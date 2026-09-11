@@ -19,7 +19,7 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
     /// a quad. Only on the quads of the highest subdivision level, which are the ones craft stand on.
     /// </summary>
     [KSPAddon(KSPAddon.Startup.Instantly, true)]
-    public class TerrainPrecisionFix : MonoBehaviour
+    public class TerrainPrecisionFixMod : MonoBehaviour
     {
         private const string HarmonyId = "com.github.lhervier.ksp.terrainprecisionfix";
 
@@ -61,9 +61,9 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
                 _buildQuad = AccessTools.FieldRefAccess<PQS, PQ>("buildQuad");
                 _vertexIndex = AccessTools.FieldRefAccess<PQS, int>("vertexIndex");
                 _precisePosition = AccessTools.FieldRefAccess<PQ, Vector3d>("PrecisePosition");
-                new Harmony(HarmonyId).PatchAll(typeof(TerrainPrecisionFix).Assembly);
+                new Harmony(HarmonyId).PatchAll(typeof(TerrainPrecisionFixMod).Assembly);
                 _active = true;
-                Log.Info($"Version {typeof(TerrainPrecisionFix).Assembly.GetName().Version} installed,"
+                Log.Info($"Version {typeof(TerrainPrecisionFixMod).Assembly.GetName().Version} installed,"
                     + $" log level {Log.Level}");
             }
             catch (Exception e)

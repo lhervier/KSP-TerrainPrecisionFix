@@ -1,6 +1,6 @@
 @echo off
-REM Compiles GameData\TerrainPrecisionFix\TerrainPrecisionFix.dll. Installing is up to you: copy the
-REM GameData\TerrainPrecisionFix folder into the GameData of KSP.
+REM Compiles GameData\TerrainPrecisionFixMod\TerrainPrecisionFixMod.dll. Installing is up to you: copy the
+REM GameData\TerrainPrecisionFixMod folder into the GameData of KSP.
 setlocal
 cd /d "%~dp0"
 
@@ -9,5 +9,5 @@ if not defined KSPDIR (
     exit /b 1
 )
 
-dotnet build TerrainPrecisionFix.csproj -c Release -p:KSPDIR="%KSPDIR%"
+dotnet build TerrainPrecisionFixMod.csproj -c Release -p:KSPDIR="%KSPDIR%"
 exit /b %errorlevel%

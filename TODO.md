@@ -1,23 +1,24 @@
 # TODO
 
-Everything else that sits on the ground and is placed with the same float rounding. The aim is for
-this mod to cover all of it, not only the terrain.
+Everything else that sits on the ground and is placed with the same float rounding. The aim is to
+cover all of it, not only the terrain, in this mod or next to it (see the rocks below).
 
-## Rocks (terrain scatter) — measured, no fix planned
+## Rocks (terrain scatter) — handled by Rock Precision Fix, not measured yet
 
 `PQSMod_LandClassScatterQuad.Setup` places the holder of a quad's rocks with
 `base.transform.localPosition = quad.positionPlanet;`, under a parent attached to the terrain sphere,
 whose origin is the centre of the body. The rocks themselves are built from the quad's vertices, in the
 quad's own coordinates, and written into the holder's mesh as they are.
 
-Measured with [Rock Offset Probe](https://github.com/lhervier/KSP-GroundFix-Mod2) on Kerbin (see the
-README): in stock, rocks are already drawn off the ground, because the holder's local to world matrix
-does not round like its transform position (−85.5 to +64.7 mm, standard deviation 29.7 mm). With this
-fix, the stock error on the quad origin adds to it (−66.3 to +152.0 mm, standard deviation 44.4 mm).
-Same kind of error, about 1.5 times wider, and visual only: stock rocks have no collider.
+Measured with [Rock Precision Fix Diag](https://github.com/lhervier/KSP-RockPrecisionFixDiag) on Kerbin
+(see the README): in stock, rocks are already drawn off the ground, because the holder's local to world
+matrix does not round like its transform position (−85.5 to +64.7 mm, standard deviation 29.7 mm). With
+this fix, the stock error on the quad origin adds to it (−66.3 to +152.0 mm, standard deviation
+44.4 mm). Same kind of error, about 1.5 times wider, and visual only: stock rocks have no collider.
 
-A fix would take the holder out of the sphere's hierarchy, under its quad for instance, which removes
-both roundings at once. Only worth doing if the extra width turns out to be visible.
+Handled by a separate mod, [Rock Precision Fix](https://github.com/lhervier/KSP-RockPrecisionFix): it
+hangs each holder from its own quad, so the holder's position no longer goes through a 600 km float,
+which removes both roundings at once. It works with or without this mod. Written, not measured yet.
 
 ## Breaking Ground
 
@@ -25,10 +26,12 @@ both roundings at once. Only worth doing if the extra width turns out to be visi
   `PQSMod_ROCScatterQuad.Setup` does the same `localPosition = quad.positionPlanet`. Unlike the rocks,
   they have colliders. The rock measurement covers where they are drawn. Where the physics puts their
   colliders, whether with the transform position or with the matrix, is not measured, and decides
-  whether this fix introduces a physical offset. To measure before deciding.
+  whether this fix introduces a physical offset. To measure before deciding. Rock Precision Fix could
+  later handle them the same way as the rocks: `PQSMod_ROCScatterQuad` has the same kind of holder,
+  which could hang from its quad too, for where they are drawn and for their colliders alike.
 - **Deployed experiments** (`ModuleGroundPart` and related modules): they are vessels, positioned in
-  double like any craft, so a priori they already benefit from the corrected ground. To check with the
-  probe rather than assume. They are also the parts `Vessel.GoOffRails` skips the physics hold for.
+  double like any craft, so a priori they already benefit from the corrected ground. To check with
+  Terrain Precision Fix Diag rather than assume. They are also the parts `Vessel.GoOffRails` skips the physics hold for.
 
 ## KSC buildings (`PQSCity`, `PQSCity2`)
 
@@ -89,4 +92,53 @@ check:
 - Kopernicus replaces the stock scatter holder with its own subclass,
   `PQSMod_KopernicusLandClassScatterQuad`, and can give scatter objects colliders (`scatterColliders`).
   Same open question as the ROCs above.
-- Measure it, with the probe, on at least one stock body and one body from a planet pack.
+- Measure it, with Terrain Precision Fix Diag, on at least one stock body and one body from a planet
+  pack.
+
+## Craft pushed into slopes on load — a separate stock bug, not measured
+
+Read in the code, not measured. Not a float rounding issue, and not something this fix touches. It is
+the reason Terrain Precision Fix Diag asks for flat ground.
+
+On unpacking, `Vessel.CheckGroundCollision` puts the craft back onto the ground. It runs on every load
+for a craft made of a single part (`Vessel.GoOffRails`), and in a few other cases. It compares two
+distances:
+
+- `D`, from the root down to the ground, along the **vertical**: a raycast straight down through the
+  root;
+- `L`, from the root to the lowest point of the craft, along the **ground normal**
+  (`getLowestPoint` turns the craft so that the normal of the hit points along `z`, and takes the lowest
+  `z` of its colliders).
+
+The move applied is `L' − D`, where `L'` comes from:
+
+```csharp
+float num5 = Mathf.Cos(Mathf.Abs((float)Vector3d.Angle(groundCollisionHit.normal, vector3d2)) * ((float)Math.PI / 180f)) * num4;
+if (Mathf.Abs(num4 - num5) > 0.1f)
+    num4 = num5;
+```
+
+`num4` is `L`, and `vector3d2` the vertical. For a craft resting on a flat slope of angle `α`, the root
+is `L` from the plane measured along the normal, so `L / cos α` measured along the vertical: that is
+what `D` finds, and the move should be zero. The code multiplies by `cos α` where it should divide, and
+only does so above 10 cm of difference; below, it keeps `L` as it is. Either way `L' < D`, so the craft
+is always moved **down**, by:
+
+| branch | taken when | move |
+|---|---|---|
+| `L` kept | `L (1 − cos α) ≤ 0.1 m` | `L (1/cos α − 1)` |
+| `L cos α` | `L (1 − cos α) > 0.1 m` | `L sin²α / cos α` |
+
+For `L = 1 m`: 15 mm at 10°, 64 mm at 20°, 103 mm at 25°, 289 mm at 30°. Moves under 10 cm are not
+applied, except when the root carries a `ModuleGroundPart`. Zero on flat ground, growing with the height
+of the craft and quickly with the slope.
+
+Dividing, always, would give zero on a flat slope. The residual would then only come from the ground
+not being a plane between the root and the lowest point.
+
+To measure: a single-part craft on a slope of 30° or more, saved and loaded three times. Expected, if
+the reading is right: a `ground contact! - error. Moving Vessel down` line, the same value on every load,
+matching the second formula with `α` taken from the normal under the craft. Counter-test: the same
+craft with a second part, which skips the pass, and the line should disappear. On uneven ground, a
+`down` line can also come from `Vessel.Load` raising the craft to the analytic terrain height first;
+check that before reading it as this bug.

@@ -8,10 +8,10 @@ and kept as small as possible for that reason: two Harmony patches, in one sourc
 
 ## The problem
 
-[Ground Height Probe](https://github.com/lhervier/KSP-GroundFix-Mod1) shows it on a stock install. It
-reloads the same save several times, and measures the distance from a landed capsule to the centre of
-the body twice per load: as the save hands the capsule back, and once it has settled on the ground. The
-first value is the same on every load, to the micrometre. The second is not:
+[Terrain Precision Fix Diag](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag) shows it on a
+stock install. It reloads the same save several times, and measures the distance from a landed capsule
+to the centre of the body twice per load: as the save hands the capsule back, and once it has settled on
+the ground. The first value is the same on every load, to the micrometre. The second is not:
 
 | body | spread of the settled height, over 6 loads of the same save |
 |---|---|
@@ -21,7 +21,7 @@ first value is the same on every load, to the micrometre. The second is not:
 | Gilly | 1.2 mm |
 
 The capsule is put back at the same place every time, and still comes to rest somewhere else: the
-ground under it has moved. Nothing but Squad and the probe was installed.
+ground under it has moved. Nothing but Squad and Terrain Precision Fix Diag was installed.
 
 That is enough to cause familiar symptoms: a landed craft that hops as the scene loads, a base that sat
 flush on one load and is half buried on the next, a large base that tears itself apart on its first
@@ -68,7 +68,8 @@ triangles on every load, yet the height differences between them change from loa
 the body is identical on every load of the same save. The angle of KSP's world frame,
 `Planetarium.InverseRotAngle`, never is, not even after restarting KSP. A rounding depends on the exact
 value being rounded, and terrain positions expressed in that frame are different values on each load.
-The two launches with the closest angles (0.075° apart) gave the closest offsets (+78.4 and +68.2 mm).
+At 600 km, even 0.075° (the smallest gap between two of those launches) moves a point by about 785 m
+in that frame, some 12,000 float steps: any change of angle is enough to draw a new rounding.
 
 ### Where it happens
 
@@ -141,8 +142,8 @@ Two safeguards:
 
 ## Results
 
-The same test as on the [Ground Height Probe](https://github.com/lhervier/KSP-GroundFix-Mod1) page,
-with this mod installed: a lone capsule on the same four worlds, stock KSP 1.12.5 with Harmony and
+The same test as on the [Terrain Precision Fix Diag](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag)
+page, with this mod installed: a lone capsule on the same four worlds, stock KSP 1.12.5 with Harmony and
 ModuleManager, the same save loaded five or six times per world.
 
 ![Kerbin, with the fix](imgs/1part/00-kerbin.png)
@@ -167,12 +168,12 @@ millimetre on every world, far below the float step at any of these distances. *
 identical on every line of every series, so KSP put the capsule back at the same place every time, and
 the capsule now comes to rest at the same place every time too.
 
-Each series uses its own spot, chosen by the probe's rules: flat bare ground, no `Moving Vessel` line in
-`KSP.log`, and a capsule that does not slide.
+Each series uses its own spot, chosen by the rules of Terrain Precision Fix Diag: flat bare ground, no
+`Moving Vessel` line in `KSP.log`, and a capsule that does not slide.
 
 ### With two parts
 
-The same capsule sitting on a small flat fuel tank, as on the probe page:
+The same capsule sitting on a small flat fuel tank, as on the Terrain Precision Fix Diag page:
 
 ![Two parts on Kerbin, with the fix](imgs/2parts/10-kerbin.png)
 
@@ -207,17 +208,20 @@ On the Mun, the quad origin matched its double position to 0.00 mm on six loads 
 
 ### Rocks, grass and trees
 
-The fix does not move terrain scatter, and does not fix it either. A second instrument,
-[Rock Offset Probe](https://github.com/lhervier/KSP-GroundFix-Mod2), measures it: for every object of
-the terrain quad nearest to the craft, the height of its lowest point above the ground right under it.
+This mod does not move terrain scatter. A second instrument,
+[Rock Precision Fix Diag](https://github.com/lhervier/KSP-RockPrecisionFixDiag), measures where it is
+drawn: for every object of the terrain quad nearest to the craft, the height of its lowest point above
+the ground right under it.
 
-In stock, scatter is already not placed exactly on the ground. The objects of a quad hang from a holder
-that `PQSMod_LandClassScatterQuad.Setup` places under the terrain sphere, at
+The offset exists in stock: scatter is already not drawn exactly on the ground. The objects of a quad
+are built from the quad's vertices, in the quad's own coordinates, and hang from a holder that
+`PQSMod_LandClassScatterQuad.Setup` places under the terrain sphere, at
 `localPosition = quad.positionPlanet`: a vector hundreds of kilometres long, in a float. Unity draws the
 holder with its local to world matrix, and the translation of that matrix differs from the holder's own
 transform position by whole float steps. The objects are drawn that much above or below the ground,
-differently on each quad and on each load. With this fix the ground is placed in double precision and
-the holders are not, so the stock error on the quad origin adds to that one.
+differently on each quad and on each load. This mod inherits that offset and widens it: the ground is
+now placed in double precision and the holders are not, so the stock error on the quad origin adds to
+the stock error of the holder.
 
 Kerbin, next to the KSC, the same save loaded six times per series, over the 118 holders of 64 quads:
 
@@ -228,25 +232,53 @@ Kerbin, next to the KSC, the same save loaded six times per series, over the 118
 
 The same kind of error, about one and a half times wider. On the quad nearest to the craft, the height
 of the objects minus those two errors is the same on every load of both series, to 1.5 mm: nothing else
-moves them. Stock scatter has no collider, so this is visual only. No fix is planned for it (see
-[TODO.md](TODO.md)).
+moves them. Stock scatter has no collider, so the offset, with or without this mod, is visual only.
+
+[Rock Precision Fix](https://github.com/lhervier/KSP-RockPrecisionFix) is a separate mod that corrects
+the stock placement of scatter: it hangs each holder from its own terrain quad, so that the objects are
+drawn in the frame they were built in. It works with or without this mod. It has not been measured yet.
+
+## Side effects
+
+What this fix can make worse:
+
+- **Where terrain scatter is drawn.** Rocks, grass and trees are already drawn off the ground in stock;
+  with this fix the offset is about one and a half times wider (measured, see
+  [Rocks, grass and trees](#rocks-grass-and-trees)). Visual only. The stock offset and this widening
+  are what [Rock Precision Fix](https://github.com/lhervier/KSP-RockPrecisionFix) addresses, not
+  measured yet.
+- **Scatter objects that have a collider**: Breaking Ground's surface features, and Kopernicus scatter
+  with `scatterColliders`. Their holders are placed the same way, so the offset would be physical
+  there: wider than in stock if the physics takes the holder's pose from the same matrix the
+  renderer uses, new if it takes it from the transform position, which matches the stock ground. Not
+  measured.
 
 ## What has not been checked
 
-- Only measured on stock KSP 1.12.5 (plus Harmony and ModuleManager): the probe on Kerbin, the Mun,
-  Minmus and Gilly, with one part and with two; the quad origins on Kerbin and the Mun.
+- Only measured on stock KSP 1.12.5 (plus Harmony and ModuleManager): Terrain Precision Fix Diag on
+  Kerbin, the Mun, Minmus and Gilly, with one part and with two; the quad origins on Kerbin and the Mun.
 - Not measured yet: flight at speed and the map view, where quads are built and destroyed all the
   time; the cost of the vertex patch, which runs for every vertex of every quad built; Kopernicus and
   Parallax, which work on the same terrain pipeline. Kopernicus compatibility is a requirement before
-  this goes anywhere (see [TODO.md](TODO.md)).
+  this goes anywhere (see [TODO.md](TODO.md)). If Kopernicus places the quads in another frame, the
+  1 m safeguard should leave its terrain as stock builds it, with one warning per body in the log.
+- Colliders below the highest subdivision level: `PQSMod_QuadMeshColliders` gives a collider to every
+  quad at or above `maxLevel - |maxLevelOffset|`. With an offset other than 0, the quads below the
+  highest level have colliders too, and this fix leaves them uncorrected. The stock value of
+  `maxLevelOffset` is not known yet; every measurement so far hit quads of the highest level (see
+  [TODO.md](TODO.md)).
 - Parallax scatters: according to its source, they should follow the corrected ground. Their positions
   and colliders are expressed relative to the quad, and a collider is a child of its quad, so they move
   with it. Not measured yet (see [TODO.md](TODO.md)).
+- Breaking Ground's deployed experiments are vessels, positioned in double like any craft, so they
+  should sit on the corrected ground like one. Not measured yet.
 - Not covered yet, and listed in [TODO.md](TODO.md): everything else that is placed on the ground the
   same way.
   - Breaking Ground's surface features: they are placed like the rocks above, but they have
     colliders. Where they are drawn is covered by the rock measurement; where the physics puts their
     colliders has not been measured.
+  - Kopernicus scatter with colliders (`scatterColliders`): Kopernicus keeps the stock placement of the
+    holder, so the same open question as the surface features.
   - The KSC buildings, runway and launchpad: `PQSCity` and `PQSCity2` both do
     `base.transform.localPosition = planetRelativePosition;`, where `planetRelativePosition` is a
     `Vector3d` measured from the centre of the body. A capsule parked on the runway spreads over 117 mm
@@ -258,12 +290,12 @@ moves them. Stock scatter has no collider, so this is visual only. No fix is pla
 Requires KSP 1.12 and [HarmonyKSP](https://github.com/KSPModdingLibs/HarmonyKSP) (the usual
 `GameData/000_Harmony`, also installed by KSP Community Fixes).
 
-Copy `GameData/TerrainPrecisionFix` into the `GameData` of KSP. Nothing is written to your saves:
+Copy `GameData/TerrainPrecisionFixMod` into the `GameData` of KSP. Nothing is written to your saves:
 removing the folder gives you the stock terrain back.
 
 ## Settings
 
-`GameData/TerrainPrecisionFix/PluginData/settings.cfg` holds a single value, read when KSP starts:
+`GameData/TerrainPrecisionFixMod/PluginData/settings.cfg` holds a single value, read when KSP starts:
 
 | `logLevel` | what goes to `KSP.log` |
 |---|---|
@@ -276,7 +308,7 @@ removing the folder gives you the stock terrain back.
 ## Build
 
 Set `KSPDIR` to your KSP install folder, which must contain `GameData/000_Harmony`, and run `build.bat`.
-It needs the .NET SDK, and produces `GameData/TerrainPrecisionFix/TerrainPrecisionFix.dll`.
+It needs the .NET SDK, and produces `GameData/TerrainPrecisionFixMod/TerrainPrecisionFixMod.dll`.
 
 ## How this was made
 
