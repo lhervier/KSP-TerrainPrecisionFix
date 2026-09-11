@@ -1,9 +1,38 @@
 # TODO
 
-Everything else that sits on the ground and is placed with the same float rounding. The aim is to
-cover all of it, not only the terrain, in this mod or next to it (see the rocks below).
+What is left to do, in three parts: the stock bugs still to test, what the fix still has to be checked
+against, and the probes still to publish so that every figure in the README can be reproduced.
 
-## Rocks (terrain scatter) — handled by Rock Precision Fix, not measured yet
+## Stock bugs still to test
+
+The terrain defect itself, where the README still relies on the code alone; everything else that sits on
+the ground and is placed with the same float rounding, which the aim is to cover too, in this mod or next
+to it (see the rocks below); and one unrelated stock bug read in the code.
+
+### What draws a new rounding — read in the code, not measured
+
+The README's observation 4 and its section "Another lead, not followed" rest on this. According to the
+stock code, two inputs of the rounding change without the terrain itself changing:
+
+- **The orientation of the world frame.** Measured: `Planetarium.InverseRotAngle` differs on every load,
+  while the body's `rotationAngle` does not. Not measured: that this is what draws a new rounding. To
+  settle it, a throwaway test mod, never published, that sets `Planetarium.InverseRotAngle` to a fixed
+  value before `FlightDriver.Start` places the bodies, on a stock install without the fix. With the same
+  save, hence the same date, the orientation of the body in the world frame is then fixed too. Expected:
+  **Settled** identical on every load; with the angle moved by 0.01°, a different value, identical on
+  every load again. If **Settled** still spreads with the angle fixed, something else changes too, and
+  observation 4 has to be rewritten.
+- **The floating origin.** When the active craft gets further than `FloatingOrigin.threshold` (500 m in
+  the code) from the world origin, and it is landed or under 100 m/s, `FloatingOrigin` calls
+  `CelestialBody.PreciseUpdateQuadPositions`. Every quad of the highest level then goes through
+  `PQ.PreciseUpdateSubQuadsPosition` again, which assigns `positionPlanet` to the float `localPosition`
+  again, under a body whose world position has just changed. In stock, that would be a new rounding
+  without any reload: a base could change height when a rover drives away from it and back. The fix
+  covers it, since it patches that method. To measure with the quad origin probe (see below): a capsule
+  and a rover side by side on Kerbin, the rover driven beyond 500 m and back. Expected: a jump at every
+  shift in stock, none with the fix.
+
+### Rocks (terrain scatter) — handled by Rock Precision Fix, not measured yet
 
 `PQSMod_LandClassScatterQuad.Setup` places the holder of a quad's rocks with
 `base.transform.localPosition = quad.positionPlanet;`, under a parent attached to the terrain sphere,
@@ -20,7 +49,7 @@ Handled by a separate mod, [Rock Precision Fix](https://github.com/lhervier/KSP-
 hangs each holder from its own quad, so the holder's position no longer goes through a 600 km float,
 which removes both roundings at once. It works with or without this mod. Written, not measured yet.
 
-## Breaking Ground
+### Breaking Ground
 
 - **Surface features (ROC)**, the ones studied in EVA or with the robotic arms: placed like the rocks,
   `PQSMod_ROCScatterQuad.Setup` does the same `localPosition = quad.positionPlanet`. Unlike the rocks,
@@ -33,7 +62,7 @@ which removes both roundings at once. It works with or without this mod. Written
   double like any craft, so a priori they already benefit from the corrected ground. To check with
   Terrain Precision Fix Diag rather than assume. They are also the parts `Vessel.GoOffRails` skips the physics hold for.
 
-## KSC buildings (`PQSCity`, `PQSCity2`)
+### KSC buildings (`PQSCity`, `PQSCity2`)
 
 Both do `base.transform.localPosition = planetRelativePosition;` with a `Vector3d` measured from the
 centre of the body (`PQSCity` twice, `PQSCity2` three times). A capsule on the runway spreads over
@@ -41,61 +70,7 @@ centre of the body (`PQSCity` twice, `PQSCity2` three times). A capsule on the r
 `PQSCity` flattens, so that measurement cannot yet tell the two apart. Differential test: with this
 fix installed, the terrain becomes stable; if the capsule on the runway still moves, it is the static.
 
-## Parallax scatters
-
-Read in the Parallax Continued source (tag 1.0.4), not measured. Unlike the rocks, the scatters should
-follow the corrected quad, because everything about them is expressed in the quad's own frame:
-
-- positions are drawn inside the triangles of `quad.mesh.vertices`, and kept as quad-local positions;
-- they are drawn every frame through the quad's `meshRenderer.localToWorldMatrix`;
-- their colliders are child GameObjects of the quad, with a short `localPosition`, and only exist on
-  quads of the highest level, the ones this fix corrects;
-- Parallax reads the mesh when the quad becomes visible, in `PQ.SetVisible` after `PQ.Build`, so after
-  both patches have run;
-- the terrain shader's replacement mesh is a child of the quad too, with no offset.
-
-To confirm in game, with Parallax installed: the offset between a scatter collider and its quad should
-be the same on every load.
-
-One thing the fix leaves as it is: Parallax samples its distribution noise with directions from the
-centre of the body computed in float, from 600 km vectors, and computes the altitude the same way. An
-object right at the noise cutoff can therefore appear on one load and not on the next. That happens in
-stock too, and has nothing to do with the terrain's placement.
-
-## Colliders below the highest level
-
-The fix only acts on quads of the highest subdivision level. `PQSMod_QuadMeshColliders` gives a
-collider to every quad at or above `sphere.maxLevel - |maxLevelOffset|`: with an offset of 0, only the
-highest level has colliders; with 2, the two levels below it have them too. Those quads hang from the
-sphere and would stay uncorrected.
-
-The actual value for stock bodies is not known. The only default visible in code is set in `Reset()`,
-which Unity only calls in its editor; what the game uses is serialized in its assets. Every measurement
-so far hit quads of the highest level, which fits an offset of 0 without proving it. To settle it: log
-`maxLevelOffset` and the resulting lowest collider level for each body at startup, at the Debug level.
-
-## Kopernicus compatibility — required
-
-Most planet packs go through Kopernicus, so the fix is not worth proposing until it works with it. To
-check:
-
-- Kopernicus rebuilds the terrain of every body it touches. The frame the fix computes positions in
-  (`body.rotation`, `body.position`) has to still be the one the quads hang from. The 1 m safeguard
-  would catch a mismatch, but the result would be no fix, silently, apart from a warning in the log.
-- `maxLevelOffset`: the one Kopernicus lets a config set belongs to the scatter
-  (`Configuration/ModLoader/LandControl.cs`), not to the colliders. On the terrains it creates,
-  Kopernicus sets the colliders' `maxLevelOffset` to 0 (`Configuration/PQSLoader.cs`). On the bodies it
-  only modifies, it keeps the stock value, which is still unknown (see above).
-- `DisableFarAwayColliders` (`RuntimeUtility/SinkingBugFix.cs`) disables every collider of a body whose
-  centre is more than 10,000 km from the world origin, to work around a PhysX raycast bug. That never
-  includes the terrain under the craft, so it should not interact with the fix.
-- Kopernicus replaces the stock scatter holder with its own subclass,
-  `PQSMod_KopernicusLandClassScatterQuad`, and can give scatter objects colliders (`scatterColliders`).
-  Same open question as the ROCs above.
-- Measure it, with Terrain Precision Fix Diag, on at least one stock body and one body from a planet
-  pack.
-
-## Craft pushed into slopes on load — a separate stock bug, not measured
+### Craft pushed into slopes on load — a separate stock bug, not measured
 
 Read in the code, not measured. Not a float rounding issue, and not something this fix touches. It is
 the reason Terrain Precision Fix Diag asks for flat ground.
@@ -142,3 +117,93 @@ matching the second formula with `α` taken from the normal under the craft. Cou
 craft with a second part, which skips the pass, and the line should disappear. On uneven ground, a
 `down` line can also come from `Vessel.Load` raising the craft to the analytic terrain height first;
 check that before reading it as this bug.
+
+## What the fix still has to be checked against
+
+### Colliders below the highest level
+
+The fix only acts on quads of the highest subdivision level. `PQSMod_QuadMeshColliders` gives a
+collider to every quad at or above `sphere.maxLevel - |maxLevelOffset|`: with an offset of 0, only the
+highest level has colliders; with 2, the two levels below it have them too. Those quads hang from the
+sphere and would stay uncorrected.
+
+The actual value for stock bodies is not known. The only default visible in code is set in `Reset()`,
+which Unity only calls in its editor; what the game uses is serialized in its assets. Every measurement
+so far hit quads of the highest level, which fits an offset of 0 without proving it. To settle it: log
+`maxLevelOffset` and the resulting lowest collider level for each body at startup, at the Debug level.
+
+### Parallax scatters
+
+Read in the Parallax Continued source (tag 1.0.4), not measured. Unlike the rocks, the scatters should
+follow the corrected quad, because everything about them is expressed in the quad's own frame:
+
+- positions are drawn inside the triangles of `quad.mesh.vertices`, and kept as quad-local positions;
+- they are drawn every frame through the quad's `meshRenderer.localToWorldMatrix`;
+- their colliders are child GameObjects of the quad, with a short `localPosition`, and only exist on
+  quads of the highest level, the ones this fix corrects;
+- Parallax reads the mesh when the quad becomes visible, in `PQ.SetVisible` after `PQ.Build`, so after
+  both patches have run;
+- the terrain shader's replacement mesh is a child of the quad too, with no offset.
+
+To confirm in game, with Parallax installed: the offset between a scatter collider and its quad should
+be the same on every load.
+
+One thing the fix leaves as it is: Parallax samples its distribution noise with directions from the
+centre of the body computed in float, from 600 km vectors, and computes the altitude the same way. An
+object right at the noise cutoff can therefore appear on one load and not on the next. That happens in
+stock too, and has nothing to do with the terrain's placement.
+
+### Kopernicus compatibility — required
+
+Most planet packs go through Kopernicus, so the fix is not worth proposing until it works with it. To
+check:
+
+- Kopernicus rebuilds the terrain of every body it touches. The frame the fix computes positions in
+  (`body.rotation`, `body.position`) has to still be the one the quads hang from. The 1 m safeguard
+  would catch a mismatch, but the result would be no fix, silently, apart from a warning in the log.
+- `maxLevelOffset`: the one Kopernicus lets a config set belongs to the scatter
+  (`Configuration/ModLoader/LandControl.cs`), not to the colliders. On the terrains it creates,
+  Kopernicus sets the colliders' `maxLevelOffset` to 0 (`Configuration/PQSLoader.cs`). On the bodies it
+  only modifies, it keeps the stock value, which is still unknown (see above).
+- `DisableFarAwayColliders` (`RuntimeUtility/SinkingBugFix.cs`) disables every collider of a body whose
+  centre is more than 10,000 km from the world origin, to work around a PhysX raycast bug. That never
+  includes the terrain under the craft, so it should not interact with the fix.
+- Kopernicus replaces the stock scatter holder with its own subclass,
+  `PQSMod_KopernicusLandClassScatterQuad`, and can give scatter objects colliders (`scatterColliders`).
+  Same open question as the ROCs above.
+- Measure it, with Terrain Precision Fix Diag, on at least one stock body and one body from a planet
+  pack.
+
+## Probes to publish
+
+Terrain Precision Fix Diag only reproduces the headline figures of the README, **On rails** and
+**Settled**: they show the defect, and that the fix brings the ground back to the same place. Everything
+the README says about the mechanism (observations 2 to 4), and the evidence that the ground comes back
+to the right place and not only to the same place ("What happens underneath"), comes from probes that
+were never published. Until they are, those figures have to be taken on trust.
+
+They belong in Terrain Precision Fix Diag, as readings of the ground under the craft, shown in the same
+window and frozen by the same *Record*. Each one shows the defect on a stock install, and the same
+reading shows what the fix changes. None needs Harmony: the quad under the craft is the collider a
+raycast straight down hits, and everything read below is public.
+
+| probe | what it reads | README figures it backs |
+|---|---|---|
+| **Collision surface against the analytic height** | the altitude of the terrain collider hit by the raycast, and `CelestialBody.TerrainAltitude` at the same point | "What happens underneath": 64.7794 m on six loads, and −5.49 to −5.54 mm from the analytic height. No stock value is published for either yet |
+| **Quad origin** | the altitude of `PQ.positionPlanet` and of the quad's transform, and the distance between that transform and `body.rotation * positionPlanet + body.position` | observation 2: 64.7851 m, and −87.8 to +145.7 mm in stock. "What happens underneath": 0.00 mm with the fix, on Kerbin and on the Mun |
+| **Mesh deformation** | the same raycast at three points 100 m apart on that quad, with the triangle each one hits, and the height differences between them | observation 3: the same triangles on every load, and differences that change by −7 to +53 mm |
+| **World frame angle** | the game time, the body's `rotationAngle` and `directRotAngle`, and `Planetarium.InverseRotAngle` | observation 4 |
+
+The first one matters most. It compares the ground with a height that stock code computes in double,
+independently of the frame the fix uses, so it is the only one that shows the ground is at the right
+place. The quad origin probe compares the quad with the fix's own frame: it shows the rounding, and that
+this frame is the one the quads hang from to within that rounding, but not that the result is at the
+right altitude.
+
+Already reproducible, from the fix's side, and partly: with `logLevel = Debug`, the fix logs for every
+quad it places how far it moved its origin, which is the stock error, as a distance rather than an
+altitude. With `Trace`, it logs how far the vertices moved within each quad.
+
+Not reproducible either, and not for the Diag, since they are about the fix: the two frames the README
+rejects ("Two frames look like more obvious choices", about 750 km and 36 mm). If they stay in the
+README, a Trace line in the fix could log both for the first quad of each body.

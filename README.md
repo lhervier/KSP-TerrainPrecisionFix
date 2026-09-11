@@ -21,7 +21,7 @@ the ground. The first value is the same on every load, to the micrometre. The se
 | Gilly | 1.2 mm |
 
 The capsule is put back at the same place every time, and still comes to rest somewhere else: the
-ground under it has moved. Nothing but Squad and Terrain Precision Fix Diag was installed.
+ground under it has moved. Nothing but Terrain Precision Fix Diag was installed.
 
 That is enough to cause familiar symptoms: a landed craft that hops as the scene loads, a base that sat
 flush on one load and is half buried on the next, a large base that tears itself apart on its first
@@ -29,7 +29,8 @@ load but not after a reload.
 
 ## Why it happens
 
-Four observations, all made with values any mod can read, point to a single cause.
+Four observations, all made with values any mod can read. The first three point to a single cause; the
+fourth suggests why its effect changes at every load.
 
 **1. The spread follows the precision of a float at that distance from the centre of the body.** A
 single precision float holding 600 km can only change in steps of 62.5 mm; holding 60 km, in steps of
@@ -64,12 +65,15 @@ change.
 triangles on every load, yet the height differences between them change from load to load, by −7 to
 +53 mm. The vertices are rounded independently of each other.
 
-**4. What differs between two loads is the orientation of the world frame.** The rotation angle of
-the body is identical on every load of the same save. The angle of KSP's world frame,
+**4. What differs between two loads is probably the orientation of the world frame.** The rotation
+angle of the body is identical on every load of the same save. The angle of KSP's world frame,
 `Planetarium.InverseRotAngle`, never is, not even after restarting KSP. A rounding depends on the exact
 value being rounded, and terrain positions expressed in that frame are different values on each load.
 At 600 km, even 0.075° (the smallest gap between two of those launches) moves a point by about 785 m
-in that frame, some 12,000 float steps: any change of angle is enough to draw a new rounding.
+in that frame, some 12,000 float steps: any change of angle is enough to draw a new rounding. That much
+is measured. That this angle is what draws a new rounding on each load, and the only thing that does,
+is a hypothesis read from the stock code, not tested: see
+[Another lead, not followed](#another-lead-not-followed).
 
 ### Where it happens
 
@@ -101,10 +105,10 @@ quadTransform.localPosition = positionPlanet;
 
 A 600 km double stored in a float `localPosition`, under a parent that sits at the centre of the body.
 
-That explains observations 2 and 3, the origin and the vertices. Observation 4 explains why the result
-differs at every load: the rounding depends on the exact values rounded, and those values change with
-the orientation of the world frame. The last proof is the fix itself: it changes nothing but the order
-of the arithmetic, and the spread disappears.
+That explains observations 2 and 3, the origin and the vertices. If observation 4 holds, it explains
+why the result differs at every load: the rounding depends on the exact values rounded, and those
+values change with the orientation of the world frame. The last proof is the fix itself: it changes
+nothing but the order of the arithmetic, and the spread disappears.
 
 ## What the fix does
 
@@ -192,8 +196,7 @@ The same capsule sitting on a small flat fuel tank, as on the Terrain Precision 
 
 ### What happens underneath
 
-Measured on Kerbin, same save loaded six times, with the fix (before it was extracted from the larger
-mod it was written in, whose other features do not touch the terrain):
+Measured on Kerbin, same save loaded six times, with the fix:
 
 | under a landed craft | measured |
 |---|---|
@@ -252,6 +255,31 @@ What this fix can make worse:
   there: wider than in stock if the physics takes the holder's pose from the same matrix the
   renderer uses, new if it takes it from the transform position, which matches the stock ground. Not
   measured.
+
+## Another lead, not followed
+
+If observation 4 is right, there is a second way to attack the problem: give the world frame the same
+orientation relative to the body on every load. The float roundings would stay, but they would be the
+same every time: the terrain would still be off by a few centimetres, but always by the same amount at
+the same place. A craft's position is a double resting on ground built in float; if that ground came
+back identical, the craft would come back on it, instead of inside or above it.
+
+We have not followed it through. What we know of it comes from reading the stock code
+(`CelestialBody.CBUpdate`, where the rotation of the body is shared between the body and the world
+frame), not from a measurement. Points still open:
+
+- pinning `Planetarium.InverseRotAngle` alone would not be enough: the orientation of the body in the
+  world frame also depends on the date of the save, so it is that orientation that would need a fixed
+  value;
+- the angle may not be the only input: the position of the body in the world frame also changes with
+  the floating origin, and according to the stock code, landed quads are placed again, the same way,
+  at every floating origin shift. That would be a new rounding without any reload. Not measured;
+- a fixed error is still an error: the mesh would stay deformed (observation 3), only always the same
+  way.
+
+This mod corrects the conversion from double to float instead: it is simpler, it is where the precision
+is actually lost, and it removes the error rather than freezing it. Anyone who wants to explore the
+other lead is welcome to.
 
 ## What has not been checked
 
