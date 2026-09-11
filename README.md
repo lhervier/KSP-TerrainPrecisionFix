@@ -205,6 +205,32 @@ by L²/8R, which is 5.8 mm for 167 m triangles on a 600 km radius. It is the sam
 
 On the Mun, the quad origin matched its double position to 0.00 mm on six loads too.
 
+### Rocks, grass and trees
+
+The fix does not move terrain scatter, and does not fix it either. A second instrument,
+[Rock Offset Probe](https://github.com/lhervier/KSP-GroundFix-Mod2), measures it: for every object of
+the terrain quad nearest to the craft, the height of its lowest point above the ground right under it.
+
+In stock, scatter is already not placed exactly on the ground. The objects of a quad hang from a holder
+that `PQSMod_LandClassScatterQuad.Setup` places under the terrain sphere, at
+`localPosition = quad.positionPlanet`: a vector hundreds of kilometres long, in a float. Unity draws the
+holder with its local to world matrix, and the translation of that matrix differs from the holder's own
+transform position by whole float steps. The objects are drawn that much above or below the ground,
+differently on each quad and on each load. With this fix the ground is placed in double precision and
+the holders are not, so the stock error on the quad origin adds to that one.
+
+Kerbin, next to the KSC, the same save loaded six times per series, over the 118 holders of 64 quads:
+
+| offset of the scatter from the ground | stock | with this mod |
+|---|---|---|
+| range | −85.5 to +64.7 mm | −66.3 to +152.0 mm |
+| standard deviation | 29.7 mm | 44.4 mm |
+
+The same kind of error, about one and a half times wider. On the quad nearest to the craft, the height
+of the objects minus those two errors is the same on every load of both series, to 1.5 mm: nothing else
+moves them. Stock scatter has no collider, so this is visual only. No fix is planned for it (see
+[TODO.md](TODO.md)).
+
 ## What has not been checked
 
 - Only measured on stock KSP 1.12.5 (plus Harmony and ModuleManager): the probe on Kerbin, the Mun,
@@ -213,13 +239,14 @@ On the Mun, the quad origin matched its double position to 0.00 mm on six loads 
   time; the cost of the vertex patch, which runs for every vertex of every quad built; Kopernicus and
   Parallax, which work on the same terrain pipeline. Kopernicus compatibility is a requirement before
   this goes anywhere (see [TODO.md](TODO.md)).
+- Parallax scatters: according to its source, they should follow the corrected ground. Their positions
+  and colliders are expressed relative to the quad, and a collider is a child of its quad, so they move
+  with it. Not measured yet (see [TODO.md](TODO.md)).
 - Not covered yet, and listed in [TODO.md](TODO.md): everything else that is placed on the ground the
   same way.
-  - Rocks, and Breaking Ground's surface features: their container does
-    `base.transform.localPosition = quad.positionPlanet;` under the terrain sphere. They keep the stock
-    rounding while the ground under them no longer has it, so with this fix they should be offset from
-    the ground by the stock error of their quad's origin — up to 15 cm on Kerbin, as measured above. Not
-    measured on the rocks themselves yet.
+  - Breaking Ground's surface features: they are placed like the rocks above, but they have
+    colliders. Where they are drawn is covered by the rock measurement; where the physics puts their
+    colliders has not been measured.
   - The KSC buildings, runway and launchpad: `PQSCity` and `PQSCity2` both do
     `base.transform.localPosition = planetRelativePosition;`, where `planetRelativePosition` is a
     `Vector3d` measured from the centre of the body. A capsule parked on the runway spreads over 117 mm
