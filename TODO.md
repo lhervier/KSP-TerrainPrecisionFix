@@ -174,36 +174,65 @@ check:
 - Measure it, with Terrain Precision Fix Diag, on at least one stock body and one body from a planet
   pack.
 
-## Probes to publish
+## Where the mechanism figures come from — nothing to publish
 
-Terrain Precision Fix Diag only reproduces the headline figures of the README, **On rails** and
-**Settled**: they show the defect, and that the fix brings the ground back to the same place. Everything
-the README says about the mechanism (observations 2 to 4), and the evidence that the ground comes back
-to the right place and not only to the same place ("What happens underneath"), comes from probes that
-were never published. Until they are, those figures have to be taken on trust.
+Not a task: a record of which figures of the README rest on a published instrument, which do not, and
+how to check the second kind without one.
 
-They belong in Terrain Precision Fix Diag, as readings of the ground under the craft, shown in the same
-window and frozen by the same *Record*. Each one shows the defect on a stock install, and the same
-reading shows what the fix changes. None needs Harmony: the quad under the craft is the collider a
-raycast straight down hits, and everything read below is public.
+Two instruments are published, and between them they carry the whole demonstration:
 
-| probe | what it reads | README figures it backs |
-|---|---|---|
-| **Collision surface against the analytic height** | the altitude of the terrain collider hit by the raycast, and `CelestialBody.TerrainAltitude` at the same point | "What happens underneath": 64.7794 m on six loads, and −5.49 to −5.54 mm from the analytic height. No stock value is published for either yet |
-| **Quad origin** | the altitude of `PQ.positionPlanet` and of the quad's transform, and the distance between that transform and `body.rotation * positionPlanet + body.position` | observation 2: 64.7851 m, and −87.8 to +145.7 mm in stock. "What happens underneath": 0.00 mm with the fix, on Kerbin and on the Mun |
-| **Mesh deformation** | the same raycast at three points 100 m apart on that quad, with the triangle each one hits, and the height differences between them | observation 3: the same triangles on every load, and differences that change by −7 to +53 mm |
-| **World frame angle** | the game time, the body's `rotationAngle` and `directRotAngle`, and `Planetarium.InverseRotAngle` | observation 4 |
+- [Terrain Precision Fix Diag](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag) reads the
+  craft — **On rails** and **Settled** — and shows that it does not come back to the same height;
+- [Terrain Precision Fix Diag 2](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2), written on
+  2026-09-12, reads the ground under it: the collision surface found by a raycast straight down against
+  `CelestialBody.TerrainAltitude` at the same point, one line per loading, frozen by a *Record* button
+  like the first one. It is a mod of its own rather than a reading folded into that instrument because
+  it measures the ground and not the craft, so it needs none of that protocol: no settling, no waiting.
+  Four stock campaigns, on Kerbin, the Mun, Minmus and Gilly, are on its page; the same four saves with
+  the fix installed are in [The ground itself](README.md#the-ground-itself).
 
-The first one matters most. It compares the ground with a height that stock code computes in double,
-independently of the frame the fix uses, so it is the only one that shows the ground is at the right
-place. The quad origin probe compares the quad with the fix's own frame: it shows the rounding, and that
-this frame is the one the quads hang from to within that rounding, but not that the result is at the
-right altitude.
+The second one is the one that matters. `TerrainAltitude` is computed in double by stock code,
+independently of the frame the fix uses, so it is the only reading that shows the ground comes back to
+the **right** place and not merely to the **same** place.
 
-Already reproducible, from the fix's side, and partly: with `logLevel = Debug`, the fix logs for every
-quad it places how far it moved its origin, which is the stock error, as a distance rather than an
-altitude. With `Trace`, it logs how far the vertices moved within each quad.
+Everything the README says about the mechanism — observations 2 to 4, and the quad origin line of
+"What happens underneath" — comes from a development probe that was never released. It stays
+unreleased (decided 2026-09-12). A third instrument would cost a public repository, a README bound by
+the same rules as the other two, a third copy of `FormatUtils` to keep in step and a campaign on four
+bodies, and it would add nothing to the case:
 
-Not reproducible either, and not for the Diag, since they are about the fix: the two frames the README
-rejects ("Two frames look like more obvious choices", about 750 km and 36 mm). If they stay in the
-README, a Trace line in the fix could log both for the first quad of each body.
+- **Observations 2 and 3 are already reproducible, without any instrument.** With `logLevel = Debug`,
+  the fix logs for every quad it places how far it moved its origin, which is the stock error, as a
+  distance rather than an altitude. With `Trace`, it logs how far the vertices moved within each quad.
+- **The mechanism is shorter to read than to measure.** `quadTransform.localPosition = positionPlanet`
+  in `PQ.SetupQuad`, a `Vector3d` of 600 km assigned to a float field, and the four lines of
+  `PQS.BuildVertexSurfaceRelative`, are both quoted in
+  [Where it happens](README.md#where-it-happens). Whoever doubts the figures can read the code
+  that produces them.
+- **A quad origin probe would be circular once the fix is installed.** The fix sets
+  `transform.position = body.rotation * positionPlanet + body.position`, and a rotation preserves the
+  length of a vector, so the altitude of the transform matches the altitude of `positionPlanet` by
+  construction. The 0.00 mm such a probe reads says the fix does what it claims, and nothing more; only
+  its stock reading carries information.
+- **And what closes the case needs no probe at all**: the fix changes nothing but the order of the
+  arithmetic, and the spread falls by three orders of magnitude. Were the cause elsewhere, reordering a
+  subtraction would leave it untouched.
+
+What this leaves without a published counterpart is the three lines of the
+[What happens underneath](README.md#what-happens-underneath) table: development measurements, taken on
+a spot no published campaign covers. The same demonstration with numbers read off screenshots on both
+sides is the section below it, "The ground itself".
+
+For the record, what the unreleased probe read, should it ever be wanted again. None of it needs
+Harmony: the quad under the craft is the collider a raycast straight down hits, and everything below is
+public.
+
+| probe | what it read | README figures it backs | how to check it now |
+|---|---|---|---|
+| **Quad origin** | the altitude of `PQ.positionPlanet` and of the quad's transform, and the distance between that transform and `body.rotation * positionPlanet + body.position` | observation 2: 64.7851 m, and −87.8 to +145.7 mm in stock. "What happens underneath": 0.00 mm with the fix, on Kerbin and on the Mun | `logLevel = Debug`: one line per quad, giving the same error as a distance |
+| **Mesh deformation** | the same raycast at three points 100 m apart on that quad, with the triangle each one hits, and the height differences between them | observation 3: the same triangles on every load, and differences that change by −7 to +53 mm | `logLevel = Trace`: the largest distance a vertex of the quad moved from where stock put it. The same claim — the vertices are rounded one by one — read from the other side, as a shift from stock rather than as a difference between two loads |
+| **World frame angle** | the game time, the body's `rotationAngle` and `directRotAngle`, and `Planetarium.InverseRotAngle` | observation 4 | nothing, and nothing is needed: that the angle differs at every load is the measurement, and the README already gives what it concludes from it as a hypothesis read in the stock code, not as a result |
+
+Not reproducible either, and about the fix rather than about stock: the two frames the README rejects
+("Two frames look like more obvious choices", about 750 km and 36 mm). If they stay in the README, a
+Trace line in the fix could log both for the first quad of each body.

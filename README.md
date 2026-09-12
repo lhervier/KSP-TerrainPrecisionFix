@@ -1,10 +1,47 @@
 # Terrain Precision Fix
 
-A fix for stock KSP 1.12: every time a scene loads, the terrain is built a few centimetres higher or
-lower than the time before. With this mod it comes back at the same place, to a tenth of a millimetre.
+A fix for stock KSP 1.12, meant as a proposal for
+[KSP Community Fixes](https://github.com/KSPModdingLibs/KSPCommunityFixes) and kept as small as
+possible for that reason: two Harmony patches, in one source file. Here is what they fix:
 
-It is meant as a proposal for [KSP Community Fixes](https://github.com/KSPModdingLibs/KSPCommunityFixes),
-and kept as small as possible for that reason: two Harmony patches, in one source file.
+> **The ground KSP builds under you is never built at the same height twice.** Load the same save five
+> times, and the surface your craft is standing on comes back a little higher or a little lower each
+> time — a few centimetres apart on Kerbin, less on smaller worlds.
+
+## Why it matters
+
+Every time you load, it is a coin toss between two outcomes.
+
+**The ground comes back lower than it was when you saved.** Your craft is now hovering a couple of
+centimetres above it, so it drops those two centimetres. You never notice, and nothing breaks.
+
+**The ground comes back higher than it was when you saved.** Your craft is now *inside* the ground —
+and the physics engine will not leave two solid things overlapping. It pushes them apart, hard, in
+the only direction available: up. Your craft gets launched.
+
+That second case is the symptom everybody already knows. The lander that twitches, hops or flips the
+moment the scene finishes loading. The base that sat perfectly flush yesterday and is buried up to
+the hatches today. The big base that tears itself apart the very first time you load it, and never
+again afterwards. A craft with many parts spread over a wide area gives the coin toss more chances
+to land the wrong way up.
+
+### Disclaimer: it is not the only cause
+
+The ground moving is one cause among several, and this page does not claim it is the only one. Plenty
+of other things move a craft when a scene opens. Two well-known examples, among others:
+
+- **suspensions.** Landing legs and wheels come back fully extended, because that is the only state
+  KSP can restore them to. They then compress under the weight of the craft, and the craft moves
+  while they do.
+- **a craft bent to fit the ground.** While you play, physics twists the joints between parts so the
+  craft settles onto the shape of the ground beneath it. That twisting is not saved. On loading, the
+  craft comes back in its original, unbent shape — and if the ground is not flat, part of it really
+  *is* underground, with no measurement error involved.
+
+This mod removes that one cause, and only that one: a lander that hops because its legs are still
+unfolding will go on hopping once it is installed. What it takes away is the part that should never
+have been there at all — a surface that is not where the game's own formulas say it is, and is not in
+the same place twice. It takes it away down to a hundredth of a millimetre, measured below.
 
 ## The problem
 
@@ -20,12 +57,15 @@ the ground. The first value is the same on every load, to the micrometre. The se
 | Minmus | 3.9 mm |
 | Gilly | 1.2 mm |
 
-The capsule is put back at the same place every time, and still comes to rest somewhere else: the
-ground under it has moved. Nothing but Terrain Precision Fix Diag was installed.
+The capsule is put back at the same place every time, and still does not come to rest in the same
+place. Nothing but Terrain Precision Fix Diag was installed.
 
-That is enough to cause familiar symptoms: a landed craft that hops as the scene loads, a base that sat
-flush on one load and is half buried on the next, a large base that tears itself apart on its first
-load but not after a reload.
+That measurement shows the craft moving, which is not by itself proof that the ground moved under it.
+The instrument that measures the ground, with no craft in the reading at all, is
+[Terrain Precision Fix Diag 2](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2): it reads the
+surface a ray hits against the height KSP computes for that same spot, and on stock the two drift apart
+by a different amount on every loading. Both instruments, before and after this fix, are further down
+under [Results](#results).
 
 ## Why it happens
 
@@ -150,13 +190,13 @@ The same test as on the [Terrain Precision Fix Diag](https://github.com/lhervier
 page, with this mod installed: a lone capsule on the same four worlds, stock KSP 1.12.5 with Harmony and
 ModuleManager, the same save loaded five or six times per world.
 
-![Kerbin, with the fix](imgs/1part/00-kerbin.png)
+![Kerbin, with the fix](imgs/Diag1/1part/00-kerbin.png)
 
-![The Mun, with the fix](imgs/1part/20-mune.png)
+![The Mun, with the fix](imgs/Diag1/1part/20-mune.png)
 
-![Minmus, with the fix](imgs/1part/30-minmus.png)
+![Minmus, with the fix](imgs/Diag1/1part/30-minmus.png)
 
-![Gilly, with the fix](imgs/1part/40-gilly.png)
+![Gilly, with the fix](imgs/Diag1/1part/40-gilly.png)
 
 (The bottom line of each table is the loading in progress, still live. It is not counted below.)
 
@@ -179,13 +219,13 @@ Each series uses its own spot, chosen by the rules of Terrain Precision Fix Diag
 
 The same capsule sitting on a small flat fuel tank, as on the Terrain Precision Fix Diag page:
 
-![Two parts on Kerbin, with the fix](imgs/2parts/10-kerbin.png)
+![Two parts on Kerbin, with the fix](imgs/Diag1/2parts/10-kerbin.png)
 
-![Two parts on the Mun, with the fix](imgs/2parts/20-mune.png)
+![Two parts on the Mun, with the fix](imgs/Diag1/2parts/20-mune.png)
 
-![Two parts on Minmus, with the fix](imgs/2parts/30-minmus.png)
+![Two parts on Minmus, with the fix](imgs/Diag1/2parts/30-minmus.png)
 
-![Two parts on Gilly, with the fix](imgs/2parts/40-gilly.png)
+![Two parts on Gilly, with the fix](imgs/Diag1/2parts/40-gilly.png)
 
 | world | loadings | spread of **Settled**, stock | spread of **Settled**, with this mod |
 |---|---|---|---|
@@ -209,9 +249,89 @@ by L²/8R, which is 5.8 mm for 167 m triangles on a 600 km radius. It is the sam
 
 On the Mun, the quad origin matched its double position to 0.00 mm on six loads too.
 
+### The ground itself
+
+Terrain Precision Fix Diag measures the craft, and a craft coming to rest elsewhere is only a hint
+about the ground under it. [Terrain Precision Fix Diag 2](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2)
+measures the ground itself, and is the one that names the culprit: two readings of the same spot, side
+by side, one line per loading — the collision surface found by a ray pointed straight down, and the
+height KSP computes for that same latitude and longitude. The second is what the world is made of and
+never moves; the first is what your landing legs touch.
+
+The four campaigns on its page were run on stock. Here are the same four saves, loaded six times each,
+with this mod installed:
+
+![Kerbin, the ground under the craft, with the fix](imgs/Diag2/00-kerbin.png)
+
+![The Mun, the ground under the craft, with the fix](imgs/Diag2/10-mune.png)
+
+![Minmus, the ground under the craft, with the fix](imgs/Diag2/20-minmus.png)
+
+![Gilly, the ground under the craft, with the fix](imgs/Diag2/30-gilly.png)
+
+(As before, the bottom line of each table is the loading in progress, still live, and is not counted
+below.)
+
+| world | *Difference*, stock | *Difference*, with this mod | spread, stock | spread, with this mod |
+|---|---|---|---|---|
+| Kerbin | −28.477 to +78.164 mm | −1.407 to −1.421 mm | 106.6 mm | 0.014 mm |
+| Mun | −35.570 to −44.363 mm | −40.742 to −40.769 mm | 8.8 mm | 0.027 mm |
+| Minmus | −13.431 to −16.567 mm | −14.200 to −14.203 mm | 3.1 mm | 0.003 mm |
+| Gilly | +36.422 to +40.115 mm | +37.507 to +37.518 mm | 3.7 mm | 0.011 mm |
+
+The stock columns are read off the Terrain Precision Fix Diag 2 page, the others off the four
+screenshots above. Three things to read in them.
+
+**The column stops varying**, by a factor of three hundred on the Mun and Gilly, a thousand on Minmus,
+seven thousand on Kerbin. On Kerbin the surface under the craft came back somewhere else over a range
+of ten centimetres; it now comes back within fourteen thousandths of a millimetre.
+
+**It stops at a value the stock readings were already scattered around.** On all four worlds the fixed
+reading falls inside the stock range, and well away from its edges on the Mun, on Minmus and on Gilly.
+This mod does not choose a better number for that patch of ground; it stops drawing a new one at every
+loading.
+
+**What is left is no longer the ground.** *Ground KSP computes* is what says these are the same four
+spots as the stock campaign: 64,784.952 mm on Kerbin, the same eight digits, and `0.000` on the Minmus
+flats. On the Mun and on Gilly, where the ground is not level, that column wanders a little by itself —
+0.072 mm over the six Mun loadings — because a craft settling a hair to one side asks for the height of
+a slightly different point. On the Mun that is more than the spread of *Difference* under it, 0.027 mm:
+both columns follow the sample point together, and most of the wobble cancels between them. What
+remains is the craft, not the terrain.
+
+One number in the Kerbin table deserves a word: *Difference* settles at −1.41 mm, where the section
+above reads −5.5 mm. Both are the same flat triangle sagging inside the curve of the world, read at two
+points that are not the same one — the probe above stops the collision surface at 64.7794 m, this ray
+at 64.7835 m, four millimetres apart on the mesh. That sag is deepest in the middle of a triangle,
+5.8 mm on Kerbin, and fades to nothing towards a corner; anywhere in between reads anywhere in between.
+What matters is not which value comes out, but that the same one comes out on every loading.
+
+### Measuring it yourself
+
+Install Terrain Precision Fix Diag 2 next to this mod, load the same save five or six times, and you
+get a table like the four above. Here is how to read it — and what *not* to expect.
+
+**Do not expect *Difference* to get smaller.** It will not, and it is not supposed to. Stock KSP drew
+somewhere between −35.6 and −44.4 mm on that Mun save; with this mod it reads −40.76 mm every time.
+Put the single stock loading that landed on −35.570 next to a fixed −40.765 and the fix looks like it
+made things worse. It did not: that stock line was luck, and the worst line of the same campaign was
+−44.363. You would be comparing two numbers neither of which was the point.
+
+**Expect the *Difference* column to stop varying.** That is the fix, and that is all of it: read the
+table above by its last two columns, not its first two. Tens of millimetres of spread on stock,
+hundredths of a millimetre with this mod, on every world — and it does not depend on drawing a lucky
+loading.
+
+**And expect whatever is left to stay.** It is not a leftover error to be chased: on flat ground it is
+the few millimetres of a flat triangle sagging inside a curve, and on rougher ground it is whatever the
+terrain does between two corners of the collision mesh — the +37.5 mm of that Gilly slope, and it is
+the same +37.5 mm on all six loadings. Removing it would mean giving that mesh more triangles, which
+costs frames, for a gap nobody can feel. This mod puts the mesh where it belongs; what a flat piece
+misses of a curve is geometry, and geometry stays.
+
 ### Rocks, grass and trees
 
-This mod does not move terrain scatter. A second instrument,
+This mod does not move terrain scatter. Another instrument,
 [Rock Precision Fix Diag](https://github.com/lhervier/KSP-RockPrecisionFixDiag), measures where it is
 drawn: for every object of the terrain quad nearest to the craft, the height of its lowest point above
 the ground right under it.
@@ -284,7 +404,8 @@ other lead is welcome to.
 ## What has not been checked
 
 - Only measured on stock KSP 1.12.5 (plus Harmony and ModuleManager): Terrain Precision Fix Diag on
-  Kerbin, the Mun, Minmus and Gilly, with one part and with two; the quad origins on Kerbin and the Mun.
+  Kerbin, the Mun, Minmus and Gilly, with one part and with two; Terrain Precision Fix Diag 2 on the
+  same four worlds; the quad origins on Kerbin and the Mun.
 - Not measured yet: flight at speed and the map view, where quads are built and destroyed all the
   time; the cost of the vertex patch, which runs for every vertex of every quad built; Kopernicus and
   Parallax, which work on the same terrain pipeline. Kopernicus compatibility is a requirement before
