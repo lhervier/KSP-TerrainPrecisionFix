@@ -253,19 +253,32 @@ PQS quads. Record the version or commit checked.
 ### Cost of the vertex patch — measured, 2026-09-13
 
 Measured, published in [Performance](README.md#performance), material and logs in [perfs/](perfs/):
-**172.2 ns per vertex in stock against 85.5 ns with the fix**, replaying both placements over the
-vertices of a quad the game had just built, in the frame that built it. Two flights of the same save
-with the correction on and off differ by less than the noise between two KSP sessions.
+**260.0 ns per vertex in stock against 87.8 ns with the fix**, replaying the placements over the
+vertices of a quad the game had just built, in the frame that built it. Two flights of the same save,
+one of them without the mod installed at all, differ by less than the noise between two KSP sessions.
+
+A third formula, stock with the two `Transform`s hoisted out of the loop, reads **174.8 ns** and splits
+the saving in half: **85.2 ns** is reading `base.transform` and `buildQuad.transform` on every vertex,
+**87.0 ns** is the arithmetic. Even against a stock that stopped asking Unity for a `Transform` per
+vertex, the fix would still be twice as fast.
 
 The expectation recorded here — "the cost should be small, and it may well be negative" — turned out to
-be true only after the patch was rewritten. As first written it read **500.4 ns, three times stock**: it
-redid for each of the 225 vertices of a quad what only depends on the quad, and reading a handful of
-Unity transforms over and over costs far more than the arithmetic the fix exists for. Worked out once
-per quad, a vertex is left with a `Vector3d` subtraction and two rotations. Both figures are in the
-README: the first one is what justifies the second being written that way.
+be true only after the patch was rewritten. As first written it read **500.4 ns**: it redid for each of
+the 225 vertices of a quad what only depends on the quad, and reading a handful of Unity transforms over
+and over costs far more than the arithmetic the fix exists for. Worked out once per quad, a vertex is
+left with a `Vector3d` subtraction and two rotations. Both figures are in the README: the first one is
+what justifies the second being written that way.
 
 What is left, and it is not a prerequisite: the same measurement on Kerbin rather than the Mun, where
 quads are four times larger and the craft can be made to fly low for much longer.
+
+**Settled by the same campaign**: an earlier one read 167.3 ns for stock, because its replay kept
+`sphere.transform` and `quad.transform` in locals across the 225 vertices of a quad — which
+`PQS.BuildVertexSurfaceRelative`, called once per vertex, never does. Timed as its own formula, that
+hoisted stock reads 174.8 ns, within a few nanoseconds of what the old method reported in three separate
+sessions (167.3, 168.6, 172.2). The old campaign was measuring a hoisted stock and calling it stock; its
+figures are out of the README, and its logs out of `perfs/runs/` — they are in the git history. The one
+kept is the run that carries the 500.4 ns, still quoted and no longer reproducible.
 
 ### Colliders below the highest level
 

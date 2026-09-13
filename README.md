@@ -380,67 +380,100 @@ drawn in the frame they were built in. It works with or without this mod. It has
 
 The vertex part of the fix replaces a computation that stock runs for every vertex of every terrain quad
 it builds, so it sits on a path the game uses continuously while flying, not only when a scene loads.
-**It places a vertex in half the time stock takes.**
+**It places a vertex in a third of the time stock takes.**
+
+### What was measured
+
+Everything below was taken with
+[PQS Bench](https://github.com/lhervier/KSP-TerrainPrecisionFix-PQSBench), a measuring mod that counts
+what building the stock terrain costs and can time this fix against stock on the same data, in the frame
+the game built a quad in. **Its page carries the procedure**, and the rules that make a run worth
+keeping; this one carries the results.
+
+The campaign, 2026-09-13, KSP 1.12.5 with Harmony, ModuleManager and KSP Community Fixes: a command pod
+on rails in a circular orbit 5 km over the Mun, low enough that the game builds the highest subdivision
+level — the only one the fix acts on — and four runs of two and a half minutes of that one save, which
+covers the same ground every time.
+
+| run | mode | this mod |
+|---|---|---|
+| 1 and 4 | `calibrate`, the placements replayed against each other | installed |
+| 2 | `counters`, what the terrain costs in flight | installed |
+| 3 | `counters`, the reference | folder taken out of `GameData` |
+
+The logs are in [perfs/](perfs/), which also records what changed in the method since an earlier
+campaign whose figures this page no longer quotes.
 
 ### What a vertex costs
 
-Both placements were replayed over the vertices of a quad the game had just built, one quad in
-thirty-two, inside the frame that built it, alternating which one ran first. A craft in a 5 km circular
-orbit of the Mun, where the game builds six or seven of the quads this fix touches every second.
+Runs 1 and 4, 30 quads each, 54 000 vertices per formula. Figures from run 4.
 
 | | per vertex |
 |---|---|
-| stock | 167.3 ns |
-| this fix | **82.7 ns** |
+| stock | 260.0 ns |
+| stock, `Transform`s hoisted out of the loop | 174.8 ns |
+| this fix | **87.8 ns** |
 
-Stock does two calls into the native engine per vertex, `Transform.TransformPoint` and
-`Transform.InverseTransformPoint`. The replacement is managed arithmetic on doubles, with no native call
-at all, and everything that depends on the quad rather than on the vertex — whether the fix applies, the
-frame the quad hangs in, the inverse of its rotation — is worked out once for its 225 vertices.
+Stock makes five trips into the native engine per vertex: `Transform.TransformPoint`,
+`Transform.InverseTransformPoint`, and two reads of `Component.transform` — `BuildVertexSurfaceRelative`
+runs once per vertex, and reads `base.transform` and `buildQuad.transform` each time. The replacement
+makes none. Everything that depends on the quad rather than on the vertex — whether the fix applies, the
+frame the quad hangs in, the inverse of its rotation — is worked out once for its 225 vertices, and what
+is left is a `Vector3d` subtraction, a rotation in double, a rotation in float and two writes.
 
-That last part is not a detail. Before it was, the same measurement read **500.4 ns**, three times stock:
-reading a handful of Unity transforms again for every vertex costs far more than the arithmetic the fix
-exists for. The figure above is what the fix does today; the one before it is why it is written that way.
+The middle row is not a placement the game contains: it is stock's arithmetic with the two `Transform`s
+read once per quad, and it says where the 172 ns go. Half is the `Transform` reads, **85.2 ns, 42.6 ns
+each**; half is the arithmetic, **87.0 ns**, the double-precision version being that much cheaper than
+two native calls. Read differently: even if stock stopped asking Unity for a `Transform` on every
+vertex, the fix would still be twice as fast.
 
-Stock was measured at 167.3, 168.6 and 172.2 ns in three separate KSP sessions, within 1.5 % of each
-other, which is what this method's reproducibility is worth.
+That the per-quad work is worked out once is not a detail either. An earlier version of the fix redid it
+for each of the 225 vertices, and came in at **500.4 ns** against the 168.6 ns that same run measured
+for stock — three times the cost, on the same flight. (That run predates the method above, and measured
+stock the way the middle row is measured here; what it says about the fix stands either way.) Reading a
+handful of Unity transforms again for every vertex costs far more than the arithmetic the fix exists
+for. The figures in the table are what the fix does today; that one is why it is written the way it is,
+and it cannot be taken again without putting the old code back.
 
-Placing a vertex is a small part of building one: a quad takes 2.7 ms to build, about 12 µs per vertex,
-nearly all of it spent in the `PQSMod`s that compute height and colour. The 85 ns are 0.7 % of that.
+Runs 1 and 4 read 262.0 and 260.0 ns for stock, 88.8 and 87.8 for the fix — 1 % apart, in two KSP
+sessions half an hour apart, which is what this method's reproducibility is worth.
+
+Placing a vertex is a small part of building one: a quad takes 2.8 ms to build, about 12 µs per vertex
+(run 3, below), nearly all of it spent in the `PQSMod`s that compute height and colour. The 260 ns are
+2 % of that.
 
 ### In flight
 
-The same save, the same stretch of orbit, the same build of the mod, twice: the correction on, then
-off.
+Runs 2 and 3: the same save and the same stretch of orbit, twice, 150 seconds each, counted second by
+second. The mod is installed in one and its folder taken out of `GameData` in the other, so that the
+reference run pays for none of its patches — not even the cost of a patch deciding it has nothing to do.
 
 | | fix | stock |
 |---|---|---|
-| frames per second | 114.6 | 114.2 |
-| quads built per second | 16.38 | 16.55 |
-| of which the fix acts on | 6.39 | 6.40 |
-| ms per quad the fix acts on | 2.743 | 2.786 |
-| terrain per frame | 0.938 ms | 0.958 ms |
-| terrain share of real time | 10.75 % | 10.94 % |
+| frames per second | 114.28 | 114.10 |
+| quads built per second | 16.61 | 16.51 |
+| of which the fix acts on | 6.40 | 6.40 |
+| ms per quad the fix acts on | 2.762 | 2.834 |
+| terrain per frame | 0.953 ms | 0.975 ms |
+| terrain share of real time | 10.89 % | 11.12 % |
 
-The two flights built 2 442 and 2 484 quads, 1.7 % apart, of which 952 and 960 were ones the fix acts
-on — the craft is on rails, so loading the same save twice covers the same ground twice.
+The two flights built 2 492 and 2 476 quads, 0.6 % apart, of which exactly 960 each were ones the fix
+acts on — the craft is on rails, so loading the same save twice covers the same ground twice.
 
-The fix is ahead on every line, and that is not a 1.5 % gain: the calibration above puts the saving at
-19.0 µs per quad, 0.7 % of 2.786 ms, half of what separates these two columns. What this pair shows is
-a bound rather than a difference — at the scale of a frame, nothing degrades, and what is left is the
-noise between two runs of the game.
+The fix is ahead on every line, and that is not a 2.5 % gain: the calibration above puts the saving at
+172.2 ns × 225 vertices = 38.7 µs per quad, 1.4 % of 2.834 ms, half of what separates these two
+columns. What this pair shows is a bound rather than a difference — at the scale of a frame, nothing
+degrades, and what is left is the noise between two runs of the game. Nor is the gain worth having for its own sake: 6.4 patched quads a
+second is 0.25 ms saved per second of flight, 0.025 % of real time. The point is that the correction is
+free.
 
 ### Where it runs at all
 
 Only the highest subdivision level is corrected, and the game only builds that level close to the
-ground: below 6 250 m over the Mun, 9 375 m over Kerbin, as its own `PQS` settings give it. Higher up,
-the patched code decides once per quad that it does not apply, and each vertex is left with a reference
-comparison before stock runs untouched.
-
-The logs these figures come from are in [perfs/](perfs/). The instrument is a mod of its own,
-[PQS Bench](https://github.com/lhervier/KSP-TerrainPrecisionFix-PQSBench), which measures what building
-the stock terrain costs and carries the procedure that produces these figures: it takes a command pod,
-the debug menu's Set Orbit, and three flights of a few minutes.
+ground: below 6 250 m over the Mun and 9 375 m over Kerbin, read in flight from each sphere's own
+`subdivisionThresholds` and written to the log by PQS Bench, once per sphere, in every run above. Higher
+up, the patched code decides once per quad that it does not apply, and each vertex is left with a
+reference comparison before stock runs untouched.
 
 ## Side effects
 
