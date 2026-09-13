@@ -3,34 +3,66 @@
 What is left to do, in three parts: the stock bugs still to test, what the fix still has to be checked
 against, and the probes still to publish so that every figure in the README can be reproduced.
 
+## Before opening the KSPCF issue
+
+Not everything below has to be done first. What does, in the order a reviewer will ask for it:
+
+1. **Kopernicus.** Most planet packs go through it; the fix is not worth proposing until it is measured
+   with it, on a stock body and on a planet pack body.
+2. **The cost of the vertex patch.** It runs per vertex, in flight, continuously. A reviewer asks this
+   right after compatibility, and the README currently leaves the section empty.
+3. **`maxLevelOffset` on stock bodies.** Decides whether the fix covers every quad that has a collider
+   or only some of them.
+4. **Existing saves.** Already tested, not yet written: the fix has been run on the author's own
+   years-old save, and none of its bases broke. What is left is to say it in the README together with
+   what it does not prove — those bases are built in a way that resists this defect (see below) — and
+   to say plainly that the fix also takes away the reload lottery players use as an escape hatch.
+   The KSPCF campaigns are done, checked and linked from all three READMEs.
+5. **Breaking Ground surface features.** They have colliders and are placed like the rocks. Enough to
+   know whether the fix introduces a physical offset there, even if the answer is "yes, and Rock
+   Precision Fix handles it".
+6. **The README reorganised** around the plan of 2026-09-13: thesis, spoiler (faulty code and patch),
+   analysis with both probes, why the draw was random, impacts.
+
+Everything else — Parallax measured rather than read, `PQSCity`, rocks measured, the ground moving in
+flight, the `cos α` bug — can be listed as open in the README without holding the issue back.
+
 ## Stock bugs still to test
 
 The terrain defect itself, where the README still relies on the code alone; everything else that sits on
 the ground and is placed with the same float rounding, which the aim is to cover too, in this mod or next
 to it (see the rocks below); and one unrelated stock bug read in the code.
 
-### What draws a new rounding — read in the code, not measured
+### What draws a new rounding — settled, no test mod needed
 
-The README's observation 4 and its section "Another lead, not followed" rest on this. According to the
-stock code, two inputs of the rounding change without the terrain itself changing:
+The quad's `localPosition` is not what varies: the same `Vector3d` always rounds to the same `float`.
+What reaches the collider is `M × localPosition`, where `M` is the world matrix of the terrain sphere,
+held in float. So what draws a new number is `M` — its rotation and its translation — and both move by
+design:
 
-- **The orientation of the world frame.** Measured: `Planetarium.InverseRotAngle` differs on every load,
-  while the body's `rotationAngle` does not. Not measured: that this is what draws a new rounding. To
-  settle it, a throwaway test mod, never published, that sets `Planetarium.InverseRotAngle` to a fixed
-  value before `FlightDriver.Start` places the bodies, on a stock install without the fix. With the same
-  save, hence the same date, the orientation of the body in the world frame is then fixed too. Expected:
-  **Settled** identical on every load; with the angle moved by 0.01°, a different value, identical on
-  every load again. If **Settled** still spreads with the angle fixed, something else changes too, and
-  observation 4 has to be rewritten.
-- **The floating origin.** When the active craft gets further than `FloatingOrigin.threshold` (500 m in
-  the code) from the world origin, and it is landed or under 100 m/s, `FloatingOrigin` calls
-  `CelestialBody.PreciseUpdateQuadPositions`. Every quad of the highest level then goes through
-  `PQ.PreciseUpdateSubQuadsPosition` again, which assigns `positionPlanet` to the float `localPosition`
-  again, under a body whose world position has just changed. In stock, that would be a new rounding
-  without any reload: a base could change height when a rover drives away from it and back. The fix
-  covers it, since it patches that method. To measure with the quad origin probe (see below): a capsule
-  and a rover side by side on Kerbin, the rover driven beyond 500 m and back. Expected: a jump at every
-  shift in stock, none with the fix.
+- **rotation**, the orientation of the world frame. Measured: `Planetarium.InverseRotAngle` differs on
+  every load (237.17 / 236.74 / 239.36 / 236.67 / 241.77 on five launches of KSP), while the body's
+  `rotationAngle` is identical on every load of the same save. It advances with the body's rotation
+  whenever the game runs in the rotating frame, which includes sitting at the space centre, so it
+  carries the time spent playing between two loads.
+- **translation**, the world position of the body, which changes every time the floating origin shifts
+  — every 500 m the active craft travels (`FloatingOrigin.threshold`). Quads built while a rover
+  approaches a base, and quads rebuilt by `CelestialBody.PreciseUpdateQuadPositions` after a shift
+  (`FloatingOrigin.cs:423`, when the craft is landed or under 100 m/s), are rounded against a matrix
+  that has moved since the scene opened.
+
+That is enough to explain the draw, whether or not anything else feeds it, and it closes the README's
+"Another lead, not followed" without a measurement: pinning the angle cannot make stock terrain
+reproducible, because the translation keeps moving, and pinning the translation means removing the
+floating origin, which is what lets KSP run in float at all. The planned throwaway probe that would
+have pinned `InverseRotAngle` is dropped (decided 2026-09-13), and so is the third public instrument it
+could have become.
+
+Still worth measuring, for itself rather than for that argument: whether stock ground visibly moves
+**during a single flight**, which would widen the defect beyond loading. A capsule and a rover side by
+side on Kerbin, Terrain Precision Fix Diag 2 reading the ground under the capsule, the rover driven
+beyond 500 m and back. Expected: *Difference* jumps at every origin shift in stock, and does not with
+the fix, which patches that path too.
 
 ### Rocks (terrain scatter) — handled by Rock Precision Fix, not measured yet
 
@@ -119,6 +151,123 @@ craft with a second part, which skips the pass, and the line should disappear. O
 check that before reading it as this bug.
 
 ## What the fix still has to be checked against
+
+### Existing saves — the one risk a player can feel
+
+The fix takes away the draw, and the draw was also an escape hatch. In stock, a base that comes back
+buried and tears itself apart can be reloaded: the ground is drawn somewhere else, and it may survive.
+With the fix, the ground comes back to the same place every time, so a base that breaks on loading
+breaks on every loading.
+
+What is true, and has to be in the README rather than discovered by a player:
+
+- **The window is one loading per landed craft.** The craft was saved sitting on the ground of one
+  particular draw; it comes back on the corrected ground, which differs from that draw by up to the
+  stock spread. Once it has been loaded and saved again with the fix installed, both sides agree and
+  the question never comes back.
+- **The corrected ground is not a worse draw than average, it is the middle of them.** Measured in
+  [The ground itself](README.md#the-ground-itself): on all four worlds the fixed reading falls inside
+  the stock range, away from its edges. So a given base is no more likely to come back buried than it
+  was on any given stock loading — what changes is that the outcome no longer differs at each try.
+- **The failure becomes repairable, which it was not in stock.** Raising a craft by a few centimetres
+  in the `.sfs` is a permanent repair once the ground is stable. In stock the same edit fixes nothing:
+  the next loading redraws the ground under it anyway.
+- **KSPCF patches are individually switchable**, so a player whose years-old base does not survive the
+  transition can turn this one off, load, raise the craft, and turn it back on. To confirm against the
+  KSPCF settings mechanism before putting it in the README.
+
+**Tried, on a real save (2026-09-13).** Install: KSP 1.12.5, Harmony, KSPCommunityFixes — the target
+itself — and this fix. Nothing else. The save is years old and carries large permanent bases; several
+*other* vessels were dropped by KSP on loading for missing modded parts (MechJeb, ScanSat), none of
+them a base. Screenshots in `imgs/bases`.
+
+Loaded one by one, the bases on the Mun, Minmus and Gilly are stable. **None broke, on any body.**
+The base on Eve settles: some of its feet end up in the ground, both on loading and on leaving time
+warp. It does not break.
+
+Eve is not this fix, and the mechanism is known. Time warp repacks the vessel and its joints are
+recreated without the elastic deformation they had: the base visibly returns to the shape it was
+**built** in, and in that shape some of its feet are below the surface. Once settled they are not,
+because Unity has pushed them out. Nothing to do with where the ground is — the ground does not move
+at an unpack, since no save is reloaded. Same family as the Disclaimer’s “craft bent to fit the
+ground”, seen at a warp exit instead of a loading.
+
+What it does say is that the base has a construction defect: parts were placed below the surface while
+building it in EVA. Fixing that belongs to the EVA construction tool, not here.
+
+Also from this run:
+- **Does KSPCF already patch the PQS?** The campaign ran with KSPCF installed, which is the right
+  install to test against, but any patch of theirs touching terrain is an interaction to document
+  before proposing this one.
+- **How these bases were built.** They were assembled in EVA construction with a personal tool
+  (KSP-EvaCMGroundPlugin), which is where this defect was found in the first place. They load and work
+  without it — the campaign above did not have it installed — so the vessels tested are stock vessels.
+  Decided 2026-09-13: say that in one sentence under `How this was made`, and do **not** open the
+  second bug that tool addresses. One issue, one bug; the question can be answered if it is asked.
+- **One screenshot in the README, not four.** They prove nothing on their own — the defect is not
+  visible in them — their only job is to show the scale of what was loaded.
+
+That save is a sample of one player, whose bases are built in a way that resists this defect more than
+most:
+
+- an anchor (a Clamp-o-Tron placed by an engineer on the ground), then "rails" of girders built on
+  that anchor in EVA construction, **following the curvature of the terrain** rather than imposing a
+  flat shape on it;
+- base modules brought by a crane and docked onto those rails, then struts added by an engineer.
+
+Rails that follow the ground mean the craft is not fighting the terrain's shape to begin with, and
+struts mean the assembly barely flexes. What that save does *not* sample is the configuration that
+suffers most, and which the author reports as having caused the worst incidents in stock: modules
+docked to each other and standing on **landing legs**, where the legs come back extended and the
+docking joints are soft. The fix removes one of the causes there, not the others.
+
+Still worth doing, and cheap, because it turns "nothing broke" into a bound: on a copy of that
+save — never the original — read how far each landed base actually moved at the first loading with
+the fix, rather than only whether it survived. A range in millimetres over real bases says how much
+transition there is to absorb, where "none of mine broke" says only that this player's bases absorb it.
+
+Also to decide, and it costs more than it looks: the README's `Disclaimer` is part of the block copied
+**word for word** into the two Diag READMEs. Adding docked assemblies and landing legs to it means
+editing all three. Either do that, or put it in the correcting mod's own closing paragraph, which is
+the part of the block that is allowed to differ.
+
+Open, and only worth doing if that bound shows a real transition cost: a migration helper that
+walks a `.sfs` and raises landed vessels onto the corrected ground. It would be a separate tool, not
+part of the fix, and it is not a prerequisite for the issue.
+
+### Measured on stock, replayed under KSPCF — done and linked (2026-09-13)
+
+The patch is proposed to KSPCF, so every campaign has been run a second time in an install that has
+KSPCF, and the screenshots are published: `imgs/kspcf` in each Diag repository (without the fix), `imgs/Diag1-KSPCF` and `imgs/Diag2-KSPCF` here (with it).
+
+The analysis stays on the stock figures, deliberately. The campaigns exist to show the defect is in
+bare KSP: measured with forty patches installed, they invite the one answer the issue must not get,
+"how do you know it is the game and not one of ours?". The KSPCF run is there to show the defect does
+not disappear, or change nature, in the install the patch is aimed at.
+
+So the READMEs **link** to those screenshots and do not tabulate them. No value from the KSPCF run is
+carried into a table, and no comparison is drawn figure by figure: the campaigns were shot on their
+own spots, so only the spread is comparable, and the spread is of the same order on every world
+(checked image by image, 2026-09-13, twelve campaigns without the fix). Keeping them as a link also
+keeps the READMEs short.
+
+Verified separately, and worth one sentence next to the claim: no KSPCF patch touches the placement of
+PQS quads. Record the version or commit checked.
+
+### Cost of the vertex patch — not measured
+
+`PQS.BuildVertexSurfaceRelative` runs for every vertex of every quad built, so the replacement sits on
+a hot path that runs continuously in flight, not only on loading. Nothing measures it yet, and the
+README has a section left empty until something does.
+
+The expectation, to be confirmed and not to be published before it is: the cost should be small, and it
+may well be negative. Stock calls `Transform.TransformPoint` and `Transform.InverseTransformPoint` per
+vertex, two calls into the native engine; the replacement is managed double arithmetic with no native
+call at all.
+
+To measure: frame time flying low and fast over Kerbin, where quads are built and destroyed
+continuously, stock against the fix, same save and same route; and a stopwatch around the patch,
+totalled per scene and logged at Trace level, to give an absolute figure per quad.
 
 ### Colliders below the highest level
 

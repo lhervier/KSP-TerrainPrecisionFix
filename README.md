@@ -329,6 +329,21 @@ the same +37.5 mm on all six loadings. Removing it would mean giving that mesh m
 costs frames, for a gap nobody can feel. This mod puts the mesh where it belongs; what a flat piece
 misses of a curve is geometry, and geometry stays.
 
+### With KSP Community Fixes installed
+
+This fix is meant for [KSP Community Fixes](https://github.com/KSPModdingLibs/KSPCommunityFixes), so
+every campaign above was run a second time in an install that has it. The screenshots are here, and
+they are not tabulated: [`imgs/Diag1-KSPCF`](imgs/Diag1-KSPCF) for the craft, eight series as above,
+and [`imgs/Diag2-KSPCF`](imgs/Diag2-KSPCF) for the ground, four campaigns on the same four spots as
+the stock ones. Each Diag page carries the matching campaigns run under KSPCF **without** this fix, so
+both halves of the comparison exist in that install.
+
+They say the same thing as the tables above, on every world: hundredths of a millimetre where stock
+spreads over millimetres or centimetres. The analysis stays on the stock readings on purpose — a
+measurement meant to show what bare KSP does, and what changes when one computation is reordered, is
+worth more taken where nothing else is installed. What these add is that nothing about the defect, or
+about the fix, changes in the install this patch is aimed at.
+
 ### Rocks, grass and trees
 
 This mod does not move terrain scatter. Another instrument,
@@ -360,6 +375,17 @@ moves them. Stock scatter has no collider, so the offset, with or without this m
 [Rock Precision Fix](https://github.com/lhervier/KSP-RockPrecisionFix) is a separate mod that corrects
 the stock placement of scatter: it hangs each holder from its own terrain quad, so that the objects are
 drawn in the frame they were built in. It works with or without this mod. It has not been measured yet.
+
+## Performance
+
+**Not measured yet.** The vertex part of the fix replaces a computation that stock runs for every
+vertex of every terrain quad it builds, so it sits on a path the game uses continuously while flying,
+not only when a scene loads. Figures belong here, and this section stays empty until they exist.
+
+What is expected, and it is an expectation and not a result: little or no cost, possibly a small gain.
+Stock calls `Transform.TransformPoint` and `Transform.InverseTransformPoint` once each per vertex, two
+calls into the native engine; the replacement is double arithmetic in managed code, with no native call
+at all.
 
 ## Side effects
 
