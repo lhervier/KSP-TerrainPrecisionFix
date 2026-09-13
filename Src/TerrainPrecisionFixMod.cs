@@ -56,6 +56,7 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
         private void Start()
         {
             Log.LoadLevel();
+            Bench.LoadSettings();
             try
             {
                 _buildQuad = AccessTools.FieldRefAccess<PQS, PQ>("buildQuad");
@@ -75,7 +76,7 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
         }
 
         /// <summary>Whether the fix acts on this quad.</summary>
-        private static bool AppliesTo(PQ quad)
+        internal static bool AppliesTo(PQ quad)
         {
             PQS sphere = quad.sphereRoot;
 
@@ -163,54 +164,70 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
         {
             private static bool Prefix(PQS __instance, PQS.VertexBuildData data)
             {
-                PQ quad = _active ? _buildQuad(__instance) : null;
-                if (quad == null || !AppliesTo(quad))
+                if (!_active || !Bench.PatchEnabled)
+                {
+                    return true;
+                }
+                PQ quad = _buildQuad(__instance);
+                if (quad == null)
                 {
                     return true;
                 }
 
-                int index = _vertexIndex(__instance);
-                if (quad.verts == null || PQS.verts == null
-                    || index < 0 || index >= quad.verts.Length || index >= PQS.verts.Length)
-                {
-                    return true;
-                }
-
-                // The vertex is placed relative to where the quad patch below puts the quad, so it only
-                // holds for a quad that patch accepts: same test, on the same numbers.
-                CelestialBody body = BodyOf(__instance);
-                if (body == null)
-                {
-                    return true;
-                }
-                Vector3d quadOrigin = WorldPosition(body, quad.positionPlanet);
-                if (!IsRoundingCorrection(body, (quadOrigin - (Vector3d)quad.transform.position).magnitude))
-                {
-                    return true;
-                }
-
-                // The vertex relative to the centre of the body, in double. Stock keeps it as is, and so does
-                // this: the normals are computed from it.
+                // The vertex relative to the centre of the body, in double. Stock keeps it as is, and so
+                // does this: the normals are computed from it.
                 Vector3d vertex = data.directionFromCenter * data.vertHeight;
-                PQS.verts[index] = vertex;
+                return !PlaceVertex(__instance, quad, _vertexIndex(__instance), vertex);
+            }
+        }
 
-                // The fix itself. The vertex and the quad origin are both doubles, in the same frame, and
-                // their difference — a quad is a couple of kilometres wide at most — is the only thing a
-                // float ever holds. Stock converts each of them to float first, 600 km from the centre where
-                // the step is 62.5 mm, and subtracts afterwards.
-                Vector3d offsetInQuad = vertex - quad.positionPlanet;
-
-                // Into world orientation in double, then into the quad's own frame. The quad's rotation is a
-                // float, which is harmless on a vector this short: a tenth of a millimetre at most.
-                Vector3 localVertex = Quaternion.Inverse(quad.transform.rotation)
-                    * (Vector3)(body.rotation * offsetInQuad);
-                if (Log.IsTraceEnabled)
-                {
-                    TraceVertexShift(__instance, quad, body, index, vertex, localVertex);
-                }
-                quad.verts[index] = localVertex;
+        /// <summary>
+        /// Puts one terrain vertex where its own double precision coordinates say it is, inside its quad.
+        /// Returns whether it did: a vertex the fix does not apply to is left to stock, untouched.
+        /// </summary>
+        internal static bool PlaceVertex(PQS sphere, PQ quad, int index, Vector3d vertex)
+        {
+            if (!AppliesTo(quad))
+            {
                 return false;
             }
+            if (quad.verts == null || PQS.verts == null
+                || index < 0 || index >= quad.verts.Length || index >= PQS.verts.Length)
+            {
+                return false;
+            }
+
+            // The vertex is placed relative to where the quad patch below puts the quad, so it only holds
+            // for a quad that patch accepts: same test, on the same numbers.
+            CelestialBody body = BodyOf(sphere);
+            if (body == null)
+            {
+                return false;
+            }
+            Vector3d quadOrigin = WorldPosition(body, quad.positionPlanet);
+            if (!IsRoundingCorrection(body, (quadOrigin - (Vector3d)quad.transform.position).magnitude))
+            {
+                return false;
+            }
+
+            PQS.verts[index] = vertex;
+
+            // The fix itself. The vertex and the quad origin are both doubles, in the same frame, and their
+            // difference — a quad is a couple of kilometres wide at most — is the only thing a float ever
+            // holds. Stock converts each of them to float first, 600 km from the centre where the step is
+            // 62.5 mm, and subtracts afterwards.
+            Vector3d offsetInQuad = vertex - quad.positionPlanet;
+
+            // Into world orientation in double, then into the quad's own frame. The quad's rotation is a
+            // float, which is harmless on a vector this short: a tenth of a millimetre at most.
+            Vector3 localVertex = Quaternion.Inverse(quad.transform.rotation)
+                * (Vector3)(body.rotation * offsetInQuad);
+            if (Log.IsTraceEnabled)
+            {
+                TraceVertexShift(sphere, quad, body, index, vertex, localVertex);
+            }
+            quad.verts[index] = localVertex;
+            return true;
         }
 
         /// <summary>
@@ -244,7 +261,7 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
         /// </summary>
         private static void PlaceQuad(PQ quad)
         {
-            if (quad == null || !AppliesTo(quad))
+            if (quad == null || !Bench.PatchEnabled || !AppliesTo(quad))
             {
                 return;
             }
