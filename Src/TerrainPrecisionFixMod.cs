@@ -91,7 +91,8 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
             // attached to the body: a position given to them is kept as it is. Every other quad hangs from
             // the sphere, whose origin is the centre of the body, so Unity would store any position given to
             // it as a 600 km float again. Those are also the quads without a collider, as long as the
-            // body's PQSMod_QuadMeshColliders.maxLevelOffset is 0.
+            // body's PQSMod_QuadMeshColliders.maxLevelOffset is 0, which it is on Kerbin and on the Mun,
+            // read in flight.
             return quad.transform.parent == sphere.LocalSpacePQStorage.transform;
         }
 
@@ -187,25 +188,19 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
         /// </summary>
         internal static bool PlaceVertex(PQS sphere, PQ quad, int index, Vector3d vertex)
         {
-            if (!AppliesTo(quad))
+            // Everything that depends on the quad rather than on the vertex is worked out once and reused
+            // for its couple of hundred vertices. Measured: without this, a vertex costs three times what
+            // stock spends on it, almost all of it in reading Unity transforms over and over.
+            if (!ReferenceEquals(quad, _contextQuad))
+            {
+                BuildQuadContext(sphere, quad);
+            }
+            if (!_contextApplies)
             {
                 return false;
             }
             if (quad.verts == null || PQS.verts == null
                 || index < 0 || index >= quad.verts.Length || index >= PQS.verts.Length)
-            {
-                return false;
-            }
-
-            // The vertex is placed relative to where the quad patch below puts the quad, so it only holds
-            // for a quad that patch accepts: same test, on the same numbers.
-            CelestialBody body = BodyOf(sphere);
-            if (body == null)
-            {
-                return false;
-            }
-            Vector3d quadOrigin = WorldPosition(body, quad.positionPlanet);
-            if (!IsRoundingCorrection(body, (quadOrigin - (Vector3d)quad.transform.position).magnitude))
             {
                 return false;
             }
@@ -216,18 +211,78 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
             // difference — a quad is a couple of kilometres wide at most — is the only thing a float ever
             // holds. Stock converts each of them to float first, 600 km from the centre where the step is
             // 62.5 mm, and subtracts afterwards.
-            Vector3d offsetInQuad = vertex - quad.positionPlanet;
+            Vector3d offsetInQuad = vertex - _contextPositionPlanet;
 
             // Into world orientation in double, then into the quad's own frame. The quad's rotation is a
             // float, which is harmless on a vector this short: a tenth of a millimetre at most.
-            Vector3 localVertex = Quaternion.Inverse(quad.transform.rotation)
-                * (Vector3)(body.rotation * offsetInQuad);
+            Vector3 localVertex = _contextInverseQuadRotation * (Vector3)(_contextBodyRotation * offsetInQuad);
             if (Log.IsTraceEnabled)
             {
-                TraceVertexShift(sphere, quad, body, index, vertex, localVertex);
+                TraceVertexShift(sphere, quad, _contextBody, index, vertex, localVertex);
             }
             quad.verts[index] = localVertex;
             return true;
+        }
+
+        // What placing a vertex needs to know about the quad it belongs to. Only ever read after
+        // BuildQuadContext has run for that same quad.
+        private static PQ _contextQuad;
+        private static bool _contextApplies;
+        private static CelestialBody _contextBody;
+        private static Vector3d _contextPositionPlanet;
+        private static QuaternionD _contextBodyRotation;
+        private static Quaternion _contextInverseQuadRotation;
+
+        /// <summary>
+        /// Works out whether the fix applies to this quad, and the frame its vertices are placed in.
+        /// </summary>
+        private static void BuildQuadContext(PQS sphere, PQ quad)
+        {
+            _contextQuad = quad;
+            _contextApplies = false;
+
+            if (!AppliesTo(quad))
+            {
+                return;
+            }
+
+            // Vertices are placed relative to where the quad patch below puts the quad, so they only hold
+            // for a quad that patch accepts: same test, on the same numbers.
+            CelestialBody body = BodyOf(sphere);
+            if (body == null)
+            {
+                return;
+            }
+            Vector3d quadOrigin = WorldPosition(body, quad.positionPlanet);
+            if (!IsRoundingCorrection(body, (quadOrigin - (Vector3d)quad.transform.position).magnitude))
+            {
+                return;
+            }
+
+            _contextBody = body;
+            _contextPositionPlanet = quad.positionPlanet;
+            _contextBodyRotation = body.rotation;
+            _contextInverseQuadRotation = Quaternion.Inverse(quad.transform.rotation);
+            _contextApplies = true;
+        }
+
+        /// <summary>Forgets what was worked out for a quad, so that the next vertex works it out again.</summary>
+        internal static void ForgetQuadContext()
+        {
+            _contextQuad = null;
+        }
+
+        /// <summary>
+        /// A quad can be rebuilt after having been moved, so whatever was worked out for it last time has
+        /// to be worked out again.
+        /// </summary>
+        [HarmonyPatch(typeof(PQS), "BuildQuad")]
+        private static class BuildQuadPatch
+        {
+            private static void Prefix()
+            {
+                ForgetQuadContext();
+            }
         }
 
         /// <summary>
@@ -283,6 +338,9 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
             // A world position, so relative to the floating origin: a short vector near the craft, which a
             // float holds precisely.
             quad.transform.position = origin;
+
+            // The quad just moved, so anything worked out from its transform is stale.
+            ForgetQuadContext();
 
             // Stock keeps the quad's world position in double alongside the transform, and later moves the
             // quad from it: it has to hold the corrected value too.

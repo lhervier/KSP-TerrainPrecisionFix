@@ -153,9 +153,9 @@ nothing but the order of the arithmetic, and the spread disappears.
 ## What the fix does
 
 The two stock placements that go through a float at planet scale are redone in double, on the quads
-of the highest subdivision level. Those are the ones craft stand on, the only ones with a collider as
-far as every measurement so far goes (see [TODO.md](TODO.md)), and the only ones that can keep a
-precise position: stock moves them to a container of their
+of the highest subdivision level. Those are the ones craft stand on, the only ones with a collider on
+Kerbin and on the Mun where `PQSMod_QuadMeshColliders.maxLevelOffset` has been read in flight and is 0
+(see [TODO.md](TODO.md)), and the only ones that can keep a precise position: stock moves them to a container of their
 own, outside the body's hierarchy. Every other quad hangs from the body's terrain sphere, whose origin
 is the centre of the body, so Unity would store any position given to it as a 600 km float again.
 Those are left exactly as stock builds them.
@@ -378,14 +378,65 @@ drawn in the frame they were built in. It works with or without this mod. It has
 
 ## Performance
 
-**Not measured yet.** The vertex part of the fix replaces a computation that stock runs for every
-vertex of every terrain quad it builds, so it sits on a path the game uses continuously while flying,
-not only when a scene loads. Figures belong here, and this section stays empty until they exist.
+The vertex part of the fix replaces a computation that stock runs for every vertex of every terrain quad
+it builds, so it sits on a path the game uses continuously while flying, not only when a scene loads.
+**It places a vertex in half the time stock takes.**
 
-What is expected, and it is an expectation and not a result: little or no cost, possibly a small gain.
-Stock calls `Transform.TransformPoint` and `Transform.InverseTransformPoint` once each per vertex, two
-calls into the native engine; the replacement is double arithmetic in managed code, with no native call
-at all.
+### What a vertex costs
+
+Both placements were replayed over the vertices of a quad the game had just built, one quad in
+thirty-two, inside the frame that built it, alternating which one ran first. A craft in a 5 km circular
+orbit of the Mun, where the game builds about ten of the quads this fix touches every second.
+
+| | per vertex |
+|---|---|
+| stock | 172.2 ns |
+| this fix | **85.5 ns** |
+
+Stock does two calls into the native engine per vertex, `Transform.TransformPoint` and
+`Transform.InverseTransformPoint`. The replacement is managed arithmetic on doubles, with no native call
+at all, and everything that depends on the quad rather than on the vertex — whether the fix applies, the
+frame the quad hangs in, the inverse of its rotation — is worked out once for its 225 vertices.
+
+That last part is not a detail. Before it was, the same measurement read **500.4 ns**, three times stock:
+reading a handful of Unity transforms again for every vertex costs far more than the arithmetic the fix
+exists for. The figure above is what the fix does today; the one before it is why it is written that way.
+
+Stock was measured at 168.6 ns and 172.2 ns in two separate KSP sessions, 2 % apart, which is what this
+method's reproducibility is worth.
+
+Placing a vertex is a small part of building one: a quad takes 2.7 ms to build, about 12 µs per vertex,
+nearly all of it spent in the `PQSMod`s that compute height and colour. The 87 ns are 0.7 % of that.
+
+### In flight
+
+The same save, the same two minutes, the same build of the mod, twice: the correction on, then off.
+
+| | fix | stock |
+|---|---|---|
+| frames per second | 106.3 | 105.2 |
+| quads built per second | 24.0 | 24.0 |
+| of which the fix acts on | 9.8 | 9.9 |
+| ms per quad the fix acts on | 2.723 | 2.839 |
+| terrain per frame | 1.347 ms | 1.370 ms |
+| terrain share of real time | 14.3 % | 14.4 % |
+
+The two flights built 2 863 and 2 871 quads, 0.3 % apart — the trajectory is on rails, so the two runs
+cover the same ground.
+
+The fix is ahead on every line, and that is not a 4 % gain: the calibration above puts the saving at
+19.5 µs per quad, 0.7 % of 2.839 ms, six times less than what separates these two columns. What this
+pair shows is a bound rather than a difference — at the scale of a frame, nothing degrades, and anything
+that remains is lost in the noise between two runs of the game.
+
+### Where it runs at all
+
+Only the highest subdivision level is corrected, and the game only builds that level close to the
+ground: below 6 250 m over the Mun, 9 375 m over Kerbin, as its own `PQS` settings give it. Higher up,
+the patched code decides once per quad that it does not apply, and each vertex is left with a reference
+comparison before stock runs untouched.
+
+The saves and the logs these figures come from are in [perfs/](perfs/), along with what records them.
 
 ## Side effects
 
@@ -431,17 +482,17 @@ other lead is welcome to.
 
 - Only measured on stock KSP 1.12.5 (plus Harmony and ModuleManager): Terrain Precision Fix Diag on
   Kerbin, the Mun, Minmus and Gilly, with one part and with two; Terrain Precision Fix Diag 2 on the
-  same four worlds; the quad origins on Kerbin and the Mun.
-- Not measured yet: flight at speed and the map view, where quads are built and destroyed all the
-  time; the cost of the vertex patch, which runs for every vertex of every quad built; Kopernicus and
+  same four worlds; the quad origins on Kerbin and the Mun; and what both placements cost, in a 5 km
+  orbit of the Mun where the game builds terrain continuously.
+- Not measured yet: the map view, where quads are built and destroyed all the time; Kopernicus and
   Parallax, which work on the same terrain pipeline. Kopernicus compatibility is a requirement before
   this goes anywhere (see [TODO.md](TODO.md)). If Kopernicus places the quads in another frame, the
   1 m safeguard should leave its terrain as stock builds it, with one warning per body in the log.
 - Colliders below the highest subdivision level: `PQSMod_QuadMeshColliders` gives a collider to every
-  quad at or above `maxLevel - |maxLevelOffset|`. With an offset other than 0, the quads below the
-  highest level have colliders too, and this fix leaves them uncorrected. The stock value of
-  `maxLevelOffset` is not known yet; every measurement so far hit quads of the highest level (see
-  [TODO.md](TODO.md)).
+  quad at or above `maxLevel - |maxLevelOffset|`, and with an offset other than 0 the fix would leave
+  those lower quads uncorrected. Read in flight on Kerbin and on the Mun: the offset is **0** on both,
+  so only the highest level carries a collider and the fix covers every quad a craft can stand on. Not
+  read on the other bodies yet (see [TODO.md](TODO.md)).
 - Parallax scatters: according to its source, they should follow the corrected ground. Their positions
   and colliders are expressed relative to the quad, and a collider is a child of its quad, so they move
   with it. Not measured yet (see [TODO.md](TODO.md)).

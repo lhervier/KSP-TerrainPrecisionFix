@@ -68,6 +68,10 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
             public int PatchedQuads;
             public long Vertices;
             public long BuildTicks;
+
+            // Of BuildTicks, what went into quads the fix acts on. Comparing stock against the fix on
+            // this alone is immune to the two runs not building the same mix of quads.
+            public long PatchedBuildTicks;
             public long UpdateTicks;
             public long SubdivisionSum;
             public int SubdivisionMax;
@@ -256,6 +260,7 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
                 if (patched)
                 {
                     _current.PatchedQuads++;
+                    _current.PatchedBuildTicks += ticks;
                 }
 
                 // The lowest ceiling the sphere put on subdivision while this sample lasted. Below maxLevel,
@@ -412,6 +417,9 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
         /// </summary>
         private static void RunFixed(PQS sphere, PQ quad, int count)
         {
+            // As if the quad had just been handed over: what the fix works out once per quad is worked out
+            // here too, and charged to the vertices of this round like it is in a real build.
+            TerrainPrecisionFixMod.ForgetQuadContext();
             for (int index = 0; index < count; index++)
             {
                 TerrainPrecisionFixMod.PlaceVertex(sphere, quad, index, PQS.verts[index]);
@@ -428,11 +436,12 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
             Log.Info($"BENCH begin;mode={_mode};patchEnabled={_patchEnabled};samples={_sampleCount}"
                 + $";verticesPerQuad={PQS.cacheVertCount};warpedSeconds={_warpedSeconds}");
             Log.Info("BENCH;sample;ut;utSpan;realSeconds;frames;fps;altitude;speed;quads;patchedQuads"
-                + ";vertices;buildMs;updateMs;subdivisionAvg;subdivisionMax;speedLevelCap;maxLevel");
+                + ";vertices;buildMs;patchedBuildMs;updateMs;subdivisionAvg;subdivisionMax;speedLevelCap;maxLevel");
             for (int i = 0; i < _sampleCount; i++)
             {
                 Sample s = _samples[i];
                 double buildMs = s.BuildTicks * 1000.0 / Stopwatch.Frequency;
+                double patchedBuildMs = s.PatchedBuildTicks * 1000.0 / Stopwatch.Frequency;
                 double updateMs = s.UpdateTicks * 1000.0 / Stopwatch.Frequency;
                 double fps = s.RealSeconds > 0.0 ? s.Frames / s.RealSeconds : 0.0;
                 double subdivisionAvg = s.Quads > 0 ? s.SubdivisionSum / (double)s.Quads : 0.0;
@@ -444,7 +453,7 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
                     I(s.Frames), F(fps, 1),
                     F(s.Altitude, 1), F(s.Speed, 1),
                     I(s.Quads), I(s.PatchedQuads), L(s.Vertices),
-                    F(buildMs, 3), F(updateMs, 3),
+                    F(buildMs, 3), F(patchedBuildMs, 3), F(updateMs, 3),
                     F(subdivisionAvg, 2), I(s.SubdivisionMax),
                     I(s.SpeedLevelCap == int.MaxValue ? -1 : s.SpeedLevelCap), I(s.MaxLevel)
                 }));

@@ -9,19 +9,15 @@ Not everything below has to be done first. What does, in the order a reviewer wi
 
 1. **Kopernicus.** Most planet packs go through it; the fix is not worth proposing until it is measured
    with it, on a stock body and on a planet pack body.
-2. **The cost of the vertex patch.** It runs per vertex, in flight, continuously. A reviewer asks this
-   right after compatibility, and the README currently leaves the section empty.
-3. **`maxLevelOffset` on stock bodies.** Decides whether the fix covers every quad that has a collider
-   or only some of them.
-4. **Existing saves.** Already tested, not yet written: the fix has been run on the author's own
+2. **Existing saves.** Already tested, not yet written: the fix has been run on the author's own
    years-old save, and none of its bases broke. What is left is to say it in the README together with
    what it does not prove — those bases are built in a way that resists this defect (see below) — and
    to say plainly that the fix also takes away the reload lottery players use as an escape hatch.
    The KSPCF campaigns are done, checked and linked from all three READMEs.
-5. **Breaking Ground surface features.** They have colliders and are placed like the rocks. Enough to
+3. **Breaking Ground surface features.** They have colliders and are placed like the rocks. Enough to
    know whether the fix introduces a physical offset there, even if the answer is "yes, and Rock
    Precision Fix handles it".
-6. **The README reorganised** around the plan of 2026-09-13: thesis, spoiler (faulty code and patch),
+4. **The README reorganised** around the plan of 2026-09-13: thesis, spoiler (faulty code and patch),
    analysis with both probes, why the draw was random, impacts.
 
 Everything else — Parallax measured rather than read, `PQSCity`, rocks measured, the ground moving in
@@ -254,20 +250,22 @@ keeps the READMEs short.
 Verified separately, and worth one sentence next to the claim: no KSPCF patch touches the placement of
 PQS quads. Record the version or commit checked.
 
-### Cost of the vertex patch — not measured
+### Cost of the vertex patch — measured, 2026-09-13
 
-`PQS.BuildVertexSurfaceRelative` runs for every vertex of every quad built, so the replacement sits on
-a hot path that runs continuously in flight, not only on loading. Nothing measures it yet, and the
-README has a section left empty until something does.
+Measured, published in [Performance](README.md#performance), material and logs in [perfs/](perfs/):
+**172.2 ns per vertex in stock against 85.5 ns with the fix**, replaying both placements over the
+vertices of a quad the game had just built, in the frame that built it. Two flights of the same save
+with the correction on and off differ by less than the noise between two KSP sessions.
 
-The expectation, to be confirmed and not to be published before it is: the cost should be small, and it
-may well be negative. Stock calls `Transform.TransformPoint` and `Transform.InverseTransformPoint` per
-vertex, two calls into the native engine; the replacement is managed double arithmetic with no native
-call at all.
+The expectation recorded here — "the cost should be small, and it may well be negative" — turned out to
+be true only after the patch was rewritten. As first written it read **500.4 ns, three times stock**: it
+redid for each of the 225 vertices of a quad what only depends on the quad, and reading a handful of
+Unity transforms over and over costs far more than the arithmetic the fix exists for. Worked out once
+per quad, a vertex is left with a `Vector3d` subtraction and two rotations. Both figures are in the
+README: the first one is what justifies the second being written that way.
 
-To measure: frame time flying low and fast over Kerbin, where quads are built and destroyed
-continuously, stock against the fix, same save and same route; and a stopwatch around the patch,
-totalled per scene and logged at Trace level, to give an absolute figure per quad.
+What is left, and it is not a prerequisite: the same measurement on Kerbin rather than the Mun, where
+quads are four times larger and the craft can be made to fly low for much longer.
 
 ### Colliders below the highest level
 
@@ -276,10 +274,13 @@ collider to every quad at or above `sphere.maxLevel - |maxLevelOffset|`: with an
 highest level has colliders; with 2, the two levels below it have them too. Those quads hang from the
 sphere and would stay uncorrected.
 
-The actual value for stock bodies is not known. The only default visible in code is set in `Reset()`,
-which Unity only calls in its editor; what the game uses is serialized in its assets. Every measurement
-so far hit quads of the highest level, which fits an offset of 0 without proving it. To settle it: log
-`maxLevelOffset` and the resulting lowest collider level for each body at startup, at the Debug level.
+**Settled, 2026-09-13.** The value is logged by the mod itself while measuring performance, and read in
+flight: `maxLevelOffset` is **0** on Kerbin and on the Mun, so the lowest level with a collider is the
+highest level itself — 10 and 9 respectively. **The fix covers every quad a craft can stand on.**
+
+Still worth reading on the other bodies as they are visited, since nothing says a body cannot ship a
+different offset. A single line in the log gives it, and the two bodies measured so far agree with the
+`Reset()` default.
 
 ### Parallax scatters
 

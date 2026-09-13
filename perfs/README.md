@@ -60,3 +60,68 @@ every PQSMod included). Terrain cost 7.5 % of real time, 0.63 ms per frame, of w
 above the 6 250 m threshold. Nothing here measures the fix. Kept because it is the control that shows
 what the counters read when the patch is idle — and because 12 µs of stock work per vertex is the
 denominator the patch will have to be compared against.
+
+### `mun-05km-fix` — the fix actually runs
+
+73 samples over 75 s, 104 fps, 24.5 quads per second of which 9.8 are patched (40 %). 2.73 ms per quad,
+12.1 µs per vertex: the same as at 10 km, so building a level 9 quad costs what any other quad costs, the
+patch included. Terrain took 15 % of real time, 1.44 ms per frame.
+
+One thing to watch in every run below this altitude: **`speedLevelCap` drops to 8 on 15 samples out of
+73**. At 5 km the craft is close enough to the angular ceiling that a single long frame pushes it over,
+and the game then declines to build level 9 at all. So a slower run builds fewer of exactly the quads
+being measured — which is why `patchedBuildMs` was added: comparing the time spent inside the quads the
+fix touches is independent of how many of them each run happened to build.
+
+### `mun-05km-calibrate-before` and `-after` — what a vertex costs
+
+`benchMode = calibrate` replays both placements over the vertices of a real quad, one quad in 32, inside
+the frame that just built it, alternating which one runs first.
+
+| | stock | this fix | difference |
+|---|---|---|---|
+| before caching, 41 quads | 168.6 ns | 500.4 ns | **+331.8 ns** |
+| after caching, 38 quads | 172.2 ns | 85.5 ns | **−86.7 ns** |
+
+The first run is why `BuildQuadContext` exists. `PlaceVertex` used to redo, for each of the 225 vertices
+of a quad, everything that only depends on the quad: `AppliesTo` (which reads `quad.transform.parent` and
+`sphere.LocalSpacePQStorage`), `BodyOf`, the one-metre safeguard, and `quad.transform.position` /
+`.rotation` with its inverse. That is several trips into the Unity engine per vertex, against the two
+stock makes — hence three times the cost. Worked out once per quad, a vertex is left with a `Vector3d`
+subtraction, a rotation in double, a rotation in float and two writes.
+
+**So the fix now places a vertex in half the time stock takes**, which was the expectation recorded in
+the TODO and had never been checked: stock calls `Transform.TransformPoint` and
+`InverseTransformPoint`, two native calls, where the replacement is managed arithmetic with none.
+
+Stock was measured twice, 168.6 and 172.2 ns, in two separate KSP sessions: 2 % apart, which is what the
+method's own reproducibility is worth.
+
+Neither the cost nor the saving is visible while playing. At 5 km over the Mun the game builds 9.9
+patched quads per second, so 2 230 vertices: 86.7 ns each amounts to 0.2 ms saved per second of flight,
+0.02 % of real time. The point is not the gain — it is that the correction is free.
+
+### `mun-05km-counters-fix` and `-stock` — the same flight, in flight
+
+Same save, same DLL, same two minutes; `patchEnabled` is the only line that differs between the two KSP
+sessions.
+
+| | fix | stock |
+|---|---|---|
+| samples / duration | 117 / 119.5 s | 117 / 119.5 s |
+| frames per second | 106.27 | 105.24 |
+| quads built per second | 23.96 | 24.02 |
+| of which patched | 9.84 (41 %) | 9.90 (41 %) |
+| ms per quad | 2.682 | 2.761 |
+| **ms per patched quad** | **2.723** | **2.839** |
+| terrain per frame | 1.347 ms | 1.370 ms |
+| terrain share of real time | 14.32 % | 14.42 % |
+
+The two runs built 2 863 and 2 871 quads, 0.3 % apart, with the same 41 % patched: the on-rails
+trajectory does give two comparable flights, which is what the saves were built for.
+
+The fix is ahead on every line, and **that must not be read as a 4 % gain**. The calibration says the
+saving is 86.7 ns × 225 vertices = 19.5 µs per quad, which is 0.7 % of 2.839 ms — six times smaller than
+the 4 % seen here. What the pair really establishes is a bound: at the scale of a frame, one session
+against another, nothing degrades, and any difference is buried in the noise between two runs of KSP. The
+figure worth publishing is the calibration; this pair is what shows it changes nothing a player can feel.
