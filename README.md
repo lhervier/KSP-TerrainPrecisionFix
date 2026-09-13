@@ -386,12 +386,12 @@ it builds, so it sits on a path the game uses continuously while flying, not onl
 
 Both placements were replayed over the vertices of a quad the game had just built, one quad in
 thirty-two, inside the frame that built it, alternating which one ran first. A craft in a 5 km circular
-orbit of the Mun, where the game builds about ten of the quads this fix touches every second.
+orbit of the Mun, where the game builds six or seven of the quads this fix touches every second.
 
 | | per vertex |
 |---|---|
-| stock | 172.2 ns |
-| this fix | **85.5 ns** |
+| stock | 167.3 ns |
+| this fix | **82.7 ns** |
 
 Stock does two calls into the native engine per vertex, `Transform.TransformPoint` and
 `Transform.InverseTransformPoint`. The replacement is managed arithmetic on doubles, with no native call
@@ -402,32 +402,33 @@ That last part is not a detail. Before it was, the same measurement read **500.4
 reading a handful of Unity transforms again for every vertex costs far more than the arithmetic the fix
 exists for. The figure above is what the fix does today; the one before it is why it is written that way.
 
-Stock was measured at 168.6 ns and 172.2 ns in two separate KSP sessions, 2 % apart, which is what this
-method's reproducibility is worth.
+Stock was measured at 167.3, 168.6 and 172.2 ns in three separate KSP sessions, within 1.5 % of each
+other, which is what this method's reproducibility is worth.
 
 Placing a vertex is a small part of building one: a quad takes 2.7 ms to build, about 12 µs per vertex,
-nearly all of it spent in the `PQSMod`s that compute height and colour. The 87 ns are 0.7 % of that.
+nearly all of it spent in the `PQSMod`s that compute height and colour. The 85 ns are 0.7 % of that.
 
 ### In flight
 
-The same save, the same two minutes, the same build of the mod, twice: the correction on, then off.
+The same save, the same stretch of orbit, the same build of the mod, twice: the correction on, then
+off.
 
 | | fix | stock |
 |---|---|---|
-| frames per second | 106.3 | 105.2 |
-| quads built per second | 24.0 | 24.0 |
-| of which the fix acts on | 9.8 | 9.9 |
-| ms per quad the fix acts on | 2.723 | 2.839 |
-| terrain per frame | 1.347 ms | 1.370 ms |
-| terrain share of real time | 14.3 % | 14.4 % |
+| frames per second | 114.6 | 114.2 |
+| quads built per second | 16.38 | 16.55 |
+| of which the fix acts on | 6.39 | 6.40 |
+| ms per quad the fix acts on | 2.743 | 2.786 |
+| terrain per frame | 0.938 ms | 0.958 ms |
+| terrain share of real time | 10.75 % | 10.94 % |
 
-The two flights built 2 863 and 2 871 quads, 0.3 % apart — the trajectory is on rails, so the two runs
-cover the same ground.
+The two flights built 2 442 and 2 484 quads, 1.7 % apart, of which 952 and 960 were ones the fix acts
+on — the craft is on rails, so loading the same save twice covers the same ground twice.
 
-The fix is ahead on every line, and that is not a 4 % gain: the calibration above puts the saving at
-19.5 µs per quad, 0.7 % of 2.839 ms, six times less than what separates these two columns. What this
-pair shows is a bound rather than a difference — at the scale of a frame, nothing degrades, and anything
-that remains is lost in the noise between two runs of the game.
+The fix is ahead on every line, and that is not a 1.5 % gain: the calibration above puts the saving at
+19.0 µs per quad, 0.7 % of 2.786 ms, half of what separates these two columns. What this pair shows is
+a bound rather than a difference — at the scale of a frame, nothing degrades, and what is left is the
+noise between two runs of the game.
 
 ### Where it runs at all
 
@@ -436,7 +437,8 @@ ground: below 6 250 m over the Mun, 9 375 m over Kerbin, as its own `PQS` settin
 the patched code decides once per quad that it does not apply, and each vertex is left with a reference
 comparison before stock runs untouched.
 
-The saves and the logs these figures come from are in [perfs/](perfs/), along with what records them.
+The logs these figures come from are in [perfs/](perfs/), with the procedure that produces them: it
+takes a command pod, the debug menu's Set Orbit, and three flights of a few minutes.
 
 ## Side effects
 
