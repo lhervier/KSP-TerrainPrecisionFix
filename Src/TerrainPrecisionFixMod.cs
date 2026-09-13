@@ -56,7 +56,6 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
         private void Start()
         {
             Log.LoadLevel();
-            Bench.LoadSettings();
             try
             {
                 _buildQuad = AccessTools.FieldRefAccess<PQS, PQ>("buildQuad");
@@ -76,7 +75,7 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
         }
 
         /// <summary>Whether the fix acts on this quad.</summary>
-        internal static bool AppliesTo(PQ quad)
+        private static bool AppliesTo(PQ quad)
         {
             PQS sphere = quad.sphereRoot;
 
@@ -165,7 +164,7 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
         {
             private static bool Prefix(PQS __instance, PQS.VertexBuildData data)
             {
-                if (!_active || !Bench.PatchEnabled)
+                if (!_active)
                 {
                     return true;
                 }
@@ -186,7 +185,7 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
         /// Puts one terrain vertex where its own double precision coordinates say it is, inside its quad.
         /// Returns whether it did: a vertex the fix does not apply to is left to stock, untouched.
         /// </summary>
-        internal static bool PlaceVertex(PQS sphere, PQ quad, int index, Vector3d vertex)
+        private static bool PlaceVertex(PQS sphere, PQ quad, int index, Vector3d vertex)
         {
             // Everything that depends on the quad rather than on the vertex is worked out once and reused
             // for its couple of hundred vertices. Measured: without this, a vertex costs three times what
@@ -267,7 +266,7 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
         }
 
         /// <summary>Forgets what was worked out for a quad, so that the next vertex works it out again.</summary>
-        internal static void ForgetQuadContext()
+        private static void ForgetQuadContext()
         {
             _contextQuad = null;
         }
@@ -316,7 +315,7 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
         /// </summary>
         private static void PlaceQuad(PQ quad)
         {
-            if (quad == null || !Bench.PatchEnabled || !AppliesTo(quad))
+            if (quad == null || !AppliesTo(quad))
             {
                 return;
             }

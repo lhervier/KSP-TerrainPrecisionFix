@@ -437,8 +437,10 @@ ground: below 6 250 m over the Mun, 9 375 m over Kerbin, as its own `PQS` settin
 the patched code decides once per quad that it does not apply, and each vertex is left with a reference
 comparison before stock runs untouched.
 
-The logs these figures come from are in [perfs/](perfs/), with the procedure that produces them: it
-takes a command pod, the debug menu's Set Orbit, and three flights of a few minutes.
+The logs these figures come from are in [perfs/](perfs/). The instrument is a mod of its own,
+[PQS Bench](https://github.com/lhervier/KSP-TerrainPrecisionFix-PQSBench), which measures what building
+the stock terrain costs and carries the procedure that produces these figures: it takes a command pod,
+the debug menu's Set Orbit, and three flights of a few minutes.
 
 ## Side effects
 
