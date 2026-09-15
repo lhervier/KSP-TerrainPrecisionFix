@@ -380,7 +380,7 @@ drawn in the frame they were built in. It works with or without this mod. It has
 
 The vertex part of the fix replaces a computation that stock runs for every vertex of every terrain quad
 it builds, so it sits on a path the game uses continuously while flying, not only when a scene loads.
-**It places a vertex in a third of the time stock takes.**
+**It places a vertex in less than a third of the time stock takes.**
 
 ### What was measured
 
@@ -395,10 +395,12 @@ reference with [the bench](https://github.com/lhervier/KSP-TerrainPrecisionFix-P
 the middle term with [Stock Quad Cache](https://github.com/lhervier/KSP-TerrainPrecisionFix-StockQuadCache/blob/main/perfs/README.md),
 and this mod's two runs in [`perfs/`](perfs/).
 
-The campaign, 2026-09-14, KSP 1.12.5 with Harmony, ModuleManager and KSP Community Fixes: a command pod
+The campaign, 2026-09-15, KSP 1.12.5 with Harmony, ModuleManager and KSP Community Fixes: a command pod
 on rails in a circular orbit 5 km over the Mun, low enough that the game builds the highest subdivision
 level — the only one the fix acts on — and six runs of two and a half minutes of that one save, which
-covers the same ground every time.
+covers the same ground every time. **All six were taken on my laptop**, described with
+[the stock run](https://github.com/lhervier/KSP-TerrainPrecisionFix-PQSBench/blob/main/perfs/README.md);
+figures from another machine are not comparable to these.
 
 Three configurations, each measured twice, once for what a vertex costs and once for what a frame pays.
 The reference is a KSP with this mod's folder taken out of `GameData`, since a mod left in place still
@@ -408,18 +410,19 @@ for this measurement alone: stock's arithmetic bit for bit, with the only differ
 `Transform`s are read once per quad instead of once per vertex. This fix changes the arithmetic **and**
 the per-quad work; that one carries the second without the first, and splits the saving between them.
 
-Every run built the same 2 484 quads, of which exactly 960 of the highest subdivision level, over 147
-samples — the craft is on rails, so the same save covers the same ground.
+Every `counters` run built exactly 1 272 quads of the highest subdivision level over 148 samples (3 211
+to 3 213 quads in all) — the craft is on rails, so the same save covers the same ground.
 
 ### What a vertex costs
 
-30 quads per run, 54 000 vertices per formula.
+40 quads per run, 72 000 vertices per formula. Each run times what is installed against its own
+measurement of stock, in the same frames, and the figure read is the difference between the two:
 
-| | per vertex |
+| installed | `differenceNsPerVertex` |
 |---|---|
-| stock | 285.2 ns |
-| stock, `Transform`s read once per quad | 206.6 ns |
-| this fix | **103.7 ns** |
+| nothing | −1.1 ns, the floor of the method |
+| stock's arithmetic, `Transform`s read once per quad | −82.8 ns |
+| this fix | **−164.3 ns** — 228.5 → 64.2 ns in its run, **3.56× faster** |
 
 Stock makes five trips into the native engine per vertex: `Transform.TransformPoint`,
 `Transform.InverseTransformPoint`, and two reads of `Component.transform` — `BuildVertexSurfaceRelative`
@@ -428,24 +431,25 @@ makes none. Everything that depends on the quad rather than on the vertex — wh
 frame the quad hangs in, the inverse of its rotation — is worked out once for its 225 vertices, and what
 is left is a `Vector3d` subtraction, a rotation in double, a rotation in float and two writes.
 
-The middle row is not a placement the game contains. It says where the 181.5 ns go: **78.6 ns** are the
-two `Transform` reads, 39.3 ns each, and **102.9 ns** are the arithmetic, the double-precision version
+The middle row is not a placement the game contains. It says where the 164.3 ns go: **82.8 ns** are the
+two `Transform` reads, 41.4 ns each, and **81.5 ns** are the arithmetic, the double-precision version
 being that much cheaper than two native calls. Read the other way: even if stock stopped asking Unity
-for a `Transform` on every vertex, the fix would still be twice as fast.
+for a `Transform` on every vertex, the fix would still be more than twice as fast.
 
-Each run carries its own measurement of stock, and the three agree within 0.9 % across three KSP
-sessions, which is what the comparison between rows rests on. In the run with neither mod installed the
-two readings are of the same code reached two different ways, and they agree to 2.2 ns — the floor of
-the method, and a sign that the two figures above are, if anything, slightly conservative.
+The difference is read within each run, never between two: from one session of KSP to the next the
+whole replay runs a little faster or slower — the stock measurement of the three runs reads 229.6,
+232.3 and 228.5 ns, a 1.7 % spread — and only a difference taken inside one session cancels that out.
+In the run with neither mod installed the two readings are of the same code reached two different ways,
+and they differ by 1.1 ns: the floor of the method, which any other row carries too.
 
 That the per-quad work is worked out once is not a detail either. The middle row is what **two** reads of
-`Component.transform` per vertex cost: 78.6 ns, more than three quarters of what this fix spends on a
-vertex altogether. This one works out rather more than two things per quad — whether it applies at all,
+`Component.transform` per vertex cost: 82.8 ns, more than this fix spends on a vertex altogether. This one works out rather more than two things per quad — whether it applies at all,
 the frame the quad hangs in, the inverse of its rotation — and doing any of that per vertex would cost
 several times the placement it is part of.
 
-Placing a vertex is a small part of building one: a quad takes 2.8 ms to build, about 12 µs per vertex,
-nearly all of it spent in the `PQSMod`s that compute height and colour. The 285 ns are 2.3 % of that.
+Placing a vertex is a small part of building one: a quad of the highest level takes 1.7 ms to build,
+about 7.6 µs per vertex, nearly all of it spent in the `PQSMod`s that compute height and colour. The
+230 ns stock spends placing it are 3.0 % of that.
 
 ### In flight
 
@@ -453,20 +457,21 @@ The same save and the same stretch of orbit, three times, 150 seconds each, coun
 
 | | stock | `Transform`s hoisted | this fix |
 |---|---|---|---|
-| frames per second | 114.72 | 114.09 | 114.49 |
-| ms per quad the fix acts on | 2.771 | 2.795 | **2.735** |
-| terrain per frame | 0.947 ms | 0.984 ms | **0.942 ms** |
-| terrain share of real time | 10.86 % | 11.22 % | **10.79 %** |
+| frames per second | 77.04 | 75.82 | 79.16 |
+| ms per quad the fix acts on | 1.716 | 1.682 | **1.650** |
+| terrain per frame | 1.195 ms | 1.170 ms | 1.182 ms |
+| terrain share of real time | 9.21 % | 8.87 % | 9.36 % |
 
-The fix is ahead, by 1.3 %, and the calibration predicts 1.5 % — 181.5 ns × 225 vertices is 40.8 µs per
-quad. **That agreement should not be read as a measurement.** The middle column is the reason: by the
-same reckoning it should be 0.6 % ahead, and it comes out 0.9 % behind. The noise between two sessions
+Per quad, the fix is ahead by 3.8 %, where the calibration predicts 2.2 % — 164.3 ns × 225 vertices is
+37.0 µs per quad. **That should not be read as a measurement.** The middle column is the reason: by the
+same reckoning it should be 1.1 % ahead, and it is 2.0 % ahead; per frame it is ahead of the fix; and
+the fix, faster per quad, takes a larger share of real time than stock. The noise between two sessions
 of KSP is worth about as much as the effect being looked for at this scale. What these three runs
 establish is a bound — nothing degrades at the scale of a frame — and the figure worth publishing is the
 calibration.
 
-Nor is the saving worth having for its own sake. At 5 km over the Mun the game builds 6.4 of these quads
-per second, so 1 440 vertices: 181.5 ns each is 0.26 ms per second of flight, 0.026 % of real time. The
+Nor is the saving worth having for its own sake. At 5 km over the Mun the game builds 8.5 of these quads
+per second, so 1 917 vertices: 164.3 ns each is 0.31 ms per second of flight, 0.031 % of real time. The
 point is not the gain. It is that the correction is free.
 
 ### Where it runs at all
