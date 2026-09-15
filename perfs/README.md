@@ -8,9 +8,11 @@ carries the procedure** — the craft, the orbit, how long to fly, and what make
 
 ## The runs
 
-2026-09-14, KSP 1.12.5. `GameData` holding Harmony, ModuleManager, KSP Community Fixes, the measuring
+2026-09-15, KSP 1.12.5. `GameData` holding Harmony, ModuleManager, KSP Community Fixes, the measuring
 mod and this one. A command pod on rails in a circular orbit 5 km over the Mun, 150 seconds of game
-time.
+time. The save and the machine are the reference run's, both described on
+[its page](https://github.com/lhervier/KSP-TerrainPrecisionFix-PQSBench/blob/main/perfs/README.md) —
+figures from another machine are not comparable to these.
 
 | log | mode |
 |---|---|
@@ -20,11 +22,10 @@ time.
 Two runs rather than one because a Harmony patch is installed for a whole session, and because
 `calibrate` does real work of its own in the frames `counters` times.
 
-Their `BENCH run` lines match the reference runs': same save, same craft, over the Mun from UT 335.5 at
-4 999.8 m, for 150 seconds of game time against as much real time. The `counters` run recorded 146
-samples, one short of the others, and built **2 442 quads, of which 952 of the highest subdivision
-level** — the only ones this mod acts on. Every figure read from it is a rate, which a second less does
-not move. The craft is on rails; the same save covers the same ground.
+Their `BENCH run` lines match the reference runs': same save, same craft, over the Mun from UT 54.72 and
+54.70 at 5 000.0 m, for 150 seconds of game time against as much real time. The `counters` run recorded
+148 samples and built **3 213 quads, of which 1 272 of the highest subdivision level** — the only ones
+this mod acts on. The craft is on rails; the same save covers the same ground.
 
 ## The three configurations
 
@@ -35,9 +36,9 @@ shows by how much:
 
 | installed | `differenceNsPerVertex` | where it is measured |
 |---|---|---|
-| nothing | +1.2, the floor of the method | [PQS Bench](https://github.com/lhervier/KSP-TerrainPrecisionFix-PQSBench/blob/main/perfs/README.md) |
-| stock's arithmetic, `Transform`s read once per quad | −76.1 | [Stock Quad Cache](https://github.com/lhervier/KSP-TerrainPrecisionFix-StockQuadCache/blob/main/perfs/README.md) |
-| **this fix** | **−180.0** | here |
+| nothing | −1.1, the floor of the method | [PQS Bench](https://github.com/lhervier/KSP-TerrainPrecisionFix-PQSBench/blob/main/perfs/README.md) |
+| stock's arithmetic, `Transform`s read once per quad | −82.8 | [Stock Quad Cache](https://github.com/lhervier/KSP-TerrainPrecisionFix-StockQuadCache/blob/main/perfs/README.md) |
+| **this fix** | **−164.3** | here |
 
 The middle row is a mod written for this measurement alone, which runs stock's arithmetic bit for bit
 and differs only in reading the two `Transform`s once per quad. It is there because this fix changes
@@ -45,54 +46,49 @@ and differs only in reading the two `Transform`s once per quad. It is there beca
 
 | | per vertex |
 |---|---|
-| reading the two `Transform`s on every vertex | **−76.1 ns**, 38 ns each |
-| the arithmetic | **−103.9 ns** |
-| total | **−180.0 ns**, 288.0 → 107.9 in this run, **2.67× faster** |
+| reading the two `Transform`s on every vertex | **−82.8 ns**, 41 ns each |
+| the arithmetic | **−81.5 ns** |
+| total | **−164.3 ns**, 228.5 → 64.2 in this run, **3.56× faster** |
 
 ## What the calibrate run says
 
-30 quads, 54 000 vertices per formula:
+40 quads, 72 000 vertices per formula:
 
 | | |
 |---|---|
-| `stockNsPerVertex` (this run's own yardstick) | 288.0 |
-| `installedNsPerVertex` | 107.9 |
-| `differenceNsPerVertex` | **−180.0** |
-| `differingQuads` | **30 / 30** |
-
-`differingQuads` is the one number that should *not* be zero here. It counts calibrated quads where a
-vertex landed somewhere other than stock puts it, compared exactly — thirty out of thirty, which is the
-whole purpose of the mod. The other two configurations read zero.
+| `stockNsPerVertex` (this run's own yardstick) | 228.5 |
+| `installedNsPerVertex` | 64.2 |
+| `differenceNsPerVertex` | **−164.3** |
 
 In the run with nothing installed, the two columns are the same code reached two different ways and
-differ by 1.2 ns; that is the floor of the method, and it makes the saving above slightly conservative.
+differ by 1.1 ns; that is the floor of the method.
 
 ## In flight
 
 | | this fix | [nothing](https://github.com/lhervier/KSP-TerrainPrecisionFix-PQSBench/blob/main/perfs/README.md) | [`Transform`s hoisted](https://github.com/lhervier/KSP-TerrainPrecisionFix-StockQuadCache/blob/main/perfs/README.md) |
 |---|---|---|---|
-| frames per second | 114.58 | 114.56 | 114.49 |
-| ms per quad of the highest level | **2.736** | 2.775 | 2.748 |
-| terrain per frame | 0.941 ms | 0.937 ms | 0.940 ms |
-| terrain share of real time | 10.78 % | 10.74 % | 10.76 % |
+| frames per second | 79.16 | 77.04 | 75.82 |
+| ms per quad of the highest level | **1.650** | 1.716 | 1.682 |
+| terrain per frame | 1.182 ms | 1.195 ms | 1.170 ms |
+| terrain share of real time | 9.36 % | 9.21 % | 8.87 % |
 
-Per quad, the fix is ahead by 1.4 %, and the calibration predicts 1.5 % — 180.0 ns × 225 vertices is
-40.5 µs per quad. **That agreement should not be read as a measurement.** The third column is the
-reason: by the same reckoning it should be 0.6 % ahead, and it is 1.0 % ahead; and per frame, both mods
-come out slightly behind stock. At this scale the noise between two sessions of KSP is worth about as
-much as the effect being looked for.
+Per quad, the fix is ahead by 3.8 %, where the calibration predicts 2.2 % — 164.3 ns × 225 vertices is
+37.0 µs per quad. **That should not be read as a measurement.** The third column is the reason: by the
+same reckoning it should be 1.1 % ahead, and it is 2.0 % ahead; per frame it is ahead of the fix; and
+the fix, faster per quad, takes a larger share of real time than stock. At this scale the noise between
+two sessions of KSP is worth as much as the effect being looked for.
 
 What these runs establish is a bound — **nothing degrades at the scale of a frame** — and the figure
 worth publishing is the calibration.
 
-Nor is the saving worth having for its own sake. At 5 km over the Mun the game builds 6.4 of these quads
-per second, so 1 440 vertices: 180.0 ns each is 0.26 ms per second of flight, 0.026 % of real time. And
-placing a vertex is a small part of building one — a quad takes 2.8 ms, nearly all of it in the
+Nor is the saving worth having for its own sake. At 5 km over the Mun the game builds 8.5 of these quads
+per second, so 1 917 vertices: 164.3 ns each is 0.31 ms per second of flight, 0.031 % of real time. And
+placing a vertex is a small part of building one — a quad takes 1.7 ms, nearly all of it in the
 `PQSMod`s that compute height and colour. The point is not the gain. It is that the correction is free.
 
 ## Why the per-quad work is worked out once
 
-The saving is not in the arithmetic alone. Of the 180.0 ns, **76.1 come from not asking Unity for a
+The saving is not in the arithmetic alone. Of the 164.3 ns, **82.8 come from not asking Unity for a
 `Transform` on every vertex** — that is what the middle configuration measures, and it is two reads.
 This fix works out rather more than two things per quad: whether it applies at all, the frame the quad
 hangs in, and the inverse of its rotation. Doing any of that per vertex instead would cost several
