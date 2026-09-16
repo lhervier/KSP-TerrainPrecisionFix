@@ -17,8 +17,9 @@ Not everything below has to be done first. What does, in the order a reviewer wi
 3. **Breaking Ground surface features.** They have colliders and are placed like the rocks. Enough to
    know whether the fix introduces a physical offset there, even if the answer is "yes, and Rock
    Precision Fix handles it".
-4. **The README reorganised** around the plan of 2026-09-13: thesis, spoiler (faulty code and patch),
-   analysis with both probes, why the draw was random, impacts.
+4. ~~**The README reorganised**~~ — done 2026-09-16: thesis, why it matters, the culprit (faulty code
+   and why the draw differs), checking it with both probes (stock, then with the fix), the fix and the
+   way out not taken, performance, limits and solutions.
 
 Everything else — Parallax measured rather than read, `PQSCity`, rocks measured, the ground moving in
 flight, the `cos α` bug — can be listed as open in the README without holding the issue back.
@@ -47,8 +48,8 @@ design:
   (`FloatingOrigin.cs:423`, when the craft is landed or under 100 m/s), are rounded against a matrix
   that has moved since the scene opened.
 
-That is enough to explain the draw, whether or not anything else feeds it, and it closes the README's
-"Another lead, not followed" without a measurement: pinning the angle cannot make stock terrain
+That is enough to explain the draw, whether or not anything else feeds it, and it closes the other way
+out, now "Two ways out, one taken" in the README, without a measurement: pinning the angle cannot make stock terrain
 reproducible, because the translation keeps moving, and pinning the translation means removing the
 floating origin, which is what lets KSP run in float at all. The planned throwaway probe that would
 have pinned `InverseRotAngle` is dropped (decided 2026-09-13), and so is the third public instrument it
@@ -161,9 +162,11 @@ What is true, and has to be in the README rather than discovered by a player:
   particular draw; it comes back on the corrected ground, which differs from that draw by up to the
   stock spread. Once it has been loaded and saved again with the fix installed, both sides agree and
   the question never comes back.
-- **The corrected ground is not a worse draw than average, it is the middle of them.** Measured in
-  [The ground itself](README.md#the-ground-itself): on all four worlds the fixed reading falls inside
-  the stock range, away from its edges. So a given base is no more likely to come back buried than it
+- **The corrected ground is not a worse draw than average, it is among them.** Measured in
+  [Terrain Precision Fix Diag 2, with this mod](README.md#terrain-precision-fix-diag-2-with-this-mod-the-ground):
+  the fixed reading falls inside the six draws without the fix on Kerbin, Minmus and Gilly (near the
+  lower edge on Gilly), and just below them on the Mun, where it is inside the twelve draws of both
+  stock campaigns on that spot. So a given base is no more likely to come back buried than it
   was on any given stock loading — what changes is that the outcome no longer differs at each try.
 - **The failure becomes repairable, which it was not in stock.** Raising a craft by a few centimetres
   in the `.sfs` is a permanent repair once the ground is stable. In stock the same edit fixes nothing:
@@ -234,9 +237,15 @@ part of the fix, and it is not a prerequisite for the issue.
 ### Measured on stock, replayed under KSPCF — done and linked (2026-09-13)
 
 The patch is proposed to KSPCF, so every campaign has been run a second time in an install that has
-KSPCF, and the screenshots are published: `imgs/kspcf` in each Diag repository (without the fix), `imgs/Diag1-KSPCF` and `imgs/Diag2-KSPCF` here (with it).
+KSPCF (1.41.1), and the screenshots are published: `imgs/kspcf` in each Diag repository (without the
+fix), `imgs/Diag1` and `imgs/Diag2` here (with it).
 
-The analysis stays on the stock figures, deliberately. The campaigns exist to show the defect is in
+**This repository changed on 2026-09-16**: its tables now come from the KSPCF campaigns, with the fix
+against without it in that same install, and the earlier campaigns with the fix and without KSPCF were
+removed (screenshots and tables; they are in the git history). Its "on stock" sections still recap the
+bare-KSP campaigns of the two Diags. What follows is about the Diag repositories.
+
+The analysis of the Diags stays on the stock figures, deliberately. The campaigns exist to show the defect is in
 bare KSP: measured with forty patches installed, they invite the one answer the issue must not get,
 "how do you know it is the game and not one of ours?". The KSPCF run is there to show the defect does
 not disappear, or change nature, in the install the patch is aimed at.
@@ -352,39 +361,32 @@ Two instruments are published, and between them they carry the whole demonstrati
   like the first one. It is a mod of its own rather than a reading folded into that instrument because
   it measures the ground and not the craft, so it needs none of that protocol: no settling, no waiting.
   Four stock campaigns, on Kerbin, the Mun, Minmus and Gilly, are on its page; the same four saves with
-  the fix installed are in [The ground itself](README.md#the-ground-itself).
+  the fix installed are in [Terrain Precision Fix Diag 2, with this mod](README.md#terrain-precision-fix-diag-2-with-this-mod-the-ground).
 
 The second one is the one that matters. `TerrainAltitude` is computed in double by stock code,
 independently of the frame the fix uses, so it is the only reading that shows the ground comes back to
 the **right** place and not merely to the **same** place.
 
-Everything the README says about the mechanism — observations 2 to 4, and the quad origin line of
-"What happens underneath" — comes from a development probe that was never released. It stays
-unreleased (decided 2026-09-12). A third instrument would cost a public repository, a README bound by
-the same rules as the other two, a third copy of `FormatUtils` to keep in step and a campaign on four
-bodies, and it would add nothing to the case:
+The figures that came from a development probe that was never released — observations 2 to 4 of the old
+"Why it happens" section, and the "What happens underneath" table — **left the README on 2026-09-16**,
+when it was reorganised: no figure without a protocol a reader can follow. The probe stays unreleased
+(decided 2026-09-12), and nothing is lost by it:
 
-- **Observations 2 and 3 are already reproducible, without any instrument.** With `logLevel = Debug`,
-  the fix logs for every quad it places how far it moved its origin, which is the stock error, as a
-  distance rather than an altitude. With `Trace`, it logs how far the vertices moved within each quad.
 - **The mechanism is shorter to read than to measure.** `quadTransform.localPosition = positionPlanet`
-  in `PQ.SetupQuad`, a `Vector3d` of 600 km assigned to a float field, and the four lines of
-  `PQS.BuildVertexSurfaceRelative`, are both quoted in
-  [Where it happens](README.md#where-it-happens). Whoever doubts the figures can read the code
-  that produces them.
-- **A quad origin probe would be circular once the fix is installed.** The fix sets
-  `transform.position = body.rotation * positionPlanet + body.position`, and a rotation preserves the
-  length of a vector, so the altitude of the transform matches the altitude of `positionPlanet` by
-  construction. The 0.00 mm such a probe reads says the fix does what it claims, and nothing more; only
-  its stock reading carries information.
-- **And what closes the case needs no probe at all**: the fix changes nothing but the order of the
-  arithmetic, and the spread falls by three orders of magnitude. Were the cause elsewhere, reordering a
-  subtraction would leave it untouched.
+  in `PQ.SetupQuad`, and the four lines of `PQS.BuildVertexSurfaceRelative`, are quoted in
+  [The culprit](README.md#the-culprit), which says in words, without measured values, that the origin
+  and each vertex are rounded on their own.
+- **Diag 2 carries the proof on the ground**, with numbers read off screenshots on both sides.
+- **The fix closes the case without any probe**: it changes where a subtraction happens, and the spread
+  falls by three orders of magnitude.
+- **Observations 2 and 3 can still be reproduced** if a reader asks: with `logLevel = Debug` the fix
+  logs how far it moved each quad origin, which is the stock error as a distance; with `Trace`, how far
+  the vertices moved within each quad.
 
-What this leaves without a published counterpart is the three lines of the
-[What happens underneath](README.md#what-happens-underneath) table: development measurements, taken on
-a spot no published campaign covers. The same demonstration with numbers read off screenshots on both
-sides is the section below it, "The ground itself".
+The two rejected frames lost their figures on the same day (about 750 km for `PQS.GetWorldPosition`,
+36 mm for the float rotation on a 600 km vector): the README gives the reason in words only. They are
+still quoted in a code comment of `WorldPosition`; a Trace line could log both for the first quad of
+each body, should they ever be wanted back.
 
 For the record, what the unreleased probe read, should it ever be wanted again. None of it needs
 Harmony: the quad under the craft is the collider a raycast straight down hits, and everything below is
@@ -392,10 +394,7 @@ public.
 
 | probe | what it read | README figures it backs | how to check it now |
 |---|---|---|---|
-| **Quad origin** | the altitude of `PQ.positionPlanet` and of the quad's transform, and the distance between that transform and `body.rotation * positionPlanet + body.position` | observation 2: 64.7851 m, and −87.8 to +145.7 mm in stock. "What happens underneath": 0.00 mm with the fix, on Kerbin and on the Mun | `logLevel = Debug`: one line per quad, giving the same error as a distance |
-| **Mesh deformation** | the same raycast at three points 100 m apart on that quad, with the triangle each one hits, and the height differences between them | observation 3: the same triangles on every load, and differences that change by −7 to +53 mm | `logLevel = Trace`: the largest distance a vertex of the quad moved from where stock put it. The same claim — the vertices are rounded one by one — read from the other side, as a shift from stock rather than as a difference between two loads |
-| **World frame angle** | the game time, the body's `rotationAngle` and `directRotAngle`, and `Planetarium.InverseRotAngle` | observation 4 | nothing, and nothing is needed: that the angle differs at every load is the measurement, and the README already gives what it concludes from it as a hypothesis read in the stock code, not as a result |
+| **Quad origin** | the altitude of `PQ.positionPlanet` and of the quad's transform, and the distance between that transform and `body.rotation * positionPlanet + body.position` | former observation 2: 64.7851 m, and −87.8 to +145.7 mm in stock; former "What happens underneath": 0.00 mm with the fix, on Kerbin and on the Mun | `logLevel = Debug`: one line per quad, giving the same error as a distance |
+| **Mesh deformation** | the same raycast at three points 100 m apart on that quad, with the triangle each one hits, and the height differences between them | former observation 3: the same triangles on every load, and differences that change by −7 to +53 mm | `logLevel = Trace`: the largest distance a vertex of the quad moved from where stock put it. The same claim — the vertices are rounded one by one — read from the other side, as a shift from stock rather than as a difference between two loads |
+| **World frame angle** | the game time, the body's `rotationAngle` and `directRotAngle`, and `Planetarium.InverseRotAngle` | former observation 4 | nothing, and nothing is needed: the README now gives the draw as a hypothesis read in the stock code, without the measured angles |
 
-Not reproducible either, and about the fix rather than about stock: the two frames the README rejects
-("Two frames look like more obvious choices", about 750 km and 36 mm). If they stay in the README, a
-Trace line in the fix could log both for the first quad of each body.

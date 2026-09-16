@@ -28,17 +28,25 @@ centimetres above it, so it drops those two centimetres. You never notice, and n
 and the physics engine will not leave two solid things overlapping. It pushes them apart, hard, in
 the only direction available: up. Your craft gets launched.
 
+![A craft jumping on its own the moment a save is reloaded](imgs/Booing-scaled.gif)
+
+*KSP 1.12 without this mod, with [KSP Community Fixes](https://github.com/KSPModdingLibs/KSPCommunityFixes)
+as the only mod installed. A pod on a fuel tank, parked in the grass at the KSC, saved, then reloaded
+from the pause menu — nothing touched in between.*
+
 That second case is the symptom everybody already knows. The lander that twitches, hops or flips the
 moment the scene finishes loading. The base that sat perfectly flush yesterday and is buried up to
 the hatches today. The big base that tears itself apart the very first time you load it, and never
 again afterwards. A craft with many parts spread over a wide area gives the coin toss more chances
 to land the wrong way up.
 
-![A craft jumping on its own the moment a save is reloaded](imgs/Booing-scaled.gif)
+**Loading is not the only time the coin is tossed.** A landed craft you fly towards is loaded long
+before you reach it, but held still at the position it was left at; its physics only starts once you
+are within 200 m. The ground under it was not built when that position was recorded, so the same toss
+happens there. From 200 m away you see much less of it — and it does just as much damage.
 
-*KSP 1.12 without this mod, with [KSP Community Fixes](https://github.com/KSPModdingLibs/KSPCommunityFixes)
-as the only mod installed. A pod on a fuel tank, parked in the grass at the KSC, saved, then reloaded
-from the pause menu — nothing touched in between.*
+Loading is the moment that can be repeated at will, though: reload the same save, and the coin is
+tossed again. So it is the case this page measures, and the only one it deals with from here on.
 
 ### Disclaimer: it is not the only cause
 
@@ -58,82 +66,12 @@ unfolding will go on hopping once it is installed. What it takes away is the par
 have been there at all — a surface that is not where the game's own formulas say it is, and is not in
 the same place twice. It takes it away down to a hundredth of a millimetre, measured below.
 
-## The problem
+## The culprit
 
-[Terrain Precision Fix Diag](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag) shows it on a
-stock install. It reloads the same save several times, and measures the distance from a landed capsule
-to the centre of the body twice per load: as the save hands the capsule back, and once it has settled on
-the ground. The first value is the same on every load, to the micrometre. The second is not:
+Here it is straight away. The next chapter checks it before anything is changed.
 
-| body | spread of the settled height, over 6 loads of the same save |
-|---|---|
-| Kerbin | 135.5 mm |
-| Mun | 18.1 mm |
-| Minmus | 3.9 mm |
-| Gilly | 1.2 mm |
-
-The capsule is put back at the same place every time, and still does not come to rest in the same
-place. Nothing but Terrain Precision Fix Diag was installed.
-
-That measurement shows the craft moving, which is not by itself proof that the ground moved under it.
-The instrument that measures the ground, with no craft in the reading at all, is
-[Terrain Precision Fix Diag 2](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2): it reads the
-surface a ray hits against the height KSP computes for that same spot, and on stock the two drift apart
-by a different amount on every loading. Both instruments, before and after this fix, are further down
-under [Results](#results).
-
-## Why it happens
-
-Four observations, all made with values any mod can read. The first three point to a single cause; the
-fourth suggests why its effect changes at every load.
-
-**1. The spread follows the precision of a float at that distance from the centre of the body.** A
-single precision float holding 600 km can only change in steps of 62.5 mm; holding 60 km, in steps of
-3.9 mm. From one body to the next the spread varies a hundredfold, but counted in those steps it stays
-between one and three:
-
-| series | distance to the centre | float step there | spread | in steps |
-|---|---|---|---|---|
-| Kerbin, capsule | 600.1 km | 62.5 mm | 135.5 mm | 2.2 |
-| Kerbin, 2 parts | 600.1 km | 62.5 mm | 129.9 mm | 2.1 |
-| Mun, capsule | 204.1 km | 15.6 mm | 18.1 mm | 1.2 |
-| Mun, 2 parts | 204.1 km | 15.6 mm | 43.4 mm | 2.8 |
-| Minmus, capsule | 60.0 km | 3.9 mm | 3.9 mm | 1.0 |
-| Minmus, 2 parts | 60.0 km | 3.9 mm | 7.3 mm | 1.9 |
-| Gilly, capsule | 15.9 km | 0.98 mm | 1.2 mm | 1.2 |
-| Gilly, 2 parts | 16.6 km | 1.95 mm | 2.3 mm | 1.2 |
-
-That alone is only a hint. The next two observations are direct.
-
-**2. Terrain quads are not where their own coordinates say.** Each terrain quad exposes its origin,
-relative to the centre of the body, in double precision: `PQ.positionPlanet`. The altitude it gives
-never changes (64.7851 m under a craft landed near the KSC). The altitude of the quad's transform, the
-one the mesh actually hangs from, does:
-
-- six loads without quitting KSP: +27.8, +18.4, +7.3, +18.6, −87.8, −4.0 mm;
-- five separate launches of KSP: −74.4, +68.2, −36.4, +78.4, +145.7 mm.
-
-It is the same quad, at the same subdivision level, on every load: this is not a level of detail
-change.
-
-**3. The mesh is deformed, not only moved.** Three points 100 m apart on that quad hit the same
-triangles on every load, yet the height differences between them change from load to load, by −7 to
-+53 mm. The vertices are rounded independently of each other.
-
-**4. What differs between two loads is probably the orientation of the world frame.** The rotation
-angle of the body is identical on every load of the same save. The angle of KSP's world frame,
-`Planetarium.InverseRotAngle`, never is, not even after restarting KSP. A rounding depends on the exact
-value being rounded, and terrain positions expressed in that frame are different values on each load.
-At 600 km, even 0.075° (the smallest gap between two of those launches) moves a point by about 785 m
-in that frame, some 12,000 float steps: any change of angle is enough to draw a new rounding. That much
-is measured. That this angle is what draws a new rounding on each load, and the only thing that does,
-is a hypothesis read from the stock code, not tested: see
-[Another lead, not followed](#another-lead-not-followed).
-
-### Where it happens
-
-The stock code, decompiled from KSP 1.12.5, shows exactly where. This is how every terrain vertex is
-placed, in `PQS.BuildVertexSurfaceRelative` (`vertRel` and `planetRel` are `Vector3d` fields):
+This is how every terrain vertex is placed, in `PQS.BuildVertexSurfaceRelative`, decompiled from
+KSP 1.12.5 (`vertRel` and `planetRel` are `Vector3d` fields):
 
 ```csharp
 private void BuildVertexSurfaceRelative(VertexBuildData data)
@@ -148,10 +86,8 @@ private void BuildVertexSurfaceRelative(VertexBuildData data)
 `vertRel` is the vertex relative to the centre of the body, computed in double: a vector 600 km long
 on Kerbin. `TransformPoint` turns it into a world position, which in KSP is close to the craft. To get
 there, it adds that 600 km vector to the position of the centre of the body, another vector of about
-600 km pointing the other way, and keeps the difference. A `Transform` works in `float`, so both go
-through a float on the way, rounded to the nearest 62.5 mm, and what is left once they cancel out is
-off by centimetres. `InverseTransformPoint` then expresses that point relative to the quad, whose own
-position was obtained the same way:
+600 km pointing the other way, and keeps the difference. `InverseTransformPoint` then expresses that
+point relative to the quad, whose own position was obtained the same way:
 
 ```csharp
 // PQ.SetupQuad and PQ.PreciseUpdateSubQuadsPosition — positionPlanet is a Vector3d
@@ -160,20 +96,236 @@ quadTransform.localPosition = positionPlanet;
 
 A 600 km double stored in a float `localPosition`, under a parent that sits at the centre of the body.
 
-That explains observations 2 and 3, the origin and the vertices. If observation 4 holds, it explains
-why the result differs at every load: the rounding depends on the exact values rounded, and those
-values change with the orientation of the world frame. The last proof is the fix itself: it changes
-nothing but the order of the arithmetic, and the spread disappears.
+**That is the error.** A `Transform` works in `float`, and a float holding 600 km can only change in
+steps of 62.5 mm. Every one of those values is rounded to the nearest step on the way, and the
+roundings pile up in the few centimetres that are left once the two 600 km vectors cancel out. The
+quad origin is rounded, and each vertex inside it is rounded on its own, so the mesh is not only moved
+but also slightly bent.
 
-## What the fix does
+### Why it is different at every load
 
-The two stock placements that go through a float at planet scale are redone in double, on the quads
-of the highest subdivision level. Those are the ones craft stand on, the only ones with a collider on
-Kerbin and on the Mun where `PQSMod_QuadMeshColliders.maxLevelOffset` has been read in flight and is 0
-(see [TODO.md](TODO.md)), and the only ones that can keep a precise position: stock moves them to a container of their
-own, outside the body's hierarchy. Every other quad hangs from the body's terrain sphere, whose origin
-is the centre of the body, so Unity would store any position given to it as a 600 km float again.
-Those are left exactly as stock builds them.
+A rounding only depends on the value being rounded, and `vertRel` and `positionPlanet` are exactly the
+same doubles on every load of a save. What changes is the frame they are converted into: the world
+matrix of the terrain sphere, itself held in float.
+
+- Its **rotation** follows the orientation of KSP's world frame, `Planetarium.InverseRotAngle`. According
+  to the stock code (`CelestialBody.CBUpdate`), that angle advances with the rotation of the body while
+  the game runs in the rotating frame, which includes sitting at the space centre, so it carries the
+  time played between two loads.
+- Its **translation** is the position of the body relative to the floating origin, which moves every
+  time the active craft travels 500 m.
+
+At 600 km, turning the frame by a thousandth of a degree moves a point by more than 10 m, some 170
+float steps: the slightest change draws a whole new set of roundings.
+
+That this is what draws a new rounding at every load is a hypothesis, read from the stock code and
+consistent with every measurement below; it has not been tested on its own. It does not need to be:
+the fix does not care whether a rounding is still drawn at every load, since it shrinks that rounding
+to a size where drawing it again no longer matters.
+
+That fix follows from the code above: do the subtraction in double first, and only give a float the
+short distance that is left. How exactly, and why the other obvious way out was not taken, is in
+[The fix this mod proposes](#the-fix-this-mod-proposes). First, the hypothesis has to hold.
+
+## Checking the culprit
+
+Before touching anything, two instruments measure what stock does:
+[Terrain Precision Fix Diag 1](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag) measures the craft, and
+[Terrain Precision Fix Diag 2](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2) measures the ground. Each has its own page, with
+its method and its protocol. Then the same campaigns are run again, with this mod installed.
+
+### Terrain Precision Fix Diag 1, on stock: the craft
+
+Terrain Precision Fix Diag 1 measures the distance from a landed capsule to the centre of the body,
+twice per load: as the save hands the capsule back (*On rails*), and once it has settled on the ground
+(*Settled*). How, and why those two readings, is in
+[This mod's demonstration](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag#this-mods-demonstration).
+
+Its campaigns, detailed in [The measurements](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag#the-measurements): stock KSP 1.12.5 with
+nothing in `GameData` but that instrument. On each of four worlds, a lone capsule, then the same capsule
+sitting on a small flat fuel tank, saved once on flat bare ground and loaded five or six times. Each
+series uses its own spot, chosen by the rules of [its protocol](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag#the-protocol): no
+`Moving Vessel` line in `KSP.log`, and a craft that does not slide.
+
+*On rails* is the same on every load, to the micrometre: KSP puts the craft back at the same place.
+*Settled* is not. Here is its spread, set against the step of a float at that distance from the centre
+of the body:
+
+| series | loads | distance to the centre | float step there | spread of *Settled* | in steps |
+|---|---|---|---|---|---|
+| Kerbin, capsule | 6 | 600.1 km | 62.5 mm | 135.5 mm | 2.2 |
+| Kerbin, 2 parts | 6 | 600.1 km | 62.5 mm | 129.9 mm | 2.1 |
+| Mun, capsule | 6 | 204.1 km | 15.6 mm | 18.1 mm | 1.2 |
+| Mun, 2 parts | 6 | 204.1 km | 15.6 mm | 43.4 mm | 2.8 |
+| Minmus, capsule | 6 | 60.0 km | 3.9 mm | 3.9 mm | 1.0 |
+| Minmus, 2 parts | 5 | 60.0 km | 3.9 mm | 7.3 mm | 1.9 |
+| Gilly, capsule | 6 | 15.9 km | 0.98 mm | 1.2 mm | 1.2 |
+| Gilly, 2 parts | 6 | 16.6 km | 1.95 mm | 2.3 mm | 1.2 |
+
+From one world to the next the spread varies a hundredfold, but counted in float steps it stays between
+one and three: the size the culprit predicts.
+
+That still only shows the craft moving, which is not by itself proof that the ground moved under it.
+The second instrument is there for that.
+
+### Terrain Precision Fix Diag 2, on stock: the ground
+
+Terrain Precision Fix Diag 2 measures the ground, with no craft in the reading at all: the collision
+surface a ray pointed straight down hits, against the height KSP computes for that same spot. The second
+never moves; the first is what your landing legs touch. *Difference* is the first minus the second. How
+both are read is in [This mod's demonstration](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2#this-mods-demonstration).
+
+Its campaigns, detailed in [Six loadings of the same save](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2#six-loadings-of-the-same-save):
+the same stock install, with nothing in `GameData` but that instrument; one save on each of the four
+worlds, loaded six times, following [its protocol](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2#the-protocol). Over those six loads:
+
+| world | spread of *Difference* | spread of the height KSP computes |
+|---|---|---|
+| Kerbin | 106.6 mm | 0.000 mm |
+| Mun | 8.8 mm | 0.035 mm |
+| Minmus | 3.1 mm | 0.000 mm |
+| Gilly | 3.7 mm | 0.046 mm |
+
+The craft never moved and the spot never changed, yet the height KSP computes held still while the
+collision surface wandered by up to ten centimetres. The ground itself is not built in the same place
+twice. The full readings, and what else they show, are in
+[What the numbers say](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2#what-the-numbers-say).
+
+### Terrain Precision Fix Diag 1, with this mod: the craft
+
+This fix is meant for [KSP Community Fixes](https://github.com/KSPModdingLibs/KSPCommunityFixes), so it
+is measured in an install that has it: KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes
+1.41.1, this mod and Terrain Precision Fix Diag 1. The same test, on the same four worlds, with the same
+two craft, loaded six times per series.
+
+What it is compared with is the same install without this mod: Terrain Precision Fix Diag 1 ran those
+campaigns too, on the same spots, and published their screenshots in [`imgs/kspcf`](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/tree/main/imgs/kspcf). Their spread
+is of the same order as on a stock install with nothing else: KSP Community Fixes does not change the
+defect.
+
+With one capsule, read off the four screenshots in [`imgs/Diag1/1part`](imgs/Diag1/1part) (in each of
+them, the bottom line is the loading in progress, still live, and is not counted):
+
+| world | spread of *Settled*, without this mod | spread of *Settled*, with this mod |
+|---|---|---|
+| Kerbin | 134.5 mm | 0.004 mm |
+| Mun | 20.7 mm | 0.031 mm |
+| Minmus | 6.7 mm | 0.038 mm |
+| Gilly | 3.3 mm | 0.058 mm |
+
+With two parts, read off the four screenshots in [`imgs/Diag1/2parts`](imgs/Diag1/2parts):
+
+| world | spread of *Settled*, without this mod | spread of *Settled*, with this mod |
+|---|---|---|
+| Kerbin | 124.7 mm | 0.025 mm |
+| Mun | 11.8 mm | 0.085 mm |
+| Minmus | 4.8 mm | 0.023 mm |
+| Gilly | 2.5 mm | 0.208 mm |
+
+**On Kerbin, the spread goes from more than twelve centimetres to a few hundredths of a millimetre at
+most.**
+
+On the other worlds too, what is left stays in the hundredths of a millimetre, two tenths at worst, far
+below the float step at any of these distances. *On rails* is still identical on every line, so KSP put
+the craft back at the same place every time, and the craft now comes to rest at the same place every
+time too.
+
+In other words: reload the same save as many times as you like, and the craft comes back to the same
+place, on ground that is in the same place. The coin toss of
+[Why the moving ground matters](#why-the-moving-ground-matters) is gone — there is nothing left to push
+the craft out of.
+
+### Terrain Precision Fix Diag 2, with this mod: the ground
+
+The same install, with Terrain Precision Fix Diag 2 instead: KSP 1.12.5 with Harmony, ModuleManager, KSP
+Community Fixes 1.41.1, this mod and the instrument, one save per world, loaded six times. It is compared
+with the campaigns Terrain Precision Fix Diag 2 ran on the same spots in that install without this mod,
+published in [`imgs/kspcf`](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/tree/master/imgs/kspcf). On the Mun, on Minmus and on Gilly, those are also the spots of its
+stock campaigns; on Kerbin the spot is another one, a grassy slope.
+
+Read off the four screenshots in [`imgs/Diag2`](imgs/Diag2) (as before, the bottom line of each is the
+loading in progress, and is not counted):
+
+| world | *Difference*, without this mod | *Difference*, with this mod | spread, without | spread, with |
+|---|---|---|---|---|
+| Kerbin | +199.797 to +307.930 mm | +246.972 to +246.976 mm | 108.1 mm | 0.004 mm |
+| Mun | −23.958 to −38.925 mm | −40.756 to −40.769 mm | 15.0 mm | 0.013 mm |
+| Minmus | −12.291 to −16.351 mm | −14.202 to −14.204 mm | 4.1 mm | 0.002 mm |
+| Gilly | +37.426 to +40.391 mm | +37.511 to +37.520 mm | 3.0 mm | 0.009 mm |
+
+Read the table by its last two columns, not its first two. Three things to read in them.
+
+**The column stops varying**, by a factor of three hundred on Gilly, a thousand on the Mun, two thousand
+on Minmus, and more than twenty thousand on Kerbin. On Kerbin the surface under the craft came back
+somewhere else over a range of eleven centimetres; it now comes back within four thousandths of a
+millimetre. That is the fix, and that is all of it.
+
+**It does not get smaller, and it is not supposed to.** It stops at a value the stock draws are scattered
+around. On Kerbin and on Minmus the fixed reading falls well inside the range of the six loadings without
+this mod, and on Gilly just inside it. On the Mun it falls just below: six draws are few for a spread that
+wide. The stock campaign of Terrain Precision Fix Diag 2, on that same spot, drew
+[down to −44.363 mm](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2#the-readings), and the twelve draws together cover −24.0 to −44.4 mm, around
+the −40.76 mm this mod reads. Put the loading that landed on −23.958 next to a fixed −40.765 and the fix
+looks like it made things worse; it did not, that line was luck. This mod does not choose a better number
+for that patch of ground; it stops drawing a new one at every loading.
+
+**What is left is no longer the ground, and it stays.** *Ground KSP computes* is what says the same spot
+was read every time: 189,650.347 mm on all six Kerbin lines, and `0.000` on the Minmus flats. On the Mun
+and on Gilly, where the ground is not level, that column wanders a little by itself — 0.018 mm over the
+six Gilly loadings — because a craft settling a hair to one side asks for the height of a slightly
+different point. On Gilly that is more than the spread of *Difference* under it, 0.009 mm: both columns
+follow the sample point together, and most of the wobble cancels between them. What remains of the
+spread is the craft, not the terrain. What remains of *Difference* itself is geometry: the collision mesh
+is made of flat triangles, and they miss what the ground does between two corners —
+[Terrain Precision Fix Diag 2 explains why a correct reading is not zero](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2#why-a-correct-reading-is-not-zero).
+On that Gilly slope it is +37.5 mm, on that Kerbin slope +247.0 mm, the same on every loading. Removing
+it would mean giving that mesh more triangles, which costs frames, for a gap nobody can feel.
+
+This is also the last proof that the culprit is the right one. The fix changes where a subtraction
+happens, and nothing else about the values placed; were the cause elsewhere, reordering that
+subtraction would have left the spread untouched.
+
+### A save made without this mod
+
+This mod brings the ground back to the same height on every load. It does not bring it back to the
+height it had in the loading where a save was made without it.
+
+A craft saved on stock sits on the ground of that one draw. If that ground was lower than the corrected
+one, the craft now comes back slightly inside the ground and gets pushed out — and since the ground no
+longer changes, it gets pushed out **on every load of that save**, the same way each time. Reloading
+the same file will not make it go away.
+
+Let the craft settle with this mod installed and save again: from that save on, the craft and the
+ground agree. This follows from the measurements above; it has not been measured on its own.
+
+## The fix this mod proposes
+
+### Two ways out, one taken
+
+The culprit leaves two ways out: make the roundings come out the same on every load, or stop rounding
+at planet scale.
+
+**Freezing the frame** would mean giving the world frame the same orientation and the same position
+relative to the body on every load. It was set aside, on a reading of the stock code rather than on a
+measurement:
+
+- the matrix that draws the rounding has a rotation **and** a translation. Pinning
+  `Planetarium.InverseRotAngle` would only pin part of the rotation — the orientation of the body in the
+  world frame also depends on the date of the save — and the translation moves at every floating origin
+  shift. According to the stock code, landed quads are placed again, the same way, at every such shift
+  (`CelestialBody.PreciseUpdateQuadPositions`), so the ground would be rounded anew without any reload.
+  Pinning the translation too would mean removing the floating origin, which is what lets KSP run in
+  float at all;
+- and a rounding that repeats is still a rounding: the ground would come back to the same place, but
+  that place would still be off the height the game computes by as much as a few centimetres, as the
+  stock readings above show.
+
+**Doing the arithmetic in double** removes the error instead of freezing it, at the place where the
+precision is actually lost. That is what this mod does.
+
+### Doing the arithmetic in double
+
+The two stock placements that go through a float at planet scale are redone in double:
 
 - **The origin of each quad.** After `PQ.SetupQuad` and `PQ.PreciseUpdateSubQuadsPosition`, the quad
   is moved to `body.rotation * positionPlanet + body.position`, computed with `QuaternionD` and
@@ -181,190 +333,186 @@ Those are left exactly as stock builds them.
   short vector, which a float holds precisely.
 - **Each vertex, inside its quad.** `PQS.BuildVertexSurfaceRelative` is replaced by the same
   computation with the subtraction done first: the vertex minus the quad origin, both doubles relative
-  to the centre of the body, then rotated into the quad's frame. What reaches a float is a distance
-  within the quad, a couple of kilometres at most, instead of 600 km: a resolution of about 0.1 mm
-  instead of 62.5 mm.
+  to the centre of the body, then rotated into the quad's frame.
+
+A double holding 600 km changes in steps of about a tenth of a nanometre, so nothing is lost while the
+long vectors are handled. What finally reaches a float is a distance within the quad, a couple of
+kilometres at most, where a float step is about a tenth of a millimetre instead of 62.5 mm. That float
+is still there, and its rounding may well still differ from one load to the next — but at that scale.
+It is the order of what the tables above still show with the fix.
 
 This is not a new way of placing the terrain. It is the stock placement, evaluated in an order that
 does not throw away its own significant digits.
 
-Two frames look like more obvious choices, and both are wrong. `PQS.GetWorldPosition` misses by about
-750 km on the body being flown over. The rotation of the body's transform is the same rotation as
-`body.rotation`, but in float: on a 600 km vector, that alone is worth 36 mm.
+Two frames look like more obvious choices, and both are wrong. `PQS.GetWorldPosition` does not give a
+position in the frame the quads hang in. The rotation of the body's transform is the same rotation as
+`body.rotation`, but held in float: applied to a 600 km vector, it brings back the very rounding being
+removed.
 
-Two safeguards:
+### Once per quad, not once per vertex
+
+`PQS.BuildVertexSurfaceRelative` runs for every vertex of every quad the game builds, 225 per quad, and
+the game builds quads all the time while flying low. Stock already asks Unity for two `Transform`s on
+every one of those vertices, and calls into them twice.
+
+The replacement needs more than that, and all of it depends on the quad rather than on the vertex:
+whether the fix applies to it at all, the frame it hangs in, the inverse of its rotation. Worked out
+again for every vertex, that would cost more than the placement it is part of. So it is worked out
+once, on the first vertex of a quad, and kept for the others; it is forgotten whenever `PQS.BuildQuad`
+starts, since a quad can be rebuilt after having moved. What is left per vertex is a `Vector3d`
+subtraction, a rotation in double, a rotation in float and two writes.
+
+What that saves, and how much of it comes from the double-precision arithmetic rather than from the
+work done once per quad, is measured in [Performance](#performance).
+
+### Only where a craft can stand
+
+Only the quads of the highest subdivision level are corrected. Those are the ones craft stand on, the
+only ones with a collider on Kerbin and on the Mun, where `PQSMod_QuadMeshColliders.maxLevelOffset` has
+been read in flight and is 0 (see [TODO.md](TODO.md)), and the only ones that can keep a precise
+position: stock moves them to a container of their own, outside the body's hierarchy. Every other quad
+hangs from the body's terrain sphere, whose origin is the centre of the body, so Unity would store any
+position given to it as a 600 km float again. Those are left exactly as stock builds them.
+
+The game only builds that level close to the ground: below 6 250 m over the Mun and 9 375 m over
+Kerbin, read in flight from each sphere's own `subdivisionThresholds` and written to the log by
+[PQS Bench](https://github.com/lhervier/KSP-TerrainPrecisionFix-PQSBench), once per sphere, in every
+run of [Performance](#performance). Higher up, the patched code decides once per quad that it does not
+apply, and each vertex is left with a reference comparison before stock runs untouched.
+
+### Safeguards
 
 - a correction larger than 1 m is refused, quad by quad, and that quad is left as stock builds it: if
   the frame is ever not the expected one, the terrain stays where KSP puts it instead of going
   somewhere else;
 - if any patch fails to install, none of them does anything.
 
-## Results
+## Performance
 
-The same test as on the [Terrain Precision Fix Diag](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag)
-page, with this mod installed: a lone capsule on the same four worlds, stock KSP 1.12.5 with Harmony and
-ModuleManager, the same save loaded five or six times per world.
+Now that the cause is known and fixed, what does the fix cost? The vertex part replaces a computation
+that stock runs for every vertex of every terrain quad it builds, so it sits on a path the game uses
+continuously while flying, not only when a scene loads. **It places a vertex in less than a third of
+the time stock takes.**
 
-![Kerbin, with the fix](imgs/Diag1/1part/00-kerbin.png)
+### The instrument
 
-![The Mun, with the fix](imgs/Diag1/1part/20-mune.png)
+Everything below was taken with
+[PQS Bench](https://github.com/lhervier/KSP-TerrainPrecisionFix-PQSBench), a measuring mod that counts
+what building the stock terrain costs and times whatever is patching the vertex placement against stock
+on the same data, in the frame the game built a quad in. **Its page carries the procedure**, and the
+rules that make a run worth keeping.
 
-![Minmus, with the fix](imgs/Diag1/1part/30-minmus.png)
+### Two changes, three configurations
 
-![Gilly, with the fix](imgs/Diag1/1part/40-gilly.png)
+This fix changes two things at once: the arithmetic, done in double, and the work done once per quad
+instead of once per vertex. Compared with stock alone, the two savings cannot be told apart — and the
+second is not specific to the fix: stock could read its two `Transform`s once per quad too.
 
-(The bottom line of each table is the loading in progress, still live. It is not counted below.)
+So the fix is measured against a third configuration as well,
+[Stock Quad Cache](https://github.com/lhervier/KSP-TerrainPrecisionFix-StockQuadCache), a mod written
+for this measurement alone: stock's arithmetic bit for bit, with the only difference that the two
+`Transform`s are read once per quad instead of once per vertex. It carries the second change without
+the first, and splits the saving between them.
 
-| world | loadings | spread of **Settled**, stock | spread of **Settled**, with this mod |
+Each configuration keeps its own logs and its own reading of them, in its own repository: the stock
+reference with [the bench](https://github.com/lhervier/KSP-TerrainPrecisionFix-PQSBench/blob/master/perfs/README.md),
+the middle term with [Stock Quad Cache](https://github.com/lhervier/KSP-TerrainPrecisionFix-StockQuadCache/blob/master/perfs/README.md),
+and this mod's two runs in [`perfs/`](perfs/).
+
+### The campaign
+
+KSP 1.12.5 with Harmony, ModuleManager and KSP Community Fixes 1.41.1: a command pod on rails in a
+circular orbit 5 km over the Mun, low enough that the game builds the highest subdivision level — the
+only one the fix acts on — and six runs of two and a half minutes of that one save, which covers the
+same ground every time. **All six were taken on my laptop**, described with
+[the stock run](https://github.com/lhervier/KSP-TerrainPrecisionFix-PQSBench/blob/master/perfs/README.md);
+figures from another machine are not comparable to these.
+
+Three configurations, each measured twice, once for what a vertex costs and once for what a frame pays.
+The reference is a KSP with this mod's folder taken out of `GameData`, since a mod left in place still
+pays for its own patches on the path being timed.
+
+Every `counters` run built exactly 1 272 quads of the highest subdivision level over 148 samples (3 211
+to 3 213 quads in all) — the craft is on rails, so the same save covers the same ground.
+
+### What a vertex costs
+
+40 quads per run, 72 000 vertices per formula. Each run times what is installed against its own
+measurement of stock, in the same frames, and the figure read is the difference between the two. Per
+vertex:
+
+| installed | stock, in that run (`stockNsPerVertex`) | installed (`installedNsPerVertex`) | difference (`differenceNsPerVertex`) |
 |---|---|---|---|
-| Kerbin | 6 | 135.5 mm | 0.069 mm |
-| Mun | 5 | 18.1 mm | 0.011 mm |
-| Minmus | 6 | 3.9 mm | 0.022 mm |
-| Gilly | 6 | 1.2 mm | 0.028 mm |
+| nothing: stock's arithmetic, `Transform`s read on every vertex | 229.6 ns | 228.5 ns | −1.1 ns, the floor of the method |
+| stock's arithmetic, `Transform`s read once per quad | 232.3 ns | 149.5 ns | −82.8 ns |
+| this fix | 228.5 ns | 64.2 ns | **−164.3 ns**, **3.56× faster** |
 
-On Kerbin, the spread is about two thousand times smaller. What is left is a few hundredths of a
-millimetre on every world, far below the float step at any of these distances. **On rails** is
-identical on every line of every series, so KSP put the capsule back at the same place every time, and
-the capsule now comes to rest at the same place every time too.
+Stock makes five trips into the native engine per vertex: `Transform.TransformPoint`,
+`Transform.InverseTransformPoint`, and two reads of `Component.transform` — `BuildVertexSurfaceRelative`
+runs once per vertex, and reads `base.transform` and `buildQuad.transform` each time. The replacement
+makes none.
 
-Each series uses its own spot, chosen by the rules of Terrain Precision Fix Diag: flat bare ground, no
-`Moving Vessel` line in `KSP.log`, and a capsule that does not slide.
+The middle row is not a placement the game contains. It says where the 164.3 ns go: **82.8 ns** are the
+two `Transform` reads, 41.4 ns each, and **81.5 ns** are the arithmetic, the double-precision version
+being that much cheaper than two native calls. Read the other way: even if stock stopped asking Unity
+for a `Transform` on every vertex, the fix would still be more than twice as fast.
 
-### With two parts
+The same row is what justifies [working out once per quad](#once-per-quad-not-once-per-vertex) what
+depends on the quad: two reads of `Component.transform` per vertex cost 82.8 ns, more than this fix
+spends on a vertex altogether, and the fix needs rather more than two things per quad.
 
-The same capsule sitting on a small flat fuel tank, as on the Terrain Precision Fix Diag page:
+The difference is read within each run, never between two: from one session of KSP to the next the
+whole replay runs a little faster or slower — the stock column above reads 229.6, 232.3 and 228.5 ns,
+a 1.7 % spread — and only a difference taken inside one session cancels that out.
+In the run with neither mod installed the two readings are of the same code reached two different ways,
+and they differ by 1.1 ns: the floor of the method, which any other row carries too.
 
-![Two parts on Kerbin, with the fix](imgs/Diag1/2parts/10-kerbin.png)
+Placing a vertex is a small part of building one: a quad of the highest level takes 1.7 ms to build,
+about 7.6 µs per vertex, nearly all of it spent in the `PQSMod`s that compute height and colour. The
+230 ns stock spends placing it are 3.0 % of that.
 
-![Two parts on the Mun, with the fix](imgs/Diag1/2parts/20-mune.png)
+### In flight
 
-![Two parts on Minmus, with the fix](imgs/Diag1/2parts/30-minmus.png)
+The same save and the same stretch of orbit, three times, 150 seconds each, counted second by second.
 
-![Two parts on Gilly, with the fix](imgs/Diag1/2parts/40-gilly.png)
-
-| world | loadings | spread of **Settled**, stock | spread of **Settled**, with this mod |
+| | stock | `Transform`s read once per quad | this fix |
 |---|---|---|---|
-| Kerbin | 6 | 129.9 mm | 0.036 mm |
-| Mun | 5 | 43.4 mm | 0.068 mm |
-| Minmus | 6 | 7.3 mm | 0.012 mm |
-| Gilly | 6 | 2.3 mm | 0.138 mm |
+| frames per second | 77.04 | 75.82 | 79.16 |
+| ms per quad the fix acts on | 1.716 | 1.682 | **1.650** |
+| terrain per frame | 1.195 ms | 1.170 ms | 1.182 ms |
+| terrain share of real time | 9.21 % | 8.87 % | 9.36 % |
 
-### What happens underneath
+Per quad, the fix is ahead by 3.8 %, where the calibration predicts 2.2 % — 164.3 ns × 225 vertices is
+37.0 µs per quad. **That should not be read as a measurement.** The middle column is the reason: by the
+same reckoning it should be 1.1 % ahead, and it is 2.0 % ahead; per frame it is ahead of the fix; and
+the fix, faster per quad, takes a larger share of real time than stock. The noise between two sessions
+of KSP is worth about as much as the effect being looked for at this scale. What these three runs
+establish is a bound — nothing degrades at the scale of a frame — and the figure worth publishing is the
+calibration.
 
-Measured on Kerbin, same save loaded six times, with the fix:
+### What this says
 
-| under a landed craft | measured |
-|---|---|
-| quad origin, compared with its double position | 0.00 mm on all six loads (−87.8 to +145.7 mm without the fix, above) |
-| altitude of the collision surface, found by raycast | 64.7794 m on all six loads |
-| collision surface minus the analytic terrain height (`CelestialBody.TerrainAltitude`) | −5.49 to −5.54 mm |
+The fix is faster than stock, and faster than stock with its `Transform`s read once per quad: half of
+its saving is the organisation any version could adopt, the other half is the arithmetic itself.
 
-The remaining −5.5 mm is not an error: a flat triangle passes below the curved surface it approximates,
-by L²/8R, which is 5.8 mm for 167 m triangles on a 600 km radius. It is the same on every load.
+Nor is the saving worth having for its own sake. At 5 km over the Mun the game builds 8.5 of these quads
+per second, so 1 917 vertices: 164.3 ns each is 0.31 ms per second of flight, 0.031 % of real time. The
+point is not the gain. It is that the correction is free.
 
-On the Mun, the quad origin matched its double position to 0.00 mm on six loads too.
+## Limits and solutions
 
-### The ground itself
-
-Terrain Precision Fix Diag measures the craft, and a craft coming to rest elsewhere is only a hint
-about the ground under it. [Terrain Precision Fix Diag 2](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2)
-measures the ground itself, and is the one that names the culprit: two readings of the same spot, side
-by side, one line per loading — the collision surface found by a ray pointed straight down, and the
-height KSP computes for that same latitude and longitude. The second is what the world is made of and
-never moves; the first is what your landing legs touch.
-
-The four campaigns on its page were run on stock. Here are the same four saves, loaded six times each,
-with this mod installed:
-
-![Kerbin, the ground under the craft, with the fix](imgs/Diag2/00-kerbin.png)
-
-![The Mun, the ground under the craft, with the fix](imgs/Diag2/10-mune.png)
-
-![Minmus, the ground under the craft, with the fix](imgs/Diag2/20-minmus.png)
-
-![Gilly, the ground under the craft, with the fix](imgs/Diag2/30-gilly.png)
-
-(As before, the bottom line of each table is the loading in progress, still live, and is not counted
-below.)
-
-| world | *Difference*, stock | *Difference*, with this mod | spread, stock | spread, with this mod |
-|---|---|---|---|---|
-| Kerbin | −28.477 to +78.164 mm | −1.407 to −1.421 mm | 106.6 mm | 0.014 mm |
-| Mun | −35.570 to −44.363 mm | −40.742 to −40.769 mm | 8.8 mm | 0.027 mm |
-| Minmus | −13.431 to −16.567 mm | −14.200 to −14.203 mm | 3.1 mm | 0.003 mm |
-| Gilly | +36.422 to +40.115 mm | +37.507 to +37.518 mm | 3.7 mm | 0.011 mm |
-
-The stock columns are read off the Terrain Precision Fix Diag 2 page, the others off the four
-screenshots above. Three things to read in them.
-
-**The column stops varying**, by a factor of three hundred on the Mun and Gilly, a thousand on Minmus,
-seven thousand on Kerbin. On Kerbin the surface under the craft came back somewhere else over a range
-of ten centimetres; it now comes back within fourteen thousandths of a millimetre.
-
-**It stops at a value the stock readings were already scattered around.** On all four worlds the fixed
-reading falls inside the stock range, and well away from its edges on the Mun, on Minmus and on Gilly.
-This mod does not choose a better number for that patch of ground; it stops drawing a new one at every
-loading.
-
-**What is left is no longer the ground.** *Ground KSP computes* is what says these are the same four
-spots as the stock campaign: 64,784.952 mm on Kerbin, the same eight digits, and `0.000` on the Minmus
-flats. On the Mun and on Gilly, where the ground is not level, that column wanders a little by itself —
-0.072 mm over the six Mun loadings — because a craft settling a hair to one side asks for the height of
-a slightly different point. On the Mun that is more than the spread of *Difference* under it, 0.027 mm:
-both columns follow the sample point together, and most of the wobble cancels between them. What
-remains is the craft, not the terrain.
-
-One number in the Kerbin table deserves a word: *Difference* settles at −1.41 mm, where the section
-above reads −5.5 mm. Both are the same flat triangle sagging inside the curve of the world, read at two
-points that are not the same one — the probe above stops the collision surface at 64.7794 m, this ray
-at 64.7835 m, four millimetres apart on the mesh. That sag is deepest in the middle of a triangle,
-5.8 mm on Kerbin, and fades to nothing towards a corner; anywhere in between reads anywhere in between.
-What matters is not which value comes out, but that the same one comes out on every loading.
-
-### Measuring it yourself
-
-Install Terrain Precision Fix Diag 2 next to this mod, load the same save five or six times, and you
-get a table like the four above. Here is how to read it — and what *not* to expect.
-
-**Do not expect *Difference* to get smaller.** It will not, and it is not supposed to. Stock KSP drew
-somewhere between −35.6 and −44.4 mm on that Mun save; with this mod it reads −40.76 mm every time.
-Put the single stock loading that landed on −35.570 next to a fixed −40.765 and the fix looks like it
-made things worse. It did not: that stock line was luck, and the worst line of the same campaign was
-−44.363. You would be comparing two numbers neither of which was the point.
-
-**Expect the *Difference* column to stop varying.** That is the fix, and that is all of it: read the
-table above by its last two columns, not its first two. Tens of millimetres of spread on stock,
-hundredths of a millimetre with this mod, on every world — and it does not depend on drawing a lucky
-loading.
-
-**And expect whatever is left to stay.** It is not a leftover error to be chased: on flat ground it is
-the few millimetres of a flat triangle sagging inside a curve, and on rougher ground it is whatever the
-terrain does between two corners of the collision mesh — the +37.5 mm of that Gilly slope, and it is
-the same +37.5 mm on all six loadings. Removing it would mean giving that mesh more triangles, which
-costs frames, for a gap nobody can feel. This mod puts the mesh where it belongs; what a flat piece
-misses of a curve is geometry, and geometry stays.
-
-### With KSP Community Fixes installed
-
-This fix is meant for [KSP Community Fixes](https://github.com/KSPModdingLibs/KSPCommunityFixes), so
-every campaign above was run a second time in an install that has it. The screenshots are here, and
-they are not tabulated: [`imgs/Diag1-KSPCF`](imgs/Diag1-KSPCF) for the craft, eight series as above,
-and [`imgs/Diag2-KSPCF`](imgs/Diag2-KSPCF) for the ground, four campaigns on the same four spots as
-the stock ones. Each Diag page carries the matching campaigns run under KSPCF **without** this fix, so
-both halves of the comparison exist in that install.
-
-They say the same thing as the tables above, on every world: hundredths of a millimetre where stock
-spreads over millimetres or centimetres. The analysis stays on the stock readings on purpose — a
-measurement meant to show what bare KSP does, and what changes when one computation is reordered, is
-worth more taken where nothing else is installed. What these add is that nothing about the defect, or
-about the fix, changes in the install this patch is aimed at.
+What this fix can make worse, and what it has not been checked against yet — each with its solution,
+or with what is still missing for one. Every campaign run with this mod installed was run on KSP 1.12.5,
+with Harmony, ModuleManager and KSP Community Fixes 1.41.1.
 
 ### Rocks, grass and trees
 
-This mod does not move terrain scatter. Another instrument,
-[Rock Precision Fix Diag](https://github.com/lhervier/KSP-RockPrecisionFixDiag), measures where it is
-drawn: for every object of the terrain quad nearest to the craft, the height of its lowest point above
-the ground right under it.
+**Limit.** This mod does not move terrain scatter, and scatter is drawn further off the ground with it
+than without it. Visual only.
+
+Another instrument, [Rock Precision Fix Diag](https://github.com/lhervier/KSP-RockPrecisionFixDiag),
+measures where scatter is drawn: for every object of the terrain quad nearest to the craft, the height
+of its lowest point above the ground right under it.
 
 The offset exists in stock: scatter is already not drawn exactly on the ground. The objects of a quad
 are built from the quad's vertices, in the quad's own coordinates, and hang from a holder that
@@ -387,188 +535,45 @@ The same kind of error, about one and a half times wider. On the quad nearest to
 of the objects minus those two errors is the same on every load of both series, to 1.5 mm: nothing else
 moves them. Stock scatter has no collider, so the offset, with or without this mod, is visual only.
 
-[Rock Precision Fix](https://github.com/lhervier/KSP-RockPrecisionFix) is a separate mod that corrects
-the stock placement of scatter: it hangs each holder from its own terrain quad, so that the objects are
-drawn in the frame they were built in. It works with or without this mod. It has not been measured yet.
+**Solution.** [Rock Precision Fix](https://github.com/lhervier/KSP-RockPrecisionFix), a separate mod,
+corrects the stock placement of scatter: it hangs each holder from its own terrain quad, so that the
+objects are drawn in the frame they were built in. It works with or without this mod. It has not been
+measured yet.
 
-## Performance
+### Scatter with colliders
 
-The vertex part of the fix replaces a computation that stock runs for every vertex of every terrain quad
-it builds, so it sits on a path the game uses continuously while flying, not only when a scene loads.
-**It places a vertex in less than a third of the time stock takes.**
+**Limit.** Breaking Ground's surface features, and Kopernicus scatter with `scatterColliders`, are
+placed the same way as the rocks, but they have colliders, so the offset would be physical there: wider
+than in stock if the physics takes the holder's pose from the same matrix the renderer uses, new if it
+takes it from the transform position, which matches the stock ground. Not measured.
 
-### What was measured
+**Solution.** Not there yet. First measure where the physics puts those colliders; Rock Precision Fix
+could then hang these holders from their quads the same way (see [TODO.md](TODO.md)).
 
-Everything below was taken with
-[PQS Bench](https://github.com/lhervier/KSP-TerrainPrecisionFix-PQSBench), a measuring mod that counts
-what building the stock terrain costs and times whatever is patching the vertex placement against stock
-on the same data, in the frame the game built a quad in. **Its page carries the procedure**, and the
-rules that make a run worth keeping.
+### Not checked yet
 
-Each configuration keeps its own logs and its own reading of them, in its own repository: the stock
-reference with [the bench](https://github.com/lhervier/KSP-TerrainPrecisionFix-PQSBench/blob/main/perfs/README.md),
-the middle term with [Stock Quad Cache](https://github.com/lhervier/KSP-TerrainPrecisionFix-StockQuadCache/blob/main/perfs/README.md),
-and this mod's two runs in [`perfs/`](perfs/).
-
-The campaign, 2026-09-15, KSP 1.12.5 with Harmony, ModuleManager and KSP Community Fixes: a command pod
-on rails in a circular orbit 5 km over the Mun, low enough that the game builds the highest subdivision
-level — the only one the fix acts on — and six runs of two and a half minutes of that one save, which
-covers the same ground every time. **All six were taken on my laptop**, described with
-[the stock run](https://github.com/lhervier/KSP-TerrainPrecisionFix-PQSBench/blob/main/perfs/README.md);
-figures from another machine are not comparable to these.
-
-Three configurations, each measured twice, once for what a vertex costs and once for what a frame pays.
-The reference is a KSP with this mod's folder taken out of `GameData`, since a mod left in place still
-pays for its own patches on the path being timed. The third configuration is
-[Stock Quad Cache](https://github.com/lhervier/KSP-TerrainPrecisionFix-StockQuadCache), a mod written
-for this measurement alone: stock's arithmetic bit for bit, with the only difference that the two
-`Transform`s are read once per quad instead of once per vertex. This fix changes the arithmetic **and**
-the per-quad work; that one carries the second without the first, and splits the saving between them.
-
-Every `counters` run built exactly 1 272 quads of the highest subdivision level over 148 samples (3 211
-to 3 213 quads in all) — the craft is on rails, so the same save covers the same ground.
-
-### What a vertex costs
-
-40 quads per run, 72 000 vertices per formula. Each run times what is installed against its own
-measurement of stock, in the same frames, and the figure read is the difference between the two:
-
-| installed | `differenceNsPerVertex` |
-|---|---|
-| nothing | −1.1 ns, the floor of the method |
-| stock's arithmetic, `Transform`s read once per quad | −82.8 ns |
-| this fix | **−164.3 ns** — 228.5 → 64.2 ns in its run, **3.56× faster** |
-
-Stock makes five trips into the native engine per vertex: `Transform.TransformPoint`,
-`Transform.InverseTransformPoint`, and two reads of `Component.transform` — `BuildVertexSurfaceRelative`
-runs once per vertex, and reads `base.transform` and `buildQuad.transform` each time. The replacement
-makes none. Everything that depends on the quad rather than on the vertex — whether the fix applies, the
-frame the quad hangs in, the inverse of its rotation — is worked out once for its 225 vertices, and what
-is left is a `Vector3d` subtraction, a rotation in double, a rotation in float and two writes.
-
-The middle row is not a placement the game contains. It says where the 164.3 ns go: **82.8 ns** are the
-two `Transform` reads, 41.4 ns each, and **81.5 ns** are the arithmetic, the double-precision version
-being that much cheaper than two native calls. Read the other way: even if stock stopped asking Unity
-for a `Transform` on every vertex, the fix would still be more than twice as fast.
-
-The difference is read within each run, never between two: from one session of KSP to the next the
-whole replay runs a little faster or slower — the stock measurement of the three runs reads 229.6,
-232.3 and 228.5 ns, a 1.7 % spread — and only a difference taken inside one session cancels that out.
-In the run with neither mod installed the two readings are of the same code reached two different ways,
-and they differ by 1.1 ns: the floor of the method, which any other row carries too.
-
-That the per-quad work is worked out once is not a detail either. The middle row is what **two** reads of
-`Component.transform` per vertex cost: 82.8 ns, more than this fix spends on a vertex altogether. This one works out rather more than two things per quad — whether it applies at all,
-the frame the quad hangs in, the inverse of its rotation — and doing any of that per vertex would cost
-several times the placement it is part of.
-
-Placing a vertex is a small part of building one: a quad of the highest level takes 1.7 ms to build,
-about 7.6 µs per vertex, nearly all of it spent in the `PQSMod`s that compute height and colour. The
-230 ns stock spends placing it are 3.0 % of that.
-
-### In flight
-
-The same save and the same stretch of orbit, three times, 150 seconds each, counted second by second.
-
-| | stock | `Transform`s hoisted | this fix |
-|---|---|---|---|
-| frames per second | 77.04 | 75.82 | 79.16 |
-| ms per quad the fix acts on | 1.716 | 1.682 | **1.650** |
-| terrain per frame | 1.195 ms | 1.170 ms | 1.182 ms |
-| terrain share of real time | 9.21 % | 8.87 % | 9.36 % |
-
-Per quad, the fix is ahead by 3.8 %, where the calibration predicts 2.2 % — 164.3 ns × 225 vertices is
-37.0 µs per quad. **That should not be read as a measurement.** The middle column is the reason: by the
-same reckoning it should be 1.1 % ahead, and it is 2.0 % ahead; per frame it is ahead of the fix; and
-the fix, faster per quad, takes a larger share of real time than stock. The noise between two sessions
-of KSP is worth about as much as the effect being looked for at this scale. What these three runs
-establish is a bound — nothing degrades at the scale of a frame — and the figure worth publishing is the
-calibration.
-
-Nor is the saving worth having for its own sake. At 5 km over the Mun the game builds 8.5 of these quads
-per second, so 1 917 vertices: 164.3 ns each is 0.31 ms per second of flight, 0.031 % of real time. The
-point is not the gain. It is that the correction is free.
-
-### Where it runs at all
-
-Only the highest subdivision level is corrected, and the game only builds that level close to the
-ground: below 6 250 m over the Mun and 9 375 m over Kerbin, read in flight from each sphere's own
-`subdivisionThresholds` and written to the log by PQS Bench, once per sphere, in every run above. Higher
-up, the patched code decides once per quad that it does not apply, and each vertex is left with a
-reference comparison before stock runs untouched.
-
-## Side effects
-
-What this fix can make worse:
-
-- **Where terrain scatter is drawn.** Rocks, grass and trees are already drawn off the ground in stock;
-  with this fix the offset is about one and a half times wider (measured, see
-  [Rocks, grass and trees](#rocks-grass-and-trees)). Visual only. The stock offset and this widening
-  are what [Rock Precision Fix](https://github.com/lhervier/KSP-RockPrecisionFix) addresses, not
-  measured yet.
-- **Scatter objects that have a collider**: Breaking Ground's surface features, and Kopernicus scatter
-  with `scatterColliders`. Their holders are placed the same way, so the offset would be physical
-  there: wider than in stock if the physics takes the holder's pose from the same matrix the
-  renderer uses, new if it takes it from the transform position, which matches the stock ground. Not
-  measured.
-
-## Another lead, not followed
-
-If observation 4 is right, there is a second way to attack the problem: give the world frame the same
-orientation relative to the body on every load. The float roundings would stay, but they would be the
-same every time: the terrain would still be off by a few centimetres, but always by the same amount at
-the same place. A craft's position is a double resting on ground built in float; if that ground came
-back identical, the craft would come back on it, instead of inside or above it.
-
-We have not followed it through. What we know of it comes from reading the stock code
-(`CelestialBody.CBUpdate`, where the rotation of the body is shared between the body and the world
-frame), not from a measurement. Points still open:
-
-- pinning `Planetarium.InverseRotAngle` alone would not be enough: the orientation of the body in the
-  world frame also depends on the date of the save, so it is that orientation that would need a fixed
-  value;
-- the angle may not be the only input: the position of the body in the world frame also changes with
-  the floating origin, and according to the stock code, landed quads are placed again, the same way,
-  at every floating origin shift. That would be a new rounding without any reload. Not measured;
-- a fixed error is still an error: the mesh would stay deformed (observation 3), only always the same
-  way.
-
-This mod corrects the conversion from double to float instead: it is simpler, it is where the precision
-is actually lost, and it removes the error rather than freezing it. Anyone who wants to explore the
-other lead is welcome to.
-
-## What has not been checked
-
-- Only measured on stock KSP 1.12.5 (plus Harmony and ModuleManager): Terrain Precision Fix Diag on
-  Kerbin, the Mun, Minmus and Gilly, with one part and with two; Terrain Precision Fix Diag 2 on the
-  same four worlds; the quad origins on Kerbin and the Mun; and what both placements cost, in a 5 km
-  orbit of the Mun where the game builds terrain continuously.
-- Not measured yet: the map view, where quads are built and destroyed all the time; Kopernicus and
-  Parallax, which work on the same terrain pipeline. Kopernicus compatibility is a requirement before
-  this goes anywhere (see [TODO.md](TODO.md)). If Kopernicus places the quads in another frame, the
-  1 m safeguard should leave its terrain as stock builds it, with one warning per body in the log.
-- Colliders below the highest subdivision level: `PQSMod_QuadMeshColliders` gives a collider to every
-  quad at or above `maxLevel - |maxLevelOffset|`, and with an offset other than 0 the fix would leave
-  those lower quads uncorrected. Read in flight on Kerbin and on the Mun: the offset is **0** on both,
-  so only the highest level carries a collider and the fix covers every quad a craft can stand on. Not
-  read on the other bodies yet (see [TODO.md](TODO.md)).
-- Parallax scatters: according to its source, they should follow the corrected ground. Their positions
-  and colliders are expressed relative to the quad, and a collider is a child of its quad, so they move
-  with it. Not measured yet (see [TODO.md](TODO.md)).
-- Breaking Ground's deployed experiments are vessels, positioned in double like any craft, so they
-  should sit on the corrected ground like one. Not measured yet.
-- Not covered yet, and listed in [TODO.md](TODO.md): everything else that is placed on the ground the
-  same way.
-  - Breaking Ground's surface features: they are placed like the rocks above, but they have
-    colliders. Where they are drawn is covered by the rock measurement; where the physics puts their
-    colliders has not been measured.
-  - Kopernicus scatter with colliders (`scatterColliders`): Kopernicus keeps the stock placement of the
-    holder, so the same open question as the surface features.
-  - The KSC buildings, runway and launchpad: `PQSCity` and `PQSCity2` both do
-    `base.transform.localPosition = planetRelativePosition;`, where `planetRelativePosition` is a
-    `Vector3d` measured from the centre of the body. A capsule parked on the runway spreads over 117 mm
-    on six loads, as on the grass next to it; whether that comes from the runway itself or from the
-    terrain underneath has not been separated yet.
+- **Kopernicus.** Not measured, and required before this goes anywhere: most planet packs go through
+  it. If Kopernicus places the quads in another frame, the 1 m safeguard should leave its terrain as
+  stock builds it, with one warning per body in the log. *Solution:* measure it with Terrain Precision
+  Fix Diag 1, on a stock body and on a planet pack body (see [TODO.md](TODO.md)).
+- **Parallax scatters.** According to its source, they should follow the corrected ground: their
+  positions and colliders are expressed relative to the quad, and a collider is a child of its quad, so
+  they move with it. *Solution:* confirm it in game (see [TODO.md](TODO.md)).
+- **Colliders below the highest subdivision level.** `PQSMod_QuadMeshColliders` gives a collider to
+  every quad at or above `maxLevel - |maxLevelOffset|`, and with an offset other than 0 the fix would
+  leave those lower quads uncorrected. The offset is **0** on Kerbin and on the Mun, so there the fix
+  covers every quad a craft can stand on. *Solution:* read it on the other bodies (see
+  [TODO.md](TODO.md)).
+- **The map view**, where quads are built and destroyed all the time. *Solution:* measure it.
+- **Breaking Ground's deployed experiments.** They are vessels, positioned in double like any craft, so
+  they should sit on the corrected ground like one. *Solution:* check it with Terrain Precision Fix Diag 1.
+- **The KSC buildings, runway and launchpad.** Not covered: `PQSCity` and `PQSCity2` both do
+  `base.transform.localPosition = planetRelativePosition;`, where `planetRelativePosition` is a
+  `Vector3d` measured from the centre of the body. With Terrain Precision Fix Diag 1 on stock, a capsule
+  parked on the runway spreads over 117 mm on six loads, as on the grass next to it; whether that comes
+  from the runway itself or from the terrain underneath has not been separated yet. *Solution:* the same
+  measurement with this mod installed tells the two apart — if the capsule on the runway still moves,
+  it is the static (see [TODO.md](TODO.md)).
 
 ## Install
 
