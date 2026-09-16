@@ -8,7 +8,16 @@ possible for that reason: two Harmony patches, in one source file. Here is what 
 > times, and the surface your craft is standing on comes back a little higher or a little lower each
 > time — a few centimetres apart on Kerbin, less on smaller worlds.
 
-## Why it matters
+**How this was made.** The investigation and the code were written with Claude, Anthropic's AI
+assistant. Everything here was reviewed and validated by a human — me — who very much enjoyed
+learning along the way how KSP builds the ground you land on. I am saying so up front, because
+contributions made with an AI deserve a closer look than others, and because some people would
+rather stop reading here. That look is what this page is built for: every figure on it comes from an
+in-game measurement, the instrument behind the headline figures is public and runs on a stock
+install, the stock code quoted here is a handful of lines anyone can check, and the fix fits in one
+file you can read in a few minutes.
+
+## Why the moving ground matters
 
 Every time you load, it is a coin toss between two outcomes.
 
@@ -24,6 +33,12 @@ moment the scene finishes loading. The base that sat perfectly flush yesterday a
 the hatches today. The big base that tears itself apart the very first time you load it, and never
 again afterwards. A craft with many parts spread over a wide area gives the coin toss more chances
 to land the wrong way up.
+
+![A craft jumping on its own the moment a save is reloaded](imgs/Booing-scaled.gif)
+
+*KSP 1.12 without this mod, with [KSP Community Fixes](https://github.com/KSPModdingLibs/KSPCommunityFixes)
+as the only mod installed. A pod on a fuel tank, parked in the grass at the KSC, saved, then reloaded
+from the pause menu — nothing touched in between.*
 
 ### Disclaimer: it is not the only cause
 
@@ -579,16 +594,6 @@ removing the folder gives you the stock terrain back.
 
 Set `KSPDIR` to your KSP install folder, which must contain `GameData/000_Harmony`, and run `build.bat`.
 It needs the .NET SDK, and produces `GameData/TerrainPrecisionFixMod/TerrainPrecisionFixMod.dll`.
-
-## How this was made
-
-The investigation and the code were done together with Claude, Anthropic's AI assistant: measurement
-campaigns in game, and reading the decompiled stock code to find where the precision is lost. I am
-saying so because it is true, and because contributions made with an AI deserve a closer look than
-others. That look is what this page is built for: every figure on it comes from an in-game measurement,
-the instrument behind the headline figures is public and runs on a stock install, the stock code quoted
-here is a handful of lines anyone can check in a decompiler, and the fix fits in one file you can read
-in a few minutes.
 
 ## License
 
