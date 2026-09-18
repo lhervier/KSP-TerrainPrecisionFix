@@ -15,8 +15,8 @@ Not everything below has to be done first. What does, in the order a reviewer wi
    to say plainly that the fix also takes away the reload lottery players use as an escape hatch.
    The KSPCF campaigns are done, checked and linked from all three READMEs.
 3. **Breaking Ground surface features.** They have colliders and are placed like the rocks. Enough to
-   know whether the fix introduces a physical offset there, even if the answer is "yes, and Rock
-   Precision Fix handles it".
+   know whether the fix introduces a physical offset there, even if the answer is "yes, and it needs a
+   fix of its own".
 4. ~~**The README reorganised**~~ — done 2026-09-16: thesis, why it matters, the culprit (faulty code
    and why the draw differs), checking it with both probes (stock, then with the fix), the fix and the
    way out not taken, performance, limits and solutions.
@@ -84,9 +84,12 @@ which removes both roundings at once. It works with or without this mod. Written
   `PQSMod_ROCScatterQuad.Setup` does the same `localPosition = quad.positionPlanet`. Unlike the rocks,
   they have colliders. The rock measurement covers where they are drawn. Where the physics puts their
   colliders, whether with the transform position or with the matrix, is not measured, and decides
-  whether this fix introduces a physical offset. To measure before deciding. Rock Precision Fix could
-  later handle them the same way as the rocks: `PQSMod_ROCScatterQuad` has the same kind of holder,
-  which could hang from its quad too, for where they are drawn and for their colliders alike.
+  whether this fix introduces a physical offset. To measure before deciding. A subject of its own, with
+  a fix of its own, not part of Rock Precision Fix. What the code shows so far: the holder hangs from a
+  `rocParent` that `LandClassROC` creates as a child of the terrain sphere, at the identity, and is
+  released through `roc.DestroyQuad(this)`, called from the quad's `onDestroy`. The identifier of a
+  surface feature depends on its position within the quad (`rocPOS`, taken from `quad.verts`), not on
+  the pose of its holder, so moving the holder would not change it.
 - **Deployed experiments** (`ModuleGroundPart` and related modules): they are vessels, positioned in
   double like any craft, so a priori they already benefit from the corrected ground. To check with
   Terrain Precision Fix Diag rather than assume. They are also the parts `Vessel.GoOffRails` skips the physics hold for.
