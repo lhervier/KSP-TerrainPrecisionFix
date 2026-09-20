@@ -66,15 +66,91 @@ measured, and it decides whether this mod widens a physical offset there or leav
 measure it first; a fix of their own would then hang those holders from their quads the same way (see
 [TODO.md](../TODO.md)).
 
+## Kopernicus, on a stock body
+
+**Measured: the fix still places the terrain, and the ground is as stable under
+Kopernicus as without it.** Most planet packs go through
+[Kopernicus](https://github.com/Kopernicus/Kopernicus), which rebuilds the terrain of every body it
+touches, so the frame this fix computes in has to still be the frame the quads hang from. If it were
+not, the 1 m safeguard would leave that terrain as stock builds it, with a warning per body in the log
+and nothing else.
+
+The series on scatter colliders above answers that for a stock body, because Rock Precision Fix Diag
+also logs, at every load, the distance from the centre of Kerbin to the transform of each terrain quad
+around the kerbal — the very number this fix places. On Kopernicus 1.12.1.247 with the collider patch,
+over the six loads of each install, for the 173 quads present in all six of them
+([the logs](https://github.com/lhervier/KSP-RockPrecisionFixDiag/tree/main/diag/runs), files
+`collider-stock-load*.log` and `collider-tpf-load*.log`):
+
+| install | spread of a quad's height over six loads, median | at worst |
+|---|---|---|
+| under Kopernicus, without this mod | 116.0 mm | 200.8 mm |
+| under Kopernicus, with this mod | 0.079 mm | 0.265 mm |
+
+The safeguard never fired, the log reported Kerbin's terrain placed in double precision, and what is
+left is in the tenths of a millimetre — the same order as the campaigns without Kopernicus. On a stock
+body, Kopernicus leaves the quads hanging in the frame this fix computes.
+
+**Still open, on any Kopernicus install: the collision surface itself.** The readings above are the
+position the quads are placed at — the cause — not the surface a craft rests on, which only
+[Terrain Precision Fix Diag 2](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2) reads, and
+which has never been read with Kopernicus installed. *Solution:* the campaign of
+[Terrain Precision Fix Diag 2](checking-the-culprit.md#terrain-precision-fix-diag-2-with-this-mod-the-ground),
+run on a Kopernicus install (see [TODO.md](../TODO.md)).
+
+The body a planet pack adds is a case of its own, and the next chapter is about it.
+
+## A body from a planet pack
+
+**Open: nothing has been measured on one.** On a stock body Kopernicus rebuilds a terrain that already
+exists; for a planet pack it does more. Each added body is built by cloning the terrain sphere of a
+stock template, which is then reconfigured — another radius, another `maxLevel`, PQSMods added and
+removed — and a pack can also rewrite the `PQS` of a stock body. The frame this fix computes in
+(`body.rotation`, `body.position`) has to still be the one those quads hang from. If it is not, the 1 m
+safeguard leaves that terrain as stock builds it: no fix, silently, apart from one warning per body in
+the log.
+
+*Solution:* the campaign of
+[Terrain Precision Fix Diag 1](checking-the-culprit.md#terrain-precision-fix-diag-1-with-this-mod-the-craft),
+run on such a body (see [TODO.md](../TODO.md)). A single landing already answers half of it: with this
+mod installed, the log carries either `<body>: terrain placed in double precision` or the safeguard's
+warning.
+
+**Which body to run it on.** [Outer Planets Mod](https://github.com/Poodmund/Outer-Planets-Mod) covers
+both cases, and its Kopernicus configs say what to expect before the game is even started:
+
+| body | built from the template | radius | `maxLevel` |
+|---|---|---|---|
+| Slate | Moho | 540 000 m | 8 |
+| Wal | Moho | 370 000 m | 8 |
+| Thatmo | Moho | 286 000 m | 8 |
+| Tekto | Laythe | 280 000 m | Laythe's |
+| Ovok | Minmus | 26 000 m | 1 |
+| Eeloo | the stock body, moved into orbit of Sarnus | 210 000 m (stock) | 8 |
+
+For comparison, read in flight by
+[PQS Bench](https://github.com/lhervier/KSP-PQSBench/blob/master/README.md#how-the-terrain-of-that-body-is-set-up):
+Kerbin subdivides to level 10 and the Mun to 9 — so the other `maxLevel` of this chapter is really
+exercised there.
+
+**Slate is the body to measure on.** Its radius, 540 km, falls between the same two powers of two as
+Kerbin's 600 km, so a float's step is the same 62.5 mm there: the defect has the amplitude of the
+campaigns already run, and the readings compare directly. It has no atmosphere, so the landing of the
+protocol is a landing and nothing more; the flat ground Diag 1 asks for is then a matter of picking the
+spot. **Eeloo is the other case**, a stock body the pack reconfigures
+rather than creates. **Ovok is the edge case**: at `maxLevel` 1 the quads of its highest level are
+enormous, and whether this fix acts on them at all — it only moves the quads the game parents to
+`LocalSpacePQStorage` — is one line of log to read.
+
+**What such a campaign would not settle: the colliders' `maxLevelOffset`.** That pack never sets it;
+every `maxLevelOffset` in its configs belongs to a scatter, not to `PQSMod_QuadMeshColliders`.
+Kopernicus sets the colliders' offset to 0 only on a sphere it creates without a template
+(`Configuration/PQSLoader.cs`); with a template, the stock value of that template comes along. A
+campaign there therefore reads that offset rather than choosing it — PQS Bench prints it for the
+body being flown over — and a pack that does set a non-zero one stays untested.
+
 ## Not checked yet
 
-- **Kopernicus.** Not measured, and required before this goes anywhere: most planet packs go through
-  it. If Kopernicus places the quads in another frame, the 1 m safeguard should leave its terrain as
-  stock builds it, with one warning per body in the log. One data point, short of a measurement: in the
-  collider series above, which runs on Kopernicus 1.12.1.247, the fix reported in `KSP.log` that it had
-  placed Kerbin's terrain in double precision, and raised no such warning, so on a stock body the quads
-  still hang in the frame it computes. *Solution:* measure it with Terrain Precision Fix Diag 1, on a stock
-  body and on a planet pack body (see [TODO.md](../TODO.md)).
 - **Parallax scatters.** According to its source, they should follow the corrected ground: their
   positions and colliders are expressed relative to the quad, and a collider is a child of its quad, so
   they move with it. *Solution:* confirm it in game (see [TODO.md](../TODO.md)).

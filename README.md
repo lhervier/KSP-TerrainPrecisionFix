@@ -108,8 +108,10 @@ the work done once per quad instead of once per vertex.
 
 Terrain scatter is not moved, and no longer comes back on the ground it is drawn on: visual on a stock
 install, physical with a mod that gives the scatter colliders, where this fix halves the gap and
-[Rock Precision Fix](https://github.com/lhervier/KSP-RockPrecisionFix) closes it. Breaking Ground's
-surface features, the KSC statics, Kopernicus and the map view are not measured yet.
+[Rock Precision Fix](https://github.com/lhervier/KSP-RockPrecisionFix) closes it. Under Kopernicus, on a
+stock body, the fix still places the terrain and the ground is as stable as without it; on a body from a
+planet pack it is not measured. Neither are Breaking Ground's surface features, the KSC statics and the
+map view.
 
 **→ Full chapter: [Limits and solutions](docs/limits-and-solutions.md)**
 
