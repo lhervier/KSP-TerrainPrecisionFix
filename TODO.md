@@ -22,7 +22,9 @@ Not everything below has to be done first. What does, in the order a reviewer wi
    way out not taken, performance, limits and solutions.
 
 Everything else — Parallax measured rather than read, `PQSCity`, rocks measured, the ground moving in
-flight, the `cos α` bug — can be listed as open in the README without holding the issue back.
+flight, the `cos α` bug, and the things that stand on the ground but have not been looked at yet
+(Kerbal Konstructs, clawed asteroids, ground anchors, KAS) — can be listed as open in the README
+without holding the issue back.
 
 ## Stock bugs still to test
 
@@ -348,6 +350,46 @@ check:
   Same open question as the ROCs above.
 - Measure it, with Terrain Precision Fix Diag, on at least one stock body and one body from a planet
   pack.
+
+### Other things that stand on the ground — not looked at yet
+
+Four cases nothing above covers. None of them has been read in the code, let alone measured: what
+follows is the question and how to answer it, not a finding.
+
+- **Kerbal Konstructs.** It plants statics — pads, runways, whole bases — anywhere on a body, the way
+  `PQSCity` does at the KSC, and a great many players park their craft on them. Two questions, in
+  order: does it position a static from the centre of the body through a float `Transform`, in which
+  case it carries the same defect and this fix does not cover it (same case as the KSC buildings
+  above); and does a static it places move **relative to** the corrected ground, which a player would
+  see as a craft on a Konstructs pad sitting a few centimetres off. Its source is not in
+  `kspmod-ext`: clone it and read `StaticObject`'s placement before guessing anything. Then measure,
+  with Terrain Precision Fix Diag 2 reading the ground under a static against the ground beside it.
+
+- **Asteroids grabbed with a claw.** An asteroid is a vessel, positioned in double like any other, so
+  on its own it should follow the corrected ground. Neither `ModuleAsteroid` nor `ModuleGrappleNode`
+  reads the PQS (checked in the decompiled source), so there is no second placement path here — the
+  case to test is the stock-fragile one: an asteroid resting on the ground, grappled by a claw, where
+  the joint was made against a body the terrain was holding up. On the first load with the fix that
+  ground moves once, by up to the stock spread, with a mass on the other end of a joint that is
+  already the game's least stable. To test: a clawed asteroid on the Mun, saved and reloaded several
+  times, with and without the fix.
+
+- **Ground anchors** (the `ModuleGroundPart` part an engineer places in EVA construction — the bases
+  in the save above are built on one). It is the part most exposed to *when* the ground is drawn, for
+  two stock reasons: it is the one thing that makes `Vessel.GoOffRails` skip the physics hold, so an
+  anchored craft starts its physics on the very first frame whatever state the terrain is in; and
+  `groundAnchor.cfg` sets `kinematicDelay = 0`, so the anchor is frozen (`PermanentGroundContact`,
+  `FreezeAll`) after a single render frame, at whatever height it happens to be at that instant.
+  Welded rather than settled, in other words. A stable ground should make that better, not worse, but
+  the part deserves to be read rather than assumed — and it is also the one case where
+  `CheckGroundCollision` applies a move below 10 cm. To measure with Terrain Precision Fix Diag on an
+  anchor-plus-one-part craft, the bench already used for the collider campaigns.
+
+- **KAS.** Not in any list above — checked, it is new here. Kerbal Attachment System attaches parts to
+  each other and to the ground with joints of its own, and its static attachment is exactly the kind
+  of thing that either rides on a vessel (and follows the corrected ground for free) or is pinned to
+  the terrain sphere (and does not). Its source is not in `kspmod-ext` either: clone it, find how a
+  statically attached part is anchored, and only then decide whether there is anything to measure.
 
 ## Where the mechanism figures come from — nothing to publish
 
