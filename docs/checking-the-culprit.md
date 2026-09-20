@@ -46,11 +46,11 @@ The second instrument is there for that.
 Terrain Precision Fix Diag 2 measures the ground, with no craft in the reading at all: the collision
 surface a ray pointed straight down hits, against the height KSP computes for that same spot. The second
 never moves; the first is what your landing legs touch. *Difference* is the first minus the second. How
-both are read is in [This mod's demonstration](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2#this-mods-demonstration).
+both are read is in [This mod's demonstration](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/blob/master/docs/this-mods-demonstration.md).
 
-Its campaigns, detailed in [Six loadings of the same save](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2#six-loadings-of-the-same-save):
+Its campaigns, detailed in [Six loadings of the same save](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/blob/master/docs/six-loadings-of-the-same-save.md):
 the same stock install, with nothing in `GameData` but that instrument; one save on each of the four
-worlds, loaded six times, following [its protocol](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2#the-protocol). Over those six loads:
+worlds, loaded six times, following [its protocol](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/blob/master/docs/the-protocol.md). Over those six loads:
 
 | world | spread of *Difference* | spread of the height KSP computes |
 |---|---|---|
@@ -62,7 +62,7 @@ worlds, loaded six times, following [its protocol](https://github.com/lhervier/K
 The craft never moved and the spot never changed, yet the height KSP computes held still while the
 collision surface wandered by up to ten centimetres. The ground itself is not built in the same place
 twice. The full readings, and what else they show, are in
-[What the numbers say](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2#what-the-numbers-say).
+[What the numbers say](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/blob/master/docs/six-loadings-of-the-same-save.md#what-the-numbers-say).
 
 ## Terrain Precision Fix Diag 1, with this mod: the craft
 
@@ -137,7 +137,7 @@ millimetre. That is the fix, and that is all of it.
 around. On Kerbin and on Minmus the fixed reading falls well inside the range of the six loadings without
 this mod, and on Gilly just inside it. On the Mun it falls just below: six draws are few for a spread that
 wide. The stock campaign of Terrain Precision Fix Diag 2, on that same spot, drew
-[down to −44.363 mm](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2#the-readings), and the twelve draws together cover −24.0 to −44.4 mm, around
+[down to −44.363 mm](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/blob/master/docs/six-loadings-of-the-same-save.md#the-readings), and the twelve draws together cover −24.0 to −44.4 mm, around
 the −40.76 mm this mod reads. Put the loading that landed on −23.958 next to a fixed −40.765 and the fix
 looks like it made things worse; it did not, that line was luck. This mod does not choose a better number
 for that patch of ground; it stops drawing a new one at every loading.
@@ -150,7 +150,7 @@ different point. On Gilly that is more than the spread of *Difference* under it,
 follow the sample point together, and most of the wobble cancels between them. What remains of the
 spread is the craft, not the terrain. What remains of *Difference* itself is geometry: the collision mesh
 is made of flat triangles, and they miss what the ground does between two corners —
-[Terrain Precision Fix Diag 2 explains why a correct reading is not zero](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2#why-a-correct-reading-is-not-zero).
+[Terrain Precision Fix Diag 2 explains why a correct reading is not zero](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/blob/master/docs/this-mods-demonstration.md#why-a-correct-reading-is-not-zero).
 On that Gilly slope it is +37.5 mm, on that Kerbin slope +247.0 mm, the same on every loading. Removing
 it would mean giving that mesh more triangles, which costs frames, for a gap nobody can feel.
 
