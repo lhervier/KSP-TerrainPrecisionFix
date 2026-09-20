@@ -8,7 +8,10 @@ against, and the probes still to publish so that every figure in the README can 
 Not everything below has to be done first. What does, in the order a reviewer will ask for it:
 
 1. **Kopernicus.** Most planet packs go through it; the fix is not worth proposing until it is measured
-   with it, on a stock body and on a planet pack body.
+   with it, on a stock body and on a planet pack body. One data point since 2026-09-20, short of that
+   measurement: the collider series of Rock Precision Fix runs on Kopernicus 1.12.1.247, and there the
+   fix logged `Kerbin: terrain placed in double precision` and no safeguard warning — so on a stock
+   body Kopernicus leaves the quads in the frame the fix computes.
 2. **Existing saves.** Already tested, not yet written: the fix has been run on the author's own
    years-old save, and none of its bases broke. What is left is to say it in the README together with
    what it does not prove — those bases are built in a way that resists this defect (see below) — and
@@ -16,7 +19,9 @@ Not everything below has to be done first. What does, in the order a reviewer wi
    The KSPCF campaigns are done, checked and linked from all three READMEs.
 3. **Breaking Ground surface features.** They have colliders and are placed like the rocks. Enough to
    know whether the fix introduces a physical offset there, even if the answer is "yes, and it needs a
-   fix of its own".
+   fix of its own". The neighbouring case is now measured and says the offset is real where a mod gives
+   the scatter colliders: 104 mm on stock, halved by the fix, closed only by Rock Precision Fix (see
+   the rocks below).
 4. ~~**The README reorganised**~~ — done 2026-09-16: thesis, why it matters, the culprit (faulty code
    and why the draw differs), checking it with both probes (stock, then with the fix), the fix and the
    way out not taken, performance, limits and solutions.
@@ -63,22 +68,32 @@ side on Kerbin, Terrain Precision Fix Diag 2 reading the ground under the capsul
 beyond 500 m and back. Expected: *Difference* jumps at every origin shift in stock, and does not with
 the fix, which patches that path too.
 
-### Rocks (terrain scatter) — handled by Rock Precision Fix, not measured yet
+### Rocks (terrain scatter) — measured, and handled by Rock Precision Fix
 
 `PQSMod_LandClassScatterQuad.Setup` places the holder of a quad's rocks with
 `base.transform.localPosition = quad.positionPlanet;`, under a parent attached to the terrain sphere,
 whose origin is the centre of the body. The rocks themselves are built from the quad's vertices, in the
 quad's own coordinates, and written into the holder's mesh as they are.
 
-Measured with [Rock Precision Fix Diag](https://github.com/lhervier/KSP-RockPrecisionFixDiag) on Kerbin
-(see the README): in stock, rocks are already drawn off the ground, because the holder's local to world
-matrix does not round like its transform position (−85.5 to +64.7 mm, standard deviation 29.7 mm). With
-this fix, the stock error on the quad origin adds to it (−66.3 to +152.0 mm, standard deviation
-44.4 mm). Same kind of error, about 1.5 times wider, and visual only: stock rocks have no collider.
+Measured with [Rock Precision Fix Diag](https://github.com/lhervier/KSP-RockPrecisionFixDiag), twelve
+loads per series on Kerbin and on the Mun: in stock the holder's centre stands on its quad's, but the
+matrix it is drawn with does not, so the objects come back at a different height against the ground at
+every load — 94 mm apart for half of the measured points on Kerbin. With this fix the quads stop moving
+and the holders do not follow them: 130 mm. The same order, but where stock splits the error between the
+ground and the holder, with the fix all of it is the holder. Visual only on stock scatter, which has no
+collider.
 
-Handled by a separate mod, [Rock Precision Fix](https://github.com/lhervier/KSP-RockPrecisionFix): it
-hangs each holder from its own quad, so the holder's position no longer goes through a 600 km float,
-which removes both roundings at once. It works with or without this mod. Written, not measured yet.
+**Give the scatter colliders and it is physical**, measured 2026-09-20 with Kopernicus and the
+[Stock Scatter Collider Enabler Patch](https://github.com/Poodmund/Stock-Scatter-Collider-Enabler-Patch):
+the collider stands −68.7 to +104.2 mm from the object drawn on stock, −70.2 to +70.3 mm with this fix
+alone, −0.026 to +0.022 mm with Rock Precision Fix as well. This fix halves that gap; it does not close
+it.
+
+Closed by [Rock Precision Fix](https://github.com/lhervier/KSP-RockPrecisionFix), which hangs each holder
+from its own quad: measured over the same series, every holder drawn exactly on its quad, no measured
+point moving more than 0.125 mm over twelve loads, and no holder lost to its pool over a flight or a
+scene change. **Nothing left to do here**, other than deciding what the README of this mod says about a
+mod that is published but not recommended on a stock install — done, in `Limits and solutions`.
 
 ### Breaking Ground
 
@@ -86,7 +101,10 @@ which removes both roundings at once. It works with or without this mod. Written
   `PQSMod_ROCScatterQuad.Setup` does the same `localPosition = quad.positionPlanet`. Unlike the rocks,
   they have colliders. The rock measurement covers where they are drawn. Where the physics puts their
   colliders, whether with the transform position or with the matrix, is not measured, and decides
-  whether this fix introduces a physical offset. To measure before deciding. A subject of its own, with
+  whether this fix introduces a physical offset. The neighbouring case now says what to expect: on
+  scatter given colliders by Kopernicus, the collider and the object drawn are centimetres apart on
+  stock already, and this fix halves that without closing it (see the rocks above). Whether a ROC is
+  placed the same way below its holder is the thing to read, then measure. To measure before deciding. A subject of its own, with
   a fix of its own, not part of Rock Precision Fix. What the code shows so far: the holder hangs from a
   `rocParent` that `LandClassROC` creates as a child of the terrain sphere, at the identity, and is
   released through `roc.DestroyQuad(this)`, called from the quad's `onDestroy`. The identifier of a
@@ -168,7 +186,7 @@ What is true, and has to be in the README rather than discovered by a player:
   stock spread. Once it has been loaded and saved again with the fix installed, both sides agree and
   the question never comes back.
 - **The corrected ground is not a worse draw than average, it is among them.** Measured in
-  [Terrain Precision Fix Diag 2, with this mod](README.md#terrain-precision-fix-diag-2-with-this-mod-the-ground):
+  [Terrain Precision Fix Diag 2, with this mod](docs/checking-the-culprit.md#terrain-precision-fix-diag-2-with-this-mod-the-ground):
   the fixed reading falls inside the six draws without the fix on Kerbin, Minmus and Gilly (near the
   lower edge on Gilly), and just below them on the Mun, where it is inside the twelve draws of both
   stock campaigns on that spot. So a given base is no more likely to come back buried than it
@@ -266,7 +284,7 @@ PQS quads. Record the version or commit checked.
 
 ### Cost of the vertex patch — measured, 2026-09-13
 
-Measured, published in [Performance](README.md#performance), material and logs in [perfs/](perfs/):
+Measured, published in [Performance](docs/performance.md), material and logs in [perfs/](perfs/):
 **260.0 ns per vertex in stock against 87.8 ns with the fix**, replaying the placements over the
 vertices of a quad the game had just built, in the frame that built it. Two flights of the same save,
 one of them without the mod installed at all, differ by less than the noise between two KSP sessions.
@@ -338,6 +356,11 @@ check:
 - Kopernicus rebuilds the terrain of every body it touches. The frame the fix computes positions in
   (`body.rotation`, `body.position`) has to still be the one the quads hang from. The 1 m safeguard
   would catch a mismatch, but the result would be no fix, silently, apart from a warning in the log.
+  **First data point, 2026-09-20**: the collider series of Rock Precision Fix runs with Kopernicus
+  1.12.1.247 and the Stock Scatter Collider Enabler Patch, on Kerbin, and `KSP.log` carries
+  `Kerbin: terrain placed in double precision (first quad corrected by 11.03 mm)` with no safeguard
+  warning — so the frame still matches on a stock body Kopernicus has been through. What is missing is
+  the Diag measurement itself, and a planet pack body.
 - `maxLevelOffset`: the one Kopernicus lets a config set belongs to the scatter
   (`Configuration/ModLoader/LandControl.cs`), not to the colliders. On the terrains it creates,
   Kopernicus sets the colliders' `maxLevelOffset` to 0 (`Configuration/PQSLoader.cs`). On the bodies it
@@ -406,7 +429,7 @@ Two instruments are published, and between them they carry the whole demonstrati
   like the first one. It is a mod of its own rather than a reading folded into that instrument because
   it measures the ground and not the craft, so it needs none of that protocol: no settling, no waiting.
   Four stock campaigns, on Kerbin, the Mun, Minmus and Gilly, are on its page; the same four saves with
-  the fix installed are in [Terrain Precision Fix Diag 2, with this mod](README.md#terrain-precision-fix-diag-2-with-this-mod-the-ground).
+  the fix installed are in [Terrain Precision Fix Diag 2, with this mod](docs/checking-the-culprit.md#terrain-precision-fix-diag-2-with-this-mod-the-ground).
 
 The second one is the one that matters. `TerrainAltitude` is computed in double by stock code,
 independently of the frame the fix uses, so it is the only reading that shows the ground comes back to
@@ -419,7 +442,7 @@ when it was reorganised: no figure without a protocol a reader can follow. The p
 
 - **The mechanism is shorter to read than to measure.** `quadTransform.localPosition = positionPlanet`
   in `PQ.SetupQuad`, and the four lines of `PQS.BuildVertexSurfaceRelative`, are quoted in
-  [The culprit](README.md#the-culprit), which says in words, without measured values, that the origin
+  [The culprit](docs/the-culprit.md), which says in words, without measured values, that the origin
   and each vertex are rounded on their own.
 - **Diag 2 carries the proof on the ground**, with numbers read off screenshots on both sides.
 - **The fix closes the case without any probe**: it changes where a subtraction happens, and the spread

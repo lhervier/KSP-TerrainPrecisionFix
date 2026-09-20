@@ -1,7 +1,7 @@
 # What this fix costs: the runs
 
 The logs this mod's performance figures are read from. The figures themselves, and what they say, are
-in [Performance](../README.md#performance) on the main page.
+in [Performance](../docs/performance.md).
 
 Measured with [PQS Bench](https://github.com/lhervier/KSP-TerrainPrecisionFix-PQSBench), **whose page
 carries the procedure** — the craft, the orbit, how long to fly, and what makes a run worth keeping.
