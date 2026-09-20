@@ -20,15 +20,24 @@ private void BuildVertexSurfaceRelative(VertexBuildData data)
 `vertRel` is the vertex relative to the centre of the body, computed in double: a vector 600 km long
 on Kerbin. `TransformPoint` turns it into a world position, which in KSP is close to the craft. To get
 there, it adds that 600 km vector to the position of the centre of the body, another vector of about
-600 km pointing the other way, and keeps the difference. `InverseTransformPoint` then expresses that
-point relative to the quad, whose own position was obtained the same way:
+600 km pointing the other way, and keeps the difference.
+
+`InverseTransformPoint` then expresses that world position relative to `buildQuad.transform`, the
+`Transform` of the quad the vertex belongs to. That one holds a 600 km vector of its own, built
+exactly like `vertRel` — a direction from the centre of the body, times a height, this time the
+height of the centre of the quad:
 
 ```csharp
-// PQ.SetupQuad and PQ.PreciseUpdateSubQuadsPosition — positionPlanet is a Vector3d
+// PQ.PreciseUpdateSubQuadsPosition; the same two values are computed in PQ.Subdivide
+// when a quad creates its children, and assigned to the Transform in PQ.SetupQuad
+positionPlanetRelative = positionPlanePosition.normalized;              // Vector3d
+positionPlanet = positionPlanetRelative * sphereRoot.GetSurfaceHeight(positionPlanetRelative);
 quadTransform.localPosition = positionPlanet;
 ```
 
-A 600 km double stored in a float `localPosition`, under a parent that sits at the centre of the body.
+The parent of that `Transform` is the sphere's quad storage, which hangs off the body without an
+offset of its own. So this is a 600 km double stored in a float `localPosition`, under a parent that
+sits at the centre of the body.
 
 **That is the error.** A `Transform` works in `float`, and a float holding 600 km can only change in
 steps of 62.5 mm. Every one of those values is rounded to the nearest step on the way, and the
