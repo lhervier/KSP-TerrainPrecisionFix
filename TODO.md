@@ -132,22 +132,6 @@ sits on terrain that `PQSCity` flattens, so that reading cannot tell the two apa
 with this fix installed the terrain is stable, so if the capsule on the runway still moves, it is the
 static.
 
-### Parallax scatters
-
-Read in the Parallax Continued source (tag 1.0.4), not measured. The scatters should follow the
-corrected quad, because everything about them is expressed in the quad's own frame: positions drawn
-inside the triangles of `quad.mesh.vertices` and kept as quad-local, drawn through the quad's
-`meshRenderer.localToWorldMatrix`, colliders that are child GameObjects of the quad and only exist at
-the highest level, the mesh read in `PQ.SetVisible` after `PQ.Build`, and the terrain shader's
-replacement mesh a child of the quad as well.
-
-To confirm in game, with Parallax installed: the offset between a scatter collider and its quad should
-be the same on every load.
-
-One thing the fix leaves as it is, and that needs no work: Parallax samples its distribution noise with
-directions computed in float from 600 km vectors, so an object right at the noise cutoff can appear on
-one load and not on the next. That happens in stock too.
-
 ### Colliders below the highest level, on the other bodies
 
 `PQSMod_QuadMeshColliders` gives a collider to every quad at or above

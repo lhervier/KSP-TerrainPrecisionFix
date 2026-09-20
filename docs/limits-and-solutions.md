@@ -39,6 +39,20 @@ It works with or without this mod, and it is not a mod to install lightly: it mo
 other mods may look for where stock puts them, and its page weighs that trade
 ([Should you install it?](https://github.com/lhervier/KSP-RockPrecisionFix/blob/main/docs/should-you-install-it.md)).
 
+**Parallax's own scatter is out of this.** Read in the source of Parallax Continued, not measured:
+everything about its objects is expressed in the frame of the terrain quad — where they are drawn from,
+the matrix they are drawn through, and the colliders it can give them, which are children of the quad —
+so they follow the ground wherever this fix places it. Rock Precision Fix reads the same source for its
+own purpose and writes up what it found there
+([What never touches them](https://github.com/lhervier/KSP-RockPrecisionFix/blob/main/docs/should-you-install-it.md#what-never-touches-them)).
+Parallax also leaves the stock `LandControl` in place on every body but Eeloo, so on a body it does not
+strip, the stock scatter this section is about is still there, hanging from the same holders.
+
+One detail this fix leaves exactly as stock has it: Parallax samples its distribution noise from
+directions computed in float out of those same 600 km vectors, so an object sitting right at the cutoff
+can appear on one load and not on the next. That happens without this fix too, and the fix touches
+neither side of it.
+
 ## Scatter with colliders
 
 **Limit, measured: this mod halves it, and does not close it.** Stock scatter has no collider, but a mod
@@ -151,9 +165,6 @@ body being flown over — and a pack that does set a non-zero one stays untested
 
 ## Not checked yet
 
-- **Parallax scatters.** According to its source, they should follow the corrected ground: their
-  positions and colliders are expressed relative to the quad, and a collider is a child of its quad, so
-  they move with it. *Solution:* confirm it in game (see [TODO.md](../TODO.md)).
 - **Colliders below the highest subdivision level.** `PQSMod_QuadMeshColliders` gives a collider to
   every quad at or above `maxLevel - |maxLevelOffset|`, and with an offset other than 0 the fix would
   leave those lower quads uncorrected. The offset is **0** on Kerbin and on the Mun, so there the fix
