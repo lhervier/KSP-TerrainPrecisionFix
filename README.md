@@ -1,5 +1,7 @@
 # Terrain Precision Fix
 
+**⚠️ Work in progress.** This is an active investigation, not a finished mod. The figures, the code and the conclusions on this page can still change, and several questions are still open — they are listed in [TODO.md](TODO.md).
+
 A fix for stock KSP 1.12, meant as a proposal for
 [KSP Community Fixes](https://github.com/KSPModdingLibs/KSPCommunityFixes) and kept as small as
 possible for that reason: two Harmony patches, in one source file. Here is what they fix:
