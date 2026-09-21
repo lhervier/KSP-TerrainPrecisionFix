@@ -1,6 +1,6 @@
 # Terrain Precision Fix
 
-**⚠️ Work in progress.** This is an active investigation, not a finished mod. The figures, the code and the conclusions on this page can still change, and several questions are still open — they are listed in [TODO.md](TODO.md).
+**⚠️ Work in progress.** This is an active investigation, not a finished mod. The figures, the code and the conclusions on this page can still change, and several questions are still open — they are listed in [Limits and solutions](docs/limits-and-solutions.md).
 
 A fix for stock KSP 1.12, meant as a proposal for
 [KSP Community Fixes](https://github.com/KSPModdingLibs/KSPCommunityFixes) and kept as small as
@@ -110,12 +110,14 @@ three configurations cannot be told apart.
 
 ## Limits and solutions
 
-Terrain scatter is not moved, and no longer comes back on the ground it is drawn on: visual on a stock
-install, physical with a mod that gives the scatter colliders, where this fix halves the gap and
-[Rock Precision Fix](https://github.com/lhervier/KSP-RockPrecisionFix) closes it. Under Kopernicus, on a
-stock body, the fix still places the terrain and the ground is as stable as without it; on a body from a
-planet pack it is not measured. Neither are Breaking Ground's surface features, the KSC statics and the
-map view.
+Everything that stands on the ground, or is placed from it, has to be checked against this fix, one
+case at a time — a work in progress, with a chapter per case saying where it stands. Terrain scatter is
+not moved, and no longer comes back on the ground it is drawn on: visual on a stock install, physical
+with a mod that gives the scatter colliders, where this fix halves the gap and
+[Rock Precision Fix](https://github.com/lhervier/KSP-RockPrecisionFix) closes it. The KSC statics carry
+the same defect and are not covered. Under Kopernicus, on a stock body, the fix still places the
+terrain; most of the other cases — planet packs, Breaking Ground, Kerbal Konstructs, slopes, existing
+saves, the map view, Deferred and more — are still to be tested, and each chapter says how.
 
 **→ Full chapter: [Limits and solutions](docs/limits-and-solutions.md)**
 
