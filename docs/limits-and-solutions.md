@@ -29,8 +29,10 @@ campaign ran with.
 
 ## Rocks, grass and trees
 
-**Status: affected.** This mod does not move terrain scatter — the rocks, and around the KSC the grass
-and the trees — and the scatter no longer comes back on the ground it is drawn on.
+**Status: affected — a stock defect, which this mod widens on Kerbin.** Terrain scatter — the rocks, and
+around the KSC the grass and the trees — is already drawn off the ground in stock, differently at every
+load. This mod does not move it, so it does not create that gap, but it does not share the ground's
+correction either, and on Kerbin the gap gets wider.
 
 The objects of a quad are built from its vertices, in the quad's own coordinates, and hang from a
 *holder* that `PQSMod_LandClassScatterQuad.Setup` places under the terrain sphere, at
@@ -45,8 +47,8 @@ never do: the ground is now placed in double precision and the holder is not.
 saves of its own, one on Kerbin and one on the Mun, each loaded twelve times per series ([the readings](https://github.com/lhervier/KSP-RockPrecisionFixDiag/blob/main/docs/what-the-readings-show.md#the-rocks)):
 the height of a measured point of an object above the ground under it comes back 94 mm apart over the
 twelve loads for half of those points on Kerbin in stock, and 130 mm with this mod; on the Mun, 31 mm
-either way. The same kind of error, of the same order, but where stock draws part of it from the ground
-moving and part from the holder, with this mod all of it comes from the holder. Stock scatter has no
+either way. The same kind of error, of the same order and wider on Kerbin, but where stock draws part
+of it from the ground moving and part from the holder, with this mod all of it comes from the holder. Stock scatter has no
 collider, so this is visual only — unless a mod gives it one, which is the next chapter.
 
 **Solution.** [Rock Precision Fix](https://github.com/lhervier/KSP-RockPrecisionFix), a separate mod,

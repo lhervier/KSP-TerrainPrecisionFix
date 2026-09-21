@@ -111,13 +111,12 @@ three configurations cannot be told apart.
 ## Limits and solutions
 
 Everything that stands on the ground, or is placed from it, has to be checked against this fix, one
-case at a time — a work in progress, with a chapter per case saying where it stands. Terrain scatter is
-not moved, and no longer comes back on the ground it is drawn on: visual on a stock install, physical
-with a mod that gives the scatter colliders, where this fix halves the gap and
-[Rock Precision Fix](https://github.com/lhervier/KSP-RockPrecisionFix) closes it. The KSC statics carry
-the same defect and are not covered. Under Kopernicus, on a stock body, the fix still places the
-terrain; most of the other cases — planet packs, rescaled systems such as Real Solar System, Breaking Ground, Kerbal Konstructs, slopes, existing
-saves, the map view, Deferred and more — are still to be tested, and each chapter says how.
+case at a time — a work in progress, with a chapter per case saying where it stands: checked, affected,
+or still to be tested. The cases go from other mods (KSP Community Fixes, Kopernicus and planet packs,
+Parallax, Kerbal Konstructs, Deferred…) to what stock itself places on the ground (scatter, the KSC
+statics, Breaking Ground) and to situations (rescaled systems such as Real Solar System, slopes,
+existing saves, the map view…). Each affected case says what changes there and, where there is one,
+what solves it; each untested one says how it will be tested.
 
 **→ Full chapter: [Limits and solutions](docs/limits-and-solutions.md)**
 
