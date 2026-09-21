@@ -18,6 +18,10 @@ measurement:
   (`CelestialBody.PreciseUpdateQuadPositions`), so the ground would be rounded anew without any reload.
   Pinning the translation too would mean removing the floating origin, which is what lets KSP run in
   float at all;
+- pinning the frame when a save is loaded would not be enough anyway. The game builds and subdivides
+  quads under a craft as it approaches, not only when a save is loaded, and the frame cannot be reset
+  in mid-flight without moving everything else that lives in it. The same quad would be rounded one
+  way when built on approach, and another when built at load;
 - and a rounding that repeats is still a rounding: the ground would come back to the same place, but
   that place would still be off the height the game computes by as much as a few centimetres, as the
   stock readings above show.

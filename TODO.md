@@ -8,14 +8,52 @@ probes; no result is recorded here.
 
 Not everything below has to be done first. What does, in the order a reviewer will ask for it:
 
-1. **Kopernicus, on a planet pack body.** Most planet packs go through it. The stock-body half is done
-   (see below); what is left is a body Kopernicus creates or reconfigures.
-2. **Existing saves.** The transition a player feels on a save made before the fix, written in the
+0. **A GitHub release on each repository the issue sends a reader to.** This one is not a measurement,
+   it is a hard prerequisite: the issue opens by asking the reader to install Terrain Precision Fix
+   Diag 1, and both Diag READMEs send them to
+   `https://github.com/lhervier/KSP-TerrainPrecisionFix<...>/releases/latest` under `Get it`. Neither
+   repository has a single release today, so that link is a 404 — on the exact page a maintainer lands
+   on from the first instruction of the repro. Nor does this repository, which the issue also links.
+   `build.bat` already produces the zip; what is missing is the release itself. At least Diag 1 and
+   Diag 2, which the repro needs, and this repository, which the fix section offers. PQS Bench and
+   Stock Quad Cache are linked only as supporting material for the performance figure, so they can wait
+   — but their `Get it` sections should not promise a download that does not exist either. Check every
+   `releases/latest` link across the family before the issue goes out.
+1. **The ground anchor, in an install a reviewer could rebuild.** The issue opens on it, so every
+   reading it quotes has to be reproducible by someone else. They are not, yet: they come from the
+   author's own years-old save, in a game that also has EvaCMGroundPlugin installed. Redo them plainly,
+   on KSP + Harmony + ModuleManager + KSPCF + Diag 1, with the fix for the second half. What has to come
+   out of it: the `Moving Vessel` values without the fix (both signs, a different one every load) and
+   with it (the same value at every load); a `.sfs` showing `PQSMin`/`PQSMax` at `0/0` on a
+   freshly placed anchor; and the 2.08 cm collider gap re-read from `groundAnchor.mu`. ⚠️ **The protocol
+   differs from every other campaign here: save after each load.** It is the re-save that arms the
+   ratchet — without it the anchor is put back to the same place every time and the climb never appears.
+2. **The whole-frame cost, with KSPProfiler.** The performance figure is a micro-benchmark, and a
+   reviewer can dismiss it in one line: 3.56× on one method is not a frame. PQS Bench cannot answer
+   that — 164 ns per vertex is below anything a frame breakdown resolves — but
+   [KSPProfiler](https://github.com/KSPModdingLibs/KSPProfiler), written by one of KSPCF's own
+   maintainers, can: it inserts itself into Unity's player loop and reports mean / median / worst 25 % /
+   worst 1 % per frame phase. Fly the same low pass with it installed, with and without the fix, and
+   report what the frame does. Install the two side by side and do **not** couple them: its
+   `GameLoopProfilerCaptureBase.captures` list is public and PQS Bench could register into its UI, but
+   referencing its assembly would cost the instruments their "runs on a stock install with no
+   dependencies", which is most of what makes them worth handing to a stranger.
+3. **Kopernicus, twice.** Most planet packs go through it, so this is the compatibility question a
+   reviewer asks first. Two runs are missing, not one:
+   - **a clean stock-body series with the terrain instruments.** The reading that exists came out of a
+     scatter campaign, in an install built for scatter, so its protocol cannot be described without
+     describing that campaign — which means the figure cannot be quoted anywhere that does not also
+     tell that story. Re-run it plainly: Kopernicus on Kerbin, Diag 1 and Diag 2, six loads, with and
+     without the fix. Cheap, and it turns a figure that has to be explained away into one that can
+     simply be given;
+   - **a body a planet pack creates or reconfigures**, rather than merely loads. Nothing has been
+     measured there at all.
+4. **Existing saves.** The transition a player feels on a save made before the fix, written in the
    README rather than discovered in play.
-3. **Breaking Ground surface features.** They have colliders and are placed like the rocks. Enough to
+5. **Breaking Ground surface features.** They have colliders and are placed like the rocks. Enough to
    know whether the fix introduces a physical offset there, even if the answer is "yes, and it needs a
    fix of its own".
-4. **The same campaign on a slope.** Every campaign so far is on flat ground, because Terrain Precision
+6. **The same campaign on a slope.** Every campaign so far is on flat ground, because Terrain Precision
    Fix Diag 1 asks for it. On a slope a single-part craft is put into the ground at every load by a
    stock bug this fix does not touch, and a reviewer who meets it there will read it as "the fix does
    not work".
@@ -59,6 +97,16 @@ Still to check:
   Fix closes it (see [Scatter with colliders](docs/limits-and-solutions.md#scatter-with-colliders)). The
   same question stays open for the ROCs below.
 - Measure it, with Terrain Precision Fix Diag 1, on a body from a planet pack.
+
+### Deferred rendering — because it broke the last PQS patch
+
+Not because anything suggests it interacts with this one. `Deferred` replaces KSP's rendering path and
+has no reason to care where a quad is placed. It is on this list because it is the mod that broke
+KSPCF's own `PQSOnlyStartOnce` patch: that patch shipped, terrain stopped loading for some players, it
+was disabled by default the same day, the cause was narrowed to `Deferred` two weeks later, and it is
+still disabled. Anyone reviewing a PQS patch will have that in mind, so the install is worth having:
+`Deferred` plus this fix, the Diag 2 campaign, and a look at whether the terrain still renders. Cheap,
+and it answers a question that will be asked.
 
 ### Existing saves — the one risk a player can feel
 
@@ -168,6 +216,35 @@ follows is the question and how to answer it, not a finding.
   clone it and read `StaticObject`'s placement before guessing anything. Then measure, with Terrain
   Precision Fix Diag 2 reading the ground under a static against the ground beside it.
 
+  **And a third question, which looked like the worst of the three until the source was read: it does
+  not only stand on the terrain, it reshapes it.** Kerbal Konstructs flattens ground to seat what it
+  plants, so a player who installs it expects the terrain under a Konstructs site to *not* be what the
+  stock heightmap says. A fix that quietly undid those edits would be exactly the kind of "sneaky, very
+  situational" side effect KSPCF's maintainers say they worry about, and it would be found by a player
+  rather than by us.
+
+  Read in the source (now cloned to `kspmod-ext\Kerbal-Konstructs`, GER-Space's fork), and it is
+  reassuring: **Konstructs writes no terrain code of its own.** `Core/MapDecals/MapDecalInstance.cs`
+  does `gameObject.AddComponent<PQSMod_MapDecal>()`, hangs it off `CelestialBody.pqsController`, and
+  calls its stock `OnSetup()`. Its whole terrain-editing feature is the stock `PQSMod_MapDecal` /
+  `PQSMod_MapDecalTangent` — the same components stock uses to flatten the ground around the KSC.
+  Nothing else in `src/Core` touches the PQS beyond reading it (`GetSurfaceHeight`, `GetRelativePosition`,
+  `radius`) and asking for a `RebuildSphere` after a decal changes.
+
+  That matters because of *where* those components act. A decal edits `vbData.vertHeight` in
+  `OnVertexBuildHeight`, which runs **before** `PQS.BuildVertexSurfaceRelative` consumes it — and this
+  fix consumes exactly the same `vbData.directionFromCenter * vbData.vertHeight`. So the height it
+  places is the already-decalled one, and the reshaped terrain should be carried through untouched.
+  `PQSMod_MapDecal.OnQuadBuilt` only resets two flags, so there is no quad-level ordering conflict
+  either. Parallax is in the same position: its only decal-related `PQSMod`,
+  `PQSMod_MapDecalVertexRemoveScatter`, removes scatter inside a decal and does not touch height.
+
+  **All of that is read, not measured**, and it is the KSC flattening path, which the campaigns already
+  cross without anything odd showing up. What is left to do is cheap and should still be done: a
+  Konstructs site, with and without this fix, Diag 2 reading the ground inside the flattened area and
+  just outside it. Note that the 1 m safeguard would not catch a decal going wrong, since the quads
+  would still be within a metre of where they belong.
+
 - **Asteroids grabbed with a claw.** An asteroid is a vessel, positioned in double like any other, so
   on its own it should follow the corrected ground. Neither `ModuleAsteroid` nor `ModuleGrappleNode`
   reads the PQS (checked in the decompiled source), so there is no second placement path here — the
@@ -185,8 +262,15 @@ follows is the question and how to answer it, not a finding.
   `FreezeAll`) after a single render frame, at whatever height it happens to be at that instant. Welded
   rather than settled, in other words. A stable ground should make that better, not worse, but the part
   deserves to be read rather than assumed — and it is also the one case where `CheckGroundCollision`
-  applies a move below 10 cm. To measure with Terrain Precision Fix Diag 1 on an anchor-plus-one-part
-  craft.
+  applies a move below 10 cm. **Already measured, and the answer is that this fix is not enough**: with
+  it installed the repositioning pass becomes perfectly repeatable (`Moving Vessel up 0.042m`, the same
+  value at four loads of one file on the Mun) but it does not go away, because it has two causes of its
+  own that have nothing to do with the terrain — a part dropped in EVA construction is saved with
+  `PQSMin`/`PQSMax` at `0/0`, which arms the pass at every load, and the anchor's collider stops 2.08 cm
+  above the part origin while its model reaches it, so the pass lifts it by about 4.2 cm. Since the rivet
+  (`PermanentGroundContact`, `FreezeAll`) lands 20 ms later, the lifted position is what gets saved: a
+  ratchet, not a wobble. That is a **separate bug with a separate fix**, and this repository should claim
+  none of it. It belongs to whatever proposal covers the anchor.
 
 - **KAS.** Kerbal Attachment System attaches parts to each other and to the ground with joints of its
   own, and its static attachment is exactly the kind of thing that either rides on a vessel (and
