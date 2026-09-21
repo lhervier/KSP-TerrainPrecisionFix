@@ -116,7 +116,7 @@ not moved, and no longer comes back on the ground it is drawn on: visual on a st
 with a mod that gives the scatter colliders, where this fix halves the gap and
 [Rock Precision Fix](https://github.com/lhervier/KSP-RockPrecisionFix) closes it. The KSC statics carry
 the same defect and are not covered. Under Kopernicus, on a stock body, the fix still places the
-terrain; most of the other cases — planet packs, Breaking Ground, Kerbal Konstructs, slopes, existing
+terrain; most of the other cases — planet packs, rescaled systems such as Real Solar System, Breaking Ground, Kerbal Konstructs, slopes, existing
 saves, the map view, Deferred and more — are still to be tested, and each chapter says how.
 
 **→ Full chapter: [Limits and solutions](docs/limits-and-solutions.md)**

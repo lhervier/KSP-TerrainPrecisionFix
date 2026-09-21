@@ -219,6 +219,36 @@ read.
 What such a campaign would not settle, the colliders' `maxLevelOffset`, is in
 [its own chapter](#colliders-below-the-highest-subdivision-level).
 
+## Rescaled systems: Real Solar System
+
+**Status: TBD — nothing has been measured on one, and the 1 m safeguard may switch the fix off there.**
+The defect grows with the radius of the body. A float's step doubles every time a distance crosses a
+power of two, so the rounding this fix removes is not the same size on a rescaled body:
+
+| body | radius | float step at that distance |
+|---|---|---|
+| Kerbin | 600 000 m | 62.5 mm |
+| Earth, in [Real Solar System](https://github.com/KSP-RO/RealSolarSystem) | 6 371 000 m | 500 mm |
+
+That is arithmetic, not a measurement. On Kerbin, the spreads measured in
+[Checking the culprit](checking-the-culprit.md) are one to three steps; at the same number of steps,
+Earth's terrain would move by half a metre to a metre and a half from one load to the next.
+
+The fix itself should hold there: what it hands a float is a distance within a quad, whatever the size of
+the body. The safeguard is what may not. It refuses any correction larger than **1 m**, a fixed value
+chosen against a rounding of a few centimetres, and on Earth a correction of one to three steps is
+0.5 to 1.5 m. Some quads would then be corrected and others left as stock builds them, each refusal
+reported once per body in the log.
+
+*To test:* a landing on Earth in Real Solar System, with this mod installed, and the log read for
+`Earth: terrain placed in double precision` or the safeguard's warning; then the campaign of
+[Terrain Precision Fix Diag 1](checking-the-culprit.md#terrain-precision-fix-diag-1-with-this-mod-the-craft)
+on flat ground, with and without this fix.
+
+**Solution, if the safeguard does fire:** a limit proportional to the float step at the body's radius,
+rather than a fixed metre, so that it keeps the same meaning — a correction no rounding can produce — on
+any body.
+
 ## Breaking Ground's surface features
 
 **Status: TBD.** The surface features studied in EVA or with the robotic arms are placed like the rocks:
