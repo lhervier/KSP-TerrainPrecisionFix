@@ -33,8 +33,8 @@ the only direction available: up. Your craft gets launched.
 ![A craft jumping on its own the moment a save is reloaded](imgs/Booing-scaled.gif)
 
 *KSP 1.12 without this mod, with [KSP Community Fixes](https://github.com/KSPModdingLibs/KSPCommunityFixes)
-as the only mod installed. A pod on a fuel tank, parked in the grass at the KSC, saved, then reloaded
-from the pause menu — nothing touched in between.*
+as the only mod installed. A pod on an empty fuel tank, parked in the grass at the KSC, saved, then reloaded
+from the pause menu, several times if needed — nothing touched in between.*
 
 That second case is the symptom everybody already knows. The lander that twitches, hops or flips the
 moment the scene finishes loading. The base that sat perfectly flush yesterday and is buried up to
