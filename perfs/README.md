@@ -3,40 +3,59 @@
 The logs this mod's performance figures are read from. The figures themselves, and what they say, are
 in [Performance](../docs/performance.md).
 
-Measured with [PQS Bench](https://github.com/lhervier/KSP-TerrainPrecisionFix-PQSBench), **whose page
-carries the procedure** — the craft, the orbit, how long to fly, and what makes a run worth keeping.
-
-## The runs
-
-2026-09-15, KSP 1.12.5. `GameData` holding Harmony, ModuleManager, KSP Community Fixes 1.41.1, the
-measuring mod and this one. A command pod on rails in a circular orbit 5 km over the Mun, 150 seconds of
-game time. The save and the machine are the reference run's, both described on
-[its page](https://github.com/lhervier/KSP-TerrainPrecisionFix-PQSBench/blob/master/perfs/README.md) —
+Two instruments, for two questions: what placing one terrain vertex costs, and what a whole frame pays.
+Every run was flown on the same save, on the same machine, and in the same session of runs as the stock
+reference runs kept with PQS Bench, which describe
+[the save and the machine](https://github.com/lhervier/KSP-PQSBench/blob/master/perfs/README.md) —
 figures from another machine are not comparable to these.
 
-| log | mode |
-|---|---|
-| [`mun-05km-fix-calibrate.log`](runs/mun-05km-fix-calibrate.log) | `calibrate`, what a vertex costs |
-| [`mun-05km-fix-counters.log`](runs/mun-05km-fix-counters.log) | `counters`, what a frame pays |
+## What a vertex costs
 
-Two runs rather than one because a Harmony patch is installed for a whole session, and because
-`calibrate` does real work of its own in the frames `counters` times.
+Measured with [PQS Bench](https://github.com/lhervier/KSP-PQSBench), **whose page carries the
+procedure** — the craft, the orbit, how long to fly, and what makes a run worth keeping.
 
-Their `BENCH run` lines match the reference runs': same save, same craft, over the Mun from UT 54.72 and
-54.70 at 5 000.0 m, for 150 seconds of game time against as much real time. The `counters` run recorded
-148 samples and built **3 213 quads, of which 1 272 of the highest subdivision level** — the only ones
-this mod acts on. The craft is on rails; the same save covers the same ground.
+KSP 1.12.5. `GameData` holding Harmony, ModuleManager, KSP Community Fixes 1.41.1, the measuring mod and
+this one. A command pod on rails in a circular orbit 5 km over the Mun, 70 seconds of game time from 30 s
+of mission time.
 
-The `calibrate` run's result line, as logged:
+| log | starts at | game time | real time | quads of the highest level built |
+|---|---|---|---|---|
+| [`mun-05km-fix-calibrate-1.log`](runs/mun-05km-fix-calibrate-1.log) | UT 54.64 | 70.08 s | 70.22 s | 704 |
+| [`mun-05km-fix-calibrate-2.log`](runs/mun-05km-fix-calibrate-2.log) | UT 54.76 | 70.16 s | 70.28 s | 704 |
+
+The figures come from their `BENCH run` lines, and match the stock runs': same save, same craft, same
+stretch of the same orbit, the same quads built. Their result lines, as logged:
 
 ```
-BENCH calibration;quads=40;roundsPerQuad=8;verticesPerFormula=72000;stockNsPerVertex=228.5;installedNsPerVertex=64.2;differenceNsPerVertex=-164.3;harnessNsPerVertex=3.5;stockRawNsPerVertex=232.0;installedRawNsPerVertex=67.7
+BENCH calibration;quads=22;roundsPerQuad=8;verticesPerFormula=39600;stockNsPerVertex=297.5;installedNsPerVertex=110.5;differenceNsPerVertex=-187.0;harnessNsPerVertex=6.8;stockRawNsPerVertex=304.3;installedRawNsPerVertex=117.3
+BENCH calibration;quads=22;roundsPerQuad=8;verticesPerFormula=39600;stockNsPerVertex=286.1;installedNsPerVertex=107.2;differenceNsPerVertex=-178.9;harnessNsPerVertex=4.7;stockRawNsPerVertex=290.7;installedRawNsPerVertex=111.9
 ```
 
-## The other two configurations
-
-Read against runs of the same campaign, each kept with the mod that produced it:
-[stock](https://github.com/lhervier/KSP-TerrainPrecisionFix-PQSBench/blob/master/perfs/README.md), in
-PQS Bench, and [stock's arithmetic with the `Transform`s read once per
+The two other configurations are kept with the mod that produced them:
+[stock](https://github.com/lhervier/KSP-PQSBench/blob/master/perfs/README.md), in PQS Bench, and
+[stock's arithmetic with the `Transform`s read once per
 quad](https://github.com/lhervier/KSP-TerrainPrecisionFix-StockQuadCache/blob/master/perfs/README.md), in
 Stock Quad Cache.
+
+## What a frame pays
+
+Measured with [KSPProfiler](https://github.com/KSPModdingLibs/KSPProfiler) 1.0.0, **by the procedure
+written in [Performance](../docs/performance.md#how-the-frames-were-timed)**, which also reads the
+figures. The three configurations are kept here together, because they are only ever read against each
+other.
+
+Six runs, two per configuration, in this order: Stock Quad Cache, this mod, stock, and again. A seventh,
+the first one flown, is not here: its save was reloaded in flight without restarting KSP.
+
+| configuration | run | frames captured | CSV | `KSP.log` |
+|---|---|---|---|---|
+| stock | 1 | 7 084 | [csv](runs/profiler/mun-05km-stock-1.csv) | [log](runs/profiler/mun-05km-stock-1.log) |
+| stock | 2 | 6 606 | [csv](runs/profiler/mun-05km-stock-2.csv) | [log](runs/profiler/mun-05km-stock-2.log) |
+| Stock Quad Cache | 1 | 6 724 | [csv](runs/profiler/mun-05km-stockquadcache-1.csv) | [log](runs/profiler/mun-05km-stockquadcache-1.log) |
+| Stock Quad Cache | 2 | 6 714 | [csv](runs/profiler/mun-05km-stockquadcache-2.csv) | [log](runs/profiler/mun-05km-stockquadcache-2.log) |
+| this mod | 1 | 6 785 | [csv](runs/profiler/mun-05km-fix-1.csv) | [log](runs/profiler/mun-05km-fix-1.log) |
+| this mod | 2 | 6 988 | [csv](runs/profiler/mun-05km-fix-2.csv) | [log](runs/profiler/mun-05km-fix-2.log) |
+
+Every run's frame count is under the profiler's 10 000 ceiling, and matches 70 seconds at its mean
+frame rate. Each `KSP.log` says which mods were loaded, and in the runs with this mod, that it placed
+the Mun's terrain in double precision.

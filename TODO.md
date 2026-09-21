@@ -28,17 +28,7 @@ Not everything below has to be done first. What does, in the order a reviewer wi
    freshly placed anchor; and the 2.08 cm collider gap re-read from `groundAnchor.mu`. ⚠️ **The protocol
    differs from every other campaign here: save after each load.** It is the re-save that arms the
    ratchet — without it the anchor is put back to the same place every time and the climb never appears.
-2. **The whole-frame cost, with KSPProfiler.** The performance figure is a micro-benchmark, and a
-   reviewer can dismiss it in one line: 3.56× on one method is not a frame. PQS Bench cannot answer
-   that — 164 ns per vertex is below anything a frame breakdown resolves — but
-   [KSPProfiler](https://github.com/KSPModdingLibs/KSPProfiler), written by one of KSPCF's own
-   maintainers, can: it inserts itself into Unity's player loop and reports mean / median / worst 25 % /
-   worst 1 % per frame phase. Fly the same low pass with it installed, with and without the fix, and
-   report what the frame does. Install the two side by side and do **not** couple them: its
-   `GameLoopProfilerCaptureBase.captures` list is public and PQS Bench could register into its UI, but
-   referencing its assembly would cost the instruments their "runs on a stock install with no
-   dependencies", which is most of what makes them worth handing to a stranger.
-3. **Kopernicus, twice.** Most planet packs go through it, so this is the compatibility question a
+2. **Kopernicus, twice.** Most planet packs go through it, so this is the compatibility question a
    reviewer asks first. Two runs are missing, not one:
    - **a clean stock-body series with the terrain instruments.** The reading that exists came out of a
      scatter campaign, in an install built for scatter, so its protocol cannot be described without
@@ -48,12 +38,12 @@ Not everything below has to be done first. What does, in the order a reviewer wi
      simply be given;
    - **a body a planet pack creates or reconfigures**, rather than merely loads. Nothing has been
      measured there at all.
-4. **Existing saves.** The transition a player feels on a save made before the fix, written in the
+3. **Existing saves.** The transition a player feels on a save made before the fix, written in the
    README rather than discovered in play.
-5. **Breaking Ground surface features.** They have colliders and are placed like the rocks. Enough to
+4. **Breaking Ground surface features.** They have colliders and are placed like the rocks. Enough to
    know whether the fix introduces a physical offset there, even if the answer is "yes, and it needs a
    fix of its own".
-6. **The same campaign on a slope.** Every campaign so far is on flat ground, because Terrain Precision
+5. **The same campaign on a slope.** Every campaign so far is on flat ground, because Terrain Precision
    Fix Diag 1 asks for it. On a slope a single-part craft is put into the ground at every load by a
    stock bug this fix does not touch, and a reviewer who meets it there will read it as "the fix does
    not work".

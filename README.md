@@ -99,10 +99,12 @@ does anything.
 
 ## Performance
 
-Measured in flight with [PQS Bench](https://github.com/lhervier/KSP-PQSBench), against stock and against
-stock with its two `Transform`s read once per quad: the fix places a vertex in 64.2 ns where stock takes
-228.5 ns, 164.3 ns less, 3.56× faster. Half of that saving is the double-precision arithmetic, half is
-the work done once per quad instead of once per vertex.
+Measured with [PQS Bench](https://github.com/lhervier/KSP-PQSBench), against stock and against
+stock with its two `Transform`s read once per quad: the fix places a vertex in about 110 ns where stock
+takes about 290 ns in the same run, 183 ns less on average, 2.7× faster. A little more than half of that
+saving is the double-precision arithmetic, the rest the work done once per quad instead of once per
+vertex. Timed frame by frame with [KSPProfiler](https://github.com/KSPModdingLibs/KSPProfiler), the
+three configurations cannot be told apart.
 
 **→ Full chapter: [Performance](docs/performance.md)**
 

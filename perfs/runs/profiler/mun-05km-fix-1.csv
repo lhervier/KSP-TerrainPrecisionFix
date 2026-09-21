@@ -1,0 +1,34 @@
+Statistic;Mean;Median;Worst 25%;Worst 1%
+FPS;96.6;98.0;85.8;28.1
+Frame time;10.35;10.20;11.65;35.59
+Profiler overhead;0.43;0.34;0.49;1.47
+Frame init;0.03;0.02;0.03;0.05
+Target framerate;0.02;0.01;0.02;0.03
+EarlyUpdate;0.09;0.08;0.11;0.18
+FixedUpdate;1.41;2.24;2.74;4.71
+FixedUpdate usercode;0.64;0.63;0.72;1.66
+Physics;2.11;2.06;2.17;3.42
+Coroutines;0.02;0.02;0.02;0.03
+PreUpdate;0.06;0.05;0.08;0.14
+OnMouse events;0.05;0.04;0.06;0.12
+Update;2.81;1.82;2.06;25.39
+Update;1.15;1.10;1.23;1.60
+Coroutines;1.91;1.22;1.32;24.88
+LateUpdate;0.58;0.57;0.60;0.77
+LateUpdate;0.46;0.46;0.48;0.60
+PostLateUpdate;4.94;4.52;5.94;6.72
+UGUI;0.14;0.13;0.14;0.39
+Audio;0.09;0.09;0.10;0.15
+Renderers;0.88;0.23;1.69;1.98
+Mesh skinning;0.01;0.00;0.00;0.04
+UGUI geometry;0.07;0.06;0.07;0.15
+Render;3.68;3.68;3.92;4.46
+VSync;0.06;0.06;0.07;0.11
+Cameras render;3.55;3.55;3.79;4.32
+OnGUI;0.02;0.02;0.02;0.05
+EndOfFrame Coroutines;0.00;0.00;0.00;0.01
+Fixed calls / frame;0.52;1.00;1.00;2.00
+FixedUpdate loop;1.41;2.30;2.74;3.28
+FixedUpdate usercode;0.32;0.42;0.63;0.95
+Physics;1.07;1.78;2.07;2.55
+Coroutines;0.01;0.01;0.02;0.02
