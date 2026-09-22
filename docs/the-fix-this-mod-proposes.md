@@ -8,20 +8,22 @@ The culprit leaves two ways out: make the roundings come out the same on every l
 at planet scale.
 
 **Freezing the frame** would mean giving the world frame the same orientation and the same position
-relative to the body on every load. It was set aside, on a reading of the stock code rather than on a
-measurement:
+relative to the body every time the ground is built. It was set aside, for reasons that
+[Terrain Precision Fix Diag 3](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag3) measures:
 
-- the matrix that draws the rounding has a rotation **and** a translation. Pinning
-  `Planetarium.InverseRotAngle` would only pin part of the rotation — the orientation of the body in the
-  world frame also depends on the date of the save — and the translation moves at every floating origin
-  shift. According to the stock code, landed quads are placed again, the same way, at every such shift
-  (`CelestialBody.PreciseUpdateQuadPositions`), so the ground would be rounded anew without any reload.
-  Pinning the translation too would mean removing the floating origin, which is what lets KSP run in
-  float at all;
+- the frame moves with nothing loaded. Its orientation, `CelestialBody.directRotAngle`, follows the
+  clock whenever the body is in the inertial frame — above 100 km on Kerbin — so a craft coming down
+  from orbit finds it wherever its trajectory left it. Its position moves at every floating origin
+  shift, so a craft driven away and back finds the terrain sphere elsewhere than where it left it
+  ([cases 2 and 3](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag3#the-measurements)). According to the stock code, landed quads are placed again,
+  the same way, at every such shift (`CelestialBody.PreciseUpdateQuadPositions`), so the ground would
+  be rounded anew without any reload. Pinning the position would mean removing the floating origin,
+  which is what lets KSP run in float at all;
 - pinning the frame when a save is loaded would not be enough anyway. The game builds and subdivides
-  quads under a craft as it approaches, not only when a save is loaded, and the frame cannot be reset
-  in mid-flight without moving everything else that lives in it. The same quad would be rounded one
-  way when built on approach, and another when built at load;
+  quads under a craft as it approaches, not only when a save is loaded, and by then the frame is
+  whatever the flight made of it; it cannot be reset in mid-flight without moving everything else that
+  lives in it. The same quad would be rounded one way when built on approach, and another when built
+  at load;
 - and a rounding that repeats is still a rounding: the ground would come back to the same place, but
   that place would still be off the height the game computes by as much as a few centimetres, as the
   stock readings above show.

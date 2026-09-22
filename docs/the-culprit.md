@@ -51,18 +51,21 @@ A rounding only depends on the value being rounded, and `vertRel` and `positionP
 same doubles on every load of a save. What changes is the frame they are converted into: the world
 matrix of the terrain sphere, itself held in float.
 
-- Its **rotation** follows the orientation of KSP's world frame, `Planetarium.InverseRotAngle`. According
-  to the stock code (`CelestialBody.CBUpdate`), that angle advances with the rotation of the body while
-  the game runs in the rotating frame, which includes sitting at the space centre, so it carries the
-  time played between two loads.
+- Its **rotation** is the orientation of the body in the world frame, `CelestialBody.directRotAngle`.
+  Stock splits the rotation of a body between that angle and `Planetarium.InverseRotAngle`
+  (`CelestialBody.CBUpdate`), and saves neither. When a save is loaded, the jump of the clock back to
+  the date of the save goes into `directRotAngle`, which comes back off by the rotation of the body over
+  the time played since that save, or since the previous load
+  ([measured with Terrain Precision Fix Diag 3](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag3#the-measurements)).
 - Its **translation** is the position of the body relative to the floating origin, which moves every
   time the active craft travels 500 m.
 
 At 600 km, turning the frame by a thousandth of a degree moves a point by more than 10 m, some 170
 float steps: the slightest change draws a whole new set of roundings.
 
-That this is what draws a new rounding at every load is a hypothesis, read from the stock code and
-consistent with every measurement below; it has not been tested on its own. It does not need to be:
+That the frame changes at every load is measured. That this change is what draws a new rounding is
+read from the stock code and consistent with every measurement below; it has not been tested on its
+own. It does not need to be:
 the fix does not care whether a rounding is still drawn at every load, since it shrinks that rounding
 to a size where drawing it again no longer matters.
 
