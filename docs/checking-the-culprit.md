@@ -2,19 +2,29 @@
 
 Part of [Terrain Precision Fix](../README.md): the measurements that check [the culprit](the-culprit.md), on stock and with this mod.
 
-Before touching anything, two instruments measure what stock does:
+A craft is put back onto the ground in two ways: when a save hands it back, and when you come close
+enough for its physics to start again, in the middle of a flight with nothing loaded at all. Both are
+measured here, each with its own protocol, and each first on stock and then again with this mod
+installed.
+
+Two instruments take the readings:
 [Terrain Precision Fix Diag 1](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag) measures the craft, and
 [Terrain Precision Fix Diag 2](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2) measures the ground. Each has its own page, with
-its method and its protocol. Then the same campaigns are run again, with this mod installed.
+its method and its protocol.
 
-## Terrain Precision Fix Diag 1, on stock: the craft
+## Loading the same save
+
+A craft is set down on flat bare ground, saved once, and that same save is loaded six times over. The
+craft never changes, the spot never changes, and nothing is touched between two loads.
+
+### The craft, over six loads
 
 Terrain Precision Fix Diag 1 measures the distance from a landed capsule to the centre of the body,
 twice per load: as the save hands the capsule back (*On rails*), and once it has settled on the ground
 (*Settled*). How, and why those two readings, is in
 [This mod's demonstration](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag#this-mods-demonstration).
 
-Its campaigns, detailed in [The measurements](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag#the-measurements): stock KSP 1.12.5 with
+**On stock.** Its campaigns, detailed in [The measurements](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag#the-measurements): stock KSP 1.12.5 with
 nothing in `GameData` but that instrument. On each of four worlds, a lone capsule, then the same capsule
 sitting on a small flat fuel tank, saved once on flat bare ground and loaded five or six times. Each
 series uses its own spot, chosen by the rules of [its protocol](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag#the-protocol): no
@@ -38,17 +48,51 @@ of the body:
 From one world to the next the spread varies a hundredfold, but counted in float steps it stays between
 one and three: the size the culprit predicts.
 
+**With this mod.** This fix is meant for [KSP Community Fixes](https://github.com/KSPModdingLibs/KSPCommunityFixes), so it
+is measured in an install that has it: KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes
+1.41.1, this mod and Terrain Precision Fix Diag 1. The same test, on the same four worlds, with the same
+two craft, loaded six times per series.
+
+What it is compared with is the same install without this mod: Terrain Precision Fix Diag 1 ran those
+campaigns too, on the same spots, and published their screenshots in [`imgs/kspcf`](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/tree/main/imgs/kspcf). Their spread
+is of the same order as on a stock install with nothing else: KSP Community Fixes does not change the
+defect.
+
+The same eight series as above, read off the screenshots in
+[`imgs/Diag1/on-load/1part`](../imgs/Diag1/on-load/1part) and
+[`imgs/Diag1/on-load/2parts`](../imgs/Diag1/on-load/2parts) — in each of them, the bottom line is the
+loading in progress, still live, and is not counted:
+
+| series | spread of *Settled*, without this mod | spread of *Settled*, with this mod |
+|---|---|---|
+| Kerbin, capsule | 134.5 mm | 0.004 mm |
+| Kerbin, 2 parts | 124.7 mm | 0.025 mm |
+| Mun, capsule | 20.7 mm | 0.031 mm |
+| Mun, 2 parts | 11.8 mm | 0.085 mm |
+| Minmus, capsule | 6.7 mm | 0.038 mm |
+| Minmus, 2 parts | 4.8 mm | 0.023 mm |
+| Gilly, capsule | 3.3 mm | 0.058 mm |
+| Gilly, 2 parts | 2.5 mm | 0.208 mm |
+
+**On Kerbin, the spread goes from more than twelve centimetres to a few hundredths of a millimetre at
+most.**
+
+On the other worlds too, what is left stays in the hundredths of a millimetre, two tenths at worst, far
+below the float step at any of these distances. *On rails* is still identical on every line, so KSP put
+the craft back at the same place every time, and the craft now comes to rest at the same place every
+time too.
+
 That still only shows the craft moving, which is not by itself proof that the ground moved under it.
 The second instrument is there for that.
 
-## Terrain Precision Fix Diag 2, on stock: the ground
+### The ground, over six loads
 
 Terrain Precision Fix Diag 2 measures the ground, with no craft in the reading at all: the collision
 surface a ray pointed straight down hits, against the height KSP computes for that same spot. The second
 never moves; the first is what your landing legs touch. *Difference* is the first minus the second. How
 both are read is in [This mod's demonstration](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/blob/master/docs/this-mods-demonstration.md).
 
-Its campaigns, detailed in [Six loadings of the same save](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/blob/master/docs/six-loadings-of-the-same-save.md):
+**On stock.** Its campaigns, detailed in [Six loadings of the same save](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/blob/master/docs/six-loadings-of-the-same-save.md):
 the same stock install, with nothing in `GameData` but that instrument; one save on each of the four
 worlds, loaded six times, following [its protocol](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/blob/master/docs/the-protocol.md). Over those six loads:
 
@@ -64,53 +108,7 @@ collision surface wandered by up to ten centimetres. The ground itself is not bu
 twice. The full readings, and what else they show, are in
 [What the numbers say](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/blob/master/docs/six-loadings-of-the-same-save.md#what-the-numbers-say).
 
-## Terrain Precision Fix Diag 1, with this mod: the craft
-
-This fix is meant for [KSP Community Fixes](https://github.com/KSPModdingLibs/KSPCommunityFixes), so it
-is measured in an install that has it: KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes
-1.41.1, this mod and Terrain Precision Fix Diag 1. The same test, on the same four worlds, with the same
-two craft, loaded six times per series.
-
-What it is compared with is the same install without this mod: Terrain Precision Fix Diag 1 ran those
-campaigns too, on the same spots, and published their screenshots in [`imgs/kspcf`](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/tree/main/imgs/kspcf). Their spread
-is of the same order as on a stock install with nothing else: KSP Community Fixes does not change the
-defect.
-
-With one capsule, read off the four screenshots in [`imgs/Diag1/1part`](../imgs/Diag1/1part) (in each of
-them, the bottom line is the loading in progress, still live, and is not counted):
-
-| world | spread of *Settled*, without this mod | spread of *Settled*, with this mod |
-|---|---|---|
-| Kerbin | 134.5 mm | 0.004 mm |
-| Mun | 20.7 mm | 0.031 mm |
-| Minmus | 6.7 mm | 0.038 mm |
-| Gilly | 3.3 mm | 0.058 mm |
-
-With two parts, read off the four screenshots in [`imgs/Diag1/2parts`](../imgs/Diag1/2parts):
-
-| world | spread of *Settled*, without this mod | spread of *Settled*, with this mod |
-|---|---|---|
-| Kerbin | 124.7 mm | 0.025 mm |
-| Mun | 11.8 mm | 0.085 mm |
-| Minmus | 4.8 mm | 0.023 mm |
-| Gilly | 2.5 mm | 0.208 mm |
-
-**On Kerbin, the spread goes from more than twelve centimetres to a few hundredths of a millimetre at
-most.**
-
-On the other worlds too, what is left stays in the hundredths of a millimetre, two tenths at worst, far
-below the float step at any of these distances. *On rails* is still identical on every line, so KSP put
-the craft back at the same place every time, and the craft now comes to rest at the same place every
-time too.
-
-In other words: reload the same save as many times as you like, and the craft comes back to the same
-place, on ground that is in the same place. The coin toss of
-[Why the moving ground matters](../README.md#why-the-moving-ground-matters) is gone — there is nothing left to push
-the craft out of.
-
-## Terrain Precision Fix Diag 2, with this mod: the ground
-
-The same install, with Terrain Precision Fix Diag 2 instead: KSP 1.12.5 with Harmony, ModuleManager, KSP
+**With this mod.** The same install, with Terrain Precision Fix Diag 2 instead: KSP 1.12.5 with Harmony, ModuleManager, KSP
 Community Fixes 1.41.1, this mod and the instrument, one save per world, loaded six times. It is compared
 with the campaigns Terrain Precision Fix Diag 2 ran on the same spots in that install without this mod,
 published in [`imgs/kspcf`](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/tree/master/imgs/kspcf). On the Mun, on Minmus and on Gilly, those are also the spots of its
@@ -158,16 +156,56 @@ This is also the last proof that the culprit is the right one. The fix changes w
 happens, and nothing else about the values placed; were the cause elsewhere, reordering that
 subtraction would have left the spread untouched.
 
-## A save made without this mod
+## Coming back to a craft left parked
 
-This mod brings the ground back to the same height on every load. It does not bring it back to the
-height it had in the loading where a save was made without it.
+The other way a craft meets the ground, and the one you cannot avoid by never quitting: a craft is left
+parked while a rover drives away from it, past 2500 m, where the game unloads it — then comes back
+within 200 m, where physics takes the parked craft over again. No save is loaded at any point and the
+scene is never changed: one single flight, six round trips in a row, on Kerbin. It is
+[the second protocol](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag#the-protocol) of Terrain
+Precision Fix Diag 1.
 
-A craft saved on stock sits on the ground of that one draw. If that ground was lower than the corrected
-one, the craft now comes back slightly inside the ground and gets pushed out — and since the ground no
-longer changes, it gets pushed out **on every load of that save**, the same way each time. Reloading
-the same file will not make it go away.
+### The craft, over six round trips
 
-Let the craft settle with this mod installed and save again: from that save on, the craft and the
-ground agree. This follows from the measurements above; it has not been measured on its own.
+**On stock**, in an install with KSP Community Fixes and that instrument
+([the readings](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag#the-measurements)). *Moved* —
+how far the craft ends up from the height it was handed back at — reads:
 
+| round trip | 1 | 2 | 3 | 4 | 5 | 6 |
+|---|---|---|---|---|---|---|
+| *Moved* | +12.570 mm | −17.549 mm | +10.969 mm | −7.749 mm | −7.484 mm | +19.170 mm |
+
+Same craft, same spot, same flight: 7.5 to 19.2 mm every time, upwards as often as downwards, and
+never the same twice. Over the six, the craft comes to rest across a spread of 21.8 mm — a fraction
+of a float step, where six loads of a save spread it over two of them. The height it is handed back
+at, read before each round trip and after it, never moves by more than six thousandths of a
+millimetre: what changes is what it settles onto.
+
+**With this mod**, in that same install, on that same save, with this mod as the only difference. The
+six screenshots are in [`imgs/Diag1/on-approach`](../imgs/Diag1/on-approach), and the session is logged in
+[`diag/runs/approach-diag1-fix.log`](../diag/runs/approach-diag1-fix.log).
+
+| round trip | 1 | 2 | 3 | 4 | 5 | 6 |
+|---|---|---|---|---|---|---|
+| *Moved*, without this mod | +12.570 mm | −17.549 mm | +10.969 mm | −7.749 mm | −7.484 mm | +19.170 mm |
+| *Moved*, with this mod | −0.023 mm | −0.020 mm | −0.043 mm | −0.041 mm | +0.086 mm | −0.022 mm |
+
+**Over the six round trips, the craft comes to rest across a spread of 21.8 mm without this mod and
+0.094 mm with it.** What is left is of the same order as after a load: hundredths of a millimetre,
+against a float step of 62.5 mm there.
+
+In other words: reload the same save as many times as you like, or leave a craft parked and come back
+to it in the middle of a flight — either way it comes back to the same place, on ground that is in the
+same place. The coin toss of
+[Why the moving ground matters](../README.md#why-the-moving-ground-matters) is gone — there is nothing left to push
+the craft out of.
+
+### The ground, over six round trips
+
+**Not measured yet.** Terrain Precision Fix Diag 2 follows a target the same way Terrain Precision Fix
+Diag 1 does, so the protocol above applies to it unchanged, and this section will hold its two series
+once they are run.
+
+Until then, what stands for this second way is the craft, not the ground. The readings above show the
+craft coming to rest somewhere else on every round trip; that the ground is what moved under it is
+what the campaigns over six loads establish, on the same worlds and with the same instruments.

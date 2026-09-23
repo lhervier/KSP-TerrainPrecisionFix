@@ -47,8 +47,8 @@ before you reach it, but held still at the position it was left at; its physics 
 are within 200 m. The ground under it was not built when that position was recorded, so the same toss
 happens there. From 200 m away you see much less of it — and it does just as much damage.
 
-Loading is the moment that can be repeated at will, though: reload the same save, and the coin is
-tossed again. So it is the case this page measures, and the only one it deals with from here on.
+Both can be repeated at will — reload the same save, or drive away from a craft left parked and come
+back to it — and both are measured on this page.
 
 ### Disclaimer: it is not the only cause
 
@@ -79,11 +79,18 @@ you play.
 
 ## Checking the culprit
 
-Two instruments measure it before anything is changed, and again with this mod installed: one reads a
-landed craft, the other the ground itself, on Kerbin, the Mun, Minmus and Gilly, six loads per save. On
-Kerbin the craft comes to rest over a spread of 134.5 mm without this mod and 0.004 mm with it, and the
-collision surface under it, read against the height KSP computes for that same spot, over 108.1 mm
-without it and 0.004 mm with it.
+A craft is put back onto the ground in two ways: when a save hands it back, and when you come close
+enough for its physics to start again, in the middle of a flight with nothing loaded at all. Both are
+measured, before anything is changed and again with this mod installed.
+
+**Loading the same save**, six times over, on Kerbin, the Mun, Minmus and Gilly, with two instruments:
+one reads the landed craft, the other the ground itself. On Kerbin the craft comes to rest over a
+spread of 134.5 mm without this mod and 0.004 mm with it, and the collision surface under it, read
+against the height KSP computes for that same spot, over 108.1 mm without it and 0.004 mm with it.
+
+**Coming back to a craft left parked**, six round trips in a single flight on Kerbin, read with the
+first of the two instruments: the craft comes to rest over a spread of 21.8 mm without this mod and
+0.094 mm with it.
 
 **→ Full chapter: [Checking the culprit](docs/checking-the-culprit.md)**
 

@@ -187,7 +187,7 @@ safeguard leaves that terrain as stock builds it: no fix, silently, apart from o
 the log.
 
 *To test:* the campaign of
-[Terrain Precision Fix Diag 1](checking-the-culprit.md#terrain-precision-fix-diag-1-with-this-mod-the-craft),
+[Terrain Precision Fix Diag 1](checking-the-culprit.md#the-craft-over-six-loads),
 run on such a body. A
 single landing already answers half of it: with this mod installed, the log carries either
 `<body>: terrain placed in double precision` or the safeguard's warning.
@@ -244,7 +244,7 @@ reported once per body in the log.
 
 *To test:* a landing on Earth in Real Solar System, with this mod installed, and the log read for
 `Earth: terrain placed in double precision` or the safeguard's warning; then the campaign of
-[Terrain Precision Fix Diag 1](checking-the-culprit.md#terrain-precision-fix-diag-1-with-this-mod-the-craft)
+[Terrain Precision Fix Diag 1](checking-the-culprit.md#the-craft-over-six-loads)
 on flat ground, with and without this fix.
 
 **Solution, if the safeguard does fire:** a limit proportional to the float step at the body's radius,
@@ -348,7 +348,7 @@ the same way every time. What a player with a long-running save should expect:
   draw, and comes back on the corrected ground; once it has been loaded and saved again with the fix
   installed, both sides agree and the question never comes back;
 - **the corrected ground is among the stock draws, not a worse one** — the readings are in
-  [Terrain Precision Fix Diag 2, with this mod](checking-the-culprit.md#terrain-precision-fix-diag-2-with-this-mod-the-ground);
+  [Terrain Precision Fix Diag 2, with this mod](checking-the-culprit.md#the-ground-over-six-loads);
 - **the failure becomes repairable**: raising a craft by a few centimetres in the `.sfs` is a permanent
   repair once the ground is stable, where in stock the next loading draws the ground under it again.
 
@@ -377,15 +377,21 @@ anything to measure.
 
 ## The ground during a flight
 
-**Status: TBD.** Loading is the moment every campaign measures, because it is the one that can be
-repeated at will. The same draw should happen without any reload: the world matrix of the terrain
-sphere moves at every floating origin shift, and stock places the landed quads again at each of them
-(`CelestialBody.PreciseUpdateQuadPositions`). This fix patches that path too, so with it the ground
-should stay put.
+**Status: checked on the craft; the ground itself still to be read.** A craft does not only meet the
+ground when a save hands it back. Drive away from a landed craft until the game unloads it, past
+2500 m, then come back within 200 m: its physics starts again on ground that was built while you were
+away, and no save was loaded at any point. The world matrix of the terrain sphere moves at every
+floating origin shift, and stock places the landed quads again at each of them
+(`CelestialBody.PreciseUpdateQuadPositions`). This fix patches that path too.
 
-*To test:* a capsule and a rover side by side on Kerbin, Terrain Precision Fix Diag 2 reading the ground
-under the capsule, the rover driven beyond 500 m and back, with and without the fix. Expected: the
-reading jumps at every origin shift in stock, and not with the fix.
+Six round trips in a row, in a single flight on Kerbin: without this fix the craft comes to rest 7.5
+to 19.2 mm from the height it was handed back at, upwards as often as downwards, over a spread of
+21.8 mm; with it, over 0.094 mm. The readings are in
+[The craft, over six round trips](checking-the-culprit.md#the-craft-over-six-round-trips).
+
+*To test:* the same protocol with Terrain Precision Fix Diag 2, which reads the ground itself rather
+than the craft resting on it. Until it is run, that the ground is what moves in flight is carried by
+the campaigns over six loads, not by a reading of its own.
 
 ## The map view
 
