@@ -78,9 +78,9 @@ is placed, and a frame off by more than a metre makes it a no-op. Deferred, the 
 episode, is on the list and its test is next — that episode says anything touching the PQS deserves
 care, this one included.
 
-This is a work in progress, not a finished fix, and I am not asking for it to be shipped. I am asking
-for a review: whether the diagnosis holds, whether the patch is correct, and what else it could break.
-Any check you would want to see run, I will run.
+This is a work in progress, and it is a mod of its own: I am not proposing it for KSPCF. I am asking
+for your opinion and your help: whether the diagnosis holds, whether the patch is correct, and what
+else it could break. Any check you would want to see run, I will run.
 
 **About #214.** Going through the open issues, I noticed that [#214](https://github.com/KSPModdingLibs/KSPCommunityFixes/issues/214), the ground anchor that
 climbs a little on every load, becomes reproducible once the ground holds still. I will add what I
