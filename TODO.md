@@ -19,16 +19,6 @@ ouverts. Seul ce qui casserait la lecture de l'issue elle-même doit donc passer
    qu'en appui du chiffre de performance et peuvent attendre, mais leur *Get it* ne doit pas non plus
    promettre un téléchargement qui n'existe pas. Vérifier tous les liens `releases/latest` de la famille
    avant d'ouvrir l'issue.
-2. **Citer la mesure d'approche dans l'issue et son premier commentaire.** Six allers-retours vers un
-   vaisseau posé, en un seul vol sans rien charger : 21,8 mm sans le correctif, 0,094 mm avec, pour
-   le vaisseau ; 21,8 mm contre 0,011 mm pour le sol lui-même
-   ([Checking the culprit: coming back to a craft left parked](docs/checking-the-culprit-approach.md)). Et la
-   campagne du changement de vaisseau ([Checking the culprit: switching to a craft far away](docs/checking-the-culprit-switching.md)), qui montre que le sol est
-   joué au chargement et que la capsule s'y pose au `]` : 104,5 → 0,022 mm (vaisseau), 120,4 →
-   0,003 mm (sol).
-   L'issue ne montre que les chargements, et défend le cas du vol par Diag 3 — un raisonnement — alors
-   que la mesure existe. C'est elle qui répond par un chiffre à « il suffit de remettre le repère en
-   place au chargement » (#435).
 
 ## Après l'ouverture
 
