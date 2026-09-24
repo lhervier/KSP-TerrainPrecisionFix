@@ -81,18 +81,29 @@ you play.
 
 A craft is put back onto the ground in two ways: when a save hands it back, and when you come close
 enough for its physics to start again, in the middle of a flight with nothing loaded at all. Both are
-measured, before anything is changed and again with this mod installed.
+measured, before anything is changed and again with this mod installed, with two instruments: one
+reads the landed craft, the other the ground itself. A third protocol takes the first way apart.
 
-**Loading the same save**, six times over, on Kerbin, the Mun, Minmus and Gilly, with two instruments:
-one reads the landed craft, the other the ground itself. On Kerbin the craft comes to rest over a
-spread of 134.5 mm without this mod and 0.004 mm with it, and the collision surface under it, read
-against the height KSP computes for that same spot, over 108.1 mm without it and 0.004 mm with it.
+**Loading the same save**, six times over, on Kerbin, the Mun, Minmus and Gilly. On Kerbin the craft
+comes to rest over a spread of 134.5 mm without this mod and 0.004 mm with it, and the collision
+surface under it, read against the height KSP computes for that same spot, over 108.1 mm without it
+and 0.004 mm with it.
 
-**Coming back to a craft left parked**, six round trips in a single flight on Kerbin, read with the
-first of the two instruments: the craft comes to rest over a spread of 21.8 mm without this mod and
-0.094 mm with it.
+**→ Full chapter: [Checking the culprit: loading the same save](docs/checking-the-culprit-loading.md)**
 
-**→ Full chapter: [Checking the culprit](docs/checking-the-culprit.md)**
+**Coming back to a craft left parked**, six round trips in a single flight on Kerbin: the craft comes
+to rest over a spread of 21.8 mm without this mod and 0.094 mm with it, and the ground under it comes
+back over 21.8 mm without it and 0.011 mm with it.
+
+**→ Full chapter: [Checking the culprit: coming back to a craft left parked](docs/checking-the-culprit-approach.md)**
+
+**Switching to a craft far away**: the save loaded while the craft is two kilometres from the one being
+flown, then the game's *switch vessel* key pressed to fly it, six times on Kerbin. The ground under it
+is built when the save is loaded, and the switch does not move it: the craft comes to rest on it over
+a spread of 104.5 mm without this mod and 0.022 mm with it, the ground spreads over 120.4 mm without
+it and 0.003 mm with it.
+
+**→ Full chapter: [Checking the culprit: switching to a craft far away](docs/checking-the-culprit-switching.md)**
 
 ## What moves the frame
 

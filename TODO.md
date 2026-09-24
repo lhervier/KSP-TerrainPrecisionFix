@@ -20,8 +20,12 @@ ouverts. Seul ce qui casserait la lecture de l'issue elle-même doit donc passer
    promettre un téléchargement qui n'existe pas. Vérifier tous les liens `releases/latest` de la famille
    avant d'ouvrir l'issue.
 2. **Citer la mesure d'approche dans l'issue et son premier commentaire.** Six allers-retours vers un
-   vaisseau posé, en un seul vol sans rien charger : 21,8 mm sans le correctif, 0,094 mm avec
-   ([Checking the culprit](docs/checking-the-culprit.md), *Coming back to a craft left parked*).
+   vaisseau posé, en un seul vol sans rien charger : 21,8 mm sans le correctif, 0,094 mm avec, pour
+   le vaisseau ; 21,8 mm contre 0,011 mm pour le sol lui-même
+   ([Checking the culprit: coming back to a craft left parked](docs/checking-the-culprit-approach.md)). Et la
+   campagne du changement de vaisseau ([Checking the culprit: switching to a craft far away](docs/checking-the-culprit-switching.md)), qui montre que le sol est
+   joué au chargement et que la capsule s'y pose au `]` : 104,5 → 0,022 mm (vaisseau), 120,4 →
+   0,003 mm (sol).
    L'issue ne montre que les chargements, et défend le cas du vol par Diag 3 — un raisonnement — alors
    que la mesure existe. C'est elle qui répond par un chiffre à « il suffit de remettre le repère en
    place au chargement » (#435).
@@ -35,12 +39,6 @@ Rien de ceci ne change ce que l'issue demande.
   l'issue : chacun dit ce qu'on sait et comment il sera testé. Un nouveau cas s'ajoute là-bas, en
   chapitre **Status: TBD**, pas ici, avec sa ligne dans le tableau du commentaire KSPCF. Deferred et
   Parallax ont leurs campagnes plus bas.
-- **Les campagnes d'approche, au nouveau protocole** : Diag 1 sans le correctif, Diag 2 sans le
-  correctif, puis le correctif avec les deux — 18 allers-retours, avec la sauvegarde
-  `approach-kerbin.sfs` révisée de Diag 1 (le rover part à 2 km du vaisseau, s'en approche sous 200 m,
-  puis s'éloigne au-delà de 2,6 km pour qu'il soit déchargé, et revient). Elles remplissent *The ground,
-  over six round trips* dans [Checking the culprit](docs/checking-the-culprit.md), et remplacent les six
-  allers-retours faits avec l'ancien protocole. Mettre ensuite à jour les chiffres cités par l'issue.
 - **Séparer le décalage d'origine du déchargement.** Dans le protocole d'approche, le vaisseau est
   déchargé et l'origine se décale à la même frame : aucune mesure ne dit encore lequel des deux fait
   bouger le sol ; le code stock désigne le décalage. ⚠️ Changer de vaisseau (`]`) **ne** décale **pas**

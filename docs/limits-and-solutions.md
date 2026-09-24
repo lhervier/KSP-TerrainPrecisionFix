@@ -165,7 +165,7 @@ body, Kopernicus leaves the quads hanging in the frame this fix computes.
 at — the cause — not the surface a craft rests on, which only
 [Terrain Precision Fix Diag 2](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2) reads, and which
 has never been read with Kopernicus installed. *To test:* the campaigns of
-[Checking the culprit](checking-the-culprit.md) — Diag 1 and Diag 2, six loads on Kerbin, with and
+[Checking the culprit: loading the same save](checking-the-culprit-loading.md) — Diag 1 and Diag 2, six loads on Kerbin, with and
 without this fix — run on a Kopernicus install with nothing else, so that the result stands on its own
 protocol rather than on a campaign about scatter.
 
@@ -187,7 +187,7 @@ safeguard leaves that terrain as stock builds it: no fix, silently, apart from o
 the log.
 
 *To test:* the campaign of
-[Terrain Precision Fix Diag 1](checking-the-culprit.md#the-craft-over-six-loads),
+[Terrain Precision Fix Diag 1](checking-the-culprit-loading.md#the-craft-over-six-loads),
 run on such a body. A
 single landing already answers half of it: with this mod installed, the log carries either
 `<body>: terrain placed in double precision` or the safeguard's warning.
@@ -233,18 +233,18 @@ power of two, so the rounding this fix removes is not the same size on a rescale
 | Earth, in [Real Solar System](https://github.com/KSP-RO/RealSolarSystem) | 6 371 000 m | 500 mm |
 
 That is arithmetic, not a measurement. On Kerbin, the spreads measured in
-[Checking the culprit](checking-the-culprit.md) are one to three steps; at the same number of steps,
-Earth's terrain would move by half a metre to a metre and a half from one load to the next.
+[Checking the culprit: loading the same save](checking-the-culprit-loading.md) are about two steps; at the same number of steps,
+Earth's terrain would move by about a metre from one load to the next.
 
 The fix itself should hold there: what it hands a float is a distance within a quad, whatever the size of
 the body. The safeguard is what may not. It refuses any correction larger than **1 m**, a fixed value
-chosen against a rounding of a few centimetres, and on Earth a correction of one to three steps is
-0.5 to 1.5 m. Some quads would then be corrected and others left as stock builds them, each refusal
+chosen against a rounding of a few centimetres, and on Earth a correction of one or two steps is
+0.5 to 1 m. Some quads would then be corrected and others left as stock builds them, each refusal
 reported once per body in the log.
 
 *To test:* a landing on Earth in Real Solar System, with this mod installed, and the log read for
 `Earth: terrain placed in double precision` or the safeguard's warning; then the campaign of
-[Terrain Precision Fix Diag 1](checking-the-culprit.md#the-craft-over-six-loads)
+[Terrain Precision Fix Diag 1](checking-the-culprit-loading.md#the-craft-over-six-loads)
 on flat ground, with and without this fix.
 
 **Solution, if the safeguard does fire:** a limit proportional to the float step at the body's radius,
@@ -348,7 +348,7 @@ the same way every time. What a player with a long-running save should expect:
   draw, and comes back on the corrected ground; once it has been loaded and saved again with the fix
   installed, both sides agree and the question never comes back;
 - **the corrected ground is among the stock draws, not a worse one** — the readings are in
-  [Terrain Precision Fix Diag 2, with this mod](checking-the-culprit.md#the-ground-over-six-loads);
+  [Terrain Precision Fix Diag 2, with this mod](checking-the-culprit-loading.md#the-ground-over-six-loads);
 - **the failure becomes repairable**: raising a craft by a few centimetres in the `.sfs` is a permanent
   repair once the ground is stable, where in stock the next loading draws the ground under it again.
 
@@ -377,7 +377,7 @@ anything to measure.
 
 ## The ground during a flight
 
-**Status: checked on the craft; the ground itself still to be read.** A craft does not only meet the
+**Status: checked, on the craft and on the ground.** A craft does not only meet the
 ground when a save hands it back. Drive away from a landed craft until the game unloads it, past
 2500 m, then come back within 200 m: its physics starts again on ground that was built while you were
 away, and no save was loaded at any point. The world matrix of the terrain sphere moves at every
@@ -387,11 +387,13 @@ floating origin shift, and stock places the landed quads again at each of them
 Six round trips in a row, in a single flight on Kerbin: without this fix the craft comes to rest 7.5
 to 19.2 mm from the height it was handed back at, upwards as often as downwards, over a spread of
 21.8 mm; with it, over 0.094 mm. The readings are in
-[The craft, over six round trips](checking-the-culprit.md#the-craft-over-six-round-trips).
+[The craft, over six round trips](checking-the-culprit-approach.md#the-craft-over-six-round-trips).
 
-*To test:* the same protocol with Terrain Precision Fix Diag 2, which reads the ground itself rather
-than the craft resting on it. Until it is run, that the ground is what moves in flight is carried by
-the campaigns over six loads, not by a reading of its own.
+Terrain Precision Fix Diag 2, which reads the ground itself rather than the craft resting on it,
+ran the same protocol: without this fix the ground comes back somewhere else on every round trip, over
+a spread of 21.8 mm, and has already moved by the time the craft is back in range; with it, over
+0.011 mm
+([The ground, over six round trips](checking-the-culprit-approach.md#the-ground-over-six-round-trips)).
 
 ## The map view
 
