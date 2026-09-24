@@ -2,9 +2,10 @@
 
 **⚠️ Work in progress.** This is an active investigation, not a finished mod. The figures, the code and the conclusions on this page can still change, and several questions are still open — they are listed in [Limits and solutions](docs/limits-and-solutions.md).
 
-A fix for stock KSP 1.12, meant as a proposal for
-[KSP Community Fixes](https://github.com/KSPModdingLibs/KSPCommunityFixes) and kept as small as
-possible for that reason: two Harmony patches, in one source file. Here is what they fix:
+A fix for stock KSP 1.12, kept as small as possible: two Harmony patches, in one source file. It is a
+mod of its own, built and measured on top of
+[KSP Community Fixes](https://github.com/KSPModdingLibs/KSPCommunityFixes), the base most players run.
+Here is what it fixes:
 
 > **The ground KSP builds under you is never built at the same height twice.** Load the same save five
 > times, and the surface your craft is standing on comes back a little higher or a little lower each

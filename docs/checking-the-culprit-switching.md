@@ -9,8 +9,8 @@ Two instruments take the readings:
 [Terrain Precision Fix Diag 2](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2) measures the ground. Each has its own page, with
 its method and its protocol.
 
-This fix is meant for [KSP Community Fixes](https://github.com/KSPModdingLibs/KSPCommunityFixes), so
-every campaign on this page is run in an install that has it: KSP 1.12.5 with Harmony, ModuleManager,
+This fix is built on top of [KSP Community Fixes](https://github.com/KSPModdingLibs/KSPCommunityFixes),
+the base most players run, so every campaign on this page is run in an install that has it: KSP 1.12.5 with Harmony, ModuleManager,
 KSP Community Fixes 1.41.1 and one of the two instruments — and this mod, or not. *On stock*, below,
 means that install without this mod.
 
