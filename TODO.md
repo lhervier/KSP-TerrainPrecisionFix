@@ -19,6 +19,40 @@ ouverts. Seul ce qui casserait la lecture de l'issue elle-même doit donc passer
    qu'en appui du chiffre de performance et peuvent attendre, mais leur *Get it* ne doit pas non plus
    promettre un téléchargement qui n'existe pas. Vérifier tous les liens `releases/latest` de la famille
    avant d'ouvrir l'issue.
+2. **Les raccords entre un quad corrigé et ses voisins d'un niveau inférieur.** Le correctif place les
+   quads du niveau max par la rotation en double ; leurs voisins d'un niveau en dessous restent placés
+   par la matrice en float de la sphère, et l'écart entre les deux est du même ordre que le défaut. Personne
+   n'a regardé le raccord : une capture au bord d'un quad du niveau max, avec et sans le correctif, et un
+   chapitre **Status** dans [Limits and solutions](docs/limits-and-solutions.md). Objection anticipée dans
+   [KSPCF-relecture.md](KSPCF-relecture.md), point 2.
+3. **Une sauvegarde refaite avec le correctif ne saute plus.** Sur `switch-kerbin` (faite sans), la
+   capsule se pose à −31,8 mm, au même endroit à chaque fois. Le test : avec le correctif, charger,
+   `]`, repasser au rover, sauvegarder sous un autre nom, puis six fois « charger → *Record* → `]` →
+   *Record* » ; *Moved* doit rester à quelques centièmes de zéro. Il complète le chapitre
+   [Existing saves](docs/limits-and-solutions.md#existing-saves) et la page du changement de vaisseau.
+4. **Le garde-fou en pas de float plutôt qu'en mètres.** Une modification du code, pas un cas : le
+   chapitre RSS de Limits and solutions dit pourquoi le mètre fixe peut être faux. Un seuil de quelques pas
+   de float au rayon du corps (quatre, par exemple) serait plus serré sur Kerbin et juste sur RSS ;
+   mesurer d'abord, par corps, la plus grande correction réellement appliquée dans les logs de campagne
+   (`origin moved by … mm`).
+   Le code est léger (le seuil ne sert que dans `IsRoundingCorrection`) ; la mesure demande une session
+   en `logLevel = Debug` sur Kerbin, la Mun, Minmus et Gilly, en relevant le plus grand `origin moved by`
+   par corps.
+5. **Deferred : refaire les campagnes Diag 1 et Diag 2 avec le correctif et Deferred** (six chargements,
+   et le protocole d'approche). C'est le mod qui a fait tomber `PQSOnlyStartOnce` : le résultat, bon ou
+   mauvais, entre dans le commentaire, qui l'annonce aujourd'hui comme « next ». Chapitre *Deferred* de
+   Limits and solutions à mettre à jour ensuite.
+6. **Parallax : les mêmes campagnes, et plus loin à cause de son scatter.** Montrer que le défaut du
+   scatter de Parallax n'existe déjà pas sans le correctif, et qu'avec le correctif rien ne change
+   (aujourd'hui, c'est lu dans ses sources, pas mesuré : *Rocks, grass and trees* de Limits and
+   solutions). Il faut un instrument ou un protocole pour ce scatter, qui n'est pas celui de KSP : à
+   concevoir.
+7. **Un kraken reproductible** (objection 1 de [KSPCF-relecture.md](KSPCF-relecture.md)), avant l'issue,
+   RSS compris (Lionel, 2026-09-24). Deux pistes de Lionel : une capsule posée sur Gilly, enfoncée d'un rien au
+   chargement, que la poussée de la physique suffit à faire décoller dans une gravité si faible ; et la
+   même capsule, réservoir plein, sur la Terre de RSS, où le pas d'un float vaut 0,5 m : elle y serait
+   enterrée de beaucoup plus, et quelques chargements pourraient la faire exploser. RSS exige son
+   install à part.
 
 ## Après l'ouverture
 
@@ -27,8 +61,7 @@ Rien de ceci ne change ce que l'issue demande.
 - **Les cas contre lesquels vérifier le correctif** sont les chapitres TBD de
   [Limits and solutions](docs/limits-and-solutions.md), le plan de test public vers lequel pointe
   l'issue : chacun dit ce qu'on sait et comment il sera testé. Un nouveau cas s'ajoute là-bas, en
-  chapitre **Status: TBD**, pas ici, avec sa ligne dans le tableau du commentaire KSPCF. Deferred et
-  Parallax ont leurs campagnes plus bas.
+  chapitre **Status: TBD**, pas ici.
 - **Séparer le décalage d'origine du déchargement.** Dans le protocole d'approche, le vaisseau est
   déchargé et l'origine se décale à la même frame : aucune mesure ne dit encore lequel des deux fait
   bouger le sol ; le code stock désigne le décalage. ⚠️ Changer de vaisseau (`]`) **ne** décale **pas**
@@ -42,20 +75,6 @@ Rien de ceci ne change ce que l'issue demande.
   du témoin ne bouge pas, le déchargement seul n'y est pour rien : c'est le décalage. En complément,
   avec le correctif en `logLevel = Debug`, le décalage du protocole d'approche doit apparaître comme une
   salve de lignes `origin moved by … mm`.
-- **Deferred : refaire les campagnes Diag 1 et Diag 2 avec le correctif et Deferred** (six chargements,
-  et le protocole d'approche). C'est le mod qui a fait tomber `PQSOnlyStartOnce`, et le commentaire
-  annonce ce test comme le prochain : le faire en premier après l'ouverture, et poster le résultat sur
-  l'issue, bon ou mauvais. Chapitre *Deferred* de Limits and solutions à mettre à jour ensuite.
-- **Parallax : les mêmes campagnes, et plus loin à cause de son scatter.** Montrer que le défaut du
-  scatter de Parallax n'existe déjà pas sans le correctif, et qu'avec le correctif rien ne change
-  (aujourd'hui, c'est lu dans ses sources, pas mesuré : *Rocks, grass and trees* de Limits and
-  solutions). Il faut un instrument ou un protocole pour ce scatter, qui n'est pas celui de KSP : à
-  concevoir.
-- **Le garde-fou en pas de float plutôt qu'en mètres.** Une modification du code, pas un cas : le
-  chapitre RSS de Limits and solutions dit pourquoi le mètre fixe peut être faux. Un seuil de quelques pas
-  de float au rayon du corps (quatre, par exemple) serait plus serré sur Kerbin et juste sur RSS ;
-  mesurer d'abord, par corps, la plus grande correction réellement appliquée dans les logs de campagne
-  (`origin moved by … mm`).
 - **L'ancre, avant de commenter #214** — pas avant l'issue du terrain. Le commentaire sur #214 cite ses
   relevés, donc ils doivent être reproductibles par quelqu'un d'autre : les refaire sur KSP + Harmony +
   ModuleManager + KSPCF + Diag 1, puis avec le correctif. Ce qui doit en sortir : les valeurs de
