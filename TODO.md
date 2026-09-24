@@ -1,85 +1,93 @@
 # TODO
 
-What is left to do, and only that. Everything already measured is in [the README](README.md) and its
-chapters under [docs/](docs/), with its logs in [perfs/](perfs/) and in the repositories of the two
-probes; no result is recorded here.
+Ce qu'il reste à faire, et seulement ça. Tout ce qui est déjà mesuré est dans [le README](README.md) et
+ses chapitres sous [docs/](docs/), avec ses logs dans [perfs/](perfs/) et dans les dépôts des trois
+Diags ; aucun résultat n'est consigné ici. La relecture anticipée de l'issue est dans
+[KSPCF-relecture.md](KSPCF-relecture.md).
 
-## Before opening the KSPCF issue
+L'issue KSPCF demande une relecture et de l'aide, pas une publication : elle dit ce qui est vérifié et ce
+qui ne l'est pas, et [Limits and solutions](docs/limits-and-solutions.md) liste en public les cas encore
+ouverts. Seul ce qui casserait la lecture de l'issue elle-même doit donc passer avant.
 
-Not everything below has to be done first. What does, in the order a reviewer will ask for it:
+## Avant d'ouvrir l'issue KSPCF
 
-0. **A GitHub release on each repository the issue sends a reader to.** This one is not a measurement,
-   it is a hard prerequisite: the issue opens by asking the reader to install Terrain Precision Fix
-   Diag 1, and both Diag READMEs send them to
-   `https://github.com/lhervier/KSP-TerrainPrecisionFix<...>/releases/latest` under `Get it`. Neither
-   repository has a single release today, so that link is a 404 — on the exact page a maintainer lands
-   on from the first instruction of the repro. Nor does this repository, which the issue also links.
-   `build.bat` already produces the zip; what is missing is the release itself. At least Diag 1 and
-   Diag 2, which the repro needs, and this repository, which the fix section offers. PQS Bench and
-   Stock Quad Cache are linked only as supporting material for the performance figure, so they can wait
-   — but their `Get it` sections should not promise a download that does not exist either. Check every
-   `releases/latest` link across the family before the issue goes out.
-1. **The ground anchor, in an install a reviewer could rebuild.** The comment posted on #214 quotes
-   its readings, so every one of them has to be reproducible by someone else. They are not, yet: they come from the
-   author's own years-old save, in a game that also has EvaCMGroundPlugin installed. Redo them plainly,
-   on KSP + Harmony + ModuleManager + KSPCF + Diag 1, with the fix for the second half. What has to come
-   out of it: the `Moving Vessel` values without the fix (both signs, a different one every load) and
-   with it (the same value at every load); a `.sfs` showing `PQSMin`/`PQSMax` at `0/0` on a
-   freshly placed anchor; and the 2.08 cm collider gap re-read from `groundAnchor.mu`. ⚠️ **The protocol
-   differs from every other campaign here: save after each load.** It is the re-save that arms the
-   ratchet — without it the anchor is put back to the same place every time and the climb never appears.
-2. **Kopernicus, twice.** Most planet packs go through it, so this is the compatibility question a
-   reviewer asks first. Two runs are missing, not one:
-   - **a clean stock-body series with the terrain instruments.** The reading that exists came out of a
-     scatter campaign, in an install built for scatter, so its protocol cannot be described without
-     describing that campaign — which means the figure cannot be quoted anywhere that does not also
-     tell that story. Re-run it plainly: Kopernicus on Kerbin, Diag 1 and Diag 2, six loads, with and
-     without the fix. Cheap, and it turns a figure that has to be explained away into one that can
-     simply be given;
-   - **a body a planet pack creates or reconfigures**, rather than merely loads. Nothing has been
-     measured there at all.
-3. **Existing saves.** The transition a player feels on a save made before the fix, written in the
-   README rather than discovered in play.
-4. **Breaking Ground surface features.** They have colliders and are placed like the rocks. Enough to
-   know whether the fix introduces a physical offset there, even if the answer is "yes, and it needs a
-   fix of its own".
-5. **The same campaign on a slope.** Every campaign so far is on flat ground, because Terrain Precision
-   Fix Diag 1 asks for it. On a slope a single-part craft is put into the ground at every load by a
-   stock bug this fix does not touch, and a reviewer who meets it there will read it as "the fix does
-   not work".
+1. **Une release GitHub sur chaque dépôt vers lequel l'issue envoie le lecteur.** Aucun n'en a : ce
+   dépôt, Diag 1, Diag 2 et Diag 3. L'issue commence par faire installer Diag 1, et les trois README des
+   Diags renvoient vers `releases/latest` dans *Get it*, qui donne une 404 aujourd'hui — sur la page
+   même où arrive un mainteneur depuis la première consigne du repro. `build.bat` produit déjà le
+   dossier `GameData` ; la release, c'est ce dossier zippé. PQS Bench et Stock Quad Cache ne sont cités
+   qu'en appui du chiffre de performance et peuvent attendre, mais leur *Get it* ne doit pas non plus
+   promettre un téléchargement qui n'existe pas. Vérifier tous les liens `releases/latest` de la famille
+   avant d'ouvrir l'issue.
+2. **Citer la mesure d'approche dans l'issue et son premier commentaire.** Six allers-retours vers un
+   vaisseau posé, en un seul vol sans rien charger : 21,8 mm sans le correctif, 0,094 mm avec
+   ([Checking the culprit](docs/checking-the-culprit.md), *Coming back to a craft left parked*).
+   L'issue ne montre que les chargements, et défend le cas du vol par Diag 3 — un raisonnement — alors
+   que la mesure existe. C'est elle qui répond par un chiffre à « il suffit de remettre le repère en
+   place au chargement » (#435).
 
-Everything else below can be listed as open in the README without holding the issue back.
+## Après l'ouverture
 
-## Every case the fix has to be checked against
+Rien de ceci ne change ce que l'issue demande.
 
-Each case, with what is known and what is planned to test it, is a chapter of
-[Limits and solutions](docs/limits-and-solutions.md) — the public page the KSPCF issue links to. That
-page is the test plan: add a case there, as a chapter with **Status: TBD**, not here, and add its line
-to the table of the KSPCF comment. What stays below is only what does not belong on a public page.
-
-## Existing saves — what is left to write
-
-The one campaign run on a real save (the author's own years-old save, loaded base by base with KSP,
-Harmony, KSPCF and this fix only) is not written up. Its public side is the chapter
-[Existing saves](docs/limits-and-solutions.md#existing-saves); left to decide or do here:
-
-- **the result of that run**: the bases on the Mun, Minmus and Gilly loaded one by one and none broke;
-  the base on Eve settles onto feet built below the surface, on loading and on leaving time warp alike,
-  which is a construction defect and not this fix. The save does not sample the worst case: its bases
-  are anchored on girder rails, docked and strutted, where the configuration that suffers most is
-  docked modules standing on landing legs. One screenshot, to show the scale of what was loaded, still
-  has to be added; it proves nothing on its own;
-- **where the docked-assemblies and landing-legs caveat goes.** The README's `Disclaimer` is copied word
-  for word into the two Diag READMEs, so adding to it means editing all three; the alternative is the
-  correcting mod's own closing paragraph, which is allowed to differ;
-- **one sentence under `How this was made`** saying those bases were assembled in EVA construction with
-  a personal tool (KSP-EvaCMGroundPlugin), that they load and work without it, and nothing more;
-- **KSPCF patches are individually switchable**: confirm it against the KSPCF settings mechanism before
-  writing, in that chapter, that a player can turn this one off, load, raise a craft, and turn it back on;
-- **only if the bound shows a real cost**: a migration helper that walks a `.sfs` and raises landed
-  vessels onto the corrected ground. A separate tool, not a prerequisite.
-
-## The cost of the fix on Kerbin
-
-The performance campaign was flown over the Mun. The same measurement on Kerbin, where quads are four
-times larger and a craft can be made to fly low for much longer, is worth having. Not a prerequisite.
+- **Les cas contre lesquels vérifier le correctif** sont les chapitres TBD de
+  [Limits and solutions](docs/limits-and-solutions.md), le plan de test public vers lequel pointe
+  l'issue : chacun dit ce qu'on sait et comment il sera testé. Un nouveau cas s'ajoute là-bas, en
+  chapitre **Status: TBD**, pas ici, avec sa ligne dans le tableau du commentaire KSPCF. Deferred et
+  Parallax ont leurs campagnes plus bas.
+- **Les campagnes d'approche, au nouveau protocole** : Diag 1 sans le correctif, Diag 2 sans le
+  correctif, puis le correctif avec les deux — 18 allers-retours, avec la sauvegarde
+  `approach-kerbin.sfs` révisée de Diag 1 (le rover part à 2 km du vaisseau, s'en approche sous 200 m,
+  puis s'éloigne au-delà de 2,6 km pour qu'il soit déchargé, et revient). Elles remplissent *The ground,
+  over six round trips* dans [Checking the culprit](docs/checking-the-culprit.md), et remplacent les six
+  allers-retours faits avec l'ancien protocole. Mettre ensuite à jour les chiffres cités par l'issue.
+- **Séparer le décalage d'origine du déchargement.** Dans le protocole d'approche, le vaisseau est
+  déchargé et l'origine se décale à la même frame : aucune mesure ne dit encore lequel des deux fait
+  bouger le sol ; le code stock désigne le décalage. ⚠️ Changer de vaisseau (`]`) **ne** décale **pas**
+  l'origine (vérifié dans `FlightGlobals.setActiveVessel`, 2026-09-24), et un décalage sans
+  déchargement est impossible tant que le témoin posé est chargé (verrou). Le test faisable est
+  l'inverse : **un déchargement sans décalage**. Une sauvegarde avec le rover à ~2,15 km du témoin
+  (chargé au départ, sous 2,25 km) : en s'éloignant, le témoin se décharge à 2,5 km alors que le rover
+  n'est qu'à ~350 m de l'origine, donc sous le seuil de 500 m ; puis retour sous 2,25 km (rechargement)
+  et approche sous 200 m (le témoin, chargé, verrouille l'origine). Diag 1 et Diag 2 visent le témoin
+  comme dans le protocole d'approche, Diag 3 doit afficher **Shifts** = 0 du début à la fin. Si le sol
+  du témoin ne bouge pas, le déchargement seul n'y est pour rien : c'est le décalage. En complément,
+  avec le correctif en `logLevel = Debug`, le décalage du protocole d'approche doit apparaître comme une
+  salve de lignes `origin moved by … mm`.
+- **Deferred : refaire les campagnes Diag 1 et Diag 2 avec le correctif et Deferred** (six chargements,
+  et le protocole d'approche). C'est le mod qui a fait tomber `PQSOnlyStartOnce`, et le commentaire
+  annonce ce test comme le prochain : le faire en premier après l'ouverture, et poster le résultat sur
+  l'issue, bon ou mauvais. Chapitre *Deferred* de Limits and solutions à mettre à jour ensuite.
+- **Parallax : les mêmes campagnes, et plus loin à cause de son scatter.** Montrer que le défaut du
+  scatter de Parallax n'existe déjà pas sans le correctif, et qu'avec le correctif rien ne change
+  (aujourd'hui, c'est lu dans ses sources, pas mesuré : *Rocks, grass and trees* de Limits and
+  solutions). Il faut un instrument ou un protocole pour ce scatter, qui n'est pas celui de KSP : à
+  concevoir.
+- **Le garde-fou en pas de float plutôt qu'en mètres.** Une modification du code, pas un cas : le
+  chapitre RSS de Limits and solutions dit pourquoi le mètre fixe peut être faux. Un seuil de quelques pas
+  de float au rayon du corps (quatre, par exemple) serait plus serré sur Kerbin et juste sur RSS ;
+  mesurer d'abord, par corps, la plus grande correction réellement appliquée dans les logs de campagne
+  (`origin moved by … mm`).
+- **L'ancre, avant de commenter #214** — pas avant l'issue du terrain. Le commentaire sur #214 cite ses
+  relevés, donc ils doivent être reproductibles par quelqu'un d'autre : les refaire sur KSP + Harmony +
+  ModuleManager + KSPCF + Diag 1, puis avec le correctif. Ce qui doit en sortir : les valeurs de
+  `Moving Vessel` sans le correctif (les deux signes, une différente à chaque chargement) et avec (la même
+  à chaque chargement) ; un `.sfs` montrant `PQSMin`/`PQSMax` à `0/0` sur une ancre fraîchement posée ;
+  l'écart de 2,08 cm du collider relu dans `groundAnchor.mu`. ⚠️ **Sauvegarder après chaque
+  chargement** : c'est la re-sauvegarde qui arme le cliquet.
+- **Les sauvegardes existantes, ce qu'il reste à rédiger** (le cas lui-même est le chapitre
+  [Existing saves](docs/limits-and-solutions.md#existing-saves)). Le seul essai sur une vraie sauvegarde
+  (la mienne, bases chargées une par une avec KSP, Harmony, KSPCF et le correctif) n'est pas rédigé :
+  aucune n'a cassé sur la Mun, Minmus et Gilly ; la base d'Eve se pose sur des pieds construits sous la
+  surface, un défaut de construction et pas le correctif. La sauvegarde n'échantillonne pas le pire cas
+  (ses bases reposent sur des rails de poutrelles, alors que ce sont les modules amarrés sur des jambes
+  d'atterrissage qui souffrent le plus). Reste à faire : une capture de l'ampleur de ce qui a été
+  chargé ; décider où va la mise en garde sur les assemblages amarrés et les jambes (le *Disclaimer* est
+  partagé mot pour mot avec les README des Diags) ; une phrase sous *How this was made* sur l'outil de
+  construction en EVA avec lequel ces bases ont été montées ; vérifier dans le mécanisme de réglages de
+  KSPCF qu'un patch se désactive, avant d'écrire qu'un joueur peut le couper, charger, relever un
+  vaisseau et le remettre ; un outil de migration du `.sfs` seulement si un coût réel apparaît.
+- **Poster sur #435** une fois sûr de ce que Diag 3 montre aux chargements, comme le commentaire
+  l'annonce.
+- **Le coût du correctif sur Kerbin.** La campagne de performance a été volée au-dessus de la Mun ;
+  Kerbin, où les quads sont quatre fois plus grands, vaut d'être mesuré.
