@@ -94,6 +94,25 @@ first of the two instruments: the craft comes to rest over a spread of 21.8 mm w
 
 **→ Full chapter: [Checking the culprit](docs/checking-the-culprit.md)**
 
+## What moves the frame
+
+The culprit explains the rounding, and the measurements above show it drawn anew every time. What
+draws it anew is the frame the ground is converted through — how the body is turned in Unity's world,
+and where it sits in it — which does not stay put. Knowing how it moves is what rules out the obvious
+remedy, putting it back in place when a save is loaded ([why, in The fix this mod
+proposes](docs/the-fix-this-mod-proposes.md#two-ways-out-one-taken)).
+
+That frame is read on a stock install by a third instrument,
+[Terrain Precision Fix Diag 3](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag3).
+Its measurements show it moving in situations every player meets, none of which the save records. At
+every load, its angle comes back off by the time played since the save. On the way to orbit and back,
+it keeps turning with the planet above the altitude where the rotating frame is left. And on the
+ground, it moves each time the floating origin shifts under a craft being driven — except while
+another landed craft is loaded nearby: the origin then stays put however far you go, and catches up
+all at once when that craft is unloaded.
+
+**→ Full chapter: [What the measurements show](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag3/blob/master/docs/what-the-measurements-show.md), on the page of Diag 3**
+
 ## The fix this mod proposes
 
 Two Harmony patches redo in double the two placements that go through a float at planet scale: the

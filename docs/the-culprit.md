@@ -56,9 +56,11 @@ matrix of the terrain sphere, itself held in float.
   (`CelestialBody.CBUpdate`), and saves neither. When a save is loaded, the jump of the clock back to
   the date of the save goes into `directRotAngle`, which comes back off by the rotation of the body over
   the time played since that save, or since the previous load
-  ([measured with Terrain Precision Fix Diag 3](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag3#the-measurements)).
+  ([measured with Terrain Precision Fix Diag 3](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag3/blob/master/docs/the-measurements.md#case-1-loading-the-same-save-three-times)).
 - Its **translation** is the position of the body relative to the floating origin, which moves every
-  time the active craft travels 500 m.
+  time the active craft travels 500 m — except while another landed craft is loaded nearby: the origin
+  then waits, and catches up all at once when that craft is unloaded
+  ([measured with Terrain Precision Fix Diag 3](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag3/blob/master/docs/the-measurements.md#case-3-a-rover-near-a-parked-craft-then-on-its-own)).
 
 At 600 km, turning the frame by a thousandth of a degree moves a point by more than 10 m, some 170
 float steps: the slightest change draws a whole new set of roundings.

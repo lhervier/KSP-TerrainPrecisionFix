@@ -15,7 +15,7 @@ relative to the body every time the ground is built. It was set aside, for reaso
   clock whenever the body is in the inertial frame — above 100 km on Kerbin — so a craft coming down
   from orbit finds it wherever its trajectory left it. Its position moves at every floating origin
   shift, so a craft driven away and back finds the terrain sphere elsewhere than where it left it
-  ([cases 2 and 3](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag3#the-measurements)). According to the stock code, landed quads are placed again,
+  ([cases 2 and 4](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag3/blob/master/docs/the-measurements.md)). According to the stock code, landed quads are placed again,
   the same way, at every such shift (`CelestialBody.PreciseUpdateQuadPositions`), so the ground would
   be rounded anew without any reload. Pinning the position would mean removing the floating origin,
   which is what lets KSP run in float at all;
