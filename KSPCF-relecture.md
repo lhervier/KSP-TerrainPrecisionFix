@@ -8,8 +8,8 @@ c'est [TODO.md](TODO.md), et les cas à tester sont les chapitres TBD de
 l'issue ou du commentaire.
 
 ⚠️ **La réponse ci-dessous est une fiction** écrite par Claude dans sa voix, à partir de ce qu'il a
-réellement écrit : `kspmod\kspcf-forum\issues\` (#9, #271, #296, #324), la PR #435 et le fil du forum,
-résumés dans [CLAUDE-kspcf.md](../CLAUDE-kspcf.md). Ce qu'on y lit de lui : précis, il connaît le moteur
+réellement écrit : `kspmod\claude-notes\archives\kspcf-forum\issues\` (#9, #271, #296, #324), la PR #435 et le fil du forum,
+résumés dans [kspcf.md](../claude-notes/kspcf.md). Ce qu'on y lit de lui : précis, il connaît le moteur
 à fond, il reprend chaque mot inexact (#9), il ne bouge que sur un cas reproductible, et il redoute les
 effets de bord « sneaky, very situational » (#296) plus que les bugs francs. Ne jamais la citer comme
 venant de lui.
