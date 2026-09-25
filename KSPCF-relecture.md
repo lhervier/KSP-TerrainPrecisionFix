@@ -53,9 +53,9 @@ venir d'un autre mainteneur. Ne pas relancer avant une ou deux semaines.
 >   methods can easily eat the gains. Your figures say otherwise, fine, but IMO a transpiler on the
 >   `TransformPoint` / `InverseTransformPoint` calls would be much less invasive, and would keep the
 >   stock method in place for everyone else.
-> - The 1 m threshold looks arbitrary. You know what correction to expect, a couple of float steps at
->   that distance, so I would derive the limit from that. Anything above means the frame isn't what you
->   think it is, and I would want that to be loud, not a log line.
+> - Why sixteen steps? You know what correction to expect, a couple of float steps at that distance.
+>   Anything above means the frame isn't what you think it is, and I would want that to be loud, not a
+>   log line.
 > - Principia drives the body rotations itself. Kopernicus you checked, but Principia is the one I would
 >   worry about for anything reading `body.rotation`.
 > - Existing saves: every landed vessel was saved on a stock draw, so the first load after install will
@@ -87,11 +87,17 @@ défaut, c'est justement que le sol ne se reproduit pas, ce qui rend les krakens
 irreproductibles ; #214 (l'ancre) en est l'exemple travaillé. **Nouveau depuis la campagne du
 changement de vaisseau** : on peut dire *quand* le saut a lieu (le sol est en place à l'ouverture, le
 vaisseau tenu à sa hauteur sauvegardée s'y pose au dépaquetage), et l'approche le montre sans aucun
-rechargement. Ne jamais écrire que le correctif supprime les krakens. **Deux pistes de Lionel pour
-un vrai kraken à la demande** : une capsule sur Gilly, où la poussée qui la sort du sol suffit à la
-faire décoller dans une gravité si faible ; et la même, réservoir plein, sur la Terre de RSS (pas d'un
-float : 0,5 m), où quelques chargements pourraient la faire exploser. Dans [TODO.md](TODO.md), avant
-l'issue, RSS compris.
+rechargement. Ne jamais écrire que le correctif supprime les krakens. **Il existe maintenant une
+repro visible, sous RSS** ([Rescaled systems: Real Solar System](docs/limits-and-solutions/rescaled-systems-real-solar-system.md)) :
+sur la Lune, une capsule sur réservoir se renverse dès le premier chargement sans le correctif, et
+reste debout avec. **Mais il faut d'abord couper la repose au sol que RSS force par défaut**
+(`VesselGroundPositionEnhancer`), sinon il verra un vaisseau téléporté de 11 à 17 cm, pas renversé ;
+et RSS 20.1.3.0 n'offre pas de réglage pour ça (DLL vide nommée `WorldStabilizer`). Il demandera
+pourquoi il faudrait désactiver un composant de RSS pour voir le défaut : réponse, ce composant existe
+*à cause* du défaut (« mostly prevent vessels clipping into the ground »), et il déplace la base d'un
+bloc au lieu de la laisser où elle était. Et le correctif ne la contrarie pas : RSS tel que publié plus
+le correctif, la repose tourne à chaque chargement sans jamais rien déplacer (0,395 mm). Sur Kerbin,
+toujours pas de destruction à la demande.
 
 **2. « Ta rotation en double n'est plus cohérente avec le `Transform` en float. »** **Nouvelle objection,
 et elle est juste.** Tout ce qui reste enfant de la sphère (quads des niveaux inférieurs, `PQSCity`,
@@ -122,11 +128,12 @@ l'issue.
 stock, *Performance*) ; pas pour l'exclusivité. Réponse : aucun mod de `kspmod-ext` (Kopernicus et Parallax compris) ne patche ces
 méthodes, vérifié le 2026-09-24 ; et on accepte volontiers un transpiler, c'est son code de référence.
 
-**6. « Ton seuil d'un mètre est arbitraire, et un refus devrait se voir. »** Retournement probable du
-garde-fou, qu'on présente comme une sécurité. Réponse : il n'est pas silencieux, chaque refus est
-journalisé une fois par corps (un `Warning`) ; s'il le veut plus visible, c'est une ligne ; et le seuil passera en pas de float **avant** l'issue
-([TODO.md](TODO.md)) : quelques lignes dans `IsRoundingCorrection`, plus une session en `Debug` pour
-choisir le multiple.
+**6. « Pourquoi seize pas, et un refus devrait se voir. »** Le seuil est maintenant en pas de float à la
+distance du quad (seize : 1 m sur Kerbin, 8 m sur la Terre de RSS). Il demandera d'où vient seize.
+Réponse : quatre fois le plus grand arrondi mesuré (3,5 pas sur la Lune de RSS), et très loin d'un
+mauvais repère, qui se trompe de kilomètres ; la plus grande correction sur les corps stock reste à
+relever ([TODO.md](TODO.md), point 4). Pour la visibilité : chaque refus est journalisé une fois par
+corps (un `Warning`) ; s'il le veut plus visible, c'est une ligne.
 
 **7. « Le calcul me semble juste ; pour les effets de bord, voilà où je chercherais. »** C'est la
 réponse aux deux questions que pose l'issue : le patch est-il correct, où peut-il casser quelque chose.
@@ -156,7 +163,8 @@ Regarder l'accueil de #435/#436 avant d'ouvrir.
 
 ## Ce qu'on ne saura pas lui répondre
 
-- **Un kraken à la demande** (point 1). Aucune mesure ne le donnera : c'est la nature même du défaut.
+- **Un kraken à la demande sur KSP stock** (point 1). Sur Kerbin, aucune mesure ne le donnera : c'est
+  la nature même du défaut. Sous RSS, on l'a, au prix d'un composant de RSS à couper.
 - **Les raccords entre niveaux** (point 2), tant que personne ne les a regardés.
 - **La liste complète des mods touchés** : elle est ouverte, et l'issue le dit. C'est l'aide qu'on lui
   demande, pas une faiblesse à cacher.

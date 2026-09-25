@@ -22,8 +22,8 @@ scatters around, and stops drawing a new one every time.
 
 **Scope and safeguards.** Only the highest subdivision level is touched: the quads craft stand on, the
 only ones with a collider, and the only ones stock moves out of the body's hierarchy, so they can hold
-a precise position at all. Everything else is built as stock builds it. A correction larger than 1 m
-is refused quad by quad, and logged, so an unexpected frame leaves the terrain where KSP puts it. If
+a precise position at all. Everything else is built as stock builds it. A correction larger than
+sixteen float steps at the quad's distance (1 m on Kerbin) is refused quad by quad, and logged, so an unexpected frame leaves the terrain where KSP puts it. If
 any patch fails to install, none of them does anything.
 
 **Cost.** Measured with [KSPProfiler](https://github.com/KSPModdingLibs/KSPProfiler) on whole frames,
