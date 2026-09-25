@@ -85,10 +85,12 @@ enough for its physics to start again, in the middle of a flight with nothing lo
 measured, before anything is changed and again with this mod installed, with two instruments: one
 reads the landed craft, the other the ground itself. A third protocol takes the first way apart.
 
-**Loading the same save**, six times over, on Kerbin, the Mun, Minmus and Gilly. On Kerbin the craft
-comes to rest over a spread of 134.5 mm without this mod and 0.004 mm with it, and the collision
+**Loading the same save**, six times over, on Kerbin, the Mun, Minmus and Gilly, then on the Moon and
+Earth of [Real Solar System](https://github.com/KSP-RO/RealSolarSystem), much larger. On Kerbin the
+craft comes to rest over a spread of 134.5 mm without this mod and 0.004 mm with it, and the collision
 surface under it, read against the height KSP computes for that same spot, over 108.1 mm without it
-and 0.004 mm with it.
+and 0.004 mm with it; on the Moon and Earth, the ground spreads over 241.2 and 301.2 mm without it, and
+within 0.3 mm with it.
 
 **→ Full chapter: [Checking the culprit: loading the same save](docs/checking-the-culprit-loading.md)**
 
@@ -130,7 +132,8 @@ all at once when that craft is unloaded.
 Two Harmony patches redo in double the two placements that go through a float at planet scale: the
 origin of each quad, and each vertex inside it. The two 600 km vectors cancel before anything reaches a
 float, which is then only asked to hold a distance within the quad. Only the quads a craft can stand on
-are touched, a correction larger than 1 m is refused, and if one patch fails to install none of them
+are touched, a correction larger than sixteen float steps at the distance of the quad (1 m on
+Kerbin) is refused, and if one patch fails to install none of them
 does anything.
 
 **→ Full chapter: [The fix this mod proposes](docs/the-fix-this-mod-proposes.md)**

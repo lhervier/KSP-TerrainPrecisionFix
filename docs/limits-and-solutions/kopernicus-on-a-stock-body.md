@@ -5,7 +5,7 @@ Part of [Terrain Precision Fix](../../README.md), one case of [Limits and soluti
 **Status: checked — the fix still places the terrain, and the ground is as stable under Kopernicus as
 without it.** Most planet packs go through [Kopernicus](https://github.com/Kopernicus/Kopernicus), which
 rebuilds the terrain of every body it touches, so the frame this fix computes in has to still be the
-frame the quads hang from. If it were not, the 1 m safeguard would leave that terrain as stock builds it,
+frame the quads hang from. If it were not, the safeguard would leave that terrain as stock builds it,
 with a warning per body in the log and nothing else.
 
 The series of [Scatter with colliders](scatter-with-colliders.md) answers that for a stock body, because Rock Precision Fix Diag

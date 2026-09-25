@@ -17,8 +17,8 @@ height it places is the already-flattened one. Parallax is in the same position:
 `PQSMod`, `PQSMod_MapDecalVertexRemoveScatter`, removes scatter inside a decal and does not touch height.
 
 Two questions stay open. Its statics may be placed like the KSC's, from the centre of the body through a
-float `Transform`, in which case they carry the same defect and this fix does not cover them. And the 1 m
-safeguard would not catch a decal going wrong, since the quads would still be within a metre of where
+float `Transform`, in which case they carry the same defect and this fix does not cover them. And the
+safeguard would not catch a decal going wrong, since the quads would still be within a few float steps of where
 they belong.
 
 *To test:* a Kerbal Konstructs site, with and without this fix, Terrain Precision Fix Diag 2 reading the

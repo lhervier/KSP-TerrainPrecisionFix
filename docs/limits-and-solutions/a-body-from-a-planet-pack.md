@@ -6,7 +6,7 @@ Part of [Terrain Precision Fix](../../README.md), one case of [Limits and soluti
 already exists; for a planet pack it does more. Each added body is built by cloning the terrain sphere of
 a stock template, which is then reconfigured — another radius, another `maxLevel`, PQSMods added and
 removed — and a pack can also rewrite the `PQS` of a stock body. The frame this fix computes in
-(`body.rotation`, `body.position`) has to still be the one those quads hang from. If it is not, the 1 m
+(`body.rotation`, `body.position`) has to still be the one those quads hang from. If it is not, the
 safeguard leaves that terrain as stock builds it: no fix, silently, apart from one warning per body in
 the log.
 
