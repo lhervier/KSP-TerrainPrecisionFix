@@ -24,11 +24,13 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
         private const string HarmonyId = "com.github.lhervier.ksp.terrainprecisionfix";
 
         /// <summary>
-        /// Largest correction applied, in metres. What is being corrected is a rounding error of a few
-        /// centimetres; anything beyond a metre means the frame computed here is not the one the quad hangs
-        /// from, and the quad is then left as stock builds it rather than moved somewhere else.
+        /// Largest correction applied, in float steps at the distance of the quad from the centre of its
+        /// body. What is being corrected is a rounding error of a few steps; anything larger means the
+        /// frame computed here is not the one the quad hangs from, and the quad is then left as stock
+        /// builds it rather than moved somewhere else. Sixteen steps is 1 m on Kerbin, and grows with the
+        /// body as the rounding does.
         /// </summary>
-        private const double MaxCorrection = 1.0;
+        private const double MaxCorrectionInFloatSteps = 16.0;
 
         // Set once every patch is in place. Each patch checks it, so that a partial install — one patch
         // applied, the next one refused — never mixes corrected vertices with an uncorrected quad origin.
@@ -134,21 +136,35 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
         }
 
         /// <summary>
-        /// Whether moving a quad by <paramref name="correction"/> metres is a rounding correction rather
-        /// than a move to a different place. Reports the first refusal on each body.
+        /// Whether moving <paramref name="quad"/> by <paramref name="correction"/> metres is a rounding
+        /// correction rather than a move to a different place. Reports the first refusal on each body.
         /// </summary>
-        private static bool IsRoundingCorrection(CelestialBody body, double correction)
+        private static bool IsRoundingCorrection(CelestialBody body, PQ quad, double correction)
         {
-            if (correction <= MaxCorrection)
+            // The rounding being removed happens on the quad's position relative to the centre of the
+            // body, so its size is set by the float step at that distance.
+            double maxCorrection = MaxCorrectionInFloatSteps * FloatStep(quad.positionPlanet.magnitude);
+            if (correction <= maxCorrection)
             {
                 return true;
             }
             if (_refused.Add(body))
             {
-                Log.Warning($"{body.bodyName}: a correction of {correction:0.000} m is too large to be a"
-                    + " rounding error, the quads concerned are left as stock builds them");
+                Log.Warning($"{body.bodyName}: a correction of {correction:0.000} m is more than"
+                    + $" {MaxCorrectionInFloatSteps:0} float steps ({maxCorrection:0.000} m at that distance),"
+                    + " too large to be a rounding error, the quads concerned are left as stock builds them");
             }
             return false;
+        }
+
+        /// <summary>The gap between two consecutive float values around <paramref name="distance"/>, in metres.</summary>
+        private static double FloatStep(double distance)
+        {
+            // A float has 24 significant bits: between 2^n and 2^(n+1), consecutive values are 2^(n-23)
+            // apart. Below a metre the value no longer matters here, and the logarithm would not be defined
+            // at zero.
+            int exponent = (int)Math.Floor(Math.Log(Math.Max(distance, 1.0), 2.0));
+            return Math.Pow(2.0, exponent - 23);
         }
 
         // ==========================================================================
@@ -253,7 +269,7 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
                 return;
             }
             Vector3d quadOrigin = WorldPosition(body, quad.positionPlanet);
-            if (!IsRoundingCorrection(body, (quadOrigin - (Vector3d)quad.transform.position).magnitude))
+            if (!IsRoundingCorrection(body, quad, (quadOrigin - (Vector3d)quad.transform.position).magnitude))
             {
                 return;
             }
@@ -329,7 +345,7 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
             // assigns it, at full length, to the float localPosition of the quad's transform.
             Vector3d origin = WorldPosition(body, quad.positionPlanet);
             double correction = (origin - (Vector3d)quad.transform.position).magnitude;
-            if (!IsRoundingCorrection(body, correction))
+            if (!IsRoundingCorrection(body, quad, correction))
             {
                 return;
             }

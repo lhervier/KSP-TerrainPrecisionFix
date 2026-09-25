@@ -30,16 +30,10 @@ ouverts. Seul ce qui casserait la lecture de l'issue elle-même doit donc passer
    `]`, repasser au rover, sauvegarder sous un autre nom, puis six fois « charger → *Record* → `]` →
    *Record* » ; *Moved* doit rester à quelques centièmes de zéro. Il complète le chapitre
    [Existing saves](docs/limits-and-solutions/existing-saves.md) et la page du changement de vaisseau.
-4. **Le garde-fou en pas de float plutôt qu'en mètres.** Une modification du code, pas un cas : le
-   chapitre RSS de Limits and solutions dit pourquoi le mètre fixe peut être faux. Un seuil de quelques pas
-   de float au rayon du corps (quatre, par exemple) serait plus serré sur Kerbin et juste sur RSS ;
-   mesurer d'abord, par corps, la plus grande correction réellement appliquée dans les logs de campagne
-   (`origin moved by … mm`).
-   Le code est léger (le seuil ne sert que dans `IsRoundingCorrection`) ; la mesure demande une session
-   en `logLevel = Debug` sur Kerbin, la Mun, Minmus et Gilly, en relevant le plus grand `origin moved by`
-   par corps. **Déjà relevé sous RSS** (chapitre « Sous RSS : la Lune » de
-   `claude-notes\collider-pqs\correctif-sol.md`) : le mètre a refusé un quad de la Terre, et la Lune
-   monte à 3,5 pas, donc « quatre pas » serait trop juste.
+4. **Confirmer la marge du garde-fou.** Il compte maintenant seize pas de float à la distance du quad
+   (1 m sur Kerbin, comme avant ; 8 m sur la Terre de RSS). Le multiple repose sur la seule mesure de la
+   Lune (3,5 pas au plus) : relever la plus grande correction (`origin moved by … mm`) en
+   `logLevel = Debug` sur Kerbin, la Mun, Minmus et Gilly, et vérifier qu'elle reste loin de seize pas.
 5. **Deferred : refaire les campagnes Diag 1 et Diag 2 avec le correctif et Deferred** (six chargements,
    et le protocole d'approche). C'est le mod qui a fait tomber `PQSOnlyStartOnce` : le résultat, bon ou
    mauvais, entre dans le commentaire, qui l'annonce aujourd'hui comme « next ». Chapitre *Deferred* de
@@ -49,37 +43,22 @@ ouverts. Seul ce qui casserait la lecture de l'issue elle-même doit donc passer
    (aujourd'hui, c'est lu dans ses sources, pas mesuré : *Rocks, grass and trees* de Limits and
    solutions). Il faut un instrument ou un protocole pour ce scatter, qui n'est pas celui de KSP : à
    concevoir.
-7. **Un kraken reproductible, sur la Lune de RSS d'abord** (objection 1 de
-   [KSPCF-relecture.md](KSPCF-relecture.md)), avant l'issue. Gotmachine reproduit lui-même ce qu'on lui
-   signale : sur Kerbin, une capsule qui saute de quelques centimètres ne le convaincra pas, la physique
-   l'absorbe. RSS amplifie le défaut, car le pas du float double avec le rayon :
-   - **La Lune** (1 737 km, entre 2²⁰ et 2²¹ m) : pas de 125 mm, soit ~25 cm d'écart attendu à ~2 pas.
-     Un seul pas dépasse déjà la peau de ~25 mm que PhysX dépénètre, et la gravité (1,62 m/s²) laisse
-     voir un saut. Le garde-fou de 1 m n'y est pas atteint : **le code actuel suffit**. C'est aussi là que
-     les joueurs RO construisent leurs bases.
-   - **La Terre** (0,5 m par pas) : seulement après le point 4, puisque le garde-fou y couperait le
-     correctif.
-   - Gilly reste une piste secondaire (capsule enfoncée d'un rien, qu'une gravité si faible laisse
-     décoller).
+7. **Real Solar System : ce qui reste**, dans `ksp-rss-dev\` (PC fixe seulement) :
+   1. **La Terre, rechargements à la chaîne avec le correctif**, sans instrument, sur
+      `diag1-reload-earth-resave`.
+   2. **Un vaisseau posé hors du KSC**, en `LANDED`, pour voir la repose de RSS à l'œuvre sur la Terre
+      (au KSC, en `PRELAUNCH`, elle ne tourne pas).
+   3. **Vénus, Mars, Mercure** : un atterrissage chacun en `logLevel = Debug`, pour la plus grande
+      correction (pas de 500 / 250 / 250 mm).
+   4. **Le KSC terrestre** : un décollage et un roulage sur la piste avec le correctif (RSS y bloque
+      l'origine flottante, reprise de RSSRunwayFix).
+   5. **Principia**, que la plupart des joueurs RSS installent (cas *Principia* de Limits and solutions).
+   6. **Vérifier pourquoi la repose de KSP a tourné sur la Terre** alors que la sauvegarde porte des
+      niveaux PQS non nuls (2/11) : comparer au `maxLevel` du `pqsController` de la Terre de RSS.
 
-   Fait le 2026-09-25 avec Diag 1 (install `ksp-rss-dev\`, PC fixe seulement) : la capsule sur réservoir
-   se renverse sans le correctif, reste debout avec (chapitre « Sous RSS : la Lune » de
-   `claude-notes\collider-pqs\correctif-sol.md`). Reste :
-   1. **La repose au sol que RSS force par défaut** (`VesselGroundPositionEnhancer`) masque le
-      renversement : la repro doit dire de la couper (DLL vide `WorldStabilizer.dll`, ou la case
-      *Force off* de RSS `master`), sinon le mainteneur verra une capsule téléportée, pas renversée.
-      Décider comment le présenter dans l'issue.
-   2. La Terre, une fois le garde-fou passé en pas de float (point 4) : Diag 1 et Diag 2, terrain plat.
-
-   Copies d'écran dans `imgs/Diag1/on-load/2parts/rss/`, mesures publiées dans
-   [Rescaled systems: Real Solar System](docs/limits-and-solutions/rescaled-systems-real-solar-system.md).
-
-   **Une fois RSS terminé** : restructurer les 19 autres cas de `docs/limits-and-solutions/` sur le plan
-   du cas RSS (introduction lue dans le code et sur GitHub, `## Checking the culprit` avec Diag 1 et
-   Diag 2, `## What the results show`). Reste à décider comment traiter un cas sans mesure.
-
-   Ce qui existe déjà côté joueurs (WorldStabilizer, RSSRunwayFix) : chapitre « Les voisins » de
-   `claude-notes\kspcf.md`.
+   Ensuite : restructurer les 19 autres cas de `docs/limits-and-solutions/` sur le plan du cas RSS
+   (introduction lue dans le code et sur GitHub, `## Checking the culprit` avec Diag 1 et Diag 2,
+   `## What the results show`), après avoir décidé comment traiter un cas sans mesure.
 8. **L'écart diffère-t-il d'un point du sol à l'autre ?** C'est ce qui casse une structure posée sur
    plusieurs pieds (un pied enterré, un autre en l'air) : sans lui, le sol monte ou descend d'un bloc et
    la structure suit. Je le crois, puisque chaque quad arrondit sa propre position, mais rien ne le
