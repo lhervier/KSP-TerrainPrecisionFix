@@ -39,12 +39,7 @@ screenshot is [`imgs/Diag1/on-switch/six-rounds.png`](../imgs/Diag1/on-switch/si
 session is logged in [`diag/runs/switching-diag1-fix.log`](../diag/runs/switching-diag1-fix.log). *On
 rails* still reads the same height, within three thousandths of a millimetre.
 
-**The capsule comes to rest across a spread of 104.5 mm without this mod, and 0.022 mm with it.**
-
-The −31.8 mm left is the same on every round, so it is not the defect. The save was made without this
-mod: the height it holds the capsule at was taken on one of the grounds stock builds, and this mod
-builds the ground in one place every time — not that one. It is the case of
-[Existing saves](limits-and-solutions/existing-saves.md).
+The capsule comes to rest across a spread of 104.5 mm without this mod, and 0.022 mm with it.
 
 ## The ground, over six rounds
 
@@ -57,22 +52,31 @@ The height KSP computes reads 64,784.828 mm on all twelve lines. *Difference*, a
 | *Difference*, without this mod | −54.655 mm | +44.378 mm | −57.166 mm | +63.188 mm | −26.893 mm | +8.032 mm |
 | *Difference*, with this mod | −1.696 mm | −1.695 mm | −1.695 mm | −1.696 mm | −1.696 mm | −1.697 mm |
 
-On stock, the switch that follows does not move it: the line taken after it reads the same ground to
-within five thousandths of a millimetre, the capsule settling a hair and moving the spot the ray is
-fired at.
+On stock, the line taken after the switch reads the same ground as the line before it, to within five
+thousandths of a millimetre.
 
 **With this mod**, in that same install: the screenshot is
 [`imgs/Diag2/on-switch/six-rounds.png`](../imgs/Diag2/on-switch/six-rounds.png), and the session is
 logged in [`diag/runs/switching-diag2-fix.log`](../diag/runs/switching-diag2-fix.log). All twelve lines,
 before and after the switch, read between −1.694 and −1.697 mm.
 
-**The ground spreads over 120.4 mm without this mod, and 0.003 mm with it.**
+The ground spreads over 120.4 mm without this mod, and 0.003 mm with it.
 
-## What the two say together
+## What the measurements say
 
-The ground under the capsule is built when the save is loaded, while the capsule is two kilometres
+**The ground is built when the save is loaded, and the switch does not move it.** The line taken after
+the switch reads the same ground as the one before, to within five thousandths of a millimetre — the
+capsule settling a hair and moving the spot the ray is fired at.
+
+**The capsule comes to rest by as much as the ground moved.** The ground under the capsule is built when the save is loaded, while the capsule is two kilometres
 from the craft being flown and not flown itself — and switching to it does not move it. Meanwhile the
 capsule is held at the height the save recorded. So until the switch, it sits inside that ground or
 above it, and it is when physics takes it over that it comes to rest on it: by as much as the ground
-moved. With this mod, the ground is built in the same place at every loading, and the capsule comes to
-rest by the same amount every time.
+moved: over 104.5 mm for the capsule, 120.4 mm for the ground. With this mod, the ground is built in the
+same place at every loading, within 0.003 mm, and the capsule comes to rest by the same amount every
+time, within 0.022 mm.
+
+**The −31.8 mm left is the same on every round, so it is not the defect.** The save was made without
+this mod: the height it holds the capsule at was taken on one of the grounds stock builds, and this mod
+builds the ground in one place every time — not that one. It is the case of
+[Existing saves](limits-and-solutions/existing-saves.md).

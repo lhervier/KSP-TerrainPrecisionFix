@@ -31,11 +31,8 @@ how far the craft ends up from the height it was handed back at — reads:
 |---|---|---|---|---|---|---|
 | *Moved* | +12.570 mm | −17.549 mm | +10.969 mm | −7.749 mm | −7.484 mm | +19.170 mm |
 
-Same craft, same spot, same flight: 7.5 to 19.2 mm every time, upwards as often as downwards, and
-never the same twice. Over the six, the craft comes to rest across a spread of 21.8 mm — a fraction
-of a float step, where six loads of a save spread it over two of them. The height it is handed back
-at, read before each round trip and after it, never moves by more than six thousandths of a
-millimetre: what changes is what it settles onto.
+Over the six, the craft comes to rest across a spread of 21.8 mm. The height it is handed back at,
+read before each round trip and after it, never moves by more than six thousandths of a millimetre.
 
 **With this mod**, in that same install, on that same save, with this mod as the only difference. The
 six screenshots are in [`imgs/Diag1/on-approach`](../imgs/Diag1/on-approach), and the session is logged in
@@ -46,15 +43,8 @@ six screenshots are in [`imgs/Diag1/on-approach`](../imgs/Diag1/on-approach), an
 | *Moved*, without this mod | +12.570 mm | −17.549 mm | +10.969 mm | −7.749 mm | −7.484 mm | +19.170 mm |
 | *Moved*, with this mod | −0.023 mm | −0.020 mm | −0.043 mm | −0.041 mm | +0.086 mm | −0.022 mm |
 
-**Over the six round trips, the craft comes to rest across a spread of 21.8 mm without this mod and
-0.094 mm with it.** What is left is of the same order as after a load: hundredths of a millimetre,
-against a float step of 62.5 mm there.
-
-In other words: reload the same save as many times as you like, or leave a craft parked and come back
-to it in the middle of a flight — either way it comes back to the same place, on ground that is in the
-same place. The coin toss of
-[Why the moving ground matters](../README.md#why-the-moving-ground-matters) is gone — there is nothing left to push
-the craft out of.
+Over the six round trips, the craft comes to rest across a spread of 21.8 mm without this mod and
+0.094 mm with it.
 
 ## The ground, over six round trips
 
@@ -69,9 +59,8 @@ across each round trip:
 |---|---|---|---|---|---|---|
 | *Difference* moved by | −21.782 mm | +5.904 mm | +4.563 mm | +4.689 mm | −6.096 mm | +2.676 mm |
 
-The ground itself comes back somewhere else on every round trip, over a spread of 21.8 mm. And it has
-already moved by the time the craft is back in range, while it is still packed: from then to the
-moment physics takes the craft over, it moves by 0.040 mm at most.
+Over the six, *Difference* spreads over 21.8 mm. From the moment the craft is back in range, still
+packed, to the moment physics takes it over, it moves by 0.040 mm at most.
 
 **With this mod**, in that same install, on that same save, with this mod as the only difference. The
 six screenshots are in [`imgs/Diag2/on-approach`](../imgs/Diag2/on-approach), and the session is logged in
@@ -85,5 +74,28 @@ six screenshots are in [`imgs/Diag2/on-approach`](../imgs/Diag2/on-approach), an
 On the fifth round trip, the last line was not recorded: the value used is the one the reading in
 progress shows under 200 m, −2.260 mm, and the first line of the sixth round trip reads the same.
 
-**Over the whole series, the ground comes back within a spread of 21.8 mm without this mod, and
-0.011 mm with it.** The ground under the craft stays where it is while the craft is away.
+Over the whole series, the ground comes back within a spread of 21.8 mm without this mod, and
+0.011 mm with it.
+
+## What the measurements say
+
+**The craft is handed back at the same place, and does not come to rest there.** Same craft, same spot,
+same flight: 7.5 to 19.2 mm every time, upwards as often as downwards, and never the same twice, while
+the height it is handed back at never moves by more than six thousandths of a millimetre. What changes
+is what it settles onto. Over the six, 21.8 mm: a fraction of a float step, where six loads of a save
+spread it over two of them.
+
+**It is the ground that moves, and it has moved before the craft comes back.** The ground itself comes
+back somewhere else on every round trip, over the same 21.8 mm, and it has already moved by the time the
+craft is back in range, while it is still packed: from then to the moment physics takes the craft over,
+it moves by 0.040 mm at most.
+
+**With this mod, the ground stays where it is while the craft is away.** The craft comes to rest across
+0.094 mm and the ground across 0.011 mm: hundredths of a millimetre, of the same order as after a load,
+against a float step of 62.5 mm there.
+
+In other words: reload the same save as many times as you like, or leave a craft parked and come back
+to it in the middle of a flight — either way it comes back to the same place, on ground that is in the
+same place. The coin toss of
+[Why the moving ground matters](../README.md#why-the-moving-ground-matters) is gone — there is nothing
+left to push the craft out of.

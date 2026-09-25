@@ -37,23 +37,16 @@ collision surface itself, with Diag 2.
 
 ### Rescaled systems: Real Solar System
 
-**Checked on the Moon: this mod works with Real Solar System and breaks nothing.** Real Solar System
-ships a stabiliser of its own, which puts a landed craft back onto the ground each time it loads. This
-mod leaves it nothing to correct: with both installed, as players would have them, the stabiliser runs
-at every load and never moves the craft, and 24 loads in a row of a pod on a tank on the Moon did not
-make it jump once. For this defect, the stabiliser becomes unnecessary; it may still matter for the
-other causes that move a craft at loading, which this mod does not touch.
-
-Without this mod, the defect is larger there than on Kerbin — a float's step is 125 mm on the Moon —
-and the stabiliser only catches part of it, since it acts only when a craft is more than 10 cm off.
-Fourteen loads of a save made in stock: moved up by the stabiliser six times, and three jumps, buried by
-less than those 10 cm. The ground itself, read by Diag 2, comes back over 241.2 mm without this mod and
-0.226 mm with it. With the stabiliser turned off, the craft tips over at the very first load without
-this mod, and stays put with it.
-
-On Earth, the 1 m safeguard refused corrections of 1.094 m and 1.318 m: part of Earth's terrain is left
-as stock builds it, which breaks nothing but leaves it uncorrected. The solution is a limit counted in
-float steps.
+**Checked on the Moon and on Earth: this mod breaks nothing, and improves on what Real Solar System
+does.** The defect grows with the body — a float's step is 125 mm on the Moon, 500 mm on Earth — and
+Real Solar System ships a workaround of its own, which moves a landed craft back onto the ground when it
+loads. That workaround does not always work: it only acts when the craft is more than 10 cm off, so
+without this mod the craft still jumps now and then, and is moved up in one block the rest of the time.
+With this mod, nothing moves any more: the craft and the ground come back within a fraction of a
+millimetre on both bodies, the workaround never has anything to correct here — it may well have other
+uses, outside the scope of this fix — and dozens of reloads on the Moon did not make the craft jump
+once. The safeguard grows with the body
+too, so none of Earth's terrain is left uncorrected.
 
 **→ Full chapter: [Rescaled systems: Real Solar System](limits-and-solutions/rescaled-systems-real-solar-system.md)**
 
