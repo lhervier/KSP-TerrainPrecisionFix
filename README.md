@@ -149,12 +149,12 @@ three configurations cannot be told apart.
 ## Limits and solutions
 
 Everything that stands on the ground, or is placed from it, has to be checked against this fix, one
-case at a time — a work in progress, with a chapter per case saying where it stands: checked, affected,
-or still to be tested. The cases go from other mods (KSP Community Fixes, Kopernicus and planet packs,
-Parallax, Kerbal Konstructs, Deferred…) to what stock itself places on the ground (scatter, the KSC
-statics, Breaking Ground) and to situations (rescaled systems such as Real Solar System, slopes,
-existing saves, the map view…). Each affected case says what changes there and, where there is one,
-what solves it; each untested one says how it will be tested.
+case at a time — a work in progress, with a chapter per case. The cases go from other mods (KSP
+Community Fixes, Kopernicus and planet packs, Parallax, Kerbal Konstructs, Deferred…) to what stock
+itself places on the ground (scatter, the KSC statics, Breaking Ground) and to situations (rescaled
+systems such as Real Solar System, slopes, existing saves, the map view…). So far, every case checked
+shows no problem caused by this fix — including Real Solar System, where the defect is at its largest
+— though some say what changes, and what can go further; the others say how they will be tested.
 
 **→ Full chapter: [Limits and solutions](docs/limits-and-solutions.md)**
 

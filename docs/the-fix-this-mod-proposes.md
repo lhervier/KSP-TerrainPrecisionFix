@@ -77,7 +77,7 @@ work done once per quad, is measured in [Performance](performance.md).
 
 Only the quads of the highest subdivision level are corrected. Those are the ones craft stand on, the
 only ones with a collider on Kerbin and on the Mun, where `PQSMod_QuadMeshColliders.maxLevelOffset` has
-been read in flight and is 0 (see [Limits and solutions](limits-and-solutions.md#colliders-below-the-highest-subdivision-level)), and the only ones that can keep a precise
+been read in flight and is 0 (see [Colliders below the highest subdivision level](limits-and-solutions/colliders-below-the-highest-subdivision-level.md)), and the only ones that can keep a precise
 position: stock moves them to a container of their own, outside the body's hierarchy. Every other quad
 hangs from the body's terrain sphere, whose origin is the centre of the body, so Unity would store any
 position given to it as a 600 km float again. Those are left exactly as stock builds them.

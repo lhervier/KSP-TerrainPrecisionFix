@@ -44,7 +44,7 @@ rails* still reads the same height, within three thousandths of a millimetre.
 The −31.8 mm left is the same on every round, so it is not the defect. The save was made without this
 mod: the height it holds the capsule at was taken on one of the grounds stock builds, and this mod
 builds the ground in one place every time — not that one. It is the case of
-[Existing saves](limits-and-solutions.md#existing-saves).
+[Existing saves](limits-and-solutions/existing-saves.md).
 
 ## The ground, over six rounds
 
