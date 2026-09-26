@@ -1,0 +1,53 @@
+# The runs
+
+Part of [Terrain Precision Fix](../README.md): the `KSP.log` of every session taken with this mod
+installed. What their readings say is in
+[Checking the culprit: loading the same save](../docs/checking-the-culprit-loading.md),
+[Coming back to a craft left parked](../docs/checking-the-culprit-approach.md),
+[Switching to a craft far away](../docs/checking-the-culprit-switching.md) and
+[Rescaled systems: Real Solar System](../docs/limits-and-solutions/rescaled-systems-real-solar-system.md).
+
+The saves are not here: each protocol belongs to an instrument, and its saves are in the `diag` folder
+of [Terrain Precision Fix Diag 1](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/tree/main/diag)
+and of [Terrain Precision Fix Diag 2](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/tree/master/diag),
+along with the logs of the same sessions without this mod.
+
+## On the stock system
+
+KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, this mod and one instrument.
+
+- [`runs/approach-diag1-fix.log`](runs/approach-diag1-fix.log) — the six round trips of
+  [the approach protocol](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/docs/the-protocol-approach.md)
+  on Kerbin, in a single flight, read by Diag 1.
+- [`runs/approach-diag2-fix.log`](runs/approach-diag2-fix.log) — the same, read by Diag 2.
+- [`runs/switching-diag1-fix.log`](runs/switching-diag1-fix.log) — the six rounds of
+  [the switching protocol](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/docs/the-protocol-switching.md)
+  on Kerbin, read by Diag 1.
+- [`runs/switching-diag2-fix.log`](runs/switching-diag2-fix.log) — the same, read by Diag 2.
+
+## On Real Solar System
+
+The same install plus [Real Solar System](https://github.com/KSP-RO/RealSolarSystem) 20.1.3.0 and what
+it requires (Kopernicus, Modular Flight Integrator, KSPTextureLoader, the RSS textures), as released
+unless said otherwise. This mod ran at `logLevel = Debug`, so each log also holds one line per quad
+placed, with how far it was moved. The sessions marked *first safeguard* ran with its first version,
+a fixed metre, and hold the line where it refused part of Earth's terrain.
+
+- [`runs/reload-moon-rss-fix.log`](runs/reload-moon-rss-fix.log) — Diag 1, Real Solar System's
+  component turned off by an empty assembly named `WorldStabilizer`: one load of
+  `reload-moon-rss.sfs`, the save made without this mod, then that save taken again as
+  `reload-moon-rss-resave.sfs` and loaded six times. *First safeguard.*
+- [`runs/reload-moon-rss-fix-vgpe-on.log`](runs/reload-moon-rss-fix-vgpe-on.log) — Diag 1, Real Solar
+  System as released: the loads of `reload-moon-rss-resave.sfs`, six of them recorded. *First
+  safeguard.*
+- [`runs/reload-moon-rss-fix-diag2.log`](runs/reload-moon-rss-fix-diag2.log) — Diag 2: six loads of
+  `reload-moon-rss-resave.sfs`.
+- [`runs/reload-moon-rss-fix-24loads.log`](runs/reload-moon-rss-fix-24loads.log) — no instrument:
+  24 loads of `reload-moon-rss-resave.sfs` in a row. *First safeguard.*
+- [`runs/reload-earth-rss-fix.log`](runs/reload-earth-rss-fix.log) — Diag 1: six loads of
+  `reload-earth-rss-resave.sfs`, the craft in *prelaunch*.
+- [`runs/reload-earth-rss-fix-diag2.log`](runs/reload-earth-rss-fix-diag2.log) — Diag 2: the same six
+  loads.
+- [`runs/reload-earth-rss-fix-chain.log`](runs/reload-earth-rss-fix-chain.log) — no instrument, one
+  session: 27 loads of `reload-earth-rss-landed.sfs`, the craft *landed*, then, after going back to the
+  space centre, 24 of `reload-earth-rss-resave.sfs`, the craft in *prelaunch*.
