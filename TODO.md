@@ -19,20 +19,75 @@ ensuite, sans ordre imposé.
    la Terre (près du KSC, en `PRELAUNCH`) sont mesurées et publiées dans
    [Rescaled systems: Real Solar System](docs/limits-and-solutions/rescaled-systems-real-solar-system.md) ;
    la Terre à la chaîne (en `PRELAUNCH` et en `LANDED`, repose de RSS comprise) aussi, et la page
-   publique suit (plus grande correction : 4,0 pas). Son *Still to test* liste ce qui reste :
-   1. **Vénus, Mars, Mercure** : un atterrissage chacun en `logLevel = Debug`, pour la plus grande
-      correction (pas de 500 / 250 / 250 mm). Alimente le point 7 (marge du garde-fou).
+   publique suit (plus grande correction : 4,0 pas). Son *Still to test* liste les points 1.1 et 1.2 ;
+   les points 1.3 et 1.4 sont à y ajouter. Reste :
+   1. **Vénus, Mars, Mercure : la plus grande correction** (pas de 500 / 250 / 250 mm). Alimente le
+      point 7 (marge du garde-fou). Pas d'atterrissage piloté : une sauvegarde fabriquée en copiant
+      `reload-earth-rss-resave.sfs` et en y changeant le corps de référence, la latitude, la longitude
+      et l'altitude (ajustée au premier chargement, puis re-sauvegarde) ; celle de la Lune, qui porte
+      les coordonnées du KSC, a visiblement été faite ainsi. Six chargements par corps, sur deux ou
+      trois sites, correctif en `logLevel = Debug`, aucun Diag. Relever la plus grande correction
+      (`origin moved by … mm`), et vérifier qu'il n'y a ni exception `[TerrainPrecisionFix]` ni refus
+      (`too large to be a rounding error`).
    2. **La piste du KSC terrestre : le correctif rend-il inutile le verrou d'origine de RSS ?** RSS
-      intègre RSSRunwayFix, qui coupe les colliders des sections de la piste et, tant que le vaisseau
-      roule dessus, bloque tout décalage d'origine (`SetSafeToEngage(false)`, seuil porté à 2 700 m).
-      Lu dans le source, la piste est un `PQSCity`, que le correctif ne touche pas : il ne devrait donc
-      **pas** rendre ce verrou inutile sur la piste (sur l'herbe, si). Le test : avec le correctif, un
-      roulage et un décollage sur la piste avec le verrou de RSS, puis sans. Aucun réglage ne coupe le
-      verrou : il faut un petit addon de test qui détruit `RSSRunwayFix.Instance` en vol. Sans verrou,
-      si la piste saute encore à chaque décalage, c'est le static, et c'est l'argument pour étendre le
-      correctif aux `PQSCity`. Voir aussi le cas
-      [The KSC buildings, runway and launchpad](docs/limits-and-solutions/the-ksc-buildings-runway-and-launchpad.md),
-      qui ne parle pas encore de RSS.
+      intègre RSSRunwayFix, qui fait deux choses. Il coupe les colliders des sections de la piste pour
+      ne garder que `runway_collider` : il vise les bosses aux jonctions entre sections, un défaut entre
+      statiques auquel le correctif ne touche pas ; cette moitié reste utile quoi qu'il arrive. Et, tant
+      que le vaisseau actif est posé (`LANDED` ou `PRELAUNCH`) et qu'un rayon vers le bas touche
+      `runway_collider`, il bloque tout décalage d'origine (`SetSafeToEngage(false)` toutes les 25
+      frames physiques, seuil porté à 2 700 m). Un décalage peut faire sauter deux surfaces sous la
+      roue, les deux que la mesure stock de 117 mm sur la piste n'a pas départagées : **(a)** la piste,
+      un `PQSCity` ré-arrondi, que le correctif ne touche pas ; **(b)** le terrain aplani sous la piste,
+      ré-arrondi lui aussi, qui dépasse du revêtement par endroits, et que le correctif stabilise
+      totalement. Le source ne tranche pas.
+      - **D'abord en stock** : le *To test* du cas
+        [The KSC buildings, runway and launchpad](docs/limits-and-solutions/the-ksc-buildings-runway-and-launchpad.md),
+        une capsule sur la piste de Kerbin, six chargements avec le correctif. Si elle devient stable,
+        elle reposait sur le terrain, et (b) devient crédible sous RSS ; si elle bouge encore, c'est la
+        piste.
+      - **Puis sous RSS** : avec le correctif, un roulage et un décollage sur la piste avec le verrou,
+        puis sans. Aucun réglage ne coupe le verrou : il faut un petit addon de test qui détruit
+        `RSSRunwayFix.Instance` en vol. Sans verrou, si la piste saute encore à chaque décalage, c'est
+        le static, et c'est l'argument pour étendre le correctif aux `PQSCity`.
+      - Même dans le cas (b), écrire que, pour ce défaut, le verrou n'a plus rien à corriger ; jamais
+        qu'il ne sert plus à rien.
+
+      Le cas KSC ne parle pas encore de RSS.
+   3. **Un vol sous RSS, pas seulement des chargements.** Tout ce qui est mesuré sous RSS est un
+      vaisseau posé qu'on recharge ; jamais des quads construits en continu pendant les décalages
+      d'origine (`PQ.PreciseUpdateSubQuadsPosition`), ce que vit tout joueur RSS à chaque lancement.
+      C'est un test de non-régression, pas une mesure par un Diag : ni exception
+      `[TerrainPrecisionFix]` ni refus dans le log, aucun trou ni décalage visible entre quads, et la
+      plus grande correction ; avec puis sans le correctif, pour comparer à l'œil.
+      - Un décollage de Cape Canaveral jusqu'à l'orbite, et une descente sur les sites du point 1.1,
+        pilotés par MechJeb2 pour être rejouables, carburant infini (cheat stock, Alt+F12) pour garder
+        des pièces stock. MechJeb s'ajoute à l'install : la série doit le déclarer (la page RSS dit
+        « Nothing else »). Son source n'est pas dans `kspmod-ext\` : le récupérer s'il faut lire son
+        comportement.
+      - Le protocole d'approche au rover, celui des campagnes stock, couvre sans mod de plus les quads
+        reconstruits et le décalage d'origine au sol : à refaire sur la Lune.
+   4. **La valeur corrigée est-elle au centre des tirages stock ?**
+      [Checking the culprit: loading the same save](docs/checking-the-culprit-loading.md) (« It does not get
+      smaller ») écrit que la *Difference* corrigée « stops at a value the stock draws are scattered
+      around ». En Diag 2, elle tombe près du bas de l'étendue stock sur la Lune (−114,0 dans −146,3 à
+      +101,0 mm), la Terre (+121,97 dans +105,9 à +799,0 mm) et Gilly, en dessous sur le Mun. Si le sol
+      corrigé est systématiquement plus bas, une sauvegarde faite avec le correctif enfonce le vaisseau
+      plus souvent quand on la charge sans. Le test : Diag 2 seul, sans le correctif, RSS tel que
+      publié, 14 chargements de plus de `reload-moon-rss-resave.sfs` et de
+      `reload-earth-rss-resave.sfs` (20 avec les 6 de chaque série publiée), puis la médiane de la série
+      et le rang de la valeur corrigée. Impact : la phrase publique, et le cas
+      [Existing saves](docs/limits-and-solutions/existing-saves.md) à l'envers (désinstaller le mod).
+   5. **Hors RSS, soulevés par cette revue** : deux cas à ajouter à
+      [Limits and solutions](docs/limits-and-solutions.md), à tester en stock (RSS en héritera) :
+      - **les jonctions entre le terrain corrigé et les statiques du KSC** : le correctif déplace le
+        terrain, pas la piste ni le pas de tir, donc l'écart entre les deux change (herbe qui traverse
+        le bord de la piste, marche au pied du pas de tir). Un *To test* dans le cas KSC : captures des
+        bords avec et sans le correctif, un rover qui sort de la piste sur l'herbe, une fusée en
+        `PRELAUNCH` sur le pas de tir. Distinct du point 5 (jonctions entre deux quads) ;
+      - **l'océan** : aucun cas aujourd'hui. Dans les logs RSS de la Terre, le correctif n'a corrigé que
+        des quads de terrain, jamais l'océan, ce qui colle avec sa garde sur `surfaceRelativeQuads` ;
+        la valeur de ce drapeau pour la sphère océan n'a pas été lue. Un amerrissage près d'une côte,
+        log à l'appui.
 2. **Restructurer les 19 autres cas** de `docs/limits-and-solutions/` sur le plan du cas RSS
    (introduction lue dans le code et sur GitHub, `## Checking the culprit` avec Diag 1 et Diag 2,
    `## What the results show`), après avoir décidé comment traiter un cas sans mesure.
