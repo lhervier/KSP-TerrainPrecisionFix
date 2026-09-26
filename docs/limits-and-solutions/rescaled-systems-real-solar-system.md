@@ -5,275 +5,103 @@ Part of [Terrain Precision Fix](../../README.md), one case of [Limits and soluti
 **Status: checked, no problem — this mod breaks nothing with Real Solar System, and improves on its own
 workaround, measured on the Moon and on Earth.**
 
-The defect grows with the radius of the body. A float's step doubles every time a distance crosses a
-power of two, so the rounding this fix removes is not the same size on a rescaled body:
+[Real Solar System](https://github.com/KSP-RO/RealSolarSystem) is a case of its own for two reasons.
+The defect grows with the radius of the body, and there it is at its largest: a float's step is
+125 mm at the distance of the Moon's ground and 500 mm at Earth's, against 62.5 mm on Kerbin. And Real
+Solar System ships a workaround of its own for the symptom, which moves a landed craft back onto the
+ground when it loads, so this mod has to live alongside it.
 
-| body | radius | float step at that distance |
-|---|---|---|
-| Kerbin | 600 000 m | 62.5 mm |
-| the Moon, in [Real Solar System](https://github.com/KSP-RO/RealSolarSystem) | 1 737 100 m | 125 mm |
-| Earth, in Real Solar System | 6 371 000 m | 500 mm |
-
-On Kerbin, the spreads measured in
-[Checking the culprit: loading the same save](../checking-the-culprit-loading.md) are about two steps.
-At the same number of steps, the ground of the Moon should move by about 25 cm from one load to the
-next, and Earth's by about a metre.
-
-**Real Solar System already works around the symptom.** Its source ships a component of its own,
-`VesselGroundPositionEnhancer`
-([its source](https://github.com/KSP-RO/RealSolarSystem/blob/master/Source/VesselGroundPositionEnhancer.cs)),
-added to *"mostly prevent vessels clipping into the ground and as a result flung into the air"*
-([pull request #257](https://github.com/KSP-RO/RealSolarSystem/pull/257)). Whenever a landed craft goes
-off rails, it runs the stock `Vessel.CheckGroundCollision`, which moves the craft onto the ground before
-its physics starts whenever it is more than 10 cm off, and logs `ground contact! - error. Moving Vessel
-up X.XXXm`. A craft that comes back more than 10 cm inside the ground is then not launched but moved,
-in one block. Under 10 cm, the stock method leaves the craft where it is, inside the ground or not. The
-component turns itself off when an assembly named `WorldStabilizer` is loaded, the mod it was written to
-stand in for. The repository also has an option to force it off, which release 20.1.3.0 does not have
-yet.
-
-**This fix has a safeguard.** It refuses any correction too large to be a rounding. It counts
-**sixteen float steps** at the distance of the quad from the centre of the body: 1 m on Kerbin, 2 m on
-the Moon, 8 m on Earth. The sessions on the Moon were run with its first version, a fixed **1 m**
-chosen against a rounding of a few centimetres, which a correction of two steps already exceeds on
-Earth; the sessions on Earth, with the current one.
+The measurements are rows of
+[Checking the culprit: loading the same save](../checking-the-culprit-loading.md): the Moon and Earth
+in the six loads of both instruments, then the reloads in a row of
+[Real Solar System's own workaround](../checking-the-culprit-loading.md#real-solar-systems-own-workaround),
+which also says what that workaround does. This page holds what is specific to this case: the install
+and the saves, what this mod corrected there, and how its safeguard behaves on a larger body.
 
 ## Checking the culprit
 
-**The install.** KSP 1.12.5 with Harmony, ModuleManager and the same release of KSP Community Fixes as
-every other campaign, plus Real Solar System 20.1.3.0 and what it requires (Kopernicus 248, Modular
-Flight Integrator, KSPTextureLoader, the RSS textures), and one of the two instruments,
+**The install.** KSP 1.12.5 with Harmony, ModuleManager and KSP Community Fixes 1.41.1, as in every
+other campaign, plus Real Solar System 20.1.3.0 and what it requires (Kopernicus 248, Modular Flight
+Integrator, KSPTextureLoader, the RSS textures), and one of the two instruments,
 [Terrain Precision Fix Diag 1](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag) or
-[Terrain Precision Fix Diag 2](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2). Nothing else.
-The series marked *RSS's pass off* add an empty assembly named `WorldStabilizer` in `GameData`, with
-nothing in it, which is what turns Real Solar System's component off.
+[Terrain Precision Fix Diag 2](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2), or none for
+the reloads in a row. Nothing else. The series with Real Solar System's workaround off add an empty
+assembly named `WorldStabilizer` in `GameData`, with nothing in it: the workaround turns itself off
+when an assembly of that name is loaded, the mod it was written to stand in for. Real Solar System's
+repository also has an option to force it off, which release 20.1.3.0 does not have yet.
 
 **The saves**, in the `diag` folder of each of the three Diags (here, Diag 1's):
 
 - [`reload-moon-rss.sfs`](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/diag/reload-moon-rss.sfs) — the pod on its tank, landed on flat ground on the
-  Moon, saved without this mod;
+  Moon (latitude 28.61°, longitude −80.62°), saved without this mod;
 - [`reload-moon-rss-resave.sfs`](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/diag/reload-moon-rss-resave.sfs) — the same craft, after loading the save
-  above once with this mod and saving it again;
+  above once with this mod and saving it again (see [Existing saves](existing-saves.md));
 - [`reload-earth-rss-resave.sfs`](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/diag/reload-earth-rss-resave.sfs) — the pod on its tank, on the grass
-  about 1.4 km west of the KSC on Earth, saved with this mod;
+  about 1.4 km west of the KSC on Earth (latitude 28.611°, longitude −80.619°, 74 m above sea level),
+  saved with this mod, the craft in *prelaunch*;
 - [`reload-earth-rss-landed.sfs`](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/diag/reload-earth-rss-landed.sfs) — the save above, with one line
   changed in the file: the situation of the craft, from `PRELAUNCH` to `LANDED`, the situation in
-  which Real Solar System's pass runs.
+  which Real Solar System's workaround runs.
 
 Copy a save into the folder of a sandbox game and load it from that game.
 
-The readings without this mod belong to the instruments, and their screenshots and logs are on the
-instruments' own pages:
+**The screenshots.** Those without this mod are on the instruments' own pages:
 [Terrain Precision Fix Diag 1](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/docs/the-measurements-loading.md#the-same-craft-with-two-parts)
 and
 [Terrain Precision Fix Diag 2](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/blob/master/docs/the-measurements-loading.md#the-readings),
-each followed by a chapter on Real Solar System's own workaround. This page gives their figures, and
-shows the screenshots taken with this mod.
+each followed by a chapter on Real Solar System's own workaround. Those with this mod and Real Solar
+System as released are in
+[Checking the culprit: loading the same save](../checking-the-culprit-loading.md). The one series left
+is this mod with the workaround off:
 
-### Terrain Precision Fix Diag 1, on the Moon
+![Six loads on the Moon, with this mod and without Real Solar System's workaround](../../imgs/Diag1/on-load/2parts/rss/30-moon-fix.png)
 
-The protocol of
-[Terrain Precision Fix Diag 1, over six loads](../checking-the-culprit-loading.md#the-craft-over-six-loads):
-a Mk1 pod on an empty FL-T100, on flat ground on the Moon (latitude 28.61°, longitude −80.62°), saved
-landed, then loaded six times from the pause menu, each reading recorded once *Settled* has frozen.
-The first two rows are `reload-moon-rss.sfs`, the last two `reload-moon-rss-resave.sfs` (see
-[Existing saves](existing-saves.md)).
+*With this mod, Real Solar System's workaround off, Diag 1: six loads of `reload-moon-rss-resave.sfs`.*
 
-| install | what the craft does | spread of *Settled* over six loads |
-|---|---|---|
-| without this mod, Real Solar System as released | moved up by RSS's pass at three loads out of six, by 0.111 to 0.169 m | 262.6 mm (2.1 float steps) |
-| without this mod, RSS's pass off | tips over at the first load | — |
-| with this mod, RSS's pass off | stays put, no `Moving Vessel` line | 0.364 mm |
-| with this mod, Real Solar System as released | stays put; RSS's pass runs at every load and never moves it | 0.395 mm |
+**The logs.** The sessions with this mod are in [`diag/runs`](../../diag/README.md#on-real-solar-system),
+each described there; the sessions without it in the `diag/runs` folder of
+[Diag 1](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/tree/main/diag/runs) and of
+[Diag 2](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/tree/master/diag/runs).
 
-The screenshots without this mod are on Diag 1's page: the six loads in
-[The same craft, with two parts](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/docs/the-measurements-loading.md#the-same-craft-with-two-parts), the first load
-with RSS's pass off in
-[Real Solar System's own workaround](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/docs/the-measurements-loading.md#real-solar-systems-own-workaround).
+## What this mod corrected
 
-![Six loads on the Moon, with this mod and without Real Solar System's pass](../../imgs/Diag1/on-load/2parts/rss/30-moon-fix.png)
+The sessions with this mod ran at `logLevel = Debug`, which logs how far each quad was moved.
 
-*With this mod, RSS's pass off: six loads of the save taken again with this mod.*
-
-![Six loads on the Moon, with this mod and Real Solar System as released](../../imgs/Diag1/on-load/2parts/40-moon.png)
-
-*With this mod, Real Solar System as released: six loads of that same save.*
-
-The two sessions without this mod are logged in
-[Diag 1's `diag/runs`](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/tree/main/diag/runs),
-files `reload-moon-rss-stock.log` and `reload-moon-rss-vgpeoff-stock.log`; the two sessions with it in
-[`diag/runs/reload-moon-rss-fix.log`](../../diag/runs/reload-moon-rss-fix.log) (RSS's pass off) and
-[`diag/runs/reload-moon-rss-fix-vgpe-on.log`](../../diag/runs/reload-moon-rss-fix-vgpe-on.log) (as released).
-
-### What this mod corrected
-
-The sessions with this mod ran at `logLevel = Debug`, which logs how far each quad was moved. On the
-Moon, 2 464 quads were corrected, by 443 mm at most, 3.5 float steps. Earth's terrain was built too
-during those sessions, and the first version of the safeguard, a fixed metre, refused part of it:
+This mod refuses any correction too large to be a rounding: sixteen float steps at the distance of the
+quad from the centre of the body, 1 m on Kerbin, 2 m on the Moon, 8 m on Earth (see
+[Safeguards](../the-fix-this-mod-proposes.md#safeguards)). Its first version was a fixed **1 m**, chosen
+against a rounding of a few centimetres, which a correction of two steps already exceeds on Earth. The
+sessions marked *first safeguard* in [`diag/runs`](../../diag/README.md#on-real-solar-system) ran with
+it: on the Moon, 2 464 quads were corrected, by 443 mm at most, 3.5 float steps. Earth's terrain was
+built too during those sessions, and that first version refused part of it:
 
 ```
 [TerrainPrecisionFix] Earth: a correction of 1.094 m is too large to be a rounding error, the quads concerned are left as stock builds them
 ```
 
-With the current safeguard, on Earth, over the loads of
-[Diag 1 and Diag 2, on Earth](#terrain-precision-fix-diag-1-and-diag-2-on-earth): 1 564 placements of a
-quad corrected over the six loads of Diag 1, by 1 998 mm at most, 4.0 float steps, and 1 576 over the six
-of Diag 2, by 1 230 mm at most, 2.5 steps, none refused. Over the 51 loads of
-[Reloading until something happens](#reloading-until-something-happens) on Earth, 12 128 placements of a
-quad corrected, by 1 992 mm at most, 4.0 float steps, and none refused. 1 998 mm is the largest
-correction seen on any body so far, a quarter of the limit. On the Moon again, with the current
-safeguard, over the six loads of
-[Diag 2, on the Moon](#terrain-precision-fix-diag-2-on-the-moon): 2 112 placements of a quad corrected,
-by 347 mm at most, 2.8 float steps, none refused.
+With the current safeguard, none refused:
 
-### Terrain Precision Fix Diag 2, on the Moon
-
-The protocol of
-[Terrain Precision Fix Diag 2, over six loads](../checking-the-culprit-loading.md#the-ground-over-six-loads),
-which reads the ground itself rather than the craft: a ray straight down under the craft, against the
-height KSP computes for that same spot. Same install with
-[Terrain Precision Fix Diag 2](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2) in place of
-Diag 1, Real Solar System as released, `reload-moon-rss-resave.sfs`, loaded six times.
-
-| install | spread of *Difference* over six loads | *Difference* |
+| series | placements of a quad corrected | largest correction |
 |---|---|---|
-| without this mod | 247.3 mm (2.0 float steps) | −146.3 to +101.0 mm |
-| with this mod | 0.203 mm | −114.12 to −113.92 mm |
+| Earth, the six loads of Diag 1 | 1 564 | 1 998 mm, 4.0 float steps |
+| Earth, the six loads of Diag 2 | 1 576 | 1 230 mm, 2.5 float steps |
+| Earth, the 51 reloads in a row | 12 128 | 1 992 mm, 4.0 float steps |
+| the Moon, the six loads of Diag 2 | 2 112 | 347 mm, 2.8 float steps |
 
-Without this mod, RSS's pass moved the craft up at two loads (0.178 and 0.216 m); the craft jumped at
-one, and tipped over at another, where it was read where it came to rest (see
-[The ground, over six loads](../checking-the-culprit-loading.md#the-ground-over-six-loads)). With this
-mod, it never moved, and the height KSP computes read the same at all six loads.
-
-![Six loads on the Moon, with this mod, Diag 2](../../imgs/Diag2/on-load/40-moon.png)
-
-*With this mod, Real Solar System as released, Diag 2: six loads of the save taken again with this
-mod.* The screenshot without this mod is on Diag 2's page, in
-[The readings](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/blob/master/docs/the-measurements-loading.md#the-readings).
-
-The session without this mod is logged in
-[Diag 2's `diag/runs`](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/tree/master/diag/runs),
-file `reload-moon-rss-stock.log`; the session with it in
-[`diag/runs/reload-moon-rss-fix-diag2.log`](../../diag/runs/reload-moon-rss-fix-diag2.log).
-
-### Terrain Precision Fix Diag 1 and Diag 2, on Earth
-
-The same two protocols, on the same install with the current safeguard: a Mk1 pod on an empty FL-T100,
-on the grass about 1.4 km west of the KSC (latitude 28.611°, longitude −80.619°, 74 m above sea
-level), `reload-earth-rss-resave.sfs`, loaded six times per instrument with this mod and six times per
-instrument without it, one instrument at a time. The craft is in
-the *prelaunch* situation there, where Real Solar System's pass does not run. Stock KSP runs its own
-instead, the same `Vessel.CheckGroundCollision`, at every load: `Vessel.GoOffRails` spares a landed
-craft whose saved terrain levels match the current ones, but skips that check for a craft in
-*prelaunch*. The pass only shows in the log when it moves the craft by more than 10 cm, up or down,
-which it did at five of the loads of Diag 1 and four of Diag 2 without this mod, and at none with it.
-
-| install | the craft (Diag 1), spread of *Settled* | the ground (Diag 2), spread of *Difference* |
-|---|---|---|
-| without this mod | 740.0 mm (1.5 float steps); moved by stock's pass at five loads, up at three (0.251 to 0.456 m) and down at two (0.143 to 0.283 m); **jumped** at one (+82.7 mm) | 693.1 mm (1.4 float steps), *Difference* +105.9 to +799.0 mm; moved up by stock's pass at four loads (0.102 to 0.678 m); **jumped** at one |
-| with this mod | 0.370 mm, never moved | 0.331 mm, *Difference* +121.81 to +122.14 mm, never moved |
-
-![Six loads on Earth, with this mod, Diag 1](../../imgs/Diag1/on-load/2parts/50-earth.png)
-
-*With this mod, Real Solar System as released, Diag 1: six loads of the save made with this mod.*
-
-![Six loads on Earth, with this mod, Diag 2](../../imgs/Diag2/on-load/50-earth.png)
-
-*With this mod, Real Solar System as released, Diag 2: six loads of the same save.*
-
-The screenshots without this mod are on the instruments' pages:
-[Diag 1's](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/docs/the-measurements-loading.md#the-same-craft-with-two-parts) and
-[Diag 2's](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/blob/master/docs/the-measurements-loading.md#the-readings).
-
-The sessions without this mod are logged in
-[Diag 1's `diag/runs`](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/tree/main/diag/runs)
-and [Diag 2's](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/tree/master/diag/runs), file
-`reload-earth-rss-stock.log` in each; the sessions with it in
-[`diag/runs/reload-earth-rss-fix.log`](../../diag/runs/reload-earth-rss-fix.log) (Diag 1) and
-[`diag/runs/reload-earth-rss-fix-diag2.log`](../../diag/runs/reload-earth-rss-fix-diag2.log) (Diag 2).
-
-### Reloading until something happens
-
-No instrument is needed for this one: the same craft, Real Solar System as released, reloaded from the
-pause menu again and again, watching whether it jumps or tips over. Real Solar System leaves one line in
-`KSP.log` each time the craft goes off rails, which counts the loads: `[RSS-VGPE] CheckGroundCollision()`
-for a landed craft, where its pass runs, `[RSS-VGPE] Vessel going off rails in PRELAUNCH` for a craft
-in *prelaunch*, where stock's runs instead. A `Moving Vessel` line is added whenever either pass moved
-the craft.
-
-**Without this mod**, `reload-moon-rss.sfs`, saved without it, loaded 14 times with Diag 1 installed,
-which read the craft over a spread of 341.2 mm at the twelve loads where it stayed upright:
-
-| loads | what the craft does | *Moved*, from Diag 1 |
-|---|---|---|
-| 2 of 14 | **tips over**, with no `Moving Vessel` line: it came back less than 10 cm off the ground, where RSS's pass leaves it | — (a craft lying on its side) |
-| 1 of 14 | **jumps**, with no `Moving Vessel` line, for the same reason | +25.5 mm |
-| 6 of 14 | moved up by RSS's pass before its physics starts, by 0.115 to 0.261 m | +114.7 to +260.6 mm |
-| 5 of 14 | nothing visible: the ground came back lower | −80.6 to −4.7 mm |
-
-Its screenshot, and one of the craft tipped over at the third load, are on Diag 1's page, in
-[Real Solar System's own workaround](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/docs/the-measurements-loading.md#real-solar-systems-own-workaround).
-
-**Without this mod, on the save taken again with it**, `reload-moon-rss-resave.sfs`: at the first load
-of a session, the craft tipped over, with RSS's pass running (one `[RSS-VGPE] CheckGroundCollision()`
-line) and no `Moving Vessel` line; it tipped over again at the fourth of the six loads of
-[Diag 2, on the Moon](#terrain-precision-fix-diag-2-on-the-moon).
-
-**With this mod**, `reload-moon-rss-resave.sfs`, saved again with it, loaded 24 times with
-no instrument installed: the craft never moved, and the log holds 24 `[RSS-VGPE]` lines and no
-`Moving Vessel` line.
-
-**On Earth, with this mod**, no instrument installed either, in one session: `reload-earth-rss-landed.sfs`
-first, brought into flight 27 times, then, after going back to the space centre,
-`reload-earth-rss-resave.sfs`, 24 times. The craft never moved and never jumped, with either pass:
-
-| save | situation of the craft | loads | pass that runs | `Moving Vessel` lines |
-|---|---|---|---|---|
-| `reload-earth-rss-landed.sfs` | landed | 27 | Real Solar System's (27 `[RSS-VGPE] CheckGroundCollision()` lines) | 0 |
-| `reload-earth-rss-resave.sfs` | prelaunch | 24 | stock's (24 `[RSS-VGPE] … in PRELAUNCH` lines) | 0 |
-
-The sessions without this mod are logged in
-[Diag 1's `diag/runs`](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/tree/main/diag/runs),
-files `reload-moon-rss-stock-14loads.log` and, for the tip-over at the first load,
-`reload-moon-rss-stock-tipped.log`; the sessions with it in
-[`diag/runs/reload-moon-rss-fix-24loads.log`](../../diag/runs/reload-moon-rss-fix-24loads.log) (the
-Moon) and [`diag/runs/reload-earth-rss-fix-chain.log`](../../diag/runs/reload-earth-rss-fix-chain.log)
-(Earth, the landed save up to the return to the space centre, then the other).
+1 998 mm is the largest correction seen on any body so far, a quarter of the limit.
 
 ## What the results show
 
-**This mod breaks nothing, and improves the situation.** Real Solar System's own workaround does not
-always work: it moves a craft back onto the ground only when it is more than 10 cm off, and lets it jump
-below that. With this mod, nothing moves any more. With both installed, as players would have them, the
-workaround still runs at every load and, for this defect, never finds anything to correct, without
-getting in the way. It may well have other uses, outside the scope of this fix. The rest of this section details why.
-
-**The defect is there, at the size the float step predicts.** Without this mod, the ground of the Moon
-comes back over 247.3 mm, and the craft resting on it over 262.6 mm, about two steps of
-125 mm: the same number of steps as on Kerbin, on a step twice as large. On Earth, the craft comes back
-over 740.0 mm and the ground over 693.1 mm, 1.5 and 1.4 steps of 500 mm. With this mod, the ground
-comes back over 0.203 mm on the Moon and 0.331 mm on Earth. The *Difference* that stays, about −114 mm
-on the Moon and +122 mm on Earth, is the same at every load: it is how far the collision mesh lies from
-the computed height at that spot, not a rounding.
-
-**Real Solar System's pass catches part of it, and hides it.** A craft that comes back more than 10 cm
-inside the ground is moved up in one block, here at six loads out of fourteen, and one that comes back
-more than 10 cm above it is moved down, as stock's pass did twice in six loads on Earth: nothing is
-launched, but a structure resting on several points is set on its lowest one. A craft that comes back less than
-10 cm inside the ground is left there, and the physics engine pushes it out: one jump and two
-tip-overs in fourteen loads, on a save made without this mod; on the save taken again with it, loaded
-without it, two more tip-overs in seven loads, the pass running every time. On the Moon, 10 cm is less than one float step, and on Earth a fifth
-of one; there, stock's own pass left the craft buried by a few centimetres at one load in each of the
-two series of six, and it jumped. With
-the pass off, the craft tips over at the very first load.
-
-**This mod leaves the pass nothing to do for this defect, and does not fight it.** With this mod, the craft stays put over
-a few tenths of a millimetre, with the pass off as with it on, and loads in a row did not make it jump
-once: 24 on the Moon, 51 on Earth. The pass still runs at every load, and
-never has anything to move: the ground comes back within a millimetre, well inside the 10 cm below which
-the pass leaves a craft where it is. On Earth this holds for both passes, Real Solar System's on the
-landed craft and stock's in *prelaunch*. What is left is wider than on Kerbin's campaigns, and 0.3 % of a
-float step at that distance.
+**This mod breaks nothing, and leaves Real Solar System's workaround nothing to do for this defect.**
+Without this mod, the workaround catches only part of the defect: it acts beyond 10 cm, less than one
+float step on the Moon and a fifth of one on Earth, and the craft still jumps or tips over now and
+then. With this mod, the craft stays put over a few tenths of a millimetre, with the workaround off
+(0.364 mm over six loads on the Moon) as with it on (0.395 mm). With both installed, as players have
+them, the workaround still runs at every load and never moves the craft, without getting in the way:
+24 reloads in a row on the Moon, 51 on Earth, on the landed craft, where Real Solar System's
+workaround runs, and in *prelaunch*, where stock's own pass runs instead. The workaround may well have
+other uses, outside the scope of this fix. What is left is wider than on Kerbin's campaigns, and at
+most 0.3 % of a float step at that distance.
 
 **The safeguard grows with the body.** A fixed metre refused corrections of 1.094 m and 1.318 m on
 Earth, leaving part of its terrain as stock builds it. Counted in float steps at the quad's distance, it

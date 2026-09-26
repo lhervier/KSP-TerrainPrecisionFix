@@ -178,13 +178,16 @@ off rails, it runs the stock `Vessel.CheckGroundCollision`, which moves the craf
 its physics starts whenever it is more than 10 cm off, inside the ground or above it, in one block, and
 logs `ground contact! - error. Moving Vessel up X.XXXm` (or `down`). Under 10 cm, the stock method leaves the craft where it is, inside the ground
 or not. The component only acts on a *landed* craft; for a craft in *prelaunch*, as on Earth near the
-KSC, stock KSP runs that same method itself at every load. The component turns itself off when an
-assembly named `WorldStabilizer` is loaded, which is how it is turned off below.
+KSC, stock KSP runs that same method itself at every load: `Vessel.GoOffRails` spares a landed craft
+whose saved terrain levels match the current ones, but never a craft in *prelaunch*. The component
+turns itself off when an assembly named `WorldStabilizer` is loaded, which is how it is turned off below.
 
 **Reloading until something happens.** No instrument is needed for this one: the same saves, Real Solar
 System as released, reloaded from the pause menu again and again, watching whether the craft jumps or
 tips over. Real Solar System leaves one line in `KSP.log` each time the craft goes off rails, which
-counts the loads, and a `Moving Vessel` line is added whenever either pass moved the craft. The two
+counts the loads: `[RSS-VGPE] CheckGroundCollision()` for a landed craft, where its workaround runs,
+`[RSS-VGPE] Vessel going off rails in PRELAUNCH` for a craft in *prelaunch*, where stock's pass runs
+instead. A `Moving Vessel` line is added whenever either pass moved the craft. The two
 series with its workaround turned off add an empty assembly named `WorldStabilizer` in `GameData`.
 
 | install | save | loads | what the craft does |
@@ -203,8 +206,8 @@ series with its workaround turned off add an empty assembly named `WorldStabiliz
 `reload-earth-rss-landed.sfs` is `reload-earth-rss-resave.sfs` with one line changed in the file: the
 situation of the craft, from `PRELAUNCH` to `LANDED`, the situation in which the workaround runs. The
 two Earth series without this mod are the six loads of Diag 1 and of Diag 2 above, and the Moon series
-of Diag 2 without this mod is its six loads above. The saves, the screenshots and the logs
-of every series are in
+of Diag 2 without this mod is its six loads above. The install, the saves and the logs of every
+series, and what this mod corrected there, are in
 [Rescaled systems: Real Solar System](limits-and-solutions/rescaled-systems-real-solar-system.md).
 
 **The workaround catches part of the defect, and hides it.** A craft that comes back more than 10 cm
