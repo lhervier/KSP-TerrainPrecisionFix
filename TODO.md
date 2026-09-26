@@ -37,7 +37,7 @@ ensuite, sans ordre imposé.
    (introduction lue dans le code et sur GitHub, `## Checking the culprit` avec Diag 1 et Diag 2,
    `## What the results show`), après avoir décidé comment traiter un cas sans mesure.
 3. **Relire `KSPCF-issue.md`, `KSPCF-comment.md` et `KSPCF-relecture.md`**, pas revus depuis RSS.
-   Au moins : la Terre (le saut de +88,8 mm sans le correctif, jusqu’à 4,0 pas de correction avec le nouveau garde-fou) est
+   Au moins : la Terre (un saut par série de six sans le correctif, jusqu’à 4,0 pas de correction avec le nouveau garde-fou) est
    absente de la relecture ; son point 6 justifie seize pas par les 3,5 pas de la Lune, alors que la
    Terre en a donné 4,0 ; l'issue ne cite pas RSS, alors que la relecture en fait la seule repro
    visible : décider s'il y entre.
