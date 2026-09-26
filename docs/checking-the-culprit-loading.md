@@ -104,7 +104,8 @@ The install is the one above, plus Real Solar System 20.1.3.0 and what it requir
 Flight Integrator, KSPTextureLoader, the RSS textures), with both instruments. The craft is a capsule on
 an empty fuel tank. Real Solar System ships a workaround of its own for the symptom: at every load, it
 moves a landed craft back onto the ground when it is more than 10 cm off, and leaves it where it is
-below that. Every series below keeps it on, as players have it, unless said otherwise. The saves, the
+below that. Every series below keeps it on, as players have it, unless said otherwise; near the KSC on
+Earth the craft is in *prelaunch*, where stock KSP runs the same pass instead. The saves, the
 screenshots, the logs and the full readings are in
 [Rescaled systems: Real Solar System](limits-and-solutions/rescaled-systems-real-solar-system.md).
 
@@ -122,11 +123,13 @@ screenshots, the logs and the full readings are in
 | the Moon | 241.2 mm | 0.226 mm | 0.541 / 0.002 mm |
 | Earth, near the KSC | 301.2 mm | 0.289 mm | 2.067 / 0.036 mm |
 
-**Reloading until something happens**, the same save on the Moon, watching the craft. Without this mod,
+**Reloading until something happens**, the same saves, watching the craft. Without this mod,
 fourteen loads: the workaround moved the craft up in one block six times, and three times the craft came
 back buried by less than its 10 cm and jumped. With its workaround turned off, the craft tipped over at
 the very first load. With this mod, twenty-four loads in a row without an instrument: the craft never
-moved, and the workaround, which still runs at every load, never had anything to move.
+moved, and the workaround, which still runs at every load, never had anything to move. On Earth, with
+this mod, fifty-one loads in a row, with the workaround running on a landed craft and with stock's own
+pass on a craft in *prelaunch*: the craft never moved either.
 
 ## What the measurements say
 
