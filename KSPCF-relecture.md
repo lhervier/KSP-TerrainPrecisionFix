@@ -132,7 +132,7 @@ méthodes, vérifié le 2026-09-24 ; et on accepte volontiers un transpiler, c'e
 distance du quad (seize : 1 m sur Kerbin, 8 m sur la Terre de RSS). Il demandera d'où vient seize.
 Réponse : quatre fois le plus grand arrondi mesuré (3,5 pas sur la Lune de RSS), et très loin d'un
 mauvais repère, qui se trompe de kilomètres ; la plus grande correction sur les corps stock reste à
-relever ([TODO.md](TODO.md), point 4). Pour la visibilité : chaque refus est journalisé une fois par
+relever ([TODO.md](TODO.md), point 7). Pour la visibilité : chaque refus est journalisé une fois par
 corps (un `Warning`) ; s'il le veut plus visible, c'est une ligne.
 
 **7. « Le calcul me semble juste ; pour les effets de bord, voilà où je chercherais. »** C'est la
