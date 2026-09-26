@@ -44,7 +44,7 @@ loads. That workaround does not always work: it only acts when the craft is more
 without this mod the craft still jumps now and then, and is moved up in one block the rest of the time.
 With this mod, nothing moves any more: the craft and the ground come back within a fraction of a
 millimetre on both bodies, the workaround never has anything to correct here — it may well have other
-uses, outside the scope of this fix — and dozens of reloads on the Moon did not make the craft jump
+uses, outside the scope of this fix — and dozens of reloads on each body did not make the craft jump
 once. The safeguard grows with the body
 too, so none of Earth's terrain is left uncorrected.
 

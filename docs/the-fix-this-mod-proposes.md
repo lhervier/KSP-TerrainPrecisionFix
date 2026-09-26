@@ -94,7 +94,8 @@ apply, and each vertex is left with a reference comparison before stock runs unt
   builds it: if the frame is ever not the expected one, the terrain stays where KSP puts it instead of
   going somewhere else. The step is taken at the distance of the quad from the centre of the body, so
   the limit is 1 m on Kerbin and grows with the body as the rounding does — 8 m on Earth in Real Solar
-  System — while a wrong frame misses by kilometres. The largest correction measured so far is 3.5
-  steps, on the Moon of Real Solar System;
+  System — while a wrong frame misses by kilometres. The largest correction measured so far is 4.0
+  steps, 1 992 mm on Earth in Real Solar System (3.5 steps on its Moon), a quarter of the limit:
+  [What this mod corrected](limits-and-solutions/rescaled-systems-real-solar-system.md#what-this-mod-corrected);
 - if any patch fails to install, none of them does anything.
 
