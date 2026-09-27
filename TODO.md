@@ -60,18 +60,7 @@ ensuite, sans ordre imposé.
         comportement.
       - Le protocole d'approche au rover, celui des campagnes stock, couvre sans mod de plus les quads
         reconstruits et le décalage d'origine au sol : à refaire sur la Lune.
-   3. **La valeur corrigée est-elle au centre des tirages stock ?**
-      [Checking the culprit: loading the same save](docs/checking-the-culprit-loading.md) (« It does not get
-      smaller ») écrit que la *Difference* corrigée « stops at a value the stock draws are scattered
-      around ». En Diag 2, elle tombe près du bas de l'étendue stock sur la Lune (−114,0 dans −146,3 à
-      +101,0 mm), la Terre (+121,97 dans +105,9 à +799,0 mm) et Gilly, en dessous sur le Mun. Si le sol
-      corrigé est systématiquement plus bas, une sauvegarde faite avec le correctif enfonce le vaisseau
-      plus souvent quand on la charge sans. Le test : Diag 2 seul, sans le correctif, RSS tel que
-      publié, 14 chargements de plus de `reload-moon-rss-resave.sfs` et de
-      `reload-earth-rss-resave.sfs` (20 avec les 6 de chaque série publiée), puis la médiane de la série
-      et le rang de la valeur corrigée. Impact : la phrase publique, et le cas
-      [Existing saves](docs/limits-and-solutions/existing-saves.md) à l'envers (désinstaller le mod).
-   4. **Hors RSS, soulevés par cette revue** : deux cas à ajouter à
+   3. **Hors RSS, soulevés par cette revue** : deux cas à ajouter à
       [Limits and solutions](docs/limits-and-solutions.md), à tester en stock (RSS en héritera) :
       - **les jonctions entre le terrain corrigé et les statiques du KSC** : le correctif déplace le
         terrain, pas la piste ni le pas de tir, donc l'écart entre les deux change (herbe qui traverse
