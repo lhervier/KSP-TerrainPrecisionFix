@@ -103,10 +103,13 @@ toujours pas de destruction à la demande.
 et elle est juste.** Tout ce qui reste enfant de la sphère (quads des niveaux inférieurs, `PQSCity`,
 scatter) est placé par la matrice en float, les quads corrigés par la rotation en double : l'écart
 entre les deux est du même ordre que le défaut. La page des limites le dit pour les rochers (*Rocks,
-grass and trees* : écart élargi sur Kerbin) et pour le KSC (*not covered*), **pas pour les raccords
-entre un quad corrigé et son voisin d'un niveau inférieur**, jamais regardés. À ajouter en chapitre
-**Status: TBD** dans *Limits and solutions* (une capture au raccord, avec et sans le correctif) :
-dans [TODO.md](TODO.md), **avant** l'issue.
+grass and trees* : écart élargi sur Kerbin), pour le KSC (*not covered*) et, désormais, pour les
+raccords entre niveaux ([The seam between subdivision levels](docs/limits-and-solutions/the-seam-between-subdivision-levels.md),
+**TBD**). Ce cas-là est le plus exposé : le stock y raccorde exactement ses quads, et le correctif y
+ouvrirait une marche (jusqu'à ~2 m sur la Terre de RSS), lu dans le code et pas mesuré. Un mainteneur
+qui la verra en premier aura raison contre nous : la mesure de son *To test* doit précéder l'issue
+(point 5 du [TODO.md](TODO.md)), et une solution aussi si la marche se confirme, puisque le mod ne sort
+pas tant qu'une limite reste.
 
 **3. « Et Principia ? »** Chapitre *Principia* ajouté à *Limits and solutions* (TBD, lu dans le
 source). Principia n'a ni patch Harmony ni code de terrain ; il écrit `body.rotation` en double et le
@@ -165,6 +168,6 @@ Regarder l'accueil de #435/#436 avant d'ouvrir.
 
 - **Un kraken à la demande sur KSP stock** (point 1). Sur Kerbin, aucune mesure ne le donnera : c'est
   la nature même du défaut. Sous RSS, on l'a, au prix d'un composant de RSS à couper.
-- **Les raccords entre niveaux** (point 2), tant que personne ne les a regardés.
+- **Les raccords entre niveaux** (point 2), tant que la marche prédite n'est pas mesurée.
 - **La liste complète des mods touchés** : elle est ouverte, et l'issue le dit. C'est l'aide qu'on lui
   demande, pas une faiblesse à cacher.
