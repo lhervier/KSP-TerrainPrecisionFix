@@ -103,6 +103,17 @@ None today.
 
 ## Still to test
 
+### The seam between subdivision levels
+
+**TBD — read in the code, not measured, and expected to be a real problem.** Stock makes the edges of
+two neighbouring quads meet, even across subdivision levels: both are off by the same rounding. This fix
+corrects the highest level only, so where the corrected terrain meets the coarser quads around it, the
+coarser side is still off by the whole stock rounding: a step, all along the edge of the corrected zone,
+of the order of the correction — close to two metres at most on Earth under Real Solar System. Visual
+only, since those coarser quads have no collider.
+
+**→ Full chapter: [The seam between subdivision levels](limits-and-solutions/the-seam-between-subdivision-levels.md)**
+
 ### The KSC buildings, runway and launchpad
 
 **Not covered by this fix, and to test with it.** `PQSCity` and `PQSCity2` place the statics through the same kind

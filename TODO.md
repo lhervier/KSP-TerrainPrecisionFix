@@ -71,7 +71,7 @@ ensuite, sans ordre imposé.
         des quads de terrain, jamais l'océan, ce qui colle avec sa garde sur `surfaceRelativeQuads` ;
         la valeur de ce drapeau pour la sphère océan n'a pas été lue. Un amerrissage près d'une côte,
         log à l'appui.
-2. **Restructurer les 19 autres cas** de `docs/limits-and-solutions/` sur le plan du cas RSS
+2. **Restructurer les 20 autres cas** de `docs/limits-and-solutions/` sur le plan du cas RSS
    (introduction lue dans le code et sur GitHub, `## Checking the culprit` avec Diag 1 et Diag 2,
    `## What the results show`), après avoir décidé comment traiter un cas sans mesure.
 3. **Relire `KSPCF-issue.md`, `KSPCF-comment.md` et `KSPCF-relecture.md`**, pas revus depuis RSS.
@@ -87,12 +87,13 @@ ensuite, sans ordre imposé.
    qu'en appui du chiffre de performance et peuvent attendre, mais leur *Get it* ne doit pas non plus
    promettre un téléchargement qui n'existe pas. Vérifier tous les liens `releases/latest` de la famille
    avant d'ouvrir l'issue.
-5. **Les raccords entre un quad corrigé et ses voisins d'un niveau inférieur.** Le correctif place les
-   quads du niveau max par la rotation en double ; leurs voisins d'un niveau en dessous restent placés
-   par la matrice en float de la sphère, et l'écart entre les deux est du même ordre que le défaut. Personne
-   n'a regardé le raccord : une capture au bord d'un quad du niveau max, avec et sans le correctif, et un
-   chapitre **Status** dans [Limits and solutions](docs/limits-and-solutions.md). Objection anticipée dans
-   [KSPCF-relecture.md](KSPCF-relecture.md), point 2.
+5. **Le raccord entre niveaux de subdivision** : le problème est décrit dans le cas
+   [The seam between subdivision levels](docs/limits-and-solutions/the-seam-between-subdivision-levels.md)
+   (prédiction lue dans le code, pas mesurée : une marche au bord de la zone corrigée). Reste :
+   - **la mesure** décrite dans son *To test*, la Terre de RSS en priorité, puis le statut du cas ;
+   - **lire ce qui se passe au décalage de l'origine flottante** (le cas le laisse ouvert) ;
+   - **si la marche se confirme**, une solution : piste esquissée dans le chapitre *A possible solution*
+     du cas. Le cas deviendra alors un sous-dossier.
 6. **Une sauvegarde refaite avec le correctif ne saute plus.** Sur `switch-kerbin` (faite sans), la
    capsule se pose à −31,8 mm, au même endroit à chaque fois. Le test : avec le correctif, charger,
    `]`, repasser au rover, sauvegarder sous un autre nom, puis six fois « charger → *Record* → `]` →
