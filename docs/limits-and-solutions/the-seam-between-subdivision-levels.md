@@ -29,7 +29,7 @@ System, where the largest correction read so far is close to two metres (see
 It stays visual: the quads below the highest level have no collider (see
 [Colliders below the highest subdivision level](colliders-below-the-highest-subdivision-level.md)), so
 a craft never stands on that edge. It would be seen from the craft, some distance away, never under
-it.
+it (see [What a player sees, on Earth](#what-a-player-sees-on-earth)).
 
 The chapters below explain, from the code, why the edges meet in stock and why they would not with this
 fix.
@@ -87,6 +87,29 @@ step, and it is the same all along the edge of the corrected zone.
 The coarser quads cannot be corrected the same way: they hang from the terrain sphere, whose origin is
 the centre of the body, and Unity would store any precise position given to them as a 600 km float
 again (see [Only where a craft can stand](../the-fix-this-mod-proposes.md#only-where-a-craft-can-stand)).
+
+## What a player sees, on Earth
+
+The step, if it is there, runs along the edge of the zone of the highest level, which follows the
+active craft: it is always some distance away from the camera, never under the craft. On Earth under
+Real Solar System, where it should be largest, that distance is large.
+
+On a launch from Cape Canaveral with this mod, on Real Solar System as released plus MechJeb (the
+session is [`runs/launch-earth-rss-fix.log`](../../diag/runs/launch-earth-rss-fix.log), at
+`logLevel = Debug`), the quads of the highest level placed around the launchpad were 180, 14 wide by
+16 long, each about 5 km across: the edge of the corrected zone ran 25 to 35 km from the pad. The
+largest correction of that session was 1 563 mm. A step of that size, 30 km away, is about a fifth of a
+pixel, even in a screenshot of 7680 × 4320 with the stock field of view of 60°, and nothing shows in
+this one:
+
+[![With this mod, on Real Solar System: a rocket on the launchpad at Cape Canaveral, seen from high above](../../imgs/seam-between-levels/launchpad-earth-fix-small.jpg)](../../imgs/seam-between-levels/launchpad-earth-fix-8k.png)
+
+*With this mod, on Real Solar System as released: a small rocket on the launchpad at Cape Canaveral,
+the camera zoomed out, screenshot taken at 7680 × 4320 (`SCREENSHOT_SUPERSIZE = 4` in `settings.cfg`,
+on a 1920 × 1080 window). Click it for the full resolution.*
+
+Not seeing the step is not measuring it: its actual size is still to measure (see *To test*, at the end
+of this page).
 
 ## A possible solution
 
