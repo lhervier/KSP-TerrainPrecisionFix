@@ -46,7 +46,8 @@ With this mod, nothing moves any more: the craft and the ground come back within
 millimetre on both bodies, the workaround never has anything to correct here — it may well have other
 uses, outside the scope of this fix — and dozens of reloads on each body did not make the craft jump
 once. The safeguard grows with the body
-too, so none of Earth's terrain is left uncorrected.
+too, so none of the terrain is left uncorrected, on Earth as on Venus, Mars and Mercury, where it was
+checked as well.
 
 **→ Full chapter: [Rescaled systems: Real Solar System](limits-and-solutions/rescaled-systems-real-solar-system.md)**
 

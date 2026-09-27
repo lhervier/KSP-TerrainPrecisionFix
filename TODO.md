@@ -19,17 +19,10 @@ ensuite, sans ordre imposé.
    la Terre (près du KSC, en `PRELAUNCH`) sont mesurées et publiées dans
    [Rescaled systems: Real Solar System](docs/limits-and-solutions/rescaled-systems-real-solar-system.md) ;
    la Terre à la chaîne (en `PRELAUNCH` et en `LANDED`, repose de RSS comprise) aussi, et la page
-   publique suit (plus grande correction : 4,0 pas). Son *Still to test* liste les points 1.1 et 1.2 ;
-   les points 1.3 et 1.4 sont à y ajouter. Reste :
-   1. **Vénus, Mars, Mercure : la plus grande correction** (pas de 500 / 250 / 250 mm). Alimente le
-      point 7 (marge du garde-fou). Pas d'atterrissage piloté : une sauvegarde fabriquée en copiant
-      `reload-earth-rss-resave.sfs` et en y changeant le corps de référence, la latitude, la longitude
-      et l'altitude (ajustée au premier chargement, puis re-sauvegarde) ; celle de la Lune, qui porte
-      les coordonnées du KSC, a visiblement été faite ainsi. Six chargements par corps, sur deux ou
-      trois sites, correctif en `logLevel = Debug`, aucun Diag. Relever la plus grande correction
-      (`origin moved by … mm`), et vérifier qu'il n'y a ni exception `[TerrainPrecisionFix]` ni refus
-      (`too large to be a rounding error`).
-   2. **La piste du KSC terrestre : le correctif rend-il inutile le verrou d'origine de RSS ?** RSS
+   publique suit (plus grande correction : 4,0 pas) ; Vénus, Mars et Mercure aussi, pour la plus grande
+   correction (sauvegardes dans [diag/](diag/README.md)). Son *Still to test* liste les points 1.1 et
+   1.2. Reste :
+   1. **La piste du KSC terrestre : le correctif rend-il inutile le verrou d'origine de RSS ?** RSS
       intègre RSSRunwayFix, qui fait deux choses. Il coupe les colliders des sections de la piste pour
       ne garder que `runway_collider` : il vise les bosses aux jonctions entre sections, un défaut entre
       statiques auquel le correctif ne touche pas ; cette moitié reste utile quoi qu'il arrive. Et, tant
@@ -53,20 +46,21 @@ ensuite, sans ordre imposé.
         qu'il ne sert plus à rien.
 
       Le cas KSC ne parle pas encore de RSS.
-   3. **Un vol sous RSS, pas seulement des chargements.** Tout ce qui est mesuré sous RSS est un
+   2. **Un vol sous RSS, pas seulement des chargements.** Tout ce qui est mesuré sous RSS est un
       vaisseau posé qu'on recharge ; jamais des quads construits en continu pendant les décalages
       d'origine (`PQ.PreciseUpdateSubQuadsPosition`), ce que vit tout joueur RSS à chaque lancement.
       C'est un test de non-régression, pas une mesure par un Diag : ni exception
       `[TerrainPrecisionFix]` ni refus dans le log, aucun trou ni décalage visible entre quads, et la
       plus grande correction ; avec puis sans le correctif, pour comparer à l'œil.
-      - Un décollage de Cape Canaveral jusqu'à l'orbite, et une descente sur les sites du point 1.1,
-        pilotés par MechJeb2 pour être rejouables, carburant infini (cheat stock, Alt+F12) pour garder
+      - Un décollage de Cape Canaveral jusqu'à l'orbite, et une descente sur les sites de Vénus, Mars
+        et Mercure (ceux des sauvegardes de `diag\` ; celui de Mercure est très accidenté, cf. la page
+        RSS), pilotés par MechJeb2 pour être rejouables, carburant infini (cheat stock, Alt+F12) pour garder
         des pièces stock. MechJeb s'ajoute à l'install : la série doit le déclarer (la page RSS dit
         « Nothing else »). Son source n'est pas dans `kspmod-ext\` : le récupérer s'il faut lire son
         comportement.
       - Le protocole d'approche au rover, celui des campagnes stock, couvre sans mod de plus les quads
         reconstruits et le décalage d'origine au sol : à refaire sur la Lune.
-   4. **La valeur corrigée est-elle au centre des tirages stock ?**
+   3. **La valeur corrigée est-elle au centre des tirages stock ?**
       [Checking the culprit: loading the same save](docs/checking-the-culprit-loading.md) (« It does not get
       smaller ») écrit que la *Difference* corrigée « stops at a value the stock draws are scattered
       around ». En Diag 2, elle tombe près du bas de l'étendue stock sur la Lune (−114,0 dans −146,3 à
@@ -77,7 +71,7 @@ ensuite, sans ordre imposé.
       `reload-earth-rss-resave.sfs` (20 avec les 6 de chaque série publiée), puis la médiane de la série
       et le rang de la valeur corrigée. Impact : la phrase publique, et le cas
       [Existing saves](docs/limits-and-solutions/existing-saves.md) à l'envers (désinstaller le mod).
-   5. **Hors RSS, soulevés par cette revue** : deux cas à ajouter à
+   4. **Hors RSS, soulevés par cette revue** : deux cas à ajouter à
       [Limits and solutions](docs/limits-and-solutions.md), à tester en stock (RSS en héritera) :
       - **les jonctions entre le terrain corrigé et les statiques du KSC** : le correctif déplace le
         terrain, pas la piste ni le pas de tir, donc l'écart entre les deux change (herbe qui traverse
@@ -94,7 +88,7 @@ ensuite, sans ordre imposé.
 3. **Relire `KSPCF-issue.md`, `KSPCF-comment.md` et `KSPCF-relecture.md`**, pas revus depuis RSS.
    Au moins : la Terre (un saut par série de six sans le correctif, jusqu’à 4,0 pas de correction avec le nouveau garde-fou) est
    absente de la relecture ; son point 6 justifie seize pas par les 3,5 pas de la Lune, alors que la
-   Terre en a donné 4,0 ; l'issue ne cite pas RSS, alors que la relecture en fait la seule repro
+   Terre en a donné 4,0 et Vénus 3,6 ; l'issue ne cite pas RSS, alors que la relecture en fait la seule repro
    visible : décider s'il y entre.
 4. **Une release GitHub sur chaque dépôt vers lequel l'issue envoie le lecteur.** Aucun n'en a : ce
    dépôt, Diag 1, Diag 2 et Diag 3. L'issue commence par faire installer Diag 1, et les trois README des
@@ -116,10 +110,10 @@ ensuite, sans ordre imposé.
    *Record* » ; *Moved* doit rester à quelques centièmes de zéro. Il complète le chapitre
    [Existing saves](docs/limits-and-solutions/existing-saves.md) et la page du changement de vaisseau.
 7. **Confirmer la marge du garde-fou.** Il compte seize pas de float à la distance du quad (1 m sur
-   Kerbin, 8 m sur la Terre de RSS). Plus grande correction vue : 4,0 pas sur la Terre (3,5 sur la
-   Lune). Relever la plus grande correction (`origin moved by … mm`) en `logLevel = Debug` sur
-   Kerbin, la Mun, Minmus et Gilly (et Vénus, Mars, Mercure, point 1.1), et vérifier qu'elle reste loin
-   de seize pas.
+   Kerbin, 8 m sur la Terre de RSS). Plus grande correction vue : 4,0 pas sur la Terre (3,6 sur
+   Vénus, 3,5 sur la Lune, environ un sur Mars et Mercure), aucun refus sur ces cinq corps. Reste à
+   relever la plus grande correction (`origin moved by … mm`) en `logLevel = Debug` sur Kerbin, la
+   Mun, Minmus et Gilly, et vérifier qu'elle reste loin de seize pas.
 8. **Deferred : refaire les campagnes Diag 1 et Diag 2 avec le correctif et Deferred** (six chargements,
    et le protocole d'approche). C'est le mod qui a fait tomber `PQSOnlyStartOnce` : le résultat, bon ou
    mauvais, entre dans le commentaire, qui l'annonce aujourd'hui comme « next ». Chapitre *Deferred* de

@@ -7,10 +7,12 @@ installed. What their readings say is in
 [Switching to a craft far away](../docs/checking-the-culprit-switching.md) and
 [Rescaled systems: Real Solar System](../docs/limits-and-solutions/rescaled-systems-real-solar-system.md).
 
-The saves are not here: each protocol belongs to an instrument, and its saves are in the `diag` folder
-of [Terrain Precision Fix Diag 1](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/tree/main/diag)
+The saves of the protocols are not here: each protocol belongs to an instrument, and its saves are in
+the `diag` folder of [Terrain Precision Fix Diag 1](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/tree/main/diag)
 and of [Terrain Precision Fix Diag 2](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/tree/master/diag),
-along with the logs of the same sessions without this mod.
+along with the logs of the same sessions without this mod. Only the loads on Venus, Mars and Mercury,
+taken with this mod alone and no instrument, have their saves here, described in
+[Rescaled systems: Real Solar System](../docs/limits-and-solutions/rescaled-systems-real-solar-system.md#checking-the-culprit).
 
 ## On the stock system
 
@@ -51,3 +53,10 @@ a fixed metre, and hold the line where it refused part of Earth's terrain.
 - [`runs/reload-earth-rss-fix-chain.log`](runs/reload-earth-rss-fix-chain.log) — no instrument, one
   session: 27 loads of `reload-earth-rss-landed.sfs`, the craft *landed*, then, after going back to the
   space centre, 24 of `reload-earth-rss-resave.sfs`, the craft in *prelaunch*.
+- [`runs/reload-venus-mars-rss-fix.log`](runs/reload-venus-mars-rss-fix.log) — no instrument, one
+  session: six loads of [`reload-venus-rss.sfs`](reload-venus-rss.sfs), then six of
+  [`reload-mars-rss.sfs`](reload-mars-rss.sfs). The six loads after them, on a second site of Mars,
+  are not used.
+- [`runs/reload-mercury-rss-fix.log`](runs/reload-mercury-rss-fix.log) — no instrument: six loads of
+  [`reload-mercury-rss.sfs`](reload-mercury-rss.sfs). Each one logs KSP moving the craft down 22.4 m,
+  the terrain detail its save describes.
