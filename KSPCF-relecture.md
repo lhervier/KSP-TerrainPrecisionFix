@@ -104,12 +104,13 @@ et elle est juste.** Tout ce qui reste enfant de la sphère (quads des niveaux i
 scatter) est placé par la matrice en float, les quads corrigés par la rotation en double : l'écart
 entre les deux est du même ordre que le défaut. La page des limites le dit pour les rochers (*Rocks,
 grass and trees* : écart élargi sur Kerbin), pour le KSC (*not covered*) et, désormais, pour les
-raccords entre niveaux ([The seam between subdivision levels](docs/limits-and-solutions/the-seam-between-subdivision-levels.md),
-**TBD**). Ce cas-là est le plus exposé : le stock y raccorde exactement ses quads, et le correctif y
-ouvrirait une marche (jusqu'à ~2 m sur la Terre de RSS), lu dans le code et pas mesuré. Un mainteneur
-qui la verra en premier aura raison contre nous : la mesure de son *To test* doit précéder l'issue
-(point 5 du [TODO.md](TODO.md)), et une solution aussi si la marche se confirme, puisque le mod ne sort
-pas tant qu'une limite reste.
+raccords entre niveaux ([The seam between subdivision levels](docs/limits-and-solutions/the-seam-between-subdivision-levels.md)).
+**Mesuré le 2026-09-28 sur la Terre de RSS** (KSP-TerrainPrecisionFixDiag4) : contrairement à ce que
+laissait croire le code, **le stock ne raccorde pas exactement ses quads**, la fente existe et se voit
+sans le correctif ; le correctif l'agrandit (médiane de l'écart max 1,2 → 1,9 m) et elle se voit plus
+souvent. Réponse honnête au relecteur : oui, on a regardé, les fentes existent déjà en stock et le
+correctif les élargit ; une correction à part est proposée (piste C du cas). Reste à mesurer les corps
+stock avec le correctif (*Still to test* du cas), et le mod ne sort pas tant qu'une limite reste.
 
 **3. « Et Principia ? »** Chapitre *Principia* ajouté à *Limits and solutions* (TBD, lu dans le
 source). Principia n'a ni patch Harmony ni code de terrain ; il écrit `body.rotation` en double et le
@@ -135,7 +136,7 @@ méthodes, vérifié le 2026-09-24 ; et on accepte volontiers un transpiler, c'e
 distance du quad (seize : 1 m sur Kerbin, 8 m sur la Terre de RSS). Il demandera d'où vient seize.
 Réponse : quatre fois le plus grand arrondi mesuré (3,5 pas sur la Lune de RSS), et très loin d'un
 mauvais repère, qui se trompe de kilomètres ; la plus grande correction sur les corps stock reste à
-relever ([TODO.md](TODO.md), point 7). Pour la visibilité : chaque refus est journalisé une fois par
+relever ([TODO.md](TODO.md), point 6). Pour la visibilité : chaque refus est journalisé une fois par
 corps (un `Warning`) ; s'il le veut plus visible, c'est une ligne.
 
 **7. « Le calcul me semble juste ; pour les effets de bord, voilà où je chercherais. »** C'est la
@@ -168,6 +169,8 @@ Regarder l'accueil de #435/#436 avant d'ouvrir.
 
 - **Un kraken à la demande sur KSP stock** (point 1). Sur Kerbin, aucune mesure ne le donnera : c'est
   la nature même du défaut. Sous RSS, on l'a, au prix d'un composant de RSS à couper.
-- **Les raccords entre niveaux** (point 2), tant que la marche prédite n'est pas mesurée.
+- ~~**Les raccords entre niveaux** (point 2), tant que la marche prédite n'est pas mesurée.~~ Mesurés
+  depuis (2026-09-28, Diag 4) : la fente existe en stock, le correctif l'élargit ; la réponse est au
+  point 2, et dans le cas *The seam between subdivision levels*.
 - **La liste complète des mods touchés** : elle est ouverte, et l'issue le dit. C'est l'aide qu'on lui
   demande, pas une faiblesse à cacher.
