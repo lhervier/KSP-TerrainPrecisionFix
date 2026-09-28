@@ -24,13 +24,16 @@ The safeguard never fired, the log reported Kerbin's terrain placed in double pr
 left is in the tenths of a millimetre — the same order as the campaigns without Kopernicus. On a stock
 body, Kopernicus leaves the quads hanging in the frame this fix computes.
 
-**Still TBD: the collision surface itself.** The readings above are the position the quads are placed
-at — the cause — not the surface a craft rests on, which only
-[Terrain Precision Fix Diag 2](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2) reads, and which
-has never been read with Kopernicus installed. *To test:* the campaigns of
-[Checking the culprit: loading the same save](../checking-the-culprit-loading.md) — Diag 1 and Diag 2, six loads on Kerbin, with and
-without this fix — run on a Kopernicus install with nothing else, so that the result stands on its own
-protocol rather than on a campaign about scatter.
+**The collision surface itself.** The readings above are the position the quads are placed at — the
+cause — not the surface a craft rests on, which only
+[Terrain Precision Fix Diag 2](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2) reads. That
+surface was read on Earth in [Real Solar System](rescaled-systems-real-solar-system.md), a stock body
+rebuilt by Kopernicus: Real Solar System's Earth is Kerbin, reconfigured by Kopernicus 248 to another
+radius and another terrain. The protocol is the one of
+[Checking the culprit: loading the same save](../checking-the-culprit-loading.md#the-ground-over-six-loads):
+one save, loaded six times, with and without this fix. Under the craft, the collision surface spreads
+over 693.1 mm without this mod and 0.331 mm with it, and the craft, loaded again and again with this
+mod, never moved.
 
 Two things read in Kopernicus' source, and not expected to interact with this fix:
 `DisableFarAwayColliders` (`RuntimeUtility/SinkingBugFix.cs`) disables every collider of a body whose

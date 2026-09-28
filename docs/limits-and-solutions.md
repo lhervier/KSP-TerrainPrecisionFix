@@ -30,8 +30,9 @@ distributed. Read on release 1.40.1, still to read again on 1.41.1.
 
 **Checked — the fix still places the terrain, and the ground is as stable under Kopernicus as without
 it.** Over six loads on Kerbin under Kopernicus, the height of a terrain quad spreads over 116.0 mm
-(median) without this mod and 0.079 mm with it, and the safeguard never fired. Still to read: the
-collision surface itself, with Diag 2.
+(median) without this mod and 0.079 mm with it, and the safeguard never fired. The collision surface
+itself, read with Diag 2 on Earth in Real Solar System — Kerbin rebuilt by Kopernicus — spreads over
+693.1 mm without this mod and 0.331 mm with it.
 
 **→ Full chapter: [Kopernicus, on a stock body](limits-and-solutions/kopernicus-on-a-stock-body.md)**
 
