@@ -33,11 +33,16 @@ ensuite, sans ordre imposé.
       un `PQSCity` ré-arrondi, que le correctif ne touche pas ; **(b)** le terrain aplani sous la piste,
       ré-arrondi lui aussi, qui dépasse du revêtement par endroits, et que le correctif stabilise
       totalement. Le source ne tranche pas.
-      - **D'abord en stock** : le *To test* du cas
-        [The KSC buildings, runway and launchpad](docs/limits-and-solutions/the-ksc-buildings-runway-and-launchpad.md),
-        une capsule sur la piste de Kerbin, six chargements avec le correctif. Si elle devient stable,
-        elle reposait sur le terrain, et (b) devient crédible sous RSS ; si elle bouge encore, c'est la
-        piste.
+      - **D'abord en stock : fait, c'est la piste.** En stock, deux vaisseaux identiques sur l'herbe et
+        sur la piste (publié dans les deux Diags, `docs/the-measurements-runway.md`) : la piste bouge
+        (~130 mm) et pas d'un bloc avec l'herbe (marche sur ~82 mm). Avec le correctif, une capsule
+        seule : le revêtement bouge de 185 mm (archivé dans `kspmod`, pas publié). Donc (a) sur Kerbin ;
+        sous RSS, déduit, pas mesuré : le verrou protège au moins de la piste.
+      - **Reste** : la même sauvegarde herbe/piste avec le correctif (la marche avec le correctif), puis
+        réécrire le cas
+        [The KSC buildings, runway and launchpad](docs/limits-and-solutions/the-ksc-buildings-runway-and-launchpad.md)
+        (passe en *Checked, a real problem*, Kerbal Konstructs avec lui), et décider si un correctif des
+        statiques se fait à part, comme RockPrecisionFix.
       - **Puis sous RSS** : avec le correctif, un roulage et un décollage sur la piste avec le verrou,
         puis sans. Aucun réglage ne coupe le verrou : il faut un petit addon de test qui détruit
         `RSSRunwayFix.Instance` en vol. Sans verrou, si la piste saute encore à chaque décalage, c'est
