@@ -66,3 +66,13 @@ a fixed metre, and hold the line where it refused part of Earth's terrain.
   Canaveral, then flown towards orbit, the flight started over three times. The launch was saved
   afterwards as [`rss-launch-to-earth-orbit.sfs`](rss-launch-to-earth-orbit.sfs), which needs MechJeb2
   to load. Used in [The seam between subdivision levels](../docs/limits-and-solutions/the-seam-between-subdivision-levels.md).
+- [`runs/revert-earth-rss-fix-diag4-1-lines.txt`](runs/revert-earth-rss-fix-diag4-1-lines.txt) —
+  [Terrain Precision Fix Diag 4](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag4), MechJeb2
+  added: the first session of [The seam with this mod](../docs/limits-and-solutions/the-seam-between-subdivision-levels.md#the-seam-with-this-mod),
+  a craft on the launchpad at Cape Canaveral reverted to launch fifteen times. Its `KSP.log` was
+  overwritten when the game was started again: this file holds every line Diag 4 wrote in it, copied
+  before it was lost; the lines of this mod are lost with it.
+- [`runs/revert-earth-rss-fix-diag4-2.log`](runs/revert-earth-rss-fix-diag4-2.log) — the same install:
+  the second session, whole. It begins with the craft taken back from the Space Center, which KSP
+  moved 8.3 m down as it loaded (`Moving Vessel down -8.346m`), and which was destroyed; then five
+  reverts to launch, loads 16 to 20 of the chapter.

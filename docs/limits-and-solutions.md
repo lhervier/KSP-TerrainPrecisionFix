@@ -65,6 +65,20 @@ look for them where stock puts them. Parallax's own scatter follows the correcte
 
 **→ Full chapter: [Rocks, grass and trees](limits-and-solutions/rocks-grass-and-trees.md)**
 
+### The seam between subdivision levels
+
+**Checked on Earth under Real Solar System — this mod does not open the seam, but widens a stock crack.**
+Where a quad of the highest level meets a coarser one, the vertices they are supposed to share are
+already apart in stock, and the terrain has a crack along the seam that can be seen, though it takes
+looking for. This mod corrects the finer side only, so it adds its own correction to that gap. Over
+fifteen loads without it and twenty with it, measured with Terrain Precision Fix Diag 4, the median of
+the largest gap of a load goes from about 1.2 m to about 1.9 m, and the crack shows more often. Visual
+only, since the coarser quads have no collider. A separate mod could close it, in stock and with this
+one; it is proposed, not written. On Kerbin, the crack shows in stock too; with this mod, still to
+measure.
+
+**→ Full chapter: [The seam between subdivision levels](limits-and-solutions/the-seam-between-subdivision-levels.md)**
+
 ### Scatter with colliders
 
 **Checked — this mod halves a stock defect, and does not close it.** When a mod gives scatter a
@@ -102,17 +116,6 @@ comes to rest over 21.8 mm without this mod and 0.094 mm with it, the ground ove
 None today.
 
 ## Still to test
-
-### The seam between subdivision levels
-
-**TBD — read in the code, not measured, and expected to be a real problem.** Stock makes the edges of
-two neighbouring quads meet, even across subdivision levels: both are off by the same rounding. This fix
-corrects the highest level only, so where the corrected terrain meets the coarser quads around it, the
-coarser side is still off by the whole stock rounding: a step, all along the edge of the corrected zone,
-of the order of the correction — close to two metres at most on Earth under Real Solar System. Visual
-only, since those coarser quads have no collider.
-
-**→ Full chapter: [The seam between subdivision levels](limits-and-solutions/the-seam-between-subdivision-levels.md)**
 
 ### The KSC buildings, runway and launchpad
 

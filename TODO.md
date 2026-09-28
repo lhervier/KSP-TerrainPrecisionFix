@@ -66,7 +66,8 @@ ensuite, sans ordre imposé.
         terrain, pas la piste ni le pas de tir, donc l'écart entre les deux change (herbe qui traverse
         le bord de la piste, marche au pied du pas de tir). Un *To test* dans le cas KSC : captures des
         bords avec et sans le correctif, un rover qui sort de la piste sur l'herbe, une fusée en
-        `PRELAUNCH` sur le pas de tir. Distinct du point 5 (jonctions entre deux quads) ;
+        `PRELAUNCH` sur le pas de tir. Distinct du raccord entre deux quads (cas
+        [The seam between subdivision levels](docs/limits-and-solutions/the-seam-between-subdivision-levels.md)) ;
       - **l'océan** : aucun cas aujourd'hui. Dans les logs RSS de la Terre, le correctif n'a corrigé que
         des quads de terrain, jamais l'océan, ce qui colle avec sa garde sur `surfaceRelativeQuads` ;
         la valeur de ce drapeau pour la sphère océan n'a pas été lue. Un amerrissage près d'une côte,
@@ -80,43 +81,38 @@ ensuite, sans ordre imposé.
    Terre en a donné 4,0 et Vénus 3,6 ; l'issue ne cite pas RSS, alors que la relecture en fait la seule repro
    visible : décider s'il y entre.
 4. **Une release GitHub sur chaque dépôt vers lequel l'issue envoie le lecteur.** Aucun n'en a : ce
-   dépôt, Diag 1, Diag 2 et Diag 3. L'issue commence par faire installer Diag 1, et les trois README des
+   dépôt, Diag 1, Diag 2, Diag 3 et Diag 4 (le cas
+   [The seam between subdivision levels](docs/limits-and-solutions/the-seam-between-subdivision-levels.md)
+   en dépend : liens, images et *Get it*). L'issue commence par faire installer Diag 1, et les trois README des
    Diags renvoient vers `releases/latest` dans *Get it*, qui donne une 404 aujourd'hui — sur la page
    même où arrive un mainteneur depuis la première consigne du repro. `build.bat` produit déjà le
    dossier `GameData` ; la release, c'est ce dossier zippé. PQS Bench et Stock Quad Cache ne sont cités
    qu'en appui du chiffre de performance et peuvent attendre, mais leur *Get it* ne doit pas non plus
    promettre un téléchargement qui n'existe pas. Vérifier tous les liens `releases/latest` de la famille
    avant d'ouvrir l'issue.
-5. **Le raccord entre niveaux de subdivision** : le problème est décrit dans le cas
-   [The seam between subdivision levels](docs/limits-and-solutions/the-seam-between-subdivision-levels.md)
-   (prédiction lue dans le code, pas mesurée : une marche au bord de la zone corrigée). Reste :
-   - **la mesure** décrite dans son *To test*, la Terre de RSS en priorité, puis le statut du cas ;
-   - **lire ce qui se passe au décalage de l'origine flottante** (le cas le laisse ouvert) ;
-   - **si la marche se confirme**, une solution : piste esquissée dans le chapitre *A possible solution*
-     du cas. Le cas deviendra alors un sous-dossier.
-6. **Une sauvegarde refaite avec le correctif ne saute plus.** Sur `switch-kerbin` (faite sans), la
+5. **Une sauvegarde refaite avec le correctif ne saute plus.** Sur `switch-kerbin` (faite sans), la
    capsule se pose à −31,8 mm, au même endroit à chaque fois. Le test : avec le correctif, charger,
    `]`, repasser au rover, sauvegarder sous un autre nom, puis six fois « charger → *Record* → `]` →
    *Record* » ; *Moved* doit rester à quelques centièmes de zéro. Il complète le chapitre
    [Existing saves](docs/limits-and-solutions/existing-saves.md) et la page du changement de vaisseau.
-7. **Confirmer la marge du garde-fou.** Il compte seize pas de float à la distance du quad (1 m sur
+6. **Confirmer la marge du garde-fou.** Il compte seize pas de float à la distance du quad (1 m sur
    Kerbin, 8 m sur la Terre de RSS). Plus grande correction vue : 4,0 pas sur la Terre (3,6 sur
    Vénus, 3,5 sur la Lune, environ un sur Mars et Mercure), aucun refus sur ces cinq corps. Reste à
    relever la plus grande correction (`origin moved by … mm`) en `logLevel = Debug` sur Kerbin, la
    Mun, Minmus et Gilly, et vérifier qu'elle reste loin de seize pas.
-8. **Deferred : refaire les campagnes Diag 1 et Diag 2 avec le correctif et Deferred** (six chargements,
+7. **Deferred : refaire les campagnes Diag 1 et Diag 2 avec le correctif et Deferred** (six chargements,
    et le protocole d'approche). C'est le mod qui a fait tomber `PQSOnlyStartOnce` : le résultat, bon ou
    mauvais, entre dans le commentaire, qui l'annonce aujourd'hui comme « next ». Chapitre *Deferred* de
    Limits and solutions à mettre à jour ensuite.
-9. **Parallax : les mêmes campagnes, et plus loin à cause de son scatter.** Montrer que le défaut du
+8. **Parallax : les mêmes campagnes, et plus loin à cause de son scatter.** Montrer que le défaut du
    scatter de Parallax n'existe déjà pas sans le correctif, et qu'avec le correctif rien ne change
    (aujourd'hui, c'est lu dans ses sources, pas mesuré : *Rocks, grass and trees* de Limits and
    solutions). Il faut un instrument ou un protocole pour ce scatter, qui n'est pas celui de KSP : à
    concevoir.
-10. **Principia**, que la plupart des joueurs RSS installent (cas
+9. **Principia**, que la plupart des joueurs RSS installent (cas
    [Principia](docs/limits-and-solutions/principia.md) de Limits and solutions). Test à part, **sur le
    système stock**, sans RSS (Lionel, 2026-09-25).
-11. **L'écart diffère-t-il d'un point du sol à l'autre ?** C'est ce qui casse une structure posée sur
+10. **L'écart diffère-t-il d'un point du sol à l'autre ?** C'est ce qui casse une structure posée sur
    plusieurs pieds (un pied enterré, un autre en l'air) : sans lui, le sol monte ou descend d'un bloc et
    la structure suit. Je le crois, puisque chaque quad arrondit sa propre position, mais rien ne le
    mesure. Diag 2 sur quelques points éloignés de plusieurs quads, six chargements, sans le correctif ;
