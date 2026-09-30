@@ -102,7 +102,8 @@ body times the one stock gives it in the sphere.
   with it.
 - **When.** Only in flight, and only while the static is within reach of the craft: within the farthest
   another craft can be loaded from it, 22.5 km by default, plus 5 km for the size of a static. A craft
-  at the KSC takes the KSC out, and leaves the Island Airfield, 33 km away, under its sphere. Only the
+  at the KSC takes the KSC out, and leaves the Island Airfield, 33 km away, under its sphere (logged in
+  the session on Kerbin of [The KSC buildings, runway and launchpad](limits-and-solutions/the-ksc-buildings-runway-and-launchpad.md)). Only the
   statics that hang directly from their sphere are handled, as those of stock and of Kerbal Konstructs
   do; `PQSCity2` is not.
 - **Following the body.** Stock moves the quads in the same call that moves the body, at every shift of
@@ -121,25 +122,13 @@ body times the one stock gives it in the sphere.
 ## Other mods that look for a static under its sphere
 
 Taking a static out of its sphere changes the hierarchy of Unity objects, and a mod may look for a
-static where stock puts it. Two of the most installed ones do, in flight, and this mod patches each of
-them. Each patch stands for a small change that the mod itself could make, which is described below;
-the patch itself leaves the original code path untouched as long as the static is under its sphere, so
-it changes nothing without this mod's statics fix.
-
-- **[Kerbal Konstructs](https://github.com/KSP-RO/Kerbal-Konstructs), its group editor.** Moving a
-  group with the editor's gizmo, in flight, sets the world position of the group's static, then reads
-  its `transform.localPosition` as its position relative to the centre of the body — which only holds
-  while the static hangs from the sphere. Out of it, the group would be sent somewhere else on the body,
-  and saved there. The change, in `GroupEditor.OnMoveCallBack`: read that position whatever the static
-  hangs from, `CelestialBody.pqsController.transform.InverseTransformPoint(...)` of its world position.
-- **[Kopernicus](https://github.com/Kopernicus/Kopernicus), its flag fix.** When a facility is upgraded
-  or repaired, `RuntimeUtility.FixFlags` looks the KSC up among the `PQSCity` under the home body's
-  sphere, and uses it without checking it was found. In flight, a facility is upgraded when a mission
-  of the Making History expansion spawns a craft; the KSC may then be out of its sphere, and the flag
-  fix would throw. The change: look the KSC up without assuming it hangs from the sphere.
-
-Their other lookups under a sphere run at the main menu, or when the space centre, the tracking station
-or an editor is entered, when no static is out of its sphere.
+static where stock puts it. Two of the most installed ones do, in flight, once each, and this mod
+patches both: the group editor of [Kerbal Konstructs](limits-and-solutions/kerbal-konstructs.md#the-patch-of-the-group-editor),
+and the flag fix of [Kopernicus](limits-and-solutions/kopernicus/the-flag-fix.md).
+Each patch is described with its mod, along with the small change in that mod it stands for. Each leaves
+the original code path untouched as long as the static is under its sphere, so it changes nothing
+without this mod's statics fix; if the code of the mod is not the one the patch expects, the statics fix
+stays off.
 
 ## Safeguards
 
@@ -157,5 +146,7 @@ or an editor is entered, when no static is out of its sphere.
 - the ground and the statics are two fixes, each installed on its own, and each can be turned off in
   the settings. If any patch of one fix fails to install, none of that fix's patches does anything;
 - if Kerbal Konstructs or Kopernicus is installed and its code is not the one its patch expects, the
-  statics fix stays off, and every static stays where stock puts it.
+  statics fix stays off, and every static stays where stock puts it. Each of these two patches can also
+  be turned off in the settings, to see what goes wrong without it: the statics fix then stays on, and
+  the log says which mod will break, and how.
 

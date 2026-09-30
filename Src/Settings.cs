@@ -15,8 +15,20 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
         public static bool FixStatics { get; private set; } = true;
 
         /// <summary>
+        /// Whether Kopernicus, when installed, is patched to cope with statics out of their sphere. Only
+        /// meaningful with the statics fix on, which then breaks Kopernicus' flag fix when this is off.
+        /// </summary>
+        public static bool PatchKopernicus { get; private set; } = true;
+
+        /// <summary>
+        /// Whether Kerbal Konstructs, when installed, is patched to cope with statics out of their sphere.
+        /// Only meaningful with the statics fix on, which then breaks its group editor when this is off.
+        /// </summary>
+        public static bool PatchKerbalKonstructs { get; private set; } = true;
+
+        /// <summary>
         /// Reads the settings file and applies its log level. A missing file, a missing value or an unknown
-        /// value leaves the default: everything fixed, logging at Info.
+        /// value leaves the default: everything fixed and patched, logging at Info.
         /// </summary>
         public static void Load()
         {
@@ -47,6 +59,8 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
 
             FixTerrain = ReadSwitch(node, "fixTerrain", FixTerrain, path);
             FixStatics = ReadSwitch(node, "fixStatics", FixStatics, path);
+            PatchKopernicus = ReadSwitch(node, "patchKopernicus", PatchKopernicus, path);
+            PatchKerbalKonstructs = ReadSwitch(node, "patchKerbalKonstructs", PatchKerbalKonstructs, path);
         }
 
         /// <summary>

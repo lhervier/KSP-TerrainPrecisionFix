@@ -33,13 +33,21 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
         private static bool _patched;
 
         /// <summary>
-        /// Applies the patch when Kopernicus is installed. Returns false when it is installed and its code
-        /// is not the one the patch expects, true otherwise.
+        /// Applies the patch when Kopernicus is installed and <paramref name="enabled"/>. Returns false when
+        /// it is installed, the patch is wanted, and its code is not the one the patch expects; true
+        /// otherwise, including when the patch is turned off, which is reported as breaking the flag fix.
         /// </summary>
-        public static bool Install(Harmony harmony)
+        public static bool Install(Harmony harmony, bool enabled)
         {
             if (AccessTools.TypeByName(RuntimeUtilityTypeName) == null)
             {
+                return true;
+            }
+            if (!enabled)
+            {
+                Log.Warning("Kopernicus: its patch is turned off in the settings while the statics fix is on."
+                    + " Its flag fix will throw when a facility is upgraded in flight near the KSC, as a mission"
+                    + " of the Making History expansion does when it spawns a craft there");
                 return true;
             }
             try

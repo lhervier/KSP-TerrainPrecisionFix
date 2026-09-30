@@ -1,0 +1,15 @@
+saveMD5 = 
+lastWriteTime = 639263774477125964
+id = bc9f31e2-3da2-42a3-b8aa-28705129bb15
+title = KSC flag fix
+briefing = 
+author = 
+hardIcon = False
+difficulty = Intermediate
+vesselCount = 2
+nodeCount = 5
+startUT = 0
+missionExpansionVersion = 1.12.1
+steamPublishedFileId = 0
+testModules = TestTimeSinceNode
+actionModules = ActionCreateVessel

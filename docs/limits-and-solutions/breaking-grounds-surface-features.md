@@ -8,7 +8,7 @@ from a `rocParent` that `LandClassROC` creates as a child of the terrain sphere.
 carry a collider without any mod being needed.
 
 Whether the physics takes their pose from the holder's matrix, as it does for
-[scatter colliders](scatter-with-colliders.md), or from its transform position, is not measured, and it decides whether this fix widens a
+[scatter colliders](kopernicus/scatter-with-colliders.md), or from its transform position, is not measured, and it decides whether this fix widens a
 physical offset there or leaves it alone. The identifier of a surface feature depends on its position
 within the quad (`rocPOS`, taken from `quad.verts`), not on the pose of its holder, so moving the holder
 would not change it.

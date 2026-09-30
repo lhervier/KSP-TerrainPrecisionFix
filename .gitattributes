@@ -10,6 +10,8 @@
 *.csv -text
 *.sfs -text
 *.craft -text
+*.mission -text
+*.loadmeta -text
 
 # Binaries.
 *.dll binary

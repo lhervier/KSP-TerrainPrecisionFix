@@ -185,8 +185,9 @@ itself places on the ground (scatter, the KSC statics, Breaking Ground) and to s
 systems such as Real Solar System, slopes, existing saves, the map view…). Taking the statics out of
 their sphere adds a case of its own: mods that look for a static where stock puts it. So far, every
 case checked shows no problem caused by this fix — including Real Solar System, where the defect is at
-its largest — though some say what changes, and what can go further; the others say how they will be
-tested.
+its largest — but one, which this mod patches itself: without that patch, the statics fix would break
+the flag fix of Kopernicus in flight. Some cases say what changes, and what can go further; the others
+say how they will be tested.
 
 **→ Full chapter: [Limits and solutions](docs/limits-and-solutions.md)**
 
@@ -200,13 +201,15 @@ removing the folder gives you the stock terrain and statics back.
 
 ## Settings
 
-`GameData/TerrainPrecisionFixMod/PluginData/settings.cfg` holds three values, read when KSP starts. To
+`GameData/TerrainPrecisionFixMod/PluginData/settings.cfg` holds five values, read when KSP starts. To
 change one: quit KSP, edit the file, start KSP again.
 
 | setting | what it does |
 |---|---|
 | `fixTerrain` | `true` (default) places the terrain in double precision; `false` leaves it as stock builds it |
 | `fixStatics` | `true` (default) places the statics in double precision; `false` leaves them where stock places them |
+| `patchKopernicus` | `true` (default) patches Kopernicus, when installed, to cope with the statics fix. With `false` and the statics fix on, Kopernicus' flag fix throws when a facility is upgraded in flight near the KSC, which only a Making History mission does: an error is logged, and that facility's flags are left unfixed until the next scene. Meant only to see what the patch is for |
+| `patchKerbalKonstructs` | `true` (default) patches Kerbal Konstructs, when installed, to cope with the statics fix. With `false` and the statics fix on, moving a group with its group editor in flight sends it elsewhere on its body, and saves it there: meant only to see what the patch is for |
 | `logLevel` | what goes to `KSP.log`, below |
 
 | `logLevel` | what goes to `KSP.log` |

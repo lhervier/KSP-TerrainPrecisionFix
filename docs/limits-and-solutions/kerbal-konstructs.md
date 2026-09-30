@@ -28,7 +28,7 @@ comes back somewhere else at every load, and the step between it and the ground 
 [Diag 2](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/blob/master/docs/the-measurements-runway.md)).
 This mod takes a group out of its sphere like the KSC ([The statics](../the-fix-this-mod-proposes.md#the-statics)),
 and patches the group editor of Kerbal Konstructs, which reads the position of a group from where stock
-hangs it ([Mods that look for a static under its sphere](mods-that-look-for-a-static-under-its-sphere.md)).
+hangs it (below, [The patch of the group editor](#the-patch-of-the-group-editor)).
 
 **Measured with this mod**, on that same runway: the deck comes back within 0.009 mm from the second
 loading to the sixth, instead of 33.5 mm on stock, and the ground beside it within 0.036 mm. At the first
@@ -40,3 +40,35 @@ on stock as with this mod; it is not a rounding, and this mod does not touch it.
 moving a group, turning it, creating, copying and deleting one, then loading the save again; a launch
 from a launch site of Kerbal Konstructs; and, for the ground, Terrain Precision Fix Diag 2 reading the
 ground inside a flattened area and just outside it.
+
+## The patch of the group editor
+
+**Where Kerbal Konstructs looks for a static.** Read in the source of 1.12.3: it looks up statics among
+the children of a body's terrain sphere only while the game loads, to find the KSC and the other stock
+sites it offers as groups (`Core/StaticGroup/BuiltinCenters.cs`, `Core/LaunchSites/LaunchSiteManager.cs`),
+when no static is out of its sphere. Everything else it does with a static in flight goes through world
+positions, or through positions relative to the group's own `PQSCity`, which mean the same thing wherever
+it hangs — except in its group editor.
+
+**What Kerbal Konstructs does.** Moving a group with the gizmo of its group editor, in flight,
+`GroupEditor.OnMoveCallBack` sets the world position of the group's `PQSCity`, then reads its
+`transform.localPosition` as the position of the group relative to the centre of the body.
+
+**Why it matters here.** That only holds while the `PQSCity` hangs directly from the terrain sphere. The
+group editor is used in flight, near a craft, where this mod has taken the group out of its sphere: the
+local position is then relative to something else, and the group would be sent elsewhere on the body,
+and saved there.
+
+**What this mod does.** It replaces that one read, in `OnMoveCallBack` alone, with one that returns the
+`localPosition` as before while the static hangs from its sphere, and works the same position out from
+its world position, in double, while it is out. Without this mod's statics fix, the group editor runs
+exactly as it did. If Kerbal Konstructs is installed and `OnMoveCallBack` does not hold exactly one such
+read, the patch changes nothing, and the statics fix stays off.
+
+**The change in Kerbal Konstructs it stands for.** In `OnMoveCallBack`, read that position whatever the
+group's `PQSCity` hangs from:
+`selectedGroup.CelestialBody.pqsController.transform.InverseTransformPoint(...)` of its world position,
+the same frame as before.
+
+**Checked**, with Kerbal Konstructs 1.12.3: the log says the patch is applied. The group editor itself
+is in the list above, still to test.

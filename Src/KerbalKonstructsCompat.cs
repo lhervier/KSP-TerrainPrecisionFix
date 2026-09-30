@@ -37,13 +37,22 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
         private static bool _patched;
 
         /// <summary>
-        /// Applies the patch when Kerbal Konstructs is installed. Returns false when it is installed and
-        /// its code is not the one the patch expects, true otherwise.
+        /// Applies the patch when Kerbal Konstructs is installed and <paramref name="enabled"/>. Returns
+        /// false when it is installed, the patch is wanted, and its code is not the one the patch expects;
+        /// true otherwise, including when the patch is turned off, which is reported as breaking the group
+        /// editor.
         /// </summary>
-        public static bool Install(Harmony harmony)
+        public static bool Install(Harmony harmony, bool enabled)
         {
             if (AccessTools.TypeByName(GroupEditorTypeName) == null)
             {
+                return true;
+            }
+            if (!enabled)
+            {
+                Log.Warning("Kerbal Konstructs: its patch is turned off in the settings while the statics fix is on."
+                    + " Moving a group with its group editor in flight will send the group elsewhere on its body,"
+                    + " and save it there");
                 return true;
             }
             try

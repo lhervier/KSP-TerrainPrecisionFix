@@ -86,7 +86,8 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
         /// Applies the statics patches, those that make other mods cope with a static out of its sphere,
         /// and turns the fix on once all of them are in place. Throws when a stock patch cannot be applied;
         /// leaves the fix off, with a warning, when a mod installed here is not the version its patch
-        /// expects. Either way the statics are then left exactly where stock puts them.
+        /// expects. Either way the statics are then left exactly where stock puts them. A mod's patch turned
+        /// off in the settings does not keep the fix off: that mod is then left to break, and says so.
         /// </summary>
         public static void Install(Harmony harmony)
         {
@@ -100,7 +101,10 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
             harmony.CreateClassProcessor(typeof(SphereMovedPatch)).Patch();
             harmony.CreateClassProcessor(typeof(BodyRotatedPatch)).Patch();
 
-            if (!KerbalKonstructsCompat.Install(harmony) || !KopernicusCompat.Install(harmony))
+            // Both attempted, so that the log says what happened to each.
+            bool kerbalKonstructs = KerbalKonstructsCompat.Install(harmony, Settings.PatchKerbalKonstructs);
+            bool kopernicus = KopernicusCompat.Install(harmony, Settings.PatchKopernicus);
+            if (!kerbalKonstructs || !kopernicus)
             {
                 Log.Warning("Statics fix turned off: a mod installed here would not cope with a static out of"
                     + " its terrain sphere. The statics are left where stock places them");

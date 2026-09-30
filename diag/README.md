@@ -14,7 +14,8 @@ and of [Terrain Precision Fix Diag 2](https://github.com/lhervier/KSP-TerrainPre
 along with the logs of the same sessions without this mod. Only the sessions taken with this mod alone
 and no instrument have their saves here: the loads on Venus, Mars and Mercury, described in
 [Rescaled systems: Real Solar System](../docs/limits-and-solutions/rescaled-systems-real-solar-system.md#checking-the-culprit),
-and the launch from Cape Canaveral.
+and the launch from Cape Canaveral; and the mission of [Kopernicus](../docs/limits-and-solutions/kopernicus/the-flag-fix.md#seeing-it),
+in `kopernicus-flag-fix/`.
 
 ## On the stock system
 
@@ -36,9 +37,28 @@ KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, this mod and
   same protocol on the Mun, beside a runway placed by Kerbal Konstructs 1.12.3 (added to the install with
   CustomPreLaunchChecks 1.8.1), read by Diag 1.
 - [`runs/runway-mun-kk-diag2-fix.log`](runs/runway-mun-kk-diag2-fix.log) — the same, read by Diag 2.
+- [`runs/statics-kerbin-fix.log`](runs/statics-kerbin-fix.log) — no instrument, this mod with its
+  statics fix, at `logLevel = Debug`: `runway-kerbin.sfs` loaded six times, the craft sent to a 200 km
+  orbit with `Alt+F12 → Cheats → Set Orbit`, then the space centre. At every step, the `PQSCity` of
+  Kerbin and where they hang, and the destructible buildings and upgradeable facilities of the KSC, are
+  listed. Read in [The KSC buildings, runway and launchpad](../docs/limits-and-solutions/the-ksc-buildings-runway-and-launchpad.md).
 - [`runs/runway-mun-kk-colliders-fix.log`](runs/runway-mun-kk-colliders-fix.log) — four loadings of
   that save, every collider under each craft listed at each loading, with its height above the terrain
   KSP computes there.
+
+## With Kopernicus
+
+KSP 1.12.5 with the Making History expansion, Harmony, ModuleManager, KSP Community Fixes 1.41.1 and
+Kopernicus 248 with ModularFlightIntegrator and KSPTextureLoader, no planet pack, no instrument. Each
+session plays the mission [`kopernicus-flag-fix/Missions/KSC flag fix`](kopernicus-flag-fix/Missions/)
+once, as described in [Kopernicus](../docs/limits-and-solutions/kopernicus/the-flag-fix.md#seeing-it).
+
+- [`runs/kopernicus-flag-fix-without-this-mod.log`](runs/kopernicus-flag-fix-without-this-mod.log) —
+  without this mod.
+- [`runs/kopernicus-flag-fix-patch-off.log`](runs/kopernicus-flag-fix-patch-off.log) — this mod at
+  `logLevel = Debug`, with `patchKopernicus = false`.
+- [`runs/kopernicus-flag-fix-patch-on.log`](runs/kopernicus-flag-fix-patch-on.log) — this mod at
+  `logLevel = Debug`, with its defaults.
 
 ## On Real Solar System
 
@@ -66,6 +86,12 @@ a fixed metre, and hold the line where it refused part of Earth's terrain.
 - [`runs/reload-earth-rss-fix-chain.log`](runs/reload-earth-rss-fix-chain.log) — no instrument, one
   session: 27 loads of `reload-earth-rss-landed.sfs`, the craft *landed*, then, after going back to the
   space centre, 24 of `reload-earth-rss-resave.sfs`, the craft in *prelaunch*.
+- [`runs/statics-earth-rss-fix.log`](runs/statics-earth-rss-fix.log) — no instrument, this mod with its
+  statics fix: two loads of `reload-earth-rss-landed.sfs`, the craft sent to a 200 km orbit with
+  `Alt+F12 → Cheats → Set Orbit`, then the space centre. At every step, the `PQSCity` of Earth and where
+  they hang, and the destructible buildings and upgradeable facilities of the KSC, are listed. Read in
+  [The KSC buildings, runway and launchpad](../docs/limits-and-solutions/the-ksc-buildings-runway-and-launchpad.md)
+  and [Kopernicus: the KSC moved by Real Solar System](../docs/limits-and-solutions/kopernicus/the-ksc-moved-by-real-solar-system.md).
 - [`runs/reload-venus-mars-rss-fix.log`](runs/reload-venus-mars-rss-fix.log) — no instrument, one
   session: six loads of [`reload-venus-rss.sfs`](reload-venus-rss.sfs), then six of
   [`reload-mars-rss.sfs`](reload-mars-rss.sfs). The six loads after them, on a second site of Mars,

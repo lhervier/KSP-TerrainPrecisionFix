@@ -52,8 +52,13 @@ journal TerrainPrecisionFix de `claude-notes`, même date).
 - [ ] Niveaux des bâtiments 1, 2 et 3 en vol : géométrie à sa place.
 - [ ] CommNet : la station du KSC relaie en vol, y compris dans une partie qui démarre en vol (scénario
       d'entraînement), là où `CommNetHome.Start` tourne hors de la sphère.
-- [ ] Kopernicus `FixFlags` : une mission Making History qui fait apparaître un vaisseau au KSC, sous RSS ;
-      aucune exception.
+- [ ] **Stock, sans aucun mod tiers** (`ksp-dev\`) : une mission Making History qui fait apparaître un
+      vaisseau sur le pas de tir (`BasicTutorial`) ; `MissionSystem.ConstructShip` retrouve le KSC
+      (`GetComponentInParent<PQSCity>`), le réoriente, fixe le niveau du pas de tir, pose le vaisseau sur
+      son point de départ. KSC hors de sa sphère à ce moment ? (Debug.)
+- [x] **Kopernicus seul** (test séparé, ne pas mélanger avec le précédent) : fait le 2026-09-30 avec la
+      mission publiée `diag/kopernicus-flag-fix/`, trois runs (sans le mod, `patchKopernicus = false`,
+      `true`) ; résultats dans la page Kopernicus.
 
 **5. KK (portable)**
 - [x] Mesure de la piste KK sur la Mune (`runway-mun-kk.sfs`) : faite sur le fixe le 2026-09-30, KK installé

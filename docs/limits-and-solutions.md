@@ -8,6 +8,9 @@ chapter of its own, and the cases are grouped by where they stand:
 
 - **[Checked, no problem](#checked-no-problem)** — measured or read, and this fix breaks nothing there.
   The summary still says what changes, when something does;
+- **[Checked, a problem this mod patches](#checked-a-problem-this-mod-patches)** — this fix would break
+  something in another mod, and patches that mod itself. The chapter says what the patch changes, the
+  change in that mod it stands for, and what is still to test;
 - **[Checked, a real problem](#checked-a-real-problem)** — this fix breaks something there. None today;
 - **[Still to test](#still-to-test)** — not done yet: the chapter holds what is already known and what
   is planned to test it.
@@ -25,18 +28,6 @@ vertex; the ones that touch the terrain patch how the spheres start and update, 
 distributed. Read on release 1.40.1, still to read again on 1.41.1.
 
 **→ Full chapter: [KSP Community Fixes' own terrain patches](limits-and-solutions/ksp-community-fixes-own-terrain-patches.md)**
-
-### Kopernicus, on a stock body
-
-**Checked — the fix still places the terrain, and the ground is as stable under Kopernicus as without
-it.** Over six loads on Kerbin under Kopernicus, the height of a terrain quad spreads over 116.0 mm
-(median) without this mod and 0.079 mm with it, and the safeguard never fired. The collision surface
-itself, read with Diag 2 on Earth in Real Solar System — Kerbin rebuilt by Kopernicus — spreads over
-693.1 mm without this mod and 0.331 mm with it. Kopernicus looks the KSC up under its terrain sphere
-once in flight, which this mod patches; on Earth, the space centre opens without error after a flight
-with the KSC out of its sphere.
-
-**→ Full chapter: [Kopernicus, on a stock body](limits-and-solutions/kopernicus-on-a-stock-body.md)**
 
 ### Rescaled systems: Real Solar System
 
@@ -82,17 +73,6 @@ measure.
 
 **→ Full chapter: [The seam between subdivision levels](limits-and-solutions/the-seam-between-subdivision-levels.md)**
 
-### Scatter with colliders
-
-**Checked — this mod halves a stock defect, and does not close it.** When a mod gives scatter a
-collider (Kopernicus with the Stock Scatter Collider Enabler Patch), the collider and the drawn rock
-round differently, so the rock a craft hits is not quite the rock its pilot sees. Over six loads of a
-kerbal on a boulder, the gap between them runs from −68.7 to +104.2 mm on stock and from −70.2 to
-+70.3 mm with this mod. Rock Precision Fix, installed next to this mod, closes it (−0.026 to
-+0.022 mm), with the same cost on the hierarchy of Unity objects.
-
-**→ Full chapter: [Scatter with colliders](limits-and-solutions/scatter-with-colliders.md)**
-
 ### Existing saves
 
 **Checked — a landed craft goes through one more draw, always the same one.** A craft saved in stock
@@ -113,6 +93,29 @@ loaded, draws the ground again too; this mod patches that path. Six round trips 
 comes to rest over 21.8 mm without this mod and 0.094 mm with it, the ground over 21.8 mm and 0.011 mm.
 
 **→ Full chapter: [The ground during a flight](limits-and-solutions/the-ground-during-a-flight.md)**
+
+## Checked, a problem this mod patches
+
+### Kopernicus
+
+**Checked — this mod patches Kopernicus, for its flag fix; the rest is checked, no problem.** Most
+planet packs go through Kopernicus, and it touches four things this mod deals with:
+
+- **the terrain** — Kopernicus changes the terrain of existing bodies, so this mod has to still find
+  the ground where it expects it. It does: on Kerbin and on Earth in Real Solar System, the ground comes
+  back to the same height at every load, as without Kopernicus;
+- **the flag fix** — Kopernicus comes with a fix for the flag by the launchpad, which twitches on big
+  home bodies, such as Earth in Real Solar System. To fix the flag, Kopernicus has to find the KSC, and
+  this mod moves the KSC while a craft is near. Without a patch, the flag fix fails in one rare case
+  only, a Making History mission spawning a craft at the KSC: an error is logged, and the flags of that
+  facility are left unfixed until the next scene. This mod patches it;
+- **scatter with colliders** — Kopernicus can give rocks, trees and the like a collider, placed on the
+  ground too. This mod does not make them worse: the gap between a rock and its collider, already there
+  without this mod, is halved, and Rock Precision Fix closes it;
+- **the KSC moved to Cape Canaveral** — Kopernicus moves the KSC for Real Solar System. This mod handles
+  it at its new place, and the space centre opens without error after a flight.
+
+**→ Full chapter: [Kopernicus](limits-and-solutions/kopernicus.md)**
 
 ## Checked, a real problem
 
