@@ -32,7 +32,9 @@ distributed. Read on release 1.40.1, still to read again on 1.41.1.
 it.** Over six loads on Kerbin under Kopernicus, the height of a terrain quad spreads over 116.0 mm
 (median) without this mod and 0.079 mm with it, and the safeguard never fired. The collision surface
 itself, read with Diag 2 on Earth in Real Solar System — Kerbin rebuilt by Kopernicus — spreads over
-693.1 mm without this mod and 0.331 mm with it.
+693.1 mm without this mod and 0.331 mm with it. Kopernicus looks the KSC up under its terrain sphere
+once in flight, which this mod patches; on Earth, the space centre opens without error after a flight
+with the KSC out of its sphere.
 
 **→ Full chapter: [Kopernicus, on a stock body](limits-and-solutions/kopernicus-on-a-stock-body.md)**
 
@@ -120,12 +122,24 @@ None today.
 
 ### The KSC buildings, runway and launchpad
 
-**Not covered by this fix, and to test with it.** `PQSCity` and `PQSCity2` place the statics through the same kind
-of float `Transform`, and this fix does not touch them. A capsule parked on the runway spreads over
-117 mm on six loads on stock, which cannot yet tell the runway from the ground under it; the same
-reading with this mod will.
+**Covered by this mod, measured on the runway of Kerbin; the rest still to test.** `PQSCity` places the
+statics through the same kind of float `Transform` as the terrain; this mod takes them out of their
+sphere in flight to place them in double. On six loadings, the deck of the runway spreads over
+130.1 mm without this mod and 0.216 mm with it. Still to test: a floating origin shift under a craft on
+the runway, the other ways a scene is left or reloaded, launches, destroyed buildings, the runway of
+Real Solar System. `PQSCity2`, the launch sites of Making History, is not covered.
 
 **→ Full chapter: [The KSC buildings, runway and launchpad](limits-and-solutions/the-ksc-buildings-runway-and-launchpad.md)**
+
+### Mods that look for a static under its sphere
+
+**Two mods read and patched, the others unknown.** Taking a static out of its terrain sphere changes the
+hierarchy of Unity objects, and a mod may look for it where stock puts it. It only happens in flight,
+near a craft. Kerbal Konstructs and Kopernicus each do so once in flight, and this mod patches both;
+each patch stands for a small change the mod itself could make. The group editor of Kerbal Konstructs is
+still to test in game.
+
+**→ Full chapter: [Mods that look for a static under its sphere](limits-and-solutions/mods-that-look-for-a-static-under-its-sphere.md)**
 
 ### Ground anchors
 
@@ -163,10 +177,13 @@ fix.
 
 ### Kerbal Konstructs
 
-**TBD — read in the source, not measured.** Kerbal Konstructs flattens the ground with the stock
-`PQSMod_MapDecal`, which edits the height before this fix places it, so the flattening is kept. Open:
-whether its statics carry the same defect as the KSC's, and a decal gone wrong, which the safeguard
-would not catch.
+**TBD — its ground is read in the source, its statics are covered by this mod and measured on a runway,
+its group editor is still to test.** Kerbal Konstructs flattens the ground with the stock
+`PQSMod_MapDecal`, which edits the height before this fix places it, so the flattening is kept. Its
+statics hang from a stock `PQSCity` and carry the same defect as the KSC's. On a runway it placed on the
+Mun, this mod brings the deck back within 0.009 mm instead of 33.5 mm, except at the first loading of a
+session, when a section of the runway 21.3 mm higher is still active, on stock as with this mod. Open:
+that section, the group editor in flight, and a decal gone wrong, which the safeguard would not catch.
 
 **→ Full chapter: [Kerbal Konstructs](limits-and-solutions/kerbal-konstructs.md)**
 

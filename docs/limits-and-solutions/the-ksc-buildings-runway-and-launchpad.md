@@ -2,15 +2,36 @@
 
 Part of [Terrain Precision Fix](../../README.md), one case of [Limits and solutions](../limits-and-solutions.md).
 
-**Status: affected — not covered by this fix.** `PQSCity` and `PQSCity2` both do
-`base.transform.localPosition = planetRelativePosition;`, where `planetRelativePosition` is a `Vector3d`
-measured from the centre of the body (`PQSCity` twice, `PQSCity2` three times). They carry the same
-defect as the terrain, through the same kind of float `Transform`, and this fix does not touch them: a
-static has no quad of its own to hang from.
+**Status: covered by this mod, measured on the runway of Kerbin; the rest still to test.** The statics
+of the KSC are placed by a `PQSCity`, through a float `Transform` at planet scale, like the terrain:
+[A second culprit: the statics](../the-culprit.md#a-second-culprit-the-statics). This mod takes a static
+out of its terrain sphere in flight, while a craft is near it, and places it in double:
+[The statics](../the-fix-this-mod-proposes.md#the-statics).
 
-With Terrain Precision Fix Diag 1 on stock, a capsule parked on the runway spreads over 117 mm on six
-loads, as on the grass next to it. The runway sits on terrain that `PQSCity` flattens, so that reading
-cannot tell the runway from the ground under it.
+**Measured on the runway of Kerbin**, with the runway protocol of both instruments, six loadings, a
+craft on the grass and a craft on the runway: the deck of the runway spreads over 130.1 mm without this
+mod and 0.216 mm with it, and the step between it and the grass beside it over 81.7 mm and 0.203 mm.
+The readings are in
+[Checking the culprit: the runway and the grass beside it](../checking-the-culprit-runway.md).
 
-*To test:* the same measurement with this mod installed. The terrain is then stable, so if the capsule on
-the runway still moves, it is the static.
+**Checked in flight**, near the KSC on Kerbin, and on Earth under Real Solar System: the KSC is taken out
+of its sphere when a craft is loaded near it, put back under it when the save is loaded again, when the
+craft is sent to orbit, and before the space centre opens, which then opens normally. Its 39 destructible
+buildings and 9 upgradeable facilities stay registered under their usual names, which KSP builds from
+their place in the hierarchy below the KSC, and nothing is logged as an error.
+
+`PQSCity2`, which places the launch sites of the Making History expansion, carries the same defect and
+is not covered.
+
+*To test:*
+
+- a shift of the floating origin under a craft parked on the runway;
+- the other ways a scene is left or reloaded: revert, quickload, recovering a craft;
+- launching from the runway and from the launchpad;
+- flying to another body and back;
+- destroying a building in flight, then repairing it from the space centre; every level of every
+  facility;
+- the ground station of the KSC, in a game that starts in flight;
+- the cost per frame, with many statics near a craft;
+- the runway of the KSC on Earth in Real Solar System, and Real Solar System's own runway fix, which
+  keeps the floating origin from moving while a craft rolls on it.

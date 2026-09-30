@@ -1,6 +1,6 @@
 # The fix this mod proposes
 
-Part of [Terrain Precision Fix](../README.md): what the two patches do, where they do it, and what they leave alone.
+Part of [Terrain Precision Fix](../README.md): what the patches do, for the ground and for the statics, where they do it, and what they leave alone.
 
 ## Two ways out, one taken
 
@@ -88,6 +88,59 @@ Kerbin, read in flight from each sphere's own `subdivisionThresholds` and writte
 run of [Performance](performance.md). Higher up, the patched code decides once per quad that it does not
 apply, and each vertex is left with a reference comparison before stock runs untouched.
 
+## The statics
+
+A static cannot be given a precise position while it hangs from its terrain sphere
+([A second culprit: the statics](the-culprit.md#a-second-culprit-the-statics)). So this mod takes it out
+of the sphere, and gives it its world position in double, in the same frame as the quads:
+`body.rotation * planetRelativePosition + body.position`, and for its orientation, the rotation of the
+body times the one stock gives it in the sphere.
+
+- **Where it goes.** Under a container of its own, next to the one stock keeps for the quads a craft can
+  stand on: outside the body's hierarchy, where a world position is kept as it is. Everything that hangs
+  from the static — buildings, colliders, spawn points, the statics of a Kerbal Konstructs group — goes
+  with it.
+- **When.** Only in flight, and only while the static is within reach of the craft: within the farthest
+  another craft can be loaded from it, 22.5 km by default, plus 5 km for the size of a static. A craft
+  at the KSC takes the KSC out, and leaves the Island Airfield, 33 km away, under its sphere. Only the
+  statics that hang directly from their sphere are handled, as those of stock and of Kerbal Konstructs
+  do; `PQSCity2` is not.
+- **Following the body.** Stock moves the quads in the same call that moves the body, at every shift of
+  the floating origin (the setter of `PQS.PrecisePosition`); a static out of its sphere is placed again
+  there too, and whenever the body turns (`CelestialBody.CBUpdate`). If something else moves it — an
+  editor, say — it stays where it was put, relative to the body.
+- **Back under its sphere.** A static goes back exactly where stock left it, with its own local
+  position and rotation, whenever it goes out of reach, before every scene change, and for the time
+  stock code that expects it there runs: `PQSCity.Orientate`, `Start` and `ResetCelestialBody`, which
+  write its local position or read its body from its parents; `PQS.SetupMods`, which lists the mods of
+  a sphere from its children and would otherwise drop the static from the list; and `CommNetHome.Start`
+  and `DayNightGameObjectSwitch.Setup`, which read the body of a ground station or of a light switch
+  from their parents, and can be part of a static. Outside flight, a static is always where stock puts
+  it.
+
+## Other mods that look for a static under its sphere
+
+Taking a static out of its sphere changes the hierarchy of Unity objects, and a mod may look for a
+static where stock puts it. Two of the most installed ones do, in flight, and this mod patches each of
+them. Each patch stands for a small change that the mod itself could make, which is described below;
+the patch itself leaves the original code path untouched as long as the static is under its sphere, so
+it changes nothing without this mod's statics fix.
+
+- **[Kerbal Konstructs](https://github.com/KSP-RO/Kerbal-Konstructs), its group editor.** Moving a
+  group with the editor's gizmo, in flight, sets the world position of the group's static, then reads
+  its `transform.localPosition` as its position relative to the centre of the body — which only holds
+  while the static hangs from the sphere. Out of it, the group would be sent somewhere else on the body,
+  and saved there. The change, in `GroupEditor.OnMoveCallBack`: read that position whatever the static
+  hangs from, `CelestialBody.pqsController.transform.InverseTransformPoint(...)` of its world position.
+- **[Kopernicus](https://github.com/Kopernicus/Kopernicus), its flag fix.** When a facility is upgraded
+  or repaired, `RuntimeUtility.FixFlags` looks the KSC up among the `PQSCity` under the home body's
+  sphere, and uses it without checking it was found. In flight, a facility is upgraded when a mission
+  of the Making History expansion spawns a craft; the KSC may then be out of its sphere, and the flag
+  fix would throw. The change: look the KSC up without assuming it hangs from the sphere.
+
+Their other lookups under a sphere run at the main menu, or when the space centre, the tracking station
+or an editor is entered, when no static is out of its sphere.
+
 ## Safeguards
 
 - a correction larger than sixteen float steps is refused, quad by quad, and that quad is left as stock
@@ -97,6 +150,12 @@ apply, and each vertex is left with a reference comparison before stock runs unt
   System — while a wrong frame misses by kilometres. The largest correction measured so far is 4.0
   steps, 1 998 mm on Earth in Real Solar System (3.6 steps on Venus, 3.5 on the Moon, about one on
   Mars and Mercury), a quarter of the limit:
-  [What this mod corrected](limits-and-solutions/rescaled-systems-real-solar-system.md#what-this-mod-corrected);
-- if any patch fails to install, none of them does anything.
+  [What this mod corrected](limits-and-solutions/rescaled-systems-real-solar-system.md#what-this-mod-corrected).
+  The same limit applies to each static;
+- a static is only taken out of its sphere if the container it goes to has the same scale as the
+  sphere, so that the scale a mod gives it keeps its meaning;
+- the ground and the statics are two fixes, each installed on its own, and each can be turned off in
+  the settings. If any patch of one fix fails to install, none of that fix's patches does anything;
+- if Kerbal Konstructs or Kopernicus is installed and its code is not the one its patch expects, the
+  statics fix stays off, and every static stays where stock puts it.
 

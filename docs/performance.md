@@ -1,11 +1,12 @@
 # Performance
 
-Part of [Terrain Precision Fix](../README.md): what the fix costs, measured against stock.
+Part of [Terrain Precision Fix](../README.md): what the fix costs, measured against stock — the ground measured, the statics not yet.
 
 Now that the cause is known and fixed, what does the fix cost? The vertex part replaces a computation
 that stock runs for every vertex of every terrain quad it builds, so it sits on a path the game uses
 continuously while flying, not only when a scene loads. **It places a vertex in under 40 % of the time
-stock takes, and a frame cannot tell the difference.**
+stock takes, and a frame cannot tell the difference.** The statics fix runs on another path, a check per
+frame of the statics the game knows of; **its cost is not measured yet**.
 
 ## Two instruments
 
@@ -47,6 +48,10 @@ another machine are not comparable to these.
 Three configurations, each measured twice with each instrument, the configurations taken in turn rather
 than one after the other. The reference is a KSP with this mod's folder taken out of `GameData`, since a
 mod left in place still pays for its own patches on the path being timed.
+
+These runs measure the ground only. They were taken before this mod placed the statics, and 5 km over
+the Mun no static is near enough for the statics fix to take it out of its sphere: had it been
+installed, it would only have run its check of every static once per frame.
 
 ## What a vertex costs
 
@@ -151,3 +156,9 @@ itself.
 
 Nor is the saving worth having for its own sake: no frame shows it. The point is not the gain. It is that
 the correction costs nothing a profiler can see.
+
+The statics are not in these figures. What their fix does grows with the number of statics, not of
+vertices: once per frame, it checks every static the game knows of to see which ones a craft is near,
+and a static out of its sphere is placed again whenever its body moves. That is still to measure, with
+many statics near a craft — a base of Kerbal Konstructs — and is listed in
+[The KSC buildings, runway and launchpad](limits-and-solutions/the-ksc-buildings-runway-and-launchpad.md).

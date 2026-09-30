@@ -41,3 +41,10 @@ centre is more than 10,000 km from the world origin, which never includes the te
 and Kopernicus replaces the stock scatter holder with its own subclass,
 `PQSMod_KopernicusLandClassScatterQuad`, which is the case measured under
 [Scatter with colliders](scatter-with-colliders.md).
+
+**The statics.** Kopernicus looks the KSC up under the home body's terrain sphere in several places. All
+of them but one run when a scene opens, when this mod has put every static back under its sphere; the
+flag fix runs when a facility is upgraded, which can happen in flight, and this mod patches it
+([Mods that look for a static under its sphere](mods-that-look-for-a-static-under-its-sphere.md)).
+Checked on Earth under Real Solar System, with Kopernicus 248: the patch applies, the KSC is taken out
+of its sphere near a craft and put back under it, and the space centre opens without error afterwards.

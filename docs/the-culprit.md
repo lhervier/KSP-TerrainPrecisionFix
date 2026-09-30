@@ -1,6 +1,6 @@
 # The culprit
 
-Part of [Terrain Precision Fix](../README.md): the stock code that places the ground, and why it places it somewhere else at every load.
+Part of [Terrain Precision Fix](../README.md): the stock code that places the ground and the statics standing on it, and why it places them somewhere else at every load.
 
 Here it is straight away. The next chapter checks it before anything is changed.
 
@@ -71,7 +71,35 @@ own. It does not need to be:
 the fix does not care whether a rounding is still drawn at every load, since it shrinks that rounding
 to a size where drawing it again no longer matters.
 
+## A second culprit: the statics
+
+The runway, the launchpad and the buildings of the KSC are not terrain. They are statics, placed by a
+`PQSCity`, and so are the pads, runways and whole bases that a mod such as
+[Kerbal Konstructs](https://github.com/KSP-RO/Kerbal-Konstructs) plants anywhere on a body. Their
+placement repeats the terrain's, in `PQSCity.Orientate` (KSP 1.12.5; `planetRelativePosition` is a
+`Vector3d`):
+
+```csharp
+planetRelativePosition = vector3d * (sphere.radius + repositionRadiusOffset);
+base.transform.localPosition = planetRelativePosition;
+```
+
+The `Transform` of a static hangs straight from the body's terrain sphere, whose origin is the centre of
+the body. So this is again a 600 km double stored in a float `localPosition`, with the same 62.5 mm
+step on Kerbin, converted through the same frame, which moves as described above. `PQSCity2`, which
+places the launch sites of the Making History expansion, does the same.
+
+One thing sets a static apart: it has nowhere else to go. Stock moves the quads a craft can stand on
+into a container outside the body's hierarchy, where a world position given to them is kept as it is.
+It gives statics no such place: a precise position given to a static under its sphere would be stored
+as a 600 km float again.
+
+That a static comes back somewhere else at every load, and not together with the ground around it, is
+checked on the runway of the KSC in
+[Checking the culprit: the runway and the grass beside it](checking-the-culprit-runway.md).
+
 That fix follows from the code above: do the subtraction in double first, and only give a float the
-short distance that is left. How exactly, and why the other obvious way out was not taken, is in
+short distance that is left — for a static, after taking it out of its sphere, since it cannot hold a
+precise position under it. How exactly, and why the other obvious way out was not taken, is in
 [The fix this mod proposes](the-fix-this-mod-proposes.md). First, the hypothesis has to hold.
 

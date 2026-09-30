@@ -4,7 +4,8 @@ Part of [Terrain Precision Fix](../README.md): the `KSP.log` of every session ta
 installed. What their readings say is in
 [Checking the culprit: loading the same save](../docs/checking-the-culprit-loading.md),
 [Coming back to a craft left parked](../docs/checking-the-culprit-approach.md),
-[Switching to a craft far away](../docs/checking-the-culprit-switching.md) and
+[Switching to a craft far away](../docs/checking-the-culprit-switching.md),
+[The runway and the grass beside it](../docs/checking-the-culprit-runway.md) and
 [Rescaled systems: Real Solar System](../docs/limits-and-solutions/rescaled-systems-real-solar-system.md).
 
 The saves of the protocols are not here: each protocol belongs to an instrument, and its saves are in
@@ -27,6 +28,17 @@ KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, this mod and
   [the switching protocol](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/docs/the-protocol-switching.md)
   on Kerbin, read by Diag 1.
 - [`runs/switching-diag2-fix.log`](runs/switching-diag2-fix.log) — the same, read by Diag 2.
+- [`runs/runway-diag1-fix.log`](runs/runway-diag1-fix.log) — the six loadings of
+  [the runway protocol](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/docs/the-protocol-runway.md)
+  on Kerbin, read by Diag 1.
+- [`runs/runway-diag2-fix.log`](runs/runway-diag2-fix.log) — the same, read by Diag 2.
+- [`runs/runway-mun-kk-diag1-fix.log`](runs/runway-mun-kk-diag1-fix.log) — the six loadings of the
+  same protocol on the Mun, beside a runway placed by Kerbal Konstructs 1.12.3 (added to the install with
+  CustomPreLaunchChecks 1.8.1), read by Diag 1.
+- [`runs/runway-mun-kk-diag2-fix.log`](runs/runway-mun-kk-diag2-fix.log) — the same, read by Diag 2.
+- [`runs/runway-mun-kk-colliders-fix.log`](runs/runway-mun-kk-colliders-fix.log) — four loadings of
+  that save, every collider under each craft listed at each loading, with its height above the terrain
+  KSP computes there.
 
 ## On Real Solar System
 

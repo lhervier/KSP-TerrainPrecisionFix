@@ -132,7 +132,7 @@ correction no rounding can produce — on any body: sixteen steps is four times 
 seen so far, 4.0 steps on Earth, then 3.6 on Venus, 3.5 on the Moon, and about one on Mars and
 Mercury. None of the terrain built on these five bodies was refused.
 
-*Still to test:* the runway of the KSC on Earth, a static this mod does not place (see
+*Still to test:* the runway of the KSC on Earth, a static this mod now places, measured so far on Kerbin only (see
 [The KSC buildings, runway and launchpad](the-ksc-buildings-runway-and-launchpad.md)), where Real
 Solar System keeps the floating origin from moving while a craft rolls on it; and a flight. Every
 series so far loads a landed craft again, while a player builds terrain continuously, the floating

@@ -9,6 +9,68 @@ L'issue KSPCF demande une relecture et de l'aide, pas une publication : elle dit
 qui ne l'est pas, et [Limits and solutions](docs/limits-and-solutions.md) liste en public les cas encore
 ouverts. Seul ce qui casserait la lecture de l'issue elle-même doit donc passer avant.
 
+## Le correctif des statiques : à valider avant de commiter
+
+Écrit le 2026-09-30 (`StaticsFix`, `KerbalKonstructsCompat`, `KopernicusCompat`), compilé, **rien testé en
+jeu**. On valide, puis on met le README à jour (un second coupable, les statiques, et les autres
+chapitres), puis on commite. « Auto » : un addon jetable peut le dérouler seul dans `ksp-dev\` ou
+`ksp-rss-dev\`.
+
+Blocs 1 et 2 faits le 2026-09-30 dans `ksp-dev\` et `ksp-rss-dev\` par un addon jetable (résultats :
+journal TerrainPrecisionFix de `claude-notes`, même date).
+
+**1. Installation et non-régression** (auto)
+- [x] Log au démarrage dans `ksp-dev\` : les deux correctifs installés, aucune erreur Harmony.
+- [x] Idem dans `ksp-rss-dev\` : la ligne « Kopernicus: flag fix patched ».
+- [x] `fixTerrain = false`, puis `fixStatics = false` : chacun se coupe seul, l'autre marche encore.
+- [x] Le sol n'a pas régressé (sondage collider − hauteur analytique de l'addon, pas Diag 2 lui-même).
+- [x] Performances du sol : quatre runs PQSBench.
+
+**2. Hypothèses du code jamais vérifiées** (auto)
+- [x] Échelle de la sphère et de `LocalSpace` à 1 (aucun avertissement « scale »).
+- [x] « KSC » enfant direct de la sphère, `SpaceCenter` sous lui : aucune erreur `CompileID`,
+      destructibles et bâtiments améliorables enregistrés en vol.
+- [x] `sphere.target` en vol est le vaisseau : sorties et retours visibles en Debug.
+- [x] Le `PQStorage` pend de `LocalSpace`, pas du corps (aucun avertissement « no place out of the
+      sphere »).
+
+**3. Le correctif lui-même**
+- [x] Mesure : `runway-kerbin.sfs`, six chargements, Diag 1 et Diag 2 ; dispersion ~0 sur la piste (auto,
+      2026-09-30 : captures dans `imgs/Diag1|2/on-runway/`, logs `diag/runs/runway-diag1|2-fix.log`).
+- [ ] Décalage de l'origine forcé, capsule sur la piste : le statique suit sans saut (auto).
+- [ ] Rotation du corps au-dessus de la rotation inverse : vu d'orbite, le KSC ne glisse pas (captures).
+- [ ] Changements de scène : vol → KSC → vol, revert, F9, récupération ; sous RSS, le `Find("KSC")` de
+      Kopernicus passe (auto en grande partie).
+- [ ] Lancement depuis la piste et le pas de tir : le vaisseau apparaît au bon endroit (auto).
+- [ ] Changement de SOI, Mun puis retour : `SetupMods` repasse, KSC visible, LOD corrects (auto).
+- [ ] Les autres statiques stock (KSC2, Island Airfield, Pyramides, anomalies) sortent sans rien casser
+      (auto).
+- [ ] Coût par frame avec beaucoup de statiques enregistrés (centaines de groupes KK).
+
+**4. Au clavier**
+- [ ] Détruire un bâtiment du KSC en vol : état sauvegardé, réparation depuis le KSC.
+- [ ] Niveaux des bâtiments 1, 2 et 3 en vol : géométrie à sa place.
+- [ ] CommNet : la station du KSC relaie en vol, y compris dans une partie qui démarre en vol (scénario
+      d'entraînement), là où `CommNetHome.Start` tourne hors de la sphère.
+- [ ] Kopernicus `FixFlags` : une mission Making History qui fait apparaître un vaisseau au KSC, sous RSS ;
+      aucune exception.
+
+**5. KK (portable)**
+- [x] Mesure de la piste KK sur la Mune (`runway-mun-kk.sfs`) : faite sur le fixe le 2026-09-30, KK installé
+      le temps du run.
+- [ ] Pourquoi la section `Section3_Mesh` de la piste KK n'est active qu'au premier chargement d'une session
+      (21,3 mm au-dessus du revêtement, en stock comme avec le correctif ; rien de tel sur la piste du KSC).
+- [ ] Éditeur de groupe en vol : déplacer au gizmo, tourner, créer, copier, supprimer un groupe hors de la
+      sphère, éditer un statique d'un groupe ; recharger, chaque groupe est où on l'a laissé.
+- [ ] Lancement depuis un site KK.
+
+**6. RSS** (`ksp-rss-dev\`)
+- [ ] La piste de RSS : même mesure, puis roulage avec et sans le verrou de RSSRunwayFix (cf. point 1.1
+      de « Avant d'ouvrir l'issue KSPCF »).
+
+**Ensuite** : README (second coupable, autres chapitres), pages *runway* des deux Diags refaites avec le
+correctif, puis commit.
+
 ## Avant d'ouvrir l'issue KSPCF
 
 **Dans cet ordre** (Lionel, 2026-09-25) : finir RSS (point 1), puis restructurer les autres cas de
