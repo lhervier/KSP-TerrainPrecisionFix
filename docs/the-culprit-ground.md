@@ -70,7 +70,3 @@ read from the stock code and consistent with every measurement below; it has not
 own. It does not need to be:
 the fix does not care whether a rounding is still drawn at every load, since it shrinks that rounding
 to a size where drawing it again no longer matters.
-
-The fix follows from the code above: do the subtraction in double first, and only give a float the
-short distance that is left. How exactly, and why the other obvious way out was not taken, is in
-[The fix this mod proposes](the-fix-this-mod-proposes.md). First, the hypothesis has to hold.
