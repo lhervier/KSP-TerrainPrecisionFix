@@ -2,9 +2,7 @@
 
 Part of [Terrain Precision Fix](../README.md): the stock code that places the ground, and why it places it somewhere else at every load.
 
-Here it is straight away. The statics standing on the ground have a culprit of their own, in
-[The culprit: the statics](the-culprit-statics.md); the chapters after it check both before anything is
-changed.
+Here it is straight away.
 
 This is how every terrain vertex is placed, in `PQS.BuildVertexSurfaceRelative`, decompiled from
 KSP 1.12.5 (`vertRel` and `planetRel` are `Vector3d` fields):
