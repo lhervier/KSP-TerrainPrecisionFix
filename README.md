@@ -138,7 +138,7 @@ with its terrain fix alone.
 ## What moves the frame
 
 The rounding is drawn anew because the frame the ground is converted through — how the body is turned
-in Unity's world, and where it sits in it — does not stay put. A third instrument,
+in Unity's world, and where it sits in it — does not stay put. An instrument,
 [Terrain Precision Fix Diag 3](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag3), reads that
 frame on a stock install: it moves at every load, on the way to orbit and back, and on the ground as a
 craft is driven, none of which the save records. That is why putting it back in place at loading would
