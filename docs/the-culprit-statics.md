@@ -2,8 +2,7 @@
 
 Part of [Terrain Precision Fix](../README.md): the stock code that places the statics standing on the ground, and why it places them somewhere else at every load.
 
-The ground has a culprit of its own, in [The culprit: the ground](the-culprit-ground.md). The statics
-repeat it, with one difference.
+Here it is straight away.
 
 The runway, the launchpad and the buildings of the KSC are not terrain. They are statics, placed by a
 `PQSCity`, and so are the pads, runways and whole bases that a mod such as
