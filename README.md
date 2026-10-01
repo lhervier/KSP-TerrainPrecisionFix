@@ -90,8 +90,8 @@ stands on, stock gives them no place outside the body where a precise position w
 A craft is put back onto the ground in two ways: when a save hands it back, and when you come close
 enough for its physics to start again, in the middle of a flight with nothing loaded at all. Both are
 measured, before anything is changed and again with this mod installed, with two instruments: one
-reads the landed craft, the other the ground itself. A third protocol takes the first way apart, and a
-fourth puts a craft on a runway.
+reads the landed craft, the other the ground itself. A third protocol takes the first way apart, a
+fourth puts a craft on a runway, and a fifth reads the ground under a rover that never stops.
 
 **Loading the same save**, six times over, on Kerbin, the Mun, Minmus and Gilly, then on the Moon and
 Earth of [Real Solar System](https://github.com/KSP-RO/RealSolarSystem), much larger. On Kerbin the
@@ -125,6 +125,14 @@ comes back within 0.009 mm with this mod instead of 33.5 mm — except at the fi
 when a section of the runway, 21.3 mm higher, is still there under the craft, on stock as with this mod.
 
 **→ Full chapter: [Checking the culprit: the runway and the grass beside it](docs/checking-the-culprit-runway.md)**
+
+**Driving on while the world moves**: every 500 m a rover drives, KSP moves the floating origin onto
+it, and stock places the quads under it again. A rover alone on flat grass, read just before and just
+after each shift, and the same few metres farther on with no shift. Without this mod, the ground under
+it moves by 4.2 to 11.8 mm at each of five shifts, with nothing loaded; over the same few metres with no
+shift, by 1.2 mm at most. With it, by 0.215 and 0.231 mm at two shifts, no more than with no shift.
+
+**→ Full chapter: [Checking the culprit: driving on while the world moves](docs/checking-the-culprit-driving.md)**
 
 ## What moves the frame
 
