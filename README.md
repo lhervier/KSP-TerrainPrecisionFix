@@ -155,8 +155,8 @@ stand on are touched.
 For the statics, which cannot hold a precise position under their sphere, a static is taken out of it
 in flight, while a craft is near it, and placed in double in the same frame. It follows its body, and it
 goes back exactly where stock left it before every scene change, and whenever stock code that expects it
-there runs. Kerbal Konstructs and Kopernicus each look for a static under its sphere once in flight: the
-mod patches both, each patch standing for a small change these mods could make themselves.
+there runs. Kerbal Konstructs and Kopernicus each look for a static under its sphere once in flight: **this
+mod has to patch both**, each patch standing for a small change these mods could make themselves.
 
 **→ Full chapter: [The fix this mod proposes](docs/the-fix-this-mod-proposes.md)**
 
