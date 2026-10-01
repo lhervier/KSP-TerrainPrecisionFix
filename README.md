@@ -139,13 +139,11 @@ with its terrain fix alone.
 
 The rounding is drawn anew because the frame the ground is built in — how the body is turned in
 Unity's world, and where its terrain sphere sits in it — does not stay put.
-[Terrain Precision Fix Diag 3](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag3) shows that
-frame on your own install, and records it whenever you ask, to compare it from one loading to the next
-and from one moment of a flight to another. It explains, it does not compare: it reads values the game
-already holds, which this mod does not touch, so it reads the same with or without it. What it shows: a
-save does not give back the frame it was saved in, and the frame changes during a flight with nothing
-loaded — which is why freezing it was set aside ([in The fix this mod
-proposes](docs/the-fix-this-mod-proposes.md#two-ways-out-one-taken)).
+[Terrain Precision Fix Diag 3](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag3) shows what
+moves it, on a stock install: KSP's floating origin — how far the craft is from it, when it is shifted
+and by how much — along with the angle of the body and the position of its terrain sphere. A save does
+not give that frame back, and it changes during a flight with nothing loaded — which is why freezing it
+was set aside ([in The fix this mod proposes](docs/the-fix-this-mod-proposes.md#two-ways-out-one-taken)).
 
 **→ Full chapter: [What the measurements show](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag3/blob/master/docs/what-the-measurements-show.md), on the page of Diag 3**
 
