@@ -44,25 +44,59 @@ History expansion that Real Solar System does not place, which its log shows wit
 `PQSCity2`, which places the launch sites of the Making History expansion, carries the same defect and
 is not covered.
 
-*To test:*
+## Still to test
 
-- a shift of the floating origin under a craft parked on the runway;
-- a craft above the altitude where KSP stops rotating the world and turns the body instead: seen from
-  orbit, the KSC does not slide over the ground;
-- the other ways a scene is left or reloaded: revert, quickload, recovering a craft;
-- launching from the runway and from the launchpad;
-- flying to another body and back;
-- destroying a building in flight, then repairing it from the space centre; every level of every
-  facility;
-- the ground station of the KSC, in a game that starts in flight;
-- a mission of the Making History expansion that spawns a craft on the launchpad, without any other mod:
-  stock finds the KSC from the launchpad, places it again, sets the launchpad's level and puts the craft
-  on its spawn point. Seen once with Kopernicus and Real Solar System, in
-  [Seeing the patch](kopernicus/the-flag-fix.md#seeing-the-patch) of Kopernicus' flag fix: the KSC is
-  placed again while it is out of its sphere, and the pod appears on the launchpad; whether it sits on
-  its spawn point was not checked;
-- the other statics of stock — the KSC 2, the Island Airfield, the pyramids, the anomalies — taken out
-  of their sphere near a craft, without anything else going wrong;
-- the cost per frame, with many statics near a craft;
-- the runway of the KSC on Earth in Real Solar System, and Real Solar System's own runway fix, which
-  keeps the floating origin from moving while a craft rolls on it.
+Each case below is what a player would see if this mod broke something there, then how to check it by
+hand, in game. Unless it says otherwise, each is played in KSP 1.12.5 with Harmony, ModuleManager, KSP
+Community Fixes 1.41.1 and this mod, with `logLevel = Debug` in its settings so that `KSP.log` shows each
+static it takes out of its sphere and puts back; and each is played a second time without this mod, to
+tell what stock already does.
+
+- **A bump under a craft rolling on the runway.** KSP moves its floating origin every 500 m the active
+  craft travels, and this mod has to move the KSC with it. From the SPH, launch a plane, alone in flight,
+  and taxi it from one end of the runway to the other: 2.4 km, four shifts or more. The plane rolls
+  without a bump, and the buildings do not jump.
+- **A craft spawned in the wrong place.** From the VAB, launch a pod on the launchpad; from the SPH, a
+  plane on the runway. Each settles where stock puts it, without a drop or a jolt.
+- **The KSC missing or misplaced after a scene change.** With a craft on the launchpad, in turn: revert
+  to launch, quicksave and quickload (F5, F9), go to the space centre and back through the tracking
+  station, revert to the VAB, recover the craft. In flight, the KSC is where it was; at the space centre,
+  every building opens.
+- **The KSC missing or blurred after a trip to another body.** With a craft on the launchpad and a second
+  one parked on the runway, send the first around the Mun (`Alt+F12 → Cheats → Set Orbit`), then switch
+  to the second from the map view. The KSC is there, at its full detail, and the second craft stands on
+  the runway.
+- **The KSC drifting during time warp.** With a craft on the runway, time warp at the highest rate on
+  rails for a few days of game time, then stop. The craft and the KSC are where they were.
+- **A destroyed building that does not stay destroyed, or will not come back.** In flight, crash a craft
+  into a destructible building of the KSC, such as the water tower of the launchpad. At the space centre,
+  it shows as destroyed; repaired there, it is back at its place in the next flight.
+- **A facility drawn at the wrong level.** In a career game, launch from the launchpad and from the
+  runway at each of their three levels, upgraded from the space centre. In flight, each facility shows
+  the buildings of its level, at their place.
+- **No connection to the KSC's ground station.** CommNet on, a probe on the launchpad: the signal
+  indicator shows a connection to the KSC. The same in a game that starts in flight, from a stock
+  scenario.
+- **A craft spawned by a mission away from its spawn point.** With the Making History expansion and no
+  other mod, play the mission [`KSC flag fix`](../../diag/kopernicus-flag-fix/Missions/): 30 seconds
+  in, it spawns a pod on the launchpad. The pod stands on its spawn point, the launchpad at its level.
+  Seen once, with Kopernicus and Real Solar System, in
+  [Seeing the patch](kopernicus/the-flag-fix.md#seeing-the-patch): the pod appears on the launchpad;
+  whether it stands on its spawn point was not checked.
+- **The same failures at the other statics of stock.** The KSC 2, the Island Airfield, the pyramids and
+  the anomalies: a craft landed by each, loaded twice, then flown away and back. The static is where it
+  was, and the craft stands as it did.
+- **A static sliding over the ground of a body without an atmosphere.** Low over a body, KSP turns the
+  world around the craft; above an altitude set for each body, it turns the body, and this mod has to turn the statics
+  with it. A craft climbing from the Mun's surface to 25 km above an anomaly of the Mun: from up there,
+  the anomaly does not slide over the ground.
+- **A bump under a craft rolling on the runway of the KSC on Earth, in Real Solar System.** Real
+  Solar System keeps the floating origin from moving while a craft rolls on that runway, and no setting
+  turns that lock off. In the install of
+  [Rescaled systems: Real Solar System](rescaled-systems-real-solar-system.md), taxi a plane from one
+  end of the runway to the other, with Real Solar System as released, then built from its sources with
+  the lock turned off; each without this mod and with it. As released, the plane rolls without a bump;
+  with the lock off, it does so with this mod.
+
+The cost per frame of the statics fix is no impact a player can check by hand: it belongs to
+[Performance](../performance.md), where it is still to measure.

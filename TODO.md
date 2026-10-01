@@ -13,29 +13,41 @@ ouverts. Seul ce qui casserait la lecture de l'issue elle-même doit donc passer
 
 Écrit le 2026-09-30 (`StaticsFix`, `KerbalKonstructsCompat`, `KopernicusCompat`), validé en partie. On
 finit de valider, puis on met le README à jour (un second coupable, les statiques, et les autres
-chapitres), puis on commite. « Auto » : un addon jetable peut le dérouler seul dans `ksp-dev\` ou
-`ksp-rss-dev\`.
+chapitres), puis on commite.
 
-**1. Le correctif lui-même**
-- [ ] Décalage de l'origine forcé, capsule sur la piste : le statique suit sans saut (auto).
-- [ ] Rotation du corps au-dessus de la rotation inverse : vu d'orbite, le KSC ne glisse pas (captures).
-- [ ] Changements de scène : vol → KSC → vol, revert, F9, récupération ; sous RSS, le `Find("KSC")` de
-      Kopernicus passe (auto en grande partie).
-- [ ] Lancement depuis la piste et le pas de tir : le vaisseau apparaît au bon endroit (auto).
-- [ ] Changement de SOI, Mun puis retour : `SetupMods` repasse, KSC visible, LOD corrects (auto).
-- [ ] Les autres statiques stock (KSC2, Island Airfield, Pyramides, anomalies) sortent sans rien casser
-      (auto).
-- [ ] Coût par frame avec beaucoup de statiques enregistrés (centaines de groupes KK).
+**Chaque test se joue à la main, en jeu, sans addon** (Lionel, 2026-10-01) : il doit montrer à un
+mainteneur de KSPCF qu'un impact sur le jeu existe ou non, et se rejouer sans nous. La liste publique,
+impact par impact, avec sa procédure, est le chapitre *Still to test* de
+[The KSC buildings, runway and launchpad](docs/limits-and-solutions/the-ksc-buildings-runway-and-launchpad.md#still-to-test) ;
+chaque test se joue avec le mod (`logLevel = Debug`) puis sans. Une fois joué, son résultat va dans la
+page, son point quitte la liste, et il s'efface d'ici.
 
-**2. Au clavier**
-- [ ] Détruire un bâtiment du KSC en vol : état sauvegardé, réparation depuis le KSC.
-- [ ] Niveaux des bâtiments 1, 2 et 3 en vol : géométrie à sa place.
-- [ ] CommNet : la station du KSC relaie en vol, y compris dans une partie qui démarre en vol (scénario
-      d'entraînement), là où `CommNetHome.Start` tourne hors de la sphère.
-- [ ] **Stock, sans aucun mod tiers** (`ksp-dev\`) : une mission Making History qui fait apparaître un
-      vaisseau sur le pas de tir (`BasicTutorial`) ; `MissionSystem.ConstructShip` retrouve le KSC
-      (`GetComponentInParent<PQSCity>`), le réoriente, fixe le niveau du pas de tir, pose le vaisseau sur
-      son point de départ. KSC hors de sa sphère à ce moment ? (Debug.)
+**1. Stock** (`ksp-dev\`, KSPCF, sans mod tiers)
+- [ ] Bosse sous un avion qui roule seul sur toute la piste (décalages d'origine).
+- [ ] Vaisseau qui apparaît au mauvais endroit : pas de tir (VAB) et piste (SPH).
+- [ ] KSC perdu après un changement de scène : revert au lancement, F5/F9, KSC puis retour par la
+      tracking station, revert au VAB, récupération.
+- [ ] KSC absent ou flou après un passage à la Mune (`Set Orbit`, puis bascule depuis la carte sur un
+      second vaisseau garé sur la piste).
+- [ ] KSC qui dérive pendant une accélération du temps sur rails, vaisseau sur la piste.
+- [ ] Bâtiment détruit en vol (château d'eau du pas de tir) : détruit au KSC, réparé, à sa place au vol
+      suivant.
+- [ ] Niveaux 1, 2 et 3 du pas de tir et de la piste en carrière : bâtiments de leur niveau, à leur place.
+- [ ] Station CommNet du KSC : connexion d'une sonde sur le pas de tir, puis dans un scénario stock qui
+      démarre en vol (là où `CommNetHome.Start` tourne hors de la sphère).
+- [ ] Mission Making History `KSC flag fix` (déjà publiée dans `diag/kopernicus-flag-fix/Missions/`),
+      sans aucun autre mod : le pod du pas de tir sur son point de départ, le pas de tir à son niveau.
+- [ ] Autres statiques stock (KSC 2, Island Airfield, pyramides, anomalies) : **une sauvegarde à
+      publier**, un vaisseau posé près de chacun ; chargée deux fois, puis on s'éloigne et on revient.
+- [ ] Statique qui glisse sur un corps sans atmosphère : vaisseau à 25 km au-dessus d'une anomalie de la
+      Mune. La portée du correctif est d'environ 27,5 km (`StaticsFix.ReachRange` : plus grand
+      `unload`, 22,5 km, + 5 km) ; relever en jeu l'altitude où la Mune cesse la rotation inverse
+      (15 km par défaut, `CelestialBody.inverseRotThresholdAltitude`). Si elle dépasse la portée,
+      passer par Gilly et corriger la page.
+
+**2. Hors liste publique**
+- [ ] Coût par frame avec beaucoup de statiques enregistrés (centaines de groupes KK) : chapitre
+      *Performance*, pas un impact jouable.
 
 **3. KK (portable)**
 - [ ] Pourquoi la section `Section3_Mesh` de la piste KK n'est active qu'au premier chargement d'une session
@@ -45,8 +57,10 @@ chapitres), puis on commite. « Auto » : un addon jetable peut le dérouler seu
 - [ ] Lancement depuis un site KK.
 
 **4. RSS** (`ksp-rss-dev\`)
-- [ ] La piste de RSS : même mesure, puis roulage avec et sans le verrou de RSSRunwayFix (cf. point 1.1
-      de « Avant d'ouvrir l'issue KSPCF »).
+- [ ] La piste de RSS : même mesure, puis roulage d'un avion sur toute la piste, **sur le modèle du flag
+      fix de Kopernicus** : RSS tel que publié, puis RSS recompilé sans le verrou d'origine de
+      `RSSRunwayFix` (diff publié dans `diag/`, comme `kopernicus-248-without-its-flag-fix.diff`) ;
+      chacun sans le mod et avec (cf. point 1.1 de « Avant d'ouvrir l'issue KSPCF »).
 
 **Ensuite** : README (second coupable, autres chapitres), pages *runway* des deux Diags refaites avec le
 correctif, puis commit.
@@ -86,13 +100,13 @@ ensuite, sans ordre imposé.
         (passe en *Checked, a real problem*, Kerbal Konstructs avec lui), et décider si un correctif des
         statiques se fait à part, comme RockPrecisionFix.
       - **Puis sous RSS** : avec le correctif, un roulage et un décollage sur la piste avec le verrou,
-        puis sans. Aucun réglage ne coupe le verrou : il faut un petit addon de test qui détruit
-        `RSSRunwayFix.Instance` en vol. Sans verrou, si la piste saute encore à chaque décalage, c'est
+        puis sans. Aucun réglage ne coupe le verrou : sur le modèle du flag fix de Kopernicus, RSS
+        recompilé sans lui, diff publié dans `diag/` (Lionel, 2026-10-01 ; plus d'addon). Sans verrou, si la piste saute encore à chaque décalage, c'est
         le static, et c'est l'argument pour étendre le correctif aux `PQSCity`.
       - Même dans le cas (b), écrire que, pour ce défaut, le verrou n'a plus rien à corriger ; jamais
         qu'il ne sert plus à rien.
 
-      Le cas KSC ne parle pas encore de RSS.
+      Le cas KSC en a la procédure publique, dernier point de son *Still to test*.
    2. **Un vol sous RSS, pas seulement des chargements.** Tout ce qui est mesuré sous RSS est un
       vaisseau posé qu'on recharge ; jamais des quads construits en continu pendant les décalages
       d'origine (`PQ.PreciseUpdateSubQuadsPosition`), ce que vit tout joueur RSS à chaque lancement.
