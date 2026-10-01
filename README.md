@@ -158,10 +158,6 @@ goes back exactly where stock left it before every scene change, and whenever st
 there runs. Kerbal Konstructs and Kopernicus each look for a static under its sphere once in flight: the
 mod patches both, each patch standing for a small change these mods could make themselves.
 
-A correction larger than sixteen float steps at the distance of what is placed (1 m on Kerbin) is
-refused. The ground and the statics are two fixes: each can be turned off in the settings, and if one of
-its patches fails to install, none of them does anything.
-
 **→ Full chapter: [The fix this mod proposes](docs/the-fix-this-mod-proposes.md)**
 
 ## Performance
