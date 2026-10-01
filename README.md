@@ -123,17 +123,17 @@ mod; the switch itself moves nothing.
 
 **→ Full chapter: [Checking the culprit: switching to a craft far away](docs/checking-the-culprit-switching.md)**
 
+**Driving on while the world moves**, every 500 m a rover drives: the ground under it jumps by 4 to 12 mm
+on Kerbin and 14 to 42 cm on Earth, where the rover jumps with it; with this mod, no jump is left.
+
+**→ Full chapter: [Checking the culprit: driving on while the world moves](docs/checking-the-culprit-driving.md)**
+
 **The runway and the grass beside it**, for the second culprit, the statics: at every loading, the runway
 comes back over 130.1 mm, on its own, and over 0.216 mm with this mod; while a rover drives by it, the
 runway moves with the ground by up to 48.5 mm, and within 0.05 mm with this mod — though it still moves
 with its terrain fix alone.
 
 **→ Full chapter: [Checking the culprit: the runway and the grass beside it](docs/checking-the-culprit-runway.md)**
-
-**Driving on while the world moves**, every 500 m a rover drives: the ground under it jumps by 4 to 12 mm
-on Kerbin and 14 to 42 cm on Earth, where the rover jumps with it; with this mod, no jump is left.
-
-**→ Full chapter: [Checking the culprit: driving on while the world moves](docs/checking-the-culprit-driving.md)**
 
 ## What moves the frame
 
