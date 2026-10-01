@@ -175,15 +175,10 @@ measured yet.
 ## Limits and solutions
 
 Everything that stands on the ground, or is placed from it, has to be checked against this fix, one
-case at a time — a work in progress, with a chapter per case. The cases go from other mods (KSP
-Community Fixes, Kopernicus and planet packs, Parallax, Kerbal Konstructs, Deferred…) to what stock
-itself places on the ground (scatter, the KSC statics, Breaking Ground) and to situations (rescaled
-systems such as Real Solar System, slopes, existing saves, the map view…). Taking the statics out of
-their sphere adds a case of its own: mods that look for a static where stock puts it. So far, every
-case checked shows no problem caused by this fix — including Real Solar System, where the defect is at
-its largest, and Kopernicus, whose fix for a twitching flag the statics fix makes unneeded where it
-moves the KSC. Some cases say what changes, and what can go further; the others say how they will be
-tested.
+case at a time: other mods (Kopernicus, Parallax, Kerbal Konstructs…), what stock places on the ground
+(scatter, the KSC statics, Breaking Ground) and situations (rescaled systems, slopes, existing saves…).
+This is a work in progress, with a chapter per case. **The statics fix is the riskier of the two**: it
+takes a static out of the place where stock, and any mod, expects to find it.
 
 **→ Full chapter: [Limits and solutions](docs/limits-and-solutions.md)**
 
