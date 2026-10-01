@@ -4,8 +4,9 @@ Part of [Terrain Precision Fix](../README.md): what the fix costs, measured agai
 
 Now that the cause is known and fixed, what does the fix cost? The vertex part replaces a computation
 that stock runs for every vertex of every terrain quad it builds, so it sits on a path the game uses
-continuously while flying, not only when a scene loads. **It places a vertex in under 40 % of the time
-stock takes, and a frame cannot tell the difference.** The statics fix runs on another path, a check per
+continuously while flying, not only when a scene loads. **It does not slow the game down: a frame
+cannot tell it from stock.** It even places a vertex faster than stock, but that saving is lost in the
+noise between two sessions of KSP. The statics fix runs on another path, a check per
 frame of the statics the game knows of; **its cost is not measured yet**.
 
 ## Two instruments
@@ -150,12 +151,13 @@ that.
 
 ## What this says
 
-The fix is faster than stock, and faster than stock with its `Transform`s read once per quad: a little
-less than half of its saving is the organisation any version could adopt, the rest is the arithmetic
-itself.
+**The fix does not slow the game down.** That is the only conclusion the frames support: the three
+configurations cannot be told apart, and two sessions of stock alone differ more than any two of them.
 
-Nor is the saving worth having for its own sake: no frame shows it. The point is not the gain. It is that
-the correction costs nothing a profiler can see.
+The bench does show the fix placing a vertex faster than stock, and faster than stock with its
+`Transform`s read once per quad: a little less than half of that saving is the organisation any version
+could adopt, the rest is the arithmetic itself. But it is not a gain worth claiming: thirty times below
+the noise between two sessions, no frame shows it.
 
 The statics are not in these figures. What their fix does grows with the number of statics, not of
 vertices: once per frame, it checks every static the game knows of to see which ones a craft is near,
