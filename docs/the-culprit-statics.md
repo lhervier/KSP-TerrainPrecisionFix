@@ -29,8 +29,3 @@ as a 600 km float again.
 That a static comes back somewhere else at every load, and not together with the ground around it, is
 checked on the runway of the KSC in
 [Checking the culprit: the runway and the grass beside it](checking-the-culprit-runway.md).
-
-The fix follows from the code above, as for the ground: do the subtraction in double first, and only
-give a float the short distance that is left — after taking the static out of its sphere, since it
-cannot hold a precise position under it. How exactly is in
-[The fix this mod proposes](the-fix-this-mod-proposes.md). First, the hypothesis has to hold.
