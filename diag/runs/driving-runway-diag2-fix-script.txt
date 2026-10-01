@@ -1,0 +1,72 @@
+17:00:07 run fix-full
+17:01:17 move 1: G -0.0416663 -74.6804293, origin distance 480.2 m
+17:01:30   at G      missed by 0.13 m
+17:01:46   record G1-b1    diff=    -2.539 computed= 64784.993 origin=  480.0 shifts=1
+17:02:17   at P      missed by 0.13 m
+17:02:47   record P1-b1    diff=  3497.543 computed= 64784.969 origin=  482.9 shifts=0
+17:03:15   at G      missed by 0.15 m
+17:03:23   record G1-b2    diff=    -2.536 computed= 64784.993 origin=  480.0 shifts=0
+17:03:53   at P      missed by 0.14 m
+17:04:10   record P1-b2    diff=  3497.574 computed= 64784.969 origin=  482.9 shifts=0
+17:04:37   at G      missed by 0.15 m
+17:04:40   record G1-b3    diff=    -2.530 computed= 64784.993 origin=  480.0 shifts=0
+17:04:53 move 1: shift, stopped because shift, last shift 500.0440783884308
+17:05:14   at N      missed by 0.14 m
+17:05:28   at G      missed by 0.13 m
+17:05:33   record G1-a1    diff=    -2.533 computed= 64784.993 origin=   20.4 shifts=1
+17:06:03   at P      missed by 0.14 m
+17:06:34   record P1-a1    diff=  3497.527 computed= 64784.969 origin=   52.3 shifts=0
+17:07:01   at G      missed by 0.15 m
+17:07:04   record G1-a2    diff=    -2.539 computed= 64784.993 origin=   20.4 shifts=0
+17:07:35   at P      missed by 0.13 m
+17:08:05   record P1-a2    diff=  3497.507 computed= 64784.969 origin=   52.3 shifts=0
+17:08:32   at G      missed by 0.15 m
+17:09:37 move 2: G -0.0416481 -74.6365398, origin distance 439.7 m
+17:09:50   at G      missed by 0.13 m
+17:09:55   record G2-b1    diff=    -2.568 computed= 64784.943 origin=  439.6 shifts=0
+17:10:25   at P      missed by 0.14 m
+17:10:29   record P2-b1    diff=  3052.863 computed= 64784.919 origin=  442.2 shifts=0
+17:10:56   at G      missed by 0.15 m
+17:11:07   record G2-b2    diff=    -2.568 computed= 64784.943 origin=  439.6 shifts=0
+17:11:37   at P      missed by 0.14 m
+17:11:41   record P2-b2    diff=  3052.860 computed= 64784.919 origin=  442.2 shifts=0
+17:12:08   at G      missed by 0.15 m
+17:12:30   record G2-b3    diff=    -2.561 computed= 64784.943 origin=  439.6 shifts=0
+17:12:58 move 2: shift, stopped because shift, last shift 500.03265240143713
+17:13:33   at N      missed by 0.15 m
+17:13:47   at G      missed by 0.13 m
+17:13:51   record G2-a1    diff=    -2.564 computed= 64784.943 origin=   60.6 shifts=1
+17:14:21   at P      missed by 0.14 m
+17:14:24   record P2-a1    diff=  3052.860 computed= 64784.919 origin=   77.3 shifts=0
+17:14:51   at G      missed by 0.14 m
+17:14:55   record G2-a2    diff=    -2.558 computed= 64784.943 origin=   60.5 shifts=0
+17:15:25   at P      missed by 0.14 m
+17:15:28   record P2-a2    diff=  3052.860 computed= 64784.919 origin=   77.3 shifts=0
+17:15:55   at G      missed by 0.13 m
+17:16:54 move 3: G -0.0421364 -74.5964781, origin distance 359.4 m
+17:17:06   at G      missed by 0.13 m
+17:17:20   record G3-b1    diff=    -1.907 computed= 64784.928 origin=  359.2 shifts=0
+17:17:50   at P      missed by 0.14 m
+17:17:56   record P3-b1    diff=  2909.027 computed= 64784.904 origin=  363.1 shifts=0
+17:18:24   at G      missed by 0.15 m
+17:18:35   record G3-b2    diff=    -1.900 computed= 64784.928 origin=  359.2 shifts=0
+17:19:04   at P      missed by 0.13 m
+17:19:08   record P3-b2    diff=  2909.023 computed= 64784.904 origin=  363.1 shifts=0
+17:19:35   at G      missed by 0.15 m
+17:19:41   record G3-b3    diff=    -1.928 computed= 64784.928 origin=  359.2 shifts=0
+17:20:33 move 3: shift, stopped because shift, last shift 500.05529452053145
+17:21:40   at N      missed by 0.15 m
+17:21:55   at G      missed by 0.13 m
+17:22:00   record G3-a1    diff=    -1.920 computed= 64784.928 origin=  140.9 shifts=1
+17:22:30   at P      missed by 0.13 m
+17:22:35   record P3-a1    diff=  2909.021 computed= 64784.904 origin=  148.9 shifts=0
+17:23:02   at G      missed by 0.15 m
+17:23:08   record G3-a2    diff=    -1.909 computed= 64784.928 origin=  140.9 shifts=0
+17:23:37   at P      missed by 0.13 m
+17:23:41   record P3-a2    diff=  2909.030 computed= 64784.904 origin=  148.9 shifts=0
+17:24:08   at G      missed by 0.15 m
+17:24:11 summary
+17:24:11 move 1: grass -0.001 (spread 0.010/0.006)  deck -0.042 (spread 0.031/0.020)  step -0.040
+17:24:11 move 2: grass +0.004 (spread 0.007/0.006)  deck -0.002 (spread 0.003/0.000)  step -0.006
+17:24:11 move 3: grass -0.003 (spread 0.028/0.011)  deck +0.001 (spread 0.004/0.010)  step +0.004
+17:24:11 finished

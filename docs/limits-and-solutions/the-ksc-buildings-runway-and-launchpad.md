@@ -11,6 +11,10 @@ out of its terrain sphere in flight, while a craft is near it, and places it in 
 **Measured on the runway of Kerbin**, with the runway protocol of both instruments, six loadings, a
 craft on the grass and a craft on the runway: the deck of the runway spreads over 130.1 mm without this
 mod and 0.216 mm with it, and the step between it and the grass beside it over 81.7 mm and 0.203 mm.
+**And while a rover drives by it**, with the protocol of the runway and the grass while the world
+moves, played by a script: at each move of the floating origin, on stock, the deck moves by −8.85 and
++48.47 mm, together with the grass; with this mod, the deck moves by 0.04 mm at most over three moves.
+A craft rolling on the runway gets no bump from the runway at a move of the origin.
 The readings are in
 [Checking the culprit: the runway and the grass beside it](../checking-the-culprit-runway.md).
 
@@ -52,10 +56,6 @@ Community Fixes 1.41.1 and this mod, with `logLevel = Debug` in its settings so 
 static it takes out of its sphere and puts back; and each is played a second time without this mod, to
 tell what stock already does.
 
-- **A bump under a craft rolling on the runway.** KSP moves its floating origin every 500 m the active
-  craft travels, and this mod has to move the KSC with it. From the SPH, launch a plane, alone in flight,
-  and taxi it from one end of the runway to the other: 2.4 km, four shifts or more. The plane rolls
-  without a bump, and the buildings do not jump.
 - **A craft spawned in the wrong place.** From the VAB, launch a pod on the launchpad; from the SPH, a
   plane on the runway. Each settles where stock puts it, without a drop or a jolt.
 - **The KSC missing or misplaced after a scene change.** With a craft on the launchpad, in turn: revert

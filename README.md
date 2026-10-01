@@ -87,51 +87,35 @@ stands on, stock gives them no place outside the body where a precise position w
 
 ## Checking the culprit
 
-A craft is put back onto the ground in two ways: when a save hands it back, and when you come close
-enough for its physics to start again, in the middle of a flight with nothing loaded at all. Both are
-measured, before anything is changed and again with this mod installed, with two instruments: one
-reads the landed craft, the other the ground itself. A third protocol takes the first way apart, a
-fourth puts a craft on a runway, and a fifth reads the ground under a rover that never stops.
+Each situation where a craft meets the ground is measured twice, without this mod and with it, with two
+instruments: one reads the landed craft, the other the ground itself. In each summary below, the first
+figure is without this mod, the second with it.
 
-**Loading the same save**, six times over, on Kerbin, the Mun, Minmus and Gilly, then on the Moon and
-Earth of [Real Solar System](https://github.com/KSP-RO/RealSolarSystem), much larger. On Kerbin the
-craft comes to rest over a spread of 134.5 mm without this mod and 0.004 mm with it, and the collision
-surface under it, read against the height KSP computes for that same spot, over 108.1 mm without it
-and 0.004 mm with it; on the Moon and Earth, the ground spreads over 247.3 and 693.1 mm without it, and
-within 0.4 mm with it.
+**Loading the same save**, six times, on Kerbin, the Mun, Minmus, Gilly, and the Moon and Earth of
+[Real Solar System](https://github.com/KSP-RO/RealSolarSystem): the ground comes back over 108.1 mm on
+Kerbin and 693.1 mm on Earth, and within 0.4 mm everywhere with this mod.
 
 **→ Full chapter: [Checking the culprit: loading the same save](docs/checking-the-culprit-loading.md)**
 
-**Coming back to a craft left parked**, six round trips in a single flight on Kerbin: the craft comes
-to rest over a spread of 21.8 mm without this mod and 0.094 mm with it, and the ground under it comes
-back over 21.8 mm without it and 0.011 mm with it.
+**Coming back to a craft left parked**, driving away until it unloads, then back, six times in one
+flight: its ground comes back over 21.8 mm, and over 0.011 mm with this mod.
 
 **→ Full chapter: [Checking the culprit: coming back to a craft left parked](docs/checking-the-culprit-approach.md)**
 
-**Switching to a craft far away**: the save loaded while the craft is two kilometres from the one being
-flown, then the game's *switch vessel* key pressed to fly it, six times on Kerbin. The ground under it
-is built when the save is loaded, and the switch does not move it: the craft comes to rest on it over
-a spread of 104.5 mm without this mod and 0.022 mm with it, the ground spreads over 120.4 mm without
-it and 0.003 mm with it.
+**Switching to a craft far away**, six loadings: its ground spreads over 120.4 mm, and 0.003 mm with this
+mod; the switch itself moves nothing.
 
 **→ Full chapter: [Checking the culprit: switching to a craft far away](docs/checking-the-culprit-switching.md)**
 
-**The runway and the grass beside it**, for the second culprit: a craft on each, 152 m apart, six
-loadings of the same save. Without this mod, the runway comes back somewhere else at every load, and
-not together with the grass: the step between the two spreads over 81.7 mm. With it, the deck of the
-runway spreads over 0.216 mm instead of 130.1 mm, the step over 0.203 mm, and the craft resting on the
-runway over 0.170 mm instead of 130.3 mm. On the Mun, on a runway placed by Kerbal Konstructs, the deck
-comes back within 0.009 mm with this mod instead of 33.5 mm — except at the first loading of a session,
-when a section of the runway, 21.3 mm higher, is still there under the craft, on stock as with this mod.
+**The runway and the grass beside it**, for the second culprit, the statics: at every loading, the runway
+comes back over 130.1 mm, on its own, and over 0.216 mm with this mod; while a rover drives by it, the
+runway moves with the ground by up to 48.5 mm, and within 0.05 mm with this mod — though it still moves
+with its terrain fix alone.
 
 **→ Full chapter: [Checking the culprit: the runway and the grass beside it](docs/checking-the-culprit-runway.md)**
 
-**Driving on while the world moves**: every 500 m a rover drives, KSP moves the floating origin onto
-it, and stock places the quads under it again. A rover alone on flat grass, read just before and just
-after each shift, and the same few metres farther on with no shift. Without this mod, the ground under
-it moves at each shift, with nothing loaded: by 4.2 to 11.8 mm on Kerbin, and by 142 to 421 mm on Earth
-in Real Solar System, where the rover jumps when it rises; over the same few metres with no shift, by
-1.2 and 15 mm at most. With it, no shift moves the ground more than the same few metres do.
+**Driving on while the world moves**, every 500 m a rover drives: the ground under it jumps by 4 to 12 mm
+on Kerbin and 14 to 42 cm on Earth, where the rover jumps with it; with this mod, no jump is left.
 
 **→ Full chapter: [Checking the culprit: driving on while the world moves](docs/checking-the-culprit-driving.md)**
 

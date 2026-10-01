@@ -1,6 +1,6 @@
 # Checking the culprit: the runway and the grass beside it
 
-Part of [Terrain Precision Fix](../README.md): the measurements that check [the second culprit](the-culprit.md#a-second-culprit-the-statics), the statics, on the runway of the KSC and on a runway placed by Kerbal Konstructs on the Mun, each with the ground beside it, on stock and with this mod.
+Part of [Terrain Precision Fix](../README.md): the measurements that check [the second culprit](the-culprit.md#a-second-culprit-the-statics), the statics, on the runway of the KSC and on a runway placed by Kerbal Konstructs on the Mun, each with the ground beside it, on stock and with this mod: at every loading, and on the runway of the KSC while a rover drives by it.
 
 The ground alone is measured in [Loading the same save](checking-the-culprit-loading.md), [Coming back to a craft left parked](checking-the-culprit-approach.md) and [Switching to a craft far away](checking-the-culprit-switching.md).
 
@@ -106,6 +106,65 @@ over 130.1 mm without it, and 0.216 mm with it; the step between the two, over 8
 over 33.5 mm without it; with it, over 0.009 mm from the second loading to the sixth — and the first
 loading stands 21.3 mm above them, as with Diag 1.
 
+## The runway and the grass, while the world moves
+
+The loadings above draw a new placement of everything. Driving does not: every 500 m a rover drives, KSP
+moves the floating origin onto it, and with it the terrain sphere the runway hangs from. A rover alone
+by the runway of the KSC reads a spot on the grass, G, and a spot on the deck, P, two or three times
+each before a move of the origin and twice after it, nine lines a move, with
+[Terrain Precision Fix Diag 2](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2) and
+[Terrain Precision Fix Diag 3](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag3), which says
+when the origin moves. A script drives the rover through
+[KSP-MCPServer](https://github.com/lhervier/KSP-MCPServer) and parks it on the same spots to within a
+centimetre. It is the
+[protocol of the runway and the grass while the world moves](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/blob/master/docs/the-protocol-driving-runway.md)
+of Terrain Precision Fix Diag 2, on the save it publishes, in the install above with Diag 3 and
+KSP-MCPServer added.
+
+This mod corrects the terrain and the statics separately, each with its own setting (`fixTerrain`,
+`fixStatics`), so the runway is read three ways: on stock, with the terrain fix alone, and with both.
+Across each move, the mean of the lines after minus the mean of the lines before, in millimetres:
+
+| | move | the grass, G | the deck, P | the step, P − G | spread at a spot, at most |
+|---|---|---|---|---|---|
+| on stock | 1 | **−8.843** | **−8.851** | −0.008 | 0.044 |
+| | 2 | **+48.506** | **+48.471** | −0.035 | 0.044 |
+| with the terrain fix alone | 1 | +0.006 | **+41.587** | **+41.581** | 0.019 |
+| | 2 | +0.004 | **−22.311** | **−22.315** | 0.017 |
+| with both fixes | 1 | −0.001 | −0.042 | −0.040 | 0.031 |
+| | 2 | +0.005 | −0.002 | −0.006 | 0.007 |
+| | 3 | −0.003 | +0.001 | +0.004 | 0.028 |
+
+**On stock**
+([the readings](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/blob/master/docs/the-measurements-driving-runway.md)),
+one run, a third move left out where the grass is no longer flat.
+
+**With the terrain fix alone**, `fixStatics = false` in this mod's settings, the only line changed. The
+session is logged in
+[`diag/runs/driving-runway-diag2-fix-terrain-only.log`](../diag/runs/driving-runway-diag2-fix-terrain-only.log),
+what the script printed in
+[`driving-runway-diag2-fix-terrain-only-script.txt`](../diag/runs/driving-runway-diag2-fix-terrain-only-script.txt)
+and every line it recorded in
+[`driving-runway-diag2-fix-terrain-only-lines.json`](../diag/runs/driving-runway-diag2-fix-terrain-only-lines.json).
+At the second move, the rover stalled against the lip of the deck on its way to P and stopped 0.79 m
+from the spot, at the same place each time: its readings there agree to 0.017 mm. On the last visit to
+P, after the move, it stopped 9.7 m away, and that line is left out: P has one line after that move.
+
+![With the terrain fix alone, the first move, read by Diag 2](../imgs/Diag2/on-driving-runway/terrain-only-move1-diag2.png)
+
+**With both fixes**, this mod as it is installed. The session is logged in
+[`diag/runs/driving-runway-diag2-fix.log`](../diag/runs/driving-runway-diag2-fix.log), what the script
+printed in [`driving-runway-diag2-fix-script.txt`](../diag/runs/driving-runway-diag2-fix-script.txt) and
+every line it recorded in
+[`driving-runway-diag2-fix-lines.json`](../diag/runs/driving-runway-diag2-fix-lines.json). It was played
+with an earlier version of the script, which parked G 359 to 480 m from the origin before each move,
+all three on flat grass.
+
+![With both fixes, the first move, read by Diag 2](../imgs/Diag2/on-driving-runway/fix-move1-diag2.png)
+
+The screenshots of every move, read by both instruments, are in
+[`imgs/Diag2/on-driving-runway/`](../imgs/Diag2/on-driving-runway/).
+
 ## What the measurements say
 
 **A runway moves on its own, and this mod stops it.** On stock, the step between the deck and the ground
@@ -116,6 +175,15 @@ this mod, the deck of the KSC comes back within 0.216 mm, and the step within 0.
 
 **Both instruments agree.** The craft on the runway of the KSC comes to rest within 0.170 mm, the deck
 under it comes back within 0.216 mm: the craft rests on the deck, and the deck no longer moves.
+
+**While driving, the runway moves too, and correcting the terrain is not enough.** On stock, at every
+move of the floating origin, the deck moves — by −8.85 and +48.47 mm — together with the grass beside
+it, to within four hundredths of a millimetre: both hang from the terrain sphere, whose position is
+written in float anew at each move, and both are carried by that same new rounding. With the terrain fix
+alone, the grass holds, within six thousandths of a millimetre, and the deck still moves on its own, by
++41.59 and −22.31 mm: the terrain fix does not reach a static. With both fixes, neither moves, within
+four hundredths of a millimetre on the deck over three moves: the statics fix holds the runway through a
+move of the origin as it does through a loading.
 
 **The runway of the KSC keeps a larger remainder than the grass.** About two tenths of a millimetre on
 the runway, four to five hundredths on the grass, with both instruments. Where that remainder comes from
