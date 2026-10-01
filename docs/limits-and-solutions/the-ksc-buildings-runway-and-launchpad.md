@@ -6,7 +6,7 @@ Part of [Terrain Precision Fix](../../README.md), one case of [Limits and soluti
 of the KSC are placed by a `PQSCity`, through a float `Transform` at planet scale, like the terrain:
 [The culprit: the statics](../the-culprit-statics.md). This mod takes a static
 out of its terrain sphere in flight, while a craft is near it, and places it in double:
-[The statics](../the-fix-this-mod-proposes.md#the-statics).
+[The fix: the statics](../the-fix-statics.md).
 
 **Measured on the runway of Kerbin**, with the runway protocol of both instruments, six loadings, a
 craft on the grass and a craft on the runway: the deck of the runway spreads over 130.1 mm without this

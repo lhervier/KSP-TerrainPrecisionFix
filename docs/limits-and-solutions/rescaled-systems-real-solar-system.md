@@ -85,7 +85,7 @@ The sessions with this mod ran at `logLevel = Debug`, which logs how far each qu
 
 This mod refuses any correction too large to be a rounding: sixteen float steps at the distance of the
 quad from the centre of the body, 1 m on Kerbin, 2 m on the Moon, 8 m on Earth (see
-[Safeguards](../the-fix-this-mod-proposes.md#safeguards)). Its first version was a fixed **1 m**, chosen
+[Safeguards](../the-fix-ground.md#safeguards)). Its first version was a fixed **1 m**, chosen
 against a rounding of a few centimetres, which a correction of two steps already exceeds on Earth. The
 sessions marked *first safeguard* in [`diag/runs`](../../diag/README.md#on-real-solar-system) ran with
 it: on the Moon, 2 464 quads were corrected, by 443 mm at most, 3.5 float steps. Earth's terrain was

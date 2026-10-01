@@ -3,7 +3,7 @@
 Part of [Terrain Precision Fix](../../README.md), one case of [Limits and solutions](../limits-and-solutions.md).
 
 **Status: two mods read and patched, the others unknown.** To place a static in double, this mod takes
-it out of its terrain sphere ([The statics](../the-fix-this-mod-proposes.md#the-statics)). That changes
+it out of its terrain sphere ([The fix: the statics](../the-fix-statics.md)). That changes
 the hierarchy of Unity objects, and any mod that looks for a static where stock puts it — among the
 children of a body's terrain sphere — or reads its `localPosition` as a position relative to the
 centre of the body, will find it missing, or somewhere else.

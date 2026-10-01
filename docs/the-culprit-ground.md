@@ -66,7 +66,6 @@ At 600 km, turning the frame by a thousandth of a degree moves a point by more t
 float steps: the slightest change draws a whole new set of roundings.
 
 That the frame changes at every load is measured. That this change is what draws a new rounding is
-read from the stock code and consistent with every measurement below; it has not been tested on its
-own. It does not need to be:
-the fix does not care whether a rounding is still drawn at every load, since it shrinks that rounding
-to a size where drawing it again no longer matters.
+read from the stock code and consistent with every measurement taken since; it has not been tested on
+its own. It does not need to be: [the fix](the-fix-ground.md) does not care whether a rounding is still
+drawn at every load, since it shrinks that rounding to a size where drawing it again no longer matters.

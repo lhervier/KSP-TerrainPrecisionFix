@@ -77,7 +77,7 @@ double-precision version being that much cheaper than two native calls. Read the
 stopped asking Unity for a `Transform` on every vertex, the fix would still save it about 98 ns per
 vertex.
 
-The same row is what justifies [working out once per quad](the-fix-this-mod-proposes.md#once-per-quad-not-once-per-vertex) what
+The same row is what justifies [working out once per quad](the-fix-ground.md#once-per-quad-not-once-per-vertex) what
 depends on the quad: two reads of `Component.transform` per vertex cost 84.6 ns, three quarters of what
 this fix spends on a vertex altogether, and the fix needs rather more than two things per quad.
 

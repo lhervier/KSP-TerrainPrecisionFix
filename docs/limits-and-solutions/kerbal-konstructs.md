@@ -26,7 +26,7 @@ with the runway protocol of both instruments, on a runway placed by Kerbal Konst
 comes back somewhere else at every load, and the step between it and the ground beside it changes
 ([Diag 1](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/docs/the-measurements-runway.md),
 [Diag 2](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/blob/master/docs/the-measurements-runway.md)).
-This mod takes a group out of its sphere like the KSC ([The statics](../the-fix-this-mod-proposes.md#the-statics)),
+This mod takes a group out of its sphere like the KSC ([The fix: the statics](../the-fix-statics.md)),
 and patches the group editor of Kerbal Konstructs, which reads the position of a group from where stock
 hangs it (below, [The patch of the group editor](#the-patch-of-the-group-editor)).
 

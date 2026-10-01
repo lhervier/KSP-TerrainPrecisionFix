@@ -14,7 +14,7 @@ a largest gap of about a tenth of a metre; how this mod changes it there is stil
 ## What goes wrong
 
 The quads of the highest subdivision level cover the ground around the craft, and they are the only
-ones this fix corrects (see [Only where a craft can stand](../the-fix-this-mod-proposes.md#only-where-a-craft-can-stand)).
+ones this fix corrects (see [Only where a craft can stand](../the-fix-ground.md#only-where-a-craft-can-stand)).
 Further away, the terrain is made of coarser quads, which stock builds and places as it always has.
 Where the two meet, the edge of the finer quad is meant to run along the edge of the coarser one (see
 [How stock joins two levels](#how-stock-joins-two-levels)).
@@ -69,7 +69,7 @@ was measured, but is not checked.
 ## What this fix changes
 
 This fix places each vertex of the highest level from double-precision values, without going through
-the matrix of the sphere (see [Doing the arithmetic in double](../the-fix-this-mod-proposes.md#doing-the-arithmetic-in-double)).
+the matrix of the sphere (see [Doing the arithmetic in double](../the-fix-ground.md#doing-the-arithmetic-in-double)).
 Its coarser neighbour is left to stock: the vertices it shares with the corrected quad are still where
 the matrix of the sphere puts them.
 
@@ -81,7 +81,7 @@ it does not, and it adds to whatever gap stock already leaves.
 
 The coarser quads cannot be corrected the same way: they hang from the terrain sphere, whose origin is
 the centre of the body, and Unity would store any precise position given to them as a 600 km float
-again (see [Only where a craft can stand](../the-fix-this-mod-proposes.md#only-where-a-craft-can-stand)).
+again (see [Only where a craft can stand](../the-fix-ground.md#only-where-a-craft-can-stand)).
 
 How much wider the seam gets is measured in [The seam with this mod](#the-seam-with-this-mod).
 
@@ -344,7 +344,7 @@ active craft: it is loaded at 2 250 m, but held in place without physics ("packe
 (`VesselRanges` in `Physics.cfg`). The highest level reaches much further. A quad is built at that level
 when its distance to the active craft, counted along the ground and multiplied by 1.3
 (`PQ.UpdateTargetRelativity`), plus the height of the craft above the ground, falls below the threshold
-given in [Only where a craft can stand](../the-fix-this-mod-proposes.md#only-where-a-craft-can-stand):
+given in [Only where a craft can stand](../the-fix-ground.md#only-where-a-craft-can-stand):
 at ground level, the zone reaches about 4.8 km around the craft on the Mun and 7.2 km on Kerbin. It
 follows the active craft, so a landed craft that gets physics is always well inside it.
 

@@ -5,7 +5,7 @@ Part of [Terrain Precision Fix](../../../README.md), one point of the case [Kope
 **Status: checked, no problem — where this mod moves the KSC, its statics fix keeps the flags steady
 without Kopernicus' flag fix, which it keeps from running there; everywhere else, Kopernicus' flag fix
 runs as before.** To place the KSC in double, this mod takes it out of the home body's terrain sphere
-while a craft is near ([The statics](../../the-fix-this-mod-proposes.md#the-statics)), and Kopernicus
+while a craft is near ([The fix: the statics](../../the-fix-statics.md)), and Kopernicus
 looks for it there.
 
 ## The flag glitch

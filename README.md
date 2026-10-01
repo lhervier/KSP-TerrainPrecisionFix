@@ -149,18 +149,20 @@ that frame back, and that it changes during a flight with nothing loaded.
 
 ## The fix this mod proposes
 
-For the ground, two Harmony patches redo in double the two placements that go through a float at planet
+**The ground.** Two Harmony patches redo in double the two placements that go through a float at planet
 scale: the origin of each quad, and each vertex inside it. The two 600 km vectors cancel before anything
 reaches a float, which is then only asked to hold a distance within the quad. Only the quads a craft can
 stand on are touched.
 
-For the statics, which cannot hold a precise position under their sphere, a static is taken out of it
-in flight, while a craft is near it, and placed in double in the same frame. It follows its body, and it
+**→ Full chapter: [The fix: the ground](docs/the-fix-ground.md)**
+
+**The statics.** A static cannot hold a precise position under its sphere, so it is taken out of it in
+flight, while a craft is near it, and placed in double in the same frame. It follows its body, and it
 goes back exactly where stock left it before every scene change, and whenever stock code that expects it
 there runs. Kerbal Konstructs and Kopernicus each look for a static under its sphere once in flight: **this
 mod has to patch both**, each patch standing for a small change these mods could make themselves.
 
-**→ Full chapter: [The fix this mod proposes](docs/the-fix-this-mod-proposes.md)**
+**→ Full chapter: [The fix: the statics](docs/the-fix-statics.md)**
 
 ## Performance
 
