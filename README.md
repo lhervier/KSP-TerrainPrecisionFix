@@ -137,12 +137,15 @@ with its terrain fix alone.
 
 ## What moves the frame
 
-The rounding is drawn anew because the frame the ground is converted through — how the body is turned
-in Unity's world, and where it sits in it — does not stay put. An instrument,
-[Terrain Precision Fix Diag 3](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag3), reads that
-frame on a stock install: it moves at every load, on the way to orbit and back, and on the ground as a
-craft is driven, none of which the save records. That is why putting it back in place at loading would
-not be enough ([why, in The fix this mod proposes](docs/the-fix-this-mod-proposes.md#two-ways-out-one-taken)).
+The rounding is drawn anew because the frame the ground is built in — how the body is turned in
+Unity's world, and where its terrain sphere sits in it — does not stay put.
+[Terrain Precision Fix Diag 3](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag3) shows that
+frame on your own install, and records it whenever you ask, to compare it from one loading to the next
+and from one moment of a flight to another. It explains, it does not compare: it reads values the game
+already holds, which this mod does not touch, so it reads the same with or without it. What it shows: a
+save does not give back the frame it was saved in, and the frame changes during a flight with nothing
+loaded — which is why freezing it was set aside ([in The fix this mod
+proposes](docs/the-fix-this-mod-proposes.md#two-ways-out-one-taken)).
 
 **→ Full chapter: [What the measurements show](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag3/blob/master/docs/what-the-measurements-show.md), on the page of Diag 3**
 
