@@ -7,10 +7,10 @@ files. It is a mod of its own, built and measured on top of
 [KSP Community Fixes](https://github.com/KSPModdingLibs/KSPCommunityFixes), the base most players run.
 Here is what it fixes, on the ground and on the runways, launchpads and buildings that stand on it:
 
-> **The ground KSP builds under you is never built at the same height twice.** Load the same save five
-> times, and the surface your craft is standing on comes back a little higher or a little lower each
-> time — a few centimetres apart on Kerbin, less on smaller worlds, and up to seventy on Earth in
-> Real Solar System.
+> **The ground KSP builds under you is never built at the same height twice.** Load a save, come back
+> to a craft left parked, drive a few hundred metres: each time the ground is built again, the surface
+> your craft is standing on comes back a little higher or a little lower — a few centimetres apart on
+> Kerbin, less on smaller worlds, and up to seventy on Earth in Real Solar System.
 
 **How this was made.** The investigation and the code were written with Claude, Anthropic's AI
 assistant. Everything here was reviewed and validated by a human — me — who very much enjoyed
@@ -23,14 +23,32 @@ files you can read in one sitting.
 
 ## Why the moving ground matters
 
-Every time you load, it is a coin toss between two outcomes.
+KSP does not keep the ground it built: it builds it again, over and over, while you play. And every
+time it does, the surface lands at a slightly different height — a little higher or a little lower,
+at random, a few centimetres on Kerbin and up to seventy on Earth in Real Solar System. Loading a save
+is only the moment everybody notices. It happens just as well:
 
-**The ground comes back lower than it was when you saved.** Your craft is now hovering a couple of
-centimetres above it, so it drops those two centimetres. You never notice, and nothing breaks.
+- **when a save is loaded**, or the scene changes: the whole ground is built anew;
+- **when you come back to a craft left parked.** A landed craft you fly towards is loaded long before
+  you reach it, but held still at the position it was left at; its physics only starts once you are
+  within 200 m, on a ground built since that position was recorded;
+- **when you switch to a craft far away**, which is put down the same way, on a ground it was not
+  standing on when it was left;
+- **while you drive.** Every 500 m the craft you fly travels, KSP moves its whole world back onto it,
+  and builds the ground under you again — in the middle of the drive, with nothing loaded and no scene
+  changed;
+- **under the runway, the launchpad and the buildings of the KSC**, and the bases a mod such as Kerbal
+  Konstructs plants on a body: they are placed the same way, and move on their own, at every load and
+  while a rover drives by them.
 
-**The ground comes back higher than it was when you saved.** Your craft is now *inside* the ground —
-and the physics engine will not leave two solid things overlapping. It pushes them apart, hard, in
-the only direction available: up. Your craft gets launched.
+Each time, it is a coin toss between two outcomes.
+
+**The ground comes back lower than it was.** Your craft is now hovering a couple of centimetres above
+it, so it drops those two centimetres. You never notice, and nothing breaks.
+
+**The ground comes back higher than it was.** Your craft is now *inside* the ground — and the physics
+engine will not leave two solid things overlapping. It pushes them apart, hard, in the only direction
+available: up. Your craft gets launched.
 
 ![A craft jumping on its own the moment a save is reloaded](imgs/Booing-scaled.gif)
 
@@ -42,15 +60,13 @@ That second case is the symptom everybody already knows. The lander that twitche
 moment the scene finishes loading. The base that sat perfectly flush yesterday and is buried up to
 the hatches today. The big base that tears itself apart the very first time you load it, and never
 again afterwards. A craft with many parts spread over a wide area gives the coin toss more chances
-to land the wrong way up.
+to land the wrong way up. The other moments do the same damage, only less visibly: from 200 m away you
+see little of a parked craft jumping, and a rover that hops while driving looks like a bump in the
+road — on Earth, it was seen to jump when the ground rose under it.
 
-**Loading is not the only time the coin is tossed.** A landed craft you fly towards is loaded long
-before you reach it, but held still at the position it was left at; its physics only starts once you
-are within 200 m. The ground under it was not built when that position was recorded, so the same toss
-happens there. From 200 m away you see much less of it — and it does just as much damage.
-
-Both can be repeated at will — reload the same save, or drive away from a craft left parked and come
-back to it — and both are measured on this page.
+Every one of these moments can be repeated at will — reload the same save, drive away from a craft left
+parked and come back to it, switch to a craft far away, drive past a few shifts of the world — and each
+is measured on this page.
 
 ### Disclaimer: it is not the only cause
 
