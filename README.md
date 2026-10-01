@@ -137,20 +137,12 @@ with its terrain fix alone.
 
 ## What moves the frame
 
-The culprit explains the rounding, and the measurements above show it drawn anew every time. What
-draws it anew is the frame the ground is converted through — how the body is turned in Unity's world,
-and where it sits in it — which does not stay put. Knowing how it moves is what rules out the obvious
-remedy, putting it back in place when a save is loaded ([why, in The fix this mod
-proposes](docs/the-fix-this-mod-proposes.md#two-ways-out-one-taken)).
-
-That frame is read on a stock install by a third instrument,
-[Terrain Precision Fix Diag 3](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag3).
-Its measurements show it moving in situations every player meets, none of which the save records. At
-every load, its angle comes back off by the time played since the save. On the way to orbit and back,
-it keeps turning with the planet above the altitude where the rotating frame is left. And on the
-ground, it moves each time the floating origin shifts under a craft being driven — except while
-another landed craft is loaded nearby: the origin then stays put however far you go, and catches up
-all at once when that craft is unloaded.
+The rounding is drawn anew because the frame the ground is converted through — how the body is turned
+in Unity's world, and where it sits in it — does not stay put. A third instrument,
+[Terrain Precision Fix Diag 3](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag3), reads that
+frame on a stock install: it moves at every load, on the way to orbit and back, and on the ground as a
+craft is driven, none of which the save records. That is why putting it back in place at loading would
+not be enough ([why, in The fix this mod proposes](docs/the-fix-this-mod-proposes.md#two-ways-out-one-taken)).
 
 **→ Full chapter: [What the measurements show](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag3/blob/master/docs/what-the-measurements-show.md), on the page of Diag 3**
 
