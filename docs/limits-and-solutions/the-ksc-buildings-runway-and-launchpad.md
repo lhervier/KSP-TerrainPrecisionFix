@@ -47,6 +47,8 @@ is not covered.
 *To test:*
 
 - a shift of the floating origin under a craft parked on the runway;
+- a craft above the altitude where KSP stops rotating the world and turns the body instead: seen from
+  orbit, the KSC does not slide over the ground;
 - the other ways a scene is left or reloaded: revert, quickload, recovering a craft;
 - launching from the runway and from the launchpad;
 - flying to another body and back;
@@ -55,7 +57,12 @@ is not covered.
 - the ground station of the KSC, in a game that starts in flight;
 - a mission of the Making History expansion that spawns a craft on the launchpad, without any other mod:
   stock finds the KSC from the launchpad, places it again, sets the launchpad's level and puts the craft
-  on its spawn point;
+  on its spawn point. Seen once with Kopernicus and Real Solar System, in
+  [Seeing the patch](kopernicus/the-flag-fix.md#seeing-the-patch) of Kopernicus' flag fix: the KSC is
+  placed again while it is out of its sphere, and the pod appears on the launchpad; whether it sits on
+  its spawn point was not checked;
+- the other statics of stock — the KSC 2, the Island Airfield, the pyramids, the anomalies — taken out
+  of their sphere near a craft, without anything else going wrong;
 - the cost per frame, with many statics near a craft;
 - the runway of the KSC on Earth in Real Solar System, and Real Solar System's own runway fix, which
   keeps the floating origin from moving while a craft rolls on it.

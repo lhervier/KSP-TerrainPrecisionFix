@@ -131,8 +131,8 @@ None today.
 statics through the same kind of float `Transform` as the terrain; this mod takes them out of their
 sphere in flight to place them in double. On six loadings, the deck of the runway spreads over
 130.1 mm without this mod and 0.216 mm with it. Still to test: a floating origin shift under a craft on
-the runway, the other ways a scene is left or reloaded, launches, destroyed buildings, the runway of
-Real Solar System. `PQSCity2`, the launch sites of Making History, is not covered.
+the runway, the other ways a scene is left or reloaded, launches, destroyed buildings, the other stock
+statics, the runway of Real Solar System. `PQSCity2`, the launch sites of Making History, is not covered.
 
 **→ Full chapter: [The KSC buildings, runway and launchpad](limits-and-solutions/the-ksc-buildings-runway-and-launchpad.md)**
 
