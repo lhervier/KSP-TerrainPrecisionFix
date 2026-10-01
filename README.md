@@ -156,9 +156,7 @@ For the statics, which cannot hold a precise position under their sphere, a stat
 in flight, while a craft is near it, and placed in double in the same frame. It follows its body, and it
 goes back exactly where stock left it before every scene change, and whenever stock code that expects it
 there runs. Kerbal Konstructs and Kopernicus each look for a static under its sphere once in flight: the
-mod patches both, each patch standing for a small change these mods could make themselves. The one in
-Kopernicus is its fix for a flag that twitches on big home bodies — and that glitch comes from the KSC
-hanging from its sphere: placed in double, the KSC holds its flag without that fix.
+mod patches both, each patch standing for a small change these mods could make themselves.
 
 A correction larger than sixteen float steps at the distance of what is placed (1 m on Kerbin) is
 refused. The ground and the statics are two fixes: each can be turned off in the settings, and if one of
