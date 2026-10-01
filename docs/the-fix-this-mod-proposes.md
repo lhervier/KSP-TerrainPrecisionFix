@@ -127,7 +127,8 @@ patches both: the group editor of [Kerbal Konstructs](limits-and-solutions/kerba
 and the flag fix of [Kopernicus](limits-and-solutions/kopernicus/the-flag-fix.md) — which is not needed
 where this mod moves the KSC: placed in double, the KSC keeps its flags steady, and the patch keeps the
 flag fix from running there.
-Each patch is described with its mod, along with the small change in that mod it stands for. Each leaves
+Each patch is described on the page of the mod it patches, along with the small change in that mod's own
+code that would make the patch unnecessary. Each leaves
 the original code path untouched as long as the static is under its sphere, so it changes nothing
 without this mod's statics fix; if the code of the mod is not the one the patch expects, the statics fix
 stays off.

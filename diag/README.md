@@ -49,7 +49,8 @@ KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, this mod and
 ## With Kopernicus
 
 KSP 1.12.5 with the Making History expansion, Harmony, ModuleManager, KSP Community Fixes 1.41.1 and
-Kopernicus 248 with ModularFlightIntegrator and KSPTextureLoader, no planet pack, no instrument. Each
+[Real Solar System](https://github.com/KSP-RO/RealSolarSystem) 20.1.3.0 with what it requires (Kopernicus
+248, Modular Flight Integrator, KSPTextureLoader, the RSS textures), no instrument. Each
 session plays the mission [`kopernicus-flag-fix/Missions/KSC flag fix`](kopernicus-flag-fix/Missions/)
 once, as described in [Seeing the patch](../docs/limits-and-solutions/kopernicus/the-flag-fix.md#seeing-the-patch).
 
@@ -95,7 +96,8 @@ a fixed metre, and hold the line where it refused part of Earth's terrain.
 - [`runs/kopernicus-flag-glitch-without-this-mod.log`](runs/kopernicus-flag-glitch-without-this-mod.log),
   [`runs/kopernicus-flag-glitch-statics-fix.log`](runs/kopernicus-flag-glitch-statics-fix.log) and
   [`runs/kopernicus-flag-glitch-statics-fix-off.log`](runs/kopernicus-flag-glitch-statics-fix-off.log) —
-  MechJeb2 2.15.3 added, and Kopernicus built from the sources of its release 248 with the change
+  MechJeb2 2.15.3 added to the first and the third, and Kopernicus built from the sources of its release
+  248 with the change
   [`kopernicus-flag-fix/kopernicus-248-without-its-flag-fix.diff`](kopernicus-flag-fix/kopernicus-248-without-its-flag-fix.diff),
   which turns its flag fix off: a craft on the launchpad at Cape Canaveral, without this mod, then with
   it, then with its statics fix turned off. Read in
