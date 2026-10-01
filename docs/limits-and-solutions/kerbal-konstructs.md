@@ -21,7 +21,7 @@ steps of where they belong.
 
 **Its statics.** Each group of statics hangs from a stock `PQSCity` of its own
 (`Core/StaticGroup/GroupCenter.cs`), child of the body's terrain sphere: they carry the
-[second culprit](../the-culprit.md#a-second-culprit-the-statics), as the KSC's do. Measured on stock,
+[second culprit](../the-culprit-statics.md), as the KSC's do. Measured on stock,
 with the runway protocol of both instruments, on a runway placed by Kerbal Konstructs on the Mun: it
 comes back somewhere else at every load, and the step between it and the ground beside it changes
 ([Diag 1](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/docs/the-measurements-runway.md),

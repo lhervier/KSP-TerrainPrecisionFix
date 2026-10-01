@@ -40,7 +40,7 @@ in Terrain Precision Fix Diag 4, shows how, with a figure.
 ## The shared vertices do not meet, even in stock
 
 Stock places every terrain vertex in two steps, in `PQS.BuildVertexSurfaceRelative` (the whole method,
-and why it rounds, is in [The culprit](../the-culprit.md)):
+and why it rounds, is in [The culprit: the ground](../the-culprit-ground.md)):
 
 ```csharp
 planetRel = base.transform.TransformPoint(vertRel);
@@ -75,7 +75,7 @@ the matrix of the sphere puts them.
 
 Part of the stock rounding is common to every quad of the body: it comes from the rotation and the
 position of the sphere, held in float, which are what change at every load (see
-[Why it is different at every load](../the-culprit.md#why-it-is-different-at-every-load)). Between two
+[Why it is different at every load](../the-culprit-ground.md#why-it-is-different-at-every-load)). Between two
 stock quads built in the same frame, that part cancels out; between a corrected quad and a stock one,
 it does not, and it adds to whatever gap stock already leaves.
 

@@ -15,7 +15,7 @@ Kopernicus comes with a fix for the flag by the launchpad, written for
 left its pole, reported in KSP 1.4 to 1.6, in Real Solar System and on a stock system rescaled ten
 times. The glitch is still there in KSP 1.12, and it goes away as soon as the KSC is placed in double
 precision: it comes from the KSC hanging from its terrain sphere, as the moving statics do
-([A second culprit: the statics](../../the-culprit.md#a-second-culprit-the-statics)).
+([The culprit: the statics](../../the-culprit-statics.md)).
 
 In KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1 and
 [Real Solar System](https://github.com/KSP-RO/RealSolarSystem) 20.1.3 with what it requires, Kopernicus

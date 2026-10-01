@@ -1,6 +1,6 @@
 # Checking the culprit: loading the same save
 
-Part of [Terrain Precision Fix](../README.md): the measurements that check [the culprit](the-culprit.md) on a craft handed back by a save, on stock and with this mod.
+Part of [Terrain Precision Fix](../README.md): the measurements that check [the culprit](the-culprit-ground.md) on a craft handed back by a save, on stock and with this mod.
 
 The two other ways a craft is put back onto the ground are measured in [Coming back to a craft left parked](checking-the-culprit-approach.md) and [Switching to a craft far away](checking-the-culprit-switching.md).
 

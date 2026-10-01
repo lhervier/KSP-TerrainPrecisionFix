@@ -91,7 +91,7 @@ apply, and each vertex is left with a reference comparison before stock runs unt
 ## The statics
 
 A static cannot be given a precise position while it hangs from its terrain sphere
-([A second culprit: the statics](the-culprit.md#a-second-culprit-the-statics)). So this mod takes it out
+([The culprit: the statics](the-culprit-statics.md)). So this mod takes it out
 of the sphere, and gives it its world position in double, in the same frame as the quads:
 `body.rotation * planetRelativePosition + body.position`, and for its orientation, the rotation of the
 body times the one stock gives it in the sphere.

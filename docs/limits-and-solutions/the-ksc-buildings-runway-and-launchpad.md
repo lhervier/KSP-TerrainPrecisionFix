@@ -4,7 +4,7 @@ Part of [Terrain Precision Fix](../../README.md), one case of [Limits and soluti
 
 **Status: covered by this mod, measured on the runway of Kerbin; the rest still to test.** The statics
 of the KSC are placed by a `PQSCity`, through a float `Transform` at planet scale, like the terrain:
-[A second culprit: the statics](../the-culprit.md#a-second-culprit-the-statics). This mod takes a static
+[The culprit: the statics](../the-culprit-statics.md). This mod takes a static
 out of its terrain sphere in flight, while a craft is near it, and places it in double:
 [The statics](../the-fix-this-mod-proposes.md#the-statics).
 

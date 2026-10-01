@@ -10,7 +10,7 @@ correction either, and on Kerbin the gap gets wider.
 The objects of a quad are built from its vertices, in the quad's own coordinates, and hang from a
 *holder* that `PQSMod_LandClassScatterQuad.Setup` places under the terrain sphere, at
 `localPosition = quad.positionPlanet`: the same 600 km vector in a float that
-[the culprit](../the-culprit.md) is about. The holder
+[the culprit](../the-culprit-ground.md) is about. The holder
 is drawn with its local to world matrix, whose translation differs from its own transform position by
 whole float steps, so the objects are drawn that much above or below the ground. On stock the two land on
 the same step often enough that the holder is drawn exactly on its quad about a quarter of the time on

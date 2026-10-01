@@ -1,6 +1,6 @@
 # Checking the culprit: driving on while the world moves
 
-Part of [Terrain Precision Fix](../README.md): the measurements that check [the culprit](the-culprit.md) under a rover that keeps driving, while the game moves its whole world, on stock and with this mod, on Kerbin and on Earth in Real Solar System.
+Part of [Terrain Precision Fix](../README.md): the measurements that check [the culprit](the-culprit-ground.md) under a rover that keeps driving, while the game moves its whole world, on stock and with this mod, on Kerbin and on Earth in Real Solar System.
 
 The ground under a craft the game sets down is measured in [Loading the same save](checking-the-culprit-loading.md), [Coming back to a craft left parked](checking-the-culprit-approach.md) and [Switching to a craft far away](checking-the-culprit-switching.md).
 
@@ -16,7 +16,7 @@ as well. *On stock*, below, means that install without this mod.
 
 Every 500 m the craft you fly travels, KSP moves the floating origin back onto it, and with it the
 terrain sphere: the translation of the frame the ground is converted through
-([Why it is different at every load](the-culprit.md)). Stock places the landed quads again at each of
+([Why it is different at every load](the-culprit-ground.md#why-it-is-different-at-every-load)). Stock places the landed quads again at each of
 those shifts (`CelestialBody.PreciseUpdateQuadPositions`), through that new frame. A rover alone on the
 grass south of the runway of the KSC drives due south; at each shift, three lines: just before it, a few
 metres after it, and the same few metres farther on with no shift, which measures what the few metres

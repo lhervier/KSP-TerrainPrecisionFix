@@ -87,19 +87,23 @@ have been there at all — a surface that is not where the game's own formulas s
 the same place twice. It takes it away down to a hundredth of a millimetre on the ground, and two tenths
 on the runway of the KSC, measured below.
 
-## The culprit
+## The culprit: the ground
 
 Stock places a terrain quad, and every vertex inside it, through a Unity `Transform`: a vector 600 km
 long stored in a float, where a step is 62.5 mm. Each value is rounded on its own. What draws a new set
 of roundings at every load is the frame they go through, whose rotation and translation both move while
 you play.
 
-The statics are a second culprit: the runway, the launchpad and the buildings of the KSC, and the bases
-a mod such as Kerbal Konstructs plants anywhere on a body. `PQSCity` places them the same way, a 600 km
-vector in a float `Transform` hanging from the body, through the same frame. Unlike the quads a craft
-stands on, stock gives them no place outside the body where a precise position would be kept.
+**→ Full chapter: [The culprit: the ground](docs/the-culprit-ground.md)**
 
-**→ Full chapter: [The culprit](docs/the-culprit.md)**
+## The culprit: the statics
+
+The runway, the launchpad and the buildings of the KSC, and the bases a mod such as Kerbal Konstructs
+plants anywhere on a body, are statics. `PQSCity` places them the same way, a 600 km vector in a float
+`Transform` hanging from the body, through the same frame. Unlike the quads a craft stands on, stock
+gives them no place outside the body where a precise position would be kept.
+
+**→ Full chapter: [The culprit: the statics](docs/the-culprit-statics.md)**
 
 ## Checking the culprit
 

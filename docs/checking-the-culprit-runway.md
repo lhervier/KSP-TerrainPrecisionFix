@@ -1,6 +1,6 @@
 # Checking the culprit: the runway and the grass beside it
 
-Part of [Terrain Precision Fix](../README.md): the measurements that check [the second culprit](the-culprit.md#a-second-culprit-the-statics), the statics, on the runway of the KSC and on a runway placed by Kerbal Konstructs on the Mun, each with the ground beside it, on stock and with this mod: at every loading, and on the runway of the KSC while a rover drives by it.
+Part of [Terrain Precision Fix](../README.md): the measurements that check [the second culprit](the-culprit-statics.md), the statics, on the runway of the KSC and on a runway placed by Kerbal Konstructs on the Mun, each with the ground beside it, on stock and with this mod: at every loading, and on the runway of the KSC while a rover drives by it.
 
 The ground alone is measured in [Loading the same save](checking-the-culprit-loading.md), [Coming back to a craft left parked](checking-the-culprit-approach.md) and [Switching to a craft far away](checking-the-culprit-switching.md).
 
