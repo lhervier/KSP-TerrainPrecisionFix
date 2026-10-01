@@ -162,13 +162,13 @@ mod has to patch both**, each patch standing for a small change these mods could
 
 ## Performance
 
-Measured with [PQS Bench](https://github.com/lhervier/KSP-PQSBench), against stock and against
-stock with its two `Transform`s read once per quad: the fix places a vertex in about 110 ns where stock
-takes about 290 ns in the same run, 183 ns less on average, 2.7× faster. A little more than half of that
-saving is the double-precision arithmetic, the rest the work done once per quad instead of once per
-vertex. Timed frame by frame with [KSPProfiler](https://github.com/KSPModdingLibs/KSPProfiler), the
-three configurations cannot be told apart. These figures are the ground's: what the statics fix costs is
-not measured yet.
+**The fix does not slow the game down.** Timed frame by frame with
+[KSPProfiler](https://github.com/KSPModdingLibs/KSPProfiler), on the same flight, stock and this fix cannot
+be told apart: two runs of stock alone differ more than any two configurations do. Measured vertex by
+vertex with [PQS Bench](https://github.com/lhervier/KSP-PQSBench), the fix even places a vertex faster
+than stock, but that saving is about 0.04 % of the time played, thirty times below the noise between two
+sessions of KSP: no frame shows it. These figures are the ground's: what the statics fix costs is not
+measured yet.
 
 **→ Full chapter: [Performance](docs/performance.md)**
 
