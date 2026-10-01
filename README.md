@@ -129,8 +129,9 @@ when a section of the runway, 21.3 mm higher, is still there under the craft, on
 **Driving on while the world moves**: every 500 m a rover drives, KSP moves the floating origin onto
 it, and stock places the quads under it again. A rover alone on flat grass, read just before and just
 after each shift, and the same few metres farther on with no shift. Without this mod, the ground under
-it moves by 4.2 to 11.8 mm at each of five shifts, with nothing loaded; over the same few metres with no
-shift, by 1.2 mm at most. With it, by 0.215 and 0.231 mm at two shifts, no more than with no shift.
+it moves at each shift, with nothing loaded: by 4.2 to 11.8 mm on Kerbin, and by 142 to 421 mm on Earth
+in Real Solar System, where the rover jumps when it rises; over the same few metres with no shift, by
+1.2 and 15 mm at most. With it, no shift moves the ground more than the same few metres do.
 
 **→ Full chapter: [Checking the culprit: driving on while the world moves](docs/checking-the-culprit-driving.md)**
 
