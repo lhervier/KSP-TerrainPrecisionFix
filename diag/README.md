@@ -14,8 +14,8 @@ and of [Terrain Precision Fix Diag 2](https://github.com/lhervier/KSP-TerrainPre
 along with the logs of the same sessions without this mod. Only the sessions taken with this mod alone
 and no instrument have their saves here: the loads on Venus, Mars and Mercury, described in
 [Rescaled systems: Real Solar System](../docs/limits-and-solutions/rescaled-systems-real-solar-system.md#checking-the-culprit),
-and the launch from Cape Canaveral; and the mission of [Kopernicus](../docs/limits-and-solutions/kopernicus/the-flag-fix.md#seeing-it),
-in `kopernicus-flag-fix/`.
+and the launch from Cape Canaveral; and, in `kopernicus-flag-fix/`, the mission and the change to
+Kopernicus of [Kopernicus: the flag fix](../docs/limits-and-solutions/kopernicus/the-flag-fix.md).
 
 ## On the stock system
 
@@ -51,7 +51,7 @@ KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, this mod and
 KSP 1.12.5 with the Making History expansion, Harmony, ModuleManager, KSP Community Fixes 1.41.1 and
 Kopernicus 248 with ModularFlightIntegrator and KSPTextureLoader, no planet pack, no instrument. Each
 session plays the mission [`kopernicus-flag-fix/Missions/KSC flag fix`](kopernicus-flag-fix/Missions/)
-once, as described in [Kopernicus](../docs/limits-and-solutions/kopernicus/the-flag-fix.md#seeing-it).
+once, as described in [Seeing the patch](../docs/limits-and-solutions/kopernicus/the-flag-fix.md#seeing-the-patch).
 
 - [`runs/kopernicus-flag-fix-without-this-mod.log`](runs/kopernicus-flag-fix-without-this-mod.log) —
   without this mod.
@@ -92,6 +92,14 @@ a fixed metre, and hold the line where it refused part of Earth's terrain.
   they hang, and the destructible buildings and upgradeable facilities of the KSC, are listed. Read in
   [The KSC buildings, runway and launchpad](../docs/limits-and-solutions/the-ksc-buildings-runway-and-launchpad.md)
   and [Kopernicus: the KSC moved by Real Solar System](../docs/limits-and-solutions/kopernicus/the-ksc-moved-by-real-solar-system.md).
+- [`runs/kopernicus-flag-glitch-without-this-mod.log`](runs/kopernicus-flag-glitch-without-this-mod.log),
+  [`runs/kopernicus-flag-glitch-statics-fix.log`](runs/kopernicus-flag-glitch-statics-fix.log) and
+  [`runs/kopernicus-flag-glitch-statics-fix-off.log`](runs/kopernicus-flag-glitch-statics-fix-off.log) —
+  MechJeb2 2.15.3 added, and Kopernicus built from the sources of its release 248 with the change
+  [`kopernicus-flag-fix/kopernicus-248-without-its-flag-fix.diff`](kopernicus-flag-fix/kopernicus-248-without-its-flag-fix.diff),
+  which turns its flag fix off: a craft on the launchpad at Cape Canaveral, without this mod, then with
+  it, then with its statics fix turned off. Read in
+  [The flag glitch](../docs/limits-and-solutions/kopernicus/the-flag-fix.md#the-flag-glitch).
 - [`runs/reload-venus-mars-rss-fix.log`](runs/reload-venus-mars-rss-fix.log) — no instrument, one
   session: six loads of [`reload-venus-rss.sfs`](reload-venus-rss.sfs), then six of
   [`reload-mars-rss.sfs`](reload-mars-rss.sfs). The six loads after them, on a second site of Mars,

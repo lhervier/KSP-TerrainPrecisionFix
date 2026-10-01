@@ -124,7 +124,9 @@ body times the one stock gives it in the sphere.
 Taking a static out of its sphere changes the hierarchy of Unity objects, and a mod may look for a
 static where stock puts it. Two of the most installed ones do, in flight, once each, and this mod
 patches both: the group editor of [Kerbal Konstructs](limits-and-solutions/kerbal-konstructs.md#the-patch-of-the-group-editor),
-and the flag fix of [Kopernicus](limits-and-solutions/kopernicus/the-flag-fix.md).
+and the flag fix of [Kopernicus](limits-and-solutions/kopernicus/the-flag-fix.md) — which is not needed
+where this mod moves the KSC: placed in double, the KSC keeps its flags steady, and the patch keeps the
+flag fix from running there.
 Each patch is described with its mod, along with the small change in that mod it stands for. Each leaves
 the original code path untouched as long as the static is under its sphere, so it changes nothing
 without this mod's statics fix; if the code of the mod is not the one the patch expects, the statics fix

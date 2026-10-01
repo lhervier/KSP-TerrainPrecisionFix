@@ -156,7 +156,9 @@ For the statics, which cannot hold a precise position under their sphere, a stat
 in flight, while a craft is near it, and placed in double in the same frame. It follows its body, and it
 goes back exactly where stock left it before every scene change, and whenever stock code that expects it
 there runs. Kerbal Konstructs and Kopernicus each look for a static under its sphere once in flight: the
-mod patches both, each patch standing for a small change these mods could make themselves.
+mod patches both, each patch standing for a small change these mods could make themselves. The one in
+Kopernicus is its fix for a flag that twitches on big home bodies — and that glitch comes from the KSC
+hanging from its sphere: placed in double, the KSC holds its flag without that fix.
 
 A correction larger than sixteen float steps at the distance of what is placed (1 m on Kerbin) is
 refused. The ground and the statics are two fixes: each can be turned off in the settings, and if one of
@@ -185,9 +187,9 @@ itself places on the ground (scatter, the KSC statics, Breaking Ground) and to s
 systems such as Real Solar System, slopes, existing saves, the map view…). Taking the statics out of
 their sphere adds a case of its own: mods that look for a static where stock puts it. So far, every
 case checked shows no problem caused by this fix — including Real Solar System, where the defect is at
-its largest — but one, which this mod patches itself: without that patch, the statics fix would break
-the flag fix of Kopernicus in flight. Some cases say what changes, and what can go further; the others
-say how they will be tested.
+its largest, and Kopernicus, whose fix for a twitching flag the statics fix makes unneeded where it
+moves the KSC. Some cases say what changes, and what can go further; the others say how they will be
+tested.
 
 **→ Full chapter: [Limits and solutions](docs/limits-and-solutions.md)**
 
@@ -208,7 +210,7 @@ change one: quit KSP, edit the file, start KSP again.
 |---|---|
 | `fixTerrain` | `true` (default) places the terrain in double precision; `false` leaves it as stock builds it |
 | `fixStatics` | `true` (default) places the statics in double precision; `false` leaves them where stock places them |
-| `patchKopernicus` | `true` (default) patches Kopernicus, when installed, to cope with the statics fix. With `false` and the statics fix on, Kopernicus' flag fix throws when a facility is upgraded in flight near the KSC, which only a Making History mission does: an error is logged, and that facility's flags are left unfixed until the next scene. Meant only to see what the patch is for |
+| `patchKopernicus` | `true` (default) patches Kopernicus, when installed, to cope with the statics fix. With `false` and the statics fix on, Kopernicus' flag fix throws when a facility is upgraded in flight near the KSC, which only a Making History mission does: an error in the log, and nothing else, since the statics fix keeps the flags steady there. Meant only to see what the patch is for |
 | `patchKerbalKonstructs` | `true` (default) patches Kerbal Konstructs, when installed, to cope with the statics fix. With `false` and the statics fix on, moving a group with its group editor in flight sends it elsewhere on its body, and saves it there: meant only to see what the patch is for |
 | `logLevel` | what goes to `KSP.log`, below |
 

@@ -2,10 +2,10 @@
 
 Part of [Terrain Precision Fix](../../README.md), one case of [Limits and solutions](../limits-and-solutions.md).
 
-**Status: checked, a problem this mod patches — without a patch, this mod would make the flag fix of
-Kopernicus throw in flight, and it patches it; the ground is as stable under Kopernicus as without it;
-the gap of scatter colliders is halved, not closed, and Rock Precision Fix closes it; the KSC Kopernicus
-moves for Real Solar System is placed where it puts it.**
+**Status: checked, no problem — the ground is as stable under Kopernicus as without it; the gap of
+scatter colliders is halved, not closed, and Rock Precision Fix closes it; where this mod moves the KSC,
+it keeps the flags steady without Kopernicus' flag fix, which it keeps from running there; the KSC
+Kopernicus moves for Real Solar System is placed where it puts it.**
 
 Most planet packs go through [Kopernicus](https://github.com/Kopernicus/Kopernicus), and it touches
 several things this mod deals with. Each is checked on its own page. The bodies here are ones Kopernicus
@@ -25,19 +25,13 @@ never fired; the collision surface on Earth in Real Solar System, over 693.1 mm 
 
 ### The flag fix
 
-**Checked, a problem this mod patches.** Kopernicus comes with a fix for the flag by the launchpad,
-which twitches on big home bodies, such as Earth in Real Solar System. To fix the flag, Kopernicus has
-to find the KSC, and this mod moves the KSC while a craft is near. Without a patch, the flag fix fails
-in one rare case only — a mission of the Making History expansion that spawns a craft at the KSC while
-another craft is near it — and what it leaves undone is minor:
-
-- an error is logged;
-- the flags of that facility are left unfixed until the next scene.
-
-A published mission shows the error with the patch turned off, and none with the patch on, or without
-this mod.
-
-This mod patches Kopernicus all the same.
+**Checked, no problem — this mod does the flag fix's job where it moves the KSC.** Kopernicus comes
+with a fix for the flag by the launchpad, which twitches on big home bodies, such as Earth in Real Solar
+System. The glitch comes from the KSC hanging from its terrain sphere, as the moving statics do: with
+Kopernicus' fix turned off, the flag twitches, and it holds as soon as this mod places the KSC in double
+precision. So where this mod moves the KSC — in flight, near it — the flag fix is not needed, and this
+mod keeps it from running there, where it would not find the KSC and would throw. Everywhere else, it
+runs as before.
 
 **→ Full chapter: [The flag fix](kopernicus/the-flag-fix.md)**
 

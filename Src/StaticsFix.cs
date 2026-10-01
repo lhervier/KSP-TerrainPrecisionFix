@@ -539,37 +539,21 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
             return transform.localPosition;
         }
 
-        /// <summary>
-        /// The statics under <paramref name="root"/>, as GetComponentsInChildren returns them, plus those out
-        /// of a sphere that hangs from it.
-        /// </summary>
-        public static PQSCity[] CitiesUnder(Component root, bool includeInactive)
+        /// <summary>Whether a static named <paramref name="name"/> is out of its sphere right now.</summary>
+        public static bool IsOut(string name)
         {
-            PQSCity[] found = root.GetComponentsInChildren<PQSCity>(includeInactive);
-            if (!_active || _out.Count == 0)
+            if (!_active)
             {
-                return found;
+                return false;
             }
-            List<PQSCity> all = null;
             foreach (TakenOut record in _out)
             {
-                if (record.Transform == null || record.Sphere == null
-                    || !record.Sphere.transform.IsChildOf(root.transform))
+                if (record.City != null && record.City.name == name)
                 {
-                    continue;
+                    return true;
                 }
-                // Under the sphere, it would be inactive along with it.
-                if (!includeInactive && !record.Sphere.gameObject.activeInHierarchy)
-                {
-                    continue;
-                }
-                if (all == null)
-                {
-                    all = new List<PQSCity>(found);
-                }
-                all.AddRange(record.Transform.GetComponentsInChildren<PQSCity>(includeInactive));
             }
-            return all == null ? found : all.ToArray();
+            return false;
         }
 
         // ==========================================================================

@@ -2,31 +2,40 @@
 
 Part of [Terrain Precision Fix](../../../README.md), one point of the case [Kopernicus](../kopernicus.md), in [Limits and solutions](../../limits-and-solutions.md).
 
-**Status: checked, a problem this mod patches — without the patch, in one rare case only, an error is
-logged and the flags of one facility are left unfixed until the next scene; their glitch was reported
-on big home bodies, such as Earth in Real Solar System.** To
-place the KSC in double, this mod takes it out of the home body's terrain sphere while a craft is near
-([The statics](../../the-fix-this-mod-proposes.md#the-statics)), and Kopernicus looks for it there.
+**Status: checked, no problem — where this mod moves the KSC, its statics fix keeps the flags steady
+without Kopernicus' flag fix, which it keeps from running there; everywhere else, Kopernicus' flag fix
+runs as before.** To place the KSC in double, this mod takes it out of the home body's terrain sphere
+while a craft is near ([The statics](../../the-fix-this-mod-proposes.md#the-statics)), and Kopernicus
+looks for it there.
 
-## Without the patch
+## The flag glitch
 
-With this mod's statics fix on and Kopernicus left unpatched (`patchKopernicus = false`), the flag fix
-fails in one rare case only, and what it leaves undone is minor:
+Kopernicus comes with a fix for the flag by the launchpad, written for
+[Kopernicus issue #349](https://github.com/Kopernicus/Kopernicus/issues/349): a flag that twitched and
+left its pole, reported in KSP 1.4 to 1.6, in Real Solar System and on a stock system rescaled ten
+times. The glitch is still there in KSP 1.12, and it goes away as soon as the KSC is placed in double
+precision: it comes from the KSC hanging from its terrain sphere, as the moving statics do
+([A second culprit: the statics](../../the-culprit.md#a-second-culprit-the-statics)).
 
-- **one rare case** — the flag fix runs a few frames after every scene opens, when the KSC is under its
-  sphere, and it looks for the KSC in flight only when a facility is upgraded or repaired there. In
-  play, facilities are upgraded and repaired from the space centre. The one exception is a mission of
-  the Making History expansion that spawns a craft at a facility of the KSC while another craft is
-  already near it: then the flag fix throws a `NullReferenceException`, which KSP catches and logs, and
-  the game goes on;
-- **what it leaves undone** — the flags that facility's new level brings are not fixed, until the flag
-  fix runs again at the next scene. Their glitch, a flag that twitches and leaves its pole, was reported
-  on big home bodies: Earth in Real Solar System, and Kerbin rescaled ten times
-  ([Kopernicus issue #349](https://github.com/Kopernicus/Kopernicus/issues/349)). On a Kerbin of stock
-  size, where the run of [Seeing it](#seeing-it) was taken, there is nothing to see: the flag by the
-  launchpad does not move, fixed or not.
+In KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1 and
+[Real Solar System](https://github.com/KSP-RO/RealSolarSystem) 20.1.3 with what it requires, Kopernicus
+248 built from its sources with its flag fix turned off: the two lines that call it commented out
+([`kopernicus-248-without-its-flag-fix.diff`](../../../diag/kopernicus-flag-fix/kopernicus-248-without-its-flag-fix.diff)).
+A craft on the launchpad at Cape Canaveral; the flag by the launchpad watched from the flight scene, and,
+in the last run, from the space centre too. Three runs, each in a KSP started afresh:
 
-This mod patches Kopernicus all the same: the log stays clean, and the flags stay fixed.
+| run | the flag by the launchpad | log |
+|---|---|---|
+| without this mod | twitches, in flight | [`kopernicus-flag-glitch-without-this-mod.log`](../../../diag/runs/kopernicus-flag-glitch-without-this-mod.log) |
+| this mod, `patchKopernicus = false`, `logLevel = Debug` | steady, in flight | [`kopernicus-flag-glitch-statics-fix.log`](../../../diag/runs/kopernicus-flag-glitch-statics-fix.log) |
+| this mod, `fixStatics = false`, `patchKopernicus = false`, `logLevel = Debug` | twitches, in flight and at the space centre | [`kopernicus-flag-glitch-statics-fix-off.log`](../../../diag/runs/kopernicus-flag-glitch-statics-fix-off.log) |
+
+Kopernicus never fixes the flags in these runs. What holds the flag in flight is the statics fix alone:
+the second run's log shows the KSC taken out of its sphere three seconds into the flight, and the third
+run, the same mod with its statics fix turned off, twitches again.
+
+This mod only moves the KSC in flight, while a craft is near it. At the space centre, in the editors, in
+the tracking station, or in flight far from the KSC, Kopernicus' flag fix is still what holds the flag.
 
 ## Where Kopernicus looks for the KSC
 
@@ -38,32 +47,28 @@ sphere, since it does so before every scene change.
 
 ## The patch
 
-**What Kopernicus does.** `RuntimeUtility.FixFlags` binds the flags of the KSC to their bones again, a
-few frames after every scene opens and whenever a facility is upgraded or repaired — a new level of a
-facility brings flags of its own. It was written for
-[Kopernicus issue #349](https://github.com/Kopernicus/Kopernicus/issues/349), a flag by the launchpad
-that twitched and left its pole, reported in KSP 1.4 to 1.6, in Real Solar System and on a stock system
-rescaled ten times. It looks the KSC up with
-`GetComponentsInChildren<PQSCity>(true)` on the home body's terrain sphere, keeps the one named `KSC`,
-and uses it without checking it was found.
+**What Kopernicus does.** `RuntimeUtility.FixFlags` binds the flags of the KSC to other bones, a few
+frames after every scene opens and whenever a facility is upgraded or repaired — a new level of a
+facility brings flags of its own. It looks the KSC up with `GetComponentsInChildren<PQSCity>(true)` on
+the home body's terrain sphere, keeps the one named `KSC`, and uses it without checking it was found.
 
 **Why it matters here.** A facility can be upgraded in flight: when a mission of the Making History
 expansion spawns a craft at a facility, it places the KSC again and sets that facility's level. If a
 craft is near the KSC then, the KSC is out of its sphere, the lookup does not find it, and the flag fix
-throws ([Without the patch](#without-the-patch)).
+throws a `NullReferenceException`, which KSP catches and logs. Nothing else goes wrong: out of its
+sphere, the KSC keeps its flags steady without the flag fix ([The flag glitch](#the-flag-glitch)).
 
-**What this mod does.** It replaces that one call, in `FixFlags` alone, with a lookup that returns what
-`GetComponentsInChildren` returns, plus the statics this mod has taken out of a sphere hanging from the
-component asked. As long as no static is out of its sphere — always, without this mod's statics fix —
-the result is the same as before. If Kopernicus is installed and `FixFlags` does not hold exactly one such
-call, the patch changes nothing, and the statics fix stays off. The patch can also be turned off in the
-settings (`patchKopernicus = false`), to see what goes wrong without it.
+**What this mod does.** It keeps `FixFlags` from running while the KSC is out of its sphere, the one
+time the flag fix is not needed. It runs as before a few frames after every scene opens, when every
+static is back under its sphere, and whenever the KSC is under it — always, without this mod's statics
+fix. If Kopernicus is installed and has no `FixFlags` without parameters, the patch fails, and the
+statics fix stays off. The patch can also be turned off in the settings (`patchKopernicus = false`), to
+see what goes wrong without it: the error in the log, in [Seeing the patch](#seeing-the-patch).
 
-**The change in Kopernicus it stands for.** In `FixFlags`, look the KSC up without assuming it hangs from
-the home body's terrain sphere — among the `PQSCity` whose `sphere` is the home body's, say — and stop
-there if it is not found, as the first version of `FixFlags` did with its `?.` operators.
+**The change in Kopernicus it stands for.** In `FixFlags`, stop when the KSC is not found under the home
+body's terrain sphere, as the first version of `FixFlags` did with its `?.` operators.
 
-## Seeing it
+## Seeing the patch
 
 In KSP 1.12.5 with the Making History expansion, Harmony, ModuleManager, KSP Community Fixes 1.41.1 and
 Kopernicus 248 with what it requires (ModularFlightIntegrator, KSPTextureLoader), and no planet pack.
@@ -103,7 +108,6 @@ In both runs with this mod, the log shows the KSC taken out of its sphere a few 
 flight, then, at the instant the second pod appears, put back under it and taken out again: the game
 placed it again before spawning the pod, and the KSC was out of its sphere when the flag fix ran —
 the case the patch covers. With the patch turned off, the log also warns, at startup, that Kopernicus'
-flag fix will throw. In that run, where the flag fix throws, the flag by the launchpad does not move:
-on a Kerbin of stock size, its glitch does not show anyway.
+flag fix will throw. In no run does the flag by the launchpad move.
 
 Under Real Solar System too, with the same Kopernicus, the log says the patch is applied.

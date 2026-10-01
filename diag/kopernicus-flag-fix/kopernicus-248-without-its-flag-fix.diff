@@ -1,0 +1,22 @@
+diff --git a/src/Kopernicus/RuntimeUtility/RuntimeUtility.cs b/src/Kopernicus/RuntimeUtility/RuntimeUtility.cs
+index 47d0f25..be2a4fa 100644
+--- a/src/Kopernicus/RuntimeUtility/RuntimeUtility.cs
++++ b/src/Kopernicus/RuntimeUtility/RuntimeUtility.cs
+@@ -207,7 +207,7 @@ namespace Kopernicus.RuntimeUtility
+             ApplyInitialTarget();
+             ApplyOrbitPatches();
+             ApplyStarPatchSun();
+-            ApplyFlagFixes();
++            // ApplyFlagFixes(); // flag fix of issue #349 turned off, to see the glitch
+ 
+             for (Int32 i = 0; i < PSystemManager.Instance.localBodies.Count; i++)
+             {
+@@ -249,7 +249,7 @@ namespace Kopernicus.RuntimeUtility
+         {
+             PatchFlightIntegrator();
+             PatchTimeOfDayAnimation();
+-            StartCoroutine(CallbackUtil.DelayedCallback(3, FixFlags));
++            // StartCoroutine(CallbackUtil.DelayedCallback(3, FixFlags)); // flag fix of issue #349 turned off, to see the glitch
+             PatchContracts();
+         }
+ 

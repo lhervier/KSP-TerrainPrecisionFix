@@ -59,6 +59,11 @@ journal TerrainPrecisionFix de `claude-notes`, même date).
 - [x] **Kopernicus seul** (test séparé, ne pas mélanger avec le précédent) : fait le 2026-09-30 avec la
       mission publiée `diag/kopernicus-flag-fix/`, trois runs (sans le mod, `patchKopernicus = false`,
       `true`) ; résultats dans la page Kopernicus.
+- [ ] **Patch Kopernicus réécrit le 2026-09-30 (préfixe qui saute `FixFlags` tant que le KSC est hors
+      de sa sphère)** : rejouer la mission sous RSS (`ksp-rss-dev\`, DLL déployée) — aucune exception,
+      drapeau immobile ; puis rejouer sur Kerbin (`ksp-dev\`) les runs `patchKopernicus = false` et
+      `true` pour remplacer `diag/runs/kopernicus-flag-fix-patch-off.log` et `-patch-on.log`, écrits
+      avec l'ancien patch (message « flag fix patched to cope… », ancien avertissement).
 
 **5. KK (portable)**
 - [x] Mesure de la piste KK sur la Mune (`runway-mun-kk.sfs`) : faite sur le fixe le 2026-09-30, KK installé

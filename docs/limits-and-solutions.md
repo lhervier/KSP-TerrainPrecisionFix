@@ -10,7 +10,7 @@ chapter of its own, and the cases are grouped by where they stand:
   The summary still says what changes, when something does;
 - **[Checked, a problem this mod patches](#checked-a-problem-this-mod-patches)** — this fix would break
   something in another mod, and patches that mod itself. The chapter says what the patch changes, the
-  change in that mod it stands for, and what is still to test;
+  change in that mod it stands for, and what is still to test. None today;
 - **[Checked, a real problem](#checked-a-real-problem)** — this fix breaks something there. None today;
 - **[Still to test](#still-to-test)** — not done yet: the chapter holds what is already known and what
   is planned to test it.
@@ -94,21 +94,19 @@ comes to rest over 21.8 mm without this mod and 0.094 mm with it, the ground ove
 
 **→ Full chapter: [The ground during a flight](limits-and-solutions/the-ground-during-a-flight.md)**
 
-## Checked, a problem this mod patches
-
 ### Kopernicus
 
-**Checked — this mod patches Kopernicus, for its flag fix; the rest is checked, no problem.** Most
-planet packs go through Kopernicus, and it touches four things this mod deals with:
+**Checked, no problem.** Most planet packs go through Kopernicus, and it touches four things this mod
+deals with:
 
 - **the terrain** — Kopernicus changes the terrain of existing bodies, so this mod has to still find
   the ground where it expects it. It does: on Kerbin and on Earth in Real Solar System, the ground comes
   back to the same height at every load, as without Kopernicus;
 - **the flag fix** — Kopernicus comes with a fix for the flag by the launchpad, which twitches on big
-  home bodies, such as Earth in Real Solar System. To fix the flag, Kopernicus has to find the KSC, and
-  this mod moves the KSC while a craft is near. Without a patch, the flag fix fails in one rare case
-  only, a Making History mission spawning a craft at the KSC: an error is logged, and the flags of that
-  facility are left unfixed until the next scene. This mod patches it;
+  home bodies, such as Earth in Real Solar System. The glitch comes from the KSC hanging from its terrain
+  sphere, as the moving statics do: where this mod moves the KSC, in flight near it, it holds the flag
+  without Kopernicus' fix, and keeps that fix from running there, where it would not find the KSC and
+  would throw. Everywhere else, Kopernicus' fix runs as before;
 - **scatter with colliders** — Kopernicus can give rocks, trees and the like a collider, placed on the
   ground too. This mod does not make them worse: the gap between a rock and its collider, already there
   without this mod, is halved, and Rock Precision Fix closes it;
@@ -116,6 +114,10 @@ planet packs go through Kopernicus, and it touches four things this mod deals wi
   it at its new place, and the space centre opens without error after a flight.
 
 **→ Full chapter: [Kopernicus](limits-and-solutions/kopernicus.md)**
+
+## Checked, a problem this mod patches
+
+None today.
 
 ## Checked, a real problem
 

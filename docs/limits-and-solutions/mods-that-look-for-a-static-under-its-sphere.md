@@ -18,8 +18,9 @@ described with the mod:
 
 - [Kerbal Konstructs](kerbal-konstructs.md#the-patch-of-the-group-editor), its group editor, when a
   group is moved with its gizmo;
-- [Kopernicus](kopernicus/the-flag-fix.md), its flag fix, when a
-  facility is upgraded.
+- [Kopernicus](kopernicus/the-flag-fix.md), its flag fix, when a facility is upgraded: not needed
+  while the KSC is out of its sphere, which keeps its flags steady, so the patch keeps it from running
+  then.
 
 *To test:* the other mods. Any mod that places things relative to the KSC, or looks up a `PQSCity`, is
 to read.
