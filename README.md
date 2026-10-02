@@ -133,8 +133,8 @@ on Kerbin and 14 to 42 cm on Earth, where the rover jumps with it; with this mod
 
 **The runway and the grass beside it**, for the second culprit, the statics: at every loading, the runway
 comes back over 130.1 mm, on its own, and over 0.216 mm with this mod; while a rover drives by it, the
-runway moves with the ground by up to 48.5 mm, and within 0.05 mm with this mod — though it still moves
-with its terrain fix alone.
+runway moves with the ground by up to 48.5 mm on Kerbin and 376 mm on Earth, and within 0.05 and 0.15 mm
+with this mod — though it still moves with its terrain fix alone.
 
 **→ Full chapter: [Checking the culprit: the runway and the grass beside it](docs/checking-the-culprit-runway.md)**
 

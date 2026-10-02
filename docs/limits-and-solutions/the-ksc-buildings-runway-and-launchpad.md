@@ -2,7 +2,7 @@
 
 Part of [Terrain Precision Fix](../../README.md), one case of [Limits and solutions](../limits-and-solutions.md).
 
-**Status: covered by this mod, measured on the runway of Kerbin; the rest still to test.** The statics
+**Status: covered by this mod, measured on the runway of Kerbin and on that of Earth in Real Solar System; the rest still to test.** The statics
 of the KSC are placed by a `PQSCity`, through a float `Transform` at planet scale, like the terrain:
 [The culprit: the statics](../the-culprit-statics.md). This mod takes a static
 out of its terrain sphere in flight, while a craft is near it, and places it in double:
@@ -13,8 +13,12 @@ craft on the grass and a craft on the runway: the deck of the runway spreads ove
 mod and 0.216 mm with it, and the step between it and the grass beside it over 81.7 mm and 0.203 mm.
 **And while a rover drives by it**, with the protocol of the runway and the grass while the world
 moves, played by a script: at each move of the floating origin, on stock, the deck moves by −8.85 and
-+48.47 mm, together with the grass; with this mod, the deck moves by 0.04 mm at most over three moves.
-A craft rolling on the runway gets no bump from the runway at a move of the origin.
++48.47 mm, together with the grass; with this mod, the deck moves by 0.04 mm at most over three moves. On Earth, in Real Solar System,
+the same protocol reads the deck moving by −375.89 and +45.69 mm on stock, together with the grass, and
+by 0.055 mm at most with this mod.
+A craft rolling on the runway gets no bump from the runway at a move of the origin. On Earth, on stock, the runway
+is also not touched where it is drawn, and its sections step against one another, depending on the
+load; with this mod, neither: [Real Solar System: the runway fix](rss/the-runway-fix.md).
 The readings are in
 [Checking the culprit: the runway and the grass beside it](../checking-the-culprit-runway.md).
 
@@ -90,13 +94,6 @@ tell what stock already does.
   world around the craft; above an altitude set for each body, it turns the body, and this mod has to turn the statics
   with it. A craft climbing from the Mun's surface to 25 km above an anomaly of the Mun: from up there,
   the anomaly does not slide over the ground.
-- **A bump under a craft rolling on the runway of the KSC on Earth, in Real Solar System.** Real
-  Solar System keeps the floating origin from moving while a craft rolls on that runway, and no setting
-  turns that lock off. In the install of
-  [Rescaled systems: Real Solar System](rescaled-systems-real-solar-system.md), taxi a plane from one
-  end of the runway to the other, with Real Solar System as released, then built from its sources with
-  the lock turned off; each without this mod and with it. As released, the plane rolls without a bump;
-  with the lock off, it does so with this mod.
 
 The cost per frame of the statics fix is no impact a player can check by hand: it belongs to
 [Performance](../performance.md), where it is still to measure.

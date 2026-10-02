@@ -97,6 +97,6 @@ apply, and each vertex is left with a reference comparison before stock runs unt
   System — while a wrong frame misses by kilometres. The largest correction measured so far is 4.0
   steps, 1 998 mm on Earth in Real Solar System (3.6 steps on Venus, 3.5 on the Moon, about one on
   Mars and Mercury), a quarter of the limit:
-  [What this mod corrected](limits-and-solutions/rescaled-systems-real-solar-system.md#what-this-mod-corrected);
+  [What this mod corrected](limits-and-solutions/rss/what-this-mod-corrected.md);
 - the ground fix is installed on its own, apart from [the statics fix](the-fix-statics.md), and can be
   turned off in the settings. If any of its patches fails to install, none of them does anything.

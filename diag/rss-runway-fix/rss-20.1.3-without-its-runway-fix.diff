@@ -1,0 +1,38 @@
+diff --git a/Source/Properties/AssemblyInfo.cs b/Source/Properties/AssemblyInfo.cs
+index 4bfccb0..57dd8a2 100644
+--- a/Source/Properties/AssemblyInfo.cs
++++ b/Source/Properties/AssemblyInfo.cs
+@@ -1,4 +1,4 @@
+-﻿#define CIBUILD_disabled
++﻿#define CIBUILD
+ using System.Reflection;
+ using System.Runtime.InteropServices;
+ 
+@@ -37,8 +37,8 @@ using System.Runtime.InteropServices;
+ // [assembly: AssemblyVersion("1.0.*")]
+ 
+ #if CIBUILD
+-[assembly: AssemblyVersion("@MAJOR@.@MINOR@.@PATCH@.@BUILD@")]
+-[assembly: AssemblyFileVersion("@MAJOR@.@MINOR@.@PATCH@.@BUILD@")]
++[assembly: AssemblyVersion("20.1.3.0")]
++[assembly: AssemblyFileVersion("20.1.3.0")]
+ #else
+ [assembly: AssemblyVersion("18.5.0.0")]
+ [assembly: AssemblyFileVersion("18.5.0.0")]
+diff --git a/Source/RSSRunwayFix.cs b/Source/RSSRunwayFix.cs
+index 60562d3..d1b36ea 100644
+--- a/Source/RSSRunwayFix.cs
++++ b/Source/RSSRunwayFix.cs
+@@ -43,6 +43,12 @@ namespace RealSolarSystem
+ 
+         public void Start()
+         {
++            // Test build: RSSRunwayFix neutralized. Instance stays set (GUI.cs reads it), but no event
++            // is subscribed, so the runway section colliders are never disabled, hold stays false
++            // (FixedUpdate never touches FloatingOrigin.threshold nor calls SetSafeToEngage).
++            Debug.Log("[RealSolarSystem] RSSRunwayFix neutralized (test build 20.1.3-without-runwayfix)");
++            return;
++
+             foreach (ConfigNode n in GameDatabase.Instance.GetConfigNodes("RSSRUNWAYFIX"))
+             {
+                 if (bool.TryParse(n.GetValue("debug"), out bool bTemp))

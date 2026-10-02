@@ -57,10 +57,12 @@ page, son point quitte la liste, et il s'efface d'ici.
 - [ ] Lancement depuis un site KK.
 
 **4. RSS** (`ksp-rss-dev\`)
-- [ ] La piste de RSS : même mesure, puis roulage d'un avion sur toute la piste, **sur le modèle du flag
-      fix de Kopernicus** : RSS tel que publié, puis RSS recompilé sans le verrou d'origine de
-      `RSSRunwayFix` (diff publié dans `diag/`, comme `kopernicus-248-without-its-flag-fix.diff`) ;
-      chacun sans le mod et avec (cf. point 1.1 de « Avant d'ouvrir l'issue KSPCF »).
+- [x] La piste de RSS, sans `RSSRunwayFix` (diff dans `diag/rss-runway-fix/`), sans le mod et avec :
+      publié dans [Real Solar System: the runway fix](docs/limits-and-solutions/rss/the-runway-fix.md).
+- [x] Le verrou d'origine : protocole « piste et herbe pendant un décalage » de Diag 2 sur la Terre,
+      RSS sans `RSSRunwayFix`, sans le mod (−375,9 / +45,7 mm, piste et herbe ensemble) et avec
+      (≤ 0,15 mm) ; publié.
+- [ ] Le dernier point de son *Still to test* : RSS tel que publié avec le mod.
 
 **Ensuite** : README (second coupable, autres chapitres), pages *runway* des deux Diags refaites avec le
 correctif, puis commit.

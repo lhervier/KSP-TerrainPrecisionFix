@@ -60,7 +60,7 @@ On the Moon and Earth, the first rule of the protocol cannot be kept: the craft 
 10 cm off the ground and was moved onto it before its physics started, at three of the six loads on the
 Moon, by Real Solar System's workaround, always up, and at five on Earth, by stock's own pass, three
 times up and twice down, since the craft is in *prelaunch* there (see
-[Real Solar System's own workaround](limits-and-solutions/rescaled-systems-real-solar-system.md#real-solar-systems-own-workaround)).
+[Real Solar System's own workaround](limits-and-solutions/rss/the-ground-workaround.md)).
 *Settled* is read all the same, as a player gets it. The Moon series loads `reload-moon-rss.sfs`, the
 Earth series `reload-earth-rss-resave.sfs`, both in
 [Diag 1's `diag` folder](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/tree/main/diag).
@@ -92,11 +92,11 @@ The capsule on its tank:
 
 ![With this mod, the capsule on its tank, six loads of the same save, on the Moon](../imgs/Diag1/on-load/2parts/40-moon.png)
 
-*The craft never jumped, and owes nothing to Real Solar System's own workaround: it ran at every load and never had to move the craft, no `Moving Vessel` line — see [Real Solar System's own workaround](limits-and-solutions/rescaled-systems-real-solar-system.md#real-solar-systems-own-workaround).*
+*The craft never jumped, and owes nothing to Real Solar System's own workaround: it ran at every load and never had to move the craft, no `Moving Vessel` line — see [Real Solar System's own workaround](limits-and-solutions/rss/the-ground-workaround.md).*
 
 ![With this mod, the capsule on its tank, six loads of the same save, on Earth](../imgs/Diag1/on-load/2parts/50-earth.png)
 
-*The craft never jumped, and owes nothing to Real Solar System's own workaround: the craft is in prelaunch, where stock runs the same pass at every load, and it never had to move the craft, no `Moving Vessel` line — see [Real Solar System's own workaround](limits-and-solutions/rescaled-systems-real-solar-system.md#real-solar-systems-own-workaround).*
+*The craft never jumped, and owes nothing to Real Solar System's own workaround: the craft is in prelaunch, where stock runs the same pass at every load, and it never had to move the craft, no `Moving Vessel` line — see [Real Solar System's own workaround](limits-and-solutions/rss/the-ground-workaround.md).*
 
 The ten series, read off those screenshots:
 
@@ -142,7 +142,7 @@ On the Moon, the save is `reload-moon-rss-resave.sfs`; on Earth, `reload-earth-r
 | Earth | 693.1 mm | 0.994 mm |
 
 On the Moon, the craft tipped over at one of the six loads, which Real Solar System's own workaround
-does not always prevent (see [its limit](limits-and-solutions/rescaled-systems-real-solar-system.md#real-solar-systems-own-workaround)).
+does not always prevent (see [its limits](limits-and-solutions/rss/the-ground-workaround.md#its-limits)).
 That load is read where the craft came to rest, and accounts for the spread of the height KSP computes:
 the five others spread it over 0.035 mm. Its *Difference* falls between the lowest and the highest of
 the five others, so the spread of *Difference* is the same with it or without it.
@@ -162,11 +162,11 @@ As before, the bottom line of each screenshot is the loading in progress, and is
 
 ![With this mod, six loads of the same save, on the Moon](../imgs/Diag2/on-load/40-moon.png)
 
-*The craft never jumped, and owes nothing to Real Solar System's own workaround: it ran at every load and never had to move the craft, no `Moving Vessel` line — see [Real Solar System's own workaround](limits-and-solutions/rescaled-systems-real-solar-system.md#real-solar-systems-own-workaround).*
+*The craft never jumped, and owes nothing to Real Solar System's own workaround: it ran at every load and never had to move the craft, no `Moving Vessel` line — see [Real Solar System's own workaround](limits-and-solutions/rss/the-ground-workaround.md).*
 
 ![With this mod, six loads of the same save, on Earth](../imgs/Diag2/on-load/50-earth.png)
 
-*The craft never jumped, and owes nothing to Real Solar System's own workaround: the craft is in prelaunch, where stock runs the same pass at every load, and it never had to move the craft, no `Moving Vessel` line — see [Real Solar System's own workaround](limits-and-solutions/rescaled-systems-real-solar-system.md#real-solar-systems-own-workaround).*
+*The craft never jumped, and owes nothing to Real Solar System's own workaround: the craft is in prelaunch, where stock runs the same pass at every load, and it never had to move the craft, no `Moving Vessel` line — see [Real Solar System's own workaround](limits-and-solutions/rss/the-ground-workaround.md).*
 
 Read off those screenshots:
 

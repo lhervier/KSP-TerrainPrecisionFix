@@ -31,17 +31,18 @@ distributed. Read on release 1.40.1, still to read again on 1.41.1.
 
 ### Rescaled systems: Real Solar System
 
-**Checked on the Moon and on Earth: this mod breaks nothing, and improves on what Real Solar System
-does.** The defect grows with the body — a float's step is 125 mm on the Moon, 500 mm on Earth — and
-Real Solar System ships a workaround of its own, which moves a landed craft back onto the ground when it
-loads. That workaround does not always work: it only acts when the craft is more than 10 cm off, so
-without this mod the craft still jumps now and then, and is moved up in one block the rest of the time.
-With this mod, nothing moves any more: the craft and the ground come back within a fraction of a
-millimetre on both bodies, the workaround never has anything to correct here — it may well have other
-uses, outside the scope of this fix — and dozens of reloads on each body did not make the craft jump
-once. The safeguard grows with the body
-too, so none of the terrain is left uncorrected, on Earth as on Venus, Mars and Mercury, where it was
-checked as well.
+**Checked: this mod breaks nothing, and leaves Real Solar System's workarounds nothing to correct for
+this defect.** The defect grows with the body — a float's step is 125 mm on the Moon, 500 mm on Earth —
+and Real Solar System ships two workarounds for it. One moves a landed craft back onto the ground when
+it goes off rails, only when it is more than 10 cm off: without this mod, the craft still jumps now and
+then; with it, the craft and the ground come back within a fraction of a millimetre, and dozens of
+reloads on the Moon and on Earth did not make it jump once. The other turns off the colliders of the
+runway's sections and holds the floating origin while a craft rolls on it: without it, the pieces of the
+runway are rounded each on their own, and a craft can rest above the deck or sunk into it, or meet a
+step, and the runway jumps by up to 376 mm with the grass at each move of the floating origin; with
+this mod, the runway is where it is drawn, in one piece, and a move of the origin moves nothing. The
+safeguard grows with the body too, so none of the terrain is left
+uncorrected, on Earth as on Venus, Mars and Mercury.
 
 **→ Full chapter: [Rescaled systems: Real Solar System](limits-and-solutions/rescaled-systems-real-solar-system.md)**
 

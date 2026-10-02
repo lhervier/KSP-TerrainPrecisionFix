@@ -5,17 +5,20 @@ installed. What their readings say is in
 [Checking the culprit: loading the same save](../docs/checking-the-culprit-loading.md),
 [Coming back to a craft left parked](../docs/checking-the-culprit-approach.md),
 [Switching to a craft far away](../docs/checking-the-culprit-switching.md),
-[The runway and the grass beside it](../docs/checking-the-culprit-runway.md) and
-[Rescaled systems: Real Solar System](../docs/limits-and-solutions/rescaled-systems-real-solar-system.md).
+[The runway and the grass beside it](../docs/checking-the-culprit-runway.md),
+[Rescaled systems: Real Solar System](../docs/limits-and-solutions/rescaled-systems-real-solar-system.md)
+and its pages.
 
 The saves of the protocols are not here: each protocol belongs to an instrument, and its saves are in
 the `diag` folder of [Terrain Precision Fix Diag 1](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/tree/main/diag)
 and of [Terrain Precision Fix Diag 2](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/tree/master/diag),
 along with the logs of the same sessions without this mod. Only the sessions taken with this mod alone
 and no instrument have their saves here: the loads on Venus, Mars and Mercury, described in
-[Rescaled systems: Real Solar System](../docs/limits-and-solutions/rescaled-systems-real-solar-system.md#the-saves),
-and the launch from Cape Canaveral; and, in `kopernicus-flag-fix/`, the mission and the change to
-Kopernicus of [Kopernicus: the flag fix](../docs/limits-and-solutions/kopernicus/the-flag-fix.md).
+[Real Solar System: what this mod corrected](../docs/limits-and-solutions/rss/what-this-mod-corrected.md#the-saves),
+and the launch from Cape Canaveral; in `kopernicus-flag-fix/`, the mission and the change to Kopernicus of
+[Kopernicus: the flag fix](../docs/limits-and-solutions/kopernicus/the-flag-fix.md); and, in
+`rss-runway-fix/`, the change to Real Solar System of
+[Real Solar System: the runway fix](../docs/limits-and-solutions/rss/the-runway-fix.md).
 
 ## On the stock system
 
@@ -124,3 +127,24 @@ a fixed metre, and hold the line where it refused part of Earth's terrain.
   the second session, whole. It begins with the craft taken back from the Space Center, which KSP
   moved 8.3 m down as it loaded (`Moving Vessel down -8.346m`), and which was destroyed; then five
   reverts to launch, loads 16 to 20 of the chapter.
+- [`runs/runway-earth-rss-without-runway-fix.log`](runs/runway-earth-rss-without-runway-fix.log) —
+  without this mod,
+  [Terrain Precision Fix Diag 5](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag5) added, and
+  Real Solar System built from the sources of its release 20.1.3.0 with the change
+  [`rss-runway-fix/rss-20.1.3-without-its-runway-fix.diff`](rss-runway-fix/rss-20.1.3-without-its-runway-fix.diff),
+  which keeps its runway fix from doing anything: one session, the rover of Terrain Precision Fix Diag 2
+  launched from the SPH onto the runway at Cape Canaveral several times, and reloaded many times
+  between, 23 entries in flight. Read in
+  [Seeing it](../docs/limits-and-solutions/rss/the-runway-fix.md#seeing-it).
+- [`runs/runway-earth-rss-without-runway-fix-fix.log`](runs/runway-earth-rss-without-runway-fix-fix.log) —
+  the same install, with this mod: one session, the protocol of
+  [Seeing it](../docs/limits-and-solutions/rss/the-runway-fix.md#seeing-it), 37 entries in flight.
+- [`runs/driving-runway-earth-rss-diag2-fix.log`](runs/driving-runway-earth-rss-diag2-fix.log) —
+  [Terrain Precision Fix Diag 2](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2), Diag 3 and
+  [KSP-MCPServer](https://github.com/lhervier/KSP-MCPServer) added, Real Solar System built without its
+  runway fix as above: the protocol of the runway and the grass while the world moves, played by its
+  script from `driving-runway-earth-rss.sfs`, two moves of the origin; what the script printed in
+  [`runs/driving-runway-earth-rss-diag2-fix-script.txt`](runs/driving-runway-earth-rss-diag2-fix-script.txt),
+  and every line it recorded in
+  [`runs/driving-runway-earth-rss-diag2-fix-lines.json`](runs/driving-runway-earth-rss-diag2-fix-lines.json).
+  Read in [The runway and the grass, while the world moves](../docs/checking-the-culprit-runway.md#the-runway-and-the-grass-while-the-world-moves).
