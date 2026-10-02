@@ -7,10 +7,11 @@ files. It is a mod of its own, built and measured on top of
 [KSP Community Fixes](https://github.com/KSPModdingLibs/KSPCommunityFixes), the base most players run.
 Here is what it fixes, on the ground and on the runways, launchpads and buildings that stand on it:
 
-> **The ground KSP builds under you is never built at the same height twice.** Load a save, come back
-> to a craft left parked, drive a few hundred metres: each time the ground is built again, the surface
-> your craft is standing on comes back a little higher or a little lower — a few centimetres apart on
-> Kerbin, less on smaller worlds, and up to seventy on Earth in Real Solar System.
+> **The ground KSP builds under you is never built at the same height twice, and neither are the
+> runways and buildings it places on it.** Load a save, come back to a craft left parked, drive a few
+> hundred metres: each time the ground is built again, the surface your craft is standing on comes back
+> a little higher or a little lower — a few centimetres apart on Kerbin, less on smaller worlds, and up
+> to seventy on Earth in Real Solar System.
 
 **How this was made.** The investigation and the code were written with Claude, Anthropic's AI
 assistant. Everything here was reviewed and validated by a human — me — who very much enjoyed
@@ -25,10 +26,13 @@ files you can read in one sitting.
 
 KSP does not keep the ground it built: it builds it again, over and over, while you play. And every
 time it does, the surface lands at a slightly different height — a little higher or a little lower,
-at random, a few centimetres on Kerbin and up to seventy on Earth in Real Solar System. Loading a save
+at random, a few centimetres on Kerbin and up to seventy on Earth in Real Solar System. The runway, the
+launchpad and the buildings of the KSC, and the bases a mod such as Kerbal Konstructs plants on a body,
+are placed the same way, each at a height of its own, apart from the ground beside it. Loading a save
 is only the moment everybody notices. It happens just as well:
 
-- **when a save is loaded**, or the scene changes: the whole ground is built anew;
+- **when a save is loaded**, or the scene changes: the whole ground is built anew, and every runway and
+  building is placed again;
 - **when you come back to a craft left parked.** Its position was recorded while it rested on the
   ground as it stood then. As you fly back towards it, KSP builds that ground again, at a different
   height, and puts the craft back at its recorded position — on a ground that is no longer the one it
@@ -36,11 +40,8 @@ is only the moment everybody notices. It happens just as well:
 - **when you switch to a craft far away**, which is put down the same way, on a ground it was not
   standing on when it was left;
 - **while you drive.** Every 500 m the craft you fly travels, KSP moves its whole world back onto it,
-  and builds the ground under you again — in the middle of the drive, with nothing loaded and no scene
-  changed;
-- **under the runway, the launchpad and the buildings of the KSC**, and the bases a mod such as Kerbal
-  Konstructs plants on a body: they are placed the same way, and move on their own, at every load and
-  while a rover drives by them.
+  builds the ground under you again, and moves the runway beside you with it — in the middle of the
+  drive, with nothing loaded and no scene changed.
 
 Each time, it is a coin toss between two outcomes.
 
@@ -67,7 +68,8 @@ road — on Earth, it was seen to jump when the ground rose under it.
 
 Every one of these moments can be repeated at will — reload the same save, drive away from a craft left
 parked and come back to it, switch to a craft far away, drive past a few shifts of the world — and each
-is measured on this page.
+is measured on this page, on the ground, and on a runway as well when a save is loaded and while you
+drive.
 
 ### Disclaimer: it is not the only cause
 
