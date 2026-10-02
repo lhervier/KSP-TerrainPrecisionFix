@@ -34,7 +34,7 @@ hangs it (below, [The patch of the group editor](#the-patch-of-the-group-editor)
 loading to the sixth, instead of 33.5 mm on stock, and the ground beside it within 0.036 mm. At the first
 loading of a session, a section of the runway 21.3 mm above the deck is still active under the craft,
 on stock as with this mod; it is not a rounding, and this mod does not touch it. The readings:
-[Checking the culprit: the runway and the grass beside it](../checking-the-culprit-runway.md).
+[Checking the culprit: loading the same save](../checking-the-culprit-loading.md).
 
 *To test:* why that section of the runway is only there at the first loading; the group editor in flight, near a craft —
 moving a group, turning it, creating, copying and deleting one, then loading the save again; a launch

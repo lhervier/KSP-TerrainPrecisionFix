@@ -112,7 +112,9 @@ figure is without this mod, the second with it.
 
 **Loading the same save**, six times, on Kerbin, the Mun, Minmus, Gilly, and the Moon and Earth of
 [Real Solar System](https://github.com/KSP-RO/RealSolarSystem): the ground comes back over 108.1 mm on
-Kerbin and 693.1 mm on Earth, and within 0.4 mm everywhere with this mod.
+Kerbin and 693.1 mm on Earth, and within 0.4 mm everywhere with this mod. For the second culprit, the
+statics, on the runway of the KSC and on one placed by Kerbal Konstructs on the Mun: the runway comes back
+over 130.1 mm, on its own, and over 0.216 mm with this mod.
 
 **→ Full chapter: [Checking the culprit: loading the same save](docs/checking-the-culprit-loading.md)**
 
@@ -127,16 +129,11 @@ mod; the switch itself moves nothing.
 **→ Full chapter: [Checking the culprit: switching to a craft far away](docs/checking-the-culprit-switching.md)**
 
 **Driving on while the world moves**, every 500 m a rover drives: the ground under it jumps by 4 to 12 mm
-on Kerbin and 14 to 42 cm on Earth, where the rover jumps with it; with this mod, no jump is left.
+on Kerbin and 14 to 42 cm on Earth, where the rover jumps with it; with this mod, no jump is left. The
+runway of the KSC moves with the ground by up to 48.5 mm on Kerbin and 376 mm on Earth, and within 0.05
+and 0.15 mm with this mod — though it still moves with its terrain fix alone.
 
 **→ Full chapter: [Checking the culprit: driving on while the world moves](docs/checking-the-culprit-driving.md)**
-
-**The runway and the grass beside it**, for the second culprit, the statics: at every loading, the runway
-comes back over 130.1 mm, on its own, and over 0.216 mm with this mod; while a rover drives by it, the
-runway moves with the ground by up to 48.5 mm on Kerbin and 376 mm on Earth, and within 0.05 and 0.15 mm
-with this mod — though it still moves with its terrain fix alone.
-
-**→ Full chapter: [Checking the culprit: the runway and the grass beside it](docs/checking-the-culprit-runway.md)**
 
 ## What moves the frame
 

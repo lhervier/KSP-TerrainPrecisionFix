@@ -20,7 +20,8 @@ A craft rolling on the runway gets no bump from the runway at a move of the orig
 is also not touched where it is drawn, and its sections step against one another, depending on the
 load; with this mod, neither: [Real Solar System: the runway fix](rss/the-runway-fix.md).
 The readings are in
-[Checking the culprit: the runway and the grass beside it](../checking-the-culprit-runway.md).
+[Checking the culprit: loading the same save](../checking-the-culprit-loading.md) and
+[Checking the culprit: driving on while the world moves](../checking-the-culprit-driving.md).
 
 **Checked in flight**, in two sessions logged with this mod at `logLevel = Debug`, where it logs every
 static it takes out of its sphere, with the correction it applied, and every static it puts back. Each
@@ -30,7 +31,7 @@ last two steps, the same log lists every `PQSCity` of the body, where it hangs a
 craft, and the destructible buildings and upgradeable facilities of the KSC, with whether KSP has them
 registered.
 
-- **On Kerbin**, in the install of [Checking the culprit](../checking-the-culprit-runway.md):
+- **On Kerbin**, in the install of [Checking the culprit](../checking-the-culprit-loading.md):
   [`runway-kerbin.sfs`](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/diag/runway-kerbin.sfs)
   loaded six times, the craft on the grass 1.4 km from the origin of the KSC
   ([`diag/runs/statics-kerbin-fix.log`](../../diag/runs/statics-kerbin-fix.log)).

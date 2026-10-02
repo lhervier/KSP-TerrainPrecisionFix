@@ -180,7 +180,7 @@ of the runway and the grass while the world moves of Terrain Precision Fix Diag 
 deck moves by −375.89 and +45.69 mm, together with the grass: what the runway fix holds the origin
 against. With this mod, the deck moves by 0.055 mm at most, and the grass by 0.147 mm, within the spread
 of the lines taken at the same spot. The readings are in
-[Checking the culprit: the runway and the grass beside it](../../checking-the-culprit-runway.md#the-runway-and-the-grass-while-the-world-moves).
+[Checking the culprit: driving on while the world moves](../../checking-the-culprit-driving.md#on-earth).
 For this defect, the hold has nothing left to correct either.
 
 ## Still to test
