@@ -13,7 +13,7 @@ the `diag` folder of [Terrain Precision Fix Diag 1](https://github.com/lhervier/
 and of [Terrain Precision Fix Diag 2](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/tree/master/diag),
 along with the logs of the same sessions without this mod. Only the sessions taken with this mod alone
 and no instrument have their saves here: the loads on Venus, Mars and Mercury, described in
-[Rescaled systems: Real Solar System](../docs/limits-and-solutions/rescaled-systems-real-solar-system.md#checking-the-culprit),
+[Rescaled systems: Real Solar System](../docs/limits-and-solutions/rescaled-systems-real-solar-system.md#the-saves),
 and the launch from Cape Canaveral; and, in `kopernicus-flag-fix/`, the mission and the change to
 Kopernicus of [Kopernicus: the flag fix](../docs/limits-and-solutions/kopernicus/the-flag-fix.md).
 

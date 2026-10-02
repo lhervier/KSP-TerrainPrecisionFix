@@ -29,9 +29,10 @@ at random, a few centimetres on Kerbin and up to seventy on Earth in Real Solar 
 is only the moment everybody notices. It happens just as well:
 
 - **when a save is loaded**, or the scene changes: the whole ground is built anew;
-- **when you come back to a craft left parked.** A landed craft you fly towards is loaded long before
-  you reach it, but held still at the position it was left at; its physics only starts once you are
-  within 200 m, on a ground built since that position was recorded;
+- **when you come back to a craft left parked.** Its position was recorded while it rested on the
+  ground as it stood then. As you fly back towards it, KSP builds that ground again, at a different
+  height, and puts the craft back at its recorded position — on a ground that is no longer the one it
+  was resting on;
 - **when you switch to a craft far away**, which is put down the same way, on a ground it was not
   standing on when it was left;
 - **while you drive.** Every 500 m the craft you fly travels, KSP moves its whole world back onto it,

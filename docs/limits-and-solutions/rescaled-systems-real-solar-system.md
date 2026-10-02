@@ -5,44 +5,96 @@ Part of [Terrain Precision Fix](../../README.md), one case of [Limits and soluti
 **Status: checked, no problem — this mod breaks nothing with Real Solar System, and improves on its own
 workaround, measured on the Moon and on Earth; its safeguard checked on Venus, Mars and Mercury too.**
 
-[Real Solar System](https://github.com/KSP-RO/RealSolarSystem) is a case of its own for two reasons.
-The defect grows with the radius of the body, and there it is at its largest: a float's step is
-125 mm at the distance of the Moon's ground and 500 mm at Earth's, against 62.5 mm on Kerbin. And Real
-Solar System ships a workaround of its own for the symptom, which moves a landed craft back onto the
-ground when it loads, so this mod has to live alongside it.
+The measurements on the Moon and on Earth, and the install, are in
+[Checking the culprit: loading the same save](../checking-the-culprit-loading.md); the logs of every
+session with this mod in [`diag/runs`](../../diag/README.md#on-real-solar-system). This page holds
+what Real Solar System's own workaround does, and what this mod changes for it, the spots of the saves,
+and what this mod corrected there — on Venus, Mars and Mercury as well.
 
-The measurements are rows of
-[Checking the culprit: loading the same save](../checking-the-culprit-loading.md): the Moon and Earth
-in the six loads of both instruments, then the reloads in a row of
-[Real Solar System's own workaround](../checking-the-culprit-loading.md#real-solar-systems-own-workaround),
-which also says what that workaround does. This page holds what is specific to this case: the install
-and the saves, what this mod corrected there — on Venus, Mars and Mercury as well — and how its
-safeguard behaves on a larger body.
+## Real Solar System's own workaround
 
-## Checking the culprit
+Real Solar System already works around the symptom. It ships a component of its own,
+`VesselGroundPositionEnhancer`
+([its source](https://github.com/KSP-RO/RealSolarSystem/blob/master/Source/VesselGroundPositionEnhancer.cs)),
+added to *"mostly prevent vessels clipping into the ground and as a result flung into the air"*
+([pull request #257](https://github.com/KSP-RO/RealSolarSystem/pull/257)). Whenever a landed craft goes
+off rails, it runs the stock `Vessel.CheckGroundCollision`, which moves the craft onto the ground before
+its physics starts whenever it is more than 10 cm off, inside the ground or above it, in one block, and
+logs `ground contact! - error. Moving Vessel up X.XXXm` (or `down`). Under 10 cm, the stock method
+leaves the craft where it is, inside the ground or not. The component only acts on a *landed* craft;
+for a craft in *prelaunch*, as on Earth near the KSC, stock KSP runs that same method itself at every
+load: `Vessel.GoOffRails` spares a landed craft whose saved terrain levels match the current ones, but
+never a craft in *prelaunch*. The component turns itself off when an assembly named `WorldStabilizer`
+is loaded, the mod it was written to stand in for; an empty assembly of that name in `GameData` is how
+it was turned off below. Real Solar System's repository also has an option to force it off, which
+release 20.1.3.0 does not have yet.
 
-**The install.** KSP 1.12.5 with Harmony, ModuleManager and KSP Community Fixes 1.41.1, as in every
-other campaign, plus Real Solar System 20.1.3.0 and what it requires (Kopernicus 248, Modular Flight
-Integrator, KSPTextureLoader, the RSS textures), and one of the two instruments,
-[Terrain Precision Fix Diag 1](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag) or
-[Terrain Precision Fix Diag 2](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2), or none for
-the reloads in a row and for the loads on Venus, Mars and Mercury. Nothing else. The series with Real Solar System's workaround off add an empty
-assembly named `WorldStabilizer` in `GameData`, with nothing in it: the workaround turns itself off
-when an assembly of that name is loaded, the mod it was written to stand in for. Real Solar System's
-repository also has an option to force it off, which release 20.1.3.0 does not have yet.
+**It hides the symptom, not the defect.** It moves the craft, never the ground: with it on, as in
+every series of
+[Checking the culprit: loading the same save](../checking-the-culprit-loading.md), the ground is still
+built somewhere else at each load, by 247.3 mm on the Moon and 693.1 mm on Earth, and the craft still
+comes to rest somewhere else, by 262.6 mm and 740.0 mm. All it can do is keep the craft from being
+thrown, and it does not always manage that.
 
-**The saves**, in the `diag` folder of each of the three Diags (here, Diag 1's):
+**Reloading until something happens.** No instrument is needed for this one: the same saves, Real Solar
+System as released, reloaded from the pause menu again and again, watching whether the craft jumps or
+tips over; some series are the six loads of an instrument in
+[Checking the culprit: loading the same save](../checking-the-culprit-loading.md). Real Solar System
+leaves one line in `KSP.log` each time the craft goes off rails, which counts the loads:
+`[RSS-VGPE] CheckGroundCollision()` for a landed craft, where its workaround runs,
+`[RSS-VGPE] Vessel going off rails in PRELAUNCH` for a craft in *prelaunch*, where stock's pass runs
+instead. A `Moving Vessel` line is added whenever either pass moved the craft.
 
-- [`reload-moon-rss.sfs`](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/diag/reload-moon-rss.sfs) — the pod on its tank, landed on flat ground on the
-  Moon (latitude 28.61°, longitude −80.62°), saved without this mod;
-- [`reload-moon-rss-resave.sfs`](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/diag/reload-moon-rss-resave.sfs) — the same craft, after loading the save
-  above once with this mod and saving it again (see [Existing saves](existing-saves.md));
-- [`reload-earth-rss-resave.sfs`](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/diag/reload-earth-rss-resave.sfs) — the pod on its tank, on the grass
-  about 1.4 km west of the KSC on Earth (latitude 28.611°, longitude −80.619°, 74 m above sea level),
-  saved with this mod, the craft in *prelaunch*;
-- [`reload-earth-rss-landed.sfs`](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/diag/reload-earth-rss-landed.sfs) — the save above, with one line
-  changed in the file: the situation of the craft, from `PRELAUNCH` to `LANDED`, the situation in
-  which Real Solar System's workaround runs.
+| install | save | loads | what the craft does |
+|---|---|---|---|
+| without this mod, workaround off | `reload-moon-rss.sfs` | 1 | **tips over** at the first load |
+| without this mod | `reload-moon-rss.sfs` | 14 | moved up by the workaround at 6 loads, by 0.115 to 0.261 m; **tips over** at 2 and **jumps** at 1, having come back less than the 10 cm the workaround acts on; nothing visible at 5 |
+| without this mod | `reload-moon-rss-resave.sfs` | 1 | **tips over** at the first load of a session, the workaround running, no `Moving Vessel` line |
+| without this mod, Diag 2 | `reload-moon-rss-resave.sfs` | 6 | moved up by the workaround at 2 loads, by 0.178 and 0.216 m; **jumps** at 1; **tips over** at 1, having come back inside the ground by less than the 10 cm the workaround acts on |
+| without this mod, Diag 1 | `reload-earth-rss-resave.sfs` | 6 | moved by stock's pass at 5 loads, up by 0.251 to 0.456 m at 3 and down by 0.143 to 0.283 m at 2; **jumps** at 1, having come back 83 mm inside the ground |
+| without this mod, Diag 2 | `reload-earth-rss-resave.sfs` | 6 | moved up by stock's pass at 4 loads, by 0.102 to 0.678 m; **jumps** at 1 |
+| with this mod, workaround off | `reload-moon-rss-resave.sfs` | 6 | stays put, over a spread of 0.364 mm; no `Moving Vessel` line |
+| with this mod | `reload-moon-rss-resave.sfs` | 24 | never moves; 24 lines of the workaround, no `Moving Vessel` line |
+| with this mod | `reload-earth-rss-landed.sfs` | 27 | never moves; the craft is *landed*, the workaround runs 27 times, no `Moving Vessel` line |
+| with this mod | `reload-earth-rss-resave.sfs` | 24 | never moves; the craft is in *prelaunch*, stock's pass runs 24 times, no `Moving Vessel` line |
+
+**Its limit: under 10 cm it does nothing, and without this mod the craft still jumps or tips over.**
+A craft that comes back more than 10 cm inside the ground is moved up in one block, and one that comes
+back more than 10 cm above it is moved down: nothing is launched, but a structure resting on several
+points is set on its lowest one. A craft that comes back less than 10 cm inside the ground is left
+there, and the physics engine pushes it out: a few centimetres are enough to throw it up, and it jumps,
+or comes down on its side and tips over. On the Moon, 10 cm is less than one float step, and on Earth a fifth of one, so the draws
+that fall under it are not rare: on the Moon, one jump and two tip-overs in fourteen loads, and two
+more tip-overs in seven loads of the save taken again; on Earth, one jump in each of the two series of
+six. The workaround ran at every one of those loads. With the workaround off, the craft tipped over at
+the very first load.
+
+**With this mod, it has nothing left to do for this defect.** The ground comes back within a
+millimetre, well inside the 10 cm below which the pass leaves a craft where it is. Over 75 loads in a
+row, 24 on the Moon and 51 on Earth, the craft never moved, and the pass, which still runs at every
+load, found nothing to correct, without getting in the way. With the workaround off, this mod keeps
+the craft in place on its own, over six loads read by Diag 1:
+
+![Six loads on the Moon, with this mod and without Real Solar System's workaround](../../imgs/Diag1/on-load/2parts/rss/30-moon-fix.png)
+
+*With this mod, Real Solar System's workaround off, Diag 1: six loads of `reload-moon-rss-resave.sfs`,
+a spread of 0.364 mm, against 0.395 mm with it on.*
+
+The workaround may well have other uses, outside the scope of this fix.
+
+## The saves
+
+The saves on the Moon and on Earth are in the `diag` folder of each of the three Diags (here, Diag 1's):
+
+- [`reload-moon-rss.sfs`](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/diag/reload-moon-rss.sfs)
+  and [`reload-moon-rss-resave.sfs`](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/diag/reload-moon-rss-resave.sfs) —
+  the Moon, latitude 28.61°, longitude −80.62°, on flat ground;
+- [`reload-earth-rss-resave.sfs`](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/diag/reload-earth-rss-resave.sfs)
+  and [`reload-earth-rss-landed.sfs`](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/diag/reload-earth-rss-landed.sfs) —
+  Earth, latitude 28.611°, longitude −80.619°, on the grass about 1.4 km west of the KSC, 74 m above
+  sea level.
+  `reload-earth-rss-landed.sfs` is `reload-earth-rss-resave.sfs` with one line changed in the file:
+  the situation of the craft, from `PRELAUNCH` to `LANDED`, the situation in which the workaround runs.
 
 The loads on Venus, Mars and Mercury, taken with this mod alone, have their saves in this repository's
 [`diag`](../../diag) folder: the same pod on its tank, placed with *Set Position* in the debug menu
@@ -61,41 +113,24 @@ The loads on Venus, Mars and Mercury, taken with this mod alone, have their save
 
 Copy a save into the folder of a sandbox game and load it from that game.
 
-**The screenshots.** Those without this mod are on the instruments' own pages:
-[Terrain Precision Fix Diag 1](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/docs/the-measurements-loading.md#the-same-craft-with-two-parts)
-and
-[Terrain Precision Fix Diag 2](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/blob/master/docs/the-measurements-loading.md#the-readings),
-each followed by a chapter on Real Solar System's own workaround. Those with this mod and Real Solar
-System as released are in
-[Checking the culprit: loading the same save](../checking-the-culprit-loading.md). The one series left
-is this mod with the workaround off:
-
-![Six loads on the Moon, with this mod and without Real Solar System's workaround](../../imgs/Diag1/on-load/2parts/rss/30-moon-fix.png)
-
-*With this mod, Real Solar System's workaround off, Diag 1: six loads of `reload-moon-rss-resave.sfs`.*
-
-**The logs.** The sessions with this mod are in [`diag/runs`](../../diag/README.md#on-real-solar-system),
-each described there; the sessions without it in the `diag/runs` folder of
-[Diag 1](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/tree/main/diag/runs) and of
-[Diag 2](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/tree/master/diag/runs).
-
 ## What this mod corrected
 
 The sessions with this mod ran at `logLevel = Debug`, which logs how far each quad was moved.
 
-This mod refuses any correction too large to be a rounding: sixteen float steps at the distance of the
-quad from the centre of the body, 1 m on Kerbin, 2 m on the Moon, 8 m on Earth (see
+This mod refuses any correction too large to be a rounding (see
 [Safeguards](../the-fix-ground.md#safeguards)). Its first version was a fixed **1 m**, chosen
 against a rounding of a few centimetres, which a correction of two steps already exceeds on Earth. The
 sessions marked *first safeguard* in [`diag/runs`](../../diag/README.md#on-real-solar-system) ran with
 it: on the Moon, 2 464 quads were corrected, by 443 mm at most, 3.5 float steps. Earth's terrain was
-built too during those sessions, and that first version refused part of it:
+built too during those sessions, and that first version refused corrections of 1.094 m and 1.318 m,
+leaving part of it as stock builds it:
 
 ```
 [TerrainPrecisionFix] Earth: a correction of 1.094 m is too large to be a rounding error, the quads concerned are left as stock builds them
 ```
 
-With the current safeguard, none refused:
+With the current safeguard, sixteen float steps at the distance of the quad from the centre of the
+body, none of the terrain built on these five bodies was refused:
 
 | series | placements of a quad corrected | largest correction |
 |---|---|---|
@@ -107,34 +142,10 @@ With the current safeguard, none refused:
 | Mars, six loads | 3 604 | 308 mm, 1.2 float steps |
 | Mercury, six loads | 1 532 | 259 mm, 1.0 float step |
 
-1 998 mm on Earth is still the largest correction seen on any body, a quarter of the limit. Venus,
-where the float step is 500 mm as on Earth, comes next at 3.6 steps. On Mars and Mercury, where it is
-250 mm, the largest correction stays around one step. Why these two
-bodies need fewer steps than Earth, Venus and the Moon is not explained.
+Venus, where the float step is 500 mm as on Earth, comes next after Earth at 3.6 steps. On Mars and
+Mercury, where it is 250 mm, the largest correction stays around one step. Why these two bodies need
+fewer steps than Earth, Venus and the Moon is not explained.
 
-## What the results show
-
-**This mod breaks nothing, and leaves Real Solar System's workaround nothing to do for this defect.**
-Without this mod, the workaround catches only part of the defect: it acts beyond 10 cm, less than one
-float step on the Moon and a fifth of one on Earth, and the craft still jumps or tips over now and
-then. With this mod, the craft stays put over a few tenths of a millimetre, with the workaround off
-(0.364 mm over six loads on the Moon) as with it on (0.395 mm). With both installed, as players have
-them, the workaround still runs at every load and never moves the craft, without getting in the way:
-24 reloads in a row on the Moon, 51 on Earth, on the landed craft, where Real Solar System's
-workaround runs, and in *prelaunch*, where stock's own pass runs instead. The workaround may well have
-other uses, outside the scope of this fix. What is left is wider than on Kerbin's campaigns, and at
-most 0.3 % of a float step at that distance.
-
-**The safeguard grows with the body.** A fixed metre refused corrections of 1.094 m and 1.318 m on
-Earth, leaving part of its terrain as stock builds it. Counted in float steps at the quad's distance, it
-accepts every correction applied there, up to 1 998 mm, 4.0 steps, and keeps the same meaning — a
-correction no rounding can produce — on any body: sixteen steps is four times the largest correction
-seen so far, 4.0 steps on Earth, then 3.6 on Venus, 3.5 on the Moon, and about one on Mars and
-Mercury. None of the terrain built on these five bodies was refused.
-
-*Still to test:* the runway of the KSC on Earth, a static this mod now places, measured so far on Kerbin only (see
-[The KSC buildings, runway and launchpad](the-ksc-buildings-runway-and-launchpad.md)), where Real
-Solar System keeps the floating origin from moving while a craft rolls on it; and a flight. Every
-series so far loads a landed craft again, while a player builds terrain continuously, the floating
-origin moving under it, on every launch: a launch from Cape Canaveral to orbit, and descents onto the
-sites of Venus, Mars and Mercury, flown by an autopilot so they can be replayed.
+*Still to test:* descents onto the sites of Venus, Mars and Mercury, flown by an autopilot so they can
+be replayed. Every series on this page loads a landed craft again, while a player builds terrain
+continuously during a descent.

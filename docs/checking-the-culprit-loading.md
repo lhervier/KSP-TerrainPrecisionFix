@@ -18,11 +18,8 @@ The culprit predicts a spread of one or two float steps, and a float's step doub
 distance to the centre of the body crosses a power of two. So besides the four stock worlds, the same
 test is run on the Moon and on Earth of [Real Solar System](https://github.com/KSP-RO/RealSolarSystem),
 which replaces the planets with the real ones, much larger. There, the install is the one above plus
-Real Solar System 20.1.3.0 and what it requires (Kopernicus, Modular Flight Integrator,
-KSPTextureLoader, the RSS textures), with one instrument or both, and Real Solar System as released:
-it ships a workaround of its own for the symptom, which stays on, as players have it. What that
-workaround does, and what it leaves, is in
-[Real Solar System's own workaround](#real-solar-systems-own-workaround).
+its release 20.1.3.0, and what it requires (Kopernicus, Modular Flight Integrator,
+KSPTextureLoader, the RSS textures), with one instrument or both.
 
 A craft is set down on bare ground, saved once, and that same save is loaded six times over. The
 craft never changes, the spot never changes, and nothing is touched between two loads.
@@ -63,7 +60,7 @@ On the Moon and Earth, the first rule of the protocol cannot be kept: the craft 
 10 cm off the ground and was moved onto it before its physics started, at three of the six loads on the
 Moon, by Real Solar System's workaround, always up, and at five on Earth, by stock's own pass, three
 times up and twice down, since the craft is in *prelaunch* there (see
-[Real Solar System's own workaround](#real-solar-systems-own-workaround)).
+[Real Solar System's own workaround](limits-and-solutions/rescaled-systems-real-solar-system.md#real-solar-systems-own-workaround)).
 *Settled* is read all the same, as a player gets it. The Moon series loads `reload-moon-rss.sfs`, the
 Earth series `reload-earth-rss-resave.sfs`, both in
 [Diag 1's `diag` folder](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/tree/main/diag).
@@ -95,7 +92,11 @@ The capsule on its tank:
 
 ![With this mod, the capsule on its tank, six loads of the same save, on the Moon](../imgs/Diag1/on-load/2parts/40-moon.png)
 
+*The craft never jumped, and owes nothing to Real Solar System's own workaround: it ran at every load and never had to move the craft, no `Moving Vessel` line — see [Real Solar System's own workaround](limits-and-solutions/rescaled-systems-real-solar-system.md#real-solar-systems-own-workaround).*
+
 ![With this mod, the capsule on its tank, six loads of the same save, on Earth](../imgs/Diag1/on-load/2parts/50-earth.png)
+
+*The craft never jumped, and owes nothing to Real Solar System's own workaround: the craft is in prelaunch, where stock runs the same pass at every load, and it never had to move the craft, no `Moving Vessel` line — see [Real Solar System's own workaround](limits-and-solutions/rescaled-systems-real-solar-system.md#real-solar-systems-own-workaround).*
 
 The ten series, read off those screenshots:
 
@@ -113,6 +114,11 @@ The ten series, read off those screenshots:
 | Earth, 2 parts | 740.0 mm | 0.370 mm |
 
 With this mod, no load of the Moon or Earth series has a `Moving Vessel` line.
+
+The logs of every series with this mod on the Moon and Earth are in
+[`diag/runs`](../diag/README.md#on-real-solar-system); the spots of the saves, and what this mod
+corrected there, in
+[Rescaled systems: Real Solar System](limits-and-solutions/rescaled-systems-real-solar-system.md).
 
 ## The ground, over six loads
 
@@ -135,9 +141,11 @@ On the Moon, the save is `reload-moon-rss-resave.sfs`; on Earth, `reload-earth-r
 | the Moon | 247.3 mm | 10.184 mm |
 | Earth | 693.1 mm | 0.994 mm |
 
-On the Moon, the craft tipped over at one of the six loads and was read where it came to rest; the
-five other loads spread the height KSP computes over 0.035 mm. That load falls between the lowest and
-the highest of the five others, so the spread of *Difference* is the same with it or without it.
+On the Moon, the craft tipped over at one of the six loads, which Real Solar System's own workaround
+does not always prevent (see [its limit](limits-and-solutions/rescaled-systems-real-solar-system.md#real-solar-systems-own-workaround)).
+That load is read where the craft came to rest, and accounts for the spread of the height KSP computes:
+the five others spread it over 0.035 mm. Its *Difference* falls between the lowest and the highest of
+the five others, so the spread of *Difference* is the same with it or without it.
 
 **With this mod.** The same installs, the same saves, on the same spots, loaded six times; this mod
 is the only difference.
@@ -154,7 +162,11 @@ As before, the bottom line of each screenshot is the loading in progress, and is
 
 ![With this mod, six loads of the same save, on the Moon](../imgs/Diag2/on-load/40-moon.png)
 
+*The craft never jumped, and owes nothing to Real Solar System's own workaround: it ran at every load and never had to move the craft, no `Moving Vessel` line — see [Real Solar System's own workaround](limits-and-solutions/rescaled-systems-real-solar-system.md#real-solar-systems-own-workaround).*
+
 ![With this mod, six loads of the same save, on Earth](../imgs/Diag2/on-load/50-earth.png)
+
+*The craft never jumped, and owes nothing to Real Solar System's own workaround: the craft is in prelaunch, where stock runs the same pass at every load, and it never had to move the craft, no `Moving Vessel` line — see [Real Solar System's own workaround](limits-and-solutions/rescaled-systems-real-solar-system.md#real-solar-systems-own-workaround).*
 
 Read off those screenshots:
 
@@ -166,63 +178,6 @@ Read off those screenshots:
 | Gilly | +37.426 to +40.391 mm | +37.511 to +37.520 mm | 3.0 mm | 0.009 mm |
 | the Moon | −146.273 to +101.023 mm | −114.123 to −113.920 mm | 247.3 mm | 0.203 mm |
 | Earth | +105.929 to +798.985 mm | +121.805 to +122.136 mm | 693.1 mm | 0.331 mm |
-
-## Real Solar System's own workaround
-
-Real Solar System already works around the symptom. It ships a component of its own,
-`VesselGroundPositionEnhancer`
-([its source](https://github.com/KSP-RO/RealSolarSystem/blob/master/Source/VesselGroundPositionEnhancer.cs)),
-added to *"mostly prevent vessels clipping into the ground and as a result flung into the air"*
-([pull request #257](https://github.com/KSP-RO/RealSolarSystem/pull/257)). Whenever a landed craft goes
-off rails, it runs the stock `Vessel.CheckGroundCollision`, which moves the craft onto the ground before
-its physics starts whenever it is more than 10 cm off, inside the ground or above it, in one block, and
-logs `ground contact! - error. Moving Vessel up X.XXXm` (or `down`). Under 10 cm, the stock method leaves the craft where it is, inside the ground
-or not. The component only acts on a *landed* craft; for a craft in *prelaunch*, as on Earth near the
-KSC, stock KSP runs that same method itself at every load: `Vessel.GoOffRails` spares a landed craft
-whose saved terrain levels match the current ones, but never a craft in *prelaunch*. The component
-turns itself off when an assembly named `WorldStabilizer` is loaded, which is how it is turned off below.
-
-**Reloading until something happens.** No instrument is needed for this one: the same saves, Real Solar
-System as released, reloaded from the pause menu again and again, watching whether the craft jumps or
-tips over. Real Solar System leaves one line in `KSP.log` each time the craft goes off rails, which
-counts the loads: `[RSS-VGPE] CheckGroundCollision()` for a landed craft, where its workaround runs,
-`[RSS-VGPE] Vessel going off rails in PRELAUNCH` for a craft in *prelaunch*, where stock's pass runs
-instead. A `Moving Vessel` line is added whenever either pass moved the craft. The two
-series with its workaround turned off add an empty assembly named `WorldStabilizer` in `GameData`.
-
-| install | save | loads | what the craft does |
-|---|---|---|---|
-| without this mod, workaround off | `reload-moon-rss.sfs` | 1 | **tips over** at the first load |
-| without this mod | `reload-moon-rss.sfs` | 14 | moved up by the workaround at 6 loads, by 0.115 to 0.261 m; **tips over** at 2 and **jumps** at 1, having come back less than the 10 cm the workaround acts on; nothing visible at 5 |
-| without this mod | `reload-moon-rss-resave.sfs` | 1 | **tips over** at the first load of a session, the workaround running, no `Moving Vessel` line |
-| without this mod, Diag 2 | `reload-moon-rss-resave.sfs` | 6 | moved up by the workaround at 2 loads, by 0.178 and 0.216 m; **jumps** at 1; **tips over** at 1, having come back inside the ground by less than the 10 cm the workaround acts on |
-| without this mod, Diag 1 | `reload-earth-rss-resave.sfs` | 6 | moved by stock's pass at 5 loads, up by 0.251 to 0.456 m at 3 and down by 0.143 to 0.283 m at 2; **jumps** at 1, having come back 83 mm inside the ground |
-| without this mod, Diag 2 | `reload-earth-rss-resave.sfs` | 6 | moved up by stock's pass at 4 loads, by 0.102 to 0.678 m; **jumps** at 1 |
-| with this mod, workaround off | `reload-moon-rss-resave.sfs` | 6 | stays put, over a spread of 0.364 mm; no `Moving Vessel` line |
-| with this mod | `reload-moon-rss-resave.sfs` | 24 | never moves; 24 lines of the workaround, no `Moving Vessel` line |
-| with this mod | `reload-earth-rss-landed.sfs` | 27 | never moves; the craft is *landed*, the workaround runs 27 times, no `Moving Vessel` line |
-| with this mod | `reload-earth-rss-resave.sfs` | 24 | never moves; the craft is in *prelaunch*, stock's pass runs 24 times, no `Moving Vessel` line |
-
-`reload-earth-rss-landed.sfs` is `reload-earth-rss-resave.sfs` with one line changed in the file: the
-situation of the craft, from `PRELAUNCH` to `LANDED`, the situation in which the workaround runs. The
-two Earth series without this mod are the six loads of Diag 1 and of Diag 2 above, and the Moon series
-of Diag 2 without this mod is its six loads above. The install, the saves and the logs of every
-series, and what this mod corrected there, are in
-[Rescaled systems: Real Solar System](limits-and-solutions/rescaled-systems-real-solar-system.md).
-
-**The workaround catches part of the defect, and hides it.** A craft that comes back more than 10 cm
-inside the ground is moved up in one block, and one that comes back more than 10 cm above it is moved
-down: nothing is launched, but a structure resting on several points is set on its lowest one. A craft that comes back less than 10 cm inside the ground is left
-there, and the physics engine pushes it out: it jumps. On the Moon, 10 cm is less than one float step,
-and on Earth a fifth of one, so the draws that fall under it are not rare: on the Moon, one jump and
-two tip-overs in fourteen loads, and two more tip-overs in seven loads of the save taken again; on
-Earth, one jump in each of the two series of six. The workaround ran at every one of those loads. With the workaround off, it tips over at the very first load.
-
-**With this mod, it never has anything to move.** The ground comes back within a millimetre, well inside
-the 10 cm below which the pass leaves a craft where it is. Over 75 loads in a row, 24 on the Moon and 51
-on Earth, the craft never moved, and the pass, which still runs at every load, found nothing to correct
-for this defect, without getting in the way. It may well have other uses, outside the scope of this fix.
-With the workaround off, this mod keeps the craft in place on its own.
 
 ## What the measurements say
 
@@ -243,7 +198,8 @@ place twice. The full readings, and what else they show, are in
 **With this mod, both stop moving.** On Kerbin, the craft's spread goes from more than twelve
 centimetres to a few hundredths of a millimetre at most; on the other stock worlds too, what is left
 stays in the hundredths of a millimetre, two tenths at worst, and on the Moon and Earth of Real Solar
-System within a few tenths — far below the float step at any of these distances. *On rails* is still
+System within a few tenths, at most 0.3 % of a float step there — far below the float step at any of
+these distances. *On rails* is still
 identical on every line, so KSP put the craft back at the same place every time, and the craft now
 comes to rest at the same place every time too. Under the craft, the ground reading does the same.
 Three things to read in its column, *Difference*:
@@ -273,15 +229,6 @@ Three things to read in its column, *Difference*:
   On that Gilly slope it is +37.5 mm, on that Kerbin slope +247.0 mm, on the Moon −114.0 mm, on Earth
   +122.0 mm, the same on every loading. Removing it would mean giving that mesh more triangles, which
   costs frames, for a gap nobody can feel.
-
-**On the larger worlds, the stock spread is enough to make a craft jump or tip over, and Real Solar
-System's own workaround does not catch it all.** It only acts beyond 10 cm, which leaves room for a
-craft buried by a few centimetres to be pushed out: on the Moon, one jump and two tip-overs in fourteen
-loads, and two more tip-overs in seven loads of the save taken again; on Earth, one jump in each of the
-two series of six.
-Turned off, the craft tipped over at the first load. With this mod, the craft did not move once in 75
-loads, and the workaround, which still runs at every load, never had anything to correct — see
-[Real Solar System's own workaround](#real-solar-systems-own-workaround).
 
 **This is also the last proof that the culprit is the right one.** The fix changes where a subtraction
 happens, and nothing else about the values placed; were the cause elsewhere, reordering that
