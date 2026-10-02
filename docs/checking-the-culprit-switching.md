@@ -5,8 +5,8 @@ Part of [Terrain Precision Fix](../README.md): the measurements that check [the 
 The two other ways a craft is put back onto the ground are measured in [Loading the same save](checking-the-culprit-loading.md) and [Coming back to a craft left parked](checking-the-culprit-approach.md).
 
 Two instruments take the readings:
-[Terrain Precision Fix Diag 1](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag) measures the craft, and
-[Terrain Precision Fix Diag 2](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2) measures the ground. Each has its own page, with
+[KSP Diag - Landed Vessel](https://github.com/lhervier/KSP-Diag-LandedVessel) measures the craft, and
+[KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainHeight) measures the ground. Each has its own page, with
 its method and its protocol.
 
 This fix is built on top of [KSP Community Fixes](https://github.com/KSPModdingLibs/KSPCommunityFixes),
@@ -18,14 +18,14 @@ Two craft landed 1.97 km apart on Kerbin. The save is loaded while flying the ro
 loaded too, but packed, held where the save put it. Then the game's *switch vessel* key flies the
 capsule, and physics takes it over. Six rounds, each starting by loading the same save. It is the
 switching protocol of both instruments —
-[Terrain Precision Fix Diag 1](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/docs/the-protocol-switching.md)
-and [Terrain Precision Fix Diag 2](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/blob/master/docs/the-protocol-switching.md) —
+[KSP Diag - Landed Vessel](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-switching.md)
+and [KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-protocol-switching.md) —
 with a save made without this mod.
 
 ## The craft, over six rounds
 
 **On stock**
-([the readings](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/docs/the-measurements-switching.md)).
+([the readings](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-measurements-switching.md)).
 As the save opens, *On rails* reads the same height on all six rounds, within two thousandths of a
 millimetre. *Moved*, once the switch has handed the capsule to physics:
 
@@ -44,7 +44,7 @@ The capsule comes to rest across a spread of 104.5 mm without this mod, and 0.02
 ## The ground, over six rounds
 
 **On stock**
-([the readings](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/blob/master/docs/the-measurements-switching.md)).
+([the readings](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-measurements-switching.md)).
 The height KSP computes reads 64,784.828 mm on all twelve lines. *Difference*, as the save opens:
 
 | round | 1 | 2 | 3 | 4 | 5 | 6 |

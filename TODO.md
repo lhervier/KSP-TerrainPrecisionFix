@@ -59,7 +59,7 @@ page, son point quitte la liste, et il s'efface d'ici.
 **4. RSS** (`ksp-rss-dev\`)
 - [x] La piste de RSS, sans `RSSRunwayFix` (diff dans `diag/rss-runway-fix/`), sans le mod et avec :
       publié dans [Real Solar System: the runway fix](docs/limits-and-solutions/rss/the-runway-fix.md).
-- [x] Le verrou d'origine : protocole « piste et herbe pendant un décalage » de Diag 2 sur la Terre,
+- [x] Le verrou d'origine : protocole « piste et herbe pendant un décalage » de Diag TerrainHeight sur la Terre,
       RSS sans `RSSRunwayFix`, sans le mod (−375,9 / +45,7 mm, piste et herbe ensemble) et avec
       (≤ 0,15 mm) ; publié.
 - [ ] Le dernier point de son *Still to test* : RSS tel que publié avec le mod.
@@ -136,7 +136,7 @@ ensuite, sans ordre imposé.
         la valeur de ce drapeau pour la sphère océan n'a pas été lue. Un amerrissage près d'une côte,
         log à l'appui.
 2. **Restructurer les 20 autres cas** de `docs/limits-and-solutions/` sur le plan du cas RSS
-   (introduction lue dans le code et sur GitHub, `## Checking the culprit` avec Diag 1 et Diag 2,
+   (introduction lue dans le code et sur GitHub, `## Checking the culprit` avec Diag LandedVessel et Diag TerrainHeight,
    `## What the results show`), après avoir décidé comment traiter un cas sans mesure.
 3. **Relire `KSPCF-issue.md`, `KSPCF-comment.md` et `KSPCF-relecture.md`**, pas revus depuis RSS.
    Au moins : la Terre (un saut par série de six sans le correctif, jusqu’à 4,0 pas de correction avec le nouveau garde-fou) est
@@ -144,9 +144,9 @@ ensuite, sans ordre imposé.
    Terre en a donné 4,0 et Vénus 3,6 ; l'issue ne cite pas RSS, alors que la relecture en fait la seule repro
    visible : décider s'il y entre.
 4. **Une release GitHub sur chaque dépôt vers lequel l'issue envoie le lecteur.** Aucun n'en a : ce
-   dépôt, Diag 1, Diag 2, Diag 3 et Diag 4 (le cas
+   dépôt, Diag LandedVessel, Diag TerrainHeight, Diag FloatingOrigin et Diag QuadSeams (le cas
    [The seam between subdivision levels](docs/limits-and-solutions/the-seam-between-subdivision-levels.md)
-   en dépend : liens, images et *Get it*). L'issue commence par faire installer Diag 1, et les trois README des
+   en dépend : liens, images et *Get it*). L'issue commence par faire installer Diag LandedVessel, et les trois README des
    Diags renvoient vers `releases/latest` dans *Get it*, qui donne une 404 aujourd'hui — sur la page
    même où arrive un mainteneur depuis la première consigne du repro. `build.bat` produit déjà le
    dossier `GameData` ; la release, c'est ce dossier zippé. PQS Bench et Stock Quad Cache ne sont cités
@@ -163,7 +163,7 @@ ensuite, sans ordre imposé.
    Vénus, 3,5 sur la Lune, environ un sur Mars et Mercure), aucun refus sur ces cinq corps. Reste à
    relever la plus grande correction (`origin moved by … mm`) en `logLevel = Debug` sur Kerbin, la
    Mun, Minmus et Gilly, et vérifier qu'elle reste loin de seize pas.
-7. **Deferred : refaire les campagnes Diag 1 et Diag 2 avec le correctif et Deferred** (six chargements,
+7. **Deferred : refaire les campagnes Diag LandedVessel et Diag TerrainHeight avec le correctif et Deferred** (six chargements,
    et le protocole d'approche). C'est le mod qui a fait tomber `PQSOnlyStartOnce` : le résultat, bon ou
    mauvais, entre dans le commentaire, qui l'annonce aujourd'hui comme « next ». Chapitre *Deferred* de
    Limits and solutions à mettre à jour ensuite.
@@ -178,7 +178,7 @@ ensuite, sans ordre imposé.
 10. **L'écart diffère-t-il d'un point du sol à l'autre ?** C'est ce qui casse une structure posée sur
    plusieurs pieds (un pied enterré, un autre en l'air) : sans lui, le sol monte ou descend d'un bloc et
    la structure suit. Je le crois, puisque chaque quad arrondit sa propre position, mais rien ne le
-   mesure. Diag 2 sur quelques points éloignés de plusieurs quads, six chargements, sans le correctif ;
+   mesure. Diag TerrainHeight sur quelques points éloignés de plusieurs quads, six chargements, sans le correctif ;
    faisable sur Kerbin dans `ksp-dev\`, sur les deux PC. Conditionne le paragraphe « Why a few
    centimetres matter » de l'issue.
 
@@ -198,14 +198,14 @@ Rien de ceci ne change ce que l'issue demande.
   l'inverse : **un déchargement sans décalage**. Une sauvegarde avec le rover à ~2,15 km du témoin
   (chargé au départ, sous 2,25 km) : en s'éloignant, le témoin se décharge à 2,5 km alors que le rover
   n'est qu'à ~350 m de l'origine, donc sous le seuil de 500 m ; puis retour sous 2,25 km (rechargement)
-  et approche sous 200 m (le témoin, chargé, verrouille l'origine). Diag 1 et Diag 2 visent le témoin
-  comme dans le protocole d'approche, Diag 3 doit afficher **Shifts** = 0 du début à la fin. Si le sol
+  et approche sous 200 m (le témoin, chargé, verrouille l'origine). Diag LandedVessel et Diag TerrainHeight visent le témoin
+  comme dans le protocole d'approche, Diag FloatingOrigin doit afficher **Shifts** = 0 du début à la fin. Si le sol
   du témoin ne bouge pas, le déchargement seul n'y est pour rien : c'est le décalage. En complément,
   avec le correctif en `logLevel = Debug`, le décalage du protocole d'approche doit apparaître comme une
   salve de lignes `origin moved by … mm`.
 - **L'ancre, avant de commenter #214** — pas avant l'issue du terrain. Le commentaire sur #214 cite ses
   relevés, donc ils doivent être reproductibles par quelqu'un d'autre : les refaire sur KSP + Harmony +
-  ModuleManager + KSPCF + Diag 1, puis avec le correctif. Ce qui doit en sortir : les valeurs de
+  ModuleManager + KSPCF + Diag LandedVessel, puis avec le correctif. Ce qui doit en sortir : les valeurs de
   `Moving Vessel` sans le correctif (les deux signes, une différente à chaque chargement) et avec (la même
   à chaque chargement) ; un `.sfs` montrant `PQSMin`/`PQSMax` à `0/0` sur une ancre fraîchement posée ;
   l'écart de 2,08 cm du collider relu dans `groundAnchor.mu`. ⚠️ **Sauvegarder après chaque
@@ -222,7 +222,7 @@ Rien de ceci ne change ce que l'issue demande.
   construction en EVA avec lequel ces bases ont été montées ; vérifier dans le mécanisme de réglages de
   KSPCF qu'un patch se désactive, avant d'écrire qu'un joueur peut le couper, charger, relever un
   vaisseau et le remettre ; un outil de migration du `.sfs` seulement si un coût réel apparaît.
-- **Poster sur #435** une fois sûr de ce que Diag 3 montre aux chargements, comme le commentaire
+- **Poster sur #435** une fois sûr de ce que Diag FloatingOrigin montre aux chargements, comme le commentaire
   l'annonce.
 - **Le coût du correctif sur Kerbin.** La campagne de performance a été volée au-dessus de la Mun ;
   Kerbin, où les quads sont quatre fois plus grands, vaut d'être mesuré.

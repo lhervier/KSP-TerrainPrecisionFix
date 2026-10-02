@@ -14,7 +14,7 @@ to 19.2 mm from the height it was handed back at, upwards as often as downwards,
 21.8 mm; with it, over 0.094 mm. The readings are in
 [The craft, over six round trips](../checking-the-culprit-approach.md#the-craft-over-six-round-trips).
 
-Terrain Precision Fix Diag 2, which reads the ground itself rather than the craft resting on it,
+KSP Diag - Terrain Height, which reads the ground itself rather than the craft resting on it,
 ran the same protocol: without this fix the ground comes back somewhere else on every round trip, over
 a spread of 21.8 mm, and has already moved by the time the craft is back in range; with it, over
 0.011 mm

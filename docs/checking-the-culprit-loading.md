@@ -5,8 +5,8 @@ Part of [Terrain Precision Fix](../README.md): the measurements that check the t
 The two other ways a craft is put back onto the ground are measured in [Coming back to a craft left parked](checking-the-culprit-approach.md) and [Switching to a craft far away](checking-the-culprit-switching.md).
 
 Two instruments take the readings:
-[Terrain Precision Fix Diag 1](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag) measures the craft, and
-[Terrain Precision Fix Diag 2](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2) measures the ground. Each has its own page, with
+[KSP Diag - Landed Vessel](https://github.com/lhervier/KSP-Diag-LandedVessel) measures the craft, and
+[KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainHeight) measures the ground. Each has its own page, with
 its method and its protocol.
 
 This fix is built on top of [KSP Community Fixes](https://github.com/KSPModdingLibs/KSPCommunityFixes),
@@ -28,8 +28,8 @@ The statics are checked on a runway. Two identical craft, one on a runway and on
 it. The save is loaded, a line is recorded on the craft on the ground, then the game's *switch vessel*
 key flies the craft on the runway and a second line is recorded there. Six loadings of the same save,
 two lines each. It is the runway protocol of both instruments —
-[Terrain Precision Fix Diag 1](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/docs/the-protocol-runway.md)
-and [Terrain Precision Fix Diag 2](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/blob/master/docs/the-protocol-runway.md)
+[KSP Diag - Landed Vessel](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-runway.md)
+and [KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-protocol-runway.md)
 — on the two saves they publish:
 
 - **on Kerbin**, the runway of the KSC and the grass beside it, 152 m apart;
@@ -42,17 +42,17 @@ and [Terrain Precision Fix Diag 2](https://github.com/lhervier/KSP-TerrainPrecis
 
 ## The craft, over six loads
 
-Terrain Precision Fix Diag 1 measures the distance from a landed capsule to the centre of the body,
+KSP Diag - Landed Vessel measures the distance from a landed capsule to the centre of the body,
 twice per load: as the save hands the capsule back (*On rails*), and once it has settled on the ground
 (*Settled*). How, and why those two readings, is in
-[This mod's demonstration](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag#this-mods-demonstration).
+[This mod's demonstration](https://github.com/lhervier/KSP-Diag-LandedVessel#this-mods-demonstration).
 
 **On stock.** Its campaigns, detailed in
-[The measurements: loading the same save](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/docs/the-measurements-loading.md).
+[The measurements: loading the same save](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-measurements-loading.md).
 On each of the four stock worlds, a lone capsule, then the same capsule sitting on a small flat fuel
 tank; on the Moon and Earth, the capsule on its tank. Each series is saved once and loaded six times,
 and uses its own spot, chosen by the rules of
-[its protocol](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/docs/the-protocol-loading.md):
+[its protocol](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-loading.md):
 no `Moving Vessel` line in `KSP.log`, and a craft that does not slide.
 
 *On rails* is the same on every load, to within three micrometres: KSP puts the craft back at the same
@@ -79,7 +79,7 @@ times up and twice down, since the craft is in *prelaunch* there (see
 [Real Solar System's own workaround](limits-and-solutions/rss/the-ground-workaround.md)).
 *Settled* is read all the same, as a player gets it. The Moon series loads `reload-moon-rss.sfs`, the
 Earth series `reload-earth-rss-resave.sfs`, both in
-[Diag 1's `diag` folder](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/tree/main/diag).
+[Diag LandedVessel's `diag` folder](https://github.com/lhervier/KSP-Diag-LandedVessel/tree/main/diag).
 
 **With this mod.** The same test, in the same installs, on the same six worlds, with the same craft,
 loaded six times per series. On the Moon, the series loads the same save taken again once with this mod,
@@ -137,7 +137,7 @@ corrected there, in
 [Rescaled systems: Real Solar System](limits-and-solutions/rescaled-systems-real-solar-system.md).
 
 **On a runway, and on the ground beside it, on stock**
-([the readings](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/docs/the-measurements-runway.md)).
+([the readings](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-measurements-runway.md)).
 *On rails* reads the same height on all six loadings, under every craft, within two thousandths of a
 millimetre. *Moved*, once physics has the craft:
 
@@ -160,11 +160,11 @@ the runway, after switching to it; the bottom line is the reading in progress, n
 
 On Kerbin, on the runway of the KSC:
 
-![Six loadings on Kerbin with this mod, read by Diag 1: the craft on the grass, then the craft on the runway](../imgs/Diag1/on-runway/six-loads.png)
+![Six loadings on Kerbin with this mod, read by Diag LandedVessel: the craft on the grass, then the craft on the runway](../imgs/Diag1/on-runway/six-loads.png)
 
 On the Mun, on a runway placed by Kerbal Konstructs:
 
-![Six loadings on the Mun with this mod, read by Diag 1: the craft on the ground, then the craft on the runway placed by Kerbal Konstructs](../imgs/Diag1/on-runway/six-loads-mun-kk.png)
+![Six loadings on the Mun with this mod, read by Diag LandedVessel: the craft on the ground, then the craft on the runway placed by Kerbal Konstructs](../imgs/Diag1/on-runway/six-loads-mun-kk.png)
 
 On Kerbin, the craft on the grass comes to rest across a spread of 88.3 mm without this mod, and
 0.051 mm with it; the craft on the runway, 130.3 mm without it, and 0.170 mm with it; the step between
@@ -174,14 +174,14 @@ loading to the sixth, the first loading apart.
 
 ## The ground, over six loads
 
-Terrain Precision Fix Diag 2 measures the ground, with no craft in the reading at all: the collision
+KSP Diag - Terrain Height measures the ground, with no craft in the reading at all: the collision
 surface a ray pointed straight down hits, against the height KSP computes for that same spot. The second
 never moves; the first is what your landing legs touch. *Difference* is the first minus the second. How
-both are read is in [This mod's demonstration](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/blob/master/docs/this-mods-demonstration.md).
+both are read is in [This mod's demonstration](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/this-mods-demonstration.md).
 
-**On stock.** Its campaigns, detailed in [The measurements: loading the same save](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/blob/master/docs/the-measurements-loading.md):
+**On stock.** Its campaigns, detailed in [The measurements: loading the same save](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-measurements-loading.md):
 the same installs, with that instrument; one save on each of the six worlds, loaded six times,
-following [its protocol](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/blob/master/docs/the-protocol-loading.md).
+following [its protocol](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-protocol-loading.md).
 On the Moon, the save is `reload-moon-rss-resave.sfs`; on Earth, `reload-earth-rss-resave.sfs`. Over those six loads:
 
 | world | spread of *Difference* | spread of the height KSP computes |
@@ -232,7 +232,7 @@ Read off those screenshots:
 | Earth | +105.929 to +798.985 mm | +121.805 to +122.136 mm | 693.1 mm | 0.331 mm |
 
 **On a runway, and on the ground beside it, on stock**
-([the readings](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/blob/master/docs/the-measurements-runway.md)).
+([the readings](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-measurements-runway.md)).
 The height KSP computes reads the same under each craft at every loading: 64,784.990 mm on the grass of
 Kerbin and 64,785.047 mm under its runway, within four hundredths of a millimetre on the Mun. On a
 runway, the ray meets the deck, above that height. *Ground under craft*:
@@ -255,17 +255,17 @@ the same digits as on stock.
 
 On Kerbin, on the runway of the KSC:
 
-![Six loadings on Kerbin with this mod, read by Diag 2: the ground under the craft on the grass, then under the craft on the runway](../imgs/Diag2/on-runway/six-loads.png)
+![Six loadings on Kerbin with this mod, read by Diag TerrainHeight: the ground under the craft on the grass, then under the craft on the runway](../imgs/Diag2/on-runway/six-loads.png)
 
 On the Mun, on a runway placed by Kerbal Konstructs:
 
-![Six loadings on the Mun with this mod, read by Diag 2: the ground under the craft on the ground, then under the craft on the runway placed by Kerbal Konstructs](../imgs/Diag2/on-runway/six-loads-mun-kk.png)
+![Six loadings on the Mun with this mod, read by Diag TerrainHeight: the ground under the craft on the ground, then under the craft on the runway placed by Kerbal Konstructs](../imgs/Diag2/on-runway/six-loads-mun-kk.png)
 
 On Kerbin, the grass spreads over 88.3 mm without this mod, and 0.038 mm with it; the deck of the runway,
 over 130.1 mm without it, and 0.216 mm with it; the step between the two, over 81.7 mm without it, and
 0.203 mm with it. On the Mun, the ground, over 24.2 mm without this mod, and 0.036 mm with it; the deck,
 over 33.5 mm without it; with it, over 0.009 mm from the second loading to the sixth — and the first
-loading stands 21.3 mm above them, as with Diag 1.
+loading stands 21.3 mm above them, as with Diag LandedVessel.
 
 ## What the measurements say
 
@@ -281,7 +281,7 @@ stays around one or two: 0.8 to 2.2 steps, series after series.
 yet the height KSP computes held still while the collision surface wandered: by up to eleven
 centimetres on Kerbin, nearly seventy on Earth in Real Solar System. The ground itself is not built in the same
 place twice. The full readings, and what else they show, are in
-[What the numbers say](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/blob/master/docs/the-measurements-loading.md#what-the-numbers-say).
+[What the numbers say](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-measurements-loading.md#what-the-numbers-say).
 
 **With this mod, both stop moving.** On Kerbin, the craft's spread goes from more than twelve
 centimetres to a few hundredths of a millimetre at most; on the other stock worlds too, what is left
@@ -313,7 +313,7 @@ Three things to read in its column, *Difference*:
   them. What remains of the spread is the craft, not the terrain. What remains of *Difference* itself is
   geometry: the collision mesh is made of flat triangles, and they miss what the ground does between two
   corners —
-  [Terrain Precision Fix Diag 2 explains why a correct reading is not zero](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/blob/master/docs/this-mods-demonstration.md#why-a-correct-reading-is-not-zero).
+  [KSP Diag - Terrain Height explains why a correct reading is not zero](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/this-mods-demonstration.md#why-a-correct-reading-is-not-zero).
   On that Gilly slope it is +37.5 mm, on that Kerbin slope +247.0 mm, on the Moon −114.0 mm, on Earth
   +122.0 mm, the same on every loading. Removing it would mean giving that mesh more triangles, which
   costs frames, for a gap nobody can feel.

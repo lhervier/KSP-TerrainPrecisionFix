@@ -51,9 +51,9 @@ instead. A `Moving Vessel` line is added whenever either pass moved the craft.
 | without this mod, workaround off | `reload-moon-rss.sfs` | 1 | **tips over** at the first load |
 | without this mod | `reload-moon-rss.sfs` | 14 | moved up by the workaround at 6 loads, by 0.115 to 0.261 m; **tips over** at 2 and **jumps** at 1, having come back less than the 10 cm the workaround acts on; nothing visible at 5 |
 | without this mod | `reload-moon-rss-resave.sfs` | 1 | **tips over** at the first load of a session, the workaround running, no `Moving Vessel` line |
-| without this mod, Diag 2 | `reload-moon-rss-resave.sfs` | 6 | moved up by the workaround at 2 loads, by 0.178 and 0.216 m; **jumps** at 1; **tips over** at 1, having come back inside the ground by less than the 10 cm the workaround acts on |
-| without this mod, Diag 1 | `reload-earth-rss-resave.sfs` | 6 | moved by stock's pass at 5 loads, up by 0.251 to 0.456 m at 3 and down by 0.143 to 0.283 m at 2; **jumps** at 1, having come back 83 mm inside the ground |
-| without this mod, Diag 2 | `reload-earth-rss-resave.sfs` | 6 | moved up by stock's pass at 4 loads, by 0.102 to 0.678 m; **jumps** at 1 |
+| without this mod, Diag TerrainHeight | `reload-moon-rss-resave.sfs` | 6 | moved up by the workaround at 2 loads, by 0.178 and 0.216 m; **jumps** at 1; **tips over** at 1, having come back inside the ground by less than the 10 cm the workaround acts on |
+| without this mod, Diag LandedVessel | `reload-earth-rss-resave.sfs` | 6 | moved by stock's pass at 5 loads, up by 0.251 to 0.456 m at 3 and down by 0.143 to 0.283 m at 2; **jumps** at 1, having come back 83 mm inside the ground |
+| without this mod, Diag TerrainHeight | `reload-earth-rss-resave.sfs` | 6 | moved up by stock's pass at 4 loads, by 0.102 to 0.678 m; **jumps** at 1 |
 | with this mod, workaround off | `reload-moon-rss-resave.sfs` | 6 | stays put, over a spread of 0.364 mm; no `Moving Vessel` line |
 | with this mod | `reload-moon-rss-resave.sfs` | 24 | never moves; 24 lines of the workaround, no `Moving Vessel` line |
 | with this mod | `reload-earth-rss-landed.sfs` | 27 | never moves; the craft is *landed*, the workaround runs 27 times, no `Moving Vessel` line |
@@ -85,24 +85,24 @@ The craft does not go off rails there, so the workaround does not run.
 millimetre, well inside the 10 cm below which the pass leaves a craft where it is. Over 75 loads in a
 row, 24 on the Moon and 51 on Earth, the craft never moved, and the pass, which still runs at every
 load, found nothing to correct, without getting in the way. With the workaround off, this mod keeps
-the craft in place on its own, over six loads read by Diag 1:
+the craft in place on its own, over six loads read by Diag LandedVessel:
 
 ![Six loads on the Moon, with this mod and without Real Solar System's workaround](../../../imgs/Diag1/on-load/2parts/rss/30-moon-fix.png)
 
-*With this mod, Real Solar System's workaround off, Diag 1: six loads of `reload-moon-rss-resave.sfs`,
+*With this mod, Real Solar System's workaround off, Diag LandedVessel: six loads of `reload-moon-rss-resave.sfs`,
 a spread of 0.364 mm, against 0.395 mm with it on.*
 
 The workaround may well have other uses, outside the scope of this fix.
 
 ## The saves
 
-The saves on the Moon and on Earth are in the `diag` folder of each of the three Diags (here, Diag 1's):
+The saves on the Moon and on Earth are in the `diag` folder of each of the three Diags (here, Diag LandedVessel's):
 
-- [`reload-moon-rss.sfs`](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/diag/reload-moon-rss.sfs)
-  and [`reload-moon-rss-resave.sfs`](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/diag/reload-moon-rss-resave.sfs) —
+- [`reload-moon-rss.sfs`](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/diag/reload-moon-rss.sfs)
+  and [`reload-moon-rss-resave.sfs`](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/diag/reload-moon-rss-resave.sfs) —
   the Moon, latitude 28.61°, longitude −80.62°, on flat ground;
-- [`reload-earth-rss-resave.sfs`](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/diag/reload-earth-rss-resave.sfs)
-  and [`reload-earth-rss-landed.sfs`](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/diag/reload-earth-rss-landed.sfs) —
+- [`reload-earth-rss-resave.sfs`](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/diag/reload-earth-rss-resave.sfs)
+  and [`reload-earth-rss-landed.sfs`](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/diag/reload-earth-rss-landed.sfs) —
   Earth, latitude 28.611°, longitude −80.619°, on the grass about 1.4 km west of the KSC, 74 m above
   sea level.
   `reload-earth-rss-landed.sfs` is `reload-earth-rss-resave.sfs` with one line changed in the file:

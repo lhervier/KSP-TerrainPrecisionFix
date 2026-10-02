@@ -17,8 +17,8 @@ the same step often enough that the holder is drawn exactly on its quad about a 
 Kerbin, and within a tenth of a millimetre of it three times out of four on the Mun. With this mod they
 never do: the ground is now placed in double precision and the holder is not.
 
-[Rock Precision Fix Diag](https://github.com/lhervier/KSP-RockPrecisionFixDiag) measures it, on two
-saves of its own, one on Kerbin and one on the Mun, each loaded twelve times per series ([the readings](https://github.com/lhervier/KSP-RockPrecisionFixDiag/blob/main/docs/what-the-readings-show.md#the-rocks)):
+[KSP Diag - Scatter](https://github.com/lhervier/KSP-Diag-Scatter) measures it, on two
+saves of its own, one on Kerbin and one on the Mun, each loaded twelve times per series ([the readings](https://github.com/lhervier/KSP-Diag-Scatter/blob/main/docs/what-the-readings-show.md#the-rocks)):
 the height of a measured point of an object above the ground under it comes back 94 mm apart over the
 twelve loads for half of those points on Kerbin in stock, and 130 mm with this mod; on the Mun, 31 mm
 either way. The same kind of error, of the same order and wider on Kerbin, but where stock draws part
@@ -31,7 +31,7 @@ hangs each holder from its own terrain quad, so that the objects are drawn in th
 in. Measured on those same series, with this mod installed next to it: every holder is drawn exactly on
 its quad, and no measured point of an object moves by more than 0.125 mm over the twelve loads on Kerbin,
 0.042 mm on the Mun
-([its measurements](https://github.com/lhervier/KSP-RockPrecisionFix/blob/main/docs/checking-the-culprit.md#rock-precision-fix-diag-with-this-mod)).
+([its measurements](https://github.com/lhervier/KSP-RockPrecisionFix/blob/main/docs/checking-the-culprit.md#ksp-diag---scatter-with-this-mod)).
 It works with or without this mod, and it is not a mod to install lightly: it moves stock objects, which
 other mods may look for where stock puts them, and its page weighs that trade
 ([Should you install it?](https://github.com/lhervier/KSP-RockPrecisionFix/blob/main/docs/should-you-install-it.md)).

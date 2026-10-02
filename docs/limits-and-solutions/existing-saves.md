@@ -10,7 +10,7 @@ the same way every time. What a player with a long-running save should expect:
   draw, and comes back on the corrected ground; once it has been loaded and saved again with the fix
   installed, both sides agree and the question never comes back;
 - **the corrected ground is among the stock draws, not a worse one** — the readings are in
-  [Terrain Precision Fix Diag 2, with this mod](../checking-the-culprit-loading.md#the-ground-over-six-loads);
+  [KSP Diag - Terrain Height, with this mod](../checking-the-culprit-loading.md#the-ground-over-six-loads);
 - **the failure becomes repairable**: raising a craft by a few centimetres in the `.sfs` is a permanent
   repair once the ground is stable, where in stock the next loading draws the ground under it again.
 

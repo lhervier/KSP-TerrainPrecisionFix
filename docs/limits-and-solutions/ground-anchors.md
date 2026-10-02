@@ -22,7 +22,7 @@ It also has causes of its own, which this fix does not touch and does not claim:
 A stable ground should make the anchor's behaviour repeatable, not fix it. That is the subject of
 KSP Community Fixes' issue [#214](https://github.com/KSPModdingLibs/KSPCommunityFixes/issues/214).
 
-*To test,* on KSP + Harmony + ModuleManager + KSP Community Fixes + Terrain Precision Fix Diag 1, with and
+*To test,* on KSP + Harmony + ModuleManager + KSP Community Fixes + KSP Diag - Landed Vessel, with and
 without this fix: an anchor placed in EVA construction, **saved after each load** — the re-save is what
 lets a lift accumulate. To read: the `Moving Vessel` lines of each load, the `PQSMin`/`PQSMax` of the
 anchor in the `.sfs`, and the gap between the anchor's collider and its origin in `groundAnchor.mu`.

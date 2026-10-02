@@ -24,8 +24,8 @@ steps of where they belong.
 [second culprit](../the-culprit-statics.md), as the KSC's do. Measured on stock,
 with the runway protocol of both instruments, on a runway placed by Kerbal Konstructs on the Mun: it
 comes back somewhere else at every load, and the step between it and the ground beside it changes
-([Diag 1](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/docs/the-measurements-runway.md),
-[Diag 2](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/blob/master/docs/the-measurements-runway.md)).
+([Diag LandedVessel](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-measurements-runway.md),
+[Diag TerrainHeight](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-measurements-runway.md)).
 This mod takes a group out of its sphere like the KSC ([The fix: the statics](../the-fix-statics.md)),
 and patches the group editor of Kerbal Konstructs, which reads the position of a group from where stock
 hangs it (below, [The patch of the group editor](#the-patch-of-the-group-editor)).
@@ -38,7 +38,7 @@ on stock as with this mod; it is not a rounding, and this mod does not touch it.
 
 *To test:* why that section of the runway is only there at the first loading; the group editor in flight, near a craft —
 moving a group, turning it, creating, copying and deleting one, then loading the save again; a launch
-from a launch site of Kerbal Konstructs; and, for the ground, Terrain Precision Fix Diag 2 reading the
+from a launch site of Kerbal Konstructs; and, for the ground, KSP Diag - Terrain Height reading the
 ground inside a flattened area and just outside it.
 
 ## The patch of the group editor

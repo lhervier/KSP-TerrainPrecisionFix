@@ -19,5 +19,5 @@ rounded again.
 What the source does not say is whether the quads are placed again often enough to follow a rotation
 that Principia computes rather than KSP.
 
-*To test:* the loading campaign of Terrain Precision Fix Diag 1 and Diag 2 on Kerbin, with Principia
+*To test:* the loading campaign of KSP Diag - Landed Vessel and Diag TerrainHeight on Kerbin, with Principia
 installed, with and without this fix.

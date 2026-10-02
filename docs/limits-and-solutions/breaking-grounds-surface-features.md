@@ -13,7 +13,7 @@ physical offset there or leaves it alone. The identifier of a surface feature de
 within the quad (`rocPOS`, taken from `quad.verts`), not on the pose of its holder, so moving the holder
 would not change it.
 
-*To test:* first read where their collider sits relative to what is drawn, the way Rock Precision Fix
-Diag does for scatter colliders; then measure the gap over several loads, with and without this fix. If
+*To test:* first read where their collider sits relative to what is drawn, the way KSP Diag - Scatter
+does for scatter colliders; then measure the gap over several loads, with and without this fix. If
 there is a gap, a fix of their own would hang those holders from their quads, the way Rock Precision Fix
 does for scatter.

@@ -46,10 +46,10 @@ one piece. It cannot bring that piece back to the deck the game draws, nor line 
 In KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1 and
 [Real Solar System](https://github.com/KSP-RO/RealSolarSystem) 20.1.3.0 with what it requires (Kopernicus
 248, Modular Flight Integrator, KSPTextureLoader, the RSS textures).
-[Terrain Precision Fix Diag 5](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag5) draws the
+[KSP Diag - Colliders](https://github.com/lhervier/KSP-Diag-Colliders) draws the
 colliders around the active craft where the physics places them, each in a colour of its own, and lists
-them by name. The craft is the rover of Terrain Precision Fix Diag 2,
-[`Diag2-Rover.craft`](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/blob/master/craft/Diag2-Rover.craft),
+them by name. The craft is the rover of KSP Diag - Terrain Height,
+[`Diag2-Rover.craft`](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/craft/Diag2-Rover.craft),
 launched from the SPH onto the runway at Cape Canaveral.
 
 To see the runway without the runway fix, Real Solar System is built from the sources of its release
@@ -75,7 +75,7 @@ The views from below the deck were taken with the flight camera moved under it.
 
 ![The rover sunk into the deck, runway_collider drawn](../../../imgs/rss-runway-fix/20-without-runway-fix-sunk.png)
 
-*Without the runway fix, without this mod, Diag 5: the rover just launched, seen from beside it with
+*Without the runway fix, without this mod, Diag Colliders: the rover just launched, seen from beside it with
 the camera below the deck, `runway_collider` (yellow) alone drawn.*
 
 ![The same, from three quarters](../../../imgs/rss-runway-fix/20b-without-runway-fix-sunk-three-quarters.png)
@@ -107,7 +107,7 @@ drawn.*
 
 ![The rover in the air, every collider drawn](../../../imgs/rss-runway-fix/21-without-runway-fix-in-the-air.png)
 
-*Without the runway fix, without this mod, Diag 5: the rover just launched, seen from beside it, every
+*Without the runway fix, without this mod, Diag Colliders: the rover just launched, seen from beside it, every
 collider drawn.*
 
 ![The same, from the front](../../../imgs/rss-runway-fix/21b-without-runway-fix-in-the-air-front.png)
@@ -134,14 +134,14 @@ in
 [`diag/runs/runway-earth-rss-without-runway-fix-fix.log`](../../../diag/runs/runway-earth-rss-without-runway-fix-fix.log):
 
 1. Launch the rover from the SPH, and save (F5); load that save five times (F9).
-2. Drive the rover to just before the fourth section, drawn in cyan by Diag 5; stop, and save.
+2. Drive the rover to just before the fourth section, drawn in cyan by Diag Colliders; stop, and save.
 3. Load that save ten times. At each load, look at the wheels from beside the rover, then drive onto
    the fourth section, watching the navball for a jolt.
 4. Recover the rover, launch it again from the SPH, and do 2 and 3 again; then a third time.
 
 ![The rover just launched, every collider drawn](../../../imgs/rss-runway-fix/29-with-this-mod-launched.png)
 
-*Without the runway fix, with this mod, Diag 5: step 1, the rover just launched, every collider drawn.*
+*Without the runway fix, with this mod, Diag Colliders: step 1, the rover just launched, every collider drawn.*
 
 ![The rover stopped just before the fourth section](../../../imgs/rss-runway-fix/30-with-this-mod-stopped-before-section4.png)
 
@@ -176,7 +176,7 @@ fix.
 **The hold on the floating origin: with this mod, a move of the origin moves nothing.** A rover alone by
 the runway, Real Solar System built without its runway fix, reads a spot on the deck and a spot on the
 grass beside it just before and just after each move of the origin, two moves a run, with the protocol
-of the runway and the grass while the world moves of Terrain Precision Fix Diag 2. Without this mod, the
+of the runway and the grass while the world moves of KSP Diag - Terrain Height. Without this mod, the
 deck moves by −375.89 and +45.69 mm, together with the grass: what the runway fix holds the origin
 against. With this mod, the deck moves by 0.055 mm at most, and the grass by 0.147 mm, within the spread
 of the lines taken at the same spot. The readings are in

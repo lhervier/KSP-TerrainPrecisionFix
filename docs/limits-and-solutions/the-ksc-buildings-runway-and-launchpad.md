@@ -32,11 +32,11 @@ craft, and the destructible buildings and upgradeable facilities of the KSC, wit
 registered.
 
 - **On Kerbin**, in the install of [Checking the culprit](../checking-the-culprit-loading.md):
-  [`runway-kerbin.sfs`](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/diag/runway-kerbin.sfs)
+  [`runway-kerbin.sfs`](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/diag/runway-kerbin.sfs)
   loaded six times, the craft on the grass 1.4 km from the origin of the KSC
   ([`diag/runs/statics-kerbin-fix.log`](../../diag/runs/statics-kerbin-fix.log)).
 - **On Earth**, in the install of [Real Solar System](rescaled-systems-real-solar-system.md):
-  [`reload-earth-rss-landed.sfs`](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag/blob/main/diag/reload-earth-rss-landed.sfs)
+  [`reload-earth-rss-landed.sfs`](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/diag/reload-earth-rss-landed.sfs)
   loaded twice, the craft 1.4 km from the KSC at Cape Canaveral
   ([`diag/runs/statics-earth-rss-fix.log`](../../diag/runs/statics-earth-rss-fix.log)).
 

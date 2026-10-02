@@ -24,10 +24,10 @@ body, none of the terrain built on these five bodies was refused:
 
 | series | placements of a quad corrected | largest correction |
 |---|---|---|
-| Earth, the six loads of Diag 1 | 1 564 | 1 998 mm, 4.0 float steps |
-| Earth, the six loads of Diag 2 | 1 576 | 1 230 mm, 2.5 float steps |
+| Earth, the six loads of Diag LandedVessel | 1 564 | 1 998 mm, 4.0 float steps |
+| Earth, the six loads of Diag TerrainHeight | 1 576 | 1 230 mm, 2.5 float steps |
 | Earth, the 51 reloads in a row | 12 128 | 1 992 mm, 4.0 float steps |
-| the Moon, the six loads of Diag 2 | 2 112 | 347 mm, 2.8 float steps |
+| the Moon, the six loads of Diag TerrainHeight | 2 112 | 347 mm, 2.8 float steps |
 | Venus, six loads | 2 112 | 1 792 mm, 3.6 float steps |
 | Mars, six loads | 3 604 | 308 mm, 1.2 float steps |
 | Mercury, six loads | 1 532 | 259 mm, 1.0 float step |

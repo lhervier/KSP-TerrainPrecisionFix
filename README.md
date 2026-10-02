@@ -141,11 +141,11 @@ and 0.15 mm with this mod — though it still moves with its terrain fix alone.
 
 The rounding is drawn anew because the frame the ground is built in — how the body is turned in
 Unity's world, and where its terrain sphere sits in it — does not stay put.
-[Terrain Precision Fix Diag 3](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag3) shows the
+[KSP Diag - Floating Origin](https://github.com/lhervier/KSP-Diag-FloatingOrigin) shows the
 values of KSP's floating origin, on a stock install. Its measurements show that a save does not give
 that frame back, and that it changes during a flight with nothing loaded.
 
-**→ Full chapter: [What the measurements show](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag3/blob/master/docs/what-the-measurements-show.md), on the page of Diag 3**
+**→ Full chapter: [What the measurements show](https://github.com/lhervier/KSP-Diag-FloatingOrigin/blob/master/docs/what-the-measurements-show.md), on the page of Diag FloatingOrigin**
 
 ## The fix this mod proposes
 

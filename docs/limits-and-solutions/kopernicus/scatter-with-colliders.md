@@ -13,9 +13,9 @@ hits is not the rock its pilot sees. Kopernicus replaces the stock scatter holde
 
 ## The gap between a rock and its collider
 
-Rock Precision Fix Diag measures the gap between a collider and the object it belongs to, over six loads
+KSP Diag - Scatter measures the gap between a collider and the object it belongs to, over six loads
 of a kerbal standing on a boulder in a desert of Kerbin, in each configuration
-([the readings](https://github.com/lhervier/KSP-RockPrecisionFix/blob/main/docs/checking-the-culprit.md#rock-precision-fix-diag-the-colliders)):
+([the readings](https://github.com/lhervier/KSP-RockPrecisionFix/blob/main/docs/checking-the-culprit.md#ksp-diag---scatter-the-colliders)):
 it runs from −68.7 to +104.2 mm on stock, and from −70.2 to +70.3 mm with this mod — halved, and drawn
 afresh at every load. On the stock loads, the six pictures taken with the readings show it: the kerbal's
 boots sink into the boulder at one load and stand clear of it at the next.

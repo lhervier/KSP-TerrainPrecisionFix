@@ -5,8 +5,8 @@ Part of [Terrain Precision Fix](../README.md): the measurements that check [the 
 The two other ways a craft is put back onto the ground are measured in [Loading the same save](checking-the-culprit-loading.md) and [Switching to a craft far away](checking-the-culprit-switching.md).
 
 Two instruments take the readings:
-[Terrain Precision Fix Diag 1](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag) measures the craft, and
-[Terrain Precision Fix Diag 2](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2) measures the ground. Each has its own page, with
+[KSP Diag - Landed Vessel](https://github.com/lhervier/KSP-Diag-LandedVessel) measures the craft, and
+[KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainHeight) measures the ground. Each has its own page, with
 its method and its protocol.
 
 This fix is built on top of [KSP Community Fixes](https://github.com/KSPModdingLibs/KSPCommunityFixes),
@@ -18,13 +18,13 @@ The other way a craft meets the ground, and the one you cannot avoid by never qu
 parked while a rover drives away from it, past 2500 m, where the game unloads it — then comes back
 within 200 m, where physics takes the parked craft over again. No save is loaded at any point and the
 scene is never changed: one single flight, six round trips in a row, on Kerbin. It is
-[the second protocol](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag#the-protocol) of Terrain
-Precision Fix Diag 1.
+[the second protocol](https://github.com/lhervier/KSP-Diag-LandedVessel#the-protocol) of KSP Diag -
+Landed Vessel.
 
 ## The craft, over six round trips
 
 **On stock**, in an install with KSP Community Fixes and that instrument
-([the readings](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag#the-measurements)). *Moved* —
+([the readings](https://github.com/lhervier/KSP-Diag-LandedVessel#the-measurements)). *Moved* —
 how far the craft ends up from the height it was handed back at — reads:
 
 | round trip | 1 | 2 | 3 | 4 | 5 | 6 |
@@ -48,10 +48,10 @@ Over the six round trips, the craft comes to rest across a spread of 21.8 mm wit
 
 ## The ground, over six round trips
 
-**On stock**, with Terrain Precision Fix Diag 2 and
-[its own approach protocol](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/blob/master/docs/the-protocol-approach.md)
+**On stock**, with KSP Diag - Terrain Height and
+[its own approach protocol](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-protocol-approach.md)
 — the same one, on the same spot
-([the readings](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2/blob/master/docs/the-measurements-approach.md)).
+([the readings](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-measurements-approach.md)).
 The height KSP computes reads the same digits on every line of the six round trips. *Difference*,
 across each round trip:
 

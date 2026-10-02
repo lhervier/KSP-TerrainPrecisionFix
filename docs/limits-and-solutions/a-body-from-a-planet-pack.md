@@ -11,7 +11,7 @@ safeguard leaves that terrain as stock builds it: no fix, silently, apart from o
 the log.
 
 *To test:* the campaign of
-[Terrain Precision Fix Diag 1](../checking-the-culprit-loading.md#the-craft-over-six-loads),
+[KSP Diag - Landed Vessel](../checking-the-culprit-loading.md#the-craft-over-six-loads),
 run on such a body. A
 single landing already answers half of it: with this mod installed, the log carries either
 `<body>: terrain placed in double precision` or the safeguard's warning.
@@ -36,7 +36,7 @@ exercised there.
 **Slate is the body to measure on.** Its radius, 540 km, falls between the same two powers of two as
 Kerbin's 600 km, so a float's step is the same 62.5 mm there: the defect has the amplitude of the
 campaigns already run, and the readings compare directly. It has no atmosphere, so the landing of the
-protocol is a landing and nothing more; the flat ground Diag 1 asks for is then a matter of picking the
+protocol is a landing and nothing more; the flat ground Diag LandedVessel asks for is then a matter of picking the
 spot. **Eeloo is the other case**, a stock body the pack reconfigures rather than creates. **Ovok is the
 edge case**: at `maxLevel` 1 the quads of its highest level are enormous, and whether this fix acts on
 them at all — it only moves the quads the game parents to `LocalSpacePQStorage` — is one line of log to

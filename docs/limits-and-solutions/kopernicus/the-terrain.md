@@ -10,11 +10,11 @@ with a warning per body in the log and nothing else.
 ## Where the quads are placed
 
 Whether the quads still hang in the frame this fix computes: the series of
-[Scatter with colliders](scatter-with-colliders.md) answers that for a stock body, because Rock
-Precision Fix Diag also logs, at every load, the distance from the centre of Kerbin to the transform of
+[Scatter with colliders](scatter-with-colliders.md) answers that for a stock body, because KSP
+Diag - Scatter also logs, at every load, the distance from the centre of Kerbin to the transform of
 each terrain quad around the kerbal — the very number this fix places. On Kopernicus 1.12.1.247 with the
 collider patch, over the six loads of each install, for the 173 quads present in all six of them
-([the logs](https://github.com/lhervier/KSP-RockPrecisionFixDiag/tree/main/diag/runs), files
+([the logs](https://github.com/lhervier/KSP-Diag-Scatter/tree/main/diag/runs), files
 `collider-stock-load*.log` and `collider-tpf-load*.log`):
 
 | install | spread of a quad's height over six loads, median | at worst |
@@ -29,7 +29,7 @@ body, Kopernicus leaves the quads hanging in the frame this fix computes.
 ## The collision surface itself
 
 The readings above are the position the quads are placed at — the cause — not the surface a craft rests
-on, which only [Terrain Precision Fix Diag 2](https://github.com/lhervier/KSP-TerrainPrecisionFixDiag2)
+on, which only [KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainHeight)
 reads. That surface was read on Earth in [Real Solar System](../rescaled-systems-real-solar-system.md),
 a stock body rebuilt by Kopernicus: Real Solar System's Earth is Kerbin, reconfigured by Kopernicus 248
 to another radius and another terrain. The protocol is the one of

@@ -2,7 +2,7 @@
 
 Part of [Terrain Precision Fix](../../README.md), one case of [Limits and solutions](../limits-and-solutions.md).
 
-**Status: TBD.** Every campaign so far is on flat ground, because Terrain Precision Fix Diag 1 asks for
+**Status: TBD.** Every campaign so far is on flat ground, because KSP Diag - Landed Vessel asks for
 it. On a slope, a separate stock bug, read in the code and not measured, puts a single-part craft down
 into the ground at every load. This fix does not touch it, and a reading taken there would show it.
 

@@ -51,7 +51,7 @@ uncorrected, on Earth as on Venus, Mars and Mercury.
 **Checked — this mod does not move them, but widens a stock defect on Kerbin.** Stock already draws
 scatter off the ground, differently at every load, from a holder placed through the same float
 `Transform` as the ground; this mod corrects the ground and not the holder, so the gap between the two
-gets wider. Over twelve loads with Rock Precision Fix Diag, the height of a measured point above the
+gets wider. Over twelve loads with KSP Diag - Scatter, the height of a measured point above the
 ground comes back 94 mm apart (median) on Kerbin in stock and 130 mm with this mod, 31 mm either way on
 the Mun. Visual only, since stock scatter has no collider. A separate mod,
 [Rock Precision Fix](https://github.com/lhervier/KSP-RockPrecisionFix), corrects it, at a cost: it
@@ -66,7 +66,7 @@ look for them where stock puts them. Parallax's own scatter follows the correcte
 Where a quad of the highest level meets a coarser one, the vertices they are supposed to share are
 already apart in stock, and the terrain has a crack along the seam that can be seen, though it takes
 looking for. This mod corrects the finer side only, so it adds its own correction to that gap. Over
-fifteen loads without it and twenty with it, measured with Terrain Precision Fix Diag 4, the median of
+fifteen loads without it and twenty with it, measured with KSP Diag - Quad Seams, the median of
 the largest gap of a load goes from about 1.2 m to about 1.9 m, and the crack shows more often. Visual
 only, since the coarser quads have no collider. A separate mod could close it, in stock and with this
 one; it is proposed, not written. On Kerbin, the crack shows in stock too; with this mod, still to
@@ -177,7 +177,7 @@ a physical offset there; that is to read first, then to measure.
 ### Breaking Ground's deployed experiments
 
 **TBD.** Deployed experiments are vessels, positioned in double, and should sit on the corrected ground
-like any craft; like the ground anchor, they skip the physics hold. Diag 1 on one, with and without this
+like any craft; like the ground anchor, they skip the physics hold. Diag LandedVessel on one, with and without this
 fix.
 
 **→ Full chapter: [Breaking Ground's deployed experiments](limits-and-solutions/breaking-grounds-deployed-experiments.md)**
