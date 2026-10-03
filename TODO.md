@@ -163,10 +163,9 @@ ensuite, sans ordre imposé.
    Vénus, 3,5 sur la Lune, environ un sur Mars et Mercure), aucun refus sur ces cinq corps. Reste à
    relever la plus grande correction (`origin moved by … mm`) en `logLevel = Debug` sur Kerbin, la
    Mun, Minmus et Gilly, et vérifier qu'elle reste loin de seize pas.
-7. **Deferred : refaire les campagnes Diag LandedVessel et Diag TerrainHeight avec le correctif et Deferred** (six chargements,
-   et le protocole d'approche). C'est le mod qui a fait tomber `PQSOnlyStartOnce` : le résultat, bon ou
-   mauvais, entre dans le commentaire, qui l'annonce aujourd'hui comme « next ». Chapitre *Deferred* de
-   Limits and solutions à mettre à jour ensuite.
+7. **Deferred : reporter le résultat dans le commentaire**, qui l'annonce aujourd'hui comme « next ».
+   Mesuré et publié (chapitre [Deferred](docs/limits-and-solutions/deferred.md) de Limits and
+   solutions) : rien ne change avec Deferred, au chargement comme au retour d'un aller-retour.
 8. **Parallax : les mêmes campagnes, et plus loin à cause de son scatter.** Montrer que le défaut du
    scatter de Parallax n'existe déjà pas sans le correctif, et qu'avec le correctif rien ne change
    (aujourd'hui, c'est lu dans ses sources, pas mesuré : *Rocks, grass and trees* de Limits and
@@ -224,5 +223,14 @@ Rien de ceci ne change ce que l'issue demande.
   vaisseau et le remettre ; un outil de migration du `.sfs` seulement si un coût réel apparaît.
 - **Poster sur #435** une fois sûr de ce que Diag FloatingOrigin montre aux chargements, comme le commentaire
   l'annonce.
+- **Rejouer toutes les campagnes en automatique, et reconstituer mesures et logs** (Lionel,
+  2026-10-03). Chaque protocole publié (chargement par corps, approche, changement de vaisseau, piste,
+  roulage, cas RSS, cas de *Limits and solutions*) reçoit un script KSP-MCPServer, **à côté** de sa
+  procédure à la main, qui reste ; on rejoue sans le correctif et avec, puis on remplace les séries, les
+  logs et les chiffres publiés par ceux des scripts. Modèles : `diag/automation/run-runway.py` et
+  `run-approach.py` (campagne Deferred). À trancher au départ : où vit un script (le protocole appartient
+  à l'instrument, donc plutôt dans le dépôt du Diag : y déplacer les deux d'ici) ; un Diag par session
+  comme aujourd'hui, ou les deux ensemble ; les outils du serveur qui manqueront (Set Position, Set
+  Orbit, Infinite Fuel : seulement ceux qu'un script utilise).
 - **Le coût du correctif sur Kerbin.** La campagne de performance a été volée au-dessus de la Mun ;
   Kerbin, où les quads sont quatre fois plus grands, vaut d'être mesuré.

@@ -7,7 +7,7 @@ installed. What their readings say is in
 [Switching to a craft far away](../docs/checking-the-culprit-switching.md),
 [Driving on while the world moves](../docs/checking-the-culprit-driving.md),
 [Rescaled systems: Real Solar System](../docs/limits-and-solutions/rescaled-systems-real-solar-system.md)
-and its pages.
+and its pages, and [Deferred](../docs/limits-and-solutions/deferred.md).
 
 The saves of the protocols are not here: each protocol belongs to an instrument, and its saves are in
 the `diag` folder of [KSP Diag - Landed Vessel](https://github.com/lhervier/KSP-Diag-LandedVessel/tree/main/diag)
@@ -48,6 +48,27 @@ KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, this mod and
 - [`runs/runway-mun-kk-colliders-fix.log`](runs/runway-mun-kk-colliders-fix.log) — four loadings of
   that save, every collider under each craft listed at each loading, with its height above the terrain
   KSP computes there.
+
+## With Deferred
+
+The install of [On the stock system](#on-the-stock-system) plus [Deferred](https://github.com/LGhassen/Deferred)
+1.3.5 and [Shabby](https://github.com/KSPModdingLibs/Shabby) 0.4.2, both instruments at once, this mod at
+`logLevel = Debug`, and [KSP-MCPServer](https://github.com/lhervier/KSP-MCPServer), which plays the
+protocols through the scripts of [`automation/`](automation/). Read in
+[Deferred](../docs/limits-and-solutions/deferred.md).
+
+- [`automation/run-runway.py`](automation/run-runway.py) — plays
+  [the runway protocol](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-runway.md).
+- [`automation/run-approach.py`](automation/run-approach.py) — plays
+  [the approach protocol](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-approach.md).
+- [`runs/runway-deferred-fix.log`](runs/runway-deferred-fix.log) — the six loadings of `runway-kerbin.sfs`;
+  the lines read are in [`runs/runway-deferred-fix-lines.json`](runs/runway-deferred-fix-lines.json).
+- [`runs/runway-without-deferred-fix.log`](runs/runway-without-deferred-fix.log) — the same script on the
+  same install, Deferred and Shabby taken out; the lines read are in
+  [`runs/runway-without-deferred-fix-lines.json`](runs/runway-without-deferred-fix-lines.json).
+- [`runs/approach-deferred-fix.log`](runs/approach-deferred-fix.log) — the six round trips of
+  `approach-kerbin.sfs`, in a single flight; the lines read are in
+  [`runs/approach-deferred-fix-lines.json`](runs/approach-deferred-fix-lines.json).
 
 ## With Kopernicus
 

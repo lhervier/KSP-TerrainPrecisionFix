@@ -1,3 +1,4 @@
 obj/
 GameData/TerrainPrecisionFixMod/*.dll
 CLAUDE.md
+__pycache__/

@@ -16,8 +16,7 @@ chapter of its own, and the cases are grouped by where they stand:
   is planned to test it.
 
 Every campaign run with this mod installed was run on KSP 1.12.5, with Harmony, ModuleManager and KSP
-Community Fixes 1.41.1 — and, for the series on scatter colliders, Kopernicus and the patch that gives
-them; the Real Solar System series adds what its chapter lists.
+Community Fixes 1.41.1, plus, of course, the mods the case is about: each chapter names them.
 
 ## Checked, no problem
 
@@ -115,6 +114,16 @@ deals with:
   it at its new place, and the space centre opens without error after a flight.
 
 **→ Full chapter: [Kopernicus](limits-and-solutions/kopernicus.md)**
+
+### Deferred
+
+**Checked, no problem.** Deferred replaces the way KSP draws everything, the terrain included, and it is
+the mod that broke KSP Community Fixes' own `PQSOnlyStartOnce`, so anything touching the terrain spheres
+gets checked against it. It draws the ground wherever it is placed and patches nothing this mod patches:
+with it installed, the craft and the ground come back as they do without it, after a load and after a
+trip out of range.
+
+**→ Full chapter: [Deferred](limits-and-solutions/deferred.md)**
 
 ## Checked, a problem this mod patches
 
@@ -230,13 +239,6 @@ to the terrain sphere and does not. To read first.
 **TBD.** Quads are built and dropped all the time in the map view, and nothing has been measured there.
 
 **→ Full chapter: [The map view](limits-and-solutions/the-map-view.md)**
-
-### Deferred
-
-**TBD.** Deferred has no reason to care where a quad is placed, but it is the mod that broke KSP
-Community Fixes' own `PQSOnlyStartOnce`, so anything touching the terrain spheres gets the same check.
-
-**→ Full chapter: [Deferred](limits-and-solutions/deferred.md)**
 
 ### Colliders below the highest subdivision level
 
