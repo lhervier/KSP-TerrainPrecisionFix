@@ -135,6 +135,23 @@ ensuite, sans ordre imposé.
         des quads de terrain, jamais l'océan, ce qui colle avec sa garde sur `surfaceRelativeQuads` ;
         la valeur de ce drapeau pour la sphère océan n'a pas été lue. Un amerrissage près d'une côte,
         log à l'appui.
+   4. **RSS sans son `VesselGroundPositionEnhancer`** (Lionel, 2026-10-04). Comme pour RSSRunwayFix :
+      montrer qu'avec le correctif le vaisseau se pose juste sans ce contournement, à tous les coups.
+      Déjà fait : six chargements sur la Lune avec le correctif et le composant coupé, 0,364 mm (contre
+      0,395 avec lui), dans
+      [Real Solar System: the ground workaround](docs/limits-and-solutions/rss/the-ground-workaround.md).
+      Reste :
+      - **la Terre en `LANDED`** (`reload-earth-rss-landed.sfs`) : en `PRELAUNCH`, le composant ne tourne
+        pas, c'est la passe stock qui tourne à sa place ;
+      - **les mêmes séries sans le correctif**, pour la comparaison (sur la Lune, le composant coupé, le
+        vaisseau s'est renversé dès le premier chargement : à rejouer par script, six chargements) ;
+      - **l'approche et le changement de vaisseau sur la Lune**, les deux autres moments où le composant
+        tourne (sauvegardes à fabriquer) ;
+      - **trancher la façon de le couper** : l'assembly vide nommée `WorldStabilizer` est l'interrupteur
+        prévu par RSS lui-même (c'est elle qui a servi), ou bien RSS recompilé sans le composant, diff
+        publié dans `diag/` comme pour RSSRunwayFix.
+
+      Le résultat va dans le statut et le chapitre *With this mod* de la page.
 2. **Restructurer les 20 autres cas** de `docs/limits-and-solutions/` sur le plan du cas RSS
    (introduction lue dans le code et sur GitHub, `## Checking the culprit` avec Diag LandedVessel et Diag TerrainHeight,
    `## What the results show`), après avoir décidé comment traiter un cas sans mesure.
