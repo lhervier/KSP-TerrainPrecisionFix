@@ -2,8 +2,6 @@
 
 Part of [Terrain Precision Fix](../README.md): the measurements that check [the culprit](the-culprit-ground.md) on a craft left parked and come back to, in the middle of a flight, on stock and with this mod.
 
-The two other ways a craft is put back onto the ground are measured in [Loading the same save](checking-the-culprit-loading.md) and [Switching to a craft far away](checking-the-culprit-switching.md).
-
 Two instruments take the readings:
 [KSP Diag - Landed Vessel](https://github.com/lhervier/KSP-Diag-LandedVessel) measures the craft, and
 [KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainHeight) measures the ground. Each has its own page, with
@@ -14,7 +12,7 @@ the base most players run, so every campaign on this page is run in an install t
 KSP Community Fixes 1.41.1, both instruments, and [KSP-MCPServer](https://github.com/lhervier/KSP-MCPServer),
 which drives the rover — and this mod, or not. *On stock*, below, means that install without this mod.
 
-The other way a craft meets the ground, and the one you cannot avoid by never quitting: a craft is left
+The way a craft meets the ground that you cannot avoid by never quitting: a craft is left
 parked while a rover drives away from it, past 2500 m, where the game unloads it — then comes back
 within 200 m, where physics takes the parked craft over again. No save is loaded at any point and the
 scene is never changed: one single flight, six round trips in a row, on Kerbin. It is

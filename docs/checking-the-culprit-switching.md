@@ -2,8 +2,6 @@
 
 Part of [Terrain Precision Fix](../README.md): the measurements that check [the culprit](the-culprit-ground.md) on a craft switched to from two kilometres away, on stock and with this mod.
 
-The two other ways a craft is put back onto the ground are measured in [Loading the same save](checking-the-culprit-loading.md) and [Coming back to a craft left parked](checking-the-culprit-approach.md).
-
 Two instruments take the readings:
 [KSP Diag - Landed Vessel](https://github.com/lhervier/KSP-Diag-LandedVessel) measures the craft, and
 [KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainHeight) measures the ground. Each has its own page, with

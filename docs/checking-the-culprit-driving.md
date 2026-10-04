@@ -2,8 +2,6 @@
 
 Part of [Terrain Precision Fix](../README.md): the measurements that check the two culprits, [the ground](the-culprit-ground.md) and [the statics](the-culprit-statics.md), under a rover that keeps driving, while the game moves its whole world, on stock and with this mod, on Kerbin and on Earth in Real Solar System: on the grass, and on the runway of the KSC with the grass beside it.
 
-The ground under a craft the game sets down is measured in [Loading the same save](checking-the-culprit-loading.md), [Coming back to a craft left parked](checking-the-culprit-approach.md) and [Switching to a craft far away](checking-the-culprit-switching.md).
-
 [KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainHeight) measures the
 ground, and [KSP Diag - Floating Origin](https://github.com/lhervier/KSP-Diag-FloatingOrigin),
 which only reads, says when the world moves. Each has its own page, with its method.
