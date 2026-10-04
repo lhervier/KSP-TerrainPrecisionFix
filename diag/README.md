@@ -94,6 +94,25 @@ well. Each log holds one line per quad this mod placed, with how far it was move
   [`runs/driving-earth-rss-diag2-fix-script.txt`](runs/driving-earth-rss-diag2-fix-script.txt), and
   every line it recorded in [`runs/driving-earth-rss-diag2-fix-lines.json`](runs/driving-earth-rss-diag2-fix-lines.json).
 
+## The protocol of the runway and the grass while the world moves
+
+The install of [The driving protocol](#the-driving-protocol): three moves of the origin of
+[the protocol of the runway and the grass while the world moves](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-protocol-driving-runway.md),
+played by its script, `run-driving-runway.py`, from `driving-runway-kerbin.sfs`. Read in
+[Driving on while the world moves](../docs/checking-the-culprit-driving.md#on-kerbin). Earth is under
+[On Real Solar System](#on-real-solar-system).
+
+- [`runs/driving-runway-diag2-fix.log`](runs/driving-runway-diag2-fix.log) — this mod as it is
+  installed; what the script printed in
+  [`runs/driving-runway-diag2-fix-script.txt`](runs/driving-runway-diag2-fix-script.txt), and every
+  line it recorded in [`runs/driving-runway-diag2-fix-lines.json`](runs/driving-runway-diag2-fix-lines.json).
+- [`runs/driving-runway-diag2-fix-terrain-only.log`](runs/driving-runway-diag2-fix-terrain-only.log) —
+  an earlier run, with an earlier version of the script, this mod with `fixStatics = false`; what the
+  script printed in
+  [`runs/driving-runway-diag2-fix-terrain-only-script.txt`](runs/driving-runway-diag2-fix-terrain-only-script.txt),
+  and every line it recorded in
+  [`runs/driving-runway-diag2-fix-terrain-only-lines.json`](runs/driving-runway-diag2-fix-terrain-only-lines.json).
+
 ## On the stock system
 
 KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, this mod and one instrument.

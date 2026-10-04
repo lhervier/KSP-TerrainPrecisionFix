@@ -82,19 +82,18 @@ the computed height, with this mod as on stock; see [What the measurements say](
 
 | | move | the grass, G | the deck, P | the step, P − G | spread at a spot, at most |
 |---|---|---|---|---|---|
-| on stock | 1 | **−8.843** | **−8.851** | −0.008 | 0.044 |
-| | 2 | **+48.506** | **+48.471** | −0.035 | 0.044 |
+| on stock | 1 | **−54.833** | **−54.847** | −0.014 | 0.073 |
+| | 2 | **+53.816** | **+53.776** | −0.041 | 0.062 |
 | with the terrain fix alone | 1 | +0.006 | **+41.587** | **+41.581** | 0.019 |
 | | 2 | +0.004 | **−22.311** | **−22.315** | 0.017 |
-| with both fixes | 1 | −0.001 | −0.042 | −0.040 | 0.031 |
-| | 2 | +0.005 | −0.002 | −0.006 | 0.007 |
-| | 3 | −0.003 | +0.001 | +0.004 | 0.028 |
+| with both fixes | 1 | +0.007 | −0.019 | −0.026 | 0.034 |
+| | 2 | −0.002 | −0.068 | −0.066 | 0.102 |
 
 **On stock**
 ([the readings](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-measurements-driving-runway.md)),
 one run, a third move left out where the grass is no longer flat.
 
-**With the terrain fix alone**, `fixStatics = false` in this mod's settings, the only line changed. The
+**With the terrain fix alone**, an earlier run, played with an earlier version of the script, `fixStatics = false` in this mod's settings, the only line changed. The
 session is logged in
 [`diag/runs/driving-runway-diag2-fix-terrain-only.log`](../diag/runs/driving-runway-diag2-fix-terrain-only.log),
 what the script printed in
@@ -107,13 +106,13 @@ P, after the move, it stopped 9.7 m away, and that line is left out: P has one l
 
 ![With the terrain fix alone, the first move, read by Diag TerrainHeight](../imgs/Diag2/on-driving-runway/terrain-only-move1-diag2.png)
 
-**With both fixes**, this mod as it is installed. The session is logged in
+**With both fixes**, this mod as it is installed, the same script as on stock. The session is logged in
 [`diag/runs/driving-runway-diag2-fix.log`](../diag/runs/driving-runway-diag2-fix.log), what the script
 printed in [`driving-runway-diag2-fix-script.txt`](../diag/runs/driving-runway-diag2-fix-script.txt) and
 every line it recorded in
-[`driving-runway-diag2-fix-lines.json`](../diag/runs/driving-runway-diag2-fix-lines.json). It was played
-with an earlier version of the script, which parked G 359 to 480 m from the origin before each move,
-all three on flat grass.
+[`driving-runway-diag2-fix-lines.json`](../diag/runs/driving-runway-diag2-fix-lines.json). G stood 476 to
+482 m from the origin before each move, and the rover stopped 12 to 17 cm from each spot. The third
+move is left out, as on stock: the lines taken at a spot there spread over up to 26.7 mm.
 
 ![With both fixes, the first move, read by Diag TerrainHeight](../imgs/Diag2/on-driving-runway/fix-move1-diag2.png)
 
@@ -159,10 +158,10 @@ no shift, or less. On that slope, the height KSP computes changes between the li
 
 | | move | the grass, G | the deck, P | the step, P − G | spread at a spot, at most |
 |---|---|---|---|---|---|
-| on stock | 1 | **−375.905** | **−375.888** | +0.017 | 0.120 |
-| | 2 | **+45.637** | **+45.685** | +0.049 | 0.051 |
-| with this mod | 1 | +0.147 | +0.055 | −0.092 | 0.264 |
-| | 2 | +0.101 | −0.014 | −0.115 | 0.203 |
+| on stock | 1 | **−231.864** | **−231.835** | +0.028 | 0.223 |
+| | 2 | **+34.188** | **+33.838** | −0.350 | 0.273 |
+| with this mod | 1 | +0.053 | +0.034 | −0.020 | 0.137 |
+| | 2 | +0.119 | −0.001 | −0.119 | 0.282 |
 
 **On stock**
 ([the readings](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-measurements-driving-runway.md#on-earth)),
@@ -174,8 +173,8 @@ what the script printed in
 [`driving-runway-earth-rss-diag2-fix-script.txt`](../diag/runs/driving-runway-earth-rss-diag2-fix-script.txt)
 and every line it recorded in
 [`driving-runway-earth-rss-diag2-fix-lines.json`](../diag/runs/driving-runway-earth-rss-diag2-fix-lines.json).
-The rover stopped 13 to 16 cm from each spot, and G stood 476 to 479 m from the origin before each move;
-Diag FloatingOrigin reads a move of 500.0 m, to within five centimetres, on the first line after each. The log shows
+The rover stopped 13 to 16 cm from each spot, and G stood 475 to 477 m from the origin before each move;
+Diag FloatingOrigin reads a move of 500.0 m, to within three centimetres, on the first line after each. The log shows
 this mod taking the KSC out of its sphere once, as the save loads, and holding it there through both
 moves.
 
@@ -202,18 +201,18 @@ metres do. The logs show this mod placing the quads again at every shift, a burs
 within the same second on Kerbin, 184 to 188 on Earth, which stock would have placed somewhere else.
 
 **The runway moves too, and correcting the terrain is not enough.** On stock, at every move of the
-floating origin, the deck of the KSC moves — by −8.85 and +48.47 mm on Kerbin — together with the grass
+floating origin, the deck of the KSC moves — by −54.85 and +53.78 mm on Kerbin — together with the grass
 beside it, to within four hundredths of a millimetre: both hang from the terrain sphere, whose position
 is written in float anew at each move, and both are carried by that same new rounding. With the terrain
 fix alone, the grass holds, within six thousandths of a millimetre, and the deck still moves on its own,
 by +41.59 and −22.31 mm: the terrain fix does not reach a static. With both fixes, neither moves, within
-four hundredths of a millimetre on the deck over three moves: the statics fix holds the runway through a
+seven hundredths of a millimetre on the deck over two moves: the statics fix holds the runway through a
 move of the origin as it does through a loading.
 
 **On Earth, where a float's step is eight times larger, the same.** On stock, the deck and the grass
-move together, by −375.89 and +45.69 mm: a rover rolling on the runway is no better off than one on the
-grass, which moves by up to 421 mm across a move. With this mod, the deck moves by 0.055 mm at most, and
-the grass by 0.147 mm, within the spread of the lines taken at the same spot, 0.264 mm: the origin
+move together, by −231.84 and +33.84 mm: a rover rolling on the runway is no better off than one on the
+grass, which moves by up to 243 mm across a move. With this mod, the deck moves by 0.034 mm at most, and
+the grass by 0.119 mm, within the spread of the lines taken at the same spot, 0.282 mm: the origin
 moves, and nothing under the rover does.
 
 **On flat grass, the ground with this mod reads 1.5 to 2.4 mm below the height KSP computes**, where on

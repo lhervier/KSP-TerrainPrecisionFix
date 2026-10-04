@@ -12,10 +12,10 @@ out of its terrain sphere in flight, while a craft is near it, and places it in 
 craft on the grass and a craft on the runway: the deck of the runway spreads over 116.5 mm without this
 mod and 0.177 mm with it, and the step between it and the grass beside it over 38.3 mm and 0.188 mm.
 **And while a rover drives by it**, with the protocol of the runway and the grass while the world
-moves, played by a script: at each move of the floating origin, on stock, the deck moves by −8.85 and
-+48.47 mm, together with the grass; with this mod, the deck moves by 0.04 mm at most over three moves. On Earth, in Real Solar System,
-the same protocol reads the deck moving by −375.89 and +45.69 mm on stock, together with the grass, and
-by 0.055 mm at most with this mod.
+moves, played by a script: at each move of the floating origin, on stock, the deck moves by −54.85 and
++53.78 mm, together with the grass; with this mod, the deck moves by 0.07 mm at most over two moves. On Earth, in Real Solar System,
+the same protocol reads the deck moving by −231.84 and +33.84 mm on stock, together with the grass, and
+by 0.034 mm at most with this mod.
 A craft rolling on the runway gets no bump from the runway at a move of the origin. On Earth, on stock, the runway
 is also not touched where it is drawn, and its sections step against one another, depending on the
 load; with this mod, neither: [Real Solar System: the runway fix](rss/the-runway-fix.md).

@@ -40,8 +40,8 @@ drawn and where the physics touches it: depending on the load, a craft rests in 
 or sunk into it, climbs a step between two sections, or rolls past a step it only sees. The runway fix
 removes the step a wheel climbs, not the rest. With this mod, and Real Solar System built without its
 runway fix, 37 entries in flight, 30 of them reloads just before a step, showed none of these. And a
-move of the floating origin, which moves the deck and the grass beside it together by up to 376 mm
-without this mod, moves them by less than 0.15 mm with it: the hold has nothing left to correct
+move of the floating origin, which moves the deck and the grass beside it together by up to 232 mm
+without this mod, moves them by less than 0.12 mm with it: the hold has nothing left to correct
 either.
 
 **→ Full chapter: [The runway fix](rss/the-runway-fix.md)**

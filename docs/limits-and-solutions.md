@@ -38,7 +38,7 @@ then; with it, the craft and the ground come back within a fraction of a millime
 reloads on the Moon and on Earth did not make it jump once. The other turns off the colliders of the
 runway's sections and holds the floating origin while a craft rolls on it: without it, the pieces of the
 runway are rounded each on their own, and a craft can rest above the deck or sunk into it, or meet a
-step, and the runway jumps by up to 376 mm with the grass at each move of the floating origin; with
+step, and the runway jumps by up to 232 mm with the grass at each move of the floating origin; with
 this mod, the runway is where it is drawn, in one piece, and a move of the origin moves nothing. The
 safeguard grows with the body too, so none of the terrain is left
 uncorrected, on Earth as on Venus, Mars and Mercury.

@@ -177,8 +177,8 @@ fix.
 the runway, Real Solar System built without its runway fix, reads a spot on the deck and a spot on the
 grass beside it just before and just after each move of the origin, two moves a run, with the protocol
 of the runway and the grass while the world moves of KSP Diag - Terrain Height. Without this mod, the
-deck moves by −375.89 and +45.69 mm, together with the grass: what the runway fix holds the origin
-against. With this mod, the deck moves by 0.055 mm at most, and the grass by 0.147 mm, within the spread
+deck moves by −231.84 and +33.84 mm, together with the grass: what the runway fix holds the origin
+against. With this mod, the deck moves by 0.034 mm at most, and the grass by 0.119 mm, within the spread
 of the lines taken at the same spot. The readings are in
 [Checking the culprit: driving on while the world moves](../../checking-the-culprit-driving.md#on-earth).
 For this defect, the hold has nothing left to correct either.

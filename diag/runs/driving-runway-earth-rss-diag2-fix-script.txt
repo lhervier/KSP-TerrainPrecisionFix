@@ -1,45 +1,45 @@
-15:29:26 move 1: G at 28.6134895, -80.6126543
-15:29:38   at G, 0.15 m from the spot
-15:30:08   G1-b1   Difference    -39.212 mm  Ground KSP computes  74039.223 mm  Origin distance  476.5 m  Shifts 2
-15:30:39   at P, 0.13 m from the spot
-15:31:09   P1-b1   Difference   3848.405 mm  Ground KSP computes  73932.192 mm  Origin distance  478.7 m  Shifts 0
-15:31:36   at G, 0.15 m from the spot
-15:32:07   G1-b2   Difference    -39.215 mm  Ground KSP computes  74039.223 mm  Origin distance  476.5 m  Shifts 0
-15:32:37   at P, 0.13 m from the spot
-15:33:07   P1-b2   Difference   3848.361 mm  Ground KSP computes  73932.185 mm  Origin distance  478.7 m  Shifts 0
-15:33:34   at G, 0.15 m from the spot
-15:34:05   G1-b3   Difference    -39.209 mm  Ground KSP computes  74039.223 mm  Origin distance  476.5 m  Shifts 0
-15:34:19 move 1: the origin moved by 500.022 m
-15:34:39   at the waypoint, 0.02 m from the spot
-15:34:53   at G, 0.14 m from the spot
-15:35:23   G1-a1   Difference    -38.933 mm  Ground KSP computes  74039.223 mm  Origin distance   23.9 m  Shifts 1
-15:35:54   at P, 0.13 m from the spot
-15:36:24   P1-a1   Difference   3848.476 mm  Ground KSP computes  73932.096 mm  Origin distance   53.5 m  Shifts 0
-15:36:52   at G, 0.15 m from the spot
-15:37:22   G1-a2   Difference    -39.197 mm  Ground KSP computes  74039.223 mm  Origin distance   23.8 m  Shifts 0
-15:37:52   at P, 0.14 m from the spot
-15:38:22   P1-a2   Difference   3848.400 mm  Ground KSP computes  73932.171 mm  Origin distance   53.5 m  Shifts 0
-15:38:50   at G, 0.15 m from the spot
-15:39:32 move 2: G at 28.6135016, -80.6075102
-15:39:44   at G, 0.15 m from the spot
-15:40:14   G2-b1   Difference    -28.207 mm  Ground KSP computes  74039.222 mm  Origin distance  478.7 m  Shifts 0
-15:40:45   at P, 0.13 m from the spot
-15:40:48   P2-b1   Difference   3716.303 mm  Ground KSP computes  74039.222 mm  Origin distance  480.9 m  Shifts 0
-15:41:15   at G, 0.15 m from the spot
-15:41:45   G2-b2   Difference    -28.203 mm  Ground KSP computes  74039.222 mm  Origin distance  478.7 m  Shifts 0
-15:42:18   at P, 0.13 m from the spot
-15:42:22   P2-b2   Difference   3716.300 mm  Ground KSP computes  74039.222 mm  Origin distance  480.9 m  Shifts 0
-15:42:49   at G, 0.16 m from the spot
-15:43:19   G2-b3   Difference    -28.182 mm  Ground KSP computes  74039.222 mm  Origin distance  478.7 m  Shifts 0
-15:43:33 move 2: the origin moved by 500.043 m
-15:43:52   at the waypoint, 0.02 m from the spot
-15:44:06   at G, 0.13 m from the spot
-15:44:37   G2-a1   Difference    -27.995 mm  Ground KSP computes  74039.222 mm  Origin distance   21.9 m  Shifts 1
-15:45:07   at P, 0.14 m from the spot
-15:45:19   P2-a1   Difference   3716.289 mm  Ground KSP computes  74039.222 mm  Origin distance   52.4 m  Shifts 0
-15:45:46   at G, 0.16 m from the spot
-15:46:17   G2-a2   Difference    -28.198 mm  Ground KSP computes  74039.222 mm  Origin distance   21.8 m  Shifts 0
-15:46:47   at P, 0.13 m from the spot
-15:46:50   P2-a2   Difference   3716.286 mm  Ground KSP computes  74039.222 mm  Origin distance   52.4 m  Shifts 0
-15:47:17   at G, 0.16 m from the spot
-15:47:20 done
+10:18:35 move 1: G at 28.6134299, -80.6126659
+10:18:47   at G, 0.14 m from the spot
+10:19:17   G1-b1   Difference    -42.792 mm  Ground KSP computes  74039.223 mm  Origin distance  475.4 m  Shifts 2
+10:19:47   at P, 0.13 m from the spot
+10:20:18   P1-b1   Difference   3870.496 mm  Ground KSP computes  73909.562 mm  Origin distance  478.2 m  Shifts 0
+10:20:45   at G, 0.16 m from the spot
+10:21:16   G1-b2   Difference    -42.744 mm  Ground KSP computes  74039.223 mm  Origin distance  475.4 m  Shifts 0
+10:21:46   at P, 0.13 m from the spot
+10:22:16   P1-b2   Difference   3870.493 mm  Ground KSP computes  73909.569 mm  Origin distance  478.2 m  Shifts 0
+10:22:44   at G, 0.15 m from the spot
+10:23:14   G1-b3   Difference    -42.749 mm  Ground KSP computes  74039.223 mm  Origin distance  475.4 m  Shifts 0
+10:23:28 move 1: the origin moved by 500.025 m
+10:23:49   at the waypoint, 0.02 m from the spot
+10:24:03   at G, 0.13 m from the spot
+10:24:33   G1-a1   Difference    -42.640 mm  Ground KSP computes  74039.223 mm  Origin distance   25.0 m  Shifts 1
+10:25:03   at P, 0.14 m from the spot
+10:25:34   P1-a1   Difference   3870.512 mm  Ground KSP computes  73909.553 mm  Origin distance   54.1 m  Shifts 0
+10:26:01   at G, 0.15 m from the spot
+10:26:31   G1-a2   Difference    -42.777 mm  Ground KSP computes  74039.223 mm  Origin distance   24.9 m  Shifts 0
+10:27:02   at P, 0.13 m from the spot
+10:27:32   P1-a2   Difference   3870.544 mm  Ground KSP computes  73909.553 mm  Origin distance   54.1 m  Shifts 0
+10:27:59   at G, 0.15 m from the spot
+10:28:44 move 2: G at 28.6134091, -80.6075312
+10:28:56   at G, 0.14 m from the spot
+10:29:27   G2-b1   Difference    -35.682 mm  Ground KSP computes  74039.222 mm  Origin distance  476.6 m  Shifts 0
+10:29:57   at P, 0.15 m from the spot
+10:30:04   P2-b1   Difference   3715.577 mm  Ground KSP computes  74039.222 mm  Origin distance  479.3 m  Shifts 0
+10:30:31   at G, 0.14 m from the spot
+10:31:01   G2-b2   Difference    -35.709 mm  Ground KSP computes  74039.222 mm  Origin distance  476.6 m  Shifts 0
+10:31:32   at P, 0.14 m from the spot
+10:31:35   P2-b2   Difference   3715.577 mm  Ground KSP computes  74039.222 mm  Origin distance  479.3 m  Shifts 0
+10:32:02   at G, 0.15 m from the spot
+10:32:33   G2-b3   Difference    -35.700 mm  Ground KSP computes  74039.222 mm  Origin distance  476.6 m  Shifts 0
+10:32:47 move 2: the origin moved by 500.022 m
+10:33:07   at the waypoint, 0.01 m from the spot
+10:33:21   at G, 0.13 m from the spot
+10:33:51   G2-a1   Difference    -35.437 mm  Ground KSP computes  74039.222 mm  Origin distance   23.7 m  Shifts 1
+10:34:22   at P, 0.13 m from the spot
+10:34:26   P2-a1   Difference   3715.576 mm  Ground KSP computes  74039.222 mm  Origin distance   53.8 m  Shifts 0
+10:34:53   at G, 0.14 m from the spot
+10:35:24   G2-a2   Difference    -35.719 mm  Ground KSP computes  74039.222 mm  Origin distance   23.7 m  Shifts 0
+10:35:54   at P, 0.14 m from the spot
+10:35:57   P2-a2   Difference   3715.577 mm  Ground KSP computes  74039.222 mm  Origin distance   53.8 m  Shifts 0
+10:36:24   at G, 0.15 m from the spot
+10:36:27 done

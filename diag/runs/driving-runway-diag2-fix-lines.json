@@ -1,272 +1,191 @@
 [
  {
   "tag": "G1-b1",
-  "diff": -2.5391539093106985,
-  "computed": 64784.993098000996,
-  "originDistance": 479.9826460355664,
-  "shifts": 1,
-  "lastShift": 2538123.045615072,
-  "lat": -0.041681535706148506,
-  "lon": -74.68042969949235
+  "difference": -2.5490806438028812,
+  "computed": 64784.986832295544,
+  "origin_distance": 481.7711575940782,
+  "shifts": 1
  },
  {
   "tag": "P1-b1",
-  "diff": 3497.542947647162,
-  "computed": 64784.969049622305,
-  "originDistance": 482.9292035281309,
-  "shifts": 0,
-  "lastShift": null,
-  "lat": -0.046623486879082236,
-  "lon": -74.68042945142564
+  "difference": 3484.1899730963632,
+  "computed": 64784.962980193086,
+  "origin_distance": 485.9720378345799,
+  "shifts": 0
  },
  {
   "tag": "G1-b2",
-  "diff": -2.5363138411194086,
-  "computed": 64784.993097768165,
-  "originDistance": 479.9821798463712,
-  "shifts": 0,
-  "lastShift": null,
-  "lat": -0.04168160823544129,
-  "lon": -74.6804297499184
+  "difference": -2.5420818710699677,
+  "computed": 64784.986888989806,
+  "origin_distance": 481.7217739568884,
+  "shifts": 0
  },
  {
   "tag": "P1-b2",
-  "diff": 3497.573761851527,
-  "computed": 64784.9690617295,
-  "originDistance": 482.9265330104121,
-  "shifts": 0,
-  "lastShift": null,
-  "lat": -0.04662095835761401,
-  "lon": -74.68042943160832
+  "difference": 3484.2242154991254,
+  "computed": 64784.96297937818,
+  "origin_distance": 485.97160663804857,
+  "shifts": 0
  },
  {
   "tag": "G1-b3",
-  "diff": -2.529618446715176,
-  "computed": 64784.993101726286,
-  "originDistance": 479.98352184702014,
-  "shifts": 0,
-  "lastShift": null,
-  "lat": -0.04168076162229628,
-  "lon": -74.68042961935134
+  "difference": -2.557812724262476,
+  "computed": 64784.9868577905,
+  "origin_distance": 481.7465387650373,
+  "shifts": 0
  },
  {
   "tag": "G1-a1",
-  "diff": -2.533263177610934,
-  "computed": 64784.99323443975,
-  "originDistance": 20.429131322593356,
-  "shifts": 1,
-  "lastShift": 500.0440783884308,
-  "lat": -0.04165463613832585,
-  "lon": -74.68043234991896
+  "difference": -2.545461291447282,
+  "computed": 64784.986989572644,
+  "origin_distance": 18.857990040444644,
+  "shifts": 1
  },
  {
   "tag": "P1-a1",
-  "diff": 3497.526785475202,
-  "computed": 64784.96905101929,
-  "originDistance": 52.32172273539651,
-  "shifts": 0,
-  "lastShift": null,
-  "lat": -0.04662318875494295,
-  "lon": -74.68042943305498
+  "difference": 3484.1984225204214,
+  "computed": 64784.96298077516,
+  "origin_distance": 50.6723656978747,
+  "shifts": 0
  },
  {
   "tag": "G1-a2",
-  "diff": -2.5390646187588573,
-  "computed": 64784.993101260625,
-  "originDistance": 20.351498642299816,
-  "shifts": 0,
-  "lastShift": null,
-  "lat": -0.041680849666192774,
-  "lon": -74.68042964138621
+  "difference": -2.5393699761480093,
+  "computed": 64784.986831014976,
+  "origin_distance": 18.67376974897127,
+  "shifts": 0
  },
  {
   "tag": "P1-a2",
-  "diff": 3497.5068863714114,
-  "computed": 64784.96904950589,
-  "originDistance": 52.3247450409891,
-  "shifts": 0,
-  "lastShift": null,
-  "lat": -0.046623495441411145,
-  "lon": -74.68042945572691
+  "difference": 3484.178221435286,
+  "computed": 64784.96297809761,
+  "origin_distance": 50.67779215105647,
+  "shifts": 0
  },
  {
   "tag": "G2-b1",
-  "diff": -2.567912684753537,
-  "computed": 64784.9428759655,
-  "originDistance": 439.6372798442931,
-  "shifts": 0,
-  "lastShift": null,
-  "lat": -0.04166173400656141,
-  "lon": -74.63654014831353
+  "difference": -1.5791963087394834,
+  "computed": 64784.93404656183,
+  "origin_distance": 476.03527975053845,
+  "shifts": 0
  },
  {
   "tag": "P2-b1",
-  "diff": 3052.8627736493945,
-  "computed": 64784.918838064186,
-  "originDistance": 442.24585442401525,
-  "shifts": 0,
-  "lastShift": null,
-  "lat": -0.046601149632333104,
-  "lon": -74.63653986227577
+  "difference": 3019.0451240632683,
+  "computed": 64784.910102025606,
+  "origin_distance": 478.4592484761533,
+  "shifts": 0
  },
  {
   "tag": "G2-b2",
-  "diff": -2.5675900978967547,
-  "computed": 64784.94286700152,
-  "originDistance": 439.63724370461176,
-  "shifts": 0,
-  "lastShift": null,
-  "lat": -0.04166354781549539,
-  "lon": -74.63654013630803
+  "difference": -1.5814787475392222,
+  "computed": 64784.93400581647,
+  "origin_distance": 476.06871716989923,
+  "shifts": 0
  },
  {
   "tag": "P2-b2",
-  "diff": 3052.8600233374164,
-  "computed": 64784.91883887909,
-  "originDistance": 442.2456710340306,
-  "shifts": 0,
-  "lastShift": null,
-  "lat": -0.04660096168707287,
-  "lon": -74.63653986227577
+  "difference": 3019.147232407704,
+  "computed": 64784.910146845505,
+  "origin_distance": 478.40922385539716,
+  "shifts": 0
  },
  {
   "tag": "G2-b3",
-  "diff": -2.561134286224842,
-  "computed": 64784.94285920169,
-  "originDistance": 439.6364790589402,
-  "shifts": 0,
-  "lastShift": null,
-  "lat": -0.04166514672473735,
-  "lon": -74.63654019573752
+  "difference": -1.579535542987287,
+  "computed": 64784.93402386084,
+  "origin_distance": 476.0526263814607,
+  "shifts": 0
  },
  {
   "tag": "G2-a1",
-  "diff": -2.564340364187956,
-  "computed": 64784.94300332386,
-  "originDistance": 60.55090696295222,
-  "shifts": 1,
-  "lastShift": 500.03265240143713,
-  "lat": -0.04163604962238405,
-  "lon": -74.6365418070583
+  "difference": -1.5835689846426249,
+  "computed": 64784.9341215333,
+  "origin_distance": 24.410811934640037,
+  "shifts": 1
  },
  {
   "tag": "P2-a1",
-  "diff": 3052.8600302059203,
-  "computed": 64784.91883748211,
-  "originDistance": 77.31501605862987,
-  "shifts": 0,
-  "lastShift": null,
-  "lat": -0.04660125862862478,
-  "lon": -74.63653981974933
+  "difference": 3019.057147204876,
+  "computed": 64784.91010761354,
+  "origin_distance": 53.53441078922835,
+  "shifts": 0
  },
  {
   "tag": "G2-a2",
-  "diff": -2.558219712227583,
-  "computed": 64784.94287712965,
-  "originDistance": 60.51651254965114,
-  "shifts": 0,
-  "lastShift": null,
-  "lat": -0.04166148768945367,
-  "lon": -74.63654008072368
+  "difference": -1.580846612341702,
+  "computed": 64784.93399755098,
+  "origin_distance": 24.296385470325742,
+  "shifts": 0
  },
  {
   "tag": "P2-a2",
-  "diff": 3052.859758841805,
-  "computed": 64784.91883724928,
-  "originDistance": 77.3157872504225,
-  "shifts": 0,
-  "lastShift": null,
-  "lat": -0.046601313992363454,
-  "lon": -74.63653987221849
+  "difference": 3018.99928227067,
+  "computed": 64784.91008316632,
+  "origin_distance": 53.56979599697813,
+  "shifts": 0
  },
  {
   "tag": "G3-b1",
-  "diff": -1.9072031136602163,
-  "computed": 64784.92772881873,
-  "originDistance": 359.162534178583,
-  "shifts": 0,
-  "lastShift": null,
-  "lat": -0.04215093726677515,
-  "lon": -74.59647847305804
+  "difference": -105.67067505326122,
+  "computed": 63996.87119550072,
+  "origin_distance": 479.6318662315827,
+  "shifts": 0
  },
  {
   "tag": "P3-b1",
-  "diff": 2909.0271671302617,
-  "computed": 64784.90374260582,
-  "originDistance": 363.10267316518326,
-  "shifts": 0,
-  "lastShift": null,
-  "lat": -0.04708957206118777,
-  "lon": -74.59647830530909
+  "difference": 3383.434314513579,
+  "computed": 64324.639919330366,
+  "origin_distance": 481.7369782012353,
+  "shifts": 0
  },
  {
   "tag": "G3-b2",
-  "diff": -1.899974886327982,
-  "computed": 64784.92772427853,
-  "originDistance": 359.1625781920239,
-  "shifts": 0,
-  "lastShift": null,
-  "lat": -0.04215187731758987,
-  "lon": -74.59647847575951
+  "difference": -104.82772847171873,
+  "computed": 63995.91442255769,
+  "origin_distance": 479.6351765453145,
+  "shifts": 0
  },
  {
   "tag": "P3-b2",
-  "diff": 2909.0227365959436,
-  "computed": 64784.903742023744,
-  "originDistance": 363.1031953059257,
-  "shifts": 0,
-  "lastShift": null,
-  "lat": -0.04708969517240273,
-  "lon": -74.59647827559469
+  "difference": 3383.474951260723,
+  "computed": 64324.603102286346,
+  "origin_distance": 481.7434645269308,
+  "shifts": 0
  },
  {
   "tag": "G3-b3",
-  "diff": -1.9283926812931895,
-  "computed": 64784.9277270725,
-  "originDistance": 359.1629894931158,
-  "shifts": 0,
-  "lastShift": null,
-  "lat": -0.04215130907358775,
-  "lon": -74.59647843118768
+  "difference": -104.9775059800595,
+  "computed": 63996.051197405905,
+  "origin_distance": 479.6359095276069,
+  "shifts": 0
  },
  {
   "tag": "G3-a1",
-  "diff": -1.920121256262064,
-  "computed": 64784.92785792332,
-  "originDistance": 140.93874130841138,
-  "shifts": 1,
-  "lastShift": 500.05529452053145,
-  "lat": -0.042124609847011524,
-  "lon": -74.59647963541113
+  "difference": -131.88043050467968,
+  "computed": 64025.9163667215,
+  "origin_distance": 21.041678689927735,
+  "shifts": 1
  },
  {
   "tag": "P3-a1",
-  "diff": 2909.020890132524,
-  "computed": 64784.9037401611,
-  "originDistance": 148.91310712381252,
-  "shifts": 0,
-  "lastShift": null,
-  "lat": -0.047090084312099156,
-  "lon": -74.59647820858729
+  "difference": 3383.462760131806,
+  "computed": 64324.60325129796,
+  "origin_distance": 51.69582315574284,
+  "shifts": 0
  },
  {
   "tag": "G3-a2",
-  "diff": -1.9092346774414182,
-  "computed": 64784.92772835307,
-  "originDistance": 140.91877742632434,
-  "shifts": 0,
-  "lastShift": null,
-  "lat": -0.04215104394341991,
-  "lon": -74.59647843115019
+  "difference": -105.166268767789,
+  "computed": 63996.256198966876,
+  "origin_distance": 20.883764792424998,
+  "shifts": 0
  },
  {
   "tag": "P3-a2",
-  "diff": 2909.030487178825,
-  "computed": 64784.90374144167,
-  "originDistance": 148.91280737355876,
-  "shifts": 0,
-  "lastShift": null,
-  "lat": -0.0470898267977957,
-  "lon": -74.59647826816608
+  "difference": 3383.4713217802346,
+  "computed": 64324.6030715527,
+  "origin_distance": 51.7000497636506,
+  "shifts": 0
  }
 ]

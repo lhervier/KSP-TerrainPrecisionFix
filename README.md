@@ -132,8 +132,8 @@ mod; the switch itself moves nothing.
 
 **Driving on while the world moves**, every 500 m a rover drives: the ground under it jumps by about
 25 mm on Kerbin and 16 cm on Earth, where the rover jumps with it; with this mod, no jump is left. The
-runway of the KSC moves with the ground by up to 48.5 mm on Kerbin and 376 mm on Earth, and within 0.05
-and 0.15 mm with this mod — though it still moves with its terrain fix alone.
+runway of the KSC moves with the ground by up to 54.8 mm on Kerbin and 232 mm on Earth, and within 0.07
+and 0.12 mm with this mod — though it still moves with its terrain fix alone.
 
 **→ Full chapter: [Checking the culprit: driving on while the world moves](docs/checking-the-culprit-driving.md)**
 
