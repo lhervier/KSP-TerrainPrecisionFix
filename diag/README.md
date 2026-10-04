@@ -113,6 +113,22 @@ played by its script, `run-driving-runway.py`, from `driving-runway-kerbin.sfs`.
   and every line it recorded in
   [`runs/driving-runway-diag2-fix-terrain-only-lines.json`](runs/driving-runway-diag2-fix-terrain-only-lines.json).
 
+## The seam between subdivision levels
+
+[KSP Diag - Quad Seams](https://github.com/lhervier/KSP-Diag-QuadSeams) and KSP-MCPServer added to
+this mod at `logLevel = Debug`, the craft `Diag3-Rocket` on the launchpad reverted to launch by the
+script of its protocol, `run-revert.py`, until the finer quad is above at the largest gap, on land.
+Read in [The seam with this mod](../docs/limits-and-solutions/the-seam-between-subdivision-levels.md#the-seam-with-this-mod).
+
+- [`runs/revert-earth-rss-fix-diag4.log`](runs/revert-earth-rss-fix-diag4.log) — on Earth, Real Solar
+  System 20.1.3.0 as released and what it requires added, at Cape Canaveral, nine loads; what the
+  script printed in [`runs/revert-earth-rss-fix-diag4-script.txt`](runs/revert-earth-rss-fix-diag4-script.txt),
+  and every reading in [`runs/revert-earth-rss-fix-diag4-readings.json`](runs/revert-earth-rss-fix-diag4-readings.json).
+- [`runs/revert-kerbin-fix-diag4.log`](runs/revert-kerbin-fix-diag4.log) — on Kerbin, at the Space
+  Center, ten loads; what the script printed in
+  [`runs/revert-kerbin-fix-diag4-script.txt`](runs/revert-kerbin-fix-diag4-script.txt), and every
+  reading in [`runs/revert-kerbin-fix-diag4-readings.json`](runs/revert-kerbin-fix-diag4-readings.json).
+
 ## On the stock system
 
 KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, this mod and one instrument.
@@ -215,16 +231,6 @@ a fixed metre, and hold the line where it refused part of Earth's terrain.
   Canaveral, then flown towards orbit, the flight started over three times. The launch was saved
   afterwards as [`rss-launch-to-earth-orbit.sfs`](rss-launch-to-earth-orbit.sfs), which needs MechJeb2
   to load. Used in [The seam between subdivision levels](../docs/limits-and-solutions/the-seam-between-subdivision-levels.md).
-- [`runs/revert-earth-rss-fix-diag4-1-lines.txt`](runs/revert-earth-rss-fix-diag4-1-lines.txt) —
-  [KSP Diag - Quad Seams](https://github.com/lhervier/KSP-Diag-QuadSeams), MechJeb2
-  added: the first session of [The seam with this mod](../docs/limits-and-solutions/the-seam-between-subdivision-levels.md#the-seam-with-this-mod),
-  a craft on the launchpad at Cape Canaveral reverted to launch fifteen times. Its `KSP.log` was
-  overwritten when the game was started again: this file holds every line Diag QuadSeams wrote in it, copied
-  before it was lost; the lines of this mod are lost with it.
-- [`runs/revert-earth-rss-fix-diag4-2.log`](runs/revert-earth-rss-fix-diag4-2.log) — the same install:
-  the second session, whole. It begins with the craft taken back from the Space Center, which KSP
-  moved 8.3 m down as it loaded (`Moving Vessel down -8.346m`), and which was destroyed; then five
-  reverts to launch, loads 16 to 20 of the chapter.
 - [`runs/runway-earth-rss-without-runway-fix.log`](runs/runway-earth-rss-without-runway-fix.log) —
   without this mod,
   [KSP Diag - Colliders](https://github.com/lhervier/KSP-Diag-Colliders) added, and
