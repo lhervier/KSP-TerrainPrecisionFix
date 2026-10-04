@@ -1,34 +1,34 @@
 Statistic;Mean;Median;Worst 25%;Worst 1%
-FPS;93.6;92.7;84.5;28.1
-Frame time;10.69;10.79;11.84;35.56
-Profiler overhead;0.45;0.37;0.52;1.68
-Frame init;0.04;0.02;0.03;0.07
-Target framerate;0.03;0.01;0.02;0.04
-EarlyUpdate;0.09;0.09;0.11;0.19
-FixedUpdate;1.45;2.33;2.72;5.08
-FixedUpdate usercode;0.65;0.64;0.74;1.73
-Physics;2.07;2.02;2.12;3.73
+FPS;95.9;95.4;86.1;28.4
+Frame time;10.42;10.48;11.62;35.16
+Profiler overhead;0.46;0.40;0.53;1.43
+Frame init;0.04;0.02;0.03;0.05
+Target framerate;0.03;0.01;0.02;0.03
+EarlyUpdate;0.09;0.09;0.11;0.18
+FixedUpdate;1.36;2.21;2.62;4.31
+FixedUpdate usercode;0.62;0.61;0.72;1.56
+Physics;1.99;1.95;2.06;3.34
 Coroutines;0.02;0.02;0.02;0.03
-PreUpdate;0.06;0.05;0.08;0.14
-OnMouse events;0.05;0.04;0.07;0.11
-Update;2.95;1.94;2.19;25.13
-Update;1.25;1.20;1.33;1.67
-Coroutines;1.99;1.30;1.41;24.42
-LateUpdate;0.67;0.66;0.70;0.88
-LateUpdate;0.56;0.56;0.58;0.73
-PostLateUpdate;4.97;4.57;5.94;6.71
-UGUI;0.16;0.13;0.15;0.46
+PreUpdate;0.07;0.06;0.10;0.16
+OnMouse events;0.06;0.05;0.08;0.13
+Update;2.89;1.91;2.15;24.99
+Update;1.24;1.19;1.31;1.63
+Coroutines;1.93;1.28;1.35;24.39
+LateUpdate;0.64;0.62;0.66;0.84
+LateUpdate;0.53;0.51;0.54;0.69
+PostLateUpdate;4.88;4.48;5.85;6.57
+UGUI;0.15;0.13;0.14;0.41
 Audio;0.09;0.09;0.10;0.14
-Renderers;0.85;0.20;1.63;1.85
+Renderers;0.84;0.19;1.64;1.83
 Mesh skinning;0.01;0.00;0.00;0.04
-UGUI geometry;0.07;0.07;0.07;0.15
-Render;3.73;3.73;3.96;4.48
-VSync;0.06;0.06;0.07;0.12
-Cameras render;3.60;3.60;3.82;4.32
+UGUI geometry;0.07;0.06;0.07;0.17
+Render;3.66;3.65;3.88;4.41
+VSync;0.06;0.06;0.07;0.11
+Cameras render;3.53;3.52;3.75;4.26
 OnGUI;0.02;0.02;0.02;0.05
 EndOfFrame Coroutines;0.00;0.00;0.00;0.01
-Fixed calls / frame;0.53;1.00;1.00;2.00
-FixedUpdate loop;1.44;2.36;2.72;3.23
-FixedUpdate usercode;0.34;0.43;0.65;1.01
-Physics;1.09;1.82;2.03;2.48
+Fixed calls / frame;0.52;1.00;1.00;2.00
+FixedUpdate loop;1.36;2.23;2.62;3.14
+FixedUpdate usercode;0.32;0.41;0.62;0.92
+Physics;1.02;1.75;1.96;2.38
 Coroutines;0.01;0.01;0.02;0.02

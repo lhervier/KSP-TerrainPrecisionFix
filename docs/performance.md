@@ -4,9 +4,9 @@ Part of [Terrain Precision Fix](../README.md): what the fix costs, measured agai
 
 Now that the cause is known and fixed, what does the fix cost? The vertex part replaces a computation
 that stock runs for every vertex of every terrain quad it builds, so it sits on a path the game uses
-continuously while flying, not only when a scene loads. **It does not slow the game down: a frame
-cannot tell it from stock.** It even places a vertex faster than stock, but that saving is lost in the
-noise between two sessions of KSP. The statics fix runs on another path, a check per
+continuously while flying, not only when a scene loads. **It does not slow the game down: timed frame
+by frame, it came out no dearer than stock.** It even places a vertex faster than stock, but that saving
+is too small for a frame to show. The statics fix runs on another path, a check per
 frame of the statics the game knows of; **its cost with statics near a craft is not measured yet**.
 
 ## Two instruments
@@ -101,6 +101,10 @@ the KsmUI library it ships with, and **one** of: nothing more (stock), Stock Qua
 0.1.0. **PQS Bench is not installed**: its calibration replays vertices inside the very frames being
 timed.
 
+The same desktop as the PQS Bench runs, with KSP this time **full screen** at 1280×720 (`FULLSCREEN = True`
+in its `settings.cfg`), so that no other window can come in front of it; vertical sync off
+(`SYNC_VBL = 0`), no frame limit, terrain detail High, terrain scatter on at full density.
+
 The runs used [a fork of KSPProfiler](https://github.com/lhervier/KSP-ExtMod-KSPProfiler) which only adds
 a remote control of its window's buttons — open, *Start capture*, *Stop capture*, *Export to CSV* —
 through [KSP-MCPServer](https://github.com/lhervier/KSP-MCPServer), a mod that answers HTTP requests on
@@ -109,7 +113,8 @@ with KSPProfiler 1.0.0. Here, the runs were flown by
 [a script](https://github.com/lhervier/KSP-PQSBench/blob/master/perfs/automation/run-perfs.py), in
 Python and nothing else. Whether driving the game through KSP-MCPServer changes what a frame costs was
 checked on [its own page](https://github.com/lhervier/KSP-MCPServer/blob/master/docs/performance.md):
-nothing visible changes.
+driving it by script costs at most about 0.05 ms per frame, on the coroutines the terrain is updated in
+(Update → Coroutines, [below](#what-they-read)).
 
 Each run is a fresh KSP:
 
@@ -118,8 +123,10 @@ Each run is a fresh KSP:
    [PQS Bench's runs](https://github.com/lhervier/KSP-PQSBench/blob/master/docs/measuring-a-terrain-mod.md#the-runs),
    pictured there. In orbit, KSP's camera turns in the orbit's frame, so the Mun's edge stands upright:
    heading 204° in that frame, pitch 0.
-2. Open the profiler's window, KSP's interface shown. Captured frames at 10 000 (the most the window
-   accepts; the profiler stops by itself when it is reached), *AutoCapture* off.
+2. Open the profiler's window, where it opens, KSP's interface shown. Captured frames at 10 000 (the
+   most the window accepts; the profiler stops by itself when it is reached), *AutoCapture* off. Bring
+   KSP's window in front of the others, and move the mouse pointer away from the craft, to the middle of
+   the screen's left edge.
 3. *Start capture* at 30 s of mission time, *Stop capture* at 1 min 40 s, at ×1 all along — the same
    70 seconds of the same orbit as the PQS Bench runs. Nothing is asked of the game in between: the
    script sleeps through the window, and KSP-MCPServer's on-screen messages are turned off.
@@ -127,7 +134,8 @@ Each run is a fresh KSP:
 
 A run is worth keeping when fewer than 10 000 frames were captured, so that the capture ended on *Stop*
 and not before. Three runs per configuration, in one session of runs, the configurations taken in turn;
-all nine ended on *Stop*, with 6 558 to 6 827 frames each.
+all nine ended on *Stop*, with 6 574 to 6 758 frames each. The script checked at the start and at the
+stop of every capture that KSP's window was in front: it was, every time.
 
 ### What they read
 
@@ -138,16 +146,16 @@ render** the drawing. In milliseconds per frame (the CSVs and logs are [with the
 
 | | stock 1 | stock 2 | stock 3 | `Transform`s once per quad 1 | `Transform`s once per quad 2 | `Transform`s once per quad 3 | this fix 1 | this fix 2 | this fix 3 |
 |---|---|---|---|---|---|---|---|---|---|
-| frames per second, mean | 94.4 | 93.6 | 94.9 | 96.7 | 96.8 | 95.9 | 93.6 | 93.2 | 96.4 |
-| frame time, mean | 10.59 | 10.69 | 10.53 | 10.34 | 10.33 | 10.43 | 10.69 | 10.72 | 10.38 |
-| frame time, worst 1 % | 36.19 | 35.86 | 35.58 | 35.21 | 35.27 | 35.58 | 35.56 | 35.58 | 35.30 |
-| Update, mean | 2.92 | 2.92 | 2.88 | 2.85 | 2.85 | 2.89 | 2.95 | 2.94 | 2.87 |
-| Update → Coroutines, mean | 2.00 | 1.97 | 1.97 | 1.92 | 1.92 | 1.96 | 1.99 | 2.03 | 1.92 |
-| Update → Coroutines, median | 1.30 | 1.30 | 1.29 | 1.28 | 1.28 | 1.28 | 1.30 | 1.31 | 1.27 |
-| Update → Coroutines, worst 1 % | 25.24 | 24.76 | 24.86 | 24.45 | 24.47 | 24.69 | 24.42 | 24.68 | 24.36 |
-| Cameras render, mean | 3.54 | 3.58 | 3.57 | 3.51 | 3.48 | 3.50 | 3.60 | 3.61 | 3.52 |
-| VSync, mean | 0.06 | 0.07 | 0.07 | 0.06 | 0.06 | 0.06 | 0.06 | 0.07 | 0.06 |
-| profiler overhead, mean | 0.45 | 0.46 | 0.47 | 0.46 | 0.46 | 0.45 | 0.45 | 0.46 | 0.45 |
+| frames per second, mean | 94.3 | 93.8 | 95.7 | 94.7 | 96.0 | 96.2 | 95.9 | 94.8 | 96.2 |
+| frame time, mean | 10.61 | 10.66 | 10.45 | 10.55 | 10.42 | 10.39 | 10.42 | 10.55 | 10.40 |
+| frame time, worst 1 % | 35.58 | 35.77 | 35.35 | 35.71 | 35.36 | 35.26 | 35.16 | 35.33 | 35.54 |
+| Update, mean | 2.92 | 2.91 | 2.89 | 2.89 | 2.88 | 2.88 | 2.89 | 2.88 | 2.89 |
+| Update → Coroutines, mean | 1.96 | 2.00 | 1.96 | 1.95 | 1.94 | 1.94 | 1.93 | 1.94 | 1.93 |
+| Update → Coroutines, median | 1.30 | 1.30 | 1.30 | 1.30 | 1.30 | 1.29 | 1.28 | 1.29 | 1.28 |
+| Update → Coroutines, worst 1 % | 24.67 | 24.77 | 24.64 | 24.70 | 24.65 | 24.33 | 24.39 | 24.32 | 24.89 |
+| Cameras render, mean | 3.56 | 3.63 | 3.54 | 3.55 | 3.50 | 3.49 | 3.53 | 3.59 | 3.51 |
+| VSync, mean | 0.06 | 0.07 | 0.06 | 0.06 | 0.06 | 0.06 | 0.06 | 0.06 | 0.06 |
+| profiler overhead, mean | 0.44 | 0.44 | 0.45 | 0.46 | 0.46 | 0.45 | 0.46 | 0.48 | 0.46 |
 
 **VSync** near zero says the frame waited on the processor, not on the screen or the graphics card —
 which is what a frame measurement of the terrain needs. Averaged over the three runs of each
@@ -155,41 +163,44 @@ configuration:
 
 | | stock | `Transform`s read once per quad | this fix |
 |---|---|---|---|
-| frame time, mean | 10.60 | 10.37 | 10.60 |
-| Update → Coroutines, mean | 1.98 | 1.93 | 1.98 |
-| Update → Coroutines, worst 1 % | 24.95 | 24.54 | 24.49 |
+| frame time, mean | 10.57 | 10.45 | 10.46 |
+| Update → Coroutines, mean | 1.97 | 1.94 | 1.93 |
+| Update → Coroutines, worst 1 % | 24.69 | 24.56 | 24.53 |
 
-**The fix cannot be told from stock.** On Update → Coroutines, stock spends 1.97 to 2.00 ms per frame on
-average over its three runs, and this fix 1.92 to 2.03: the same average, 1.98 ms, while the three runs
-of the fix spread by 0.11 ms. The mean frame time tells the same: 10.60 ms for both, and 0.34 ms between
-two runs of the fix.
+**The fix is no dearer than stock.** On Update → Coroutines, stock spends 1.96 to 2.00 ms per frame, run
+by run, 1.97 ms over its three runs, and this fix 1.93 to 1.94 ms, 1.93 ms over its three: each
+run of the fix a little below each run of stock, by 0.02 ms between the closest two. The mean frame time
+leans the same way, less cleanly: 10.57 ms for stock and 10.46 ms for the fix on average, but the fix's
+second run, at 10.55 ms, is above stock's third, at 10.45 ms.
 
-Stock's arithmetic with its `Transform`s read once per quad comes out a little cheaper than both: 1.93 ms
-on Update → Coroutines, 0.05 ms below the other two averages, and each of its runs below each run of
-stock — by 0.01 ms between the closest two. It is not cheaper than the fix in every run: the fix's third
-run, at 1.92 ms, is as cheap as its cheapest two, and cheaper than its third. Its frames are also
-cheaper to draw than stock's (Cameras render, 3.48 to 3.51 ms, against 3.54 to 3.58), a phase it does
-not touch.
+Stock's arithmetic with its `Transform`s read once per quad sits between the two: 1.94 to 1.95 ms,
+1.94 ms on average, each of its runs below each run of stock too — by 0.01 ms between the closest two —
+and none below the fix's. Cameras render, the drawing, which neither mod touches, also averages a little
+less for the two than for stock: 3.51 and 3.54 ms, against 3.58.
 
 The vertex figures predict none of this. At 704 quads of the highest level in 70 seconds, the game builds
 about 10 of them a second, 2 263 vertices: the fix's 183 ns each is **0.41 ms per second of flight,
 0.04 % of real time**, or 4 µs per frame at 95 frames a second, and the 84.6 ns saved by reading the
-`Transform`s once per quad, 2 µs per frame. The three runs of one configuration spread by 0.03 to
-0.11 ms on Update → Coroutines: seven to twenty-five times the fix's saving. And the 0.05 ms by which
-the middle configuration comes out below stock is twenty-five times its own: whatever makes those runs
-cheaper, it is not the vertex placement, and three runs do not say what it is.
+`Transform`s once per quad, 2 µs per frame. Both are below the 0.01 ms the CSV gives its figures to, and
+below the spread of the three runs of one configuration on Update → Coroutines: 0.04 ms for stock,
+0.01 ms for each of the other two. And the 0.04 ms by which the fix comes out below stock on average is
+ten times its own saving, the 0.03 ms of the middle configuration fifteen times its own: whatever makes
+those runs cheaper, it is not the vertex placement, and three runs per configuration do not say what it
+is.
 
 ## What this says
 
-**The fix does not slow the game down.** That is the only conclusion the frames support about it: its
-runs average the same as stock's, and three runs of the fix alone differ more than the fix differs from
-stock. Stock with its `Transform`s read once per quad came out a little cheaper than both, by far more
-than its vertex saving can pay for: three runs per configuration show it, and do not say why.
+**The fix does not slow the game down.** That is the only conclusion the frames support about it. In
+this session, its runs and those of stock with its `Transform`s read once per quad came out a little
+cheaper than stock's, every one of them — by 0.03 to 0.04 ms on average, ten to fifteen times more than
+their vertex saving can pay for: three runs per configuration show it, and do not say why. It is not a
+gain to claim for the fix.
 
 The bench does show the fix placing a vertex faster than stock, and faster than stock with its
 `Transform`s read once per quad: a little less than half of that saving is the organisation any version
-could adopt, the rest is the arithmetic itself. But it is not a gain worth claiming: seven to twenty-five
-times below the spread among the runs of one configuration, no frame shows it.
+could adopt, the rest is the arithmetic itself. But it is not a gain worth claiming: at 4 µs per frame,
+below the 0.01 ms the profiler reports to and below the spread among the runs of one configuration, no
+frame shows it.
 
 The statics are hardly in these figures: in the profiler runs, no static was near the craft. What their
 fix does grows with the number of statics, not of vertices: once per frame, it checks every static the

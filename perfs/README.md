@@ -7,7 +7,8 @@ Two instruments, for two questions: what placing one terrain vertex costs, and w
 Every run was flown on the same save and on the same machine as the stock reference runs kept with PQS
 Bench, which describe [the save and the machine](https://github.com/lhervier/KSP-PQSBench/blob/master/perfs/README.md) —
 figures from another machine are not comparable to these. The PQS Bench runs belong to the same session
-of runs as those; the profiler runs, to a later one.
+of runs as those, KSP in a 1280×720 window; the profiler runs, to a later one, KSP full screen at
+1280×720.
 
 ## What a vertex costs
 
@@ -50,22 +51,23 @@ Nine runs, three per configuration, each in a fresh KSP, in this order: stock, S
 mod, and again, three rounds. They belong to one session of runs that also measured, in each round,
 Terrain Precision Fix with [Rock Precision Fix](https://github.com/lhervier/KSP-RockPrecisionFix), for
 that mod's page. The mission time at the start and the stop of each capture is as the script recorded
-it.
+it; it also recorded, at both, that KSP's window was in front of the others, in every run.
 
 | configuration | run | captured from | to | frames captured | CSV | `KSP.log` |
 |---|---|---|---|---|---|---|
-| stock | 1 | 30.000 s | 100.12 s | 6 630 | [csv](runs/profiler/mun-05km-stock-1.csv) | [log](runs/profiler/mun-05km-stock-1.log) |
-| stock | 2 | 29.996 s | 100.30 s | 6 590 | [csv](runs/profiler/mun-05km-stock-2.csv) | [log](runs/profiler/mun-05km-stock-2.log) |
-| stock | 3 | 29.977 s | 100.18 s | 6 673 | [csv](runs/profiler/mun-05km-stock-3.csv) | [log](runs/profiler/mun-05km-stock-3.log) |
-| Stock Quad Cache | 1 | 29.972 s | 100.26 s | 6 813 | [csv](runs/profiler/mun-05km-stockquadcache-1.csv) | [log](runs/profiler/mun-05km-stockquadcache-1.log) |
-| Stock Quad Cache | 2 | 30.020 s | 100.44 s | 6 827 | [csv](runs/profiler/mun-05km-stockquadcache-2.csv) | [log](runs/profiler/mun-05km-stockquadcache-2.log) |
-| Stock Quad Cache | 3 | 29.973 s | 100.14 s | 6 742 | [csv](runs/profiler/mun-05km-stockquadcache-3.csv) | [log](runs/profiler/mun-05km-stockquadcache-3.log) |
-| this mod | 1 | 29.996 s | 100.16 s | 6 576 | [csv](runs/profiler/mun-05km-fix-1.csv) | [log](runs/profiler/mun-05km-fix-1.log) |
-| this mod | 2 | 30.013 s | 100.24 s | 6 558 | [csv](runs/profiler/mun-05km-fix-2.csv) | [log](runs/profiler/mun-05km-fix-2.log) |
-| this mod | 3 | 30.020 s | 100.10 s | 6 763 | [csv](runs/profiler/mun-05km-fix-3.csv) | [log](runs/profiler/mun-05km-fix-3.log) |
+| stock | 1 | 30.026 s | 100.04 s | 6 612 | [csv](runs/profiler/mun-05km-stock-1.csv) | [log](runs/profiler/mun-05km-stock-1.log) |
+| stock | 2 | 30.037 s | 100.02 s | 6 574 | [csv](runs/profiler/mun-05km-stock-2.csv) | [log](runs/profiler/mun-05km-stock-2.log) |
+| stock | 3 | 30.030 s | 100.02 s | 6 707 | [csv](runs/profiler/mun-05km-stock-3.csv) | [log](runs/profiler/mun-05km-stock-3.log) |
+| Stock Quad Cache | 1 | 29.994 s | 100.10 s | 6 649 | [csv](runs/profiler/mun-05km-stockquadcache-1.csv) | [log](runs/profiler/mun-05km-stockquadcache-1.log) |
+| Stock Quad Cache | 2 | 29.981 s | 100.10 s | 6 737 | [csv](runs/profiler/mun-05km-stockquadcache-2.csv) | [log](runs/profiler/mun-05km-stockquadcache-2.log) |
+| Stock Quad Cache | 3 | 29.993 s | 100.12 s | 6 758 | [csv](runs/profiler/mun-05km-stockquadcache-3.csv) | [log](runs/profiler/mun-05km-stockquadcache-3.log) |
+| this mod | 1 | 30.020 s | 100.10 s | 6 730 | [csv](runs/profiler/mun-05km-fix-1.csv) | [log](runs/profiler/mun-05km-fix-1.log) |
+| this mod | 2 | 30.000 s | 100.08 s | 6 654 | [csv](runs/profiler/mun-05km-fix-2.csv) | [log](runs/profiler/mun-05km-fix-2.log) |
+| this mod | 3 | 30.016 s | 100.12 s | 6 749 | [csv](runs/profiler/mun-05km-fix-3.csv) | [log](runs/profiler/mun-05km-fix-3.log) |
 
 Every run's frame count is under the profiler's 10 000 ceiling, so each capture ended on *Stop*, and
 matches 70 seconds at its mean frame rate. Each `KSP.log` says which mods were loaded, in its
 `Mod DLLs found` list; the runs with Stock Quad Cache log
 `[StockQuadCache] Version 0.1.0.0 installed, log level Info`, and the runs with this mod
-`[TerrainPrecisionFix] Mun: terrain placed in double precision`.
+`[TerrainPrecisionFix] Statics fix installed` and `[TerrainPrecisionFix] Mun: terrain placed in double
+precision`.

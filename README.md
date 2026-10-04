@@ -167,12 +167,12 @@ mod has to patch both**, each patch standing for a small change these mods could
 ## Performance
 
 **The fix does not slow the game down.** Timed frame by frame with
-[KSPProfiler](https://github.com/KSPModdingLibs/KSPProfiler), on the same flight, stock and this fix cannot
-be told apart: their runs average the same, and three runs of the fix alone differ more than it differs
-from stock. Measured vertex by vertex with [PQS Bench](https://github.com/lhervier/KSP-PQSBench), the fix
-even places a vertex faster than stock, but that saving is about 0.04 % of the time played, seven to
-twenty-five times below the spread among runs of one configuration: no frame shows it. What the statics
-fix costs with statics near a craft is not measured yet.
+[KSPProfiler](https://github.com/KSPModdingLibs/KSPProfiler), on the same flight, every run of the fix
+came out a little cheaper than every run of stock on the coroutines the terrain is updated in — by more
+than the fix's own saving can explain, so not a gain to claim, but no cost. Measured vertex by vertex with
+[PQS Bench](https://github.com/lhervier/KSP-PQSBench), the fix even places a vertex faster than stock, but
+that saving is about 0.04 % of the time played, too small for a frame to show. What the statics fix costs
+with statics near a craft is not measured yet.
 
 **→ Full chapter: [Performance](docs/performance.md)**
 
