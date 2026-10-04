@@ -30,10 +30,10 @@ This mod takes a group out of its sphere like the KSC ([The fix: the statics](..
 and patches the group editor of Kerbal Konstructs, which reads the position of a group from where stock
 hangs it (below, [The patch of the group editor](#the-patch-of-the-group-editor)).
 
-**Measured with this mod**, on that same runway: the deck comes back within 0.009 mm from the second
-loading to the sixth, instead of 33.5 mm on stock, and the ground beside it within 0.036 mm. At the first
-loading of a session, a section of the runway 21.3 mm above the deck is still active under the craft,
-on stock as with this mod; it is not a rounding, and this mod does not touch it. The readings:
+**Measured with this mod**, on that same runway: the deck comes back within 0.015 mm from the second
+loading to the sixth, instead of 17.7 mm on stock, and the ground beside it within 0.034 mm. At the first
+loading of a session, a section of the runway 21.3 mm above the deck is still active under the craft;
+it is not a rounding, and this mod does not touch it. The readings:
 [Checking the culprit: loading the same save](../checking-the-culprit-loading.md).
 
 *To test:* why that section of the runway is only there at the first loading; the group editor in flight, near a craft —

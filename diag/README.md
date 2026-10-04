@@ -62,18 +62,25 @@ in a single flight, played by its script, `run-approach.py`, on `approach-kerbin
   printed in [`runs/approach-fix-script.txt`](runs/approach-fix-script.txt), and every line it
   recorded, in both instruments, in [`runs/approach-fix-lines.json`](runs/approach-fix-lines.json).
 
+## The runway protocol
+
+The install of [The loading protocol](#the-loading-protocol): the six loadings of
+[the runway protocol](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-runway.md),
+played by its script, `run-runway.py`. Read in
+[Checking the culprit: loading the same save](../docs/checking-the-culprit-loading.md).
+
+- [`runs/runway-fix.log`](runs/runway-fix.log) — on Kerbin, `runway-kerbin.sfs`; what the script
+  printed in [`runs/runway-fix-script.txt`](runs/runway-fix-script.txt), and every line it recorded, in
+  both instruments, in [`runs/runway-fix-lines.json`](runs/runway-fix-lines.json).
+- [`runs/runway-mun-kk-fix.log`](runs/runway-mun-kk-fix.log) — on the Mun, `runway-mun-kk.sfs`, beside a
+  runway placed by Kerbal Konstructs 1.12.3, added to the install with CustomPreLaunchChecks 1.8.1; what
+  the script printed in [`runs/runway-mun-kk-fix-script.txt`](runs/runway-mun-kk-fix-script.txt), and
+  every line it recorded in [`runs/runway-mun-kk-fix-lines.json`](runs/runway-mun-kk-fix-lines.json).
+
 ## On the stock system
 
 KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, this mod and one instrument.
 
-- [`runs/runway-diag1-fix.log`](runs/runway-diag1-fix.log) — the six loadings of
-  [the runway protocol](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-runway.md)
-  on Kerbin, read by Diag LandedVessel.
-- [`runs/runway-diag2-fix.log`](runs/runway-diag2-fix.log) — the same, read by Diag TerrainHeight.
-- [`runs/runway-mun-kk-diag1-fix.log`](runs/runway-mun-kk-diag1-fix.log) — the six loadings of the
-  same protocol on the Mun, beside a runway placed by Kerbal Konstructs 1.12.3 (added to the install with
-  CustomPreLaunchChecks 1.8.1), read by Diag LandedVessel.
-- [`runs/runway-mun-kk-diag2-fix.log`](runs/runway-mun-kk-diag2-fix.log) — the same, read by Diag TerrainHeight.
 - [`runs/statics-kerbin-fix.log`](runs/statics-kerbin-fix.log) — no instrument, this mod with its
   statics fix, at `logLevel = Debug`: `runway-kerbin.sfs` loaded six times, the craft sent to a 200 km
   orbit with `Alt+F12 → Cheats → Set Orbit`, then the space centre. At every step, the `PQSCity` of

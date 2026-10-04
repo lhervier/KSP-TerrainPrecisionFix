@@ -9,8 +9,8 @@ out of its terrain sphere in flight, while a craft is near it, and places it in 
 [The fix: the statics](../the-fix-statics.md).
 
 **Measured on the runway of Kerbin**, with the runway protocol of both instruments, six loadings, a
-craft on the grass and a craft on the runway: the deck of the runway spreads over 130.1 mm without this
-mod and 0.216 mm with it, and the step between it and the grass beside it over 81.7 mm and 0.203 mm.
+craft on the grass and a craft on the runway: the deck of the runway spreads over 116.5 mm without this
+mod and 0.177 mm with it, and the step between it and the grass beside it over 38.3 mm and 0.188 mm.
 **And while a rover drives by it**, with the protocol of the runway and the grass while the world
 moves, played by a script: at each move of the floating origin, on stock, the deck moves by −8.85 and
 +48.47 mm, together with the grass; with this mod, the deck moves by 0.04 mm at most over three moves. On Earth, in Real Solar System,
