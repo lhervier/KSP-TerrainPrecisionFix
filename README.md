@@ -113,7 +113,7 @@ instruments: one reads the landed craft, the other the ground itself. In each su
 figure is without this mod, the second with it.
 
 **Loading the same save**, six times, on the four stock worlds and the Moon and Earth of
-[Real Solar System](https://github.com/KSP-RO/RealSolarSystem): the ground comes back over 73.7 mm on
+[Real Solar System](https://github.com/KSP-RO/RealSolarSystem): the ground comes back over 43.6 mm on
 Kerbin and 292.3 mm on Earth, within 0.3 mm with this mod. The runway of the KSC comes back over
 116.5 mm, and 0.177 mm with this mod.
 

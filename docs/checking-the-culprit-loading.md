@@ -183,22 +183,19 @@ never moves; the first is what your landing legs touch. *Difference* is the firs
 both are read is in [This mod's demonstration](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/this-mods-demonstration.md).
 
 **On stock.** Its campaigns, detailed in [The measurements: loading the same save](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-measurements-loading.md):
-the same sessions, read under the same craft at the same moments, following
+the same sessions, read at the same moments under the capsule on its tank, following
 [its protocol](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-protocol-loading.md).
+The craft only marks the spot the ray is fired at, so the lone capsule adds nothing to this reading.
 Over those six loads:
 
 | series | spread of *Difference* | spread of the height KSP computes |
 |---|---|---|
-| Kerbin, capsule | 73.7 mm | 0.000 mm |
-| Kerbin, 2 parts | 43.6 mm | 0.000 mm |
-| Mun, capsule | 5.5 mm | 0.012 mm |
-| Mun, 2 parts | 18.0 mm | 0.136 mm |
-| Minmus, capsule | 4.6 mm | 0.000 mm |
-| Minmus, 2 parts | 7.3 mm | 0.000 mm |
-| Gilly, capsule | 1.4 mm | 0.041 mm |
-| Gilly, 2 parts | 2.3 mm | 0.008 mm |
-| the Moon, 2 parts | 48.7 mm | 4.985 mm |
-| Earth, 2 parts | 292.3 mm | 0.697 mm |
+| Kerbin | 43.6 mm | 0.000 mm |
+| Mun | 18.0 mm | 0.136 mm |
+| Minmus | 7.3 mm | 0.000 mm |
+| Gilly | 2.3 mm | 0.008 mm |
+| the Moon | 48.7 mm | 4.985 mm |
+| Earth | 292.3 mm | 0.697 mm |
 
 On the Moon, the craft came back inside the ground at every load and was pushed out of it, coming to
 rest a little to one side each time; the height KSP computes follows the spot read, which accounts for
@@ -208,18 +205,7 @@ the same way: the five others stay within 0.06 mm.
 **With this mod.** The same installs, the same saves, on the same spots, loaded six times; this mod
 is the only difference.
 
-As before, the bottom line of each screenshot is the loading in progress, and is not counted. The lone
-capsule:
-
-![With this mod, a lone capsule, six loads of the same save, on Kerbin](../imgs/Diag2/on-load/1part/00-kerbin.png)
-
-![With this mod, a lone capsule, six loads of the same save, on the Mun](../imgs/Diag2/on-load/1part/10-mune.png)
-
-![With this mod, a lone capsule, six loads of the same save, on Minmus](../imgs/Diag2/on-load/1part/20-minmus.png)
-
-![With this mod, a lone capsule, six loads of the same save, on Gilly](../imgs/Diag2/on-load/1part/30-gilly.png)
-
-The capsule on its tank:
+As before, the bottom line of each screenshot is the loading in progress, and is not counted.
 
 ![With this mod, the capsule on its tank, six loads of the same save, on Kerbin](../imgs/Diag2/on-load/2parts/00-kerbin.png)
 
@@ -241,16 +227,12 @@ Read off those screenshots:
 
 | series | *Difference*, without this mod | *Difference*, with this mod | spread, without | spread, with |
 |---|---|---|---|---|
-| Kerbin, capsule | −31.435 to +42.293 mm | −2.189 to −2.184 mm | 73.7 mm | 0.005 mm |
-| Kerbin, 2 parts | +14.647 to +58.264 mm | −2.186 to −2.182 mm | 43.6 mm | 0.004 mm |
-| Mun, capsule | −37.583 to −32.041 mm | −41.396 to −41.384 mm | 5.5 mm | 0.012 mm |
-| Mun, 2 parts | −43.858 to −25.814 mm | −40.976 to −40.964 mm | 18.0 mm | 0.012 mm |
-| Minmus, capsule | −10.790 to −6.219 mm | −8.954 to −8.941 mm | 4.6 mm | 0.013 mm |
-| Minmus, 2 parts | −11.222 to −3.905 mm | −8.950 to −8.929 mm | 7.3 mm | 0.022 mm |
-| Gilly, capsule | +6.393 to +7.784 mm | +7.170 to +7.175 mm | 1.4 mm | 0.005 mm |
-| Gilly, 2 parts | +6.919 to +9.236 mm | +7.177 to +7.182 mm | 2.3 mm | 0.005 mm |
-| the Moon, 2 parts | −96.777 to −48.070 mm | −114.043 to −113.968 mm | 48.7 mm | 0.074 mm |
-| Earth, 2 parts | −43.698 to +248.589 mm | +121.669 to +121.952 mm | 292.3 mm | 0.283 mm |
+| Kerbin | +14.647 to +58.264 mm | −2.186 to −2.182 mm | 43.6 mm | 0.004 mm |
+| Mun | −43.858 to −25.814 mm | −40.976 to −40.964 mm | 18.0 mm | 0.012 mm |
+| Minmus | −11.222 to −3.905 mm | −8.950 to −8.929 mm | 7.3 mm | 0.022 mm |
+| Gilly | +6.919 to +9.236 mm | +7.177 to +7.182 mm | 2.3 mm | 0.005 mm |
+| the Moon | −96.777 to −48.070 mm | −114.043 to −113.968 mm | 48.7 mm | 0.074 mm |
+| Earth | −43.698 to +248.589 mm | +121.669 to +121.952 mm | 292.3 mm | 0.283 mm |
 
 **On a runway, and on the ground beside it, on stock**
 ([the readings](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-measurements-runway.md)).
@@ -297,7 +279,7 @@ two hundredfold, but counted in float steps at that distance from the centre of 
 within two: 0.4 to 1.9 steps, series after series.
 
 **It is the ground that moves, not only the craft.** The craft never moved and the spot never changed,
-yet the height KSP computes held still while the collision surface wandered: by up to seven
+yet the height KSP computes held still while the collision surface wandered: by more than four
 centimetres on Kerbin, nearly thirty on Earth in Real Solar System. The ground itself is not built in the same
 place twice. The full readings, and what else they show, are in
 [What the numbers say](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-measurements-loading.md#what-the-numbers-say).
@@ -310,31 +292,28 @@ still identical on every line, so KSP put the craft back at the same place every
 now comes to rest at the same place every time too. Under the craft, the ground reading does the same.
 Three things to read in its column, *Difference*:
 
-- **It stops varying**, by a factor of two hundred and fifty to fifteen hundred on the Mun, Minmus,
-  Gilly, the Moon and Earth, and of more than ten thousand on Kerbin. On Kerbin the surface under the
-  craft came back somewhere else over a range of seven centimetres; it now comes back within five
+- **It stops varying**, by a factor of three hundred to fifteen hundred on the Mun, Minmus, Gilly, the
+  Moon and Earth, and of more than ten thousand on Kerbin. On Kerbin the surface under the craft came
+  back somewhere else over a range of more than four centimetres; it now comes back within four
   thousandths of a millimetre. That is the fix, and that is all of it.
 - **It does not get smaller, and it is not supposed to.** It stops at a value the stock draws are
-  scattered around. On Kerbin with a lone capsule, on Minmus, on Gilly, on the Mun with two parts and on
-  Earth, the fixed reading falls inside the range of the six loadings without this mod. Elsewhere it
-  falls just outside: on Kerbin with two parts, 16.8 mm below the lowest of the six; on the Mun with a
-  lone capsule, 3.8 mm below; on the Moon, 17.2 mm below — each time about a quarter of a float step or less.
+  scattered around. On the Mun, Minmus, Gilly and Earth, the fixed reading falls inside the range of the
+  six loadings without this mod. On Kerbin and on the Moon it falls just outside, 16.8 and 17.2 mm below
+  the lowest of the six — about a quarter of a float step or less.
   Six draws are few for a spread that wide, and a seventh could as well have landed under the fixed
-  value. Put the loading on the Mun that landed on −32.041 next to a fixed −41.390 and the fix looks
+  value. Put the loading on the Mun that landed on −25.814 next to a fixed −40.970 and the fix looks
   like it made things worse; it did not, that line was luck. This mod does not choose a better number
   for that patch of ground; it stops drawing a new one at every loading.
 - **What is left is no longer the ground, and it stays.** *Ground KSP computes* is what says the same
-  spot was read every time: 64,785.079 mm on all twelve Kerbin lines, and `0.000` on the Minmus flats.
-  On the Mun and on Gilly, where the ground is not perfectly level, that column wanders a little by
-  itself — 0.040 mm over the six loadings of the lone capsule on Gilly — because a craft settling a hair
-  to one side asks for the height of a slightly different point; on Real Solar System, without this
-  mod, a craft pushed out of the ground lands elsewhere, and the column follows. On Gilly that is more
-  than the spread of *Difference* under it, 0.005 mm: both columns follow the sample point together,
-  and most of the wobble cancels between them. What remains of the spread is the craft, not the
-  terrain. What remains of *Difference* itself is geometry: the collision mesh is made of flat
+  spot was read every time: 64,785.079 mm on all six Kerbin lines, `0.000` on the Minmus flats, within
+  a thousandth of a millimetre on the Mun and on Gilly. Where the ground is not perfectly level, that
+  column can wander a little by itself, because a craft settling a hair to one side asks for the height
+  of a slightly different point — 0.136 mm on the Mun without this mod; on Real Solar System, without
+  this mod, a craft pushed out of the ground lands elsewhere, and the column follows. What remains of the
+  spread is the craft, not the terrain. What remains of *Difference* itself is geometry: the collision mesh is made of flat
   triangles, and they miss what the ground does between two corners —
   [KSP Diag - Terrain Height explains why a correct reading is not zero](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/this-mods-demonstration.md#why-a-correct-reading-is-not-zero).
-  On the levelled grass of Kerbin it is −2.2 mm, on the Mun −41.4 and −41.0 mm, on Minmus −8.9 mm, on
+  On the levelled grass of Kerbin it is −2.2 mm, on the Mun −41.0 mm, on Minmus −8.9 mm, on
   Gilly +7.2 mm, on the Moon −114.0 mm, on Earth +121.8 mm, the same on every loading. Removing it would
   mean giving that mesh more triangles, which costs frames, for a gap nobody can feel.
 
