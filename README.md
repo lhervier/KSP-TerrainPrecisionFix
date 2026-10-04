@@ -125,7 +125,7 @@ flight: its ground comes back over 21.8 mm, and over 0.011 mm with this mod.
 
 **→ Full chapter: [Checking the culprit: coming back to a craft left parked](docs/checking-the-culprit-approach.md)**
 
-**Switching to a craft far away**, six loadings: its ground spreads over 120.4 mm, and 0.003 mm with this
+**Switching to a craft far away**, six loadings: its ground spreads over 112.1 mm, and 0.002 mm with this
 mod; the switch itself moves nothing.
 
 **→ Full chapter: [Checking the culprit: switching to a craft far away](docs/checking-the-culprit-switching.md)**

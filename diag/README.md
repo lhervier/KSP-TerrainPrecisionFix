@@ -40,6 +40,17 @@ and what it requires (Kopernicus 248, Modular Flight Integrator, KSPTextureLoade
   [`runs/reload-kerbin-1part-fix-lines.json`](runs/reload-kerbin-1part-fix-lines.json) or
   [`runs/reload-earth-rss-resave-fix-lines.json`](runs/reload-earth-rss-resave-fix-lines.json).
 
+## The switching protocol
+
+The install of [The loading protocol](#the-loading-protocol), on Kerbin: the six rounds of
+[the switching protocol](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-switching.md),
+played by its script, `run-switching.py`, on `switch-kerbin.sfs`. Read in
+[Switching to a craft far away](../docs/checking-the-culprit-switching.md).
+
+- [`runs/switching-fix.log`](runs/switching-fix.log) — the `KSP.log` of the session; what the script
+  printed in [`runs/switching-fix-script.txt`](runs/switching-fix-script.txt), and every line it
+  recorded, in both instruments, in [`runs/switching-fix-lines.json`](runs/switching-fix-lines.json).
+
 ## On the stock system
 
 KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, this mod and one instrument.
@@ -48,10 +59,6 @@ KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, this mod and
   [the approach protocol](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-approach.md)
   on Kerbin, in a single flight, read by Diag LandedVessel.
 - [`runs/approach-diag2-fix.log`](runs/approach-diag2-fix.log) — the same, read by Diag TerrainHeight.
-- [`runs/switching-diag1-fix.log`](runs/switching-diag1-fix.log) — the six rounds of
-  [the switching protocol](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-switching.md)
-  on Kerbin, read by Diag LandedVessel.
-- [`runs/switching-diag2-fix.log`](runs/switching-diag2-fix.log) — the same, read by Diag TerrainHeight.
 - [`runs/runway-diag1-fix.log`](runs/runway-diag1-fix.log) — the six loadings of
   [the runway protocol](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-runway.md)
   on Kerbin, read by Diag LandedVessel.
