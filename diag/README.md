@@ -20,6 +20,26 @@ and the launch from Cape Canaveral; in `kopernicus-flag-fix/`, the mission and t
 `rss-runway-fix/`, the change to Real Solar System of
 [Real Solar System: the runway fix](../docs/limits-and-solutions/rss/the-runway-fix.md).
 
+## The loading protocol
+
+KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, this mod, both instruments and
+[KSP-MCPServer](https://github.com/lhervier/KSP-MCPServer): the eight saves of
+[the loading protocol](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-loading.md),
+a lone capsule then a capsule on a small tank on Kerbin, the Mun, Minmus and Gilly, each loaded six
+times by its script, `run-loading.py`. On Real Solar System, the same, plus Real Solar System 20.1.3.0
+and what it requires (Kopernicus 248, Modular Flight Integrator, KSPTextureLoader, the RSS textures):
+`reload-moon-rss-resave.sfs` and `reload-earth-rss-resave.sfs`. Read in
+[Checking the culprit: loading the same save](../docs/checking-the-culprit-loading.md).
+
+- [`runs/loading-fix.log`](runs/loading-fix.log) — the `KSP.log` of the session the eight saves were
+  played in, one after the other.
+- [`runs/loading-rss-fix.log`](runs/loading-rss-fix.log) — the same on Real Solar System, the Moon then
+  Earth.
+- `runs/reload-<save>-fix-script.txt` — what the script printed for each save, and
+  `runs/reload-<save>-fix-lines.json`, every line it recorded, in both instruments: for instance
+  [`runs/reload-kerbin-1part-fix-lines.json`](runs/reload-kerbin-1part-fix-lines.json) or
+  [`runs/reload-earth-rss-resave-fix-lines.json`](runs/reload-earth-rss-resave-fix-lines.json).
+
 ## On the stock system
 
 KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, this mod and one instrument.

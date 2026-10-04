@@ -18,8 +18,8 @@ another terrain and another place for the KSC. A body Kopernicus creates is the 
 **Checked, no problem.** Kopernicus changes the terrain of existing bodies, so this mod has to still find
 the ground where it expects it. It does: over six loads on Kerbin under Kopernicus, the height of a
 terrain quad spreads over 116.0 mm (median) without this mod and 0.079 mm with it, and the safeguard
-never fired; the collision surface on Earth in Real Solar System, over 693.1 mm without this mod and
-0.331 mm with it.
+never fired; the collision surface on Earth in Real Solar System, over 292.3 mm without this mod and
+0.283 mm with it.
 
 **→ Full chapter: [The terrain](kopernicus/the-terrain.md)**
 

@@ -11,18 +11,22 @@ its method and its protocol.
 
 This fix is built on top of [KSP Community Fixes](https://github.com/KSPModdingLibs/KSPCommunityFixes),
 the base most players run, so every campaign on this page is run in an install that has it: KSP 1.12.5 with Harmony, ModuleManager,
-KSP Community Fixes 1.41.1 and one of the two instruments — and this mod, or not. *On stock*, below,
-means that install without this mod.
+KSP Community Fixes 1.41.1, both instruments, and [KSP-MCPServer](https://github.com/lhervier/KSP-MCPServer),
+which plays the protocols — and this mod, or not. *On stock*, below, means that install without this mod.
+Every series is played by the script of its protocol, published with the protocol by the instruments,
+once without this mod and once with it, both instruments recording at the same moments.
 
-The culprit predicts a spread of one or two float steps, and a float's step doubles each time the
+The culprit predicts a spread of up to one or two float steps, and a float's step doubles each time the
 distance to the centre of the body crosses a power of two. So besides the four stock worlds, the same
 test is run on the Moon and on Earth of [Real Solar System](https://github.com/KSP-RO/RealSolarSystem),
 which replaces the planets with the real ones, much larger. There, the install is the one above plus
-its release 20.1.3.0, and what it requires (Kopernicus, Modular Flight Integrator,
-KSPTextureLoader, the RSS textures), with one instrument or both.
+its release 20.1.3.0, and what it requires (Kopernicus 248, Modular Flight Integrator,
+KSPTextureLoader, the RSS textures).
 
 A craft is set down on bare ground, saved once, and that same save is loaded six times over. The
-craft never changes, the spot never changes, and nothing is touched between two loads.
+craft never changes, the spot never changes, and nothing is touched between two loads. It is the
+loading protocol of both instruments, played by its script,
+[`run-loading.py`](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-loading.md#played-by-a-script), on the saves they publish.
 
 The statics are checked on a runway. Two identical craft, one on a runway and one on the ground beside
 it. The save is loaded, a line is recorded on the craft on the ground, then the game's *switch vessel*
@@ -50,8 +54,8 @@ twice per load: as the save hands the capsule back (*On rails*), and once it has
 **On stock.** Its campaigns, detailed in
 [The measurements: loading the same save](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-measurements-loading.md).
 On each of the four stock worlds, a lone capsule, then the same capsule sitting on a small flat fuel
-tank; on the Moon and Earth, the capsule on its tank. Each series is saved once and loaded six times,
-and uses its own spot, chosen by the rules of
+tank, on the same spot; on the Moon and Earth, the capsule on its tank. Each series is saved once and
+loaded six times, and uses its own spot, chosen by the rules of
 [its protocol](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-loading.md):
 no `Moving Vessel` line in `KSP.log`, and a craft that does not slide.
 
@@ -61,30 +65,31 @@ centre of the body:
 
 | series | loads | distance to the centre | float step there | spread of *Settled* | in steps |
 |---|---|---|---|---|---|
-| Kerbin, capsule | 6 | 600.2 km | 62.5 mm | 134.5 mm | 2.2 |
-| Kerbin, 2 parts | 6 | 600.1 km | 62.5 mm | 124.7 mm | 2.0 |
-| Mun, capsule | 6 | 202.1 km | 15.6 mm | 20.7 mm | 1.3 |
-| Mun, 2 parts | 6 | 202.6 km | 15.6 mm | 11.8 mm | 0.8 |
-| Minmus, capsule | 6 | 60.0 km | 3.9 mm | 6.7 mm | 1.7 |
-| Minmus, 2 parts | 6 | 60.0 km | 3.9 mm | 4.8 mm | 1.2 |
-| Gilly, capsule | 6 | 16.7 km | 1.95 mm | 3.3 mm | 1.7 |
-| Gilly, 2 parts | 6 | 16.7 km | 1.95 mm | 2.5 mm | 1.3 |
-| the Moon, 2 parts | 6 | 1 744.4 km | 125 mm | 262.6 mm | 2.1 |
-| Earth, 2 parts | 6 | 6 371.1 km | 500 mm | 740.0 mm | 1.5 |
+| Kerbin, capsule | 6 | 600.1 km | 62.5 mm | 73.7 mm | 1.2 |
+| Kerbin, 2 parts | 6 | 600.1 km | 62.5 mm | 43.7 mm | 0.7 |
+| Mun, capsule | 6 | 202.1 km | 15.6 mm | 5.6 mm | 0.4 |
+| Mun, 2 parts | 6 | 202.1 km | 15.6 mm | 18.2 mm | 1.2 |
+| Minmus, capsule | 6 | 60.0 km | 3.9 mm | 4.6 mm | 1.2 |
+| Minmus, 2 parts | 6 | 60.0 km | 3.9 mm | 7.3 mm | 1.9 |
+| Gilly, capsule | 6 | 17.6 km | 1.95 mm | 1.4 mm | 0.7 |
+| Gilly, 2 parts | 6 | 17.6 km | 1.95 mm | 2.3 mm | 1.2 |
+| the Moon, 2 parts | 6 | 1 744.4 km | 125 mm | 49.2 mm | 0.4 |
+| Earth, 2 parts | 6 | 6 371.1 km | 500 mm | 292.4 mm | 0.6 |
 
-On the Moon and Earth, the first rule of the protocol cannot be kept: the craft came back more than
-10 cm off the ground and was moved onto it before its physics started, at three of the six loads on the
-Moon, by Real Solar System's workaround, always up, and at five on Earth, by stock's own pass, three
-times up and twice down, since the craft is in *prelaunch* there (see
-[Real Solar System's own workaround](limits-and-solutions/rss/the-ground-workaround.md)).
-*Settled* is read all the same, as a player gets it. The Moon series loads `reload-moon-rss.sfs`, the
-Earth series `reload-earth-rss-resave.sfs`, both in
+On Earth, the first rule of the protocol cannot be kept: the craft came back more than 10 cm off the
+ground at three of the six loads and was moved onto it before its physics started, by stock's own pass,
+twice down and once up, since the craft is in *prelaunch* there (see
+[Real Solar System's own workaround](limits-and-solutions/rss/the-ground-workaround.md)). On the Moon,
+Real Solar System's workaround ran at every load and never had to move the craft: it came back inside
+the ground by 18 to 67 mm each time, under the 10 cm the workaround acts on, and was pushed out by the
+physics engine. *Settled* is read all the same, as a player gets it. The Moon series loads
+`reload-moon-rss-resave.sfs`, the Earth series `reload-earth-rss-resave.sfs`, both in
 [Diag LandedVessel's `diag` folder](https://github.com/lhervier/KSP-Diag-LandedVessel/tree/main/diag).
 
-**With this mod.** The same test, in the same installs, on the same six worlds, with the same craft,
-loaded six times per series. On the Moon, the series loads the same save taken again once with this mod,
-`reload-moon-rss-resave.sfs` (see [Existing saves](limits-and-solutions/existing-saves.md)). In each
-screenshot, the bottom line is the loading in progress, still live, and is not counted.
+**With this mod.** The same test, in the same installs, on the same six worlds, with the same craft and
+the same saves, loaded six times per series. In each screenshot, the bottom line is the loading in
+progress, still live, and is not counted. The sessions, what the script printed and every line it
+recorded are in [`diag/runs`](../diag/README.md#the-loading-protocol).
 
 The lone capsule:
 
@@ -108,32 +113,30 @@ The capsule on its tank:
 
 ![With this mod, the capsule on its tank, six loads of the same save, on the Moon](../imgs/Diag1/on-load/2parts/40-moon.png)
 
-*The craft never jumped, and owes nothing to Real Solar System's own workaround: it ran at every load and never had to move the craft, no `Moving Vessel` line — see [Real Solar System's own workaround](limits-and-solutions/rss/the-ground-workaround.md).*
+*Real Solar System's own workaround ran at every load and never had to move the craft: no `Moving Vessel` line — see [Real Solar System's own workaround](limits-and-solutions/rss/the-ground-workaround.md).*
 
 ![With this mod, the capsule on its tank, six loads of the same save, on Earth](../imgs/Diag1/on-load/2parts/50-earth.png)
 
-*The craft never jumped, and owes nothing to Real Solar System's own workaround: the craft is in prelaunch, where stock runs the same pass at every load, and it never had to move the craft, no `Moving Vessel` line — see [Real Solar System's own workaround](limits-and-solutions/rss/the-ground-workaround.md).*
+*The craft is in prelaunch, where stock runs the same pass at every load, and it never had to move the craft: no `Moving Vessel` line — see [Real Solar System's own workaround](limits-and-solutions/rss/the-ground-workaround.md).*
 
 The ten series, read off those screenshots:
 
 | series | spread of *Settled*, without this mod | spread of *Settled*, with this mod |
 |---|---|---|
-| Kerbin, capsule | 134.5 mm | 0.004 mm |
-| Kerbin, 2 parts | 124.7 mm | 0.025 mm |
-| Mun, capsule | 20.7 mm | 0.031 mm |
-| Mun, 2 parts | 11.8 mm | 0.085 mm |
-| Minmus, capsule | 6.7 mm | 0.038 mm |
-| Minmus, 2 parts | 4.8 mm | 0.023 mm |
-| Gilly, capsule | 3.3 mm | 0.058 mm |
-| Gilly, 2 parts | 2.5 mm | 0.208 mm |
-| the Moon, 2 parts | 262.6 mm | 0.395 mm |
-| Earth, 2 parts | 740.0 mm | 0.370 mm |
+| Kerbin, capsule | 73.7 mm | 0.009 mm |
+| Kerbin, 2 parts | 43.7 mm | 0.010 mm |
+| Mun, capsule | 5.6 mm | 0.048 mm |
+| Mun, 2 parts | 18.2 mm | 0.060 mm |
+| Minmus, capsule | 4.6 mm | 0.081 mm |
+| Minmus, 2 parts | 7.3 mm | 0.045 mm |
+| Gilly, capsule | 1.4 mm | 0.039 mm |
+| Gilly, 2 parts | 2.3 mm | 0.060 mm |
+| the Moon, 2 parts | 49.2 mm | 0.384 mm |
+| Earth, 2 parts | 292.4 mm | 0.189 mm |
 
 With this mod, no load of the Moon or Earth series has a `Moving Vessel` line.
 
-The logs of every series with this mod on the Moon and Earth are in
-[`diag/runs`](../diag/README.md#on-real-solar-system); the spots of the saves, and what this mod
-corrected there, in
+The spots of the saves on the Moon and Earth, and what this mod corrected there, are in
 [Rescaled systems: Real Solar System](limits-and-solutions/rescaled-systems-real-solar-system.md).
 
 **On a runway, and on the ground beside it, on stock**
@@ -180,56 +183,74 @@ never moves; the first is what your landing legs touch. *Difference* is the firs
 both are read is in [This mod's demonstration](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/this-mods-demonstration.md).
 
 **On stock.** Its campaigns, detailed in [The measurements: loading the same save](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-measurements-loading.md):
-the same installs, with that instrument; one save on each of the six worlds, loaded six times,
-following [its protocol](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-protocol-loading.md).
-On the Moon, the save is `reload-moon-rss-resave.sfs`; on Earth, `reload-earth-rss-resave.sfs`. Over those six loads:
+the same sessions, read under the same craft at the same moments, following
+[its protocol](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-protocol-loading.md).
+Over those six loads:
 
-| world | spread of *Difference* | spread of the height KSP computes |
+| series | spread of *Difference* | spread of the height KSP computes |
 |---|---|---|
-| Kerbin | 108.1 mm | 0.039 mm |
-| Mun | 15.0 mm | 0.015 mm |
-| Minmus | 4.1 mm | 0.000 mm |
-| Gilly | 3.0 mm | 0.018 mm |
-| the Moon | 247.3 mm | 10.184 mm |
-| Earth | 693.1 mm | 0.994 mm |
+| Kerbin, capsule | 73.7 mm | 0.000 mm |
+| Kerbin, 2 parts | 43.6 mm | 0.000 mm |
+| Mun, capsule | 5.5 mm | 0.012 mm |
+| Mun, 2 parts | 18.0 mm | 0.136 mm |
+| Minmus, capsule | 4.6 mm | 0.000 mm |
+| Minmus, 2 parts | 7.3 mm | 0.000 mm |
+| Gilly, capsule | 1.4 mm | 0.041 mm |
+| Gilly, 2 parts | 2.3 mm | 0.008 mm |
+| the Moon, 2 parts | 48.7 mm | 4.985 mm |
+| Earth, 2 parts | 292.3 mm | 0.697 mm |
 
-On the Moon, the craft tipped over at one of the six loads, which Real Solar System's own workaround
-does not always prevent (see [its limits](limits-and-solutions/rss/the-ground-workaround.md#its-limits)).
-That load is read where the craft came to rest, and accounts for the spread of the height KSP computes:
-the five others spread it over 0.035 mm. Its *Difference* falls between the lowest and the highest of
-the five others, so the spread of *Difference* is the same with it or without it.
+On the Moon, the craft came back inside the ground at every load and was pushed out of it, coming to
+rest a little to one side each time; the height KSP computes follows the spot read, which accounts for
+its spread there. On Earth, nearly all of it comes from the first load, where the craft was pushed out
+the same way: the five others stay within 0.06 mm.
 
 **With this mod.** The same installs, the same saves, on the same spots, loaded six times; this mod
 is the only difference.
 
-As before, the bottom line of each screenshot is the loading in progress, and is not counted:
+As before, the bottom line of each screenshot is the loading in progress, and is not counted. The lone
+capsule:
 
-![With this mod, six loads of the same save, on Kerbin](../imgs/Diag2/on-load/00-kerbin.png)
+![With this mod, a lone capsule, six loads of the same save, on Kerbin](../imgs/Diag2/on-load/1part/00-kerbin.png)
 
-![With this mod, six loads of the same save, on the Mun](../imgs/Diag2/on-load/10-mune.png)
+![With this mod, a lone capsule, six loads of the same save, on the Mun](../imgs/Diag2/on-load/1part/10-mune.png)
 
-![With this mod, six loads of the same save, on Minmus](../imgs/Diag2/on-load/20-minmus.png)
+![With this mod, a lone capsule, six loads of the same save, on Minmus](../imgs/Diag2/on-load/1part/20-minmus.png)
 
-![With this mod, six loads of the same save, on Gilly](../imgs/Diag2/on-load/30-gilly.png)
+![With this mod, a lone capsule, six loads of the same save, on Gilly](../imgs/Diag2/on-load/1part/30-gilly.png)
 
-![With this mod, six loads of the same save, on the Moon](../imgs/Diag2/on-load/40-moon.png)
+The capsule on its tank:
 
-*The craft never jumped, and owes nothing to Real Solar System's own workaround: it ran at every load and never had to move the craft, no `Moving Vessel` line — see [Real Solar System's own workaround](limits-and-solutions/rss/the-ground-workaround.md).*
+![With this mod, the capsule on its tank, six loads of the same save, on Kerbin](../imgs/Diag2/on-load/2parts/00-kerbin.png)
 
-![With this mod, six loads of the same save, on Earth](../imgs/Diag2/on-load/50-earth.png)
+![With this mod, the capsule on its tank, six loads of the same save, on the Mun](../imgs/Diag2/on-load/2parts/10-mune.png)
 
-*The craft never jumped, and owes nothing to Real Solar System's own workaround: the craft is in prelaunch, where stock runs the same pass at every load, and it never had to move the craft, no `Moving Vessel` line — see [Real Solar System's own workaround](limits-and-solutions/rss/the-ground-workaround.md).*
+![With this mod, the capsule on its tank, six loads of the same save, on Minmus](../imgs/Diag2/on-load/2parts/20-minmus.png)
+
+![With this mod, the capsule on its tank, six loads of the same save, on Gilly](../imgs/Diag2/on-load/2parts/30-gilly.png)
+
+![With this mod, the capsule on its tank, six loads of the same save, on the Moon](../imgs/Diag2/on-load/2parts/40-moon.png)
+
+*Real Solar System's own workaround ran at every load and never had to move the craft: no `Moving Vessel` line — see [Real Solar System's own workaround](limits-and-solutions/rss/the-ground-workaround.md).*
+
+![With this mod, the capsule on its tank, six loads of the same save, on Earth](../imgs/Diag2/on-load/2parts/50-earth.png)
+
+*The craft is in prelaunch, where stock runs the same pass at every load, and it never had to move the craft: no `Moving Vessel` line — see [Real Solar System's own workaround](limits-and-solutions/rss/the-ground-workaround.md).*
 
 Read off those screenshots:
 
-| world | *Difference*, without this mod | *Difference*, with this mod | spread, without | spread, with |
+| series | *Difference*, without this mod | *Difference*, with this mod | spread, without | spread, with |
 |---|---|---|---|---|
-| Kerbin | +199.797 to +307.930 mm | +246.972 to +246.976 mm | 108.1 mm | 0.004 mm |
-| Mun | −23.958 to −38.925 mm | −40.756 to −40.769 mm | 15.0 mm | 0.013 mm |
-| Minmus | −12.291 to −16.351 mm | −14.202 to −14.204 mm | 4.1 mm | 0.002 mm |
-| Gilly | +37.426 to +40.391 mm | +37.511 to +37.520 mm | 3.0 mm | 0.009 mm |
-| the Moon | −146.273 to +101.023 mm | −114.123 to −113.920 mm | 247.3 mm | 0.203 mm |
-| Earth | +105.929 to +798.985 mm | +121.805 to +122.136 mm | 693.1 mm | 0.331 mm |
+| Kerbin, capsule | −31.435 to +42.293 mm | −2.189 to −2.184 mm | 73.7 mm | 0.005 mm |
+| Kerbin, 2 parts | +14.647 to +58.264 mm | −2.186 to −2.182 mm | 43.6 mm | 0.004 mm |
+| Mun, capsule | −37.583 to −32.041 mm | −41.396 to −41.384 mm | 5.5 mm | 0.012 mm |
+| Mun, 2 parts | −43.858 to −25.814 mm | −40.976 to −40.964 mm | 18.0 mm | 0.012 mm |
+| Minmus, capsule | −10.790 to −6.219 mm | −8.954 to −8.941 mm | 4.6 mm | 0.013 mm |
+| Minmus, 2 parts | −11.222 to −3.905 mm | −8.950 to −8.929 mm | 7.3 mm | 0.022 mm |
+| Gilly, capsule | +6.393 to +7.784 mm | +7.170 to +7.175 mm | 1.4 mm | 0.005 mm |
+| Gilly, 2 parts | +6.919 to +9.236 mm | +7.177 to +7.182 mm | 2.3 mm | 0.005 mm |
+| the Moon, 2 parts | −96.777 to −48.070 mm | −114.043 to −113.968 mm | 48.7 mm | 0.074 mm |
+| Earth, 2 parts | −43.698 to +248.589 mm | +121.669 to +121.952 mm | 292.3 mm | 0.283 mm |
 
 **On a runway, and on the ground beside it, on stock**
 ([the readings](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-measurements-runway.md)).
@@ -273,50 +294,51 @@ loading stands 21.3 mm above them, as with Diag LandedVessel.
 the same on every load of every series, to within three micrometres; *Settled* is not, once, on any of
 the six bodies.
 
-**The spread is the size the culprit predicts.** From Gilly to Earth it goes from 2.5 mm to 740.0 mm,
-more than two hundredfold, but counted in float steps at that distance from the centre of the body it
-stays around one or two: 0.8 to 2.2 steps, series after series.
+**The spread is the size the culprit predicts.** From Gilly to Earth it goes from 1.4 mm to 292.4 mm,
+two hundredfold, but counted in float steps at that distance from the centre of the body it stays
+within two: 0.4 to 1.9 steps, series after series.
 
 **It is the ground that moves, not only the craft.** The craft never moved and the spot never changed,
-yet the height KSP computes held still while the collision surface wandered: by up to eleven
-centimetres on Kerbin, nearly seventy on Earth in Real Solar System. The ground itself is not built in the same
+yet the height KSP computes held still while the collision surface wandered: by up to seven
+centimetres on Kerbin, nearly thirty on Earth in Real Solar System. The ground itself is not built in the same
 place twice. The full readings, and what else they show, are in
 [What the numbers say](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-measurements-loading.md#what-the-numbers-say).
 
-**With this mod, both stop moving.** On Kerbin, the craft's spread goes from more than twelve
-centimetres to a few hundredths of a millimetre at most; on the other stock worlds too, what is left
-stays in the hundredths of a millimetre, two tenths at worst, and on the Moon and Earth of Real Solar
-System within a few tenths, at most 0.3 % of a float step there — far below the float step at any of
-these distances. *On rails* is still
-identical on every line, so KSP put the craft back at the same place every time, and the craft now
-comes to rest at the same place every time too. Under the craft, the ground reading does the same.
+**With this mod, both stop moving.** On Kerbin, the craft's spread goes from several centimetres to a
+hundredth of a millimetre; on the other stock worlds too, what is left stays in the hundredths of a
+millimetre, 0.081 mm at worst, and on the Moon and Earth of Real Solar System within a few tenths, at
+most 0.3 % of a float step there — far below the float step at any of these distances. *On rails* is
+still identical on every line, so KSP put the craft back at the same place every time, and the craft
+now comes to rest at the same place every time too. Under the craft, the ground reading does the same.
 Three things to read in its column, *Difference*:
 
-- **It stops varying**, by a factor of three hundred on Gilly, a thousand on the Mun and on the Moon, two
-  thousand on Minmus and on Earth, and more than twenty thousand on Kerbin. On Kerbin the surface under
-  the craft came back somewhere else over a range of eleven centimetres; it now comes back within four
+- **It stops varying**, by a factor of two hundred and fifty to fifteen hundred on the Mun, Minmus,
+  Gilly, the Moon and Earth, and of more than ten thousand on Kerbin. On Kerbin the surface under the
+  craft came back somewhere else over a range of seven centimetres; it now comes back within five
   thousandths of a millimetre. That is the fix, and that is all of it.
 - **It does not get smaller, and it is not supposed to.** It stops at a value the stock draws are
-  scattered around. On Kerbin and on Minmus the fixed reading falls well inside the range of the six
-  loadings without this mod, on the Moon inside it, and on Gilly and on Earth just inside it. On the Mun it falls just
-  below: six draws are few for a spread that wide, and a seventh could as well have landed under
-  −40.76 mm. Put the loading that landed on −23.958 next to a fixed −40.765 and the fix looks like it
-  made things worse; it did not, that line was luck. This mod does not choose a better number for that
-  patch of ground; it stops drawing a new one at every loading.
+  scattered around. On Kerbin with a lone capsule, on Minmus, on Gilly, on the Mun with two parts and on
+  Earth, the fixed reading falls inside the range of the six loadings without this mod. Elsewhere it
+  falls just outside: on Kerbin with two parts, 16.8 mm below the lowest of the six; on the Mun with a
+  lone capsule, 3.8 mm below; on the Moon, 17.2 mm below — each time about a quarter of a float step or less.
+  Six draws are few for a spread that wide, and a seventh could as well have landed under the fixed
+  value. Put the loading on the Mun that landed on −32.041 next to a fixed −41.390 and the fix looks
+  like it made things worse; it did not, that line was luck. This mod does not choose a better number
+  for that patch of ground; it stops drawing a new one at every loading.
 - **What is left is no longer the ground, and it stays.** *Ground KSP computes* is what says the same
-  spot was read every time: 189,650.347 mm on all six Kerbin lines, and `0.000` on the Minmus flats. On
-  the Mun and on Gilly, where the ground is not level, that column wanders a little by itself — 0.018 mm
-  over the six Gilly loadings — because a craft settling a hair to one side asks for the height of a
-  slightly different point; on Real Solar System, without this mod, a craft pushed out of the ground
-  lands elsewhere, and the column follows. On Gilly that is more than the spread of *Difference* under
-  it, 0.009 mm: both columns follow the sample point together, and most of the wobble cancels between
-  them. What remains of the spread is the craft, not the terrain. What remains of *Difference* itself is
-  geometry: the collision mesh is made of flat triangles, and they miss what the ground does between two
-  corners —
+  spot was read every time: 64,785.079 mm on all twelve Kerbin lines, and `0.000` on the Minmus flats.
+  On the Mun and on Gilly, where the ground is not perfectly level, that column wanders a little by
+  itself — 0.040 mm over the six loadings of the lone capsule on Gilly — because a craft settling a hair
+  to one side asks for the height of a slightly different point; on Real Solar System, without this
+  mod, a craft pushed out of the ground lands elsewhere, and the column follows. On Gilly that is more
+  than the spread of *Difference* under it, 0.005 mm: both columns follow the sample point together,
+  and most of the wobble cancels between them. What remains of the spread is the craft, not the
+  terrain. What remains of *Difference* itself is geometry: the collision mesh is made of flat
+  triangles, and they miss what the ground does between two corners —
   [KSP Diag - Terrain Height explains why a correct reading is not zero](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/this-mods-demonstration.md#why-a-correct-reading-is-not-zero).
-  On that Gilly slope it is +37.5 mm, on that Kerbin slope +247.0 mm, on the Moon −114.0 mm, on Earth
-  +122.0 mm, the same on every loading. Removing it would mean giving that mesh more triangles, which
-  costs frames, for a gap nobody can feel.
+  On the levelled grass of Kerbin it is −2.2 mm, on the Mun −41.4 and −41.0 mm, on Minmus −8.9 mm, on
+  Gilly +7.2 mm, on the Moon −114.0 mm, on Earth +121.8 mm, the same on every loading. Removing it would
+  mean giving that mesh more triangles, which costs frames, for a gap nobody can feel.
 
 **A runway moves on its own, and this mod stops it.** On stock, the step between the deck and the ground
 beside it changes by up to 81.7 mm on Kerbin and 43.0 mm on the Mun from one loading to the next: the

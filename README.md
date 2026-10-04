@@ -113,8 +113,8 @@ instruments: one reads the landed craft, the other the ground itself. In each su
 figure is without this mod, the second with it.
 
 **Loading the same save**, six times, on Kerbin, the Mun, Minmus, Gilly, and the Moon and Earth of
-[Real Solar System](https://github.com/KSP-RO/RealSolarSystem): the ground comes back over 108.1 mm on
-Kerbin and 693.1 mm on Earth, and within 0.4 mm everywhere with this mod. For the second culprit, the
+[Real Solar System](https://github.com/KSP-RO/RealSolarSystem): the ground comes back over 73.7 mm on
+Kerbin and 292.3 mm on Earth, and within 0.3 mm everywhere with this mod. For the second culprit, the
 statics, on the runway of the KSC and on one placed by Kerbal Konstructs on the Mun: the runway comes back
 over 130.1 mm, on its own, and over 0.216 mm with this mod.
 

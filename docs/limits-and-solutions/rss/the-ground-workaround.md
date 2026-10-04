@@ -31,8 +31,8 @@ the player switches to a craft far away. It never runs while a craft is already 
 **It hides the symptom, not the defect.** It moves the craft, never the ground: with it on, as in
 every series of
 [Checking the culprit: loading the same save](../../checking-the-culprit-loading.md), the ground is still
-built somewhere else at each load, by 247.3 mm on the Moon and 693.1 mm on Earth, and the craft still
-comes to rest somewhere else, by 262.6 mm and 740.0 mm. All it can do is keep the craft from being
+built somewhere else at each load, by 48.7 mm on the Moon and 292.3 mm on Earth, and the craft still
+comes to rest somewhere else, by 49.2 mm and 292.4 mm. All it can do is keep the craft from being
 thrown, and it does not always manage that.
 
 ## Reloading until something happens
