@@ -211,6 +211,16 @@ rotation Principia computes.
 
 **→ Full chapter: [Principia](limits-and-solutions/principia.md)**
 
+### Tilt'Em
+
+**TBD — read in the source, not measured.** Tilt'Em gives the planets an axial tilt by rewriting the
+rotation of every body, one of the two values this fix places the terrain from, in a stock method this
+fix also patches. It writes that rotation the way stock does, so the fix reads it like the rest of the
+game, and the fix's own patch on that method still runs. Open: whether the ground follows a tilted body
+when a craft comes down to the altitude where the world starts turning with it.
+
+**→ Full chapter: [Tilt'Em](limits-and-solutions/tilt-em.md)**
+
 ### Sloped ground
 
 **TBD.** Every campaign so far is on flat ground. On a slope, a separate stock bug, read in the code and
