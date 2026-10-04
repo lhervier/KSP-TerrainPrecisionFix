@@ -112,11 +112,10 @@ Each situation where a craft meets the ground is measured twice, without this mo
 instruments: one reads the landed craft, the other the ground itself. In each summary below, the first
 figure is without this mod, the second with it.
 
-**Loading the same save**, six times, on Kerbin, the Mun, Minmus, Gilly, and the Moon and Earth of
+**Loading the same save**, six times, on the four stock worlds and the Moon and Earth of
 [Real Solar System](https://github.com/KSP-RO/RealSolarSystem): the ground comes back over 73.7 mm on
-Kerbin and 292.3 mm on Earth, and within 0.3 mm everywhere with this mod. For the second culprit, the
-statics, on the runway of the KSC and on one placed by Kerbal Konstructs on the Mun: the runway comes back
-over 116.5 mm, on its own, and over 0.177 mm with this mod.
+Kerbin and 292.3 mm on Earth, within 0.3 mm with this mod. The runway of the KSC comes back over
+116.5 mm, and 0.177 mm with this mod.
 
 **→ Full chapter: [Checking the culprit: loading the same save](docs/checking-the-culprit-loading.md)**
 
@@ -131,9 +130,8 @@ mod; the switch itself moves nothing.
 **→ Full chapter: [Checking the culprit: switching to a craft far away](docs/checking-the-culprit-switching.md)**
 
 **Driving on while the world moves**, every 500 m a rover drives: the ground under it jumps by about
-25 mm on Kerbin and 16 cm on Earth, where the rover jumps with it; with this mod, no jump is left. The
-runway of the KSC moves with the ground by up to 54.8 mm on Kerbin and 232 mm on Earth, and within 0.07
-and 0.12 mm with this mod — though it still moves with its terrain fix alone.
+25 mm on Kerbin and up to 243 mm on Earth, and the runway beside it with it; with this mod, no jump is
+left.
 
 **→ Full chapter: [Checking the culprit: driving on while the world moves](docs/checking-the-culprit-driving.md)**
 
