@@ -29,7 +29,7 @@ both cases, and its Kopernicus configs say what to expect before the game is eve
 | Eeloo | the stock body, moved into orbit of Sarnus | 210 000 m (stock) | 8 |
 
 For comparison, read in flight by
-[PQS Bench](https://github.com/lhervier/KSP-PQSBench/blob/master/README.md#how-the-terrain-of-that-body-is-set-up):
+[PQS Bench](https://github.com/lhervier/KSP-PQSBench/blob/master/docs/how-the-bench-works.md#how-the-terrain-of-that-body-is-set-up):
 Kerbin subdivides to level 10 and the Mun to 9 — so the other `maxLevel` of this chapter is really
 exercised there.
 
