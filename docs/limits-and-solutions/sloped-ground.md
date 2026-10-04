@@ -31,7 +31,7 @@ For `L = 1 m`: 15 mm at 10°, 64 mm at 20°, 103 mm at 25°, 289 mm at 30°. Mov
 applied, except when the root carries a `ModuleGroundPart`.
 
 *To test:* the campaign already run on flat ground, run again on a slope of 30° or more — the same
-install, the same lone capsule, the same six loads, without and with this fix. It is the one case where
+install, six loads, but with a lone capsule this time, without and with this fix. It is the one case where
 the two defects can be told apart: the fix makes the ground stop moving and leaves the slope move as it
 is. Expected, if the reading is right: a `ground contact! - error. Moving Vessel down` line at every
 load, whose value changes from load to load without the fix, and comes back the same with it. The same
