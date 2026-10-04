@@ -232,5 +232,11 @@ Rien de ceci ne change ce que l'issue demande.
   à l'instrument, donc plutôt dans le dépôt du Diag : y déplacer les deux d'ici) ; un Diag par session
   comme aujourd'hui, ou les deux ensemble ; les outils du serveur qui manqueront (Set Position, Set
   Orbit, Infinite Fuel : seulement ceux qu'un script utilise).
+- **Diags : *Clear* remet la fenêtre à sa hauteur initiale** (Lionel, 2026-10-04). Diag TerrainHeight,
+  Diag LandedVessel et Diag FloatingOrigin : leur fenêtre (`GUILayout.Window`) garde la hauteur qu'elle
+  avait avant *Clear table*, et un vide reste sous le tableau, jusque dans les captures. Remettre la
+  hauteur de `windowRect` à zéro au *Clear* (et sans doute au *Delete* d'une ligne), pour qu'elle se
+  recale sur son contenu. Contourné en attendant par les scripts de capture (`set_member` de
+  `windowRect`).
 - **Le coût du correctif sur Kerbin.** La campagne de performance a été volée au-dessus de la Mun ;
   Kerbin, où les quads sont quatre fois plus grands, vaut d'être mesuré.
