@@ -4,10 +4,10 @@ The logs this mod's performance figures are read from. The figures themselves, a
 in [Performance](../docs/performance.md).
 
 Two instruments, for two questions: what placing one terrain vertex costs, and what a whole frame pays.
-Every run was flown on the same save, on the same machine, and in the same session of runs as the stock
-reference runs kept with PQS Bench, which describe
-[the save and the machine](https://github.com/lhervier/KSP-PQSBench/blob/master/perfs/README.md) —
-figures from another machine are not comparable to these.
+Every run was flown on the same save and on the same machine as the stock reference runs kept with PQS
+Bench, which describe [the save and the machine](https://github.com/lhervier/KSP-PQSBench/blob/master/perfs/README.md) —
+figures from another machine are not comparable to these. The PQS Bench runs belong to the same session
+of runs as those; the profiler runs, to a later one.
 
 ## What a vertex costs
 
@@ -39,23 +39,33 @@ Stock Quad Cache.
 
 ## What a frame pays
 
-Measured with [KSPProfiler](https://github.com/KSPModdingLibs/KSPProfiler) 1.0.0, **by the procedure
-written in [Performance](../docs/performance.md#how-the-frames-were-timed)**, which also reads the
-figures. The three configurations are kept here together, because they are only ever read against each
-other.
+Measured with [KSPProfiler](https://github.com/KSPModdingLibs/KSPProfiler) 1.0.0, through
+[a fork of it](https://github.com/lhervier/KSP-ExtMod-KSPProfiler) that
+[KSP-MCPServer](https://github.com/lhervier/KSP-MCPServer) can drive, **by the procedure written in
+[Performance](../docs/performance.md#how-the-frames-were-timed)**, which also reads the figures. The runs
+were flown by [this script](https://github.com/lhervier/KSP-PQSBench/blob/master/perfs/automation/run-perfs.py).
+The three configurations are kept here together, because they are only ever read against each other.
 
-Six runs, two per configuration, in this order: Stock Quad Cache, this mod, stock, and again. A seventh,
-the first one flown, is not here: its save was reloaded in flight without restarting KSP.
+Nine runs, three per configuration, each in a fresh KSP, in this order: stock, Stock Quad Cache, this
+mod, and again, three rounds. They belong to one session of runs that also measured, in each round,
+Terrain Precision Fix with [Rock Precision Fix](https://github.com/lhervier/KSP-RockPrecisionFix), for
+that mod's page. The mission time at the start and the stop of each capture is as the script recorded
+it.
 
-| configuration | run | frames captured | CSV | `KSP.log` |
-|---|---|---|---|---|
-| stock | 1 | 7 084 | [csv](runs/profiler/mun-05km-stock-1.csv) | [log](runs/profiler/mun-05km-stock-1.log) |
-| stock | 2 | 6 606 | [csv](runs/profiler/mun-05km-stock-2.csv) | [log](runs/profiler/mun-05km-stock-2.log) |
-| Stock Quad Cache | 1 | 6 724 | [csv](runs/profiler/mun-05km-stockquadcache-1.csv) | [log](runs/profiler/mun-05km-stockquadcache-1.log) |
-| Stock Quad Cache | 2 | 6 714 | [csv](runs/profiler/mun-05km-stockquadcache-2.csv) | [log](runs/profiler/mun-05km-stockquadcache-2.log) |
-| this mod | 1 | 6 785 | [csv](runs/profiler/mun-05km-fix-1.csv) | [log](runs/profiler/mun-05km-fix-1.log) |
-| this mod | 2 | 6 988 | [csv](runs/profiler/mun-05km-fix-2.csv) | [log](runs/profiler/mun-05km-fix-2.log) |
+| configuration | run | captured from | to | frames captured | CSV | `KSP.log` |
+|---|---|---|---|---|---|---|
+| stock | 1 | 30.000 s | 100.12 s | 6 630 | [csv](runs/profiler/mun-05km-stock-1.csv) | [log](runs/profiler/mun-05km-stock-1.log) |
+| stock | 2 | 29.996 s | 100.30 s | 6 590 | [csv](runs/profiler/mun-05km-stock-2.csv) | [log](runs/profiler/mun-05km-stock-2.log) |
+| stock | 3 | 29.977 s | 100.18 s | 6 673 | [csv](runs/profiler/mun-05km-stock-3.csv) | [log](runs/profiler/mun-05km-stock-3.log) |
+| Stock Quad Cache | 1 | 29.972 s | 100.26 s | 6 813 | [csv](runs/profiler/mun-05km-stockquadcache-1.csv) | [log](runs/profiler/mun-05km-stockquadcache-1.log) |
+| Stock Quad Cache | 2 | 30.020 s | 100.44 s | 6 827 | [csv](runs/profiler/mun-05km-stockquadcache-2.csv) | [log](runs/profiler/mun-05km-stockquadcache-2.log) |
+| Stock Quad Cache | 3 | 29.973 s | 100.14 s | 6 742 | [csv](runs/profiler/mun-05km-stockquadcache-3.csv) | [log](runs/profiler/mun-05km-stockquadcache-3.log) |
+| this mod | 1 | 29.996 s | 100.16 s | 6 576 | [csv](runs/profiler/mun-05km-fix-1.csv) | [log](runs/profiler/mun-05km-fix-1.log) |
+| this mod | 2 | 30.013 s | 100.24 s | 6 558 | [csv](runs/profiler/mun-05km-fix-2.csv) | [log](runs/profiler/mun-05km-fix-2.log) |
+| this mod | 3 | 30.020 s | 100.10 s | 6 763 | [csv](runs/profiler/mun-05km-fix-3.csv) | [log](runs/profiler/mun-05km-fix-3.log) |
 
-Every run's frame count is under the profiler's 10 000 ceiling, and matches 70 seconds at its mean
-frame rate. Each `KSP.log` says which mods were loaded, and in the runs with this mod, that it placed
-the Mun's terrain in double precision.
+Every run's frame count is under the profiler's 10 000 ceiling, so each capture ended on *Stop*, and
+matches 70 seconds at its mean frame rate. Each `KSP.log` says which mods were loaded, in its
+`Mod DLLs found` list; the runs with Stock Quad Cache log
+`[StockQuadCache] Version 0.1.0.0 installed, log level Info`, and the runs with this mod
+`[TerrainPrecisionFix] Mun: terrain placed in double precision`.
