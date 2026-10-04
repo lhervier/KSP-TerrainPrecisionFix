@@ -11,87 +11,94 @@ its method and its protocol.
 
 This fix is built on top of [KSP Community Fixes](https://github.com/KSPModdingLibs/KSPCommunityFixes),
 the base most players run, so every campaign on this page is run in an install that has it: KSP 1.12.5 with Harmony, ModuleManager,
-KSP Community Fixes 1.41.1 and one of the two instruments — and this mod, or not. *On stock*, below,
-means that install without this mod.
+KSP Community Fixes 1.41.1, both instruments, and [KSP-MCPServer](https://github.com/lhervier/KSP-MCPServer),
+which drives the rover — and this mod, or not. *On stock*, below, means that install without this mod.
 
 The other way a craft meets the ground, and the one you cannot avoid by never quitting: a craft is left
 parked while a rover drives away from it, past 2500 m, where the game unloads it — then comes back
 within 200 m, where physics takes the parked craft over again. No save is loaded at any point and the
 scene is never changed: one single flight, six round trips in a row, on Kerbin. It is
-[the second protocol](https://github.com/lhervier/KSP-Diag-LandedVessel#the-protocol) of KSP Diag -
-Landed Vessel.
+[the approach protocol](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-approach.md)
+of both instruments, on the save they publish, `approach-kerbin.sfs`, played by its script,
+[`run-approach.py`](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-approach.md#played-by-a-script),
+once without this mod and once with it, both instruments recording at the same moments. The session
+with this mod is logged in [`diag/runs/approach-fix.log`](../diag/runs/approach-fix.log); what the
+script printed is in [`approach-fix-script.txt`](../diag/runs/approach-fix-script.txt), and every line
+it recorded in [`approach-fix-lines.json`](../diag/runs/approach-fix-lines.json).
 
 ## The craft, over six round trips
 
-**On stock**, in an install with KSP Community Fixes and that instrument
-([the readings](https://github.com/lhervier/KSP-Diag-LandedVessel#the-measurements)). *Moved* —
-how far the craft ends up from the height it was handed back at — reads:
+**On stock**
+([the readings](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-measurements-approach.md)).
+*Moved* — how far the craft ends up from the height it was handed back at — reads:
 
 | round trip | 1 | 2 | 3 | 4 | 5 | 6 |
 |---|---|---|---|---|---|---|
-| *Moved* | +12.570 mm | −17.549 mm | +10.969 mm | −7.749 mm | −7.484 mm | +19.170 mm |
+| *Moved* | −28.752 mm | +6.619 mm | −24.666 mm | +34.263 mm | +6.758 mm | −37.177 mm |
 
-Over the six, the craft comes to rest across a spread of 21.8 mm. The height it is handed back at,
-read before each round trip and after it, never moves by more than six thousandths of a millimetre.
+Over the whole series — where the craft started, and where each of the six round trips left it — it
+comes to rest across a spread of 46.8 mm. The height it is handed back at, read before each round trip
+and after it, never moves by more than a thousandth of a millimetre.
 
-**With this mod**, in that same install, on that same save, with this mod as the only difference. The
-six screenshots are in [`imgs/Diag1/on-approach`](../imgs/Diag1/on-approach), and the session is logged in
-[`diag/runs/approach-diag1-fix.log`](../diag/runs/approach-diag1-fix.log).
+**With this mod**, in that same install, on that same save, with this mod as the only difference. One
+screenshot per round trip, the table cleared between them:
+
+![With this mod, the first round trip, read by Diag LandedVessel](../imgs/Diag1/on-approach/1.png)
+
+The five others are in [`imgs/Diag1/on-approach`](../imgs/Diag1/on-approach).
 
 | round trip | 1 | 2 | 3 | 4 | 5 | 6 |
 |---|---|---|---|---|---|---|
-| *Moved*, without this mod | +12.570 mm | −17.549 mm | +10.969 mm | −7.749 mm | −7.484 mm | +19.170 mm |
-| *Moved*, with this mod | −0.023 mm | −0.020 mm | −0.043 mm | −0.041 mm | +0.086 mm | −0.022 mm |
+| *Moved*, without this mod | −28.752 mm | +6.619 mm | −24.666 mm | +34.263 mm | +6.758 mm | −37.177 mm |
+| *Moved*, with this mod | −0.073 mm | +0.032 mm | −0.036 mm | −0.027 mm | +0.015 mm | +0.050 mm |
 
-Over the six round trips, the craft comes to rest across a spread of 21.8 mm without this mod and
-0.094 mm with it.
+Over the whole series, the craft comes to rest across a spread of 46.8 mm without this mod and
+0.103 mm with it.
 
 ## The ground, over six round trips
 
-**On stock**, with KSP Diag - Terrain Height and
-[its own approach protocol](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-protocol-approach.md)
-— the same one, on the same spot
+**On stock**
 ([the readings](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-measurements-approach.md)).
 The height KSP computes reads the same digits on every line of the six round trips. *Difference*,
 across each round trip:
 
 | round trip | 1 | 2 | 3 | 4 | 5 | 6 |
 |---|---|---|---|---|---|---|
-| *Difference* moved by | −21.782 mm | +5.904 mm | +4.563 mm | +4.689 mm | −6.096 mm | +2.676 mm |
+| *Difference* moved by | −28.722 mm | +6.495 mm | −24.546 mm | +28.226 mm | +6.381 mm | −37.167 mm |
 
-Over the six, *Difference* spreads over 21.8 mm. From the moment the craft is back in range, still
-packed, to the moment physics takes it over, it moves by 0.040 mm at most.
+Over the whole series, *Difference* spreads over 49.3 mm. From the moment the craft is back in range,
+still packed, to the moment physics takes it over, it moves by 0.023 mm at most.
 
-**With this mod**, in that same install, on that same save, with this mod as the only difference. The
-six screenshots are in [`imgs/Diag2/on-approach`](../imgs/Diag2/on-approach), and the session is logged in
-[`diag/runs/approach-diag2-fix.log`](../diag/runs/approach-diag2-fix.log).
+**With this mod**, in that same install, the same session:
+
+![With this mod, the first round trip, read by Diag TerrainHeight](../imgs/Diag2/on-approach/1.png)
+
+The five others are in [`imgs/Diag2/on-approach`](../imgs/Diag2/on-approach).
 
 | round trip | 1 | 2 | 3 | 4 | 5 | 6 |
 |---|---|---|---|---|---|---|
-| *Difference* moved by, without this mod | −21.782 mm | +5.904 mm | +4.563 mm | +4.689 mm | −6.096 mm | +2.676 mm |
-| *Difference* moved by, with this mod | +0.006 mm | −0.003 mm | +0.006 mm | +0.001 mm | +0.001 mm | −0.002 mm |
+| *Difference* moved by, without this mod | −28.722 mm | +6.495 mm | −24.546 mm | +28.226 mm | +6.381 mm | −37.167 mm |
+| *Difference* moved by, with this mod | −0.002 mm | +0.008 mm | −0.001 mm | −0.001 mm | 0.000 mm | −0.008 mm |
 
-On the fifth round trip, the last line was not recorded: the value used is the one the reading in
-progress shows under 200 m, −2.260 mm, and the first line of the sixth round trip reads the same.
-
-Over the whole series, the ground comes back within a spread of 21.8 mm without this mod, and
-0.011 mm with it.
+Over the whole series, the ground comes back within a spread of 49.3 mm without this mod, and
+0.010 mm with it.
 
 ## What the measurements say
 
 **The craft is handed back at the same place, and does not come to rest there.** Same craft, same spot,
-same flight: 7.5 to 19.2 mm every time, upwards as often as downwards, and never the same twice, while
-the height it is handed back at never moves by more than six thousandths of a millimetre. What changes
-is what it settles onto. Over the six, 21.8 mm: a fraction of a float step, where six loads of a save
-spread it over two of them.
+same flight: 6.6 to 37.2 mm every time, upwards as often as downwards, and never the same twice, while
+the height it is handed back at never moves by more than a thousandth of a millimetre. What changes
+is what it settles onto. Over the series, 46.8 mm: less than a float step, of the same order as six
+loads of a save on Kerbin.
 
 **It is the ground that moves, and it has moved before the craft comes back.** The ground itself comes
-back somewhere else on every round trip, over the same 21.8 mm, and it has already moved by the time the
-craft is back in range, while it is still packed: from then to the moment physics takes the craft over,
-it moves by 0.040 mm at most.
+back somewhere else on every round trip, by as much as the craft, to within a few tenths of a
+millimetre on five of the six — 6.0 mm apart on the fourth — and it has already moved by the time the
+craft is back in range, while it is still packed: from then to the moment physics takes the craft
+over, it moves by 0.023 mm at most.
 
 **With this mod, the ground stays where it is while the craft is away.** The craft comes to rest across
-0.094 mm and the ground across 0.011 mm: hundredths of a millimetre, of the same order as after a load,
+0.103 mm and the ground across 0.010 mm: hundredths of a millimetre, of the same order as after a load,
 against a float step of 62.5 mm there.
 
 In other words: reload the same save as many times as you like, or leave a craft parked and come back

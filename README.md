@@ -121,7 +121,7 @@ over 130.1 mm, on its own, and over 0.216 mm with this mod.
 **→ Full chapter: [Checking the culprit: loading the same save](docs/checking-the-culprit-loading.md)**
 
 **Coming back to a craft left parked**, driving away until it unloads, then back, six times in one
-flight: its ground comes back over 21.8 mm, and over 0.011 mm with this mod.
+flight: its ground comes back over 49.3 mm, and over 0.010 mm with this mod.
 
 **→ Full chapter: [Checking the culprit: coming back to a craft left parked](docs/checking-the-culprit-approach.md)**
 

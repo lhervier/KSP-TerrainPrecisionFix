@@ -51,14 +51,21 @@ played by its script, `run-switching.py`, on `switch-kerbin.sfs`. Read in
   printed in [`runs/switching-fix-script.txt`](runs/switching-fix-script.txt), and every line it
   recorded, in both instruments, in [`runs/switching-fix-lines.json`](runs/switching-fix-lines.json).
 
+## The approach protocol
+
+The install of [The loading protocol](#the-loading-protocol), on Kerbin: the six round trips of
+[the approach protocol](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-approach.md),
+in a single flight, played by its script, `run-approach.py`, on `approach-kerbin.sfs`. Read in
+[Coming back to a craft left parked](../docs/checking-the-culprit-approach.md).
+
+- [`runs/approach-fix.log`](runs/approach-fix.log) — the `KSP.log` of the session; what the script
+  printed in [`runs/approach-fix-script.txt`](runs/approach-fix-script.txt), and every line it
+  recorded, in both instruments, in [`runs/approach-fix-lines.json`](runs/approach-fix-lines.json).
+
 ## On the stock system
 
 KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, this mod and one instrument.
 
-- [`runs/approach-diag1-fix.log`](runs/approach-diag1-fix.log) — the six round trips of
-  [the approach protocol](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-approach.md)
-  on Kerbin, in a single flight, read by Diag LandedVessel.
-- [`runs/approach-diag2-fix.log`](runs/approach-diag2-fix.log) — the same, read by Diag TerrainHeight.
 - [`runs/runway-diag1-fix.log`](runs/runway-diag1-fix.log) — the six loadings of
   [the runway protocol](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-runway.md)
   on Kerbin, read by Diag LandedVessel.
