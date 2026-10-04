@@ -74,8 +74,8 @@ the very first load.
 
 **It never sees the ground move under a craft that is already rolling.** Every 500 m a craft travels,
 KSP moves the floating origin back onto it, and stock places the ground under it again, somewhere else.
-On Earth, across such a move, the ground under a rover driving on the grass by the KSC moved by 142 to
-421 mm without this mod, and the rover was seen to jump; with this mod, a move changes nothing
+On Earth, across such a move, the ground under a rover driving on the grass by the KSC moved by 159 to
+243 mm without this mod, and the rover was seen to jump; with this mod, a move changes nothing
 ([Checking the culprit: driving on while the world moves](../../checking-the-culprit-driving.md#on-earth)).
 The craft does not go off rails there, so the workaround does not run.
 

@@ -77,6 +77,23 @@ played by its script, `run-runway.py`. Read in
   the script printed in [`runs/runway-mun-kk-fix-script.txt`](runs/runway-mun-kk-fix-script.txt), and
   every line it recorded in [`runs/runway-mun-kk-fix-lines.json`](runs/runway-mun-kk-fix-lines.json).
 
+## The driving protocol
+
+KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, this mod at `logLevel = Debug`,
+KSP Diag - Terrain Height, KSP Diag - Floating Origin and KSP-MCPServer: one run of three shifts of
+[the driving protocol](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-protocol-driving.md),
+played by its script, `run-driving.py`; on Earth, Real Solar System 20.1.3.0 and what it requires as
+well. Each log holds one line per quad this mod placed, with how far it was moved. Read in
+[Driving on while the world moves](../docs/checking-the-culprit-driving.md).
+
+- [`runs/driving-diag2-fix.log`](runs/driving-diag2-fix.log) — on Kerbin, `driving-kerbin.sfs`; what the
+  script printed in [`runs/driving-diag2-fix-script.txt`](runs/driving-diag2-fix-script.txt), and every
+  line it recorded in [`runs/driving-diag2-fix-lines.json`](runs/driving-diag2-fix-lines.json).
+- [`runs/driving-earth-rss-diag2-fix.log`](runs/driving-earth-rss-diag2-fix.log) — on Earth,
+  `driving-earth-rss.sfs`; what the script printed in
+  [`runs/driving-earth-rss-diag2-fix-script.txt`](runs/driving-earth-rss-diag2-fix-script.txt), and
+  every line it recorded in [`runs/driving-earth-rss-diag2-fix-lines.json`](runs/driving-earth-rss-diag2-fix-lines.json).
+
 ## On the stock system
 
 KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, this mod and one instrument.
