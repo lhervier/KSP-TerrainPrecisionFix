@@ -66,7 +66,7 @@ Where a quad of the highest level meets a coarser one, the vertices they are sup
 already apart in stock, and the terrain has a crack along the seam that can be seen, though it takes
 looking for. This mod corrects the finer side only, so it adds its own correction to that gap.
 Measured with KSP Diag - Quad Seams, the median of the largest gap of a load goes from about 1.3 m to
-about 1.9 m on Earth (seventeen loads without this mod, nine with it), and from about 157 mm to about
+about 1.9 m on Earth (79 loads without this mod, nine with it), and from about 157 mm to about
 225 mm on Kerbin (seven and ten loads). Visual only, since the coarser quads have no collider. A
 separate mod could close it, in stock and with this one; it is proposed, not written.
 
