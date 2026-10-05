@@ -114,7 +114,9 @@ Unity's world, and where its terrain sphere sits in it — does not stay put.
 values of KSP's floating origin, on a stock install. Its measurements show that a save does not give
 that frame back, and that it changes during a flight with nothing loaded.
 
-**→ Full chapter: [What the measurements show](https://github.com/lhervier/KSP-Diag-FloatingOrigin/blob/master/docs/what-the-measurements-show.md), on the page of Diag FloatingOrigin**
+**→ On the pages of Diag FloatingOrigin: [loading the same save](https://github.com/lhervier/KSP-Diag-FloatingOrigin/blob/master/docs/what-the-measurements-show-loading.md),
+[leaving the rotating frame](https://github.com/lhervier/KSP-Diag-FloatingOrigin/blob/master/docs/what-the-measurements-show-rotating-frame.md),
+[a rover driven 2 km and back](https://github.com/lhervier/KSP-Diag-FloatingOrigin/blob/master/docs/what-the-measurements-show-driving.md)**
 
 ## The fix this mod proposes
 

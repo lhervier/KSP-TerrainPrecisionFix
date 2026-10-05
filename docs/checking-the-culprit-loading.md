@@ -260,8 +260,10 @@ within two: 0.4 to 1.9 steps, series after series.
 **It is the ground that moves, not only the craft.** The craft never moved and the spot never changed,
 yet the height KSP computes held still while the collision surface wandered: by more than four
 centimetres on Kerbin, nearly thirty on Earth in Real Solar System. The ground itself is not built in the same
-place twice. The full readings, and what else they show, are in
-[What the numbers say](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-measurements-loading.md#what-the-numbers-say).
+place twice. The full readings are in
+[The measurements: loading the same save](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-measurements-loading.md),
+and what else they show in
+[What the measurements show: loading the same save](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/what-the-measurements-show-loading.md).
 
 **With this mod, both stop moving.** On Kerbin, the craft's spread goes from several centimetres to a
 hundredth of a millimetre; on the other stock worlds too, what is left stays in the hundredths of a
