@@ -266,10 +266,6 @@ KSP Diag - Floating Origin at the top, without this mod: a craft moved from orbi
 with Set Orbit, 8, 5.2 and 5.05 km up for a few seconds each, where KSP turns the Mun, then 4.95 and
 4.8 km up, where it turns the world again; the game paused at 4.8 km.*
 
-*Still to test.* With a mod that loads every craft from farther away, this mod takes statics out
-farther too, and the two conditions may meet. Then, from above that altitude, a static near the craft
-should not slide over the ground.
-
 ## What this page does not cover
 
 `PQSCity2`, which places the launch sites of the Making History expansion, carries the same defect and
