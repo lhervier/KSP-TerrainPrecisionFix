@@ -2,28 +2,11 @@
 
 Ce qu'il reste à faire, et seulement ça. Tout ce qui est déjà mesuré est dans [le README](README.md) et
 ses chapitres sous [docs/](docs/), avec ses logs dans [perfs/](perfs/) et dans les dépôts des trois
-Diags ; aucun résultat n'est consigné ici. La relecture anticipée de l'issue est dans
-[KSPCF-relecture.md](KSPCF-relecture.md).
-
-L'issue KSPCF demande une relecture et de l'aide, pas une publication : elle dit ce qui est vérifié et ce
-qui ne l'est pas, et [Limits and solutions](docs/limits-and-solutions.md) liste en public les cas encore
-ouverts. Seul ce qui casserait la lecture de l'issue elle-même doit donc passer avant.
+Diags ; aucun résultat n'est consigné ici.
 
 ## Le correctif des statiques : à valider avant de commiter
 
-Écrit le 2026-09-30 (`StaticsFix`, `KerbalKonstructsCompat`, `KopernicusCompat`), validé en partie. On
-finit de valider, puis on met le README à jour (un second coupable, les statiques, et les autres
-chapitres), puis on commite.
-
-**Chaque test se joue à la main, en jeu, sans addon** (Lionel, 2026-10-01) : il doit montrer à un
-mainteneur de KSPCF qu'un impact sur le jeu existe ou non, et se rejouer sans nous. La liste publique,
-impact par impact, avec sa procédure, est le chapitre *Still to test* de
-[The KSC buildings, runway and launchpad](docs/limits-and-solutions/the-ksc-buildings-runway-and-launchpad.md#still-to-test) ;
-chaque test se joue avec le mod (`logLevel = Debug`) puis sans. Une fois joué, son résultat va dans la
-page, son point quitte la liste, et il s'efface d'ici.
-
 **1. Stock** (`ksp-dev\`, KSPCF, sans mod tiers)
-- [ ] Bosse sous un avion qui roule seul sur toute la piste (décalages d'origine).
 - [ ] Vaisseau qui apparaît au mauvais endroit : pas de tir (VAB) et piste (SPH).
 - [ ] KSC perdu après un changement de scène : revert au lancement, F5/F9, KSC puis retour par la
       tracking station, revert au VAB, récupération.
