@@ -1,5 +1,6 @@
 obj/
 GameData/TerrainPrecisionFixMod/*.dll
+GameData/*.zip
 CLAUDE.md
 __pycache__/
 TODO.txt
