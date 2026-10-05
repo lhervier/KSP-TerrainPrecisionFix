@@ -43,4 +43,4 @@ them at all — it only moves the quads the game parents to `LocalSpacePQStorage
 read.
 
 What such a campaign would not settle, the colliders' `maxLevelOffset`, is in
-[its own chapter](colliders-below-the-highest-subdivision-level.md).
+[its own chapter](../non-regression/colliders-below-the-highest-subdivision-level.md).

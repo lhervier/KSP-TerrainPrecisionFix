@@ -1,6 +1,6 @@
 # Sloped ground
 
-Part of [Terrain Precision Fix](../../README.md), one case of [Limits and solutions](../limits-and-solutions.md).
+Part of [Terrain Precision Fix](../../README.md), one test of [Non-regression tests: the ground](../non-regression-ground.md).
 
 **Status: TBD.** Every campaign so far is on flat ground, because KSP Diag - Landed Vessel asks for
 it. On a slope, a separate stock bug, read in the code and not measured, puts a single-part craft down

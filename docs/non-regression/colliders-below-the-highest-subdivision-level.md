@@ -1,6 +1,6 @@
 # Colliders below the highest subdivision level
 
-Part of [Terrain Precision Fix](../../README.md), one case of [Limits and solutions](../limits-and-solutions.md).
+Part of [Terrain Precision Fix](../../README.md), one test of [Non-regression tests: the ground](../non-regression-ground.md).
 
 **Status: TBD on every body but Kerbin and the Mun.** `PQSMod_QuadMeshColliders` gives a collider to
 every quad at or above `maxLevel - |maxLevelOffset|`, and this fix only acts on the highest level: with

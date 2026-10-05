@@ -1,6 +1,6 @@
 # Ground anchors
 
-Part of [Terrain Precision Fix](../../README.md), one case of [Limits and solutions](../limits-and-solutions.md).
+Part of [Terrain Precision Fix](../../README.md), one test of [Non-regression tests: the ground](../non-regression-ground.md).
 
 **Status: TBD.** The ground anchor, the `ModuleGroundPart` part an engineer places in EVA construction, is
 the part most exposed to the moment the ground is drawn, for two stock reasons read in the code: it is

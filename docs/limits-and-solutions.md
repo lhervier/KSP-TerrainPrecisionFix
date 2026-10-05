@@ -1,10 +1,13 @@
 # Limits and solutions
 
-Part of [Terrain Precision Fix](../README.md): the side effects of the fix, and the ground it has not been measured on.
+Part of [Terrain Precision Fix](../README.md): what this fix does to other mods.
 
-This fix changes where the ground is, so everything that stands on the ground, or is placed from it, has
-to be checked against it, one case at a time. **This is a work in progress.** Each case below has a
-chapter of its own, and the cases are grouped by where they stand:
+This fix changes where the ground and the statics are, so every mod that places something on the
+ground, reads it, or changes the bodies it is built from, has to be checked against it, one mod at a
+time. What it does to stock itself is in the non-regression tests of
+[the ground](non-regression-ground.md) and of [the statics](non-regression-statics.md). **This is a
+work in progress.** Each case below has a chapter of its own, and the cases are grouped by where they
+stand:
 
 - **[Checked, no problem](#checked-no-problem)** — measured or read, and this fix breaks nothing there.
   The summary still says what changes, when something does;
@@ -44,54 +47,6 @@ safeguard grows with the body too, so none of the terrain is left
 uncorrected, on Earth as on Venus, Mars and Mercury.
 
 **→ Full chapter: [Rescaled systems: Real Solar System](limits-and-solutions/rescaled-systems-real-solar-system.md)**
-
-### Rocks, grass and trees
-
-**Checked — this mod does not move them, but widens a stock defect on Kerbin.** Stock already draws
-scatter off the ground, differently at every load, from a holder placed through the same float
-`Transform` as the ground; this mod corrects the ground and not the holder, so the gap between the two
-gets wider. Over twelve loads with KSP Diag - Scatter, the height of a measured point above the
-ground comes back 94 mm apart (median) on Kerbin in stock and 130 mm with this mod, 31 mm either way on
-the Mun. Visual only, since stock scatter has no collider. A separate mod,
-[Rock Precision Fix](https://github.com/lhervier/KSP-RockPrecisionFix), corrects it, at a cost: it
-changes the hierarchy of Unity objects, hanging each holder from its terrain quad, and other mods may
-look for them where stock puts them. Parallax's own scatter follows the corrected ground already.
-
-**→ Full chapter: [Rocks, grass and trees](limits-and-solutions/rocks-grass-and-trees.md)**
-
-### The seam between subdivision levels
-
-**Checked on Earth under Real Solar System and on Kerbin — this mod does not open the seam, but widens a stock crack.**
-Where a quad of the highest level meets a coarser one, the vertices they are supposed to share are
-already apart in stock, and the terrain has a crack along the seam that can be seen, though it takes
-looking for. This mod corrects the finer side only, so it adds its own correction to that gap.
-Measured with KSP Diag - Quad Seams, the median of the largest gap of a load goes from about 1.3 m to
-about 1.9 m on Earth (79 loads without this mod, nine with it), and from about 157 mm to about
-225 mm on Kerbin (seven and ten loads). Visual only, since the coarser quads have no collider. A
-separate mod could close it, in stock and with this one; it is proposed, not written.
-
-**→ Full chapter: [The seam between subdivision levels](limits-and-solutions/the-seam-between-subdivision-levels.md)**
-
-### Existing saves
-
-**Checked — a landed craft goes through one more draw, always the same one.** A craft saved in stock
-was saved on the ground of one random draw. At its first load with this mod, it comes back on the
-corrected ground, which is just one of the draws stock could have given. The difference: that draw no
-longer changes. If it happens to be one that breaks the base, it breaks it at every load, where stock
-would let the player reload until it survives. Loading the craft once and saving it again with this mod
-ends it for good, and raising a craft by a few centimetres in the `.sfs` becomes a permanent repair.
-Seen on the Moon under Real Solar System: a craft saved in stock, loaded once and saved again with this
-mod, then never moved in 42 loads.
-
-**→ Full chapter: [Existing saves](limits-and-solutions/existing-saves.md)**
-
-### The ground during a flight
-
-**Checked, on the craft and on the ground.** Driving away from a landed craft and back, with no save
-loaded, draws the ground again too; this mod patches that path. Six round trips on Kerbin: the craft
-comes to rest over 21.8 mm without this mod and 0.094 mm with it, the ground over 21.8 mm and 0.011 mm.
-
-**→ Full chapter: [The ground during a flight](limits-and-solutions/the-ground-during-a-flight.md)**
 
 ### Kopernicus
 
@@ -134,18 +89,6 @@ None today.
 
 ## Still to test
 
-### The KSC buildings, runway and launchpad
-
-**Covered by this mod, measured on the runway of Kerbin; the rest still to test.** `PQSCity` places the
-statics through the same kind of float `Transform` as the terrain; this mod takes them out of their
-sphere in flight to place them in double. On six loadings, the deck of the runway spreads over
-116.5 mm without this mod and 0.177 mm with it. Still to test, each by hand in game: a bump under a craft
-rolling on the runway, a craft spawned in the wrong place, the KSC lost after a scene change, a trip to
-another body or a time warp, destroyed buildings and facility levels, the ground station, the other
-stock statics, the runway of Real Solar System. `PQSCity2`, the launch sites of Making History, is not covered.
-
-**→ Full chapter: [The KSC buildings, runway and launchpad](limits-and-solutions/the-ksc-buildings-runway-and-launchpad.md)**
-
 ### Mods that look for a static under its sphere
 
 **Two mods read and patched, the others unknown.** Taking a static out of its terrain sphere changes the
@@ -156,15 +99,6 @@ still to test in game.
 
 **→ Full chapter: [Mods that look for a static under its sphere](limits-and-solutions/mods-that-look-for-a-static-under-its-sphere.md)**
 
-### Ground anchors
-
-**TBD.** The anchor is the part most exposed to the moment the ground is drawn — its physics starts on
-the very first frame and it is frozen after one — and it has causes of its own that this fix does not
-touch (KSP Community Fixes' issue #214). A stable ground should make its behaviour repeatable, not fix
-it. The test is planned.
-
-**→ Full chapter: [Ground anchors](limits-and-solutions/ground-anchors.md)**
-
 ### A body from a planet pack
 
 **TBD — nothing has been measured on one.** A planet pack builds new bodies from cloned, reconfigured
@@ -173,22 +107,6 @@ Outer Planets Mod: Slate first, whose float step is Kerbin's; Eeloo, reconfigure
 Ovok, the edge case.
 
 **→ Full chapter: [A body from a planet pack](limits-and-solutions/a-body-from-a-planet-pack.md)**
-
-### Breaking Ground's surface features
-
-**TBD.** Surface features are placed like the rocks, and carry a collider without any mod. Whether the
-physics takes their pose from the holder's matrix or from its transform decides whether this fix widens
-a physical offset there; that is to read first, then to measure.
-
-**→ Full chapter: [Breaking Ground's surface features](limits-and-solutions/breaking-grounds-surface-features.md)**
-
-### Breaking Ground's deployed experiments
-
-**TBD.** Deployed experiments are vessels, positioned in double, and should sit on the corrected ground
-like any craft; like the ground anchor, they skip the physics hold. Diag LandedVessel on one, with and without this
-fix.
-
-**→ Full chapter: [Breaking Ground's deployed experiments](limits-and-solutions/breaking-grounds-deployed-experiments.md)**
 
 ### Kerbal Konstructs
 
@@ -221,21 +139,6 @@ when a craft comes down to the altitude where the world starts turning with it.
 
 **→ Full chapter: [Tilt'Em](limits-and-solutions/tilt-em.md)**
 
-### Sloped ground
-
-**TBD.** Every campaign so far is on flat ground. On a slope, a separate stock bug, read in the code and
-not measured, moves a single-part craft down into the ground at every load; this fix does not touch it.
-The campaign on a 30° slope is what tells the two apart.
-
-**→ Full chapter: [Sloped ground](limits-and-solutions/sloped-ground.md)**
-
-### Asteroids held by a claw
-
-**TBD.** An asteroid follows the corrected ground like any vessel; the fragile case is one resting on the
-ground and grappled by a claw, when the ground moves once under it at the first load with this fix.
-
-**→ Full chapter: [Asteroids held by a claw](limits-and-solutions/asteroids-held-by-a-claw.md)**
-
 ### KAS
 
 **TBD.** A static KAS attachment either rides on a vessel and follows the corrected ground, or is pinned
@@ -243,16 +146,3 @@ to the terrain sphere and does not. To read first.
 
 **→ Full chapter: [KAS](limits-and-solutions/kas.md)**
 
-### The map view
-
-**TBD.** Quads are built and dropped all the time in the map view, and nothing has been measured there.
-
-**→ Full chapter: [The map view](limits-and-solutions/the-map-view.md)**
-
-### Colliders below the highest subdivision level
-
-**TBD on every body but Kerbin and the Mun.** With a non-zero collider offset, levels below the highest
-would carry colliders and stay uncorrected. The offset is 0 on Kerbin and the Mun, read in flight; to
-read on the other bodies.
-
-**→ Full chapter: [Colliders below the highest subdivision level](limits-and-solutions/colliders-below-the-highest-subdivision-level.md)**

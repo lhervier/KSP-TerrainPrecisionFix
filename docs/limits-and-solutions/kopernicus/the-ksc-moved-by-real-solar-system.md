@@ -11,7 +11,7 @@ through the KSC's own `PQSCity`, before any flight, and this mod places a static
 ## Checked on Earth
 
 With Kopernicus 248, in the session described in
-[The KSC buildings, runway and launchpad](../the-ksc-buildings-runway-and-launchpad.md): two loadings
+[Non-regression tests: the statics](../../non-regression-statics.md): two loadings
 of `reload-earth-rss-landed.sfs`, a craft 1.4 km from the KSC, then the craft sent to orbit, then the
 space centre, logged in [`diag/runs/statics-earth-rss-fix.log`](../../../diag/runs/statics-earth-rss-fix.log).
 

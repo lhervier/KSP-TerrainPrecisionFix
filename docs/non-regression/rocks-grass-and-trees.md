@@ -1,6 +1,6 @@
 # Rocks, grass and trees
 
-Part of [Terrain Precision Fix](../../README.md), one case of [Limits and solutions](../limits-and-solutions.md).
+Part of [Terrain Precision Fix](../../README.md), one test of [Non-regression tests: the ground](../non-regression-ground.md).
 
 **Status: checked, no problem — this mod does not move them, but widens a stock defect on Kerbin.** Terrain scatter — the rocks, and
 around the KSC the grass and the trees — is already drawn off the ground in stock, differently at every
@@ -24,7 +24,7 @@ twelve loads for half of those points on Kerbin in stock, and 130 mm with this m
 either way. The same kind of error, of the same order and wider on Kerbin, but where stock draws part
 of it from the ground moving and part from the holder, with this mod all of it comes from the holder. Stock scatter has no
 collider, so this is visual only — unless a mod gives it one, which is
-[Scatter with colliders](kopernicus/scatter-with-colliders.md).
+[Scatter with colliders](../limits-and-solutions/kopernicus/scatter-with-colliders.md).
 
 **Solution.** [Rock Precision Fix](https://github.com/lhervier/KSP-RockPrecisionFix), a separate mod,
 hangs each holder from its own terrain quad, so that the objects are drawn in the frame they were built

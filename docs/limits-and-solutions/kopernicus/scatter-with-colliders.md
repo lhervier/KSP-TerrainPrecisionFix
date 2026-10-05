@@ -5,7 +5,7 @@ Part of [Terrain Precision Fix](../../../README.md), one point of the case [Kope
 **Status: checked, no problem — this mod halves a stock gap, and does not close it; Rock Precision Fix
 closes it.** Stock scatter has no collider, but Kopernicus can give it one: Kopernicus with the
 [Stock Scatter Collider Enabler Patch](https://github.com/Poodmund/Stock-Scatter-Collider-Enabler-Patch),
-both on CKAN, do. The offset described in [Rocks, grass and trees](../rocks-grass-and-trees.md) then
+both on CKAN, do. The offset described in [Rocks, grass and trees](../../non-regression/rocks-grass-and-trees.md) then
 stops being visual: the physics engine is handed the holder's position, while the pilot sees what is
 drawn from the holder's matrix, and those are the two numbers that round differently. The rock a craft
 hits is not the rock its pilot sees. Kopernicus replaces the stock scatter holder with its own subclass,

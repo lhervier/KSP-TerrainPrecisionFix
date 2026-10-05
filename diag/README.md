@@ -118,7 +118,7 @@ played by its script, `run-driving-runway.py`, from `driving-runway-kerbin.sfs`.
 [KSP Diag - Quad Seams](https://github.com/lhervier/KSP-Diag-QuadSeams) and KSP-MCPServer added to
 this mod at `logLevel = Debug`, the craft `Diag3-Rocket` on the launchpad reverted to launch by the
 script of its protocol, `run-revert.py`, until the finer quad is above at the largest gap, on land.
-Read in [The seam with this mod](../docs/limits-and-solutions/the-seam-between-subdivision-levels.md#the-seam-with-this-mod).
+Read in [The seam with this mod](../docs/non-regression/the-seam-between-subdivision-levels.md#the-seam-with-this-mod).
 
 - [`runs/revert-earth-rss-fix-diag4.log`](runs/revert-earth-rss-fix-diag4.log) — on Earth, Real Solar
   System 20.1.3.0 as released and what it requires added, at Cape Canaveral, nine loads; what the
@@ -137,7 +137,7 @@ KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, this mod and
   statics fix, at `logLevel = Debug`: `runway-kerbin.sfs` loaded six times, the craft sent to a 200 km
   orbit with `Alt+F12 → Cheats → Set Orbit`, then the space centre. At every step, the `PQSCity` of
   Kerbin and where they hang, and the destructible buildings and upgradeable facilities of the KSC, are
-  listed. Read in [The KSC buildings, runway and launchpad](../docs/limits-and-solutions/the-ksc-buildings-runway-and-launchpad.md).
+  listed. Read in [Non-regression tests: the statics](../docs/non-regression-statics.md).
 - [`runs/runway-mun-kk-colliders-fix.log`](runs/runway-mun-kk-colliders-fix.log) — four loadings of
   that save, every collider under each craft listed at each loading, with its height above the terrain
   KSP computes there.
@@ -208,7 +208,7 @@ a fixed metre, and hold the line where it refused part of Earth's terrain.
   statics fix: two loads of `reload-earth-rss-landed.sfs`, the craft sent to a 200 km orbit with
   `Alt+F12 → Cheats → Set Orbit`, then the space centre. At every step, the `PQSCity` of Earth and where
   they hang, and the destructible buildings and upgradeable facilities of the KSC, are listed. Read in
-  [The KSC buildings, runway and launchpad](../docs/limits-and-solutions/the-ksc-buildings-runway-and-launchpad.md)
+  [Non-regression tests: the statics](../docs/non-regression-statics.md)
   and [Kopernicus: the KSC moved by Real Solar System](../docs/limits-and-solutions/kopernicus/the-ksc-moved-by-real-solar-system.md).
 - [`runs/kopernicus-flag-glitch-without-this-mod.log`](runs/kopernicus-flag-glitch-without-this-mod.log),
   [`runs/kopernicus-flag-glitch-statics-fix.log`](runs/kopernicus-flag-glitch-statics-fix.log) and
@@ -230,7 +230,7 @@ a fixed metre, and hold the line where it refused part of Earth's terrain.
   added to the install: one session, a small rocket launched from the VAB onto the launchpad at Cape
   Canaveral, then flown towards orbit, the flight started over three times. The launch was saved
   afterwards as [`rss-launch-to-earth-orbit.sfs`](rss-launch-to-earth-orbit.sfs), which needs MechJeb2
-  to load. Used in [The seam between subdivision levels](../docs/limits-and-solutions/the-seam-between-subdivision-levels.md).
+  to load. Used in [The seam between subdivision levels](../docs/non-regression/the-seam-between-subdivision-levels.md).
 - [`runs/runway-earth-rss-without-runway-fix.log`](runs/runway-earth-rss-without-runway-fix.log) —
   without this mod,
   [KSP Diag - Colliders](https://github.com/lhervier/KSP-Diag-Colliders) added, and

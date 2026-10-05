@@ -1,6 +1,6 @@
 # Breaking Ground's deployed experiments
 
-Part of [Terrain Precision Fix](../../README.md), one case of [Limits and solutions](../limits-and-solutions.md).
+Part of [Terrain Precision Fix](../../README.md), one test of [Non-regression tests: the ground](../non-regression-ground.md).
 
 **Status: TBD.** Deployed experiments (`ModuleGroundPart` and the modules around it) are vessels,
 positioned in double like any craft, so they should sit on the corrected ground like one. They are also

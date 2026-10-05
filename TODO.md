@@ -7,7 +7,6 @@ Diags ; aucun résultat n'est consigné ici.
 ## Le correctif des statiques : à valider avant de commiter
 
 **1. Stock** (`ksp-dev\`, KSPCF, sans mod tiers)
-- [ ] Vaisseau qui apparaît au mauvais endroit : pas de tir (VAB) et piste (SPH).
 - [ ] KSC perdu après un changement de scène : revert au lancement, F5/F9, KSC puis retour par la
       tracking station, revert au VAB, récupération.
 - [ ] KSC absent ou flou après un passage à la Mune (`Set Orbit`, puis bascule depuis la carte sur un
@@ -81,7 +80,7 @@ ensuite, sans ordre imposé.
         sous RSS, déduit, pas mesuré : le verrou protège au moins de la piste.
       - **Reste** : la même sauvegarde herbe/piste avec le correctif (la marche avec le correctif), puis
         réécrire le cas
-        [The KSC buildings, runway and launchpad](docs/limits-and-solutions/the-ksc-buildings-runway-and-launchpad.md)
+        [Non-regression tests: the statics](docs/non-regression-statics.md)
         (passe en *Checked, a real problem*, Kerbal Konstructs avec lui), et décider si un correctif des
         statiques se fait à part, comme RockPrecisionFix.
       - **Puis sous RSS** : avec le correctif, un roulage et un décollage sur la piste avec le verrou,
@@ -106,15 +105,17 @@ ensuite, sans ordre imposé.
         comportement.
       - Le protocole d'approche au rover, celui des campagnes stock, couvre sans mod de plus les quads
         reconstruits et le décalage d'origine au sol : à refaire sur la Lune.
-   3. **Hors RSS, soulevés par cette revue** : deux cas à ajouter à
-      [Limits and solutions](docs/limits-and-solutions.md), à tester en stock (RSS en héritera) :
+   3. **Hors RSS, soulevés par cette revue** : deux tests de non-régression à ajouter, à jouer en stock
+      (RSS en héritera) :
       - **les jonctions entre le terrain corrigé et les statiques du KSC** : le correctif déplace le
         terrain, pas la piste ni le pas de tir, donc l'écart entre les deux change (herbe qui traverse
-        le bord de la piste, marche au pied du pas de tir). Un *To test* dans le cas KSC : captures des
+        le bord de la piste, marche au pied du pas de tir). Une ligne du tableau de
+        [Non-regression tests: the statics](docs/non-regression-statics.md) : captures des
         bords avec et sans le correctif, un rover qui sort de la piste sur l'herbe, une fusée en
         `PRELAUNCH` sur le pas de tir. Distinct du raccord entre deux quads (cas
-        [The seam between subdivision levels](docs/limits-and-solutions/the-seam-between-subdivision-levels.md)) ;
-      - **l'océan** : aucun cas aujourd'hui. Dans les logs RSS de la Terre, le correctif n'a corrigé que
+        [The seam between subdivision levels](docs/non-regression/the-seam-between-subdivision-levels.md)) ;
+      - **l'océan**, une ligne de [Non-regression tests: the ground](docs/non-regression-ground.md) :
+        aucun test aujourd'hui. Dans les logs RSS de la Terre, le correctif n'a corrigé que
         des quads de terrain, jamais l'océan, ce qui colle avec sa garde sur `surfaceRelativeQuads` ;
         la valeur de ce drapeau pour la sphère océan n'a pas été lue. Un amerrissage près d'une côte,
         log à l'appui.
@@ -135,7 +136,8 @@ ensuite, sans ordre imposé.
         publié dans `diag/` comme pour RSSRunwayFix.
 
       Le résultat va dans le statut et le chapitre *With this mod* de la page.
-2. **Restructurer les 20 autres cas** de `docs/limits-and-solutions/` sur le plan du cas RSS
+2. **Restructurer les autres cas** de `docs/limits-and-solutions/` et de `docs/non-regression/` sur le
+   plan du cas RSS
    (introduction lue dans le code et sur GitHub, `## Checking the culprit` avec Diag LandedVessel et Diag TerrainHeight,
    `## What the results show`), après avoir décidé comment traiter un cas sans mesure.
 3. **Relire `KSPCF-issue.md`, `KSPCF-comment.md` et `KSPCF-relecture.md`**, pas revus depuis RSS.
@@ -145,7 +147,7 @@ ensuite, sans ordre imposé.
    visible : décider s'il y entre.
 4. **Une release GitHub sur chaque dépôt vers lequel l'issue envoie le lecteur.** Aucun n'en a : ce
    dépôt, Diag LandedVessel, Diag TerrainHeight, Diag FloatingOrigin et Diag QuadSeams (le cas
-   [The seam between subdivision levels](docs/limits-and-solutions/the-seam-between-subdivision-levels.md)
+   [The seam between subdivision levels](docs/non-regression/the-seam-between-subdivision-levels.md)
    en dépend : liens, images et *Get it*). L'issue commence par faire installer Diag LandedVessel, et les trois README des
    Diags renvoient vers `releases/latest` dans *Get it*, qui donne une 404 aujourd'hui — sur la page
    même où arrive un mainteneur depuis la première consigne du repro. `build.bat` produit déjà le
@@ -157,7 +159,7 @@ ensuite, sans ordre imposé.
    capsule se pose à −31,8 mm, au même endroit à chaque fois. Le test : avec le correctif, charger,
    `]`, repasser au rover, sauvegarder sous un autre nom, puis six fois « charger → *Record* → `]` →
    *Record* » ; *Moved* doit rester à quelques centièmes de zéro. Il complète le chapitre
-   [Existing saves](docs/limits-and-solutions/existing-saves.md) et la page du changement de vaisseau.
+   [Existing saves](docs/non-regression/existing-saves.md) et la page du changement de vaisseau.
 6. **Confirmer la marge du garde-fou.** Il compte seize pas de float à la distance du quad (1 m sur
    Kerbin, 8 m sur la Terre de RSS). Plus grande correction vue : 4,0 pas sur la Terre (3,6 sur
    Vénus, 3,5 sur la Lune, environ un sur Mars et Mercure), aucun refus sur ces cinq corps. Reste à
@@ -185,10 +187,13 @@ ensuite, sans ordre imposé.
 
 Rien de ceci ne change ce que l'issue demande.
 
-- **Les cas contre lesquels vérifier le correctif** sont les chapitres TBD de
-  [Limits and solutions](docs/limits-and-solutions.md), le plan de test public vers lequel pointe
-  l'issue : chacun dit ce qu'on sait et comment il sera testé. Un nouveau cas s'ajoute là-bas (un
-  fichier dans `docs/limits-and-solutions/` et son résumé dans la page d'index), en **TBD**, pas ici.
+- **Les cas contre lesquels vérifier le correctif** sont publics : l'impact sur stock dans les tableaux
+  de [Non-regression tests: the ground](docs/non-regression-ground.md) et
+  [the statics](docs/non-regression-statics.md), l'impact sur les autres mods dans les chapitres TBD de
+  [Limits and solutions](docs/limits-and-solutions.md), vers lequel pointe l'issue. Chacun dit ce qu'on
+  sait et comment il sera testé. Un nouveau cas s'ajoute là-bas (une ligne de tableau, et une page
+  dans `docs/non-regression/` s'il en faut une ; ou un fichier dans `docs/limits-and-solutions/` et son
+  résumé dans la page d'index), à tester, pas ici.
 - **Séparer le décalage d'origine du déchargement.** Dans le protocole d'approche, le vaisseau est
   déchargé et l'origine se décale à la même frame : aucune mesure ne dit encore lequel des deux fait
   bouger le sol ; le code stock désigne le décalage. ⚠️ Changer de vaisseau (`]`) **ne** décale **pas**
@@ -210,7 +215,7 @@ Rien de ceci ne change ce que l'issue demande.
   l'écart de 2,08 cm du collider relu dans `groundAnchor.mu`. ⚠️ **Sauvegarder après chaque
   chargement** : c'est la re-sauvegarde qui arme le cliquet.
 - **Les sauvegardes existantes, ce qu'il reste à rédiger** (le cas lui-même est le chapitre
-  [Existing saves](docs/limits-and-solutions/existing-saves.md)). Le seul essai sur une vraie sauvegarde
+  [Existing saves](docs/non-regression/existing-saves.md)). Le seul essai sur une vraie sauvegarde
   (la mienne, bases chargées une par une avec KSP, Harmony, KSPCF et le correctif) n'est pas rédigé :
   aucune n'a cassé sur la Mun, Minmus et Gilly ; la base d'Eve se pose sur des pieds construits sous la
   surface, un défaut de construction et pas le correctif. La sauvegarde n'échantillonne pas le pire cas

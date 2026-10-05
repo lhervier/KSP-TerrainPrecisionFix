@@ -1,6 +1,6 @@
 # The map view
 
-Part of [Terrain Precision Fix](../../README.md), one case of [Limits and solutions](../limits-and-solutions.md).
+Part of [Terrain Precision Fix](../../README.md), one test of [Non-regression tests: the ground](../non-regression-ground.md).
 
 **Status: TBD.** In the map view, quads are built and destroyed all the time, and nothing has been
 measured there.

@@ -1,6 +1,6 @@
 # Existing saves
 
-Part of [Terrain Precision Fix](../../README.md), one case of [Limits and solutions](../limits-and-solutions.md).
+Part of [Terrain Precision Fix](../../README.md), one test of [Non-regression tests: the ground](../non-regression-ground.md).
 
 **Status: checked, no problem — a landed craft goes through one more draw, always the same one.** The fix takes away the draw, and the draw was also an escape hatch: in stock, a base
 that comes back buried and tears itself apart can be reloaded until it survives. With the fix, it breaks
@@ -15,7 +15,7 @@ the same way every time. What a player with a long-running save should expect:
   repair once the ground is stable, where in stock the next loading draws the ground under it again.
 
 Seen on the Moon under Real Solar System
-([Rescaled systems: Real Solar System](rescaled-systems-real-solar-system.md)): a craft saved without this
+([Rescaled systems: Real Solar System](../limits-and-solutions/rescaled-systems-real-solar-system.md)): a craft saved without this
 mod, loaded once and saved again with it, then loaded 42 times with it without moving once.
 
 *Still worth measuring:* on a copy of a long-running save, how far each landed base actually moves at its first

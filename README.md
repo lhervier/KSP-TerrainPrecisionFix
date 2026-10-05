@@ -1,6 +1,6 @@
 # Terrain Precision Fix
 
-**⚠️ Work in progress.** This is an active investigation, not a finished mod. The figures, the code and the conclusions on this page can still change, and several questions are still open — they are listed in [Limits and solutions](docs/limits-and-solutions.md).
+**⚠️ Work in progress.** This is an active investigation, not a finished mod. The figures, the code and the conclusions on this page can still change, and several questions are still open — they are listed in [Non-regression tests](#non-regression-tests) and [Limits and solutions](docs/limits-and-solutions.md).
 
 A fix for stock KSP 1.12, kept as small as possible: a handful of Harmony patches, in a few short source
 files. It is a mod of its own, built and measured on top of
@@ -106,6 +106,33 @@ stock gives them no place outside the body where a precise position would be kep
 
 **→ Full chapter: [The culprit: the statics](docs/the-culprit-statics.md)**
 
+## What moves the frame
+
+The rounding is drawn anew because the frame the ground is built in — how the body is turned in
+Unity's world, and where its terrain sphere sits in it — does not stay put.
+[KSP Diag - Floating Origin](https://github.com/lhervier/KSP-Diag-FloatingOrigin) shows the
+values of KSP's floating origin, on a stock install. Its measurements show that a save does not give
+that frame back, and that it changes during a flight with nothing loaded.
+
+**→ Full chapter: [What the measurements show](https://github.com/lhervier/KSP-Diag-FloatingOrigin/blob/master/docs/what-the-measurements-show.md), on the page of Diag FloatingOrigin**
+
+## The fix this mod proposes
+
+**The ground.** Two Harmony patches redo in double the two placements that go through a float at planet
+scale: the origin of each quad, and each vertex inside it. The two 600 km vectors cancel before anything
+reaches a float, which is then only asked to hold a distance within the quad. Only the quads a craft can
+stand on are touched.
+
+**→ Full chapter: [The fix: the ground](docs/the-fix-ground.md)**
+
+**The statics.** A static cannot hold a precise position under its sphere, so it is taken out of it in
+flight, while a craft is near it, and placed in double in the same frame. It follows its body, and it
+goes back exactly where stock left it before every scene change, and whenever stock code that expects it
+there runs. Kerbal Konstructs and Kopernicus each look for a static under its sphere once in flight: **this
+mod has to patch both**, each patch standing for a small change these mods could make themselves.
+
+**→ Full chapter: [The fix: the statics](docs/the-fix-statics.md)**
+
 ## Checking the culprit
 
 Each situation where a craft meets the ground is measured twice, without this mod and with it, with two
@@ -135,32 +162,25 @@ left.
 
 **→ Full chapter: [Checking the culprit: driving on while the world moves](docs/checking-the-culprit-driving.md)**
 
-## What moves the frame
+## Non-regression tests
 
-The rounding is drawn anew because the frame the ground is built in — how the body is turned in
-Unity's world, and where its terrain sphere sits in it — does not stay put.
-[KSP Diag - Floating Origin](https://github.com/lhervier/KSP-Diag-FloatingOrigin) shows the
-values of KSP's floating origin, on a stock install. Its measurements show that a save does not give
-that frame back, and that it changes during a flight with nothing loaded.
+Checking the culprit shows what this mod fixes. These tests check the other side: what works in stock
+still works with it. Each is played in game with this mod, and compared with stock where stock has to
+be told apart.
 
-**→ Full chapter: [What the measurements show](https://github.com/lhervier/KSP-Diag-FloatingOrigin/blob/master/docs/what-the-measurements-show.md), on the page of Diag FloatingOrigin**
+**The ground.** Rocks, grass and trees, and the seam with the coarser quads around the craft, are not
+moved, but this mod widens a visual gap stock already has there; an existing save goes through one more
+draw of the ground, always the same one. Still to test: slopes, ground anchors, asteroids held by a
+claw, Breaking Ground, the map view, and the colliders of lower levels on most bodies.
 
-## The fix this mod proposes
+**→ Full chapter: [Non-regression tests: the ground](docs/non-regression-ground.md)**
 
-**The ground.** Two Harmony patches redo in double the two placements that go through a float at planet
-scale: the origin of each quad, and each vertex inside it. The two 600 km vectors cancel before anything
-reaches a float, which is then only asked to hold a distance within the quad. Only the quads a craft can
-stand on are touched.
+**The statics.** Taken out of its sphere and put back over loadings, an orbit and a return to the space
+centre, the KSC keeps every building registered; a craft launched from the VAB or the SPH stands on the
+launchpad or the runway. Still to test: scene changes, a trip to another body, time warp, destroyed
+buildings and facility levels, the ground station, missions, the other stock statics.
 
-**→ Full chapter: [The fix: the ground](docs/the-fix-ground.md)**
-
-**The statics.** A static cannot hold a precise position under its sphere, so it is taken out of it in
-flight, while a craft is near it, and placed in double in the same frame. It follows its body, and it
-goes back exactly where stock left it before every scene change, and whenever stock code that expects it
-there runs. Kerbal Konstructs and Kopernicus each look for a static under its sphere once in flight: **this
-mod has to patch both**, each patch standing for a small change these mods could make themselves.
-
-**→ Full chapter: [The fix: the statics](docs/the-fix-statics.md)**
+**→ Full chapter: [Non-regression tests: the statics](docs/non-regression-statics.md)**
 
 ## Performance
 
@@ -176,11 +196,10 @@ with statics near a craft is not measured yet.
 
 ## Limits and solutions
 
-Everything that stands on the ground, or is placed from it, has to be checked against this fix, one
-case at a time: other mods (Kopernicus, Parallax, Kerbal Konstructs…), what stock places on the ground
-(scatter, the KSC statics, Breaking Ground) and situations (rescaled systems, slopes, existing saves…).
-This is a work in progress, with a chapter per case. **The statics fix is the riskier of the two**: it
-takes a static out of the place where stock, and any mod, expects to find it.
+Every mod that places something on the ground, reads it, or changes the bodies it is built from, has to
+be checked against this fix, one mod at a time: Kopernicus, Real Solar System, Kerbal Konstructs,
+Principia, a planet pack… This is a work in progress, with a chapter per mod. **The statics fix is the
+riskier of the two**: it takes a static out of the place where stock, and any mod, expects to find it.
 
 **→ Full chapter: [Limits and solutions](docs/limits-and-solutions.md)**
 
