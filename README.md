@@ -99,9 +99,10 @@ both move while you play.
 
 **→ Full chapter: [The culprit: the ground](docs/the-culprit-ground.md)**
 
-**The statics.** The runway, the launchpad and the buildings of the KSC, and the bases a mod such as
-Kerbal Konstructs plants anywhere on a body. `PQSCity` places them the same way, a 600 km vector in a
-float `Transform` hanging from the body, through the same frame. Unlike the quads a craft stands on,
+**The statics.** The runway, the launchpad and the buildings of the KSC, the launch sites of the Making
+History expansion, and the bases a mod such as Kerbal Konstructs plants anywhere on a body. `PQSCity`
+and `PQSCity2` place them the same way, a 600 km vector in a float `Transform` hanging from the body,
+through the same frame. Unlike the quads a craft stands on,
 stock gives them no place outside the body where a precise position would be kept.
 
 **→ Full chapter: [The culprit: the statics](docs/the-culprit-statics.md)**
@@ -130,7 +131,8 @@ stand on are touched.
 **The statics.** A static cannot hold a precise position under its sphere, so it is taken out of it in
 flight, while a craft is near it, and placed in double in the same frame. It follows its body, and it
 goes back exactly where stock left it before every scene change, and whenever stock code that expects it
-there runs. Kerbal Konstructs and Kopernicus each look for a static under its sphere once in flight: **this
+there runs. A launch pad of Making History is also taken out for the moment it measures the ground to
+set itself on it. Kerbal Konstructs and Kopernicus each look for a static under its sphere once in flight: **this
 mod has to patch both**, each patch standing for a small change these mods could make themselves.
 
 **→ Full chapter: [The fix: the statics](docs/the-fix-statics.md)**
@@ -164,6 +166,12 @@ left.
 
 **→ Full chapter: [Checking the culprit: driving on while the world moves](docs/checking-the-culprit-driving.md)**
 
+**Launching from a launch pad of Making History**, the Desert Launch Site, in six sessions of the game:
+the deck the craft stands on spreads over 592.8 mm, and 0.001 mm with this mod; its feet stand on the
+ground either way.
+
+**→ Full chapter: [Checking the culprit: launching from a launch pad of Making History](docs/checking-the-culprit-launch-pad.md)**
+
 **In flight**, a rocket from the launchpad to the sea, its quads written about once a second: two
 quads of the highest level built at different moments step by up to 22.5 mm where they meet on Kerbin
 and 289 mm on Earth, and by 0.67 mm and 2.1 mm at most with this mod.
@@ -185,8 +193,8 @@ claw, Breaking Ground, the map view, and the colliders of lower levels on most b
 
 **The statics.** Taken out of its sphere and put back over loadings, an orbit and a return to the space
 centre, the KSC keeps every building registered; a craft launched from the VAB or the SPH stands on the
-launchpad or the runway. Still to test: scene changes, a trip to another body, time warp, destroyed
-buildings and facility levels, the ground station, missions, the other stock statics. A static
+launchpad or the runway. Still to test: scene changes, a trip to another body, time warp, destroyed buildings and facility
+levels, the ground station, missions and the launch pads they place, the other stock statics. A static
 turning with its body cannot happen on stock, in Real Solar System or with Outer Planets Mod: no body
 turns low enough for a craft near a static to see it.
 

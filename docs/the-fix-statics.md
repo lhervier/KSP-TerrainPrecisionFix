@@ -16,8 +16,9 @@ body times the one stock gives it in the sphere.
 - **When.** Only in flight, and only while the static is within reach of the craft: within the farthest
   another craft can be loaded from it, 22.5 km by default, plus 5 km for the size of a static. A craft
   at the KSC takes the KSC out, and leaves the Island Airfield, 33 km away, under its sphere. Only the
-  statics that hang directly from their sphere are handled, as those of stock and of Kerbal Konstructs
-  do; `PQSCity2` is not.
+  statics that hang directly from their sphere are handled, as those of stock, of the Making History
+  expansion and of Kerbal Konstructs do: the KSC and the other stock statics, placed by `PQSCity`, and
+  the launch sites of Making History, placed by `PQSCity2`.
 - **Following the body.** Out of its sphere, a static no longer moves with its body: the fix places it
   again whenever the body moves or turns, in the same call where stock moves the quads. If something
   else moves it — an editor, say — it stays where it was put, relative to the body.
@@ -34,8 +35,19 @@ installs its patches, with the name of its patch in the code.
   rotation in the frame of the sphere. Called by `Start`, and before stock puts a craft on a launch site.
 - **`PQSCity.Start`** (`StartPatch`) — starts a static: finds its body, then calls `Orientate`.
 - **`PQSCity.ResetCelestialBody`** (`ResetCelestialBodyPatch`) — finds the body of a static again.
+- **`PQSCity2.Orientate`** (`Orientate2Patch`) — the same as `PQSCity.Orientate`, for a launch site of
+  Making History: places it on its body, and has its launch pad, if it has one, set itself on the ground.
+  Called by `Start`, when the site comes into view, and before stock puts a craft on it.
+- **`PQSCity2.Start`** (`Start2Patch`) — starts a launch site of Making History: finds its body, then
+  calls `Orientate`.
+- **`PQSCity2.SetBody`** (`SetBody2Patch`) — finds the body of a launch site of Making History again; a
+  mission calls it on the launch pad it places.
+- **`PositionMobileLaunchPad.CompleteOrientation`** (`CompleteOrientationPatch`) — sets a launch pad of
+  Making History, such as the Desert Launch Site, on the ground: lifts it if one of its feet is under the
+  ground, then stretches its legs down to the ground, both by casting rays from where it stands. Called
+  by `PQSCity2.Orientate`.
 - **`PQS.SetupMods`** (`SetupModsPatch`) — builds the list of the mods of a terrain sphere, `PQSCity`
-  included; the sphere calls the mods on this list as the terrain updates.
+  and `PQSCity2` included; the sphere calls the mods on this list as the terrain updates.
 - **`CommNetHome.Start`** (`CommNetHomeStartPatch`) — starts a CommNet ground station, such as the one
   of the KSC: finds its body, to place it in the network.
 - **`DayNightGameObjectSwitch.Setup`** (`DayNightSetupPatch`) — sets up a component that switches
@@ -67,15 +79,16 @@ asked for — it:
 When a scene change is asked for, every static goes back under its sphere, and none is taken out again
 until the next flight scene is ready.
 
-The patches are there for three things around this. None of the methods they patch is changed: the fix
+The patches are there for four things around this. None of the methods they patch is changed: the fix
 only acts just before or just after them.
 
 ### Learning of the statics
 
-- **`PQSCity.Orientate`** (`OrientatePatch`) — just after it, the static is added to those the code
-  run at every frame goes through. Every static goes through this method at least once, from its
-  `Start`, so none is missed. This is the only part of the patches that runs while no static is out of
-  its sphere.
+- **`PQSCity.Orientate`** (`OrientatePatch`) and **`PQSCity2.Orientate`** (`Orientate2Patch`) — just
+  after it, the static is added to those the code run at every frame goes through. Every static goes
+  through one of these methods at least once, from its `Start`, so none is missed. This is the only
+  part of the patches that runs while no static is out of its sphere, with the patch of
+  [Measuring a launch pad against the ground](#measuring-a-launch-pad-against-the-ground).
 
 ### Keeping a static out of its sphere in place
 
@@ -96,21 +109,23 @@ Should the body move some other way, the code run at every frame places the stat
 
 ### Lending the static back to stock code that expects it under its sphere
 
-These six methods would break with a static out of its sphere. Only one of them would lose the static
+These nine methods would break with a static out of its sphere. Only one of them would lose the static
 itself; the others would lose its body, or write its position in the wrong frame:
 
 - **`PQS.SetupMods`** (`SetupModsPatch`) builds the list of the mods of a sphere from its children: a
   static out of it would drop off the list, and with it the calls that show it and load its levels of
   detail, until the list is built again.
 - **`PQSCity.Start`** (`StartPatch`), **`PQSCity.ResetCelestialBody`** (`ResetCelestialBodyPatch`),
+  **`PQSCity2.Start`** (`Start2Patch`), **`PQSCity2.SetBody`** (`SetBody2Patch`),
   **`CommNetHome.Start`** (`CommNetHomeStartPatch`) and **`DayNightGameObjectSwitch.Setup`**
   (`DayNightSetupPatch`) look for the body as the `CelestialBody` among the parents of the static, or of
   an object inside it: out of the sphere, there is none. The static would lose its body, a ground station
   could not be placed in the network, and the objects of a day and night switch would not follow day and
   night.
-- **`PQSCity.Orientate`** (`OrientatePatch`) writes the static's position and rotation in the frame of
-  the sphere, as local values: out of the sphere, they would send the static far away. It also finds its
-  body among its parents when it has none.
+- **`PQSCity.Orientate`** (`OrientatePatch`) and **`PQSCity2.Orientate`** (`Orientate2Patch`) write
+  the static's position and rotation in the frame of the sphere, as local values: out of the sphere, they
+  would send the static far away. `PQSCity.Orientate` also finds its body among its parents when it has
+  none.
 
 So for each of them, the fix **lends the static back to stock** for the time of the call. Just before
 the method runs, the static is put back under its sphere, with the local position and rotation stock
@@ -119,8 +134,24 @@ still within reach of a craft, it is taken out again, from the pose the method j
 that stock placed again with `Orientate` — before a craft is spawned on its launch site, for instance —
 keeps its new place. For `SetupMods`, every static out of the sphere is lent back; for
 `CommNetHome.Start` and `DayNightGameObjectSwitch.Setup`, the static the station or the switch belongs
-to. `PQSCity.Start` is
-normally run before a static can ever be taken out: its patch covers the case where it is not.
+to. `PQSCity.Start` and `PQSCity2.Start` are normally run before a static can ever be taken out: their
+patches cover the case where they are not. A mission calls `PQSCity2.SetBody` a frame after it has placed
+a launch pad, by which time the pad may be out of its sphere.
+
+### Measuring a launch pad against the ground
+
+A launch pad of Making History, such as the Desert Launch Site, sets itself on the ground by casting
+rays from where it stands: it lifts itself if one of its feet is under the ground, then stretches its
+legs down to it (`PositionMobileLaunchPad.CompleteOrientation`). It does so while a craft is being
+launched from it, before the flight scene is ready, so before the fix takes any static out of its sphere:
+under its sphere, the pad would measure the ground from a rounded position, and once taken out, its
+feet would end above the ground or inside it by as much.
+
+- **`PositionMobileLaunchPad.CompleteOrientation`** (`CompleteOrientationPatch`) — just before it, in
+  flight, the launch pad is taken out of its sphere and placed in double, even though the flight scene
+  is not ready yet; just after it, it is put back under its sphere, and the height it lifted itself to
+  is kept in double, as its position in the frame of the sphere: when it is taken out next, it goes back
+  to that height exactly.
 
 ## Other mods that look for a static under its sphere
 

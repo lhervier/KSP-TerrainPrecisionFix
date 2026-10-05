@@ -6,6 +6,7 @@ installed. What their readings say is in
 [Coming back to a craft left parked](../docs/checking-the-culprit-approach.md),
 [Switching to a craft far away](../docs/checking-the-culprit-switching.md),
 [Driving on while the world moves](../docs/checking-the-culprit-driving.md),
+[Launching from a launch pad of Making History](../docs/checking-the-culprit-launch-pad.md),
 [In flight](../docs/checking-the-culprit-flight.md),
 [Rescaled systems: Real Solar System](../docs/limits-and-solutions/rescaled-systems-real-solar-system.md)
 and its pages, and [Deferred](../docs/limits-and-solutions/deferred.md).
@@ -113,6 +114,20 @@ played by its script, `run-driving-runway.py`, from `driving-runway-kerbin.sfs`.
   [`runs/driving-runway-diag2-fix-terrain-only-script.txt`](runs/driving-runway-diag2-fix-terrain-only-script.txt),
   and every line it recorded in
   [`runs/driving-runway-diag2-fix-terrain-only-lines.json`](runs/driving-runway-diag2-fix-terrain-only-lines.json).
+
+## The launch pad protocol
+
+KSP 1.12.5 with the Making History expansion, Harmony, ModuleManager, KSP Community Fixes 1.41.1, this
+mod, [KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainHeight) and KSP-MCPServer:
+six launches of `Capsule.craft` from the Desert Launch Site, one session of the game each, by the script
+of [the launch pad protocol](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/main/docs/the-protocol-launch-pad.md),
+`run-launch-pad.py`. Read in
+[Launching from a launch pad of Making History](../docs/checking-the-culprit-launch-pad.md).
+
+- [`runs/launch-pad-fix-1.log`](runs/launch-pad-fix-1.log) to
+  [`runs/launch-pad-fix-6.log`](runs/launch-pad-fix-6.log) — the `KSP.log` of each session; what the
+  script printed in [`runs/launch-pad-fix-script.txt`](runs/launch-pad-fix-script.txt), and every line
+  it recorded in [`runs/launch-pad-fix-lines.json`](runs/launch-pad-fix-lines.json).
 
 ## The protocol of the quads of the highest level, in flight
 

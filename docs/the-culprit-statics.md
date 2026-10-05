@@ -30,3 +30,5 @@ That a static comes back somewhere else at every load, and not together with the
 checked on the runway of the KSC in
 [Checking the culprit: loading the same save](checking-the-culprit-loading.md), and while a rover
 drives by it in [Checking the culprit: driving on while the world moves](checking-the-culprit-driving.md).
+On a launch site of Making History, it is checked on the deck of the Desert Launch Site in
+[Checking the culprit: launching from a launch pad of Making History](checking-the-culprit-launch-pad.md).

@@ -1,20 +1,21 @@
 using System.Collections.Generic;
 using CommNet;
+using Expansions.Missions.Scenery.Scripts;
 using HarmonyLib;
 using UnityEngine;
 
 namespace com.github.lhervier.ksp.terrainprecisionfix
 {
     /// <summary>
-    /// Places the statics — the buildings of the KSC, and whatever a mod such as Kerbal Konstructs places
-    /// through a PQSCity — the same way at every load, where their own double precision coordinates say
-    /// they are.
+    /// Places the statics — the buildings of the KSC, the launch sites of Making History, and whatever a
+    /// mod such as Kerbal Konstructs places through a PQSCity or a PQSCity2 — the same way at every load,
+    /// where their own double precision coordinates say they are.
     ///
-    /// A PQSCity hangs from its body's terrain sphere, whose origin is the centre of the body, at a
-    /// localPosition hundreds of kilometres long: the same float rounding as the terrain, and for the same
-    /// reason the same static comes back a few centimetres higher or lower at every load. Unlike a terrain
-    /// quad, a static cannot be given a precise position while it hangs from the sphere: Unity would store
-    /// it as a 600 km float again.
+    /// A PQSCity or a PQSCity2 hangs from its body's terrain sphere, whose origin is the centre of the
+    /// body, at a localPosition hundreds of kilometres long: the same float rounding as the terrain, and for
+    /// the same reason the same static comes back a few centimetres higher or lower at every load. Unlike a
+    /// terrain quad, a static cannot be given a precise position while it hangs from the sphere: Unity
+    /// would store it as a 600 km float again.
     ///
     /// So in flight, while a static is within reach of the craft, it is moved out of the sphere, next to
     /// the terrain quads that carry colliders, and given its world position in double precision. It is
@@ -43,7 +44,7 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
         /// <summary>A static out of its sphere, and what it takes to keep it where it belongs.</summary>
         private sealed class TakenOut
         {
-            public PQSCity City;
+            public PQSSurfaceObject City;
             public Transform Transform;
             public PQS Sphere;
             public CelestialBody Body;
@@ -68,14 +69,15 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
         // Whether the flight scene is ready and not being left: the only time statics are moved out.
         private static bool _inFlight;
 
-        private static AccessTools.FieldRef<PQSCity, Vector3d> _planetRelativePosition;
+        private static AccessTools.FieldRef<PQSCity, Vector3d> _cityPosition;
+        private static AccessTools.FieldRef<PQSCity2, Vector3d> _city2Position;
 
         // Every static seen, and those out of their sphere right now. Lists rather than sets: a destroyed
         // Unity object compares equal to any other, and a static can be destroyed at any time (a Kerbal
         // Konstructs group deleted in flight).
-        private static readonly List<PQSCity> _known = new List<PQSCity>();
+        private static readonly List<PQSSurfaceObject> _known = new List<PQSSurfaceObject>();
         private static readonly List<TakenOut> _out = new List<TakenOut>();
-        private static readonly List<PQSCity> _scratch = new List<PQSCity>();
+        private static readonly List<PQSSurfaceObject> _scratch = new List<PQSSurfaceObject>();
 
         // Bodies already reported, so that each of these messages appears once per body and per session.
         private static readonly HashSet<CelestialBody> _announced = new HashSet<CelestialBody>();
@@ -91,10 +93,15 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
         /// </summary>
         public static void Install(Harmony harmony)
         {
-            _planetRelativePosition = AccessTools.FieldRefAccess<PQSCity, Vector3d>("planetRelativePosition");
+            _cityPosition = AccessTools.FieldRefAccess<PQSCity, Vector3d>("planetRelativePosition");
+            _city2Position = AccessTools.FieldRefAccess<PQSCity2, Vector3d>("planetRelativePosition");
             harmony.CreateClassProcessor(typeof(OrientatePatch)).Patch();
             harmony.CreateClassProcessor(typeof(StartPatch)).Patch();
             harmony.CreateClassProcessor(typeof(ResetCelestialBodyPatch)).Patch();
+            harmony.CreateClassProcessor(typeof(Orientate2Patch)).Patch();
+            harmony.CreateClassProcessor(typeof(Start2Patch)).Patch();
+            harmony.CreateClassProcessor(typeof(SetBody2Patch)).Patch();
+            harmony.CreateClassProcessor(typeof(CompleteOrientationPatch)).Patch();
             harmony.CreateClassProcessor(typeof(SetupModsPatch)).Patch();
             harmony.CreateClassProcessor(typeof(CommNetHomeStartPatch)).Patch();
             harmony.CreateClassProcessor(typeof(DayNightSetupPatch)).Patch();
@@ -152,7 +159,7 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
             // Taking a static out or putting it back changes neither list being read.
             _scratch.Clear();
             _scratch.AddRange(_known);
-            foreach (PQSCity city in _scratch)
+            foreach (PQSSurfaceObject city in _scratch)
             {
                 TakenOut record = Find(city);
                 if (city == null)
@@ -187,7 +194,7 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
         // ==========================================================================
 
         /// <summary>Whether a static should be out of its sphere, given whether it already is.</summary>
-        private static bool IsWithinReach(PQSCity city, bool isOut)
+        private static bool IsWithinReach(PQSSurfaceObject city, bool isOut)
         {
             if (!_inFlight || !HighLogic.LoadedSceneIsFlight)
             {
@@ -203,8 +210,8 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
                 return false;
             }
 
-            // Only the statics that hang directly from their sphere, as those of stock and of Kerbal
-            // Konstructs do: the localPosition of any other is not in the frame of the sphere.
+            // Only the statics that hang directly from their sphere, as those of stock, of Making History
+            // and of Kerbal Konstructs do: the localPosition of any other is not in the frame of the sphere.
             if (!isOut && city.transform.parent != sphere.transform)
             {
                 return false;
@@ -237,33 +244,61 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
         /// Moves a static out of its sphere, to where its own double precision coordinates say it is. Leaves
         /// it under its sphere when this cannot be done safely.
         /// </summary>
-        private static void TakeOut(PQSCity city)
+        private static void TakeOut(PQSSurfaceObject city)
         {
+            double correction;
+            TakenOut record = MoveOut(city, out correction);
+            if (record == null)
+            {
+                return;
+            }
+            if (_announced.Add(record.Body))
+            {
+                Log.Info($"{record.Body.bodyName}: statics placed in double precision"
+                    + $" (first one, '{city.name}', corrected by {correction * 1000.0:0.00} mm)");
+            }
+            if (Log.IsDebugEnabled)
+            {
+                Log.Debug($"{record.Body.bodyName} static '{city.name}': out of its sphere,"
+                    + $" corrected by {correction * 1000.0:0.00} mm");
+            }
+        }
+
+        /// <summary>
+        /// Moves a static out of its sphere, to where its own double precision coordinates say it is, and
+        /// returns its record, with how far it moved in <paramref name="correction"/>. Returns null, and
+        /// leaves it under its sphere, when this cannot be done safely.
+        /// </summary>
+        private static TakenOut MoveOut(PQSSurfaceObject city, out double correction)
+        {
+            correction = 0.0;
             PQS sphere = city.sphere;
             CelestialBody body = PlanetFrame.BodyOf(sphere);
             if (body == null)
             {
-                return;
+                return null;
             }
             Transform storage = StorageFor(sphere, body);
             if (storage == null)
             {
-                return;
+                return null;
             }
 
             // Stock sets the localPosition from planetRelativePosition, in double, whenever it places the
-            // static; when it does not, the localPosition of the prefab is all there is.
+            // static; when it does not, the localPosition of the prefab is all there is. A PQSCity2 put on
+            // water, or lifted by its mobile launch pad's legs outside flight, is placed by a world position,
+            // and its localPosition then is all there is too.
             Transform transform = city.transform;
             Vector3 localPosition = transform.localPosition;
-            Vector3d planetRelativePosition = _planetRelativePosition(city);
+            Vector3d planetRelativePosition = PlanetRelativePosition(city);
             Vector3d spherePosition = ((Vector3)planetRelativePosition).Equals(localPosition)
                 ? planetRelativePosition
                 : (Vector3d)localPosition;
 
-            double correction = (PlanetFrame.WorldPosition(body, spherePosition) - (Vector3d)transform.position).magnitude;
+            correction = (PlanetFrame.WorldPosition(body, spherePosition) - (Vector3d)transform.position).magnitude;
             if (!IsRoundingCorrection(body, spherePosition.magnitude, correction))
             {
-                return;
+                return null;
             }
 
             TakenOut record = new TakenOut
@@ -280,17 +315,7 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
             transform.SetParent(storage, false);
             _out.Add(record);
             Place(record, true);
-
-            if (_announced.Add(body))
-            {
-                Log.Info($"{body.bodyName}: statics placed in double precision"
-                    + $" (first one, '{city.name}', corrected by {correction * 1000.0:0.00} mm)");
-            }
-            if (Log.IsDebugEnabled)
-            {
-                Log.Debug($"{body.bodyName} static '{city.name}': out of its sphere,"
-                    + $" corrected by {correction * 1000.0:0.00} mm");
-            }
+            return record;
         }
 
         /// <summary>
@@ -385,8 +410,18 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
             }
         }
 
+        /// <summary>
+        /// The position, in double precision, stock last worked out for a static in the frame of its sphere.
+        /// </summary>
+        private static Vector3d PlanetRelativePosition(PQSSurfaceObject city)
+        {
+            // The public PlanetRelativePosition of both classes is their localPosition, in float.
+            PQSCity pqsCity = city as PQSCity;
+            return pqsCity != null ? _cityPosition(pqsCity) : _city2Position((PQSCity2)city);
+        }
+
         /// <summary>The record of a static out of its sphere, or null when it is under it.</summary>
-        private static TakenOut Find(PQSCity city)
+        private static TakenOut Find(PQSSurfaceObject city)
         {
             foreach (TakenOut record in _out)
             {
@@ -471,7 +506,7 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
         /// Puts a static back under its sphere, for the time code that expects it there runs. Returns
         /// whether it was out, to be handed to <see cref="GiveBack"/>.
         /// </summary>
-        private static bool Borrow(PQSCity city)
+        private static bool Borrow(PQSSurfaceObject city)
         {
             TakenOut record = Find(city);
             if (record == null)
@@ -486,16 +521,16 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
         /// Takes a static borrowed by <see cref="Borrow"/> out of its sphere again, from the pose stock code
         /// just gave it.
         /// </summary>
-        private static void GiveBack(PQSCity city, bool wasOut)
+        private static void GiveBack(PQSSurfaceObject city, bool wasOut)
         {
-            if (wasOut && city != null && IsWithinReach(city, false))
+            if (wasOut && city != null && Find(city) == null && IsWithinReach(city, false))
             {
                 TakeOut(city);
             }
         }
 
         /// <summary>The static out of its sphere that <paramref name="transform"/> belongs to, or null.</summary>
-        private static PQSCity OutAncestor(Transform transform)
+        private static PQSSurfaceObject OutAncestor(Transform transform)
         {
             for (Transform current = transform; current != null; current = current.parent)
             {
@@ -511,7 +546,7 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
         }
 
         /// <summary>Remembers a static, so that it can be moved out when within reach.</summary>
-        private static void Register(PQSCity city)
+        private static void Register(PQSSurfaceObject city)
         {
             if (!_known.Contains(city))
             {
@@ -614,13 +649,125 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
         }
 
         /// <summary>
+        /// The same as <see cref="OrientatePatch"/>, for a PQSCity2, which also moves itself in the world
+        /// frame there: to measure the ground under it, to put it on water, or to lift its mobile launch
+        /// pad above the ground.
+        /// </summary>
+        [HarmonyPatch(typeof(PQSCity2), nameof(PQSCity2.Orientate))]
+        private static class Orientate2Patch
+        {
+            private static void Prefix(PQSCity2 __instance, out bool __state)
+            {
+                __state = _active && Borrow(__instance);
+            }
+
+            private static void Postfix(PQSCity2 __instance, bool __state)
+            {
+                if (_active)
+                {
+                    Register(__instance);
+                    GiveBack(__instance, __state);
+                }
+            }
+        }
+
+        /// <summary>Reads the static's body from its parents, for a PQSCity2.</summary>
+        [HarmonyPatch(typeof(PQSCity2), "Start")]
+        private static class Start2Patch
+        {
+            private static void Prefix(PQSCity2 __instance, out bool __state)
+            {
+                __state = _active && Borrow(__instance);
+            }
+
+            private static void Postfix(PQSCity2 __instance, bool __state)
+            {
+                GiveBack(__instance, __state);
+            }
+        }
+
+        /// <summary>
+        /// Reads the static's body from its parents, for a PQSCity2: a mission does, a frame after it has
+        /// created a mobile launch pad, by which time the pad may be out of its sphere.
+        /// </summary>
+        [HarmonyPatch(typeof(PQSCity2), "SetBody")]
+        private static class SetBody2Patch
+        {
+            private static void Prefix(PQSCity2 __instance, out bool __state)
+            {
+                __state = _active && Borrow(__instance);
+            }
+
+            private static void Postfix(PQSCity2 __instance, bool __state)
+            {
+                GiveBack(__instance, __state);
+            }
+        }
+
+        // ==========================================================================
+        // Stock code that measures a static against the ground
+        // ==========================================================================
+
+        /// <summary>
+        /// Lifts a mobile launch pad above the ground and stretches its legs down to it, by casting rays in
+        /// the world frame. It runs while the craft is being loaded, before statics are taken out of their
+        /// sphere, so under it the pad would be measured from a rounded position, and its legs would end
+        /// above or below the ground by as much once it is out. So the pad is taken out of its sphere for
+        /// the time of the call, and put back with the lift it was given kept in double precision.
+        /// </summary>
+        [HarmonyPatch(typeof(PositionMobileLaunchPad), "CompleteOrientation")]
+        private static class CompleteOrientationPatch
+        {
+            private static void Prefix(PositionMobileLaunchPad __instance, out TakenOut __state)
+            {
+                __state = null;
+                PQSCity2 city = __instance.City;
+                if (!_active || !HighLogic.LoadedSceneIsFlight || city == null || city.sphere == null)
+                {
+                    return;
+                }
+
+                // Already out, it is measured from where it is; and only a static hanging directly from its
+                // sphere has a localPosition in the frame of the sphere.
+                if (Find(city) != null || city.transform.parent != city.sphere.transform)
+                {
+                    return;
+                }
+                double correction;
+                __state = MoveOut(city, out correction);
+                if (__state != null && Log.IsDebugEnabled)
+                {
+                    Log.Debug($"{__state.Body.bodyName} static '{city.name}': out of its sphere while its legs"
+                        + $" are measured, corrected by {correction * 1000.0:0.00} mm");
+                }
+            }
+
+            private static void Postfix(TakenOut __state)
+            {
+                if (__state == null)
+                {
+                    return;
+                }
+
+                // PutBack takes the world position the pad was lifted to as its position in the sphere, in
+                // double. Written to planetRelativePosition too, it is what the pad is taken out from next.
+                PutBack(__state);
+                PQSCity2 city = __state.City as PQSCity2;
+                if (city != null)
+                {
+                    _city2Position(city) = __state.SpherePosition;
+                }
+            }
+        }
+
+        /// <summary>
         /// Lists the mods of a sphere, statics included, from its children: a static out of the sphere
         /// would drop out of the list, and no longer be placed nor shown.
         /// </summary>
         [HarmonyPatch(typeof(PQS), "SetupMods")]
         private static class SetupModsPatch
         {
-            private static void Prefix(PQS __instance, out List<PQSCity> __state)
+            private static void Prefix(PQS __instance, out List<PQSSurfaceObject> __state)
             {
                 __state = null;
                 if (!_active)
@@ -634,7 +781,7 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
                     {
                         if (__state == null)
                         {
-                            __state = new List<PQSCity>();
+                            __state = new List<PQSSurfaceObject>();
                         }
                         __state.Add(record.City);
                         PutBack(record);
@@ -642,13 +789,13 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
                 }
             }
 
-            private static void Postfix(List<PQSCity> __state)
+            private static void Postfix(List<PQSSurfaceObject> __state)
             {
                 if (__state == null)
                 {
                     return;
                 }
-                foreach (PQSCity city in __state)
+                foreach (PQSSurfaceObject city in __state)
                 {
                     GiveBack(city, true);
                 }
@@ -662,7 +809,7 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
         [HarmonyPatch(typeof(CommNetHome), "Start")]
         private static class CommNetHomeStartPatch
         {
-            private static void Prefix(CommNetHome __instance, out PQSCity __state)
+            private static void Prefix(CommNetHome __instance, out PQSSurfaceObject __state)
             {
                 __state = null;
                 if (_active)
@@ -672,7 +819,7 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
                 }
             }
 
-            private static void Postfix(PQSCity __state)
+            private static void Postfix(PQSSurfaceObject __state)
             {
                 GiveBack(__state, __state != null);
             }
@@ -685,7 +832,7 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
         [HarmonyPatch(typeof(DayNightGameObjectSwitch), "Setup")]
         private static class DayNightSetupPatch
         {
-            private static void Prefix(DayNightGameObjectSwitch __instance, out PQSCity __state)
+            private static void Prefix(DayNightGameObjectSwitch __instance, out PQSSurfaceObject __state)
             {
                 __state = null;
                 if (_active && __instance.objects != null && __instance.objects.Length > 0
@@ -696,7 +843,7 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
                 }
             }
 
-            private static void Postfix(PQSCity __state)
+            private static void Postfix(PQSSurfaceObject __state)
             {
                 GiveBack(__state, __state != null);
             }

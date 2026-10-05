@@ -1,0 +1,50 @@
+[
+ {
+  "launch": 1,
+  "ut": 48961.63999999894,
+  "terrain_height": {
+   "CollisionSurfaceMm": 823720.3004502226,
+   "ComputedTerrainMm": 820000
+  }
+ },
+ {
+  "launch": 2,
+  "ut": 49278.59999999894,
+  "terrain_height": {
+   "CollisionSurfaceMm": 823720.3004502226,
+   "ComputedTerrainMm": 820000
+  }
+ },
+ {
+  "launch": 3,
+  "ut": 49595.59999999894,
+  "terrain_height": {
+   "CollisionSurfaceMm": 823720.3004502226,
+   "ComputedTerrainMm": 820000
+  }
+ },
+ {
+  "launch": 4,
+  "ut": 49912.63999999894,
+  "terrain_height": {
+   "CollisionSurfaceMm": 823720.3004502226,
+   "ComputedTerrainMm": 820000
+  }
+ },
+ {
+  "launch": 5,
+  "ut": 50229.59999999894,
+  "terrain_height": {
+   "CollisionSurfaceMm": 823720.3004502226,
+   "ComputedTerrainMm": 820000
+  }
+ },
+ {
+  "launch": 6,
+  "ut": 50546.61999999894,
+  "terrain_height": {
+   "CollisionSurfaceMm": 823720.2993538231,
+   "ComputedTerrainMm": 820000
+  }
+ }
+]

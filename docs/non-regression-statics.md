@@ -23,6 +23,7 @@ to tell what stock already does.
 - [Facility levels](#facility-levels) — to test.
 - [The ground station](#the-ground-station) — to test.
 - [A mission spawning a craft](#a-mission-spawning-a-craft) — to test.
+- [A launch pad placed by a mission](#a-launch-pad-placed-by-a-mission) — to test.
 - [The other stock statics](#the-other-stock-statics) — to test.
 - [A static turning with its body](#a-static-turning-with-its-body) — cannot happen on stock, in Real
   Solar System or with Outer Planets Mod.
@@ -157,6 +158,19 @@ with Kopernicus and Real Solar System, in
 [Seeing the patch](limits-and-solutions/kopernicus/the-flag-fix.md#seeing-the-patch): the pod appears
 on the launchpad; whether it stands on its spawn point was not checked.
 
+## A launch pad placed by a mission
+
+**To test.**
+
+*Why.* A mission of Making History can place a launch pad of its own, and finds its body a frame after
+it has placed it, from its parents; by then, this mod may have taken it out of its sphere.
+
+*The test.* With the Making History expansion and no other mod, play a mission that places a launch
+pad, and launch from it.
+
+*What should happen.* The craft should stand on the launch pad, its feet on the ground, and `KSP.log`
+should not say that the launch pad *is not parented to a valid CelestialBody*.
+
 ## The other stock statics
 
 **To test.**
@@ -267,9 +281,6 @@ with Set Orbit, 8, 5.2 and 5.05 km up for a few seconds each, where KSP turns th
 4.8 km up, where it turns the world again; the game paused at 4.8 km.*
 
 ## What this page does not cover
-
-`PQSCity2`, which places the launch sites of the Making History expansion, carries the same defect and
-is not covered.
 
 The cost per frame of the statics fix is no test a player can play by hand: it belongs to
 [Performance](performance.md), where it is still to measure.
