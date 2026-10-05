@@ -184,7 +184,9 @@ claw, Breaking Ground, the map view, and the colliders of lower levels on most b
 **The statics.** Taken out of its sphere and put back over loadings, an orbit and a return to the space
 centre, the KSC keeps every building registered; a craft launched from the VAB or the SPH stands on the
 launchpad or the runway. Still to test: scene changes, a trip to another body, time warp, destroyed
-buildings and facility levels, the ground station, missions, the other stock statics.
+buildings and facility levels, the ground station, missions, the other stock statics. A static
+turning with its body cannot happen on stock, in Real Solar System or with Outer Planets Mod: no body
+turns low enough for a craft near a static to see it.
 
 **→ Full chapter: [Non-regression tests: the statics](docs/non-regression-statics.md)**
 

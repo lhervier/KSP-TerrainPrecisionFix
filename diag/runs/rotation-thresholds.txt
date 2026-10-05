@@ -1,0 +1,62 @@
+The altitude above which KSP turns each body rather than the world around the craft, read with
+KSP Diag - Floating Origin (its Frame column) and a craft moved from orbit to orbit with the cheat
+Set Orbit, through KSP-MCPServer. KSP 1.12.5, Harmony, ModuleManager, KSP Community Fixes 1.41.1,
+without Terrain Precision Fix.
+
+== Stock system ==
+Read with loops of the same calls as run-rotation-threshold.py, written before it, from a craft in
+orbit of the Mun (ref-mune-5km.sfs of KSP-PQSBench). A first try on Minmus, at 1 km, crashed the
+craft; Minmus, Gilly and the others were read from the same save loaded again.
+Mun threshold between 99921 and 100000 m
+Gilly threshold between 99843 and 100000 m
+Minmus threshold between 99800 and 100200 m
+Moho, Ike, Dres, Tylo, Vall, Bop, Pol, Eeloo: still rotating at 30000 m (one reading each)
+
+== Real Solar System 20.1.3.0 ==
+First run, with an earlier version of run-rotation-threshold.py that started every body at 30 km, Phobos and Deimos capped at 38 km:
+Phobos still rotating at 38000 m (highest tried)
+Deimos still rotating at 38000 m (highest tried)
+Moon threshold between 99843 and 100312 m
+Mercury threshold between 99843 and 100312 m
+
+Second run, with run-rotation-threshold.py as published, from a new craft:
+Earth threshold between 144772 and 145049 m
+Venus INERTIAL already at 147000 m
+Mars INERTIAL already at 127000 m
+Ceres threshold between 99687 and 100000 m
+Vesta threshold between 99843 and 100312 m
+Io threshold between 99687 and 100000 m
+Europa threshold between 99687 and 100000 m
+Ganymede threshold between 99687 and 100000 m
+Callisto threshold between 99687 and 100000 m
+Mimas threshold between 99687 and 100000 m
+Enceladus threshold between 99687 and 100000 m
+Tethys threshold between 99687 and 100000 m
+Dione threshold between 99687 and 100000 m
+Rhea threshold between 99687 and 100000 m
+Titan INERTIAL already at 602000 m
+Iapetus threshold between 99687 and 100000 m
+Miranda threshold between 99687 and 100000 m
+Ariel threshold between 99687 and 100000 m
+Umbriel threshold between 99687 and 100000 m
+Titania threshold between 99687 and 100000 m
+Oberon threshold between 99687 and 100000 m
+Triton INERTIAL already at 112000 m
+Pluto INERTIAL already at 112000 m
+Charon threshold between 99687 and 100000 m
+
+== Outer Planets Mod 2.2.12 (with Kopernicus 248, Community Terrain Texture Pack 1.0.5) ==
+One run, with run-rotation-threshold.py as published, from a craft launched onto the launchpad:
+Hale still rotating at 33000 m (sphere of influence)
+Ovok still rotating at 65000 m (sphere of influence)
+Slate threshold between 99687 and 100000 m
+Tekto threshold between 99652 and 100031 m
+Eeloo threshold between 99687 and 100000 m
+Polta threshold between 99609 and 100000 m
+Priax threshold between 99609 and 100000 m
+Wal threshold between 99687 and 100000 m
+Tal threshold between 99687 and 100156 m
+Thatmo threshold between 99726 and 100015 m
+Nissee threshold between 99687 and 100000 m
+Plock threshold between 99687 and 100000 m
+Karen threshold between 99687 and 100000 m

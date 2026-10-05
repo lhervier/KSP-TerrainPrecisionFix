@@ -154,6 +154,20 @@ Read in [The seam with this mod](../docs/non-regression/the-seam-between-subdivi
   [`runs/revert-kerbin-fix-diag4-script.txt`](runs/revert-kerbin-fix-diag4-script.txt), and every
   reading in [`runs/revert-kerbin-fix-diag4-readings.json`](runs/revert-kerbin-fix-diag4-readings.json).
 
+## The altitude where KSP turns the body
+
+Without this mod: KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1,
+[KSP Diag - Floating Origin](https://github.com/lhervier/KSP-Diag-FloatingOrigin) and
+[KSP-MCPServer](https://github.com/lhervier/KSP-MCPServer); on the stock system, then with Real Solar
+System 20.1.3.0 and what it requires, then with Outer Planets Mod 2.2.12, Kopernicus 248, Modular Flight
+Integrator and KSPTextureLoader as for Real Solar System, and the Community Terrain Texture Pack 1.0.5.
+
+- [`runs/rotation-thresholds.txt`](runs/rotation-thresholds.txt) — what
+  [`automation/run-rotation-threshold.py`](automation/run-rotation-threshold.py) printed, body by body:
+  a craft moved from orbit to orbit, the altitude above which KSP turns the body rather than the world.
+  No log kept: the readings are the script's. Read in
+  [Non-regression tests: the statics](../docs/non-regression-statics.md#a-static-turning-with-its-body).
+
 ## On the stock system
 
 KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, this mod and one instrument.
