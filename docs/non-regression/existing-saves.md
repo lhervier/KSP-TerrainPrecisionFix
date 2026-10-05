@@ -22,3 +22,10 @@ mod, loaded once and saved again with it, then loaded 42 times with it without m
 loading with the fix — a range in millimetres over real bases, to say how much transition there is to
 absorb. The configuration expected to suffer most is modules docked to each other and standing on
 landing legs.
+
+*To test:* that a save made again with the fix no longer jumps, on Kerbin. On
+[`switch-kerbin.sfs`](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/diag/switch-kerbin.sfs),
+made without the fix, the capsule comes to rest 31.8 mm off, at the same place every time. With the fix,
+load it, switch to the capsule with `]` and back to the rover, save under another name, then six times
+"load → *Record* → `]` → *Record*" with KSP Diag - Landed Vessel: *Moved* should stay within a few
+hundredths of a millimetre of zero.

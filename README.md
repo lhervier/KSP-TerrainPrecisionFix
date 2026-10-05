@@ -197,8 +197,8 @@ with statics near a craft is not measured yet.
 ## Limits and solutions
 
 Every mod that places something on the ground, reads it, or changes the bodies it is built from, has to
-be checked against this fix, one mod at a time: Kopernicus, Real Solar System, Kerbal Konstructs,
-Principia, a planet pack… This is a work in progress, with a chapter per mod. **The statics fix is the
+be checked against this fix, one mod at a time: Kopernicus, Real Solar System, Parallax, Kerbal
+Konstructs, Principia, a planet pack… This is a work in progress, with a chapter per mod. **The statics fix is the
 riskier of the two**: it takes a static out of the place where stock, and any mod, expects to find it.
 
 **→ Full chapter: [Limits and solutions](docs/limits-and-solutions.md)**

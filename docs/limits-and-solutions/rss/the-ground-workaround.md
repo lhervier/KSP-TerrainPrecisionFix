@@ -94,6 +94,12 @@ a spread of 0.364 mm, against 0.395 mm with it on.*
 
 The workaround may well have other uses, outside the scope of this fix.
 
+*Still to test:* the same six loads on Earth, with the craft in *landed*
+(`reload-earth-rss-landed.sfs`), since in *prelaunch* the workaround does not run and stock's pass runs
+instead; the same series without this mod, to compare (on the Moon, with the workaround off, the craft
+tipped over at the very first load); and, on the Moon, the two other moments the workaround runs:
+coming back to a craft left parked, and switching to one.
+
 ## The saves
 
 The saves on the Moon and on Earth are in the `diag` folder of each of the three Diags (here, Diag LandedVessel's):

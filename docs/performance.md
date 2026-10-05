@@ -206,4 +206,7 @@ The statics are hardly in these figures: in the profiler runs, no static was nea
 fix does grows with the number of statics, not of vertices: once per frame, it checks every static the
 game knows of to see which ones a craft is near, and a static out of its sphere is placed again whenever
 its body moves. That is still to measure, with many statics near a craft — a base of Kerbal
-Konstructs — and is listed in [Non-regression tests: the statics](non-regression-statics.md).
+Konstructs.
+
+The campaign was flown over the Mun. Kerbin, where the quads are four times larger, is still to
+measure too.

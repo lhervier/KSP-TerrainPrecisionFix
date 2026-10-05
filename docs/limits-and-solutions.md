@@ -44,7 +44,7 @@ runway are rounded each on their own, and a craft can rest above the deck or sun
 step, and the runway jumps by up to 232 mm with the grass at each move of the floating origin; with
 this mod, the runway is where it is drawn, in one piece, and a move of the origin moves nothing. The
 safeguard grows with the body too, so none of the terrain is left
-uncorrected, on Earth as on Venus, Mars and Mercury.
+uncorrected, on Earth as on Venus, Mars and Mercury. Still to test: a flight, not only loads.
 
 **→ Full chapter: [Rescaled systems: Real Solar System](limits-and-solutions/rescaled-systems-real-solar-system.md)**
 
@@ -128,6 +128,16 @@ them like the rest of the game. Open: whether the quads are placed again often e
 rotation Principia computes.
 
 **→ Full chapter: [Principia](limits-and-solutions/principia.md)**
+
+### Parallax
+
+**TBD — read in the source, not measured.** Parallax draws the terrain with shaders of its own, on the
+meshes stock builds, and its scatter is expressed in the frame of the terrain quad, colliders included,
+so it should follow the ground wherever this fix places it. The stock scatter it leaves in place keeps
+the gap this fix widens on Kerbin. Open: the loading and approach campaigns with Parallax installed, and
+an instrument for its scatter.
+
+**→ Full chapter: [Parallax](limits-and-solutions/parallax.md)**
 
 ### Tilt'Em
 
