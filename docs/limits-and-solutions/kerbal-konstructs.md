@@ -25,7 +25,7 @@ steps of where they belong.
 with the runway protocol of both instruments, on a runway placed by Kerbal Konstructs on the Mun: it
 comes back somewhere else at every load, and the step between it and the ground beside it changes
 ([Diag LandedVessel](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-measurements-runway.md),
-[Diag TerrainHeight](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-measurements-runway.md)).
+[Diag TerrainHeight](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/main/docs/the-measurements-runway.md)).
 This mod takes a group out of its sphere like the KSC ([The fix: the statics](../the-fix-statics.md)),
 and patches the group editor of Kerbal Konstructs, which reads the position of a group from where stock
 hangs it (below, [The patch of the group editor](#the-patch-of-the-group-editor)).

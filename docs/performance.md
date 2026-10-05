@@ -32,8 +32,8 @@ for this measurement alone: stock's arithmetic bit for bit, with the only differ
 the first, and splits the saving between them.
 
 Each configuration keeps its own PQS Bench logs and its own reading of them, in its own repository: the
-stock reference with [the bench](https://github.com/lhervier/KSP-PQSBench/blob/master/perfs/README.md),
-the middle term with [Stock Quad Cache](https://github.com/lhervier/KSP-TerrainPrecisionFix-StockQuadCache/blob/master/perfs/README.md),
+stock reference with [the bench](https://github.com/lhervier/KSP-PQSBench/blob/main/perfs/README.md),
+the middle term with [Stock Quad Cache](https://github.com/lhervier/KSP-TerrainPrecisionFix-StockQuadCache/blob/main/perfs/README.md),
 and this mod's runs in [`perfs/`](../perfs/README.md), along with the profiler runs of all three.
 
 ## The campaign
@@ -43,7 +43,7 @@ circular orbit 5 km over the Mun, low enough that the game builds the highest su
 only one the fix acts on. Every run flies the same 70 seconds of that one save, from 30 s of mission time,
 which covers the same ground every time: each PQS Bench run built the same 704 quads of the highest level.
 **All runs were taken on my desktop**, described with
-[the stock runs](https://github.com/lhervier/KSP-PQSBench/blob/master/perfs/README.md); figures from
+[the stock runs](https://github.com/lhervier/KSP-PQSBench/blob/main/perfs/README.md); figures from
 another machine are not comparable to these.
 
 Three configurations, taken in turn rather than one after the other: each measured twice with PQS Bench,
@@ -110,9 +110,9 @@ a remote control of its window's buttons — open, *Start capture*, *Stop captur
 through [KSP-MCPServer](https://github.com/lhervier/KSP-MCPServer), a mod that answers HTTP requests on
 127.0.0.1. Nothing in what the profiler measures was changed: the same procedure can be played by hand
 with KSPProfiler 1.0.0. Here, the runs were flown by
-[a script](https://github.com/lhervier/KSP-PQSBench/blob/master/perfs/automation/run-perfs.py), in
+[a script](https://github.com/lhervier/KSP-PQSBench/blob/main/perfs/automation/run-perfs.py), in
 Python and nothing else. Whether driving the game through KSP-MCPServer changes what a frame costs was
-checked on [its own page](https://github.com/lhervier/KSP-MCPServer/blob/master/docs/performance.md):
+checked on [its own page](https://github.com/lhervier/KSP-MCPServer/blob/main/docs/performance.md):
 driving it by script costs at most about 0.05 ms per frame, on the coroutines the terrain is updated in
 (Update → Coroutines, [below](#what-they-read)).
 
@@ -120,7 +120,7 @@ Each run is a fresh KSP:
 
 1. Load the save. Right after the load, turn the camera to look ahead along the orbit, with the Mun's
    ground on the left two thirds of the screen: the framing of
-   [PQS Bench's runs](https://github.com/lhervier/KSP-PQSBench/blob/master/docs/measuring-a-terrain-mod.md#the-runs),
+   [PQS Bench's runs](https://github.com/lhervier/KSP-PQSBench/blob/main/docs/measuring-a-terrain-mod.md#the-runs),
    pictured there. In orbit, KSP's camera turns in the orbit's frame, so the Mun's edge stands upright:
    heading 204° in that frame, pitch 0.
 2. Open the profiler's window, where it opens, KSP's interface shown. Captured frames at 10 000 (the

@@ -56,11 +56,11 @@ matrix of the terrain sphere, itself held in float.
   (`CelestialBody.CBUpdate`), and saves neither. When a save is loaded, the jump of the clock back to
   the date of the save goes into `directRotAngle`, which comes back off by the rotation of the body over
   the time played since that save, or since the previous load
-  ([measured with KSP Diag - Floating Origin](https://github.com/lhervier/KSP-Diag-FloatingOrigin/blob/master/docs/the-measurements-loading.md)).
+  ([measured with KSP Diag - Floating Origin](https://github.com/lhervier/KSP-Diag-FloatingOrigin/blob/main/docs/the-measurements-loading.md)).
 - Its **translation** is the position of the body relative to the floating origin, which moves every
   time the active craft travels 500 m — except while another landed craft is loaded nearby: the origin
   then waits, and catches up all at once when that craft is unloaded
-  ([measured with KSP Diag - Floating Origin](https://github.com/lhervier/KSP-Diag-FloatingOrigin/blob/master/docs/the-measurements-parked-craft.md)).
+  ([measured with KSP Diag - Floating Origin](https://github.com/lhervier/KSP-Diag-FloatingOrigin/blob/main/docs/the-measurements-parked-craft.md)).
 
 At 600 km, turning the frame by a thousandth of a degree moves a point by more than 10 m, some 170
 float steps: the slightest change draws a whole new set of roundings.

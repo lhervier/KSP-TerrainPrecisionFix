@@ -17,7 +17,7 @@ loaded too, but packed, held where the save put it. Then the game's *switch vess
 capsule, and physics takes it over. Six rounds, each starting by loading the same save. It is the
 switching protocol of both instruments —
 [KSP Diag - Landed Vessel](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-switching.md)
-and [KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-protocol-switching.md) —
+and [KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/main/docs/the-protocol-switching.md) —
 with a save made without this mod, played by its script,
 [`run-switching.py`](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-switching.md#played-by-a-script),
 once without this mod and once with it, both instruments recording at the same moments. The session
@@ -48,7 +48,7 @@ The capsule comes to rest across a spread of 112.0 mm without this mod, and 0.02
 ## The ground, over six rounds
 
 **On stock**
-([the readings](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-measurements-switching.md)).
+([the readings](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/main/docs/the-measurements-switching.md)).
 The height KSP computes reads 64,784.828 mm on all twelve lines. *Difference*, as the save opens:
 
 | round | 1 | 2 | 3 | 4 | 5 | 6 |

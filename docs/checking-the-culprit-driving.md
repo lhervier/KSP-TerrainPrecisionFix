@@ -20,9 +20,9 @@ those shifts (`CelestialBody.PreciseUpdateQuadPositions`), through that new fram
 grass south of the runway of the KSC drives due south; at each shift, three lines: just before it, a few
 metres after it, and the same few metres farther on with no shift, which measures what the few metres
 do on their own. A shift counts when the first change is at least three times the second. It is
-[the driving protocol](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-protocol-driving.md)
+[the driving protocol](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/main/docs/the-protocol-driving.md)
 of KSP Diag - Terrain Height, on the two saves it publishes, played by its script,
-[`run-driving.py`](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-protocol-driving.md#played-by-a-script):
+[`run-driving.py`](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/main/docs/the-protocol-driving.md#played-by-a-script):
 one run of three shifts on each body, without this mod and with it.
 
 The terrain sphere carries the runway of the KSC too. A rover alone by it reads a spot on the grass, G,
@@ -30,7 +30,7 @@ and a spot on the deck, P, two or three times each before a move of the origin a
 lines a move. A script drives the rover through
 [KSP-MCPServer](https://github.com/lhervier/KSP-MCPServer) and parks it on the same spots to within a
 centimetre. It is the
-[protocol of the runway and the grass while the world moves](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-protocol-driving-runway.md)
+[protocol of the runway and the grass while the world moves](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/main/docs/the-protocol-driving-runway.md)
 of KSP Diag - Terrain Height, on the saves it publishes, in the install above with KSP-MCPServer
 added; on Earth, Real Solar System is built without its runway fix, which keeps the floating origin from
 moving at 500 m once a craft has rolled onto the deck
@@ -44,7 +44,7 @@ of the lines before.
 ## On Kerbin
 
 **On stock**, one run
-([the readings](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-measurements-driving.md#on-kerbin)).
+([the readings](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/main/docs/the-measurements-driving.md#on-kerbin)).
 *Difference* — the ground under the rover minus the height KSP computes for that spot — changes, in
 millimetres:
 
@@ -88,7 +88,7 @@ the computed height, with this mod as on stock; see [What the measurements say](
 | | 2 | −0.002 | −0.068 | −0.066 | 0.102 |
 
 **On stock**
-([the readings](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-measurements-driving-runway.md)),
+([the readings](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/main/docs/the-measurements-driving-runway.md)),
 one run, a third move left out where the grass is no longer flat.
 
 **With the terrain fix alone**, an earlier run, played with an earlier version of the script, `fixStatics = false` in this mod's settings, the only line changed. The
@@ -121,7 +121,7 @@ changes by about a centimetre per metre, so the rover stops within two metres of
 two metres on.
 
 **On stock**, one run
-([the readings](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-measurements-driving.md#on-earth)).
+([the readings](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/main/docs/the-measurements-driving.md#on-earth)).
 In millimetres:
 
 | shift | across the shift | same distance, no shift | counts |
@@ -162,7 +162,7 @@ no shift, or less. On that slope, the height KSP computes changes between the li
 | | 2 | +0.119 | −0.001 | −0.119 | 0.282 |
 
 **On stock**
-([the readings](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-measurements-driving-runway.md#on-earth)),
+([the readings](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/main/docs/the-measurements-driving-runway.md#on-earth)),
 one run, two moves.
 
 **With this mod**, on the same save. The session is logged in
@@ -190,7 +190,7 @@ with no shift on a slope, one shift kept and the two others just short of the ru
 and the scene does not change: the quads under the rover are placed again through a new rounding of the
 frame, and land somewhere else. On Earth, in earlier runs played by hand, the rover was seen to jump
 when the ground rose under it
-([KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-measurements-driving.md#on-earth)).
+([KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/main/docs/the-measurements-driving.md#on-earth)).
 
 **With this mod, a shift moves nothing.** On Kerbin, on the flat grass, *Difference* changes by 0.18 and
 0.49 mm across the two shifts, against 26.6 mm on stock at the second; on Earth, by 8 to 52 mm, against
@@ -217,7 +217,7 @@ moves, and nothing under the rover does.
 stock it reads anywhere from 16 mm below it to 10 mm above it. That remainder is geometry, not a
 rounding: the collision mesh is made of flat triangles, which miss what the ground does between two
 vertices
-([KSP Diag - Terrain Height explains why a correct reading is not zero](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/this-mods-demonstration.md#why-a-correct-reading-is-not-zero)).
+([KSP Diag - Terrain Height explains why a correct reading is not zero](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/main/docs/this-mods-demonstration.md#why-a-correct-reading-is-not-zero)).
 
 **One spot on Kerbin, about a kilometre and a half south of the runway, reads far below the computed
 height**, on stock (−437 to −462 mm) and with this mod (−512 to −517 mm), and a few metres change the

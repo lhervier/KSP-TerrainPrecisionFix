@@ -31,7 +31,7 @@ it. The save is loaded, a line is recorded on the craft on the ground, then the 
 key flies the craft on the runway and a second line is recorded there. Six loadings of the same save,
 two lines each. It is the runway protocol of both instruments —
 [KSP Diag - Landed Vessel](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-runway.md)
-and [KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-protocol-runway.md)
+and [KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/main/docs/the-protocol-runway.md)
 — on the two saves they publish, played by its script,
 [`run-runway.py`](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-runway.md#played-by-a-script):
 
@@ -159,11 +159,11 @@ loading to the sixth, the first loading apart.
 KSP Diag - Terrain Height measures the ground, with no craft in the reading at all: the collision
 surface a ray pointed straight down hits, against the height KSP computes for that same spot. The second
 never moves; the first is what your landing legs touch. *Difference* is the first minus the second. How
-both are read is in [This mod's demonstration](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/this-mods-demonstration.md).
+both are read is in [This mod's demonstration](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/main/docs/this-mods-demonstration.md).
 
-**On stock.** Its campaigns, detailed in [The measurements: loading the same save](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-measurements-loading.md):
+**On stock.** Its campaigns, detailed in [The measurements: loading the same save](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/main/docs/the-measurements-loading.md):
 the same sessions, read at the same moments under the capsule on its tank, following
-[its protocol](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-protocol-loading.md).
+[its protocol](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/main/docs/the-protocol-loading.md).
 The craft only marks the spot the ray is fired at.
 Over those six loads:
 
@@ -214,7 +214,7 @@ Read off those screenshots:
 | Earth | −43.698 to +248.589 mm | +121.669 to +121.952 mm | 292.3 mm | 0.283 mm |
 
 **On a runway, and on the ground beside it, on stock**
-([the readings](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-measurements-runway.md)).
+([the readings](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/main/docs/the-measurements-runway.md)).
 The height KSP computes reads the same under each craft at every loading: 64,784.990 mm on the grass of
 Kerbin and 64,785.047 mm under its runway, within three hundredths of a millimetre on the Mun. On a
 runway, the ray meets the deck, above that height. *Ground under craft*:
@@ -261,9 +261,9 @@ within two: 0.4 to 1.9 steps, series after series.
 yet the height KSP computes held still while the collision surface wandered: by more than four
 centimetres on Kerbin, nearly thirty on Earth in Real Solar System. The ground itself is not built in the same
 place twice. The full readings are in
-[The measurements: loading the same save](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-measurements-loading.md),
+[The measurements: loading the same save](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/main/docs/the-measurements-loading.md),
 and what else they show in
-[What the measurements show: loading the same save](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/what-the-measurements-show-loading.md).
+[What the measurements show: loading the same save](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/main/docs/what-the-measurements-show-loading.md).
 
 **With this mod, both stop moving.** On Kerbin, the craft's spread goes from several centimetres to a
 hundredth of a millimetre; on the other stock worlds too, what is left stays in the hundredths of a
@@ -293,7 +293,7 @@ Three things to read in its column, *Difference*:
   this mod, a craft pushed out of the ground lands elsewhere, and the column follows. What remains of the
   spread is the craft, not the terrain. What remains of *Difference* itself is geometry: the collision mesh is made of flat
   triangles, and they miss what the ground does between two corners —
-  [KSP Diag - Terrain Height explains why a correct reading is not zero](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/this-mods-demonstration.md#why-a-correct-reading-is-not-zero).
+  [KSP Diag - Terrain Height explains why a correct reading is not zero](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/main/docs/this-mods-demonstration.md#why-a-correct-reading-is-not-zero).
   On the levelled grass of Kerbin it is −2.2 mm, on the Mun −41.0 mm, on Minmus −8.9 mm, on
   Gilly +7.2 mm, on the Moon −114.0 mm, on Earth +121.8 mm, the same on every loading. Removing it would
   mean giving that mesh more triangles, which costs frames, for a gap nobody can feel.

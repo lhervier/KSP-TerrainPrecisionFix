@@ -49,7 +49,7 @@ In KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1 and
 [KSP Diag - Colliders](https://github.com/lhervier/KSP-Diag-Colliders) draws the
 colliders around the active craft where the physics places them, each in a colour of its own, and lists
 them by name. The craft is the rover of KSP Diag - Terrain Height,
-[`Diag2-Rover.craft`](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/craft/Diag2-Rover.craft),
+[`Diag2-Rover.craft`](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/main/craft/Diag2-Rover.craft),
 launched from the SPH onto the runway at Cape Canaveral.
 
 To see the runway without the runway fix, Real Solar System is built from the sources of its release

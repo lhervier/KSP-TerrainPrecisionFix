@@ -5,7 +5,7 @@ in [Performance](../docs/performance.md).
 
 Two instruments, for two questions: what placing one terrain vertex costs, and what a whole frame pays.
 Every run was flown on the same save and on the same machine as the stock reference runs kept with PQS
-Bench, which describe [the save and the machine](https://github.com/lhervier/KSP-PQSBench/blob/master/perfs/README.md) —
+Bench, which describe [the save and the machine](https://github.com/lhervier/KSP-PQSBench/blob/main/perfs/README.md) —
 figures from another machine are not comparable to these. The PQS Bench runs belong to the same session
 of runs as those, KSP in a 1280×720 window; the profiler runs, to a later one, KSP full screen at
 1280×720.
@@ -33,9 +33,9 @@ BENCH calibration;quads=22;roundsPerQuad=8;verticesPerFormula=39600;stockNsPerVe
 ```
 
 The two other configurations are kept with the mod that produced them:
-[stock](https://github.com/lhervier/KSP-PQSBench/blob/master/perfs/README.md), in PQS Bench, and
+[stock](https://github.com/lhervier/KSP-PQSBench/blob/main/perfs/README.md), in PQS Bench, and
 [stock's arithmetic with the `Transform`s read once per
-quad](https://github.com/lhervier/KSP-TerrainPrecisionFix-StockQuadCache/blob/master/perfs/README.md), in
+quad](https://github.com/lhervier/KSP-TerrainPrecisionFix-StockQuadCache/blob/main/perfs/README.md), in
 Stock Quad Cache.
 
 ## What a frame pays
@@ -44,7 +44,7 @@ Measured with [KSPProfiler](https://github.com/KSPModdingLibs/KSPProfiler) 1.0.0
 [a fork of it](https://github.com/lhervier/KSP-ExtMod-KSPProfiler) that
 [KSP-MCPServer](https://github.com/lhervier/KSP-MCPServer) can drive, **by the procedure written in
 [Performance](../docs/performance.md#how-the-frames-were-timed)**, which also reads the figures. The runs
-were flown by [this script](https://github.com/lhervier/KSP-PQSBench/blob/master/perfs/automation/run-perfs.py).
+were flown by [this script](https://github.com/lhervier/KSP-PQSBench/blob/main/perfs/automation/run-perfs.py).
 The three configurations are kept here together, because they are only ever read against each other.
 
 Nine runs, three per configuration, each in a fresh KSP, in this order: stock, Stock Quad Cache, this

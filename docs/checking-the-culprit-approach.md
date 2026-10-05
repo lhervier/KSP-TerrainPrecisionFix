@@ -56,7 +56,7 @@ Over the whole series, the craft comes to rest across a spread of 46.8 mm withou
 ## The ground, over six round trips
 
 **On stock**
-([the readings](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-measurements-approach.md)).
+([the readings](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/main/docs/the-measurements-approach.md)).
 The height KSP computes reads the same digits on every line of the six round trips. *Difference*,
 across each round trip:
 

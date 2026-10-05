@@ -18,7 +18,7 @@ puis les deux points ci-dessous (Lionel, 2026-09-25).
    plan du cas RSS
    (introduction lue dans le code et sur GitHub, `## Checking the culprit` avec Diag LandedVessel et Diag TerrainHeight,
    `## What the results show`), après avoir décidé comment traiter un cas sans mesure.
-2. **Mettre à jour le texte de #440 au merge dans `master`.** Son lien *so many cases to test* vise
+2. **Mettre à jour le texte de #440** (la branche est fusionnée dans `main`). Son lien *so many cases to test* vise
    `limits-and-solutions.md`, qui ne parle plus que des autres mods : y ajouter les tests de
    non-régression ([the ground](docs/non-regression-ground.md), [the statics](docs/non-regression-statics.md)),
    l'impact sur stock. Décider si RSS y entre comme repro visible : l'issue ne le cite qu'en passant

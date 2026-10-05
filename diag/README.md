@@ -12,7 +12,7 @@ and its pages, and [Deferred](../docs/limits-and-solutions/deferred.md).
 
 The saves of the protocols are not here: each protocol belongs to an instrument, and its saves are in
 the `diag` folder of [KSP Diag - Landed Vessel](https://github.com/lhervier/KSP-Diag-LandedVessel/tree/main/diag)
-and of [KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainHeight/tree/master/diag),
+and of [KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainHeight/tree/main/diag),
 along with the logs of the same sessions without this mod. Only the sessions taken with this mod alone
 and no instrument have their saves here: the loads on Venus, Mars and Mercury, described in
 [Real Solar System: what this mod corrected](../docs/limits-and-solutions/rss/what-this-mod-corrected.md#the-saves),
@@ -82,7 +82,7 @@ played by its script, `run-runway.py`. Read in
 
 KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, this mod at `logLevel = Debug`,
 KSP Diag - Terrain Height, KSP Diag - Floating Origin and KSP-MCPServer: one run of three shifts of
-[the driving protocol](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-protocol-driving.md),
+[the driving protocol](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/main/docs/the-protocol-driving.md),
 played by its script, `run-driving.py`; on Earth, Real Solar System 20.1.3.0 and what it requires as
 well. Each log holds one line per quad this mod placed, with how far it was moved. Read in
 [Driving on while the world moves](../docs/checking-the-culprit-driving.md).
@@ -98,7 +98,7 @@ well. Each log holds one line per quad this mod placed, with how far it was move
 ## The protocol of the runway and the grass while the world moves
 
 The install of [The driving protocol](#the-driving-protocol): three moves of the origin of
-[the protocol of the runway and the grass while the world moves](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/master/docs/the-protocol-driving-runway.md),
+[the protocol of the runway and the grass while the world moves](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/main/docs/the-protocol-driving-runway.md),
 played by its script, `run-driving-runway.py`, from `driving-runway-kerbin.sfs`. Read in
 [Driving on while the world moves](../docs/checking-the-culprit-driving.md#on-kerbin). Earth is under
 [On Real Solar System](#on-real-solar-system).
@@ -118,7 +118,7 @@ played by its script, `run-driving-runway.py`, from `driving-runway-kerbin.sfs`.
 
 KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, this mod at `logLevel = Debug`,
 KSP Diag - Terrain Quads, KSP Diag - Floating Origin and KSP-MCPServer: on each body, one flight of
-[the protocol of the quads of the highest level, in flight](https://github.com/lhervier/KSP-Diag-TerrainQuads/blob/master/docs/the-protocol-flight.md),
+[the protocol of the quads of the highest level, in flight](https://github.com/lhervier/KSP-Diag-TerrainQuads/blob/main/docs/the-protocol-flight.md),
 `Quad-Rocket` launched from the launchpad, played by its script, `run-flight.py`, and read by its
 `analyse-flight.py`. Read in [In flight](../docs/checking-the-culprit-flight.md).
 
