@@ -1,0 +1,15 @@
+saveMD5 = 
+lastWriteTime = 639268358409782025
+id = 22d32b67-37a6-4660-a0fd-45234dabed71
+title = PQSCity2
+briefing = Testing PQSCity2
+author = 
+hardIcon = False
+difficulty = Intermediate
+vesselCount = 0
+nodeCount = 3
+startUT = 0
+missionExpansionVersion = 1.12.1
+steamPublishedFileId = 0
+testModules = TestVesselAltitude
+actionModules = ActionCreateLaunchSite

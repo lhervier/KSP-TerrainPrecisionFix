@@ -135,8 +135,9 @@ that stock placed again with `Orientate` — before a craft is spawned on its la
 keeps its new place. For `SetupMods`, every static out of the sphere is lent back; for
 `CommNetHome.Start` and `DayNightGameObjectSwitch.Setup`, the static the station or the switch belongs
 to. `PQSCity.Start` and `PQSCity2.Start` are normally run before a static can ever be taken out: their
-patches cover the case where they are not. A mission calls `PQSCity2.SetBody` a frame after it has placed
-a launch pad, by which time the pad may be out of its sphere.
+patches cover the case where they are not. So does the patch of `PQSCity2.SetBody`: a mission calls it a
+frame after it has placed a launch pad, and it places its launch pads while its game is set up, before
+any flight.
 
 ### Measuring a launch pad against the ground
 

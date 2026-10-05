@@ -688,7 +688,8 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
 
         /// <summary>
         /// Reads the static's body from its parents, for a PQSCity2: a mission does, a frame after it has
-        /// created a mobile launch pad, by which time the pad may be out of its sphere.
+        /// created a mobile launch pad. Stock missions create theirs while their game is set up, before any
+        /// flight; the patch covers a pad created in flight.
         /// </summary>
         [HarmonyPatch(typeof(PQSCity2), "SetBody")]
         private static class SetBody2Patch
