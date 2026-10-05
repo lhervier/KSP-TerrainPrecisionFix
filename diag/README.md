@@ -117,18 +117,26 @@ played by its script, `run-driving-runway.py`, from `driving-runway-kerbin.sfs`.
 ## The protocol of the quads of the highest level, in flight
 
 KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, this mod at `logLevel = Debug`,
-KSP Diag - Quad Seams, KSP Diag - Floating Origin and KSP-MCPServer: one flight of
+KSP Diag - Quad Seams, KSP Diag - Floating Origin and KSP-MCPServer: on each body, one flight of
 [the protocol of the quads of the highest level, in flight](https://github.com/lhervier/KSP-Diag-QuadSeams/blob/master/docs/the-protocol-flight.md),
-`Quad-Rocket` launched from the launchpad of the Space Center, played by its script, `run-flight.py`,
-and read by its `analyse-flight.py`. Read in [In flight](../docs/checking-the-culprit-flight.md).
+`Quad-Rocket` launched from the launchpad, played by its script, `run-flight.py`, and read by its
+`analyse-flight.py`. Read in [In flight](../docs/checking-the-culprit-flight.md).
 
-- [`runs/flight-kerbin-fix.log`](runs/flight-kerbin-fix.log) — the session, 73 *Logs*; what the script
-  printed in [`runs/flight-kerbin-fix-script.txt`](runs/flight-kerbin-fix-script.txt), what each *Log*
+- [`runs/flight-kerbin-fix.log`](runs/flight-kerbin-fix.log) — on Kerbin, from the launchpad of the
+  Space Center, 73 *Logs*; what the script printed in [`runs/flight-kerbin-fix-script.txt`](runs/flight-kerbin-fix-script.txt), what each *Log*
   answered in [`runs/flight-kerbin-fix-readings.json`](runs/flight-kerbin-fix-readings.json), the two
   files of the *Logs* in [`runs/flight-kerbin-fix-logs.csv`](runs/flight-kerbin-fix-logs.csv) and
   [`runs/flight-kerbin-fix-quads.zip`](runs/flight-kerbin-fix-quads.zip) (zipped: 43 MB once unzipped),
   and what `analyse-flight.py` printed in
   [`runs/flight-kerbin-fix-analysis.txt`](runs/flight-kerbin-fix-analysis.txt).
+- [`runs/flight-earth-rss-fix.log`](runs/flight-earth-rss-fix.log) — on Earth, Real Solar System
+  20.1.3.0 as released and what it requires added, from the launchpad of Cape Canaveral, 56 *Logs*; what
+  the script printed in [`runs/flight-earth-rss-fix-script.txt`](runs/flight-earth-rss-fix-script.txt),
+  what each *Log* answered in [`runs/flight-earth-rss-fix-readings.json`](runs/flight-earth-rss-fix-readings.json),
+  the two files of the *Logs* in [`runs/flight-earth-rss-fix-logs.csv`](runs/flight-earth-rss-fix-logs.csv)
+  and [`runs/flight-earth-rss-fix-quads.zip`](runs/flight-earth-rss-fix-quads.zip) (zipped: 41 MB once
+  unzipped), and what `analyse-flight.py` printed in
+  [`runs/flight-earth-rss-fix-analysis.txt`](runs/flight-earth-rss-fix-analysis.txt).
 
 ## The seam between subdivision levels
 

@@ -57,14 +57,10 @@ on Venus, Mars and Mercury as well.
 
 ## Still to test
 
-- **A flight, not only loads.** Everything measured under Real Solar System is a landed craft loaded
-  again, never the quads built one after the other in flight, which every player of Real Solar System
-  goes through at each launch. If this mod broke something there, the ground would step up or down where
-  two quads meet, under a craft coming down to land. On Kerbin, the protocol of
-  [Checking the culprit: in flight](../checking-the-culprit-flight.md) shows those steps on stock and
-  none with this mod; on Earth, where a float's step is eight times larger, the same flight from the
-  launchpad of Cape Canaveral, with a rocket of stock parts sized for it, and on the Moon from a launchpad
-  placed by Kerbal Konstructs; with this mod, then without it. And, on the Moon, the approach protocol of
-  the stock campaigns, which covers the quads built again and the moves of the origin on the ground.
+- **Coming back to a craft left parked, on the Moon.** Everything measured on the ground under Real Solar
+  System is a landed craft loaded again; a craft left parked and come back to is not, and that is where
+  the quads under it are built again, after the origin has moved. If this mod broke something there, the
+  parked craft would sit higher or lower than its ground when the player comes back to it. The approach
+  protocol of the stock campaigns, played on the Moon, with this mod, then without it, covers it.
 - **Without the ground workaround, the rest of the series**: see
   [The ground workaround](rss/the-ground-workaround.md#with-this-mod).

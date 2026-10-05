@@ -163,8 +163,8 @@ left.
 **→ Full chapter: [Checking the culprit: driving on while the world moves](docs/checking-the-culprit-driving.md)**
 
 **In flight**, a rocket from the launchpad to the sea, its quads written about once a second: two
-quads of the highest level built at different moments step by up to 22.5 mm where they meet on Kerbin,
-and by 0.67 mm at most with this mod.
+quads of the highest level built at different moments step by up to 22.5 mm where they meet on Kerbin
+and 289 mm on Earth, and by 0.67 mm and 2.1 mm at most with this mod.
 
 **→ Full chapter: [Checking the culprit: in flight](docs/checking-the-culprit-flight.md)**
 
