@@ -135,9 +135,9 @@ mod has to patch both**, each patch standing for a small change these mods could
 
 ## Checking the culprit
 
-Each situation where a craft meets the ground is measured twice, without this mod and with it, with two
-instruments: one reads the landed craft, the other the ground itself. In each summary below, the first
-figure is without this mod, the second with it.
+Each situation where a craft meets the ground is measured twice, without this mod and with it: one
+instrument reads the landed craft, another the ground itself, and in flight a third reads the quads the
+ground is made of. In each summary below, the first figure is without this mod, the second with it.
 
 **Loading the same save**, six times, on the four stock worlds and the Moon and Earth of
 [Real Solar System](https://github.com/KSP-RO/RealSolarSystem): the ground comes back over 43.6 mm on
@@ -161,6 +161,12 @@ mod; the switch itself moves nothing.
 left.
 
 **→ Full chapter: [Checking the culprit: driving on while the world moves](docs/checking-the-culprit-driving.md)**
+
+**In flight**, a rocket from the launchpad to the sea, its quads written about once a second: two
+quads of the highest level built at different moments step by up to 22.5 mm where they meet on Kerbin,
+and by 0.67 mm at most with this mod.
+
+**→ Full chapter: [Checking the culprit: in flight](docs/checking-the-culprit-flight.md)**
 
 ## Non-regression tests
 

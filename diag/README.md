@@ -6,6 +6,7 @@ installed. What their readings say is in
 [Coming back to a craft left parked](../docs/checking-the-culprit-approach.md),
 [Switching to a craft far away](../docs/checking-the-culprit-switching.md),
 [Driving on while the world moves](../docs/checking-the-culprit-driving.md),
+[In flight](../docs/checking-the-culprit-flight.md),
 [Rescaled systems: Real Solar System](../docs/limits-and-solutions/rescaled-systems-real-solar-system.md)
 and its pages, and [Deferred](../docs/limits-and-solutions/deferred.md).
 
@@ -112,6 +113,22 @@ played by its script, `run-driving-runway.py`, from `driving-runway-kerbin.sfs`.
   [`runs/driving-runway-diag2-fix-terrain-only-script.txt`](runs/driving-runway-diag2-fix-terrain-only-script.txt),
   and every line it recorded in
   [`runs/driving-runway-diag2-fix-terrain-only-lines.json`](runs/driving-runway-diag2-fix-terrain-only-lines.json).
+
+## The protocol of the quads of the highest level, in flight
+
+KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, this mod at `logLevel = Debug`,
+KSP Diag - Quad Seams, KSP Diag - Floating Origin and KSP-MCPServer: one flight of
+[the protocol of the quads of the highest level, in flight](https://github.com/lhervier/KSP-Diag-QuadSeams/blob/master/docs/the-protocol-flight.md),
+`Quad-Rocket` launched from the launchpad of the Space Center, played by its script, `run-flight.py`,
+and read by its `analyse-flight.py`. Read in [In flight](../docs/checking-the-culprit-flight.md).
+
+- [`runs/flight-kerbin-fix.log`](runs/flight-kerbin-fix.log) — the session, 73 *Logs*; what the script
+  printed in [`runs/flight-kerbin-fix-script.txt`](runs/flight-kerbin-fix-script.txt), what each *Log*
+  answered in [`runs/flight-kerbin-fix-readings.json`](runs/flight-kerbin-fix-readings.json), the two
+  files of the *Logs* in [`runs/flight-kerbin-fix-logs.csv`](runs/flight-kerbin-fix-logs.csv) and
+  [`runs/flight-kerbin-fix-quads.zip`](runs/flight-kerbin-fix-quads.zip) (zipped: 43 MB once unzipped),
+  and what `analyse-flight.py` printed in
+  [`runs/flight-kerbin-fix-analysis.txt`](runs/flight-kerbin-fix-analysis.txt).
 
 ## The seam between subdivision levels
 

@@ -1,0 +1,7 @@
+73 Logs, 356 quads of level 10
+same quad, next Log, under 100 m/s      1364   median    0.000   p90    0.000   max    0.000 mm
+same quad, next Log, over 100 m/s      10068   median    0.050   p90    0.238   max    0.855 mm
+step between siblings                  11451   median    0.061   p90    0.220   max    0.783 mm
+step between cousins                    9136   median    0.061   p90    0.214   max    0.774 mm
+  both there from the first Log         5041   median    0.062   p90    0.231   max    0.774 mm
+  one at least built in flight          4095   median    0.060   p90    0.202   max    0.674 mm

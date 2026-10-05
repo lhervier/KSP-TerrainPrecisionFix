@@ -92,3 +92,15 @@ puis les deux points ci-dessous (Lionel, 2026-09-25).
   hauteur de `windowRect` à zéro au *Clear* (et sans doute au *Delete* d'une ligne), pour qu'elle se
   recale sur son contenu. Contourné en attendant par les scripts de capture (`set_member` de
   `windowRect`).
+- **Revoir le plan des README des Diags : un chapitre par situation à vérifier** (Lionel, 2026-10-05).
+  Aujourd'hui, un README de Diag a trois parties, chacune découpée par situation : les protocoles, les
+  mesures, l'analyse. À la place, un chapitre par situation (chargement, approche, changement de
+  vaisseau, piste, roulage, vol…), qui donne à chaque fois le protocole, les mesures (stock) et leur
+  analyse. Vaut pour Diag LandedVessel, Diag TerrainHeight, Diag FloatingOrigin et Diag QuadSeams ; les
+  pages `docs/` et les liens qui y mènent (README du correctif, `KSPCF-relecture.md`, texte de #440)
+  suivent.
+- **Renommer Diag QuadSeams** (Lionel, 2026-10-05). Il reçoit un bouton *Log* qui écrit en CSV la
+  distance au centre du corps de chaque vertex de chaque quad, pour le test du vol suborbital : il ne
+  dessine plus seulement le raccord entre niveaux, son nom ne dit plus ce qu'il fait. Nom à choisir
+  (proposé : *KSP Diag - Terrain Quads*), puis dépôt, dossier `GameData`, README et liens de la famille,
+  comme au renommage des Diags du 2026-10-02.

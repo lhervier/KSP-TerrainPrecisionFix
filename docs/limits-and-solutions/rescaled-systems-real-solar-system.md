@@ -58,14 +58,13 @@ on Venus, Mars and Mercury as well.
 ## Still to test
 
 - **A flight, not only loads.** Everything measured under Real Solar System is a landed craft loaded
-  again, never the quads built one after the other while the floating origin moves in flight, which
-  every player of Real Solar System goes through at each launch. A launch from Cape Canaveral to orbit,
-  and a descent onto the sites of Venus, Mars and Mercury (those of the saves of
-  [`diag/`](../../diag/README.md)), flown by MechJeb2 so that they can be played again, with infinite fuel
-  (`Alt+F12 → Cheats`) to keep to stock parts; MechJeb2 then joins the install. The log should show no
-  exception from this mod and no refusal, the terrain no hole and no offset between quads, and the
-  largest correction stays to read; with this mod, then without it, to compare by eye. And, on the
-  Moon, the approach protocol of the stock campaigns, which covers the quads built again and the moves
-  of the origin on the ground.
+  again, never the quads built one after the other in flight, which every player of Real Solar System
+  goes through at each launch. If this mod broke something there, the ground would step up or down where
+  two quads meet, under a craft coming down to land. On Kerbin, the protocol of
+  [Checking the culprit: in flight](../checking-the-culprit-flight.md) shows those steps on stock and
+  none with this mod; on Earth, where a float's step is eight times larger, the same flight from the
+  launchpad of Cape Canaveral, with a rocket of stock parts sized for it, and on the Moon from a launchpad
+  placed by Kerbal Konstructs; with this mod, then without it. And, on the Moon, the approach protocol of
+  the stock campaigns, which covers the quads built again and the moves of the origin on the ground.
 - **Without the ground workaround, the rest of the series**: see
   [The ground workaround](rss/the-ground-workaround.md#with-this-mod).
