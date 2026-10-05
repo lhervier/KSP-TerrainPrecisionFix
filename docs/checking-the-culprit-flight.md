@@ -4,7 +4,7 @@ Part of [Terrain Precision Fix](../README.md): the measurements that check the f
 [the ground](the-culprit-ground.md), in flight, where the quads of the highest level are built and dropped
 all the time as the craft goes, on stock and with this mod, on Kerbin and on Earth in Real Solar System.
 
-[KSP Diag - Quad Seams](https://github.com/lhervier/KSP-Diag-QuadSeams) reads the quads, and
+[KSP Diag - Terrain Quads](https://github.com/lhervier/KSP-Diag-TerrainQuads) reads the quads, and
 [KSP Diag - Floating Origin](https://github.com/lhervier/KSP-Diag-FloatingOrigin), which only reads,
 says when the world moves. Each has its own page, with its method.
 
@@ -21,13 +21,13 @@ ground, the quads under a craft are built together. In flight, they are built on
 craft goes, each through the frame of its own moment, while the floating origin moves every 500 m the
 craft travels, and every frame once it goes fast. A rocket, `Quad-Rocket`, is launched from the
 launchpad and left to fly until it falls into the sea, about a minute later; about once a second, the
-*Log* button of Diag QuadSeams writes, for every quad of the highest level, the distance from the centre
+*Log* button of Diag TerrainQuads writes, for every quad of the highest level, the distance from the centre
 of the body to each of its vertices. Two quads of the highest level that share an edge should put its
 vertices at the same distance; the step between them is how far apart they are. *Siblings* are two
 quads split from the same quad, at the same moment; *cousins* any other two. It is
-[the protocol of the quads of the highest level, in flight](https://github.com/lhervier/KSP-Diag-QuadSeams/blob/master/docs/the-protocol-flight.md)
-of KSP Diag - Quad Seams, played by its script,
-[`run-flight.py`](https://github.com/lhervier/KSP-Diag-QuadSeams/blob/master/docs/the-protocol-flight.md#played-by-a-script),
+[the protocol of the quads of the highest level, in flight](https://github.com/lhervier/KSP-Diag-TerrainQuads/blob/master/docs/the-protocol-flight.md)
+of KSP Diag - Terrain Quads, played by its script,
+[`run-flight.py`](https://github.com/lhervier/KSP-Diag-TerrainQuads/blob/master/docs/the-protocol-flight.md#played-by-a-script),
 and read by its `analyse-flight.py`: on each body, one flight without this mod, one with it, the same
 craft and the same steps.
 
@@ -36,7 +36,7 @@ craft and the same steps.
 From the launchpad of the Space Center; the highest subdivision level of Kerbin is 10.
 
 **On stock**, one flight, 72 *Logs*, up to 957 m and 653 m/s
-([the readings](https://github.com/lhervier/KSP-Diag-QuadSeams/blob/master/docs/the-measurements-flight.md#on-kerbin)).
+([the readings](https://github.com/lhervier/KSP-Diag-TerrainQuads/blob/master/docs/the-measurements-flight.md#on-kerbin)).
 
 **With this mod**, in that same install, with this mod as the only difference, at `logLevel = Debug`.
 The session is logged in [`diag/runs/flight-kerbin-fix.log`](../diag/runs/flight-kerbin-fix.log); what
@@ -72,7 +72,7 @@ From the launchpad of Cape Canaveral; the highest subdivision level of Earth is 
 a lower and shorter curve there than on Kerbin.
 
 **On stock**, one flight, 55 *Logs*, up to 565 m and 488 m/s
-([the readings](https://github.com/lhervier/KSP-Diag-QuadSeams/blob/master/docs/the-measurements-flight.md#on-earth-in-real-solar-system)).
+([the readings](https://github.com/lhervier/KSP-Diag-TerrainQuads/blob/master/docs/the-measurements-flight.md#on-earth-in-real-solar-system)).
 
 **With this mod**, in that same install, with this mod as the only difference, at `logLevel = Debug`.
 The session is logged in [`diag/runs/flight-earth-rss-fix.log`](../diag/runs/flight-earth-rss-fix.log);

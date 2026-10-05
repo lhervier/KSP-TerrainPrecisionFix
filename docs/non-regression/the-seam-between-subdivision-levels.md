@@ -34,8 +34,8 @@ A quad one level coarser covers twice the width, so along the edge two quads sha
 twice as many vertices. Stock does not move the extra ones: it changes the triangles of the finer quad
 along that side (`PQ.GetEdgeState`, `PQS.cacheIndices`), so that its edge runs on every other vertex,
 along the same segments as the coarser edge — provided the vertices both quads share land on the same
-point. [What it shows](https://github.com/lhervier/KSP-Diag-QuadSeams/blob/master/docs/what-it-shows.md#the-seam),
-in KSP Diag - Quad Seams, shows how, with a figure.
+point. [What it shows](https://github.com/lhervier/KSP-Diag-TerrainQuads/blob/master/docs/what-it-shows.md#the-seam),
+in KSP Diag - Terrain Quads, shows how, with a figure.
 
 ## The shared vertices do not meet, even in stock
 
@@ -52,14 +52,14 @@ terrain sphere: its result depends on the vertex and on that matrix, not on the 
 expresses that world position relative to the quad's own `Transform`, as rounded. Read alone, this
 says that two quads built in the same frame of the sphere put a vertex they share on the same point.
 
-Measured, they do not. [KSP Diag - Quad Seams](https://github.com/lhervier/KSP-Diag-QuadSeams)
+Measured, they do not. [KSP Diag - Terrain Quads](https://github.com/lhervier/KSP-Diag-TerrainQuads)
 finds every seam around the craft and measures, in double precision, the distance between the places
 where the two quads draw each vertex they share. On Earth under Real Solar System, **without this
 mod**, over 79 loads of a craft on the launchpad at Cape Canaveral, the largest gap of a load went
 from 0.76 m to 2.82 m, and the mean over all shared vertices from 0.28 m to 2.08 m
-([the measurements](https://github.com/lhervier/KSP-Diag-QuadSeams/blob/master/docs/the-measurements.md#case-1-real-solar-system)); on Kerbin, over seven loads at the Space
+([the measurements](https://github.com/lhervier/KSP-Diag-TerrainQuads/blob/master/docs/the-measurements-seam.md#case-1-real-solar-system)); on Kerbin, over seven loads at the Space
 Center, from 118 mm to 312 mm, and the mean from 46 mm to 225 mm
-([the measurements](https://github.com/lhervier/KSP-Diag-QuadSeams/blob/master/docs/the-measurements.md#case-2-stock-ksp)).
+([the measurements](https://github.com/lhervier/KSP-Diag-TerrainQuads/blob/master/docs/the-measurements-seam.md#case-2-stock-ksp)).
 The gap changes from one load to the next, and so does its direction: the finer quad above the coarser
 one, or below.
 
@@ -90,14 +90,14 @@ How much wider the seam gets is measured in [The seam with this mod](#the-seam-w
 ## The seam with this mod
 
 The same measurement as without this mod, with this mod installed: the two cases of
-[the protocol of KSP Diag - Quad Seams](https://github.com/lhervier/KSP-Diag-QuadSeams/blob/master/docs/the-protocol.md),
+[the protocol of KSP Diag - Terrain Quads](https://github.com/lhervier/KSP-Diag-TerrainQuads/blob/master/docs/the-protocol-seam.md),
 played by its script, `run-revert.py`, through [KSP-MCPServer](https://github.com/lhervier/KSP-MCPServer),
-in the installs of [its measurements](https://github.com/lhervier/KSP-Diag-QuadSeams/blob/master/docs/the-measurements.md), this mod added; the craft is `Diag3-Rocket`. The
+in the installs of [its measurements](https://github.com/lhervier/KSP-Diag-TerrainQuads/blob/master/docs/the-measurements-seam.md), this mod added; the craft is `Diag3-Rocket`. The
 script reverts to launch until the first load where the finer quad is above the coarser one at the
 largest gap, on land, with a step of at least 0.5 m on Earth and 50 mm on Kerbin, and takes two
 screenshots there, at the size of the window, 1280 × 720, the camera some 50 m beyond the foot of the
 yellow line and 20 m above it, looking back towards the craft: the yellow line only, then everything.
-The last line of the log of KSP Diag - Quad Seams after each load, the first load being the launch
+The last line of the log of KSP Diag - Terrain Quads after each load, the first load being the launch
 itself. The logs, what the script printed and every reading are in
 [the runs](../../diag/README.md#the-seam-between-subdivision-levels).
 
@@ -124,7 +124,7 @@ metres:
 ![The same place, the same camera, with the triangles of the two quads drawn](../../imgs/seam-between-levels/earth-fix-seams.png)
 
 *With this mod, on Real Solar System as released: the craft on the launchpad at Cape Canaveral, load 9,
-the camera beyond the seam and looking back towards the craft; KSP Diag - Quad Seams drawing the yellow
+the camera beyond the seam and looking back towards the craft; KSP Diag - Terrain Quads drawing the yellow
 line only, then the triangles of the coarser quad in red and of the finer one in green.*
 
 **On Kerbin**, stock KSP, launched at UT 3,600 s for daylight. Every load ended with 56 seams between
@@ -152,7 +152,7 @@ line only, then the triangles of the coarser quad in red and of the finer one in
 *With this mod, on stock KSP: the craft on the launchpad at the Space Center, load 10, the same way.*
 
 Next to the same measurements without this mod
-([KSP Diag - Quad Seams](https://github.com/lhervier/KSP-Diag-QuadSeams/blob/master/docs/the-measurements.md)):
+([KSP Diag - Terrain Quads](https://github.com/lhervier/KSP-Diag-TerrainQuads/blob/master/docs/the-measurements-seam.md)):
 
 | | Loads | Gap, max | Median of the gap max | Gap, mean | Finer quad above |
 |---|---:|---|---:|---|---:|
@@ -191,20 +191,20 @@ just beyond it, and turned back towards the craft. From there, the gap shows as 
 the seam, where the terrain is open and what lies behind it shows through; best when the finer quad,
 the one further from the camera, is the higher. In stock:
 
-![Without this mod: grassland, a yellow vertical line, and a thin dark line running from its foot](https://raw.githubusercontent.com/lhervier/KSP-Diag-QuadSeams/master/imgs/earth-stock-largest-gap.png)
+![Without this mod: grassland, a yellow vertical line, and a thin dark line running from its foot](https://raw.githubusercontent.com/lhervier/KSP-Diag-TerrainQuads/master/imgs/earth-stock-largest-gap.png)
 
-![The same place, the same camera, with the triangles of the two quads drawn](https://raw.githubusercontent.com/lhervier/KSP-Diag-QuadSeams/master/imgs/earth-stock-seams.png)
+![The same place, the same camera, with the triangles of the two quads drawn](https://raw.githubusercontent.com/lhervier/KSP-Diag-TerrainQuads/master/imgs/earth-stock-seams.png)
 
 *Without this mod, on Real Solar System as released: a craft on the launchpad at Cape Canaveral, the
 camera beyond the seam, 37.0 km from the craft, at the 12th of 79 loads; two screenshots at 1280 × 720
 from the same camera, with
-KSP Diag - Quad Seams drawing, first, only a yellow line on the vertex of the largest gap, then
+KSP Diag - Terrain Quads drawing, first, only a yellow line on the vertex of the largest gap, then
 the triangles of the coarser quad in red and of the finer one in green.*
 
 It takes looking for: without this mod, of the eight loads among 79 where the finer quad was above, on
 land, the crack showed clearly at this one only, for a step of 1.26 m, and as a dashed or dotted line at
 most others
-([what the measurements show](https://github.com/lhervier/KSP-Diag-QuadSeams/blob/master/docs/what-the-measurements-show.md));
+([what the measurements show](https://github.com/lhervier/KSP-Diag-TerrainQuads/blob/master/docs/what-the-measurements-show-seam.md));
 with this mod, wider, it shows more readily (see [The seam with this mod](#the-seam-with-this-mod)).
 
 ## A possible solution
@@ -251,11 +251,11 @@ back to the mesh, and its bounds recomputed.
   vertices back, or it opens a crack with its new neighbour: the stock vertices have to be kept;
 - at every floating origin shift, the coarser quad follows the new rounding of the matrix of the sphere,
   while the corrected quad keeps its own (`PQ.PreciseUpdateSubQuadsPosition`, which this fix patches
-  already): the step changes, and KSP Diag - Quad Seams shows it changing at every
+  already): the step changes, and KSP Diag - Terrain Quads shows it changing at every
   shift.
 
 The simplest answer to all four is not to follow each event, but to reconcile: a few times a second,
-and right after every shift, find the seams the way KSP Diag - Quad Seams does, move
+and right after every shift, find the seams the way KSP Diag - Terrain Quads does, move
 the shared vertices, give their stock vertices back to the sides that are no longer seams, and hand the
 changed vertices to the meshes. A few dozen quads are concerned; at worst, a crack shows for one frame
 after a shift.
@@ -278,7 +278,7 @@ as well as the wider one this mod leaves, and it reads nothing this mod does not
   after a neighbour changes level, and a moved edge could shade a little differently from the rest;
 - that no mod reads the vertices of a coarser quad for anything else: Parallax copies the meshes of the
   quads near the camera only, and the coarser ones are far from it;
-- with KSP Diag - Quad Seams: the gaps down to a fraction of a millimetre, and staying
+- with KSP Diag - Terrain Quads: the gaps down to a fraction of a millimetre, and staying
   there across a floating origin shift, a move of the zone, and the reverts of a craft on the launchpad.
 
 ### Leave the vertices, change what the edge triangles rest on
@@ -408,4 +408,4 @@ on the same point move the same way, two vertices apart stay apart. Not measured
 - **Why the shared vertices do not meet in stock**: which builds, which shifts of the world origin, put
   the two quads of a seam in different frames.
 - **A floating origin shift**: the gap changes when the origin of the world moves, which KSP Diag -
-  Quad Seams logs at every shift; not measured in a series yet.
+  Terrain Quads logs at every shift; not measured in a series yet.

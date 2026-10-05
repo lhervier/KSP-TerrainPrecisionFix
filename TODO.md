@@ -23,14 +23,12 @@ puis les deux points ci-dessous (Lionel, 2026-09-25).
    non-régression ([the ground](docs/non-regression-ground.md), [the statics](docs/non-regression-statics.md)),
    l'impact sur stock. Décider si RSS y entre comme repro visible : l'issue ne le cite qu'en passant
    (« especially with RSS »), alors que la Terre donne un saut par série de six chargements sans le
-   correctif, et jusqu'à 4,0 pas de correction avec. Revoir en même temps `KSPCF-relecture.md`, les
-   réponses à préparer pour un mainteneur, pas revues depuis RSS : son point 6 justifie seize pas par
-   les 3,5 pas de la Lune, alors que la Terre en a donné 4,0 et Vénus 3,6.
+   correctif, et jusqu'à 4,0 pas de correction avec.
 
 ## Sans ordre imposé
 
 3. **Une release GitHub sur chaque dépôt vers lequel l'issue envoie le lecteur.** Aucun n'en a : ce
-   dépôt, Diag LandedVessel, Diag TerrainHeight, Diag FloatingOrigin et Diag QuadSeams (le cas
+   dépôt, Diag LandedVessel, Diag TerrainHeight, Diag FloatingOrigin et Diag TerrainQuads (le cas
    [The seam between subdivision levels](docs/non-regression/the-seam-between-subdivision-levels.md)
    en dépend : liens, images et *Get it*). L'issue commence par faire installer Diag LandedVessel, et les trois README des
    Diags renvoient vers `releases/latest` dans *Get it*, qui donne une 404 aujourd'hui — sur la page
@@ -92,13 +90,3 @@ puis les deux points ci-dessous (Lionel, 2026-09-25).
   hauteur de `windowRect` à zéro au *Clear* (et sans doute au *Delete* d'une ligne), pour qu'elle se
   recale sur son contenu. Contourné en attendant par les scripts de capture (`set_member` de
   `windowRect`).
-- **Reporter le nouveau plan des Diags dans `KSPCF-relecture.md`** (absent du PC fixe). Les README des
-  quatre Diags ont un chapitre par situation depuis le 2026-10-05, et les pages d'analyse sont sorties
-  des pages de mesures (Diag FloatingOrigin : `the-protocol.md`, `the-measurements.md` et
-  `what-the-measurements-show.md` éclatées par cas) ; un lien de ce fichier vers l'une de ces pages ou
-  vers une ancre `#what-the-numbers-say`, `#case-N-…`, `#the-protocol`, `#the-measurements` est à refaire.
-- **Renommer Diag QuadSeams** (Lionel, 2026-10-05). Il reçoit un bouton *Log* qui écrit en CSV la
-  distance au centre du corps de chaque vertex de chaque quad, pour le test du vol suborbital : il ne
-  dessine plus seulement le raccord entre niveaux, son nom ne dit plus ce qu'il fait. Nom à choisir
-  (proposé : *KSP Diag - Terrain Quads*), puis dépôt, dossier `GameData`, README et liens de la famille,
-  comme au renommage des Diags du 2026-10-02.

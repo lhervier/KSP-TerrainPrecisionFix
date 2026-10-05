@@ -117,8 +117,8 @@ played by its script, `run-driving-runway.py`, from `driving-runway-kerbin.sfs`.
 ## The protocol of the quads of the highest level, in flight
 
 KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, this mod at `logLevel = Debug`,
-KSP Diag - Quad Seams, KSP Diag - Floating Origin and KSP-MCPServer: on each body, one flight of
-[the protocol of the quads of the highest level, in flight](https://github.com/lhervier/KSP-Diag-QuadSeams/blob/master/docs/the-protocol-flight.md),
+KSP Diag - Terrain Quads, KSP Diag - Floating Origin and KSP-MCPServer: on each body, one flight of
+[the protocol of the quads of the highest level, in flight](https://github.com/lhervier/KSP-Diag-TerrainQuads/blob/master/docs/the-protocol-flight.md),
 `Quad-Rocket` launched from the launchpad, played by its script, `run-flight.py`, and read by its
 `analyse-flight.py`. Read in [In flight](../docs/checking-the-culprit-flight.md).
 
@@ -140,7 +140,7 @@ KSP Diag - Quad Seams, KSP Diag - Floating Origin and KSP-MCPServer: on each bod
 
 ## The seam between subdivision levels
 
-[KSP Diag - Quad Seams](https://github.com/lhervier/KSP-Diag-QuadSeams) and KSP-MCPServer added to
+[KSP Diag - Terrain Quads](https://github.com/lhervier/KSP-Diag-TerrainQuads) and KSP-MCPServer added to
 this mod at `logLevel = Debug`, the craft `Diag3-Rocket` on the launchpad reverted to launch by the
 script of its protocol, `run-revert.py`, until the finer quad is above at the largest gap, on land.
 Read in [The seam with this mod](../docs/non-regression/the-seam-between-subdivision-levels.md#the-seam-with-this-mod).
