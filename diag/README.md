@@ -8,23 +8,23 @@ installed. What their readings say is in
 [Driving on while the world moves](../docs/checking-the-culprit-driving.md),
 [Launching from a launch pad of Making History](../docs/checking-the-culprit-launch-pad.md),
 [In flight](../docs/checking-the-culprit-flight.md),
-[Rescaled systems: Real Solar System](../docs/limits-and-solutions/rescaled-systems-real-solar-system.md)
-and its pages, and [Deferred](../docs/limits-and-solutions/deferred.md).
+the pages of [Non-regression tests](../docs/non-regression.md) and of
+[Limits and solutions](../docs/limits-and-solutions.md).
 
 The saves of the protocols are not here: each protocol belongs to an instrument, and its saves are in
 the `diag` folder of [KSP Diag - Landed Vessel](https://github.com/lhervier/KSP-Diag-LandedVessel/tree/main/diag)
 and of [KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainHeight/tree/main/diag),
 along with the logs of the same sessions without this mod. Only the sessions taken with this mod alone
 and no instrument have their saves here: the loads on Venus, Mars and Mercury, described in
-[Real Solar System: what this mod corrected](../docs/limits-and-solutions/rss/what-this-mod-corrected.md#the-saves),
+[Real Solar System: what this mod corrected](../docs/non-regression/real-solar-system/what-this-mod-corrected.md#the-saves),
 the launch from Cape Canaveral, and the rover of
-[A CommNet ground station from a planet pack](../docs/non-regression/a-commnet-ground-station-from-a-planet-pack.md);
+[Real Solar System: a CommNet ground station](../docs/non-regression/real-solar-system/a-commnet-ground-station.md);
 the pod beside a runway of Kerbal Konstructs, `non-reg-runway-mune-kk.sfs`, and the runway in
-`non-reg-runway-mune-kk/`, of [Kerbal Konstructs](../docs/limits-and-solutions/kerbal-konstructs.md#the-patch-of-the-group-editor);
-in `kopernicus-flag-fix/`, the mission and the change to Kopernicus of
+`non-reg-runway-mune-kk/`, of [Kerbal Konstructs: the group editor](../docs/limits-and-solutions/kerbal-konstructs/the-group-editor.md);
+in `kopernicus-flag-fix/`, the mission and the change that turns off the flag fix of Kopernicus, of
 [Kopernicus: the flag fix](../docs/limits-and-solutions/kopernicus/the-flag-fix.md); and, in
 `rss-runway-fix/`, the change to Real Solar System of
-[Real Solar System: the runway fix](../docs/limits-and-solutions/rss/the-runway-fix.md).
+[Real Solar System: the runway fix](../docs/non-regression/real-solar-system/the-runway-fix.md).
 
 ## The loading protocol
 
@@ -162,7 +162,7 @@ KSP Diag - Terrain Quads, KSP Diag - Floating Origin and KSP-MCPServer: on each 
 [KSP Diag - Terrain Quads](https://github.com/lhervier/KSP-Diag-TerrainQuads) and KSP-MCPServer added to
 this mod at `logLevel = Debug`, the craft `Diag3-Rocket` on the launchpad reverted to launch by the
 script of its protocol, `run-revert.py`, until the finer quad is above at the largest gap, on land.
-Read in [The seam with this mod](../docs/non-regression/the-seam-between-subdivision-levels.md#the-seam-with-this-mod).
+Read in [The seam with this mod](../docs/limits-and-solutions/stock/the-seam-between-subdivision-levels.md#the-seam-with-this-mod).
 
 - [`runs/revert-earth-rss-fix-diag4.log`](runs/revert-earth-rss-fix-diag4.log) — on Earth, Real Solar
   System 20.1.3.0 as released and what it requires added, at Cape Canaveral, nine loads; what the
@@ -185,7 +185,7 @@ Integrator and KSPTextureLoader as for Real Solar System, and the Community Terr
   [`automation/run-rotation-threshold.py`](automation/run-rotation-threshold.py) printed, body by body:
   a craft moved from orbit to orbit, the altitude above which KSP turns the body rather than the world.
   No log kept: the readings are the script's. Read in
-  [Non-regression tests: the statics](../docs/non-regression-statics.md#a-static-turning-with-its-body).
+  [A static turning with its body](../docs/non-regression/stock/a-static-turning-with-its-body.md).
 
 ## On the stock system
 
@@ -195,7 +195,7 @@ KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, this mod and
   statics fix, at `logLevel = Debug`: `runway-kerbin.sfs` loaded six times, the craft sent to a 200 km
   orbit with `Alt+F12 → Cheats → Set Orbit`, then the space centre. At every step, the `PQSCity` of
   Kerbin and where they hang, and the destructible buildings and upgradeable facilities of the KSC, are
-  listed. Read in [Non-regression tests: the statics](../docs/non-regression-statics.md).
+  listed. Read in [Loading, an orbit and the space centre](../docs/non-regression/stock/loading-an-orbit-and-the-space-centre.md).
 - [`runs/runway-mun-kk-colliders-fix.log`](runs/runway-mun-kk-colliders-fix.log) — four loadings of
   that save, every collider under each craft listed at each loading, with its height above the terrain
   KSP computes there.
@@ -205,8 +205,8 @@ KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, this mod and
 The install of [On the stock system](#on-the-stock-system) plus [Deferred](https://github.com/LGhassen/Deferred)
 1.3.5 and [Shabby](https://github.com/KSPModdingLibs/Shabby) 0.4.2, both instruments at once, this mod at
 `logLevel = Debug`, and [KSP-MCPServer](https://github.com/lhervier/KSP-MCPServer), which plays the
-protocols through the scripts of [`automation/`](automation/). Read in
-[Deferred](../docs/limits-and-solutions/deferred.md).
+protocols through the scripts of [`automation/`](automation). Read in
+[Deferred](../docs/non-regression/deferred/drawing-the-ground.md).
 
 - [`automation/run-runway.py`](automation/run-runway.py) — plays
   [the runway protocol](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-runway.md).
@@ -226,7 +226,7 @@ protocols through the scripts of [`automation/`](automation/). Read in
 KSP 1.12.5 with the Making History expansion, Harmony, ModuleManager, KSP Community Fixes 1.41.1,
 [Kerbal Konstructs](https://github.com/KSP-RO/Kerbal-Konstructs) 1.12.3 and CustomPreLaunchChecks 1.8.1,
 which it requires, no instrument, this mod at `logLevel = Debug`. Read in
-[Kerbal Konstructs: the patch of the group editor](../docs/limits-and-solutions/kerbal-konstructs.md#the-patch-of-the-group-editor).
+[Kerbal Konstructs: the group editor](../docs/limits-and-solutions/kerbal-konstructs/the-group-editor.md).
 
 - [`runs/kk-group-editor-fix.log`](runs/kk-group-editor-fix.log) — `non-reg-runway-mune-kk.sfs`, its
   runway in `GameData/KerbalKonstructs/NewInstances`: the group moved with the gizmo of the group editor,
@@ -237,7 +237,7 @@ which it requires, no instrument, this mod at `logLevel = Debug`. Read in
 KSP 1.12.5 with the Making History expansion, Harmony, ModuleManager, KSP Community Fixes 1.41.1 and
 [Real Solar System](https://github.com/KSP-RO/RealSolarSystem) 20.1.3.0 with what it requires (Kopernicus
 248, Modular Flight Integrator, KSPTextureLoader, the RSS textures), no instrument. Each
-session plays the mission [`kopernicus-flag-fix/Missions/KSC flag fix`](kopernicus-flag-fix/Missions/)
+session plays the mission [`kopernicus-flag-fix/Missions/KSC flag fix`](kopernicus-flag-fix/Missions)
 once, as described in [Seeing the patch](../docs/limits-and-solutions/kopernicus/the-flag-fix.md#seeing-the-patch).
 
 - [`runs/kopernicus-flag-fix-without-this-mod.log`](runs/kopernicus-flag-fix-without-this-mod.log) —
@@ -277,8 +277,8 @@ a fixed metre, and hold the line where it refused part of Earth's terrain.
   statics fix: two loads of `reload-earth-rss-landed.sfs`, the craft sent to a 200 km orbit with
   `Alt+F12 → Cheats → Set Orbit`, then the space centre. At every step, the `PQSCity` of Earth and where
   they hang, and the destructible buildings and upgradeable facilities of the KSC, are listed. Read in
-  [Non-regression tests: the statics](../docs/non-regression-statics.md)
-  and [Kopernicus: the KSC moved by Real Solar System](../docs/limits-and-solutions/kopernicus/the-ksc-moved-by-real-solar-system.md).
+  [Loading, an orbit and the space centre](../docs/non-regression/stock/loading-an-orbit-and-the-space-centre.md)
+  and [Kopernicus: the KSC moved by Real Solar System](../docs/non-regression/kopernicus/the-ksc-moved-by-real-solar-system.md).
 - [`runs/kopernicus-flag-glitch-without-this-mod.log`](runs/kopernicus-flag-glitch-without-this-mod.log),
   [`runs/kopernicus-flag-glitch-statics-fix.log`](runs/kopernicus-flag-glitch-statics-fix.log) and
   [`runs/kopernicus-flag-glitch-statics-fix-off.log`](runs/kopernicus-flag-glitch-statics-fix-off.log) —
@@ -299,7 +299,7 @@ a fixed metre, and hold the line where it refused part of Earth's terrain.
   added to the install: one session, a small rocket launched from the VAB onto the launchpad at Cape
   Canaveral, then flown towards orbit, the flight started over three times. The launch was saved
   afterwards as [`rss-launch-to-earth-orbit.sfs`](rss-launch-to-earth-orbit.sfs), which needs MechJeb2
-  to load. Used in [The seam between subdivision levels](../docs/non-regression/the-seam-between-subdivision-levels.md).
+  to load. Used in [The seam between subdivision levels](../docs/limits-and-solutions/stock/the-seam-between-subdivision-levels.md).
 - [`runs/runway-earth-rss-without-runway-fix.log`](runs/runway-earth-rss-without-runway-fix.log) —
   without this mod,
   [KSP Diag - Colliders](https://github.com/lhervier/KSP-Diag-Colliders) added, and
@@ -308,10 +308,10 @@ a fixed metre, and hold the line where it refused part of Earth's terrain.
   which keeps its runway fix from doing anything: one session, the rover of KSP Diag - Terrain Height
   launched from the SPH onto the runway at Cape Canaveral several times, and reloaded many times
   between, 23 entries in flight. Read in
-  [Seeing it](../docs/limits-and-solutions/rss/the-runway-fix.md#seeing-it).
+  [Seeing it](../docs/non-regression/real-solar-system/the-runway-fix.md#seeing-it).
 - [`runs/runway-earth-rss-without-runway-fix-fix.log`](runs/runway-earth-rss-without-runway-fix-fix.log) —
   the same install, with this mod: one session, the protocol of
-  [Seeing it](../docs/limits-and-solutions/rss/the-runway-fix.md#seeing-it), 37 entries in flight.
+  [Seeing it](../docs/non-regression/real-solar-system/the-runway-fix.md#seeing-it), 37 entries in flight.
 - [`runs/driving-runway-earth-rss-diag2-fix.log`](runs/driving-runway-earth-rss-diag2-fix.log) —
   [KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainHeight), Diag FloatingOrigin and
   [KSP-MCPServer](https://github.com/lhervier/KSP-MCPServer) added, Real Solar System built without its
@@ -326,4 +326,201 @@ a fixed metre, and hold the line where it refused part of Earth's terrain.
   in 500 m legs toward the CommNet ground station of Kourou, from 28.86 km to 27.30 km, then
   [`station-kourou-rss.sfs`](station-kourou-rss.sfs) loaded and driven from 27.83 km to 27.30 km by
   [`automation/run-station-approach.py`](automation/run-station-approach.py). Read in
-  [A CommNet ground station from a planet pack](../docs/non-regression/a-commnet-ground-station-from-a-planet-pack.md).
+  [A CommNet ground station from a planet pack](../docs/non-regression/real-solar-system/a-commnet-ground-station.md).
+
+## The scatter fix
+
+The readings of [KSP Diag - Scatter](https://github.com/lhervier/KSP-Diag-Scatter) with
+[the scatter fix](../docs/limits-and-solutions/stock/rocks-grass-and-trees.md#the-solution-the-scatter-fix)
+on, read in [The scatter fix: checking the culprit](../docs/limits-and-solutions/stock/the-scatter-fix/checking-the-culprit.md),
+kept as they were logged, copied out of `KSP.log`, in [`runs/scatter-fix/`](runs/scatter-fix): for the
+rocks after a load, one file per load, each holding the last record taken after that load; for the rocks
+over a flight and for the holder pools, one file per flight or session, holding every record taken
+during it. The scatter fix was then a mod of its own, Rock Precision Fix 0.1.0, installed next to this
+mod: the same two patches, whose lines in these logs are tagged `[RockPrecisionFix]`.
+
+The procedure, the saves and the format of a record belong to the instrument:
+[its protocol](https://github.com/lhervier/KSP-Diag-Scatter/blob/main/docs/measuring-the-rocks.md#load-after-load),
+[the saves](https://github.com/lhervier/KSP-Diag-Scatter/blob/main/diag/README.md#the-saves) and
+[the log](https://github.com/lhervier/KSP-Diag-Scatter/blob/main/docs/measuring-the-rocks.md#the-log).
+
+### The scatter fix: the rocks, over twelve loads
+
+KSP 1.12.5 on Windows. `GameData` holding Harmony, ModuleManager, KSP Community Fixes 1.41.1,
+this mod, 0.1.0, KSP Diag - Scatter and Rock Precision Fix 0.1.0. Both fixes at `logLevel = Info`. Terrain scatter on, the log flushed at once. KSP was
+started once, and in that session `reference-kerbin.sfs` then `reference-mune.sfs` were each loaded twelve
+times, with `Alt+F6` pressed after each load once the scene had settled.
+
+Both fixes wrote to `KSP.log` that they were installed, and that they had acted on each body before its
+first record:
+
+```
+[RockPrecisionFix] Version 0.1.0.0 installed, log level Info
+[TerrainPrecisionFix] Version 0.1.0.0 installed, log level Info
+[TerrainPrecisionFix] Kerbin: terrain placed in double precision (first quad corrected by 16.50 mm)
+[RockPrecisionFix] Kerbin: scatter drawn from its terrain quads (first holder was -27.51 mm off)
+[TerrainPrecisionFix] Mun: terrain placed in double precision (first quad corrected by 9.18 mm)
+[RockPrecisionFix] Mun: scatter drawn from its terrain quads (first holder was +8.51 mm off)
+```
+
+| load | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Kerbin | [`1`](runs/scatter-fix/kerbin-both-load1.log) | [`2`](runs/scatter-fix/kerbin-both-load2.log) | [`3`](runs/scatter-fix/kerbin-both-load3.log) | [`4`](runs/scatter-fix/kerbin-both-load4.log) | [`5`](runs/scatter-fix/kerbin-both-load5.log) | [`6`](runs/scatter-fix/kerbin-both-load6.log) | [`7`](runs/scatter-fix/kerbin-both-load7.log) | [`8`](runs/scatter-fix/kerbin-both-load8.log) | [`9`](runs/scatter-fix/kerbin-both-load9.log) | [`10`](runs/scatter-fix/kerbin-both-load10.log) | [`11`](runs/scatter-fix/kerbin-both-load11.log) | [`12`](runs/scatter-fix/kerbin-both-load12.log) |
+| the Mun | [`1`](runs/scatter-fix/mun-both-load1.log) | [`2`](runs/scatter-fix/mun-both-load2.log) | [`3`](runs/scatter-fix/mun-both-load3.log) | [`4`](runs/scatter-fix/mun-both-load4.log) | [`5`](runs/scatter-fix/mun-both-load5.log) | [`6`](runs/scatter-fix/mun-both-load6.log) | [`7`](runs/scatter-fix/mun-both-load7.log) | [`8`](runs/scatter-fix/mun-both-load8.log) | [`9`](runs/scatter-fix/mun-both-load9.log) | [`10`](runs/scatter-fix/mun-both-load10.log) | [`11`](runs/scatter-fix/mun-both-load11.log) | [`12`](runs/scatter-fix/mun-both-load12.log) |
+
+Every record of Kerbin ends on the same line, but for its number:
+
+```
+End of record 1: 64 quads with rocks, 118 holders (0 not built yet); nearest quad 'Kerbin Zn3010000130': 218 rocks, 1780 vertices measured, 0 without ground under them
+```
+
+and every record of the Mun on this one:
+
+```
+End of record 13: 128 quads with rocks, 128 holders (0 not built yet); nearest quad 'Mun Zp211333000': 20 rocks, 200 vertices measured, 0 without ground under them
+```
+
+So every record was taken once all the holders were built, and all the records of a body name the same
+nearest quad: its objects and their measured vertices compare one by one from one load to the next.
+
+### The scatter fix: the rocks, over a flight
+
+Where the rocks are drawn once the terrain has kept building and destroying quads under a moving craft,
+with the world origin following it.
+
+The same install as above, with the build of KSP Diag - Scatter of
+[the holder pools](#the-scatter-fix-the-holder-pools-over-a-flight) below. `ref-mune-5km.sfs` loaded once, then `Alt+F6`
+pressed 30 s into the flight, again every two minutes, and once more after the pod crashed, following
+[its protocol](https://github.com/lhervier/KSP-Diag-Scatter/blob/main/docs/measuring-the-rocks.md#over-a-flight).
+
+Both fixes wrote to `KSP.log` that they had acted on the Mun before the first record:
+
+```
+[TerrainPrecisionFix] Mun: terrain placed in double precision (first quad corrected by 17.46 mm)
+[RockPrecisionFix] Mun: scatter drawn from its terrain quads (first holder was -15.15 mm off)
+```
+
+| flight | records |
+|---|---|
+| with both fixes | [`mun-5km-both-rocks.log`](runs/scatter-fix/mun-5km-both-rocks.log) |
+
+The file holds the six records and the line of `KSP.log` reporting the crash, between the fifth and the
+sixth. Every record has all its holders built, and 200 vertices measured on its nearest quad, all of them
+with ground under them:
+
+| record | quads with rocks | holders | nearest quad |
+|---|---|---|---|
+| 1 | 344 | 344 | `Mun Zp200000011` |
+| 2 | 168 | 168 | `Mun Xn231111111` |
+| 3 | 144 | 144 | `Mun Xn211311311` |
+| 4 | 224 | 224 | `Mun Xn122020000` |
+| 5 | 152 | 152 | `Mun Xn013331113` |
+| 6, after the crash | 568 | 568 | `Mun Zn200000011` |
+
+Those are, record for record, the quads of the same flight with this mod without the scatter fix, and the same
+nearest quads: their vertices compare one by one from one flight to the other.
+
+### The scatter fix: the holder pools, over a flight
+
+The scatter fix takes each holder out of the pool's container while its quad is in use, and hangs it back there
+when the quad is handed back. This series checks that every holder does go back, and that none is lost on
+the way.
+
+The same install as above, with a later build of KSP Diag - Scatter: the first one
+with the holder record. `ref-mune-5km.sfs` loaded once, then `Alt+Shift+F6` pressed 30 s into the flight,
+again about every two minutes, and once more after the pod crashed, following
+[its protocol](https://github.com/lhervier/KSP-Diag-Scatter/blob/main/docs/checking-the-holder-pools.md#over-a-flight).
+
+Both fixes wrote to `KSP.log` that they had acted on the Mun before the first record:
+
+```
+[TerrainPrecisionFix] Mun: terrain placed in double precision (first quad corrected by 14.82 mm)
+[RockPrecisionFix] Mun: scatter drawn from its terrain quads (first holder was -1.34 mm off)
+```
+
+| flight | records |
+|---|---|
+| with both fixes | [`mun-5km-both-holders.log`](runs/scatter-fix/mun-5km-both-holders.log) |
+
+The file holds the six records and the line of `KSP.log` reporting the crash, between the fifth and the
+sixth. Every record ends on `0 broken rules`:
+
+| record | holders in use | free | broken rules |
+|---|---|---|---|
+| 1 | 344 | 40 | 0 |
+| 2 | 168 | 216 | 0 |
+| 3 | 144 | 240 | 0 |
+| 4 | 224 | 160 | 0 |
+| 5 | 152 | 232 | 0 |
+| 6, after the crash | 568 | 40 | 0 |
+
+Those counts are, record for record, those of the flight with this mod without the scatter fix: the flight
+takes as many holders out of the pool, at the same moments, with the scatter fix as without it.
+
+### The scatter fix: the holder pools, across scene switches
+
+The scatter fix hangs a holder from its quad, and the quads of the most detailed level are shared by every body.
+Leaving a body switches its terrain off: this series checks that its holders go back to their pools
+before stock destroys them, and that none travels on a quad to the next body.
+
+The same install and build as the flight above. One session, following
+[its protocol](https://github.com/lhervier/KSP-Diag-Scatter/blob/main/docs/checking-the-holder-pools.md#across-scene-switches):
+`reference-mune.sfs` loaded from the Space Center, back to the Space Center, then `reference-kerbin.sfs`,
+with `Alt+Shift+F6` pressed in each of the three scenes.
+
+Both fixes wrote to `KSP.log` that they had acted on each body before its first record:
+
+```
+[TerrainPrecisionFix] Kerbin: terrain placed in double precision (first quad corrected by 16.50 mm)
+[RockPrecisionFix] Kerbin: scatter drawn from its terrain quads (first holder was -27.51 mm off)
+[TerrainPrecisionFix] Mun: terrain placed in double precision (first quad corrected by 1.68 mm)
+[RockPrecisionFix] Mun: scatter drawn from its terrain quads (first holder was -0.40 mm off)
+```
+
+| session | records |
+|---|---|
+| with both fixes | [`scenes-both-holders.log`](runs/scatter-fix/scenes-both-holders.log) |
+
+The file holds the three records, the line of `KSP.log` marking the arrival in each scene, and those of
+both fixes. Every record ends on `0 in no pool` and `0 broken rules`:
+
+| record | scene | pools | holders in use | free |
+|---|---|---|---|---|
+| 1 | the Mun | the Mun's `Rock00` | 128 | 32 |
+| 2 | the Space Center | Kerbin's `Tree00`, `Grass00`, `boulder`, `Pine00`, `cactus` | 4 | 316 |
+| 3 | Kerbin | the same five | 118 | 202 |
+
+Those are, pool for pool, the counts of the same session with this mod without the scatter fix. The Mun's pool
+is gone from the second record on, and no holder of the Mun turned up under a quad of Kerbin.
+
+### The scatter fix: the colliders
+
+A different install, because stock scatter has no collider: the one above, plus
+[Kopernicus](https://github.com/Kopernicus/Kopernicus) 1.12.1.247 and the
+[Stock Scatter Collider Enabler Patch](https://github.com/Poodmund/Stock-Scatter-Collider-Enabler-Patch)
+1.0.1, which gives every stock object of scatter a collision mesh of its own shape.
+
+One series, following
+[its protocol](https://github.com/lhervier/KSP-Diag-Scatter/blob/main/docs/measuring-the-rocks.md#with-colliders-on-the-scatter):
+`ref-kerbin-scatter-collider-eva.sfs`, a kerbal standing on a boulder in a desert of Kerbin, loaded six
+times in one session, each load with a record and a picture of the kerbal's feet.
+
+| load | 1 | 2 | 3 | 4 | 5 | 6 |
+|---|---|---|---|---|---|---|
+| with both fixes | [`1`](runs/scatter-fix/collider-both-load1.log) | [`2`](runs/scatter-fix/collider-both-load2.log) | [`3`](runs/scatter-fix/collider-both-load3.log) | [`4`](runs/scatter-fix/collider-both-load4.log) | [`5`](runs/scatter-fix/collider-both-load5.log) | [`6`](runs/scatter-fix/collider-both-load6.log) |
+| its pictures | [`1`](../imgs/scatter-fix/collider-both-load1.png) | [`2`](../imgs/scatter-fix/collider-both-load2.png) | [`3`](../imgs/scatter-fix/collider-both-load3.png) | [`4`](../imgs/scatter-fix/collider-both-load4.png) | [`5`](../imgs/scatter-fix/collider-both-load5.png) | [`6`](../imgs/scatter-fix/collider-both-load6.png) |
+
+Every record ends on the same line, but for its number:
+
+```
+End of record 1: 173 quads with rocks, 306 holders (0 not built yet); nearest quad 'Kerbin Xn0131000203': 6 rocks, 60 vertices measured, 0 without ground under them, 6 colliders measured
+```
+
+The same nearest quad throughout, carrying the same six objects with a collider — one `boulder` and five
+`cactus` — so they compare one by one from one load to the next, and with the two series taken without the scatter fix.
+
+### The scatter fix: the other configurations
+
+Stock and this mod without the scatter fix, on the same saves, are kept with
+[KSP Diag - Scatter](https://github.com/lhervier/KSP-Diag-Scatter/blob/main/diag/README.md),
+the colliders included.

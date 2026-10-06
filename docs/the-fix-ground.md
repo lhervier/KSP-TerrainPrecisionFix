@@ -77,8 +77,8 @@ work done once per quad, is measured in [Performance](performance.md).
 ## Only where a craft can stand
 
 Only the quads of the highest subdivision level are corrected. Those are the ones craft stand on, the
-only ones with a collider on Kerbin and on the Mun, where `PQSMod_QuadMeshColliders.maxLevelOffset` has
-been read in flight and is 0 (see [Colliders below the highest subdivision level](non-regression/colliders-below-the-highest-subdivision-level.md)), and the only ones that can keep a precise
+only ones with a collider on every stock body, where `PQSMod_QuadMeshColliders.maxLevelOffset` has
+been read in game and is 0 (see [Colliders below the highest subdivision level](non-regression/stock/colliders-below-the-highest-subdivision-level.md)), and the only ones that can keep a precise
 position: stock moves them to a container of their own, outside the body's hierarchy. Every other quad
 hangs from the body's terrain sphere, whose origin is the centre of the body, so Unity would store any
 position given to it as a 600 km float again. Those are left exactly as stock builds them.
@@ -98,6 +98,6 @@ apply, and each vertex is left with a reference comparison before stock runs unt
   System — while a wrong frame misses by kilometres. The largest correction measured so far is 4.0
   steps, 1 998 mm on Earth in Real Solar System (3.6 steps on Venus, 3.5 on the Moon, about one on
   Mars and Mercury), a quarter of the limit:
-  [What this mod corrected](limits-and-solutions/rss/what-this-mod-corrected.md);
+  [What this mod corrected](non-regression/real-solar-system/what-this-mod-corrected.md);
 - the ground fix is installed on its own, apart from [the statics fix](the-fix-statics.md), and can be
   turned off in the settings. If any of its patches fails to install, none of them does anything.

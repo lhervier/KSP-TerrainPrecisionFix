@@ -5,9 +5,9 @@ using UnityEngine;
 namespace com.github.lhervier.ksp.terrainprecisionfix
 {
     /// <summary>
-    /// Places the terrain and the statics the same way at every load, where their own double precision
-    /// coordinates say they are: installs each fix the settings leave on, and drives the statics fix
-    /// through scene changes and from frame to frame.
+    /// Places the terrain and the statics, and, when asked to, the terrain scatter, the same way at every
+    /// load, where their own double precision coordinates say they are: installs each fix the settings
+    /// leave on, and drives the statics fix through scene changes and from frame to frame.
     /// </summary>
     [KSPAddon(KSPAddon.Startup.Instantly, true)]
     public class TerrainPrecisionFixMod : MonoBehaviour
@@ -58,6 +58,31 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
                     // Whatever patch did get applied does nothing: the statics are exactly where stock puts
                     // them.
                     Log.Error($"Could not install the statics fix, the statics are left where stock places them: {e}");
+                }
+            }
+
+            if (!Settings.FixScatter)
+            {
+                Log.Info("Scatter fix turned off in the settings");
+            }
+            else
+            {
+                try
+                {
+                    if (ScatterFix.Install(harmony))
+                    {
+                        Log.Info("Scatter fix installed");
+                    }
+                    else
+                    {
+                        Log.Warning("Scatter fix not installed: Rock Precision Fix is installed, and does the same."
+                            + " Remove Rock Precision Fix to use this mod's scatter fix instead");
+                    }
+                }
+                catch (Exception e)
+                {
+                    // Whatever patch did get applied does nothing: the scatter is exactly where stock puts it.
+                    Log.Error($"Could not install the scatter fix, the scatter is left where stock places it: {e}");
                 }
             }
 

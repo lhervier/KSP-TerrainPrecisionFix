@@ -1,6 +1,6 @@
 # Terrain Precision Fix
 
-**⚠️ Work in progress.** This is an active investigation, not a finished mod. The figures, the code and the conclusions on this page can still change, and several questions are still open — they are listed in [Non-regression tests](#non-regression-tests) and [Limits and solutions](docs/limits-and-solutions.md).
+**⚠️ Work in progress.** This is an active investigation, not a finished mod. The figures, the code and the conclusions on this page can still change, and several questions are still open — they are listed in [Work in progress](#work-in-progress).
 
 A fix for stock KSP 1.12, kept as small as possible: a handful of Harmony patches, in a few short source
 files. It is a mod of its own, built and measured on top of
@@ -180,25 +180,27 @@ and 289 mm on Earth, and by 0.67 mm and 2.1 mm at most with this mod.
 
 ## Non-regression tests
 
-Checking the culprit shows what this mod fixes. These tests check the other side: what works in stock
-still works with it. Each is played in game with this mod, and compared with stock where stock has to
-be told apart.
+Checking the culprit shows what this mod fixes. These tests check the other side, one mod at a time:
+what works without this mod still works with it. Only what has been checked is listed; each test is
+played in game with this mod, and compared with the game without it where the two have to be told apart.
 
-**The ground.** Rocks, grass and trees, and the seam with the coarser quads around the craft, are not
-moved, but this mod widens a visual gap stock already has there; an existing save goes through one more
-draw of the ground, always the same one. Still to test: slopes, ground anchors, asteroids held by a
-claw, Breaking Ground, the map view, and the colliders of lower levels on most bodies.
+**Stock.** Existing saves go through one more draw of the ground, always the same one. Over loadings, an
+orbit and a return to the space centre, the KSC keeps every building registered, and a craft launched
+from the VAB or the SPH stands on the launchpad or the runway.
 
-**→ Full chapter: [Non-regression tests: the ground](docs/non-regression-ground.md)**
+**KSP Community Fixes.** None of its patches places the terrain, and every measurement on these pages
+was taken with it installed.
 
-**The statics.** Taken out of its sphere and put back over loadings, an orbit and a return to the space
-centre, the KSC keeps every building registered; a craft launched from the VAB or the SPH stands on the
-launchpad or the runway. Still to test: scene changes, a trip to another body, time warp, destroyed buildings and facility
-levels, the ground station, missions and the launch pads they place, the other stock statics. A static
-turning with its body cannot happen on stock, in Real Solar System or with Outer Planets Mod: no body
-turns low enough for a craft near a static to see it.
+**Kopernicus.** The ground is as stable under Kopernicus as without it, and the KSC it moves to Cape
+Canaveral for Real Solar System is placed where it puts it.
 
-**→ Full chapter: [Non-regression tests: the statics](docs/non-regression-statics.md)**
+**Real Solar System.** Its two workarounds for this defect, one for a landed craft and one for the
+runway, have nothing left to correct with this mod, and its CommNet ground stations keep relaying.
+
+**Deferred.** It draws the ground wherever this mod places it, and the craft and the ground come back as
+they do without it.
+
+**→ Full chapter: [Non-regression tests](docs/non-regression.md)**
 
 ## Performance
 
@@ -214,12 +216,28 @@ with statics near a craft is not measured yet.
 
 ## Limits and solutions
 
-Every mod that places something on the ground, reads it, or changes the bodies it is built from, has to
-be checked against this fix, one mod at a time: Kopernicus, Real Solar System, Parallax, Kerbal
-Konstructs, Principia, a planet pack… This is a work in progress, with a chapter per mod. **The statics fix is the
-riskier of the two**: it takes a static out of the place where stock, and any mod, expects to find it.
+What this mod makes worse, or would break without a patch of its own, with the solution to each. **The
+statics fix is the riskier of the two fixes on by default**: it takes a static out of the place where stock, and any
+mod, expects to find it.
+
+**Stock.** This mod widens two visual gaps stock already has: the rocks, grass and trees against the
+ground, which a third fix of this mod closes, off by default; and the crack where the corrected quads
+meet coarser ones, with no solution yet.
+
+**Kopernicus and Kerbal Konstructs.** Each looks for a static under its sphere once in flight, and this
+mod patches both, each patch standing for a small change these mods could make themselves, given as a
+diff of their source.
 
 **→ Full chapter: [Limits and solutions](docs/limits-and-solutions.md)**
+
+## Work in progress
+
+What is still to check, one mod at a time, with what is already known and the test planned for it. In
+progress: the last tests on Real Solar System. Planned: the rest of stock, from slopes to scene changes,
+Kerbal Konstructs, a body from a planet pack, Principia, Parallax, Tilt'Em, KAS, and other mods that
+look for a static under its sphere.
+
+**→ Full chapter: [Work in progress](docs/work-in-progress.md)**
 
 ## Install
 
@@ -227,26 +245,27 @@ Requires KSP 1.12 and [HarmonyKSP](https://github.com/KSPModdingLibs/HarmonyKSP)
 `GameData/000_Harmony`, also installed by KSP Community Fixes).
 
 Copy `GameData/TerrainPrecisionFixMod` into the `GameData` of KSP. Nothing is written to your saves:
-removing the folder gives you the stock terrain and statics back.
+removing the folder gives you the stock terrain, statics and scatter back.
 
 ## Settings
 
-`GameData/TerrainPrecisionFixMod/PluginData/settings.cfg` holds five values, read when KSP starts. To
+`GameData/TerrainPrecisionFixMod/PluginData/settings.cfg` holds six values, read when KSP starts. To
 change one: quit KSP, edit the file, start KSP again.
 
 | setting | what it does |
 |---|---|
 | `fixTerrain` | `true` (default) places the terrain in double precision; `false` leaves it as stock builds it |
 | `fixStatics` | `true` (default) places the statics in double precision; `false` leaves them where stock places them |
-| `patchKopernicus` | `true` (default) patches Kopernicus, when installed, to cope with the statics fix. With `false` and the statics fix on, Kopernicus' flag fix throws when a facility is upgraded in flight near the KSC, which only a Making History mission does: an error in the log, and nothing else, since the statics fix keeps the flags steady there. Meant only to see what the patch is for |
+| `fixScatter` | `false` (default) leaves the terrain scatter where stock draws it; `true` draws it from the terrain quads it was built on. Off by default because it moves stock objects other mods may look for, against a gap nobody sees on a stock install: see [Should you turn it on?](docs/limits-and-solutions/stock/the-scatter-fix/should-you-turn-it-on.md) |
+| `patchKopernicus` | `true` (default) patches Kopernicus, when installed, to cope with the statics fix. With `false` and the statics fix on, Kopernicus' flag fix throws when a facility is upgraded in flight near the KSC, which only a Making History mission does: an error in the log whose stack trace names Kopernicus, and nothing else, since the statics fix keeps the flags steady there. Meant only to see what the patch is for |
 | `patchKerbalKonstructs` | `true` (default) patches Kerbal Konstructs, when installed, to cope with the statics fix. With `false` and the statics fix on, moving a group with its group editor in flight sends it elsewhere on its body, and saves it there: meant only to see what the patch is for |
 | `logLevel` | what goes to `KSP.log`, below |
 
 | `logLevel` | what goes to `KSP.log` |
 |---|---|
-| `Info` (default) | a few lines at startup, then one line per body the first time its terrain, then its statics, are corrected |
-| `Debug` | adds one line per quad placed, with how far it was moved, and one line per static taken out of its sphere or put back under it |
-| `Trace` | adds, per quad, how far its vertices were moved within it — slower, meant for measuring |
+| `Info` (default) | a few lines at startup, then one line per body the first time its terrain, then its statics, then its scatter, are corrected |
+| `Debug` | adds one line per quad placed, with how far it was moved, one line per static taken out of its sphere or put back under it, and one line per scatter holder hung from its quad |
+| `Trace` | adds, per quad, how far its vertices were moved within it, and one line per scatter holder handed back to its pool — slower, meant for measuring |
 
 `Error` and `Warning` are accepted too.
 

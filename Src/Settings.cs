@@ -15,6 +15,12 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
         public static bool FixStatics { get; private set; } = true;
 
         /// <summary>
+        /// Whether terrain scatter (rocks, grass, trees) is drawn from its terrain quads. Off by default: it
+        /// moves stock objects away from where other mods may look for them.
+        /// </summary>
+        public static bool FixScatter { get; private set; } = false;
+
+        /// <summary>
         /// Whether Kopernicus, when installed, is patched to cope with statics out of their sphere. Only
         /// meaningful with the statics fix on, which then breaks Kopernicus' flag fix when this is off.
         /// </summary>
@@ -28,7 +34,8 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
 
         /// <summary>
         /// Reads the settings file and applies its log level. A missing file, a missing value or an unknown
-        /// value leaves the default: everything fixed and patched, logging at Info.
+        /// value leaves the default: the terrain and the statics fixed, the scatter left as stock, both mods
+        /// patched, logging at Info.
         /// </summary>
         public static void Load()
         {
@@ -59,6 +66,7 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
 
             FixTerrain = ReadSwitch(node, "fixTerrain", FixTerrain, path);
             FixStatics = ReadSwitch(node, "fixStatics", FixStatics, path);
+            FixScatter = ReadSwitch(node, "fixScatter", FixScatter, path);
             PatchKopernicus = ReadSwitch(node, "patchKopernicus", PatchKopernicus, path);
             PatchKerbalKonstructs = ReadSwitch(node, "patchKerbalKonstructs", PatchKerbalKonstructs, path);
         }

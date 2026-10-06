@@ -48,9 +48,8 @@ were flown by [this script](https://github.com/lhervier/KSP-PQSBench/blob/main/p
 The three configurations are kept here together, because they are only ever read against each other.
 
 Nine runs, three per configuration, each in a fresh KSP, in this order: stock, Stock Quad Cache, this
-mod, and again, three rounds. They belong to one session of runs that also measured, in each round,
-Terrain Precision Fix with [Rock Precision Fix](https://github.com/lhervier/KSP-RockPrecisionFix), for
-that mod's page. The mission time at the start and the stop of each capture is as the script recorded
+mod, and again, three rounds. In each round, a fourth run followed this mod's: this mod with its
+scatter fix, kept below in [The scatter fix](#the-scatter-fix). The mission time at the start and the stop of each capture is as the script recorded
 it; it also recorded, at both, that KSP's window was in front of the others, in every run.
 
 | configuration | run | captured from | to | frames captured | CSV | `KSP.log` |
@@ -71,3 +70,44 @@ matches 70 seconds at its mean frame rate. Each `KSP.log` says which mods were l
 `[StockQuadCache] Version 0.1.0.0 installed, log level Info`, and the runs with this mod
 `[TerrainPrecisionFix] Statics fix installed` and `[TerrainPrecisionFix] Mun: terrain placed in double
 precision`.
+
+## The scatter fix
+
+What [the scatter fix](../docs/limits-and-solutions/stock/the-scatter-fix/performance.md) costs, timed by
+the procedure of [What a frame pays](#what-a-frame-pays), in the same session of runs: in each of its
+three rounds, right after the run of this mod, a run of this mod with the scatter fix. The scatter fix
+was then a mod of its own, Rock Precision Fix 0.1.0, installed next to this mod: the same two patches.
+The runs of this mod alone are the ones of [What a frame pays](#what-a-frame-pays), read against these.
+
+| configuration | run | captured from | to | frames captured | CSV | `KSP.log` |
+|---|---|---|---|---|---|---|
+| this mod and the scatter fix | 1 | 29.992 s | 100.10 s | 6 685 | [csv](runs/profiler/mun-05km-fix-scatter-1.csv) | [log](runs/profiler/mun-05km-fix-scatter-1.log) |
+| this mod and the scatter fix | 2 | 30.011 s | 100.14 s | 6 719 | [csv](runs/profiler/mun-05km-fix-scatter-2.csv) | [log](runs/profiler/mun-05km-fix-scatter-2.log) |
+| this mod and the scatter fix | 3 | 30.018 s | 99.92 s | 6 584 | [csv](runs/profiler/mun-05km-fix-scatter-3.csv) | [log](runs/profiler/mun-05km-fix-scatter-3.log) |
+
+Every frame count is under the profiler's 10 000 ceiling, so each capture ended on *Stop*.
+
+**The profiler's CSV does not name the mods.** The `KSP.log` of the same run does: its `Mod DLLs found`
+list names `RockPrecisionFixMod v0.1.0.0` in these three logs only, and so do the lines
+`[RockPrecisionFix] Version 0.1.0.0 installed, log level Info` at startup and
+`[RockPrecisionFix] Mun: scatter drawn from its terrain quads` when it first acts on the Mun. Every log,
+of both configurations, has `[TerrainPrecisionFix] Mun: terrain placed in double precision`.
+
+### The scatter fix: the figures
+
+In milliseconds per frame, except the frame rate, as read from the CSVs. The CSV repeats row names:
+**Update** is the first `Update` row, the whole phase; **Update → Coroutines** is the first `Coroutines`
+row after it. *alone* is this mod without the scatter fix, the runs `fix-1` to `fix-3` above.
+
+| | alone 1 | scatter 1 | alone 2 | scatter 2 | alone 3 | scatter 3 |
+|---|---|---|---|---|---|---|
+| frames per second, mean | 95.9 | 95.2 | 94.8 | 95.7 | 96.2 | 93.9 |
+| frame time, mean | 10.42 | 10.50 | 10.55 | 10.45 | 10.40 | 10.65 |
+| frame time, worst 1 % | 35.16 | 35.53 | 35.33 | 35.24 | 35.54 | 35.67 |
+| Update, mean | 2.89 | 2.93 | 2.88 | 2.89 | 2.89 | 2.94 |
+| Update → Coroutines, mean | 1.93 | 1.95 | 1.94 | 1.93 | 1.93 | 2.00 |
+| Update → Coroutines, median | 1.28 | 1.28 | 1.29 | 1.27 | 1.28 | 1.28 |
+| Update → Coroutines, worst 1 % | 24.39 | 24.53 | 24.32 | 24.41 | 24.89 | 24.98 |
+| Cameras render, mean | 3.53 | 3.53 | 3.59 | 3.54 | 3.51 | 3.58 |
+| VSync, mean | 0.06 | 0.06 | 0.06 | 0.06 | 0.06 | 0.06 |
+| profiler overhead, mean | 0.46 | 0.45 | 0.48 | 0.47 | 0.46 | 0.46 |

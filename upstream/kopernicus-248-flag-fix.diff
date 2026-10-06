@@ -1,0 +1,16 @@
+--- a/src/Kopernicus/RuntimeUtility/RuntimeUtility.cs
++++ b/src/Kopernicus/RuntimeUtility/RuntimeUtility.cs
+@@ -1015,6 +1015,13 @@
+                     .GetComponentsInChildren<PQSCity>(true)?
+                     .FirstOrDefault(p => p.name == "KSC");
+ 
++                // A mod may have taken the KSC out of the terrain sphere, in flight, to place it in double
++                // precision; its flags then need no fix.
++                if (KSC == null)
++                {
++                    return;
++                }
++
+                 SkinnedMeshRenderer[] flags = KSC
+                     .GetComponentsInChildren<SkinnedMeshRenderer>(true)
+                     .Where(smr => smr.name == "Flag")?

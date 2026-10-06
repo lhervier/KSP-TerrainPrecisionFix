@@ -1,27 +1,27 @@
 # TODO
 
 Ce qu'il reste à faire, et seulement ça. Tout ce qui est déjà mesuré est dans [le README](README.md) et
-ses chapitres sous [docs/](docs/), avec ses logs dans [perfs/](perfs/) et dans les dépôts des trois
-Diags ; aucun résultat n'est consigné ici. **Les tests à jouer n'y sont pas non plus** : l'impact sur
-stock est dans les tableaux de [Non-regression tests: the ground](docs/non-regression-ground.md) et
-[the statics](docs/non-regression-statics.md), l'impact sur les autres mods dans les *Still to test* de
-[Limits and solutions](docs/limits-and-solutions.md), le coût dans [Performance](docs/performance.md).
-Un nouveau test s'ajoute là-bas (une ligne de tableau, et une page dans `docs/non-regression/` s'il en
-faut une ; ou un fichier dans `docs/limits-and-solutions/` et son résumé dans la page d'index), pas ici.
+ses chapitres sous [docs/](docs), avec ses logs dans [perfs/](perfs) et dans les dépôts des trois
+Diags ; aucun résultat n'est consigné ici. **Les tests à jouer n'y sont pas non plus** : ils sont dans
+[Work in progress](docs/work-in-progress.md), un chapitre par mod (stock d'abord), les vérifications en
+cours puis celles prévues ; le coût dans [Performance](docs/performance.md). Un nouveau test s'ajoute
+là-bas (une page dans `docs/work-in-progress/<mod>/` et son résumé dans la page d'index), pas ici. Une
+fois joué, il passe dans [Non-regression tests](docs/non-regression.md) si rien n'empire, dans
+[Limits and solutions](docs/limits-and-solutions.md) sinon.
 
 ## Dans cet ordre
 
-D'abord les tests encore ouverts de [Real Solar System](docs/limits-and-solutions/rescaled-systems-real-solar-system.md#still-to-test),
+D'abord les tests encore ouverts de [Real Solar System](docs/work-in-progress.md#real-solar-system),
 puis les deux points ci-dessous (Lionel, 2026-09-25).
 
-1. **Restructurer les autres cas** de `docs/limits-and-solutions/` et de `docs/non-regression/` sur le
-   plan du cas RSS
+1. **Restructurer les pages** de `docs/non-regression/` et de `docs/limits-and-solutions/` sur le
+   plan des pages RSS
    (introduction lue dans le code et sur GitHub, `## Checking the culprit` avec Diag LandedVessel et Diag TerrainHeight,
-   `## What the results show`), après avoir décidé comment traiter un cas sans mesure.
+   `## What the results show`). Un cas sans mesure va dans `docs/work-in-progress/` (Lionel, 2026-10-06).
 2. **Mettre à jour le texte de #440** (la branche est fusionnée dans `main`). Son lien *so many cases to test* vise
-   `limits-and-solutions.md`, qui ne parle plus que des autres mods : y ajouter les tests de
-   non-régression ([the ground](docs/non-regression-ground.md), [the statics](docs/non-regression-statics.md)),
-   l'impact sur stock. Décider si RSS y entre comme repro visible : l'issue ne le cite qu'en passant
+   `limits-and-solutions.md`, qui ne liste plus que ce que le mod empire et sa solution : le faire
+   pointer vers [Work in progress](docs/work-in-progress.md) (les tests à jouer) et
+   [Non-regression tests](docs/non-regression.md) (ceux déjà joués). Décider si RSS y entre comme repro visible : l'issue ne le cite qu'en passant
    (« especially with RSS »), alors que la Terre donne un saut par série de six chargements sans le
    correctif, et jusqu'à 4,0 pas de correction avec.
 
@@ -29,7 +29,7 @@ puis les deux points ci-dessous (Lionel, 2026-09-25).
 
 3. **Une release GitHub sur chaque dépôt vers lequel l'issue envoie le lecteur.** Aucun n'en a : ce
    dépôt, Diag LandedVessel, Diag TerrainHeight, Diag FloatingOrigin et Diag TerrainQuads (le cas
-   [The seam between subdivision levels](docs/non-regression/the-seam-between-subdivision-levels.md)
+   [The seam between subdivision levels](docs/limits-and-solutions/stock/the-seam-between-subdivision-levels.md)
    en dépend : liens, images et *Get it*). L'issue commence par faire installer Diag LandedVessel, et les trois README des
    Diags renvoient vers `releases/latest` dans *Get it*, qui donne une 404 aujourd'hui — sur la page
    même où arrive un mainteneur depuis la première consigne du repro. `build.bat` produit déjà le
@@ -62,7 +62,7 @@ puis les deux points ci-dessous (Lionel, 2026-09-25).
   avec le correctif en `logLevel = Debug`, le décalage du protocole d'approche doit apparaître comme une
   salve de lignes `origin moved by … mm`.
 - **Les sauvegardes existantes, ce qu'il reste à rédiger** (le cas lui-même est le chapitre
-  [Existing saves](docs/non-regression/existing-saves.md)). Le seul essai sur une vraie sauvegarde
+  [Existing saves](docs/non-regression/stock/existing-saves.md)). Le seul essai sur une vraie sauvegarde
   (la mienne, bases chargées une par une avec KSP, Harmony, KSPCF et le correctif) n'est pas rédigé :
   aucune n'a cassé sur la Mun, Minmus et Gilly ; la base d'Eve se pose sur des pieds construits sous la
   surface, un défaut de construction et pas le correctif. La sauvegarde n'échantillonne pas le pire cas

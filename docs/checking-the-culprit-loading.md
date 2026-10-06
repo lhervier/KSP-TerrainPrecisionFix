@@ -73,7 +73,7 @@ centre of the body:
 On Earth, the first rule of the protocol cannot be kept: the craft came back more than 10 cm off the
 ground at three of the six loads and was moved onto it before its physics started, by stock's own pass,
 twice down and once up, since the craft is in *prelaunch* there (see
-[Real Solar System's own workaround](limits-and-solutions/rss/the-ground-workaround.md)). On the Moon,
+[Real Solar System's own workaround](non-regression/real-solar-system/the-ground-workaround.md)). On the Moon,
 Real Solar System's workaround ran at every load and never had to move the craft: it came back inside
 the ground by 18 to 67 mm each time, under the 10 cm the workaround acts on, and was pushed out by the
 physics engine. *Settled* is read all the same, as a player gets it. The Moon series loads
@@ -95,11 +95,11 @@ recorded are in [`diag/runs`](../diag/README.md#the-loading-protocol).
 
 ![With this mod, the capsule on its tank, six loads of the same save, on the Moon](../imgs/Diag1/on-load/2parts/40-moon.png)
 
-*Real Solar System's own workaround ran at every load and never had to move the craft: no `Moving Vessel` line — see [Real Solar System's own workaround](limits-and-solutions/rss/the-ground-workaround.md).*
+*Real Solar System's own workaround ran at every load and never had to move the craft: no `Moving Vessel` line — see [Real Solar System's own workaround](non-regression/real-solar-system/the-ground-workaround.md).*
 
 ![With this mod, the capsule on its tank, six loads of the same save, on Earth](../imgs/Diag1/on-load/2parts/50-earth.png)
 
-*The craft is in prelaunch, where stock runs the same pass at every load, and it never had to move the craft: no `Moving Vessel` line — see [Real Solar System's own workaround](limits-and-solutions/rss/the-ground-workaround.md).*
+*The craft is in prelaunch, where stock runs the same pass at every load, and it never had to move the craft: no `Moving Vessel` line — see [Real Solar System's own workaround](non-regression/real-solar-system/the-ground-workaround.md).*
 
 The six series, read off those screenshots:
 
@@ -115,7 +115,7 @@ The six series, read off those screenshots:
 With this mod, no load of the Moon or Earth series has a `Moving Vessel` line.
 
 The spots of the saves on the Moon and Earth, and what this mod corrected there, are in
-[Rescaled systems: Real Solar System](limits-and-solutions/rescaled-systems-real-solar-system.md).
+[Non-regression tests: Real Solar System](non-regression.md#real-solar-system).
 
 **On a runway, and on the ground beside it, on stock**
 ([the readings](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-measurements-runway.md)).
@@ -196,11 +196,11 @@ As before, the bottom line of each screenshot is the loading in progress, and is
 
 ![With this mod, the capsule on its tank, six loads of the same save, on the Moon](../imgs/Diag2/on-load/2parts/40-moon.png)
 
-*Real Solar System's own workaround ran at every load and never had to move the craft: no `Moving Vessel` line — see [Real Solar System's own workaround](limits-and-solutions/rss/the-ground-workaround.md).*
+*Real Solar System's own workaround ran at every load and never had to move the craft: no `Moving Vessel` line — see [Real Solar System's own workaround](non-regression/real-solar-system/the-ground-workaround.md).*
 
 ![With this mod, the capsule on its tank, six loads of the same save, on Earth](../imgs/Diag2/on-load/2parts/50-earth.png)
 
-*The craft is in prelaunch, where stock runs the same pass at every load, and it never had to move the craft: no `Moving Vessel` line — see [Real Solar System's own workaround](limits-and-solutions/rss/the-ground-workaround.md).*
+*The craft is in prelaunch, where stock runs the same pass at every load, and it never had to move the craft: no `Moving Vessel` line — see [Real Solar System's own workaround](non-regression/real-solar-system/the-ground-workaround.md).*
 
 Read off those screenshots:
 

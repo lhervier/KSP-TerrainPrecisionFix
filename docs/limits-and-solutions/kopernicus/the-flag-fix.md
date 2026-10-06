@@ -1,12 +1,14 @@
 # Kopernicus: the flag fix
 
-Part of [Terrain Precision Fix](../../../README.md), one point of the case [Kopernicus](../kopernicus.md), in [Limits and solutions](../../limits-and-solutions.md).
+Part of [Terrain Precision Fix](../../../README.md), one limit of [Limits and solutions](../../limits-and-solutions.md), on [Kopernicus](../../limits-and-solutions.md#kopernicus).
 
-**Status: checked, no problem — where this mod moves the KSC, its statics fix keeps the flags steady
-without Kopernicus' flag fix, which it keeps from running there; everywhere else, Kopernicus' flag fix
-runs as before.** To place the KSC in double, this mod takes it out of the home body's terrain sphere
-while a craft is near ([The fix: the statics](../../the-fix-statics.md)), and Kopernicus
-looks for it there.
+**Status: checked, a problem this mod patches — where this mod moves the KSC, Kopernicus' flag fix would
+not find it and would throw; the patch keeps it from running there, where the statics fix keeps the
+flags steady without it. Everywhere else, Kopernicus' flag fix runs as before. The patch is on by
+default (`patchKopernicus = true`).** To place the KSC in double, this mod takes it out of the home body's
+terrain sphere while a craft is near ([The fix: the statics](../../the-fix-statics.md)), and Kopernicus
+looks for it there. Without the patch, all that goes wrong is an error in the log, but an error whose
+stack trace names Kopernicus, where its maintainers would be the ones asked about it.
 
 ## The flag glitch
 
@@ -66,8 +68,28 @@ fix. If Kopernicus is installed and has no `FixFlags` without parameters, the pa
 statics fix stays off. The patch can also be turned off in the settings (`patchKopernicus = false`), to
 see what goes wrong without it: the error in the log, in [Seeing the patch](#seeing-the-patch).
 
-**The change in Kopernicus it stands for.** In `FixFlags`, stop when the KSC is not found under the home
-body's terrain sphere, as the first version of `FixFlags` did with its `?.` operators.
+## The change in Kopernicus it stands for
+
+In `FixFlags`, stop when the KSC is not found under the home body's terrain sphere, as the first version
+of `FixFlags` did with its `?.` operators. Against the source of Kopernicus 248, in
+[`upstream/kopernicus-248-flag-fix.diff`](../../../upstream/kopernicus-248-flag-fix.diff):
+
+```diff
+                     .GetComponentsInChildren<PQSCity>(true)?
+                     .FirstOrDefault(p => p.name == "KSC");
+ 
++                // A mod may have taken the KSC out of the terrain sphere, in flight, to place it in double
++                // precision; its flags then need no fix.
++                if (KSC == null)
++                {
++                    return;
++                }
++
+                 SkinnedMeshRenderer[] flags = KSC
+```
+
+With that change in Kopernicus, this mod's patch has nothing left to do: the flag fix would stop by
+itself where the patch stops it.
 
 ## Seeing the patch
 
@@ -76,7 +98,7 @@ In KSP 1.12.5 with the Making History expansion, Harmony, ModuleManager, KSP Com
 248 among them, as released. The screenshots below were taken on the stock system, where the steps are
 the same.
 
-The mission [`KSC flag fix`](../../../diag/kopernicus-flag-fix/Missions/): copy the `Missions` folder of
+The mission [`KSC flag fix`](../../../diag/kopernicus-flag-fix/Missions): copy the `Missions` folder of
 `diag/kopernicus-flag-fix/` into the folder of KSP. It starts with a pod on the runway; 30 seconds
 later, it spawns a second pod on the launchpad; 30 seconds after that, it ends.
 

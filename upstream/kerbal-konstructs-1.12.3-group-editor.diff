@@ -1,0 +1,14 @@
+--- a/src/Editor/GroupEditor/GroupEditor.cs
++++ b/src/Editor/GroupEditor/GroupEditor.cs
+@@ -912,7 +912,10 @@
+                 }
+ 
+                 selectedGroup.gameObject.transform.position = EditorGizmo.moveGizmo.transform.position;
+-                selectedGroup.RadialPosition = selectedGroup.gameObject.transform.localPosition;
++                // Relative to the centre of the body, whatever the group's PQSCity hangs from: a mod may have
++                // taken it out of the terrain sphere, in flight, to place it in double precision.
++                selectedGroup.RadialPosition = selectedGroup.CelestialBody.pqsController.transform
++                    .InverseTransformPoint(selectedGroup.gameObject.transform.position);
+ 
+                 double alt;
+                 selectedGroup.CelestialBody.GetLatLonAlt(EditorGizmo.moveGizmo.transform.position, out selectedGroup.RefLatitude, out selectedGroup.RefLongitude, out alt);

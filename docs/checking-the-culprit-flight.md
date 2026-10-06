@@ -123,7 +123,7 @@ the same rounding, and with this mod each is placed on its own. Where those rema
 not been checked on its own.
 
 **These flights do not say what a move of the origin does at low speed.** Stock places the quads again
-after a move only when the active craft is landed or slower than 100 m/s (`FloatingOrigin.cs:423`), and
+after a move only when the active craft is landed or slower than 100 m/s (`FloatingOrigin.FixedUpdate`), and
 the floating origin did not move while these craft were that slow; a rover driving on the ground covers
 that case ([Checking the culprit: driving on while the world moves](checking-the-culprit-driving.md)).
 Nor do they say anything of the statics.

@@ -69,8 +69,8 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
             // attached to the body: a position given to them is kept as it is. Every other quad hangs from
             // the sphere, whose origin is the centre of the body, so Unity would store any position given to
             // it as a 600 km float again. Those are also the quads without a collider, as long as the
-            // body's PQSMod_QuadMeshColliders.maxLevelOffset is 0, which it is on Kerbin and on the Mun,
-            // read in flight.
+            // body's PQSMod_QuadMeshColliders.maxLevelOffset is 0, which it is on every stock body, read
+            // in game.
             return quad.transform.parent == sphere.LocalSpacePQStorage.transform;
         }
 

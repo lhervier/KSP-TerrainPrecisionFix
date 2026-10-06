@@ -1,0 +1,28 @@
+# Kopernicus: scatter with colliders
+
+Part of [Terrain Precision Fix](../../../README.md), one test of [Non-regression tests](../../non-regression.md), on [Kopernicus](../../non-regression.md#kopernicus).
+
+**Status: checked, no problem — the terrain fix halves a stock gap, and does not close it; the scatter
+fix of this mod, off by default, closes it.** Stock scatter has no collider, but Kopernicus can give it one: Kopernicus with the
+[Stock Scatter Collider Enabler Patch](https://github.com/Poodmund/Stock-Scatter-Collider-Enabler-Patch),
+both on CKAN, do. The offset described in [Rocks, grass and trees](../../limits-and-solutions/stock/rocks-grass-and-trees.md) then
+stops being visual: the physics engine is handed the holder's position, while the pilot sees what is
+drawn from the holder's matrix, and those are the two numbers that round differently. The rock a craft
+hits is not the rock its pilot sees. Kopernicus replaces the stock scatter holder with its own subclass,
+`PQSMod_KopernicusLandClassScatterQuad`, which is the one measured here.
+
+## The gap between a rock and its collider
+
+KSP Diag - Scatter measures the gap between a collider and the object it belongs to, over six loads
+of a kerbal standing on a boulder in a desert of Kerbin, in each configuration
+([the readings](../../limits-and-solutions/stock/the-scatter-fix/checking-the-culprit.md#ksp-diag---scatter-the-colliders)):
+it runs from −68.7 to +104.2 mm on stock, and from −70.2 to +70.3 mm with the terrain fix — halved, and drawn
+afresh at every load. On the stock loads, the six pictures taken with the readings show it: the kerbal's
+boots sink into the boulder at one load and stand clear of it at the next.
+
+## Solution
+
+The scatter fix of this mod, off by default (`fixScatter = true` turns it on), and only with the terrain
+fix as well: the same series reads −0.026 to +0.022 mm with both. The collider and the object are the
+same object again. Why it is off by default, and when to turn it on:
+[Rocks, grass and trees](../../limits-and-solutions/stock/rocks-grass-and-trees.md#the-solution-the-scatter-fix).

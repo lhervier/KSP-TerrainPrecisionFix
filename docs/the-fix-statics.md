@@ -158,12 +158,13 @@ feet would end above the ground or inside it by as much.
 
 Taking a static out of its sphere changes the hierarchy of Unity objects, and a mod may look for a
 static where stock puts it. Two of the most installed ones do, in flight, once each, and this mod
-patches both: the group editor of [Kerbal Konstructs](limits-and-solutions/kerbal-konstructs.md#the-patch-of-the-group-editor),
+patches both: the group editor of [Kerbal Konstructs](limits-and-solutions/kerbal-konstructs/the-group-editor.md),
 and the flag fix of [Kopernicus](limits-and-solutions/kopernicus/the-flag-fix.md) — which is not needed
 where this mod moves the KSC: placed in double, the KSC keeps its flags steady, and the patch keeps the
 flag fix from running there.
-Each patch is described on the page of the mod it patches, along with the small change in that mod's own
-code that would make the patch unnecessary. Each leaves
+Each patch is described in [Limits and solutions](limits-and-solutions.md), along with the small change
+in that mod's own code that would make the patch unnecessary, given as a diff of its source in
+[`upstream/`](../upstream). Each leaves
 the original code path untouched as long as the static is under its sphere, so it changes nothing
 without this mod's statics fix; if the code of the mod is not the one the patch expects, the statics fix
 stays off.

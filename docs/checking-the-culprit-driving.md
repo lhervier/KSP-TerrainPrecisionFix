@@ -35,7 +35,7 @@ of KSP Diag - Terrain Height, on the saves it publishes, in the install above wi
 added; on Earth, Real Solar System is built without its runway fix, which keeps the floating origin from
 moving at 500 m once a craft has rolled onto the deck
 ([`rss-20.1.3-without-its-runway-fix.diff`](../diag/rss-runway-fix/rss-20.1.3-without-its-runway-fix.diff);
-see [Real Solar System: the runway fix](limits-and-solutions/rss/the-runway-fix.md)). This mod corrects
+see [Real Solar System: the runway fix](non-regression/real-solar-system/the-runway-fix.md)). This mod corrects
 the terrain and the statics separately, each with its own setting (`fixTerrain`, `fixStatics`), so on
 Kerbin the runway is read three ways: on stock, with the terrain fix alone, and with both. On Earth, on
 stock and with this mod as it is installed. Across each move, the mean of the lines after minus the mean
@@ -179,7 +179,7 @@ moves.
 ![On Earth, with this mod, the first move, read by Diag TerrainHeight](../imgs/Diag2/on-driving-runway/earth-fix-move1-diag2.png)
 
 The screenshots of every move by the runway, on Kerbin and on Earth, read by both instruments, are in
-[`imgs/Diag2/on-driving-runway/`](../imgs/Diag2/on-driving-runway/).
+[`imgs/Diag2/on-driving-runway/`](../imgs/Diag2/on-driving-runway).
 
 ## What the measurements say
 
