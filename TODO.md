@@ -61,18 +61,13 @@ puis les deux points ci-dessous (Lionel, 2026-09-25).
   du témoin ne bouge pas, le déchargement seul n'y est pour rien : c'est le décalage. En complément,
   avec le correctif en `logLevel = Debug`, le décalage du protocole d'approche doit apparaître comme une
   salve de lignes `origin moved by … mm`.
-- **Les sauvegardes existantes, ce qu'il reste à rédiger** (le cas lui-même est le chapitre
-  [Existing saves](docs/non-regression/stock/existing-saves.md)). Le seul essai sur une vraie sauvegarde
-  (la mienne, bases chargées une par une avec KSP, Harmony, KSPCF et le correctif) n'est pas rédigé :
-  aucune n'a cassé sur la Mun, Minmus et Gilly ; la base d'Eve se pose sur des pieds construits sous la
-  surface, un défaut de construction et pas le correctif. La sauvegarde n'échantillonne pas le pire cas
-  (ses bases reposent sur des rails de poutrelles, alors que ce sont les modules amarrés sur des jambes
-  d'atterrissage qui souffrent le plus). Reste à faire : une capture de l'ampleur de ce qui a été
-  chargé ; décider où va la mise en garde sur les assemblages amarrés et les jambes (le *Disclaimer* est
-  partagé mot pour mot avec les README des Diags) ; une phrase sous *How this was made* sur l'outil de
-  construction en EVA avec lequel ces bases ont été montées ; vérifier dans le mécanisme de réglages de
-  KSPCF qu'un patch se désactive, avant d'écrire qu'un joueur peut le couper, charger, relever un
-  vaisseau et le remettre ; un outil de migration du `.sfs` seulement si un coût réel apparaît.
+- **Les sauvegardes existantes, ce qu'il reste à faire** (le cas lui-même est le chapitre
+  [Existing saves](docs/non-regression/stock/existing-saves.md)). Décider où va la mise en garde sur
+  les modules amarrés posés sur des jambes d'atterrissage, la configuration qui souffre le plus au
+  premier chargement (le *Disclaimer* est partagé mot pour mot avec les README des Diags) ; vérifier
+  dans le mécanisme de réglages de KSPCF qu'un patch se désactive, avant d'écrire qu'un joueur peut le
+  couper, charger, relever un vaisseau et le remettre ; un outil de migration du `.sfs` seulement si un
+  coût réel apparaît.
 - **Poster sur #435** une fois sûr de ce que Diag FloatingOrigin montre aux chargements, comme le commentaire
   l'annonce.
 - **Rejouer toutes les campagnes en automatique, et reconstituer mesures et logs** (Lionel,

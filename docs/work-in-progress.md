@@ -10,14 +10,6 @@ to [Non-regression tests](non-regression.md) if nothing is worse, or to
 
 ## Stock
 
-### Existing saves
-
-**Planned.** A craft saved again with this mod should no longer move at all: still to measure on
-Kerbin, on the save of the switching protocol, and how far real bases move at their first loading with
-this mod, on a long-running save.
-
-**→ Full chapter: [Existing saves](work-in-progress/stock/existing-saves.md)**
-
 ### Sloped ground
 
 **Planned.** Every campaign so far is on flat ground. On a slope, a separate stock bug, read in the code,
