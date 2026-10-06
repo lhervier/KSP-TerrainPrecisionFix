@@ -53,13 +53,6 @@ sphere is flagged has not been read, and a craft floating near a coast has not b
 
 **→ Full chapter: [The ocean](work-in-progress/stock/the-ocean.md)**
 
-### The map view
-
-**Planned.** Quads are built and dropped all the time in the map view: the log, and the terrain on
-returning to flight.
-
-**→ Full chapter: [The map view](work-in-progress/stock/the-map-view.md)**
-
 ### Scene changes
 
 **Planned.** This mod has to put the KSC back under its sphere before every scene change: reverting,

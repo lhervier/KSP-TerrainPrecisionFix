@@ -68,6 +68,14 @@ above any craft near a static this mod has moved.
 
 **→ Full chapter: [A static turning with its body](non-regression/stock/a-static-turning-with-its-body.md)**
 
+### The map view
+
+**Nothing to test, read in the code.** The map draws the bodies from scaled space, which this mod does
+not touch. While it is open, the terrain keeps being built around the active craft exactly as in
+flight, and the markers of the launch sites follow their statics wherever this mod places them.
+
+**→ Full chapter: [The map view](non-regression/stock/the-map-view.md)**
+
 ## KSP Community Fixes
 
 KSP Community Fixes is the base most players run, and it patches the terrain too.
