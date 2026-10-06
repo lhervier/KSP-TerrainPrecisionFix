@@ -3,7 +3,7 @@
 Part of [Terrain Precision Fix](../../README.md), one case of [Limits and solutions](../limits-and-solutions.md).
 
 **Status: TBD — its ground is read in the source, its statics are covered by this mod and measured on a
-runway, its group editor is still to test.** [Kerbal Konstructs](https://github.com/KSP-RO/Kerbal-Konstructs)
+runway, moving a group with its group editor is checked; the rest of the editor is still to test.** [Kerbal Konstructs](https://github.com/KSP-RO/Kerbal-Konstructs)
 plants statics — pads, runways, whole bases — anywhere on a body, and flattens the ground to seat them.
 A fix that quietly undid those edits would be exactly the kind of side effect a player finds before
 anyone else.
@@ -37,7 +37,7 @@ it is not a rounding, and this mod does not touch it. The readings:
 [Checking the culprit: loading the same save](../checking-the-culprit-loading.md).
 
 *To test:* why that section of the runway is only there at the first loading; the group editor in flight, near a craft —
-moving a group, turning it, creating, copying and deleting one, then loading the save again; a launch
+turning a group, creating, copying and deleting one, then loading the save again; a launch
 from a launch site of Kerbal Konstructs; and, for the ground, KSP Diag - Terrain Height reading the
 ground inside a flattened area and just outside it.
 
@@ -70,5 +70,16 @@ group's `PQSCity` hangs from:
 `selectedGroup.CelestialBody.pqsController.transform.InverseTransformPoint(...)` of its world position,
 the same frame as before.
 
-**Checked**, with Kerbal Konstructs 1.12.3: the log says the patch is applied. The group editor itself
-is in the list above, still to test.
+**Checked**, with Kerbal Konstructs 1.12.3 and CustomPreLaunchChecks 1.8.1, which it requires, and this
+mod at `logLevel = Debug`. The save, [`diag/non-reg-runway-mune-kk.sfs`](../../diag/non-reg-runway-mune-kk.sfs),
+is a pod landed on the Mun beside a runway of Kerbal Konstructs, whose two files go in
+`GameData/KerbalKonstructs/NewInstances` ([`diag/non-reg-runway-mune-kk/GameData`](../../diag/non-reg-runway-mune-kk/GameData)).
+In flight, `Ctrl+K` → *Edit Groups* → `MuneBase` opens the group editor, in *Group* mode. Dragging the
+arrows of its gizmo moves the runway, *Save&Close* saves it, then the save is loaded again. The runway
+follows the gizmo and stays where it is let go, the latitude and longitude the editor shows change by
+no more than the distance dragged, and once the save is loaded again the runway is where it was left.
+The log says the patch is applied, and the group stays out of its sphere throughout, put back under it
+only while Kerbal Konstructs places it anew after each drag:
+[`diag/runs/kk-group-editor-fix.log`](../../diag/runs/kk-group-editor-fix.log). Only the gizmo goes
+through the read this mod patches: the keys and the arrows of the editor's window move a group by
+latitude and longitude, which mean the same thing wherever it hangs.

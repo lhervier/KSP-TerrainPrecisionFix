@@ -94,8 +94,8 @@ None today.
 **Two mods read and patched, the others unknown.** Taking a static out of its terrain sphere changes the
 hierarchy of Unity objects, and a mod may look for it where stock puts it. It only happens in flight,
 near a craft. Kerbal Konstructs and Kopernicus each do so once in flight, and this mod patches both;
-each patch stands for a small change the mod itself could make. The group editor of Kerbal Konstructs is
-still to test in game.
+each patch stands for a small change the mod itself could make. Moving a group with the group editor of
+Kerbal Konstructs is checked in game.
 
 **→ Full chapter: [Mods that look for a static under its sphere](limits-and-solutions/mods-that-look-for-a-static-under-its-sphere.md)**
 
@@ -111,12 +111,15 @@ Ovok, the edge case.
 ### Kerbal Konstructs
 
 **TBD — its ground is read in the source, its statics are covered by this mod and measured on a runway,
-its group editor is still to test.** Kerbal Konstructs flattens the ground with the stock
+moving a group with its group editor is checked, the rest of the editor is still to test.** Kerbal
+Konstructs flattens the ground with the stock
 `PQSMod_MapDecal`, which edits the height before this fix places it, so the flattening is kept. Its
 statics hang from a stock `PQSCity` and carry the same defect as the KSC's. On a runway it placed on the
 Mun, this mod brings the deck back within 0.015 mm instead of 17.7 mm, except at the first loading of a
-session, when a section of the runway 21.3 mm higher is still active. Open:
-that section, the group editor in flight, and a decal gone wrong, which the safeguard would not catch.
+session, when a section of the runway 21.3 mm higher is still active. Moved with the gizmo of the group
+editor, in flight beside a craft, a group stays where it is let go, and is saved there. Open: that
+section, turning, creating, copying and deleting a group, and a decal gone wrong, which the safeguard
+would not catch.
 
 **→ Full chapter: [Kerbal Konstructs](limits-and-solutions/kerbal-konstructs.md)**
 

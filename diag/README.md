@@ -18,7 +18,10 @@ along with the logs of the same sessions without this mod. Only the sessions tak
 and no instrument have their saves here: the loads on Venus, Mars and Mercury, described in
 [Real Solar System: what this mod corrected](../docs/limits-and-solutions/rss/what-this-mod-corrected.md#the-saves),
 the launch from Cape Canaveral, and the rover of
-[A CommNet ground station from a planet pack](../docs/non-regression/a-commnet-ground-station-from-a-planet-pack.md); in `kopernicus-flag-fix/`, the mission and the change to Kopernicus of
+[A CommNet ground station from a planet pack](../docs/non-regression/a-commnet-ground-station-from-a-planet-pack.md);
+the pod beside a runway of Kerbal Konstructs, `non-reg-runway-mune-kk.sfs`, and the runway in
+`non-reg-runway-mune-kk/`, of [Kerbal Konstructs](../docs/limits-and-solutions/kerbal-konstructs.md#the-patch-of-the-group-editor);
+in `kopernicus-flag-fix/`, the mission and the change to Kopernicus of
 [Kopernicus: the flag fix](../docs/limits-and-solutions/kopernicus/the-flag-fix.md); and, in
 `rss-runway-fix/`, the change to Real Solar System of
 [Real Solar System: the runway fix](../docs/limits-and-solutions/rss/the-runway-fix.md).
@@ -217,6 +220,17 @@ protocols through the scripts of [`automation/`](automation/). Read in
 - [`runs/approach-deferred-fix.log`](runs/approach-deferred-fix.log) — the six round trips of
   `approach-kerbin.sfs`, in a single flight; the lines read are in
   [`runs/approach-deferred-fix-lines.json`](runs/approach-deferred-fix-lines.json).
+
+## With Kerbal Konstructs
+
+KSP 1.12.5 with the Making History expansion, Harmony, ModuleManager, KSP Community Fixes 1.41.1,
+[Kerbal Konstructs](https://github.com/KSP-RO/Kerbal-Konstructs) 1.12.3 and CustomPreLaunchChecks 1.8.1,
+which it requires, no instrument, this mod at `logLevel = Debug`. Read in
+[Kerbal Konstructs: the patch of the group editor](../docs/limits-and-solutions/kerbal-konstructs.md#the-patch-of-the-group-editor).
+
+- [`runs/kk-group-editor-fix.log`](runs/kk-group-editor-fix.log) — `non-reg-runway-mune-kk.sfs`, its
+  runway in `GameData/KerbalKonstructs/NewInstances`: the group moved with the gizmo of the group editor,
+  saved with *Save&Close*, then the save loaded again.
 
 ## With Kopernicus
 
