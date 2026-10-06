@@ -25,6 +25,8 @@ to tell what stock already does.
 - [A mission spawning a craft](#a-mission-spawning-a-craft) — to test.
 - [A launch pad placed by a mission](#a-launch-pad-placed-by-a-mission) — not tested: no way found on stock.
 - [The other stock statics](#the-other-stock-statics) — to test.
+- [A CommNet ground station from a planet pack](#a-commnet-ground-station-from-a-planet-pack) — checked on
+  Earth in Real Solar System.
 - [A static turning with its body](#a-static-turning-with-its-body) — cannot happen on stock, in Real
   Solar System or with Outer Planets Mod.
 - [What this page does not cover](#what-this-page-does-not-cover).
@@ -215,6 +217,20 @@ KSC, and this mod takes them out of their sphere the same way.
 *The test.* A craft landed by each of them, loaded twice, then flown away and back.
 
 *What should happen.* The static should be where it was, and the craft should stand as it did.
+
+## A CommNet ground station from a planet pack
+
+**Checked on Earth in Real Solar System.**
+
+*Why.* Kopernicus lets a planet pack add statics to a body, of the same kind as the sites of Making
+History, and this mod takes them out of their sphere the same way. Real Solar System adds 63: its CommNet
+ground stations, which no player sees or touches, and whose one use is to relay CommNet.
+
+*The test, and what it showed.* A rover driven toward the ground station of Kourou, from 27.8 km to
+27.3 km: `KSP.log` shows the station taken out of its sphere on the way, and CommNet keeps linking the
+rover to it, the distance of the first hop going down by the distance driven and holding still while the
+rover stands. The save, the protocol, the log lines to expect and the readings:
+[A CommNet ground station from a planet pack](non-regression/a-commnet-ground-station-from-a-planet-pack.md).
 
 ## A static turning with its body
 

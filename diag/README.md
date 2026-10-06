@@ -17,7 +17,8 @@ and of [KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainH
 along with the logs of the same sessions without this mod. Only the sessions taken with this mod alone
 and no instrument have their saves here: the loads on Venus, Mars and Mercury, described in
 [Real Solar System: what this mod corrected](../docs/limits-and-solutions/rss/what-this-mod-corrected.md#the-saves),
-and the launch from Cape Canaveral; in `kopernicus-flag-fix/`, the mission and the change to Kopernicus of
+the launch from Cape Canaveral, and the rover of
+[A CommNet ground station from a planet pack](../docs/non-regression/a-commnet-ground-station-from-a-planet-pack.md); in `kopernicus-flag-fix/`, the mission and the change to Kopernicus of
 [Kopernicus: the flag fix](../docs/limits-and-solutions/kopernicus/the-flag-fix.md); and, in
 `rss-runway-fix/`, the change to Real Solar System of
 [Real Solar System: the runway fix](../docs/limits-and-solutions/rss/the-runway-fix.md).
@@ -306,3 +307,9 @@ a fixed metre, and hold the line where it refused part of Earth's terrain.
   and every line it recorded in
   [`runs/driving-runway-earth-rss-diag2-fix-lines.json`](runs/driving-runway-earth-rss-diag2-fix-lines.json).
   Read in [Driving on while the world moves](../docs/checking-the-culprit-driving.md#on-earth).
+- [`runs/station-kourou-rss-fix.log`](runs/station-kourou-rss-fix.log) —
+  [KSP-MCPServer](https://github.com/lhervier/KSP-MCPServer) added: one session, a rover driven by its `drive_to` tool
+  in 500 m legs toward the CommNet ground station of Kourou, from 28.86 km to 27.30 km, then
+  [`station-kourou-rss.sfs`](station-kourou-rss.sfs) loaded and driven from 27.83 km to 27.30 km by
+  [`automation/run-station-approach.py`](automation/run-station-approach.py). Read in
+  [A CommNet ground station from a planet pack](../docs/non-regression/a-commnet-ground-station-from-a-planet-pack.md).

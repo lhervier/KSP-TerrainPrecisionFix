@@ -84,6 +84,12 @@ puis les deux points ci-dessous (Lionel, 2026-09-25).
   à l'instrument, donc plutôt dans le dépôt du Diag : y déplacer les deux d'ici) ; un Diag par session
   comme aujourd'hui, ou les deux ensemble ; les outils du serveur qui manqueront (Set Position, Set
   Orbit, Infinite Fuel : seulement ceux qu'un script utilise).
+- **Vérifier que les scripts de pilotage du jeu recourent le moins possible à l'introspection**
+  (`get_member`, `set_member`, `call_method` de KSP-MCPServer) (Lionel, 2026-10-06). Cas connus :
+  `diag/automation/run-rotation-threshold.py` active deux `CheatOptions` (`IgnoreMaxTemperature`,
+  `NoCrashDamage`) par `set_member`, que `set_cheats` ne couvre pas (électricité et carburant infinis
+  seulement) ; les scripts de capture recalent la fenêtre des Diags par `set_member` de `windowRect`
+  (point suivant).
 - **Diags : *Clear* remet la fenêtre à sa hauteur initiale** (Lionel, 2026-10-04). Diag TerrainHeight,
   Diag LandedVessel et Diag FloatingOrigin : leur fenêtre (`GUILayout.Window`) garde la hauteur qu'elle
   avait avant *Clear table*, et un vide reste sous le tableau, jusque dans les captures. Remettre la
