@@ -60,13 +60,6 @@ returning to flight.
 
 **→ Full chapter: [The map view](work-in-progress/stock/the-map-view.md)**
 
-### The foot of the launchpad
-
-**Planned.** This mod places the ground and the launchpad each in double, so the edge between the two
-changes: no grass should come through it, and no step should show that stock does not show.
-
-**→ Full chapter: [The foot of the launchpad](work-in-progress/stock/the-foot-of-the-launchpad.md)**
-
 ### Scene changes
 
 **Planned.** This mod has to put the KSC back under its sphere before every scene change: reverting,
