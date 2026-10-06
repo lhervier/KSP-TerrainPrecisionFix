@@ -60,13 +60,6 @@ returning to flight.
 
 **→ Full chapter: [The map view](work-in-progress/stock/the-map-view.md)**
 
-### The seam between subdivision levels
-
-**Planned.** The crack this mod widens is measured on Earth and on Kerbin; the other stock bodies, why
-stock leaves it, and how a shift of the world origin changes it are not.
-
-**→ Full chapter: [The seam between subdivision levels](work-in-progress/stock/the-seam-between-subdivision-levels.md)**
-
 ### The foot of the launchpad
 
 **Planned.** This mod places the ground and the launchpad each in double, so the edge between the two

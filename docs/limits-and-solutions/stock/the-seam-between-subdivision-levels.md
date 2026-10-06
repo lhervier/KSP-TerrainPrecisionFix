@@ -48,7 +48,7 @@ buildQuad.verts[vertexIndex] = buildQuad.transform.InverseTransformPoint(planetR
 ```
 
 The first line takes the vertex from the centre of the body to the world, through the matrix of the
-terrain sphere: its result depends on the vertex and on that matrix, not on the quad. The second line
+terrain sphere: its result depends on `vertRel` and on that matrix, not on the quad's `Transform`. The second line
 expresses that world position relative to the quad's own `Transform`, as rounded. Read alone, this
 says that two quads built in the same frame of the sphere put a vertex they share on the same point.
 
@@ -63,10 +63,20 @@ Center, from 118 mm to 312 mm, and the mean from 46 mm to 225 mm
 The gap changes from one load to the next, and so does its direction: the finer quad above the coarser
 one, or below.
 
-Why the two quads do not share the frame the code above assumes has not been traced. The world origin
-is far from the craft when a scene loads, and moved onto it early; quads built on either side of that
-move, or of any later floating origin shift, are not placed through the same matrix. That fits what
-was measured, but is not checked.
+Part of the gap comes before those two lines, from `vertRel` itself. Its direction from the centre of
+the body is computed in `PQS.BuildQuad`, in float, through the matrix of the quad being built:
+
+```csharp
+vbData.globalV = buildQuad.quadMatrix.MultiplyPoint3x4(cacheVerts[vertexIndex]);
+vbData.directionFromCenter = vbData.globalV.normalized;
+```
+
+The two quads of a seam reach a vertex they share through two different matrices, and the two
+directions can differ by the precision of a float, about 6 × 10⁻⁸: some 0.4 m along the ground at the
+radius of Earth, some 40 mm at the radius of Kerbin. That is the order of what the measurements give
+beside the coarser vertex. Most of the gap is vertical, though, the finer quad above or below the
+coarser one: about twice what it is beside on Earth, and several times more on Kerbin. Where that part
+comes from has not been traced.
 
 ## What this fix changes
 
