@@ -53,13 +53,6 @@ sphere is flagged has not been read, and a craft floating near a coast has not b
 
 **→ Full chapter: [The ocean](work-in-progress/stock/the-ocean.md)**
 
-### A trip to another body
-
-**Planned.** Away from Kerbin, the KSC goes back under its sphere, and switching back to a craft near it
-takes it out again.
-
-**→ Full chapter: [A trip to another body](work-in-progress/stock/a-trip-to-another-body.md)**
-
 ### Time warp
 
 **Planned.** A static out of its sphere has to follow its body as it turns, over days of time warp.

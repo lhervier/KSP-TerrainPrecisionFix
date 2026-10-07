@@ -56,8 +56,8 @@ the VAB and from the SPH, a craft stands on the launchpad and on the runway.
 ### Scene changes
 
 **Checked on Kerbin and on Earth in Real Solar System.** This mod has to put the KSC back before every
-scene change. Through every way of leaving a flight and coming back, the launchpad stays within 0.14 mm,
-against up to 963 mm without this mod, and every building opens.
+scene change. Through every way of leaving a flight and coming back, a trip to another body included,
+the launchpad stays within 0.13 mm, against up to 1 127 mm without this mod, and every building opens.
 
 **→ Full chapter: [Scene changes](non-regression/stock/scene-changes.md)**
 

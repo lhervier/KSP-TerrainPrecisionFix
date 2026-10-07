@@ -1,31 +1,43 @@
-19:41:27 01 launched from the space centre: collider (LP_lev2) 3581.710 mm above the terrain, PRELAUNCH
-19:41:41 02 revert to launch 1: collider (LP_lev2) 3581.656 mm above the terrain, PRELAUNCH
-19:41:56 03 revert to launch 2: collider (LP_lev2) 3581.699 mm above the terrain, PRELAUNCH
-19:42:10 04 quickload 1: collider (LP_lev2) 3581.745 mm above the terrain, PRELAUNCH
-19:42:24 05 quickload 2: collider (LP_lev2) 3581.789 mm above the terrain, PRELAUNCH
-19:42:30 closed: dialog 'IntroKSC', pressing 'Merci, j'ai compris'
-19:42:31 screenshot 06-space-centre-from-flight.png
-19:42:35 screenshot 07-open-AstronautComplex.png
-19:42:36 closed: AstronautComplex
-19:42:41 screenshot 08-open-RnD.png
-19:42:43 closed: RnD
-19:42:48 screenshot 09-open-MissionControl.png
-19:42:49 closed: MissionControl
-19:42:54 screenshot 10-open-Administration.png
-19:42:55 closed: Administration
-19:43:00 closed: dialog 'IntroTS', pressing 'Compris !'
-19:43:01 screenshot 11-tracking-station.png
-19:43:15 12 flown from the tracking station: collider (LP_lev2) 3581.792 mm above the terrain, PRELAUNCH
-19:43:22 closed: dialog 'IntroVAB', pressing 'Compris !'
-19:43:23 screenshot 13-vab-from-space-centre.png
-19:43:39 14 launched from the VAB: collider (LP_lev2) 3581.764 mm above the terrain, PRELAUNCH
-19:43:44 screenshot 15-vab-after-revert.png
-19:43:59 16 launched after a revert to the VAB: collider (LP_lev2) 3581.685 mm above the terrain, PRELAUNCH
-19:44:02 recovered: {"location": "\u00c0 Aire de lancement", "factor": "100.0% "}
-19:44:06 screenshot 17-recovery-report.png
-19:44:07 closed: recovery report
-19:44:11 screenshot 18-space-centre-after-recovery.png
-19:44:26 19 launched after a recovery: collider (LP_lev2) 3581.697 mm above the terrain, PRELAUNCH
-19:44:30 screenshot 20-main-menu.png
-19:44:44 21 loaded from the main menu: collider (LP_lev2) 3581.697 mm above the terrain, PRELAUNCH
-19:44:44 done: 10 arrivals in flight, in D:\ksp-dev\campagnes\2026-10-06-scene-changes-rss\fix\run
+10:42:14 01 launched from the space centre: collider (LP_lev2) 3581.710 mm above the terrain, PRELAUNCH
+10:42:14 case revert-to-launch: Revert to Launch, twice.
+10:42:28 02 revert to launch 1: collider (LP_lev2) 3581.736 mm above the terrain, PRELAUNCH
+10:42:42 03 revert to launch 2: collider (LP_lev2) 3581.699 mm above the terrain, PRELAUNCH
+10:42:42 case quicksave: A quicksave (F5), then a quickload of it (F9), twice.
+10:42:56 04 quickload 1: collider (LP_lev2) 3581.744 mm above the terrain, PRELAUNCH
+10:43:09 05 quickload 2: collider (LP_lev2) 3581.779 mm above the terrain, PRELAUNCH
+10:43:09 case space-centre: The space centre, the screen of each of its buildings, then the tracking station, and the craft flown from there.
+10:43:15 closed: dialog 'IntroKSC', pressing 'Merci, j'ai compris'
+10:43:16 screenshot 06-space-centre-from-flight.png
+10:43:20 screenshot 07-open-AstronautComplex.png
+10:43:21 closed: AstronautComplex
+10:43:27 screenshot 08-open-RnD.png
+10:43:28 closed: RnD
+10:43:33 screenshot 09-open-MissionControl.png
+10:43:34 closed: MissionControl
+10:43:39 screenshot 10-open-Administration.png
+10:43:40 closed: Administration
+10:43:45 closed: dialog 'IntroTS', pressing 'Compris !'
+10:43:46 screenshot 11-tracking-station.png
+10:44:00 12 flown from the tracking station: collider (LP_lev2) 3581.683 mm above the terrain, PRELAUNCH
+10:44:00 case vab: The Vehicle Assembly Building, entered through its building at the space centre, and a launch from it.
+10:44:07 closed: dialog 'IntroVAB', pressing 'Compris !'
+10:44:09 screenshot 13-vab-from-space-centre.png
+10:44:24 14 launched from the VAB: collider (LP_lev2) 3581.727 mm above the terrain, PRELAUNCH
+10:44:24 case revert-to-vab: Revert to Vehicle Assembly Building, and a launch from it.
+10:44:29 screenshot 15-vab-after-revert.png
+10:44:44 16 launched after a revert to the VAB: collider (LP_lev2) 3581.735 mm above the terrain, PRELAUNCH
+10:44:44 case recovery: Recover, the recovery report closed, and a launch from the space centre.
+10:44:47 recovered: {"location": "\u00c0 Aire de lancement", "factor": "100.0% "}
+10:44:50 screenshot 17-recovery-report.png
+10:44:51 closed: recovery report
+10:44:55 screenshot 18-space-centre-after-recovery.png
+10:45:10 19 launched after a recovery: collider (LP_lev2) 3581.721 mm above the terrain, LANDED
+10:45:10 case main-menu: Quit to Main Menu, and the game loaded back into the flight of the craft.
+10:45:15 screenshot 20-main-menu.png
+10:45:29 21 loaded from the main menu: collider (LP_lev2) 3581.721 mm above the terrain, LANDED
+10:45:29 case another-body: A trip to another body: a second craft sent around it, and back to the craft on the launchpad from the map view.
+10:45:34 screenshot 22-space-centre-before-the-trip.png
+10:45:43 screenshot 23-second-craft-on-the-runway.png
+10:45:49 screenshot 24-second-craft-around-moon.png
+10:46:03 25 switched to from around Moon: collider (LP_lev2) 3581.792 mm above the terrain, LANDED
+10:46:03 done: 11 arrivals in flight, in D:\ksp-dev\campagnes\2026-10-07-scene-changes-rss\fix\run
