@@ -53,12 +53,6 @@ sphere is flagged has not been read, and a craft floating near a coast has not b
 
 **→ Full chapter: [The ocean](work-in-progress/stock/the-ocean.md)**
 
-### Time warp
-
-**Planned.** A static out of its sphere has to follow its body as it turns, over days of time warp.
-
-**→ Full chapter: [Time warp](work-in-progress/stock/time-warp.md)**
-
 ### The ground station
 
 **Planned.** The ground station of the KSC finds its body by looking up from where it hangs, and a game

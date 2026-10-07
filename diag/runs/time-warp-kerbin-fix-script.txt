@@ -1,0 +1,14 @@
+21:40:39 closed: dialog 'IntroKSC', pressing 'Merci, j'ai compris'
+21:41:03 01 launched onto the runway: runway_collider (Facility) 4301.385 mm above the terrain, PRELAUNCH
+21:41:06 screenshot 02-launched.png
+21:41:07 warping at 100000x
+21:41:09 back to normal time at UT 128832
+21:41:19 03 after 3 days at the highest rate: runway_collider (Facility) 4301.354 mm above the terrain, PRELAUNCH
+21:41:22 screenshot 04-after-warp.png
+21:41:31 warped 8472 s, to local time 0.900
+21:41:53 05 at night: runway_collider (Facility) 4301.372 mm above the terrain, PRELAUNCH
+21:41:57 screenshot 06-night.png
+21:42:11 warped 12935 s, to local time 0.500
+21:42:33 07 at noon: runway_collider (Facility) 4301.356 mm above the terrain, PRELAUNCH
+21:42:36 screenshot 08-noon.png
+21:42:45 done: 4 readings, in D:\ksp-dev\campagnes\2026-10-07-time-warp\fix\run

@@ -65,6 +65,22 @@ and stays within 0.25 mm through its arrivals, against up to 145 mm without it.
 
 **→ Full chapter: [Facility levels](non-regression/stock/facility-levels.md)**
 
+### Time warp
+
+**Checked on Kerbin.** On the ground, time warp neither turns the body nor moves the floating origin.
+A craft on the runway through three days at 100 000×, then a night and a day: the KSC stays out of its
+sphere throughout, the runway within 0.04 mm under the craft, as without this mod.
+
+**→ Full chapter: [Time warp](non-regression/stock/time-warp.md)**
+
+### The lights of the KSC
+
+**Checked on Kerbin.** A component switches the lights of the KSC with day and night, after finding its
+body among its parents, which this mod lends back to it. In flight, the KSC out of its sphere, the
+runway lights and the windows come on at night and go off by day, as without this mod.
+
+**→ Full chapter: [The lights of the KSC](non-regression/stock/the-lights-of-the-ksc.md)**
+
 ### A launch pad placed by a mission
 
 **Impossible to reproduce.** A mission of Making History can place a launch pad of its own, which stock

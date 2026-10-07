@@ -1,0 +1,206 @@
+[
+ {
+  "step": 1,
+  "arrival": "launched onto the runway",
+  "launchpad": false,
+  "state": {
+   "scene": "FLIGHT",
+   "paused": false,
+   "ut": 3611.17999999999,
+   "warpRate": 1,
+   "vessel": {
+    "id": "1f590ba8-e63d-4376-9a34-2a1040970c02",
+    "name": "Diag3-Rover",
+    "situation": "PRELAUNCH",
+    "packed": false,
+    "body": "Kerbin",
+    "latitude": -0.048599960252721286,
+    "longitude": -74.72447014097827,
+    "altitude": 69.82980789302383,
+    "heightFromTerrain": 0.744711697101593,
+    "surfaceSpeed": 0.00017792146843078471,
+    "heading": 90.38092881262598,
+    "brakes": true,
+    "sas": false,
+    "localTime": 0.7098697486408616,
+    "solarDay": 21599.999999999996
+   }
+  },
+  "underCrafts": [
+   {
+    "craft": "Diag3-Rover",
+    "id": "1f590ba8-e63d-4376-9a34-2a1040970c02",
+    "situation": "PRELAUNCH",
+    "latitude": -0.04859996037226241,
+    "longitude": -74.72447014036551,
+    "colliders": [
+     {
+      "name": "runway_collider",
+      "parent": "Facility",
+      "heightMm": 4299.983621924184,
+      "active": true
+     },
+     {
+      "name": "Kerbin Zn1232223233",
+      "parent": "PQStorage",
+      "heightMm": 5.513215786777437,
+      "active": true
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "step": 3,
+  "arrival": "after 3 days at the highest rate",
+  "launchpad": false,
+  "state": {
+   "scene": "FLIGHT",
+   "paused": false,
+   "ut": 128867.7409619161,
+   "warpRate": 1,
+   "vessel": {
+    "id": "1f590ba8-e63d-4376-9a34-2a1040970c02",
+    "name": "Diag3-Rover",
+    "situation": "PRELAUNCH",
+    "packed": false,
+    "body": "Kerbin",
+    "latitude": -0.048599971043003815,
+    "longitude": -74.72446989547582,
+    "altitude": 69.8330516521819,
+    "heightFromTerrain": 0.747961163520813,
+    "surfaceSpeed": 0.00034079135251690196,
+    "heading": 90.4195458623324,
+    "brakes": true,
+    "sas": false,
+    "localTime": 0.5087846086707828,
+    "solarDay": 21599.999999999996
+   }
+  },
+  "underCrafts": [
+   {
+    "craft": "Diag3-Rover",
+    "id": "1f590ba8-e63d-4376-9a34-2a1040970c02",
+    "situation": "PRELAUNCH",
+    "latitude": -0.048599971043003815,
+    "longitude": -74.72446989547582,
+    "colliders": [
+     {
+      "name": "runway_collider",
+      "parent": "Facility",
+      "heightMm": 4299.970795982517,
+      "active": true
+     },
+     {
+      "name": "Kerbin Zn1232223233",
+      "parent": "PQStorage",
+      "heightMm": 5.512924399226904,
+      "active": true
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "step": 5,
+  "arrival": "at night",
+  "launchpad": false,
+  "state": {
+   "scene": "FLIGHT",
+   "paused": false,
+   "ut": 137340.0028091174,
+   "warpRate": 1,
+   "vessel": {
+    "id": "1f590ba8-e63d-4376-9a34-2a1040970c02",
+    "name": "Diag3-Rover",
+    "situation": "PRELAUNCH",
+    "packed": false,
+    "body": "Kerbin",
+    "latitude": -0.048599999903253484,
+    "longitude": -74.72446994895498,
+    "altitude": 69.83301128388848,
+    "heightFromTerrain": 0.7479197978973389,
+    "surfaceSpeed": 9.067354373731908e-05,
+    "heading": 90.41535486278266,
+    "brakes": true,
+    "sas": false,
+    "localTime": 0.9010189533000676,
+    "solarDay": 21599.999999999996
+   }
+  },
+  "underCrafts": [
+   {
+    "craft": "Diag3-Rover",
+    "id": "1f590ba8-e63d-4376-9a34-2a1040970c02",
+    "situation": "PRELAUNCH",
+    "latitude": -0.048599999903253484,
+    "longitude": -74.72446994895498,
+    "colliders": [
+     {
+      "name": "runway_collider",
+      "parent": "Facility",
+      "heightMm": 4299.948211526498,
+      "active": true
+     },
+     {
+      "name": "Kerbin Zn1232223233",
+      "parent": "PQStorage",
+      "heightMm": 5.498034995980561,
+      "active": true
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "step": 7,
+  "arrival": "at noon",
+  "launchpad": false,
+  "state": {
+   "scene": "FLIGHT",
+   "paused": false,
+   "ut": 150300.08311481244,
+   "warpRate": 1,
+   "vessel": {
+    "id": "1f590ba8-e63d-4376-9a34-2a1040970c02",
+    "name": "Diag3-Rover",
+    "situation": "PRELAUNCH",
+    "packed": false,
+    "body": "Kerbin",
+    "latitude": -0.048600026833368615,
+    "longitude": -74.72447019038874,
+    "altitude": 69.83300394576509,
+    "heightFromTerrain": 0.7479071617126465,
+    "surfaceSpeed": 6.361644657938863e-05,
+    "heading": 90.53251249467371,
+    "brakes": true,
+    "sas": false,
+    "localTime": 0.5010226704856694,
+    "solarDay": 21599.999999999996
+   }
+  },
+  "underCrafts": [
+   {
+    "craft": "Diag3-Rover",
+    "id": "1f590ba8-e63d-4376-9a34-2a1040970c02",
+    "situation": "PRELAUNCH",
+    "latitude": -0.048600026833368615,
+    "longitude": -74.72447019038874,
+    "colliders": [
+     {
+      "name": "runway_collider",
+      "parent": "Facility",
+      "heightMm": 4299.942028592341,
+      "active": true
+     },
+     {
+      "name": "Kerbin Zn1232223233",
+      "parent": "PQStorage",
+      "heightMm": 5.506364395841956,
+      "active": true
+     }
+    ]
+   }
+  ]
+ }
+]

@@ -259,6 +259,26 @@ arrivals on each at each of their three levels. Played again without this mod. R
   [`runs/facility-levels-kerbin-fix-readings.json`](runs/facility-levels-kerbin-fix-readings.json) and
   [`runs/facility-levels-kerbin-without-this-mod-readings.json`](runs/facility-levels-kerbin-without-this-mod-readings.json).
 
+## The time warp protocol
+
+KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1,
+[KSP Diag - Colliders](https://github.com/lhervier/KSP-Diag-Colliders), this mod at `logLevel = Debug`,
+and KSP-MCPServer, which plays the test through
+[`automation/run-time-warp.py`](automation/run-time-warp.py): a new sandbox game, `Diag3-Rover.craft`
+launched from the SPH onto the runway, three days of time warp at 100 000×, then *Warp To* the night and
+the next noon at the KSC; four readings, a screenshot at each. Played again without this mod. Read in
+[Time warp](../docs/non-regression/stock/time-warp.md) and
+[The lights of the KSC](../docs/non-regression/stock/the-lights-of-the-ksc.md).
+
+- [`runs/time-warp-kerbin-fix.log`](runs/time-warp-kerbin-fix.log) and
+  [`runs/time-warp-kerbin-without-this-mod.log`](runs/time-warp-kerbin-without-this-mod.log);
+  what the script printed in
+  [`runs/time-warp-kerbin-fix-script.txt`](runs/time-warp-kerbin-fix-script.txt) and
+  [`runs/time-warp-kerbin-without-this-mod-script.txt`](runs/time-warp-kerbin-without-this-mod-script.txt),
+  the colliders under the craft at each reading in
+  [`runs/time-warp-kerbin-fix-readings.json`](runs/time-warp-kerbin-fix-readings.json) and
+  [`runs/time-warp-kerbin-without-this-mod-readings.json`](runs/time-warp-kerbin-without-this-mod-readings.json).
+
 ## On the stock system
 
 KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, this mod and one instrument.

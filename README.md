@@ -222,7 +222,8 @@ played in game with this mod, and compared with the game without it where the tw
 **Stock.** Existing saves go through one more draw of the ground, always the same one. Over loadings, an
 orbit and a return to the space centre, the KSC keeps every building registered, and a craft launched
 from the VAB or the SPH stands on the launchpad or the runway. Through every scene change, the KSC comes
-back to the same place. With the scatter fix on, every scatter holder goes back to its pool.
+back to the same place, and through days of time warp it stays put, its lights following day and night.
+With the scatter fix on, every scatter holder goes back to its pool.
 
 **KSP Community Fixes.** None of its patches places the terrain, and every measurement on these pages
 was taken with it installed.
@@ -271,7 +272,7 @@ diff of their source.
 ## Work in progress
 
 What is still to check, one mod at a time, with what is already known and the test planned for it. In
-progress: the last tests on Real Solar System. Planned: the rest of stock, from slopes to time warp,
+progress: the last tests on Real Solar System. Planned: the rest of stock, from slopes to the other stock statics,
 Kerbal Konstructs, a body from a planet pack, Principia, Parallax, Tilt'Em, KAS, and other mods that
 look for a static under its sphere.
 
