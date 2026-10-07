@@ -140,7 +140,7 @@ flight, while a craft is near it, and placed in double in the same frame. It fol
 goes back exactly where stock left it before every scene change, and whenever stock code that expects it
 there runs. A launch pad of Making History is also taken out for the moment it measures the ground to
 set itself on it. Kerbal Konstructs and Kopernicus each look for a static under its sphere once in flight: **this
-mod has to patch both**, each patch standing for a small change these mods could make themselves.
+mod has to patch both**, below.
 
 **→ Full chapter: [The fix: the statics](docs/the-fix-statics.md)**
 
@@ -151,6 +151,22 @@ a gap nobody sees on a stock install. With a mod that gives the scatter collider
 and turning it on is yours to weigh.
 
 **→ Full chapter: [The fix: the scatter](docs/the-fix-scatter.md)**
+
+**The patches to other mods.** Two mods look for a static where the statics fix no longer leaves it in
+flight. Each patch, on by default, stands for a small change these mods could make themselves, given as a
+diff to apply to their source.
+
+- **Kopernicus, its flag fix.** Without the patch, nothing goes wrong in the game. It only spares an
+  error in the log whose stack trace names Kopernicus, where this mod is the cause — a bug its
+  maintainers would be asked about for nothing.
+
+  **→ Full chapter: [Kopernicus: the flag fix](docs/limits-and-solutions/kopernicus/the-flag-fix.md)**
+
+- **Kerbal Konstructs, its group editor.** This patch is indispensable, and the most serious problem
+  this mod has met so far: without it, a group moved with the gizmo of the editor, in flight, would be
+  sent elsewhere on its body, and saved there.
+
+  **→ Full chapter: [Kerbal Konstructs: the group editor](docs/limits-and-solutions/kerbal-konstructs/the-group-editor.md)**
 
 ## Checking the culprit
 
