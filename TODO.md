@@ -9,25 +9,14 @@ là-bas (une page dans `docs/work-in-progress/<mod>/` et son résumé dans la pa
 fois joué, il passe dans [Non-regression tests](docs/non-regression.md) si rien n'empire, dans
 [Limits and solutions](docs/limits-and-solutions.md) sinon.
 
-## Dans cet ordre
+## D'abord
 
-D'abord les tests encore ouverts de [Real Solar System](docs/work-in-progress.md#real-solar-system),
-puis les deux points ci-dessous (Lionel, 2026-09-25).
+Les tests encore ouverts de [Real Solar System](docs/work-in-progress.md#real-solar-system) (Lionel,
+2026-09-25).
 
-1. **Restructurer les pages** de `docs/non-regression/` et de `docs/limits-and-solutions/` sur le
-   plan des pages RSS
-   (introduction lue dans le code et sur GitHub, `## Checking the culprit` avec Diag LandedVessel et Diag TerrainHeight,
-   `## What the results show`). Un cas sans mesure va dans `docs/work-in-progress/` (Lionel, 2026-10-06).
-2. **Mettre à jour le texte de #440** (la branche est fusionnée dans `main`). Son lien *so many cases to test* vise
-   `limits-and-solutions.md`, qui ne liste plus que ce que le mod empire et sa solution : le faire
-   pointer vers [Work in progress](docs/work-in-progress.md) (les tests à jouer) et
-   [Non-regression tests](docs/non-regression.md) (ceux déjà joués). Décider si RSS y entre comme repro visible : l'issue ne le cite qu'en passant
-   (« especially with RSS »), alors que la Terre donne un saut par série de six chargements sans le
-   correctif, et jusqu'à 4,0 pas de correction avec.
+## Ensuite, sans ordre imposé
 
-## Sans ordre imposé
-
-3. **Une release GitHub sur chaque dépôt vers lequel l'issue envoie le lecteur.** Aucun n'en a : ce
+1. **Une release GitHub sur chaque dépôt vers lequel l'issue envoie le lecteur.** Aucun n'en a : ce
    dépôt, Diag LandedVessel, Diag TerrainHeight, Diag FloatingOrigin et Diag TerrainQuads (le cas
    [The seam between subdivision levels](docs/limits-and-solutions/stock/the-seam-between-subdivision-levels.md)
    en dépend : liens, images et *Get it*). L'issue commence par faire installer Diag LandedVessel, et les trois README des
@@ -36,12 +25,12 @@ puis les deux points ci-dessous (Lionel, 2026-09-25).
    dossier `GameData` ; la release, c'est ce dossier zippé. PQS Bench et Stock Quad Cache ne sont cités
    qu'en appui du chiffre de performance et peuvent attendre, mais leur *Get it* ne doit pas non plus
    promettre un téléchargement qui n'existe pas. Vérifier tous les liens `releases/latest` de la famille.
-4. **Confirmer la marge du garde-fou.** Il compte seize pas de float à la distance du quad (1 m sur
+2. **Confirmer la marge du garde-fou.** Il compte seize pas de float à la distance du quad (1 m sur
    Kerbin, 8 m sur la Terre de RSS). Plus grande correction vue : 4,0 pas sur la Terre (3,6 sur
    Vénus, 3,5 sur la Lune, environ un sur Mars et Mercure), aucun refus sur ces cinq corps. Reste à
    relever la plus grande correction (`origin moved by … mm`) en `logLevel = Debug` sur Kerbin, la
    Mun, Minmus et Gilly, et vérifier qu'elle reste loin de seize pas.
-5. **L'écart diffère-t-il d'un point du sol à l'autre ?** C'est ce qui casse une structure posée sur
+3. **L'écart diffère-t-il d'un point du sol à l'autre ?** C'est ce qui casse une structure posée sur
    plusieurs pieds (un pied enterré, un autre en l'air) : sans lui, le sol monte ou descend d'un bloc et
    la structure suit. Je le crois, puisque chaque quad arrondit sa propre position, mais rien ne le
    mesure. Diag TerrainHeight sur quelques points éloignés de plusieurs quads, six chargements, sans le correctif ;
