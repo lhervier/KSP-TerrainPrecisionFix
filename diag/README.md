@@ -17,7 +17,9 @@ and of [KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainH
 along with the logs of the same sessions without this mod. Only the sessions taken with this mod alone
 and no instrument have their saves here: the loads on Venus, Mars and Mercury, described in
 [Real Solar System: this mod's safeguard](../docs/non-regression/real-solar-system/this-mods-safeguard.md#the-saves),
-the launch from Cape Canaveral, and the rover of
+the launch from Cape Canaveral, the capsule on a launch pad of Kerbal Konstructs on the Mun,
+`warp-static-mun-kk.sfs`, and the launch pad in `warp-static-mun-kk/`, of
+[Time warp](../docs/non-regression/stock/time-warp.md#in-flight-low-over-a-static), and the rover of
 [Real Solar System: a CommNet ground station](../docs/non-regression/real-solar-system/a-commnet-ground-station.md);
 the pod beside a runway of Kerbal Konstructs, `non-reg-runway-mune-kk.sfs`, and the runway in
 `non-reg-runway-mune-kk/`, of [Kerbal Konstructs: the group editor](../docs/limits-and-solutions/kerbal-konstructs/the-group-editor.md);
@@ -278,6 +280,29 @@ the next noon at the KSC; four readings, a screenshot at each. Played again with
   the colliders under the craft at each reading in
   [`runs/time-warp-kerbin-fix-readings.json`](runs/time-warp-kerbin-fix-readings.json) and
   [`runs/time-warp-kerbin-without-this-mod-readings.json`](runs/time-warp-kerbin-without-this-mod-readings.json).
+
+## The time warp flyover protocol
+
+KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, Kerbal Konstructs 1.12.3 with the launch
+pad of [`warp-static-mun-kk/`](warp-static-mun-kk/) and its CustomPreLaunchChecks,
+[KSP Diag - Colliders](https://github.com/lhervier/KSP-Diag-Colliders), this mod at `logLevel = Debug`,
+and KSP-MCPServer, which plays the test through
+[`automation/run-time-warp-flyover.py`](automation/run-time-warp-flyover.py): the capsule of
+[`warp-static-mun-kk.sfs`](warp-static-mun-kk.sfs) on that launch pad, near the highest point of the Mun's
+equator, read before and after `Diag3-Rover.craft`, put on a low orbit of the Mun, passes over it in time
+warp at 10×. Played again without this mod. Read in
+[Time warp](../docs/non-regression/stock/time-warp.md#in-flight-low-over-a-static).
+
+- [`runs/time-warp-flyover-mun-kk-fix.log`](runs/time-warp-flyover-mun-kk-fix.log) and
+  [`runs/time-warp-flyover-mun-kk-without-this-mod.log`](runs/time-warp-flyover-mun-kk-without-this-mod.log);
+  the session without this mod is also the one the launch pad was placed in, with Kerbal Konstructs' editor,
+  and holds a first try of the script that launched from the launchpad, where KSP recovered the capsule;
+  what the script printed in
+  [`runs/time-warp-flyover-mun-kk-fix-script.txt`](runs/time-warp-flyover-mun-kk-fix-script.txt) and
+  [`runs/time-warp-flyover-mun-kk-without-this-mod-script.txt`](runs/time-warp-flyover-mun-kk-without-this-mod-script.txt),
+  the colliders under the capsule at each reading in
+  [`runs/time-warp-flyover-mun-kk-fix-readings.json`](runs/time-warp-flyover-mun-kk-fix-readings.json) and
+  [`runs/time-warp-flyover-mun-kk-without-this-mod-readings.json`](runs/time-warp-flyover-mun-kk-without-this-mod-readings.json).
 
 ## On the stock system
 

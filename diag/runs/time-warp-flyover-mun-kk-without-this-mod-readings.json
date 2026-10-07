@@ -1,0 +1,104 @@
+[
+ {
+  "step": 1,
+  "arrival": "loaded",
+  "launchpad": false,
+  "state": {
+   "scene": "FLIGHT",
+   "paused": false,
+   "ut": 74571.91390204302,
+   "warpRate": 1,
+   "vessel": {
+    "id": "3f2e19ca-72a8-4c2d-9305-66eb914c7040",
+    "name": "Capsule",
+    "situation": "LANDED",
+    "packed": false,
+    "body": "Mun",
+    "latitude": -0.27727226334384364,
+    "longitude": -132.9520550612767,
+    "altitude": 5976.953979417856,
+    "heightFromTerrain": 0.3125041723251343,
+    "surfaceSpeed": 1.937052121459738e-05,
+    "heading": 74.27712592824432,
+    "brakes": false,
+    "sas": true,
+    "localTime": 0.2981436678203844,
+    "solarDay": 141115.38529617633
+   }
+  },
+  "underCrafts": [
+   {
+    "craft": "Capsule",
+    "id": "3f2e19ca-72a8-4c2d-9305-66eb914c7040",
+    "situation": "LANDED",
+    "latitude": -0.277272263351847,
+    "longitude": -132.9520550613068,
+    "colliders": [
+     {
+      "name": "collider",
+      "parent": "LP_lev2",
+      "heightMm": 27590.370495105162,
+      "active": true
+     },
+     {
+      "name": "Mun Zn022232221",
+      "parent": "PQStorage",
+      "heightMm": -114.52170321717858,
+      "active": true
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "step": 2,
+  "arrival": "after pass 1",
+  "launchpad": false,
+  "state": {
+   "scene": "FLIGHT",
+   "paused": false,
+   "ut": 74780.69026923191,
+   "warpRate": 1,
+   "vessel": {
+    "id": "3f2e19ca-72a8-4c2d-9305-66eb914c7040",
+    "name": "Capsule",
+    "situation": "LANDED",
+    "packed": false,
+    "body": "Mun",
+    "latitude": -0.27727220815033066,
+    "longitude": -132.95205505565457,
+    "altitude": 5976.960026223271,
+    "heightFromTerrain": 0.3125062882900238,
+    "surfaceSpeed": 2.377300246023564e-05,
+    "heading": 73.94135863480817,
+    "brakes": false,
+    "sas": true,
+    "localTime": 0.2996235430762533,
+    "solarDay": 141115.38529617633
+   }
+  },
+  "underCrafts": [
+   {
+    "craft": "Capsule",
+    "id": "3f2e19ca-72a8-4c2d-9305-66eb914c7040",
+    "situation": "LANDED",
+    "latitude": -0.27727220815033066,
+    "longitude": -132.95205505565457,
+    "colliders": [
+     {
+      "name": "collider",
+      "parent": "LP_lev2",
+      "heightMm": 27596.407197095687,
+      "active": true
+     },
+     {
+      "name": "Mun Zn022232221",
+      "parent": "PQStorage",
+      "heightMm": -114.14481504471041,
+      "active": true
+     }
+    ]
+   }
+  ]
+ }
+]

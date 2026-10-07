@@ -67,9 +67,9 @@ and stays within 0.25 mm through its arrivals, against up to 145 mm without it.
 
 ### Time warp
 
-**Checked on Kerbin.** On the ground, time warp neither turns the body nor moves the floating origin.
-A craft on the runway through three days at 100 000×, then a night and a day: the KSC stays out of its
-sphere throughout, the runway within 0.04 mm under the craft, as without this mod.
+**Checked on Kerbin and on the Mun.** A craft on the runway through three days at 100 000×: the runway
+stays within 0.04 mm under it. A craft passing 3 km over a static of the Mun in time warp on rails: a
+capsule standing on the static reads it within 0.002 mm, against 6 mm without this mod.
 
 **→ Full chapter: [Time warp](non-regression/stock/time-warp.md)**
 
