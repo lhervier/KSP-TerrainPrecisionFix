@@ -148,13 +148,14 @@ fix, with this mod, 37 entries in flight showed no step, and a move of the origi
 
 **→ Full chapter: [Real Solar System: the runway fix](non-regression/real-solar-system/the-runway-fix.md)**
 
-### What this mod corrected
+### This mod's safeguard
 
-**Checked on the Moon, Earth, Venus, Mars and Mercury — none of the terrain was left uncorrected.** This
-mod refuses any correction too large to be a rounding, a limit that grows with the body: on Earth, it
-corrected the terrain by up to four float steps, 2 m, and refused nothing.
+**Checked on the Moon, Earth, Venus, Mars and Mercury — it never refused a correction.** This mod
+refuses any correction larger than sixteen float steps, a limit that grows with the body. The largest
+correction, on Earth, was four steps, 2 m, a quarter of the limit; a first version, a fixed metre,
+refused part of Earth's terrain.
 
-**→ Full chapter: [Real Solar System: what this mod corrected](non-regression/real-solar-system/what-this-mod-corrected.md)**
+**→ Full chapter: [Real Solar System: this mod's safeguard](non-regression/real-solar-system/this-mods-safeguard.md)**
 
 ### A CommNet ground station
 

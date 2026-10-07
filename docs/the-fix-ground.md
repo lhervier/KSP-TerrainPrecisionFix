@@ -96,8 +96,8 @@ apply, and each vertex is left with a reference comparison before stock runs unt
   going somewhere else. The step is taken at the distance of the quad from the centre of the body, so
   the limit is 1 m on Kerbin and grows with the body as the rounding does — 8 m on Earth in Real Solar
   System — while a wrong frame misses by kilometres. The largest correction measured so far is 4.0
-  steps, 1 998 mm on Earth in Real Solar System (3.6 steps on Venus, 3.5 on the Moon, about one on
+  steps, 1 998 mm on Earth in Real Solar System (3.6 steps on Venus and on the Moon, about one on
   Mars and Mercury), a quarter of the limit:
-  [What this mod corrected](non-regression/real-solar-system/what-this-mod-corrected.md);
+  [This mod's safeguard](non-regression/real-solar-system/this-mods-safeguard.md);
 - the ground fix is installed on its own, apart from [the statics fix](the-fix-statics.md), and can be
   turned off in the settings. If any of its patches fails to install, none of them does anything.

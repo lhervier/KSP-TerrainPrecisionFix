@@ -16,7 +16,7 @@ the `diag` folder of [KSP Diag - Landed Vessel](https://github.com/lhervier/KSP-
 and of [KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainHeight/tree/main/diag),
 along with the logs of the same sessions without this mod. Only the sessions taken with this mod alone
 and no instrument have their saves here: the loads on Venus, Mars and Mercury, described in
-[Real Solar System: what this mod corrected](../docs/non-regression/real-solar-system/what-this-mod-corrected.md#the-saves),
+[Real Solar System: this mod's safeguard](../docs/non-regression/real-solar-system/this-mods-safeguard.md#the-saves),
 the launch from Cape Canaveral, and the rover of
 [Real Solar System: a CommNet ground station](../docs/non-regression/real-solar-system/a-commnet-ground-station.md);
 the pod beside a runway of Kerbal Konstructs, `non-reg-runway-mune-kk.sfs`, and the runway in

@@ -4,7 +4,7 @@ Part of [Terrain Precision Fix](../../../README.md), one point of [Work in progr
 
 **Status: planned.** On Venus, Mars and Mercury, this mod corrected the terrain by up to 3.6 float steps
 and refused nothing, over six loads each
-([What this mod corrected](../../non-regression/real-solar-system/what-this-mod-corrected.md)). Every
+([This mod's safeguard](../../non-regression/real-solar-system/this-mods-safeguard.md)). Every
 one of those series loads a landed craft again, while a player builds terrain continuously during a
 descent.
 
