@@ -186,7 +186,8 @@ played in game with this mod, and compared with the game without it where the tw
 
 **Stock.** Existing saves go through one more draw of the ground, always the same one. Over loadings, an
 orbit and a return to the space centre, the KSC keeps every building registered, and a craft launched
-from the VAB or the SPH stands on the launchpad or the runway.
+from the VAB or the SPH stands on the launchpad or the runway. Through every scene change, the KSC comes
+back to the same place.
 
 **KSP Community Fixes.** None of its patches places the terrain, and every measurement on these pages
 was taken with it installed.
@@ -233,7 +234,7 @@ diff of their source.
 ## Work in progress
 
 What is still to check, one mod at a time, with what is already known and the test planned for it. In
-progress: the last tests on Real Solar System. Planned: the rest of stock, from slopes to scene changes,
+progress: the last tests on Real Solar System. Planned: the rest of stock, from slopes to time warp,
 Kerbal Konstructs, a body from a planet pack, Principia, Parallax, Tilt'Em, KAS, and other mods that
 look for a static under its sphere.
 

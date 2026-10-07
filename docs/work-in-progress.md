@@ -53,13 +53,6 @@ sphere is flagged has not been read, and a craft floating near a coast has not b
 
 **→ Full chapter: [The ocean](work-in-progress/stock/the-ocean.md)**
 
-### Scene changes
-
-**Planned.** This mod has to put the KSC back under its sphere before every scene change: reverting,
-quicksaving and quickloading, going through the tracking station, recovering a craft.
-
-**→ Full chapter: [Scene changes](work-in-progress/stock/scene-changes.md)**
-
 ### A trip to another body
 
 **Planned.** Away from Kerbin, the KSC goes back under its sphere, and switching back to a craft near it

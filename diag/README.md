@@ -187,6 +187,32 @@ Integrator and KSPTextureLoader as for Real Solar System, and the Community Terr
   No log kept: the readings are the script's. Read in
   [A static turning with its body](../docs/non-regression/stock/a-static-turning-with-its-body.md).
 
+## The scene changes protocol
+
+KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1,
+[KSP Diag - Colliders](https://github.com/lhervier/KSP-Diag-Colliders), this mod at `logLevel = Debug`,
+and KSP-MCPServer, which plays the test through [`automation/run-scene-changes.py`](automation/run-scene-changes.py):
+a new career, `Diag3-Rocket.craft` on the launchpad, ten arrivals in flight through every way of leaving
+it. On Earth, Real Solar System 20.1.3.0 and what it requires (Kopernicus 248, Modular Flight Integrator,
+KSPTextureLoader, the RSS textures). Each one played again without this mod. Read in
+[Scene changes](../docs/non-regression/stock/scene-changes.md).
+
+- [`runs/scene-changes-kerbin-fix.log`](runs/scene-changes-kerbin-fix.log) and
+  [`runs/scene-changes-kerbin-without-this-mod.log`](runs/scene-changes-kerbin-without-this-mod.log) — on
+  Kerbin; what the script printed in
+  [`runs/scene-changes-kerbin-fix-script.txt`](runs/scene-changes-kerbin-fix-script.txt) and
+  [`runs/scene-changes-kerbin-without-this-mod-script.txt`](runs/scene-changes-kerbin-without-this-mod-script.txt),
+  the colliders under the craft at each arrival in
+  [`runs/scene-changes-kerbin-fix-readings.json`](runs/scene-changes-kerbin-fix-readings.json) and
+  [`runs/scene-changes-kerbin-without-this-mod-readings.json`](runs/scene-changes-kerbin-without-this-mod-readings.json).
+- [`runs/scene-changes-earth-rss-fix.log`](runs/scene-changes-earth-rss-fix.log) and
+  [`runs/scene-changes-earth-rss-without-this-mod.log`](runs/scene-changes-earth-rss-without-this-mod.log)
+  — on Earth; the same in
+  [`runs/scene-changes-earth-rss-fix-script.txt`](runs/scene-changes-earth-rss-fix-script.txt),
+  [`runs/scene-changes-earth-rss-without-this-mod-script.txt`](runs/scene-changes-earth-rss-without-this-mod-script.txt),
+  [`runs/scene-changes-earth-rss-fix-readings.json`](runs/scene-changes-earth-rss-fix-readings.json) and
+  [`runs/scene-changes-earth-rss-without-this-mod-readings.json`](runs/scene-changes-earth-rss-without-this-mod-readings.json).
+
 ## On the stock system
 
 KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, this mod and one instrument.

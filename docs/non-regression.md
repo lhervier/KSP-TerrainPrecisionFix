@@ -52,6 +52,14 @@ the VAB and from the SPH, a craft stands on the launchpad and on the runway.
 
 **→ Full chapter: [Launching from the VAB and the SPH](non-regression/stock/launching-from-the-vab-and-the-sph.md)**
 
+### Scene changes
+
+**Checked on Kerbin and on Earth in Real Solar System.** This mod has to put the KSC back before every
+scene change. Through every way of leaving a flight and coming back, the launchpad stays within 0.14 mm,
+against up to 963 mm without this mod, and every building opens.
+
+**→ Full chapter: [Scene changes](non-regression/stock/scene-changes.md)**
+
 ### A launch pad placed by a mission
 
 **Impossible to reproduce.** A mission of Making History can place a launch pad of its own, which stock

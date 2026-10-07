@@ -1,0 +1,272 @@
+[
+ {
+  "step": 1,
+  "arrival": "launched from the space centre",
+  "underCrafts": [
+   {
+    "craft": "Diag3-Rocket",
+    "id": "14650c11-71d1-4cee-a2ba-3b0eb9d88f75",
+    "situation": "PRELAUNCH",
+    "latitude": 28.60839247623612,
+    "longitude": -80.5997520133554,
+    "colliders": [
+     {
+      "name": "collider",
+      "parent": "LP_lev2",
+      "heightMm": 3102.290650829673,
+      "active": true
+     },
+     {
+      "name": "Kerbin Zn32010321221",
+      "parent": "PQStorage",
+      "heightMm": -219.52049061655998,
+      "active": true
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "step": 2,
+  "arrival": "revert to launch 1",
+  "underCrafts": [
+   {
+    "craft": "Diag3-Rocket",
+    "id": "14650c11-71d1-4cee-a2ba-3b0eb9d88f75",
+    "situation": "PRELAUNCH",
+    "latitude": 28.608392487941956,
+    "longitude": -80.59975201265117,
+    "colliders": [
+     {
+      "name": "collider",
+      "parent": "LP_lev2",
+      "heightMm": 4065.2483636513352,
+      "active": true
+     },
+     {
+      "name": "Kerbin Zn32010321221",
+      "parent": "PQStorage",
+      "heightMm": 767.7161078900099,
+      "active": true
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "step": 3,
+  "arrival": "revert to launch 2",
+  "underCrafts": [
+   {
+    "craft": "Diag3-Rocket",
+    "id": "14650c11-71d1-4cee-a2ba-3b0eb9d88f75",
+    "situation": "PRELAUNCH",
+    "latitude": 28.608392487971287,
+    "longitude": -80.59975201259721,
+    "colliders": [
+     {
+      "name": "collider",
+      "parent": "LP_lev2",
+      "heightMm": 3925.6481071934104,
+      "active": true
+     },
+     {
+      "name": "Kerbin Zn32010321221",
+      "parent": "PQStorage",
+      "heightMm": 365.1953600347042,
+      "active": true
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "step": 4,
+  "arrival": "quickload 1",
+  "underCrafts": [
+   {
+    "craft": "Diag3-Rocket",
+    "id": "14650c11-71d1-4cee-a2ba-3b0eb9d88f75",
+    "situation": "PRELAUNCH",
+    "latitude": 28.608392462726563,
+    "longitude": -80.5997520184981,
+    "colliders": [
+     {
+      "name": "collider",
+      "parent": "LP_lev2",
+      "heightMm": 3504.4312523677945,
+      "active": true
+     },
+     {
+      "name": "Kerbin Zn32010321221",
+      "parent": "PQStorage",
+      "heightMm": 45.21526023745537,
+      "active": true
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "step": 5,
+  "arrival": "quickload 2",
+  "underCrafts": [
+   {
+    "craft": "Diag3-Rocket",
+    "id": "14650c11-71d1-4cee-a2ba-3b0eb9d88f75",
+    "situation": "PRELAUNCH",
+    "latitude": 28.608392471789443,
+    "longitude": -80.5997520148398,
+    "colliders": [
+     {
+      "name": "collider",
+      "parent": "LP_lev2",
+      "heightMm": 3283.408540301025,
+      "active": true
+     },
+     {
+      "name": "Kerbin Zn32010321221",
+      "parent": "PQStorage",
+      "heightMm": -186.4120764657855,
+      "active": true
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "step": 12,
+  "arrival": "flown from the tracking station",
+  "underCrafts": [
+   {
+    "craft": "Diag3-Rocket",
+    "id": "14650c11-71d1-4cee-a2ba-3b0eb9d88f75",
+    "situation": "PRELAUNCH",
+    "latitude": 28.608392486710937,
+    "longitude": -80.59975201379277,
+    "colliders": [
+     {
+      "name": "collider",
+      "parent": "LP_lev2",
+      "heightMm": 3664.877677336335,
+      "active": true
+     },
+     {
+      "name": "Kerbin Zn32010321221",
+      "parent": "PQStorage",
+      "heightMm": 194.63850278407335,
+      "active": true
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "step": 14,
+  "arrival": "launched from the VAB",
+  "underCrafts": [
+   {
+    "craft": "Diag3-Rocket",
+    "id": "3af97780-d7e2-42d3-886e-a28ba3fff8e9",
+    "situation": "PRELAUNCH",
+    "latitude": 28.608393205395245,
+    "longitude": -80.59974481496833,
+    "colliders": [
+     {
+      "name": "collider",
+      "parent": "LP_lev2",
+      "heightMm": 3366.453685797751,
+      "active": true
+     },
+     {
+      "name": "Kerbin Zn32010321221",
+      "parent": "PQStorage",
+      "heightMm": -103.88448182493448,
+      "active": true
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "step": 16,
+  "arrival": "launched after a revert to the VAB",
+  "underCrafts": [
+   {
+    "craft": "Diag3-Rocket",
+    "id": "ee067478-56d0-49ac-bc3d-30af39d3bff9",
+    "situation": "PRELAUNCH",
+    "latitude": 28.608390442457512,
+    "longitude": -80.59974378974866,
+    "colliders": [
+     {
+      "name": "collider",
+      "parent": "LP_lev2",
+      "heightMm": 3842.014703899622,
+      "active": true
+     },
+     {
+      "name": "Kerbin Zn32010321221",
+      "parent": "PQStorage",
+      "heightMm": 79.9713572487235,
+      "active": true
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "step": 19,
+  "arrival": "launched after a recovery",
+  "underCrafts": [
+   {
+    "craft": "Diag3-Rocket",
+    "id": "28d2a642-4f44-4c1d-8437-02797a2ff230",
+    "situation": "PRELAUNCH",
+    "latitude": 28.60839219295373,
+    "longitude": -80.59974271762938,
+    "colliders": [
+     {
+      "name": "collider",
+      "parent": "LP_lev2",
+      "heightMm": 3570.106971077621,
+      "active": true
+     },
+     {
+      "name": "Kerbin Zn32010321221",
+      "parent": "PQStorage",
+      "heightMm": -191.83546863496304,
+      "active": true
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "step": 21,
+  "arrival": "loaded from the main menu",
+  "underCrafts": [
+   {
+    "craft": "Diag3-Rocket",
+    "id": "28d2a642-4f44-4c1d-8437-02797a2ff230",
+    "situation": "PRELAUNCH",
+    "latitude": 28.60839219091947,
+    "longitude": -80.59974272260102,
+    "colliders": [
+     {
+      "name": "collider",
+      "parent": "LP_lev2",
+      "heightMm": 3816.5001701563597,
+      "active": true
+     },
+     {
+      "name": "Kerbin Zn32010321221",
+      "parent": "PQStorage",
+      "heightMm": 54.726348258554935,
+      "active": true
+     }
+    ]
+   }
+  ]
+ }
+]
