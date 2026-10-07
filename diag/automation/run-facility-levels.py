@@ -58,6 +58,7 @@ def flights(session, site, editor, craft, level):
     call("load_save", folder=session.options.folder, save=QUICKSAVE)
     session.arrived(where + ": quickload", launchpad=on_pad)
     recovered = call("recover_vessel")
+    common.at_space_centre()
     log("recovered: %s" % json.dumps(recovered.get("recovery")))
     close(dialogs_only=False)
 

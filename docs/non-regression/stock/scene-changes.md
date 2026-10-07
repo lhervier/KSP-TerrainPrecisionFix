@@ -4,7 +4,7 @@ Part of [Terrain Precision Fix](../../../README.md), one test of [Non-regression
 
 **Status: checked on Kerbin and on Earth in Real Solar System.** With this mod, after every way of
 leaving a flight and coming back to the craft on the launchpad, the launchpad is where it was, within
-0.11 mm; without it, it moves by up to 113 mm on Kerbin and 1 146 mm on Earth. A craft launched from the
+0.2 mm; without it, it moves by up to 67 mm on Kerbin and 938 mm on Earth. A craft launched from the
 VAB stands on the launchpad, one launched from the SPH on the runway, and every building of the space
 centre opens.
 
@@ -69,15 +69,15 @@ The height of the launchpad under the craft, lowest and highest over its eleven 
 
 | | without this mod | with this mod |
 |---|---|---|
-| Kerbin | 2 685.991 to 2 798.596 mm (112.604 mm) | 2 747.132 to 2 747.236 mm (0.104 mm) |
-| Earth | 3 102.290 to 4 248.363 mm (1 146.072 mm) | 3 581.730 to 3 581.820 mm (0.090 mm) |
+| Kerbin | 2 700.795 to 2 767.968 mm (67.173 mm) | 2 747.055 to 2 747.249 mm (0.193 mm) |
+| Earth | 3 316.901 to 4 255.051 mm (938.150 mm) | 3 581.708 to 3 581.821 mm (0.113 mm) |
 
-Back from the other body, the launchpad reads 2 730.394 mm on Kerbin and 3 401.631 mm on Earth without
-this mod, 2 747.199 mm and 3 581.767 mm with it: within 0.032 mm of the arrival before it on Kerbin, and
-0.020 mm on Earth.
+Back from the other body, the launchpad reads 2 746.312 mm on Kerbin and 3 997.469 mm on Earth without
+this mod, 2 747.249 mm and 3 581.710 mm with it: within 0.022 mm of the arrival before it on Kerbin, and
+0.045 mm on Earth.
 
-The rover, launched from the SPH, stands on the runway: the runway is under it, 4 184.082 mm above the
-terrain on Kerbin and 3 727.081 mm on Earth without this mod, 4 064.028 mm and 3 861.237 mm with it. One
+The rover, launched from the SPH, stands on the runway: the runway is under it, 4 092.747 mm above the
+terrain on Kerbin and 4 359.758 mm on Earth without this mod, 4 064.025 mm and 3 861.470 mm with it. One
 launch from the SPH per session gives one reading, not a spread.
 
 Without this mod, KSP places the KSC again at every arrival, rounded each time in a different way
@@ -102,25 +102,24 @@ is open on the craft on the launchpad. Stripped of the rest:
 setting new dominant body: Mun
 [TerrainPrecisionFix] [DEBUG] Kerbin static 'KSC': back under its sphere
 [HighLogic]: =========================== Scene Change : From FLIGHT to FLIGHT =====================
-[TerrainPrecisionFix] [DEBUG] Kerbin static 'KSC': out of its sphere, corrected by 30.93 mm
+[TerrainPrecisionFix] [DEBUG] Kerbin static 'KSC': out of its sphere, corrected by 78.23 mm
 ```
 
 At the space centre, every building opens and closes as without this mod, and the recovery report places
 the craft on the launchpad.
 
-On Kerbin, the log with this mod shows no error that the log without it does not show. On Earth, it shows
-one, at two of its visits to the space centre (after the recovery, and after the game loaded back from the
-main menu): the space centre camera does not find its transform, then fails at every frame until the scene
-is left:
+Each log with this mod shows one error that the log without it does not show this time, both of the
+interface of the game, and neither of them about the statics:
 
-```
-SpaceCenterCamera: Cannot find transform of name 'KSC/SpaceCenter/SpaceCenterCameraPosition'
-NullReferenceException: Object reference not set to an instance of an object
-```
+- on Kerbin, a `NullReferenceException` of the tooltip of a crew hatch (`CrewHatchController.HideTooltip`),
+  which the logs on Earth show with this mod and without it;
+- on Earth, a `NullReferenceException` of the Knowledge Base when the map view changes its focus
+  (`KnowledgeBase.OnMapFocusChange`), which an earlier session on Earth without this mod shows too
+  ([`diag/runs/scene-changes-earth-rss-without-this-mod-earlier.log`](../../../diag/runs/scene-changes-earth-rss-without-this-mod-earlier.log)).
 
-The same error comes and goes from one session to the next, without this mod as with it: it shows twice in
-an earlier session on Kerbin without this mod, the same protocol at the Normal difficulty
-([`diag/runs/scene-changes-kerbin-without-this-mod-earlier.log`](../../../diag/runs/scene-changes-kerbin-without-this-mod-earlier.log)).
+The script stays a few seconds at the space centre at every arrival there, as a player looking at it
+would: leaving it within its first frames loses the anchor of its camera for the rest of the session, a
+bug of the game without this mod, which a script going straight on would trigger.
 
 The logs, what the script printed and every reading of KSP Diag - Colliders are in
 [`diag/runs/`](../../../diag/README.md#the-scene-changes-protocol).

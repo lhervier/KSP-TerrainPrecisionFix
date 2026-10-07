@@ -152,6 +152,7 @@ def main():
     call("wait", seconds=options.collapse)
     session.shoot("vab-collapsed")
     call("go_to_scene", scene="SPACECENTER")
+    common.at_space_centre()
     close(dialogs_only=True)
     vab_menu(session, "vab-menu-destroyed")
 
@@ -167,6 +168,7 @@ def main():
     session.arrived("quickload with the VAB destroyed", launchpad=False)
     towards_vab(session, "vab-destroyed-after-the-quickload", runway=True)
     recovered = call("recover_vessel")
+    common.at_space_centre()
     log("recovered: %s" % json.dumps(recovered.get("recovery")))
     close(dialogs_only=False)
 

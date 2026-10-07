@@ -122,6 +122,18 @@ class Session:
                 self.step, how, first["name"], first["parent"], first["heightMm"], active["situation"]))
 
 
+# How long a script stays at the space centre whenever it arrives there, before going anywhere else.
+SPACE_CENTRE_PAUSE = 5.0
+
+
+def at_space_centre():
+    """Waits a few seconds at the space centre, as a player looking at it would, before going anywhere else.
+    Left within its first frames, the space centre loses the anchor of its camera for the rest of the session
+    (SpaceCenterCameraPosition, popped to the scene root a few frames late), and its camera fails at every
+    later visit: a stock bug, which a script would otherwise trigger."""
+    call("wait", seconds=SPACE_CENTRE_PAUSE)
+
+
 def brake():
     """Puts the brakes on the active vessel, as the B key does: a rover launched, or reverted to its launch,
     has them off, and would roll away from where it was put."""
@@ -147,6 +159,7 @@ def new_career(folder):
         state = call("research_tech", node=node)
     log("%d nodes researched, %.0f science left" % (len(NODES), state["science"]))
     close(dialogs_only=False)
+    at_space_centre()
 
 
 def load(name):
@@ -198,8 +211,10 @@ def main(cases, description):
         new_career(options.folder)
     elif options.new_game:
         call("new_game", folder=options.folder, mode=options.new_game)
+        at_space_centre()
     else:
         call("open_game", folder=options.folder)
+        at_space_centre()
     if options.ut is not None:
         call("set_time", ut=options.ut)
     call("launch_vessel", craft=options.craft, site="LaunchPad")

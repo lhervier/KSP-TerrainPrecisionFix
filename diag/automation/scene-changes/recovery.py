@@ -9,6 +9,7 @@ from common import call, close, log
 
 def play(session):
     recovered = call("recover_vessel")
+    common.at_space_centre()
     log("recovered: %s" % json.dumps(recovered.get("recovery")))
     session.shoot("recovery-report")
     close(dialogs_only=False)

@@ -16,6 +16,7 @@ SCREENS = ["AstronautComplex", "RnD", "MissionControl", "Administration"]
 
 def play(session):
     call("go_to_scene", scene="SPACECENTER")
+    common.at_space_centre()
     session.shoot("space-centre-from-flight")
     for facility in SCREENS:
         call("open_facility", facility=facility)

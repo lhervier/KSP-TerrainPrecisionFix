@@ -208,9 +208,6 @@ KSPTextureLoader, the RSS textures). Each one played again without this mod. Rea
   the colliders under the craft at each arrival in
   [`runs/scene-changes-kerbin-fix-readings.json`](runs/scene-changes-kerbin-fix-readings.json) and
   [`runs/scene-changes-kerbin-without-this-mod-readings.json`](runs/scene-changes-kerbin-without-this-mod-readings.json).
-- [`runs/scene-changes-kerbin-without-this-mod-earlier.log`](runs/scene-changes-kerbin-without-this-mod-earlier.log)
-  — an earlier session on Kerbin without this mod, the same protocol at the Normal difficulty, kept for the
-  error of the space centre camera it shows.
 - [`runs/scene-changes-earth-rss-fix.log`](runs/scene-changes-earth-rss-fix.log) and
   [`runs/scene-changes-earth-rss-without-this-mod.log`](runs/scene-changes-earth-rss-without-this-mod.log)
   — on Earth; the same in
@@ -218,6 +215,8 @@ KSPTextureLoader, the RSS textures). Each one played again without this mod. Rea
   [`runs/scene-changes-earth-rss-without-this-mod-script.txt`](runs/scene-changes-earth-rss-without-this-mod-script.txt),
   [`runs/scene-changes-earth-rss-fix-readings.json`](runs/scene-changes-earth-rss-fix-readings.json) and
   [`runs/scene-changes-earth-rss-without-this-mod-readings.json`](runs/scene-changes-earth-rss-without-this-mod-readings.json).
+- [`runs/scene-changes-earth-rss-without-this-mod-earlier.log`](runs/scene-changes-earth-rss-without-this-mod-earlier.log)
+  — an earlier session on Earth without this mod, kept for the error of the Knowledge Base it shows.
 
 ## The destroyed buildings protocol
 

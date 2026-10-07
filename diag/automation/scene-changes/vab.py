@@ -8,6 +8,7 @@ from common import call
 
 def play(session):
     call("go_to_scene", scene="SPACECENTER")
+    common.at_space_centre()
     call("open_facility", facility="VAB")
     session.shoot("vab-from-space-centre")
     call("launch_vessel", craft=session.options.craft, site="LaunchPad")

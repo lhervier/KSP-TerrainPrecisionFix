@@ -42,7 +42,7 @@ collider: a stock case, read in the code, outside what this mod fixes.
 
 **Checked on Kerbin and on Earth in Real Solar System.** This mod has to put the KSC back before every
 scene change. Through every way of leaving a flight and coming back, a trip to another body included,
-the launchpad stays within 0.11 mm, against up to 1 146 mm without this mod. A craft launched from the
+the launchpad stays within 0.2 mm, against up to 938 mm without this mod. A craft launched from the
 VAB stands on the launchpad, one from the SPH on the runway, and every building opens.
 
 **→ Full chapter: [Scene changes](non-regression/stock/scene-changes.md)**

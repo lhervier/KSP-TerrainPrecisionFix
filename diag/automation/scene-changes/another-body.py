@@ -28,6 +28,7 @@ def play(session):
     options = session.options
     craft = session.craft_id
     call("go_to_scene", scene="SPACECENTER")
+    common.at_space_centre()
     call("open_facility", facility="SPH")
     session.shoot("sph-from-space-centre")
     call("launch_vessel", craft=options.second_craft, site="Runway")
