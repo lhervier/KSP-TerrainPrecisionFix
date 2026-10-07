@@ -9,7 +9,8 @@ space centre opens.
 
 *Why.* This mod takes the KSC out of its terrain sphere in flight, near a craft, and has to put it back
 before every scene change: the next scene, and the next flight, look for it under its sphere
-([The fix: the statics](../../the-fix-statics.md)). A craft leaving for another body takes the KSC out of
+([The fix: the statics](../../the-fix-statics.md)), and KSP finds the buildings of the KSC by their place
+in the hierarchy below it. A craft leaving for another body takes the KSC out of
 its reach: it goes back under its sphere on the way, and has to come out again when the player switches
 back to a craft near it.
 
@@ -68,6 +69,8 @@ Without this mod, KSP places the KSC again at every arrival, rounded each time i
 ([The culprits: the statics](../../the-culprit-statics.md)). With it, the KSC comes back to the same place,
 whichever way the flight was left.
 
+Only the statics within reach of the craft are taken out: on Kerbin, the KSC alone, the Island Airfield,
+33 km away, staying under its sphere; on Earth, the KSC and the tracking station of Cape Canaveral.
 Before ten of the eleven exits from the flight, the log shows the KSC put back, just before the scene
 change; after each arrival, taken out again:
 

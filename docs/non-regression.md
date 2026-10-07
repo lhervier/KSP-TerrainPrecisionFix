@@ -38,14 +38,6 @@ collider: a stock case, read in the code, outside what this mod fixes.
 
 **→ Full chapter: [Colliders below the highest subdivision level](non-regression/stock/colliders-below-the-highest-subdivision-level.md)**
 
-### Loading, an orbit and the space centre
-
-**Checked.** KSP finds the buildings of the KSC by their place below it, and this mod moves the KSC in
-flight. Over loadings, an orbit and a return to the space centre, on Kerbin and on Earth, the KSC keeps
-its 39 destructible buildings and 9 facilities registered, without error.
-
-**→ Full chapter: [Loading, an orbit and the space centre](non-regression/stock/loading-an-orbit-and-the-space-centre.md)**
-
 ### Launching from the VAB and the SPH
 
 **Checked on Kerbin.** KSP places a new craft on a spawn point that hangs from the KSC. Launched from
@@ -132,8 +124,8 @@ mod, −70.2 to +70.3 mm with the terrain fix, −0.026 to +0.022 mm with the sc
 ### The KSC moved to Cape Canaveral
 
 **Checked, no problem.** Kopernicus moves the KSC for Real Solar System, so this mod has to handle it at
-its new place. It takes the KSC out of its sphere there and puts it back, and the space centre opens
-without error after a flight.
+its new place. It takes the KSC out of its sphere there and puts it back, and the launchpad comes back
+to the same place through every way of leaving a flight, within 0.11 mm.
 
 **→ Full chapter: [Kopernicus: the KSC moved by Real Solar System](non-regression/kopernicus/the-ksc-moved-by-real-solar-system.md)**
 

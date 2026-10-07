@@ -217,13 +217,8 @@ KSPTextureLoader, the RSS textures). Each one played again without this mod. Rea
 
 KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, this mod and one instrument.
 
-- [`runs/statics-kerbin-fix.log`](runs/statics-kerbin-fix.log) — no instrument, this mod with its
-  statics fix, at `logLevel = Debug`: `runway-kerbin.sfs` loaded six times, the craft sent to a 200 km
-  orbit with `Alt+F12 → Cheats → Set Orbit`, then the space centre. At every step, the `PQSCity` of
-  Kerbin and where they hang, and the destructible buildings and upgradeable facilities of the KSC, are
-  listed. Read in [Loading, an orbit and the space centre](../docs/non-regression/stock/loading-an-orbit-and-the-space-centre.md).
 - [`runs/runway-mun-kk-colliders-fix.log`](runs/runway-mun-kk-colliders-fix.log) — four loadings of
-  that save, every collider under each craft listed at each loading, with its height above the terrain
+  `runway-mun-kk.sfs`, every collider under each craft listed at each loading, with its height above the terrain
   KSP computes there.
 
 ## With Deferred
@@ -299,12 +294,6 @@ a fixed metre, and hold the line where it refused part of Earth's terrain.
 - [`runs/reload-earth-rss-fix-chain.log`](runs/reload-earth-rss-fix-chain.log) — no instrument, one
   session: 27 loads of `reload-earth-rss-landed.sfs`, the craft *landed*, then, after going back to the
   space centre, 24 of `reload-earth-rss-resave.sfs`, the craft in *prelaunch*.
-- [`runs/statics-earth-rss-fix.log`](runs/statics-earth-rss-fix.log) — no instrument, this mod with its
-  statics fix: two loads of `reload-earth-rss-landed.sfs`, the craft sent to a 200 km orbit with
-  `Alt+F12 → Cheats → Set Orbit`, then the space centre. At every step, the `PQSCity` of Earth and where
-  they hang, and the destructible buildings and upgradeable facilities of the KSC, are listed. Read in
-  [Loading, an orbit and the space centre](../docs/non-regression/stock/loading-an-orbit-and-the-space-centre.md)
-  and [Kopernicus: the KSC moved by Real Solar System](../docs/non-regression/kopernicus/the-ksc-moved-by-real-solar-system.md).
 - [`runs/kopernicus-flag-glitch-without-this-mod.log`](runs/kopernicus-flag-glitch-without-this-mod.log),
   [`runs/kopernicus-flag-glitch-statics-fix.log`](runs/kopernicus-flag-glitch-statics-fix.log) and
   [`runs/kopernicus-flag-glitch-statics-fix-off.log`](runs/kopernicus-flag-glitch-statics-fix-off.log) —
