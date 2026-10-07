@@ -59,20 +59,6 @@ sphere is flagged has not been read, and a craft floating near a coast has not b
 
 **→ Full chapter: [Time warp](work-in-progress/stock/time-warp.md)**
 
-### Destroyed buildings
-
-**Planned.** KSP finds a destructible building by its place below the KSC, which this mod changes in
-flight.
-
-**→ Full chapter: [Destroyed buildings](work-in-progress/stock/destroyed-buildings.md)**
-
-### Facility levels
-
-**Planned.** Upgradeable facilities are found the same way as destructible buildings, at each of their
-levels.
-
-**→ Full chapter: [Facility levels](work-in-progress/stock/facility-levels.md)**
-
 ### The ground station
 
 **Planned.** The ground station of the KSC finds its body by looking up from where it hangs, and a game

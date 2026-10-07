@@ -47,6 +47,24 @@ VAB stands on the launchpad, one from the SPH on the runway, and every building 
 
 **→ Full chapter: [Scene changes](non-regression/stock/scene-changes.md)**
 
+### Destroyed buildings
+
+**Checked on Kerbin.** KSP finds a destructible building by its path below the KSC, which this mod moves in
+flight. The VAB, brought down by a heavy craft dropped onto it while the KSC is out of its sphere,
+collapses, shows as destroyed at the space centre, stays in ruins through the next flights, and stands again
+once repaired, as without this mod; the launchpad and the runway stay within 0.2 mm, against 53 mm
+for the launchpad without it.
+
+**→ Full chapter: [Destroyed buildings](non-regression/stock/destroyed-buildings.md)**
+
+### Facility levels
+
+**Checked on Kerbin.** Each level of a facility is a model of its own, built below the KSC. At each of
+their three levels, a craft stands on the launchpad and on the runway of that level, as without this mod,
+and stays within 0.25 mm through its arrivals, against up to 145 mm without it.
+
+**→ Full chapter: [Facility levels](non-regression/stock/facility-levels.md)**
+
 ### A launch pad placed by a mission
 
 **Impossible to reproduce.** A mission of Making History can place a launch pad of its own, which stock

@@ -31,6 +31,7 @@ def play(session):
     call("open_facility", facility="SPH")
     session.shoot("sph-from-space-centre")
     call("launch_vessel", craft=options.second_craft, site="Runway")
+    common.brake()
     session.arrived("second craft launched from the SPH onto the runway", launchpad=False)
     call("set_orbit", body=options.other_body, altitude=options.other_altitude)
     session.shoot("second-craft-around-" + options.other_body.lower())

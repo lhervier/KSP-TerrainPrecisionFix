@@ -1,0 +1,34 @@
+18:02:37 closed: dialog 'IntroKSC', pressing 'Merci, j'ai compris'
+18:02:40 Research and Development upgraded to level 2 of 3, 454900 funds left
+18:02:42 Research and Development upgraded to level 3 of 3, 285900 funds left
+18:02:48 21 nodes researched, 2517 science left
+18:02:49 closed: RnD
+18:02:51 VAB menu: {"facility": "VAB", "damage": 0, "repairCost": 0, "funds": 285900, "level": 1, "levels": 3, "upgradeCost": 22500, "buttons": ["Upgrade"]}
+18:02:54 screenshot 01-vab-menu-intact.png
+18:02:55 closed: menu
+18:02:58 LaunchPad upgraded to level 2 of 3
+18:03:02 closed: dialog 'IntroVAB', pressing 'Compris !'
+18:03:22 02 dropper launched from the VAB: LP_barsAlpha (LP_lev3 1) 4962.602 mm above the terrain, PRELAUNCH
+18:03:26 screenshot 03-dropper-on-the-launchpad.png
+18:03:34 the craft has hit after 7.7 s of fall
+18:03:38 screenshot 04-vab-hit.png
+18:03:54 05 revert to launch while the VAB collapses: LP_barsAlpha (LP_lev3 1) 4959.418 mm above the terrain, PRELAUNCH
+18:03:57 screenshot 06-vab-after-the-revert.png
+18:04:06 the craft has hit after 7.5 s of fall
+18:04:29 screenshot 07-vab-collapsed.png
+18:04:35 VAB menu: {"facility": "VAB", "damage": 100, "repairCost": 2396.400146484375, "funds": 282800, "level": 1, "levels": 3, "upgradeCost": 22500, "buttons": ["Upgrade", "Repair"]}
+18:04:38 screenshot 08-vab-menu-destroyed.png
+18:04:39 closed: menu
+18:05:01 09 rover launched from the SPH with the VAB destroyed: runway_lev1_v2 (Facility) 4095.323 mm above the terrain, PRELAUNCH
+18:05:04 screenshot 10-vab-destroyed-from-the-runway.png
+18:05:20 11 quickload with the VAB destroyed: runway_lev1_v2 (Facility) 4101.326 mm above the terrain, PRELAUNCH
+18:05:23 screenshot 12-vab-destroyed-after-the-quickload.png
+18:05:28 recovered: {"location": "\u00c0 Piste de d\u00e9collage", "factor": "100.0% "}
+18:05:29 closed: recovery report
+18:05:35 VAB repaired: {"facility": "VAB", "damage": 0, "repairCost": 0, "funds": 280403.5998535156, "level": 1, "levels": 3, "upgradeCost": 22500, "buttons": ["Upgrade"]}
+18:05:36 VAB menu: {"facility": "VAB", "damage": 0, "repairCost": 0, "funds": 280403.5998535156, "level": 1, "levels": 3, "upgradeCost": 22500, "buttons": ["Upgrade"]}
+18:05:39 screenshot 13-vab-menu-repaired.png
+18:05:40 closed: menu
+18:06:02 14 launched from the repaired VAB: LP_barsAlpha (LP_lev3 1) 4909.820 mm above the terrain, PRELAUNCH
+18:06:05 screenshot 15-vab-repaired-from-the-launchpad.png
+18:06:05 done: 5 arrivals in flight, in D:\ksp-dev\campagnes\2026-10-07-destroyed-buildings\stock\run

@@ -25,6 +25,21 @@ URL = None
 # A case of the protocol: its name (its file's, without .py), its docstring and its module.
 Case = collections.namedtuple("Case", "name doc module")
 
+# The nodes of the tech tree that hold the parts of the protocols' crafts (Diag3-Rocket, Diag3-Rover, VAB-Dropper)
+# and the nodes they need, each after a parent it needs: 2 483 science in all, within the largest starting science.
+NODES = ["basicRocketry", "engineering101", "survivability", "stability", "generalRocketry", "flightControl",
+         "generalConstruction", "basicScience", "advRocketry", "electrics", "landing", "advConstruction",
+         "spaceExploration", "commandModules", "advElectrics", "advLanding", "specializedConstruction",
+         "fieldScience", "advMetalworks", "advancedMotors", "fuelSystems"]
+SCIENCE = 5000
+
+# The Custom difficulty of a new career: the largest starting funds and science, funds penalties low enough for the
+# upgrades of the Research and Development and of the launchpad and the runway to their last levels, and the
+# largest building impact damage: at Normal's, a craft dropped onto the VAB does not bring it down.
+STARTING_FUNDS = 500000
+FUNDS_PENALTIES = 10
+BUILDING_DAMAGE = 1
+
 
 def call(tool, **args):
     """Calls one tool of KSP-MCPServer and returns its answer, decoded from JSON when it is JSON."""
@@ -107,6 +122,33 @@ class Session:
                 self.step, how, first["name"], first["parent"], first["heightMm"], active["situation"]))
 
 
+def brake():
+    """Puts the brakes on the active vessel, as the B key does: a rover launched, or reverted to its launch,
+    has them off, and would roll away from where it was put."""
+    call("set_controls", brakes=True)
+
+
+def new_career(folder):
+    """Starts a new career in saves/<folder> from the main menu, set up as a player would to build the protocols'
+    crafts and bring a building down: at the Custom difficulty, with the funds and the science it takes, the parts
+    of a researched node bought with it, the largest building impact damage; the Research and Development upgraded
+    to its last level, the one whose nodes cost as much as they like, and the nodes of NODES researched. Ends at the
+    space centre."""
+    call("new_game", folder=folder, mode="CAREER", starting_funds=STARTING_FUNDS, funds_penalties=FUNDS_PENALTIES,
+         starting_science=SCIENCE, bypass_entry_purchase=True, building_damage=BUILDING_DAMAGE)
+    close(dialogs_only=True)
+    for _ in range(2):
+        state = call("facility_menu", facility="RnD", button="Upgrade")
+        log("Research and Development upgraded to level %d of %d, %.0f funds left" % (
+            state["level"], state["levels"], state["funds"]))
+    call("open_facility", facility="RnD")
+    close(dialogs_only=True)
+    for node in NODES:
+        state = call("research_tech", node=node)
+    log("%d nodes researched, %.0f science left" % (len(NODES), state["science"]))
+    close(dialogs_only=False)
+
+
 def load(name):
     """The case of this folder whose file is <name>.py."""
     path = os.path.join(FOLDER, name + ".py")
@@ -152,7 +194,9 @@ def main(cases, description):
     session = Session(options, out)
     chosen = [c for c in cases if options.cases is None or c.name in options.cases]
 
-    if options.new_game:
+    if options.new_game == "CAREER":
+        new_career(options.folder)
+    elif options.new_game:
         call("new_game", folder=options.folder, mode=options.new_game)
     else:
         call("open_game", folder=options.folder)

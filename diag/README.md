@@ -215,6 +215,47 @@ KSPTextureLoader, the RSS textures). Each one played again without this mod. Rea
   [`runs/scene-changes-earth-rss-fix-readings.json`](runs/scene-changes-earth-rss-fix-readings.json) and
   [`runs/scene-changes-earth-rss-without-this-mod-readings.json`](runs/scene-changes-earth-rss-without-this-mod-readings.json).
 
+## The destroyed buildings protocol
+
+KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1,
+[KSP Diag - Colliders](https://github.com/lhervier/KSP-Diag-Colliders), this mod at `logLevel = Debug`,
+and KSP-MCPServer, which plays the test through
+[`automation/run-destroyed-buildings.py`](automation/run-destroyed-buildings.py): a new career at the Custom
+difficulty (the same as [`career-with-the-parts.sfs`](career-with-the-parts.sfs), which a player can start
+from), [`craft/VAB-Dropper.craft`](craft/VAB-Dropper.craft) dropped twice onto the VAB from the
+launchpad, `Diag3-Rover.craft` launched from the SPH onto the runway around the VAB in ruins, the VAB
+repaired, and `Diag3-Rocket.craft` launched from it; three arrivals on the launchpad, two on the runway.
+Played again without this mod. Read in
+[Destroyed buildings](../docs/non-regression/stock/destroyed-buildings.md).
+
+- [`runs/destroyed-buildings-kerbin-fix.log`](runs/destroyed-buildings-kerbin-fix.log) and
+  [`runs/destroyed-buildings-kerbin-without-this-mod.log`](runs/destroyed-buildings-kerbin-without-this-mod.log);
+  what the script printed in
+  [`runs/destroyed-buildings-kerbin-fix-script.txt`](runs/destroyed-buildings-kerbin-fix-script.txt) and
+  [`runs/destroyed-buildings-kerbin-without-this-mod-script.txt`](runs/destroyed-buildings-kerbin-without-this-mod-script.txt),
+  the colliders under the craft at each arrival in
+  [`runs/destroyed-buildings-kerbin-fix-readings.json`](runs/destroyed-buildings-kerbin-fix-readings.json) and
+  [`runs/destroyed-buildings-kerbin-without-this-mod-readings.json`](runs/destroyed-buildings-kerbin-without-this-mod-readings.json).
+
+## The facility levels protocol
+
+KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1,
+[KSP Diag - Colliders](https://github.com/lhervier/KSP-Diag-Colliders), this mod at `logLevel = Debug`,
+and KSP-MCPServer, which plays the test through
+[`automation/run-facility-levels.py`](automation/run-facility-levels.py): a new career at the Custom
+difficulty (the same as [`career-with-the-parts.sfs`](career-with-the-parts.sfs)), `Diag3-Rocket.craft` launched onto the launchpad and `Diag3-Rover.craft` onto the runway, four
+arrivals on each at each of their three levels. Played again without this mod. Read in
+[Facility levels](../docs/non-regression/stock/facility-levels.md).
+
+- [`runs/facility-levels-kerbin-fix.log`](runs/facility-levels-kerbin-fix.log) and
+  [`runs/facility-levels-kerbin-without-this-mod.log`](runs/facility-levels-kerbin-without-this-mod.log);
+  what the script printed in
+  [`runs/facility-levels-kerbin-fix-script.txt`](runs/facility-levels-kerbin-fix-script.txt) and
+  [`runs/facility-levels-kerbin-without-this-mod-script.txt`](runs/facility-levels-kerbin-without-this-mod-script.txt),
+  the colliders under the craft at each arrival in
+  [`runs/facility-levels-kerbin-fix-readings.json`](runs/facility-levels-kerbin-fix-readings.json) and
+  [`runs/facility-levels-kerbin-without-this-mod-readings.json`](runs/facility-levels-kerbin-without-this-mod-readings.json).
+
 ## On the stock system
 
 KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, this mod and one instrument.

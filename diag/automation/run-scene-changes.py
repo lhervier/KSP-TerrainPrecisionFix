@@ -8,9 +8,10 @@ for the main menu, then run:
 
 The game should be a career: in a sandbox, the Research and Development, the Administration and Mission Control
 only show the dialog that tells they are closed in this mode. With --new-game CAREER, the script starts that
-game itself from the main menu, as New Game does at the Normal difficulty, the craft files already in its
-Ships/VAB and Ships/SPH folders (the second craft, SPH/Diag3-Rover.craft by default, see --second-craft). It opens the game at the space centre and launches the craft onto the launchpad, then plays
-each case of the folder scene-changes, in turn:
+game itself from the main menu, set up as its player would to build the crafts (see new_career in
+scene-changes/common.py), the craft files already in its Ships/VAB and Ships/SPH folders (the second craft,
+SPH/Diag3-Rover.craft by default, see --second-craft). It opens the game at the space centre and launches the
+craft onto the launchpad, then plays each case of the folder scene-changes, in turn:
 
 1. revert-to-launch: Revert to Launch, twice;
 2. quicksave: a quicksave (F5), then a quickload of it (F9), twice;

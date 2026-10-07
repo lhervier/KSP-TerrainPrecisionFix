@@ -1,0 +1,278 @@
+[
+ {
+  "step": 2,
+  "arrival": "dropper launched from the VAB",
+  "launchpad": true,
+  "state": {
+   "scene": "FLIGHT",
+   "paused": false,
+   "ut": 3618.879999999983,
+   "vessel": {
+    "id": "2e000859-57e0-47fb-a1b2-2bbfabe64dd0",
+    "name": "VAB-Dropper",
+    "situation": "PRELAUNCH",
+    "packed": false,
+    "body": "Kerbin",
+    "latitude": -0.0972082248887764,
+    "longitude": -74.55761148377269,
+    "altitude": 79.01920659840107,
+    "heightFromTerrain": 9.280035972595215,
+    "surfaceSpeed": 0.00011899545924805335,
+    "heading": 92.36900213231188,
+    "brakes": false,
+    "sas": false
+   }
+  },
+  "underCrafts": [
+   {
+    "craft": "VAB-Dropper",
+    "id": "2e000859-57e0-47fb-a1b2-2bbfabe64dd0",
+    "situation": "PRELAUNCH",
+    "latitude": -0.0972082248887764,
+    "longitude": -74.55761148377269,
+    "colliders": [
+     {
+      "name": "LP_barsAlpha",
+      "parent": "LP_lev3 1",
+      "heightMm": 4954.465493327007,
+      "active": true
+     },
+     {
+      "name": "LP_main",
+      "parent": "LP_main",
+      "heightMm": 4787.96820982825,
+      "active": true
+     },
+     {
+      "name": "LP_main",
+      "parent": "LP_lev3 1",
+      "heightMm": 4737.964959349483,
+      "active": true
+     },
+     {
+      "name": "Kerbin Zn1232223323",
+      "parent": "PQStorage",
+      "heightMm": -174.11310237366706,
+      "active": true
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "step": 5,
+  "arrival": "revert to launch while the VAB collapses",
+  "launchpad": true,
+  "state": {
+   "scene": "FLIGHT",
+   "paused": false,
+   "ut": 3619.1599999999826,
+   "vessel": {
+    "id": "2e000859-57e0-47fb-a1b2-2bbfabe64dd0",
+    "name": "VAB-Dropper",
+    "situation": "PRELAUNCH",
+    "packed": false,
+    "body": "Kerbin",
+    "latitude": -0.0972082311619162,
+    "longitude": -74.55761146386212,
+    "altitude": 79.01924303383566,
+    "heightFromTerrain": 9.280007362365723,
+    "surfaceSpeed": 4.051273797668632e-05,
+    "heading": 91.66057266212613,
+    "brakes": false,
+    "sas": false
+   }
+  },
+  "underCrafts": [
+   {
+    "craft": "VAB-Dropper",
+    "id": "2e000859-57e0-47fb-a1b2-2bbfabe64dd0",
+    "situation": "PRELAUNCH",
+    "latitude": -0.0972082311619162,
+    "longitude": -74.55761146386212,
+    "colliders": [
+     {
+      "name": "LP_barsAlpha",
+      "parent": "LP_lev3 1",
+      "heightMm": 4954.5290634268895,
+      "active": true
+     },
+     {
+      "name": "LP_main",
+      "parent": "LP_main",
+      "heightMm": 4788.069599540904,
+      "active": true
+     },
+     {
+      "name": "LP_main",
+      "parent": "LP_lev3 1",
+      "heightMm": 4738.075824803673,
+      "active": true
+     },
+     {
+      "name": "Kerbin Zn1232223323",
+      "parent": "PQStorage",
+      "heightMm": -174.11433579400182,
+      "active": true
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "step": 9,
+  "arrival": "rover launched from the SPH with the VAB destroyed",
+  "launchpad": false,
+  "state": {
+   "scene": "FLIGHT",
+   "paused": false,
+   "ut": 3671.0599999999354,
+   "vessel": {
+    "id": "8dced0b0-15c6-4cdf-a434-68bfae02e2d3",
+    "name": "Diag3-Rover",
+    "situation": "PRELAUNCH",
+    "packed": false,
+    "body": "Kerbin",
+    "latitude": -0.048904413206356426,
+    "longitude": -74.71015999521681,
+    "altitude": 69.5971398318652,
+    "heightFromTerrain": 0.7481130957603455,
+    "surfaceSpeed": 8.616003025177557e-05,
+    "heading": 90.39098828180545,
+    "brakes": true,
+    "sas": false
+   }
+  },
+  "underCrafts": [
+   {
+    "craft": "Diag3-Rover",
+    "id": "8dced0b0-15c6-4cdf-a434-68bfae02e2d3",
+    "situation": "PRELAUNCH",
+    "latitude": -0.048904413206356426,
+    "longitude": -74.71015999521681,
+    "colliders": [
+     {
+      "name": "runway_lev1_v2",
+      "parent": "Facility",
+      "heightMm": 4064.1017496818677,
+      "active": true
+     },
+     {
+      "name": "Kerbin Zn1232223233",
+      "parent": "PQStorage",
+      "heightMm": -2.4802912957966328,
+      "active": true
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "step": 11,
+  "arrival": "quickload with the VAB destroyed",
+  "launchpad": false,
+  "state": {
+   "scene": "FLIGHT",
+   "paused": false,
+   "ut": 3685.2799999999224,
+   "vessel": {
+    "id": "8dced0b0-15c6-4cdf-a434-68bfae02e2d3",
+    "name": "Diag3-Rover",
+    "situation": "PRELAUNCH",
+    "packed": false,
+    "body": "Kerbin",
+    "latitude": -0.048904440084134616,
+    "longitude": -74.71015997202336,
+    "altitude": 69.59706013696268,
+    "heightFromTerrain": 0.7481405735015869,
+    "surfaceSpeed": 0.00013936789329416287,
+    "heading": 90.46365748437627,
+    "brakes": true,
+    "sas": false
+   }
+  },
+  "underCrafts": [
+   {
+    "craft": "Diag3-Rover",
+    "id": "8dced0b0-15c6-4cdf-a434-68bfae02e2d3",
+    "situation": "PRELAUNCH",
+    "latitude": -0.04890444051415777,
+    "longitude": -74.71015997204849,
+    "colliders": [
+     {
+      "name": "runway_lev1_v2",
+      "parent": "Facility",
+      "heightMm": 4063.931051758118,
+      "active": true
+     },
+     {
+      "name": "Kerbin Zn1232223233",
+      "parent": "PQStorage",
+      "heightMm": -2.4301301455125213,
+      "active": true
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "step": 14,
+  "arrival": "launched from the repaired VAB",
+  "launchpad": true,
+  "state": {
+   "scene": "FLIGHT",
+   "paused": false,
+   "ut": 3712.4199999998978,
+   "vessel": {
+    "id": "80476b89-39ea-4d94-8b99-0f6a1aab0b33",
+    "name": "Diag3-Rocket",
+    "situation": "PRELAUNCH",
+    "packed": false,
+    "body": "Kerbin",
+    "latitude": -0.09717903045962484,
+    "longitude": -74.55762726822302,
+    "altitude": 74.7791589567205,
+    "heightFromTerrain": 5.040060997009277,
+    "surfaceSpeed": 4.113722302060704e-05,
+    "heading": 264.19115497798566,
+    "brakes": false,
+    "sas": false
+   }
+  },
+  "underCrafts": [
+   {
+    "craft": "Diag3-Rocket",
+    "id": "80476b89-39ea-4d94-8b99-0f6a1aab0b33",
+    "situation": "PRELAUNCH",
+    "latitude": -0.09717903045962484,
+    "longitude": -74.55762726822302,
+    "colliders": [
+     {
+      "name": "LP_barsAlpha",
+      "parent": "LP_lev3 1",
+      "heightMm": 4954.392262501642,
+      "active": true
+     },
+     {
+      "name": "LP_main",
+      "parent": "LP_main",
+      "heightMm": 4787.911606021225,
+      "active": true
+     },
+     {
+      "name": "LP_main",
+      "parent": "LP_lev3 1",
+      "heightMm": 4737.909361720085,
+      "active": true
+     },
+     {
+      "name": "Kerbin Zn1232223323",
+      "parent": "PQStorage",
+      "heightMm": -175.82048359327018,
+      "active": true
+     }
+    ]
+   }
+  ]
+ }
+]
