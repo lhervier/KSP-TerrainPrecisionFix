@@ -15,10 +15,10 @@ launchpad at Cape Canaveral, through every way of leaving the flight and coming 
 included, logged in
 [`diag/runs/scene-changes-earth-rss-fix.log`](../../../diag/runs/scene-changes-earth-rss-fix.log).
 
-The KSC is taken out of its sphere at Cape Canaveral at each of the twelve times the craft is in flight
-near it, corrected each time by a different amount, from 103 to 1 191 mm, and put back under it before
+The KSC is taken out of its sphere at Cape Canaveral at each of the twelve arrivals of a craft in flight
+near it, corrected each time by a different amount, from 147 to 1 086 mm, and put back under it before
 every scene change, and when the second craft reaches the Moon. The launchpad comes back to the same
-place every time, within 0.11 mm. The space centre opens each time, and every building in it (the
-errors of the logs are in [Scene changes](../stock/scene-changes.md#the-result)), although Kopernicus
-looks the KSC up under the home body's terrain sphere when it opens (see
+place every time, within 0.2 mm, and a craft launched from the SPH stands on the runway. The space centre
+opens each time, and every building in it, without an error the session without this mod does not show,
+although Kopernicus looks the KSC up under the home body's terrain sphere when it opens (see
 [The flag fix](../../limits-and-solutions/kopernicus/the-flag-fix.md#where-kopernicus-looks-for-the-ksc)).

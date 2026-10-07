@@ -8,4 +8,4 @@ from it.
 
 *To test:* a craft launched from a launch site of Kerbal Konstructs, from the VAB and from the SPH, then
 the save loaded again. The craft should stand on the pad or the runway, as on the launchpad of the KSC
-([Launching from the VAB and the SPH](../../non-regression/stock/launching-from-the-vab-and-the-sph.md)).
+([Scene changes](../../non-regression/stock/scene-changes.md)).

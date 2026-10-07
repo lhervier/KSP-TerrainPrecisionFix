@@ -2,7 +2,7 @@
 
 Every case is a script of this folder. It starts with the craft in flight on the launchpad, the active vessel,
 leaves the flight one way, and ends with that craft in flight on the launchpad again, read by KSP Diag -
-Colliders at every arrival. A case is a module with:
+Colliders at every arrival, and at the arrival of any other craft the case flies on the way. A case is a module with:
 
 - a docstring, whose first line says what it plays;
 - play(session): plays it;
@@ -83,18 +83,19 @@ class Session:
         call("screenshot", path=path, return_image=False)
         log("screenshot " + os.path.basename(path))
 
-    def arrived(self, how):
-        """Reads the colliders under each craft, once the craft on the launchpad, just arrived in flight and the
-        active vessel, has settled."""
+    def arrived(self, how, launchpad=True):
+        """Reads the colliders under each craft, once the active vessel, just arrived in flight, has settled: the
+        craft on the launchpad, or another craft when launchpad is False."""
         self.step += 1
         call("wait", seconds=self.options.settle)
         call("colliders_show_window", visible=False)
         state = call("get_state")
         crafts = call("colliders_log_under_crafts")
         active = state.get("vessel", {})
-        self.craft_id = active.get("id")
+        if launchpad:
+            self.craft_id = active.get("id")
         under = next((c for c in crafts if c["craft"] == active.get("name")), None)
-        reading = {"step": self.step, "arrival": how, "state": state, "underCrafts": crafts}
+        reading = {"step": self.step, "arrival": how, "launchpad": launchpad, "state": state, "underCrafts": crafts}
         self.readings.append(reading)
         with open(os.path.join(self.out, "readings.json"), "w", newline="") as f:
             json.dump(self.readings, f, indent=1)
@@ -164,7 +165,8 @@ def main(cases, description):
         log("case %s: %s" % (c.name, c.doc.strip().splitlines()[0]))
         c.module.play(session)
 
-    log("done: %d arrivals in flight, in %s" % (len(session.readings), out))
+    log("done: %d arrivals in flight, %d of them on the launchpad, in %s" % (
+        len(session.readings), sum(1 for r in session.readings if r["launchpad"]), out))
     if options.quit:
         call("quit_game")
 

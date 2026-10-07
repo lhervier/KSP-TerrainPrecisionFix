@@ -38,18 +38,12 @@ collider: a stock case, read in the code, outside what this mod fixes.
 
 **→ Full chapter: [Colliders below the highest subdivision level](non-regression/stock/colliders-below-the-highest-subdivision-level.md)**
 
-### Launching from the VAB and the SPH
-
-**Checked on Kerbin.** KSP places a new craft on a spawn point that hangs from the KSC. Launched from
-the VAB and from the SPH, a craft stands on the launchpad and on the runway.
-
-**→ Full chapter: [Launching from the VAB and the SPH](non-regression/stock/launching-from-the-vab-and-the-sph.md)**
-
 ### Scene changes
 
 **Checked on Kerbin and on Earth in Real Solar System.** This mod has to put the KSC back before every
 scene change. Through every way of leaving a flight and coming back, a trip to another body included,
-the launchpad stays within 0.13 mm, against up to 1 127 mm without this mod, and every building opens.
+the launchpad stays within 0.2 mm, against up to 1 127 mm without this mod. A craft launched from the
+VAB stands on the launchpad, one from the SPH on the runway, and every building opens.
 
 **→ Full chapter: [Scene changes](non-regression/stock/scene-changes.md)**
 
@@ -125,7 +119,7 @@ mod, −70.2 to +70.3 mm with the terrain fix, −0.026 to +0.022 mm with the sc
 
 **Checked, no problem.** Kopernicus moves the KSC for Real Solar System, so this mod has to handle it at
 its new place. It takes the KSC out of its sphere there and puts it back, and the launchpad comes back
-to the same place through every way of leaving a flight, within 0.11 mm.
+to the same place through every way of leaving a flight, within 0.2 mm.
 
 **→ Full chapter: [Kopernicus: the KSC moved by Real Solar System](non-regression/kopernicus/the-ksc-moved-by-real-solar-system.md)**
 

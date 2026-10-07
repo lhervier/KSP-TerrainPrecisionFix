@@ -4,13 +4,15 @@ Part of [Terrain Precision Fix](../../../README.md), one test of [Non-regression
 
 **Status: checked on Kerbin and on Earth in Real Solar System.** With this mod, after every way of
 leaving a flight and coming back to the craft on the launchpad, the launchpad is where it was, within
-0.13 mm; without it, it moves by up to 140 mm on Kerbin and 1 127 mm on Earth. Every building of the
-space centre opens.
+0.2 mm; without it, it moves by up to 149 mm on Kerbin and 1 127 mm on Earth. A craft launched from the
+VAB stands on the launchpad, one launched from the SPH on the runway, and every building of the space
+centre opens.
 
 *Why.* This mod takes the KSC out of its terrain sphere in flight, near a craft, and has to put it back
 before every scene change: the next scene, and the next flight, look for it under its sphere
-([The fix: the statics](../../the-fix-statics.md)), and KSP finds the buildings of the KSC by their place
-in the hierarchy below it. A craft leaving for another body takes the KSC out of
+([The fix: the statics](../../the-fix-statics.md)): KSP finds the buildings of the KSC by their place
+in the hierarchy below it, and places a new craft on a spawn point that hangs from it, on the launchpad or
+on the runway. A craft leaving for another body takes the KSC out of
 its reach: it goes back under its sphere on the way, and has to come out again when the player switches
 back to a craft near it.
 
@@ -28,14 +30,16 @@ coming back to the craft each time:
 5. *Revert to Vehicle Assembly Building*, and a launch;
 6. *Recover*, and a launch from the space centre;
 7. *Quit to Main Menu*, and the game loaded back into the flight of the craft;
-8. a second craft launched onto the runway from the space centre, then put on a circular orbit 100 km
-   above the Mun (`Alt+F12 → Cheats → Set Orbit`; on Earth, the Moon), and the player switched back to
-   the craft on the launchpad from the map view (*Switch To*).
+8. the space centre again, the Space Plane Hangar entered through its building, and a second craft, a
+   rover, launched from it onto the runway; the rover then put on a circular orbit 100 km above the Mun
+   (`Alt+F12 → Cheats → Set Orbit`; on Earth, the Moon), and the player switched back to the craft on
+   the launchpad from the map view (*Switch To*).
 
-That makes eleven arrivals in flight, with the launch that starts the game. At each one, once the craft has
-settled, [KSP Diag - Colliders](https://github.com/lhervier/KSP-Diag-Colliders) logs the colliders under
-each craft (its button *Log the colliders under each craft*): the launchpad's, with its height above the
-terrain the game computes there. In a sandbox game, three of the buildings of step 3 only show a dialog
+That makes eleven arrivals of the craft on the launchpad, with the launch that starts the game, and one of
+the rover on the runway. At each one, once the craft has settled,
+[KSP Diag - Colliders](https://github.com/lhervier/KSP-Diag-Colliders) logs the colliders under each craft
+(its button *Log the colliders under each craft*): the launchpad's or the runway's, with its height above
+the terrain the game computes there. In a sandbox game, three of the buildings of step 3 only show a dialog
 saying they are closed in that mode: hence the career.
 
 KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, KSP Diag - Colliders, and this mod
@@ -46,7 +50,9 @@ mod.
 *Played by a script.* [KSP-MCPServer](https://github.com/lhervier/KSP-MCPServer) plays the test through
 [`diag/automation/run-scene-changes.py`](../../../diag/automation/run-scene-changes.py), with
 [`Diag3-Rocket.craft`](https://github.com/lhervier/KSP-Diag-FloatingOrigin/blob/main/craft/Diag3-Rocket.craft)
-in the `Ships/VAB` folder of the game, for both craft: it starts the career itself from the main menu, and closes the
+in the `Ships/VAB` folder of the game and
+[`Diag3-Rover.craft`](https://github.com/lhervier/KSP-Diag-FloatingOrigin/blob/main/craft/Diag3-Rover.craft)
+in its `Ships/SPH` folder: it starts the career itself from the main menu, and closes the
 guide of a new career by its button wherever it shows. Each way of leaving the flight is a script of its
 own, in [`diag/automation/scene-changes/`](../../../diag/automation/scene-changes/), that can also be played
 alone. Every step is one a player can take: the test
@@ -54,16 +60,20 @@ plays just as well by hand, pressing *Log the colliders under each craft* at eac
 
 ## The result
 
-The height of the launchpad under the craft, lowest and highest over the eleven arrivals:
+The height of the launchpad under the craft, lowest and highest over its eleven arrivals:
 
 | | without this mod | with this mod |
 |---|---|---|
-| Kerbin | 2 675.643 to 2 815.769 mm (140.126 mm) | 2 747.132 to 2 747.254 mm (0.122 mm) |
-| Earth | 3 102.290 to 4 229.275 mm (1 126.984 mm) | 3 581.683 to 3 581.792 mm (0.109 mm) |
+| Kerbin | 2 687.927 to 2 837.068 mm (149.140 mm) | 2 747.128 to 2 747.241 mm (0.113 mm) |
+| Earth | 3 102.290 to 4 229.274 mm (1 126.984 mm) | 3 581.669 to 3 581.862 mm (0.192 mm) |
 
-Back from the other body, the launchpad reads 2 730.054 mm on Kerbin and 3 752.959 mm on Earth without
-this mod, 2 747.197 mm and 3 581.792 mm with it: the same as the arrival before it on Kerbin, within
-0.071 mm on Earth.
+Back from the other body, the launchpad reads 2 825.781 mm on Kerbin and 3 650.495 mm on Earth without
+this mod, 2 747.128 mm and 3 581.690 mm with it: within 0.047 mm of the arrival before it on Kerbin, and
+0.008 mm on Earth.
+
+The rover, launched from the SPH, stands on the runway: the runway is under it, 4 149.754 mm above the
+terrain on Kerbin and 3 798.226 mm on Earth without this mod, 4 062.424 mm and 3 861.214 mm with it. One
+launch from the SPH per session gives one reading, not a spread.
 
 Without this mod, KSP places the KSC again at every arrival, rounded each time in a different way
 ([The culprits: the statics](../../the-culprit-statics.md)). With it, the KSC comes back to the same place,
@@ -87,15 +97,12 @@ is open on the craft on the launchpad. Stripped of the rest:
 setting new dominant body: Mun
 [TerrainPrecisionFix] [DEBUG] Kerbin static 'KSC': back under its sphere
 [HighLogic]: =========================== Scene Change : From FLIGHT to FLIGHT =====================
-[TerrainPrecisionFix] [DEBUG] Kerbin static 'KSC': out of its sphere, corrected by 45.43 mm
+[TerrainPrecisionFix] [DEBUG] Kerbin static 'KSC': out of its sphere, corrected by 68.76 mm
 ```
 
-The logs show the same errors with this mod as without it, but for one that comes in some runs and not in
-others: in two of the visits to the space centre, KSP's camera there does not find its place
-(`SpaceCenterCamera: Cannot find transform of name 'KSC/SpaceCenter/SpaceCenterCameraPosition'`), then
-throws a `NullReferenceException` at every frame from `SpaceCenterCamera2.UpdateTransformOverview`. On
-Kerbin it shows without this mod as with it; on Earth, only with it. At the space centre, every building
-opens and closes as without this mod, and the recovery report places the craft on the launchpad.
+The logs with this mod show no error that the logs without it do not show. At the space centre, every
+building opens and closes as without this mod, and the recovery report places the craft on the
+launchpad.
 
 The logs, what the script printed and every reading of KSP Diag - Colliders are in
 [`diag/runs/`](../../../diag/README.md#the-scene-changes-protocol).

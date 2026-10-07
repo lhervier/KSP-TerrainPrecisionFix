@@ -8,8 +8,8 @@ for the main menu, then run:
 
 The game should be a career: in a sandbox, the Research and Development, the Administration and Mission Control
 only show the dialog that tells they are closed in this mode. With --new-game CAREER, the script starts that
-game itself from the main menu, as New Game does at the Normal difficulty, the craft file already in its
-Ships/VAB folder. It opens the game at the space centre and launches the craft onto the launchpad, then plays
+game itself from the main menu, as New Game does at the Normal difficulty, the craft files already in its
+Ships/VAB and Ships/SPH folders (the second craft, SPH/Diag3-Rover.craft by default, see --second-craft). It opens the game at the space centre and launches the craft onto the launchpad, then plays
 each case of the folder scene-changes, in turn:
 
 1. revert-to-launch: Revert to Launch, twice;
@@ -20,8 +20,9 @@ each case of the folder scene-changes, in turn:
 5. revert-to-vab: Revert to Vehicle Assembly Building, and a launch from it;
 6. recovery: Recover, the recovery report closed, and a launch from the space centre;
 7. main-menu: Quit to Main Menu, and the game loaded back into the flight of the craft;
-8. another-body: a second craft launched onto the runway and put around another body (the Mun by default) with
-   Set Orbit, then back to the craft on the launchpad as Switch To of the map view does.
+8. another-body: the Space Plane Hangar, entered through its building, and a second craft launched from it onto
+   the runway, then put around another body (the Mun by default) with Set Orbit, and back to the craft on the
+   launchpad as Switch To of the map view does.
 
 --cases plays some of them only, in that order. Each case can also be played alone, as a script of that folder
 taking the same arguments. At every arrival in flight, once the craft has settled, it presses the button of KSP
