@@ -6,8 +6,9 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
 {
     /// <summary>
     /// Places the terrain and the statics, and, when asked to, the terrain scatter, the same way at every
-    /// load, where their own double precision coordinates say they are: installs each fix the settings
-    /// leave on, and drives the statics fix through scene changes and from frame to frame.
+    /// load, where their own double precision coordinates say they are, and keeps the stock ground anchor
+    /// at the height it was placed at: installs each fix the settings leave on, and drives the statics fix
+    /// through scene changes and from frame to frame.
     /// </summary>
     [KSPAddon(KSPAddon.Startup.Instantly, true)]
     public class TerrainPrecisionFixMod : MonoBehaviour
@@ -86,12 +87,25 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
                 }
             }
 
+            if (!Settings.FixGroundAnchor)
+            {
+                Log.Info("Ground anchor fix turned off in the settings");
+            }
+            else
+            {
+                // The parts are not loaded yet: the anchor is fixed once they are, and again if the part
+                // database is ever reloaded.
+                GameEvents.OnPartLoaderLoaded.Add(OnPartLoaderLoaded);
+                Log.Info("Ground anchor fix installed");
+            }
+
             GameEvents.onGameSceneLoadRequested.Add(OnGameSceneLoadRequested);
             GameEvents.onFlightReady.Add(OnFlightReady);
         }
 
         private void OnDestroy()
         {
+            GameEvents.OnPartLoaderLoaded.Remove(OnPartLoaderLoaded);
             GameEvents.onGameSceneLoadRequested.Remove(OnGameSceneLoadRequested);
             GameEvents.onFlightReady.Remove(OnFlightReady);
         }
@@ -110,6 +124,19 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
         private void OnFlightReady()
         {
             StaticsFix.OnFlightReady();
+        }
+
+        private void OnPartLoaderLoaded()
+        {
+            try
+            {
+                GroundAnchorFix.Apply();
+            }
+            catch (Exception e)
+            {
+                // The collider is only replaced once the new one is complete: the anchor is exactly stock.
+                Log.Error($"Could not fix the ground anchor, it is left as stock: {e}");
+            }
         }
     }
 }

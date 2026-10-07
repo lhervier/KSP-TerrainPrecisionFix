@@ -29,6 +29,10 @@
       <HintPath>$(KSPDIR)\KSP_x64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
       <Private>false</Private>
     </Reference>
+    <Reference Include="UnityEngine.PhysicsModule">
+      <HintPath>$(KSPDIR)\KSP_x64_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
     <!-- Not part of KSP: HarmonyKSP, the usual GameData\000_Harmony. -->
     <Reference Include="0Harmony">
       <HintPath>$(KSPDIR)\GameData\000_Harmony\0Harmony.dll</HintPath>

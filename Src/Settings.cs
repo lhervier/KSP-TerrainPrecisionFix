@@ -21,6 +21,11 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
         public static bool FixScatter { get; private set; } = false;
 
         /// <summary>
+        /// Whether the stock ground anchor is kept at the height it was placed at, load after load.
+        /// </summary>
+        public static bool FixGroundAnchor { get; private set; } = true;
+
+        /// <summary>
         /// Whether Kopernicus, when installed, is patched to cope with statics out of their sphere. Only
         /// meaningful with the statics fix on, which then breaks Kopernicus' flag fix when this is off.
         /// </summary>
@@ -34,8 +39,8 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
 
         /// <summary>
         /// Reads the settings file and applies its log level. A missing file, a missing value or an unknown
-        /// value leaves the default: the terrain and the statics fixed, the scatter left as stock, both mods
-        /// patched, logging at Info.
+        /// value leaves the default: the terrain, the statics and the ground anchor fixed, the scatter left as
+        /// stock, both mods patched, logging at Info.
         /// </summary>
         public static void Load()
         {
@@ -67,6 +72,7 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
             FixTerrain = ReadSwitch(node, "fixTerrain", FixTerrain, path);
             FixStatics = ReadSwitch(node, "fixStatics", FixStatics, path);
             FixScatter = ReadSwitch(node, "fixScatter", FixScatter, path);
+            FixGroundAnchor = ReadSwitch(node, "fixGroundAnchor", FixGroundAnchor, path);
             PatchKopernicus = ReadSwitch(node, "patchKopernicus", PatchKopernicus, path);
             PatchKerbalKonstructs = ReadSwitch(node, "patchKerbalKonstructs", PatchKerbalKonstructs, path);
         }
