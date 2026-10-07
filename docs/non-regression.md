@@ -16,8 +16,9 @@ its own.
 
 This mod places the terrain quads a craft stands on in double, and takes the statics out of their
 terrain sphere in flight, near a craft ([The fix: the ground](the-fix-ground.md),
-[The fix: the statics](the-fix-statics.md)). What stock places on the ground, or finds the statics by,
-has to keep working.
+[The fix: the statics](the-fix-statics.md)); with its scatter fix on, off by default, it hangs each
+holder of terrain scatter from its quad ([The fix: the scatter](the-fix-scatter.md)). What stock places
+on the ground, or finds the statics and the holders by, has to keep working.
 
 ### Existing saves
 
@@ -84,6 +85,14 @@ flight, and the markers of the launch sites follow their statics wherever this m
 
 **→ Full chapter: [The map view](non-regression/stock/the-map-view.md)**
 
+### The scatter holders
+
+**Checked with the scatter fix on, no problem — no holder lost.** The scatter fix takes each holder out
+of its pool's container while its quad is in use. Over a flight over the Mun and across scene switches,
+every holder went back to its pool, none was left on a quad, and the pools counted as in stock.
+
+**→ Full chapter: [The scatter holders](non-regression/stock/the-scatter-holders.md)**
+
 ## KSP Community Fixes
 
 KSP Community Fixes is the base most players run, and it patches the terrain too.
@@ -91,7 +100,8 @@ KSP Community Fixes is the base most players run, and it patches the terrain too
 ### Its own terrain patches
 
 **Checked, in the source and in every campaign.** None of its patches places a terrain quad or a terrain
-vertex, and every measurement of this mod was taken with KSP Community Fixes 1.41.1 installed.
+vertex, or names a scatter holder, and every measurement of this mod was taken with KSP Community Fixes
+1.41.1 installed.
 
 **→ Full chapter: [KSP Community Fixes: its own terrain patches](non-regression/ksp-community-fixes/its-own-terrain-patches.md)**
 

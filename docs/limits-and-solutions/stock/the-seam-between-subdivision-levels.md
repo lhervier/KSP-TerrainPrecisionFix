@@ -276,7 +276,7 @@ two stock quads: every quad that holds the point has to move with it. Where the 
 two corrected quads that meet the coarser one at a corner do not put that corner at quite the same place,
 but only by millimetres: either will do.
 
-**One fix more.** This would be a fix of its own, as [the scatter fix](rocks-grass-and-trees.md#the-solution-the-scatter-fix)
+**One fix more.** This would be a fix of its own, as [the scatter fix](../../the-fix-scatter.md)
 is for the rocks. It closes the seam whatever its size, so it would close the crack stock already leaves
 as well as the wider one this mod leaves, and it reads nothing this mod does not already rely on.
 

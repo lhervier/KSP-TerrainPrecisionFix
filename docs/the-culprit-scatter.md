@@ -1,11 +1,11 @@
-# The scatter fix: the culprit
+# The culprit: the scatter
 
-Part of [Terrain Precision Fix](../../../../README.md), one page of the solution to
-[Rocks, grass and trees](../rocks-grass-and-trees.md), in [Limits and solutions](../../../limits-and-solutions.md).
+Part of [Terrain Precision Fix](../README.md): the stock code that places the terrain scatter on the ground, and why it draws it somewhere else at every load.
 
-[Checking the culprit](checking-the-culprit.md) checks it before anything is changed.
+Here it is straight away.
 
-The objects of a terrain quad are built from the quad's own vertices, in the quad's own coordinates, in
+The objects of a terrain quad — the rocks, and around the KSC the grass and the trees — are built from the
+quad's own vertices, in the quad's own coordinates, in
 `PQSLandControl.LandClassScatter.CreateScatterMesh`, KSP 1.12.5:
 
 ```csharp
@@ -60,7 +60,7 @@ much above or below the ground.
 A rounding depends on the frame the vector is converted into: the world matrix of the terrain sphere,
 whose rotation and translation change from one load to the next. It is the same frame, and the same
 reason, as for the ground itself, set out in
-[The culprit: the ground](../../../the-culprit-ground.md#why-it-is-different-at-every-load).
+[The culprit: the ground](the-culprit-ground.md#why-it-is-different-at-every-load).
 As there, it is a hypothesis read from the stock code, and the fix does not need it to hold: it removes
 the long vector the rounding is drawn from.
 
@@ -69,8 +69,14 @@ the long vector the rounding is drawn from.
 The terrain fix places the quads of the highest level in double precision. It moves the quad, not its
 holder. The holder is still placed and drawn from a 600 km float, so it no longer shares even its
 position with the quad: the rounding of the quad's origin, which the terrain fix removed from the
-ground, is still in the holder, on top of the rounding of its matrix.
+ground, is still in the holder, on top of the rounding of its matrix. On Kerbin, the gap between the
+scatter and the ground gets wider: that is a limit of the terrain fix,
+[Rocks, grass and trees](limits-and-solutions/stock/rocks-grass-and-trees.md).
 
 Both come from a transform holding a vector hundreds of kilometres long. The fix follows from that: hang
 the holder from its quad, so that no transform in its chain holds one. How exactly is in
-[The fix](the-fix.md). First, the culprit has to hold: see [Checking the culprit](checking-the-culprit.md).
+[The fix: the scatter](the-fix-scatter.md).
+
+That the scatter comes back somewhere else at every load, on stock and with the terrain fix alone, is
+checked in [Checking the culprit: loading the same save](checking-the-culprit-loading.md#the-scatter-over-twelve-loads),
+and along a flight in [Checking the culprit: in flight](checking-the-culprit-flight.md#the-rocks-along-a-flight).

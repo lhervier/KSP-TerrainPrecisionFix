@@ -1,13 +1,15 @@
 # Performance
 
-Part of [Terrain Precision Fix](../README.md): what the fix costs, measured against stock — the ground measured, the statics not yet.
+Part of [Terrain Precision Fix](../README.md): what the fix costs, measured against stock — the ground and the scatter measured, the statics not yet.
 
 Now that the cause is known and fixed, what does the fix cost? The vertex part replaces a computation
 that stock runs for every vertex of every terrain quad it builds, so it sits on a path the game uses
 continuously while flying, not only when a scene loads. **It does not slow the game down: timed frame
 by frame, it came out no dearer than stock.** It even places a vertex faster than stock, but that saving
 is too small for a frame to show. The statics fix runs on another path, a check per
-frame of the statics the game knows of; **its cost with statics near a craft is not measured yet**.
+frame of the statics the game knows of; **its cost with statics near a craft is not measured yet**. The
+scatter fix, off by default, only works when a scatter holder is given a quad or released: turned on,
+**it shows no cost the frames can resolve** ([The scatter fix](#the-scatter-fix)).
 
 ## Two instruments
 
@@ -54,7 +56,9 @@ being timed.
 The PQS Bench runs measure the ground only: they were taken before this mod placed the statics. The
 profiler runs were taken with the statics fix installed, but 5 km over the Mun no static is near enough
 for it to take one out of its sphere: all it did there was its check of every static, once per frame,
-and that check is in their figures.
+and that check is in their figures. The scatter fix, off by default, is in none of these three
+configurations: it is timed apart, with the profiler only, in the same session of runs
+([The scatter fix](#the-scatter-fix)).
 
 ## What a vertex costs
 
@@ -188,6 +192,50 @@ ten times its own saving, the 0.03 ms of the middle configuration fifteen times 
 those runs cheaper, it is not the vertex placement, and three runs per configuration do not say what it
 is.
 
+### The scatter fix
+
+What the scatter fix adds runs once each time a holder is given a quad or released, not once per vertex: a
+re-parenting and three transform assignments. A holder is given its quad within `PQS.BuildQuad`, when the
+`PQSMod`s are told the quad is built (`Mod_OnQuadBuilt` → `AddScatterMeshController` → `Setup`), and
+handed back to its pool within `PQS.UpdateQuads`, when a quad collapses (`UpdateSubdivision` →
+`Collapse` → `onDestroy`). In flight, both happen inside `PQS.UpdateQuads`, where the terrain subdivides
+and collapses its quads, and which the terrain's coroutine `PQS.UpdateSphere` calls each time it runs. So
+whatever the scatter fix costs is paid in the frames the terrain is updated in, on Update → Coroutines.
+PQS Bench does not answer this question: its `calibrate` mode only replays the vertex placement, which
+the scatter fix does not touch.
+
+It is timed against this mod as installed by default, the terrain fix and the statics fix, since the
+scatter fix is meant to go with them. In each of the three rounds of the session, right after the run of
+this mod, a run of this mod with the scatter fix, by the same procedure: three more runs, all ended on
+*Stop*, with 6 584 to 6 719 frames each. **The scatter fix was then a mod of its own**, Rock Precision Fix
+0.1.0, installed next to this mod: the same two patches. The runs of this mod alone are the ones of the
+table above. In milliseconds per frame (every row of every run is
+[with the runs](../perfs/README.md#the-scatter-fix-the-figures)):
+
+| | this fix 1 | with the scatter fix 1 | this fix 2 | with the scatter fix 2 | this fix 3 | with the scatter fix 3 |
+|---|---|---|---|---|---|---|
+| frame time, mean | 10.42 | 10.50 | 10.55 | 10.45 | 10.40 | 10.65 |
+| frame time, worst 1 % | 35.16 | 35.53 | 35.33 | 35.24 | 35.54 | 35.67 |
+| Update → Coroutines, mean | 1.93 | 1.95 | 1.94 | 1.93 | 1.93 | 2.00 |
+| Update → Coroutines, median | 1.28 | 1.28 | 1.29 | 1.27 | 1.28 | 1.28 |
+| Update → Coroutines, worst 1 % | 24.39 | 24.53 | 24.32 | 24.41 | 24.89 | 24.98 |
+| VSync, mean | 0.06 | 0.06 | 0.06 | 0.06 | 0.06 | 0.06 |
+
+Averaged over the three runs of each configuration:
+
+| | this fix | with the scatter fix |
+|---|---|---|
+| frame time, mean | 10.46 | 10.53 |
+| Update → Coroutines, mean | 1.93 | 1.96 |
+| Update → Coroutines, worst 1 % | 24.53 | 24.64 |
+
+On Update → Coroutines, this fix spends 1.93 to 1.94 ms per frame on average over its three runs,
+1.93 ms on average, and 1.93 to 2.00 ms with the scatter fix, 1.96 ms on average: 0.03 ms more, made by
+one run, the third, at 2.00 ms; the other two, at 1.95 and 1.93 ms, are within 0.02 ms of the runs
+without it. The three runs with the scatter fix spread by 0.07 ms, more than the two averages differ. The
+mean frame time leans the same way, and for the same run: 10.46 ms without the scatter fix and 10.53 ms
+with it on average, the third run with it at 10.65 ms.
+
 ## What this says
 
 **The fix does not slow the game down.** That is the only conclusion the frames support about it. In
@@ -201,6 +249,11 @@ The bench does show the fix placing a vertex faster than stock, and faster than 
 could adopt, the rest is the arithmetic itself. But it is not a gain worth claiming: at 4 µs per frame,
 below the 0.01 ms the profiler reports to and below the spread among the runs of one configuration, no
 frame shows it.
+
+**The scatter fix shows no cost these runs can resolve.** With it, the coroutines the terrain is updated
+in average 0.03 ms more per frame, but one run of the three makes that difference, and the runs with the
+scatter fix spread by 0.07 ms, more than it. Whatever the scatter fix costs is at most of the order of
+that spread; these runs show neither a gain nor a cost.
 
 The statics are hardly in these figures: in the profiler runs, no static was near the craft. What their
 fix does grows with the number of statics, not of vertices: once per frame, it checks every static the

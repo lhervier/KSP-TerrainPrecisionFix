@@ -73,7 +73,7 @@ precision`.
 
 ## The scatter fix
 
-What [the scatter fix](../docs/limits-and-solutions/stock/the-scatter-fix/performance.md) costs, timed by
+What [the scatter fix](../docs/the-fix-scatter.md) costs, read in [Performance: the scatter fix](../docs/performance.md#the-scatter-fix), timed by
 the procedure of [What a frame pays](#what-a-frame-pays), in the same session of runs: in each of its
 three rounds, right after the run of this mod, a run of this mod with the scatter fix. The scatter fix
 was then a mod of its own, Rock Precision Fix 0.1.0, installed next to this mod: the same two patches.

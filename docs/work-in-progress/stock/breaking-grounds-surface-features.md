@@ -16,4 +16,4 @@ would not change it.
 *To test:* first read where their collider sits relative to what is drawn, the way KSP Diag - Scatter
 does for scatter colliders; then measure the gap over several loads, with and without this fix. If
 there is a gap, a fix of their own would hang those holders from their quads, the way the
-[scatter fix](../../limits-and-solutions/stock/rocks-grass-and-trees.md#the-solution-the-scatter-fix) does for scatter.
+[scatter fix](../../the-fix-scatter.md) does for scatter.

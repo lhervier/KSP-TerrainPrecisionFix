@@ -238,3 +238,11 @@ pinned to the terrain sphere and does not. To read first.
 Kopernicus and Kerbal Konstructs are read and patched; the others are not read.
 
 **→ Full chapter: [Mods that look for a static under its sphere](work-in-progress/other-mods/mods-that-look-for-a-static-under-its-sphere.md)**
+
+### Mods that look for a scatter holder under its sphere
+
+**Planned.** With the scatter fix on, off by default, any mod that looks for a scatter holder where stock
+puts it would miss it. Stock, KSP Community Fixes, Kopernicus, Parallax and TUFX are read; the others are
+not.
+
+**→ Full chapter: [Mods that look for a scatter holder under its sphere](work-in-progress/other-mods/mods-that-look-for-a-scatter-holder-under-its-sphere.md)**

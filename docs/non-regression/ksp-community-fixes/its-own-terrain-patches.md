@@ -10,4 +10,9 @@ scatter is distributed; none of them patches `PQS.BuildVertexSurfaceRelative`, `
 replaces `FloatingOrigin.setOffset`, but stock repositions the landed quads from the method that calls it,
 not from inside it, so that path is left as stock has it.
 
+None of them names a scatter holder either, which the scatter fix of this mod moves
+([The fix: the scatter](../../the-fix-scatter.md)): `ScatterDistribution` only corrects the longitude the
+scatter is spread by, in `PQSLandControl.OnVertexBuildHeight`, and `OptimizedModuleRaycasts` asks the
+object a ray hits whether it is a quad, as stock does, not its parents.
+
 Read in the repository as of release 1.40.1.

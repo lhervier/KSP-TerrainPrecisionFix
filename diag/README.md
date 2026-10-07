@@ -357,8 +357,11 @@ a fixed metre, and hold the line where it refused part of Earth's terrain.
 ## The scatter fix
 
 The readings of [KSP Diag - Scatter](https://github.com/lhervier/KSP-Diag-Scatter) with
-[the scatter fix](../docs/limits-and-solutions/stock/rocks-grass-and-trees.md#the-solution-the-scatter-fix)
-on, read in [The scatter fix: checking the culprit](../docs/limits-and-solutions/stock/the-scatter-fix/checking-the-culprit.md),
+[the scatter fix](../docs/the-fix-scatter.md)
+on, read in [Checking the culprit: loading the same save](../docs/checking-the-culprit-loading.md#the-scatter-over-twelve-loads),
+[Checking the culprit: in flight](../docs/checking-the-culprit-flight.md#the-rocks-along-a-flight),
+[The scatter holders](../docs/non-regression/stock/the-scatter-holders.md) and
+[Kopernicus: scatter with colliders](../docs/non-regression/kopernicus/scatter-with-colliders.md),
 kept as they were logged, copied out of `KSP.log`, in [`runs/scatter-fix/`](runs/scatter-fix): for the
 rocks after a load, one file per load, each holding the last record taken after that load; for the rocks
 over a flight and for the holder pools, one file per flight or session, holding every record taken

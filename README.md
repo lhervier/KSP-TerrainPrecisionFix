@@ -107,6 +107,13 @@ stock gives them no place outside the body where a precise position would be kep
 
 **→ Full chapter: [The culprit: the statics](docs/the-culprit-statics.md)**
 
+**The scatter.** The rocks, and around the KSC the grass and the trees, are built from the vertices of
+their quad, but hang from a *holder* that stays under the body, at the same 600 km vector in a float. The
+quad is drawn where its position says, the holder where its matrix says, and the two need not round the
+same way. Stock scatter has no collider, so this is visual — unless a mod gives it one.
+
+**→ Full chapter: [The culprit: the scatter](docs/the-culprit-scatter.md)**
+
 ## What moves the frame
 
 The rounding is drawn anew because the frame the ground is built in — how the body is turned in
@@ -137,16 +144,27 @@ mod has to patch both**, each patch standing for a small change these mods could
 
 **→ Full chapter: [The fix: the statics](docs/the-fix-statics.md)**
 
+**The scatter, off by default.** Two Harmony patches hang each holder from its own quad, at no offset,
+and hang it back in its pool when the quad goes: the stock scatter is then drawn with the very matrix of
+the ground it was built on. It is off by default: it moves stock objects other mods may look for, against
+a gap nobody sees on a stock install. With a mod that gives the scatter colliders, the gap is a real one,
+and turning it on is yours to weigh.
+
+**→ Full chapter: [The fix: the scatter](docs/the-fix-scatter.md)**
+
 ## Checking the culprit
 
 Each situation where a craft meets the ground is measured twice, without this mod and with it: one
 instrument reads the landed craft, another the ground itself, and in flight a third reads the quads the
-ground is made of. In each summary below, the first figure is without this mod, the second with it.
+ground is made of. In each summary below, the first figure is without this mod, the second with it. A
+fourth instrument reads the scatter, once more with the scatter fix on.
 
 **Loading the same save**, six times, on the four stock worlds and the Moon and Earth of
 [Real Solar System](https://github.com/KSP-RO/RealSolarSystem): the ground comes back over 43.6 mm on
 Kerbin and 292.3 mm on Earth, within 0.3 mm with this mod. The runway of the KSC comes back over
-116.5 mm, and 0.177 mm with this mod.
+116.5 mm, and 0.177 mm with this mod. Over twelve loads, half of the points measured on the scatter
+of Kerbin come back more than 94 mm apart against the ground, 130 mm with this mod as installed by
+default; with its scatter fix on, none more than 0.125 mm.
 
 **→ Full chapter: [Checking the culprit: loading the same save](docs/checking-the-culprit-loading.md)**
 
@@ -174,7 +192,8 @@ ground either way.
 
 **In flight**, a rocket from the launchpad to the sea, its quads written about once a second: two
 quads of the highest level built at different moments step by up to 22.5 mm where they meet on Kerbin
-and 289 mm on Earth, and by 0.67 mm and 2.1 mm at most with this mod.
+and 289 mm on Earth, and by 0.67 mm and 2.1 mm at most with this mod. Over the Mun, the scatter is drawn
+up to 26.5 mm off its quads without the scatter fix, and exactly on them with it.
 
 **→ Full chapter: [Checking the culprit: in flight](docs/checking-the-culprit-flight.md)**
 
@@ -187,13 +206,14 @@ played in game with this mod, and compared with the game without it where the tw
 **Stock.** Existing saves go through one more draw of the ground, always the same one. Over loadings, an
 orbit and a return to the space centre, the KSC keeps every building registered, and a craft launched
 from the VAB or the SPH stands on the launchpad or the runway. Through every scene change, the KSC comes
-back to the same place.
+back to the same place. With the scatter fix on, every scatter holder goes back to its pool.
 
 **KSP Community Fixes.** None of its patches places the terrain, and every measurement on these pages
 was taken with it installed.
 
 **Kopernicus.** The ground is as stable under Kopernicus as without it, and the KSC it moves to Cape
-Canaveral for Real Solar System is placed where it puts it.
+Canaveral for Real Solar System is placed where it puts it. The rocks it can give a collider are hit
+where they are drawn with the scatter fix on.
 
 **Real Solar System.** Its two workarounds for this defect, one for a landed craft and one for the
 runway, have nothing left to correct with this mod, and its CommNet ground stations keep relaying.
@@ -210,8 +230,9 @@ they do without it.
 came out a little cheaper than every run of stock on the coroutines the terrain is updated in — by more
 than the fix's own saving can explain, so not a gain to claim, but no cost. Measured vertex by vertex with
 [PQS Bench](https://github.com/lhervier/KSP-PQSBench), the fix even places a vertex faster than stock, but
-that saving is about 0.04 % of the time played, too small for a frame to show. What the statics fix costs
-with statics near a craft is not measured yet.
+that saving is about 0.04 % of the time played, too small for a frame to show. Turned on, the scatter fix
+shows no cost these runs can resolve. What the statics fix costs with statics near a craft is not
+measured yet.
 
 **→ Full chapter: [Performance](docs/performance.md)**
 
@@ -257,7 +278,7 @@ change one: quit KSP, edit the file, start KSP again.
 |---|---|
 | `fixTerrain` | `true` (default) places the terrain in double precision; `false` leaves it as stock builds it |
 | `fixStatics` | `true` (default) places the statics in double precision; `false` leaves them where stock places them |
-| `fixScatter` | `false` (default) leaves the terrain scatter where stock draws it; `true` draws it from the terrain quads it was built on. Off by default because it moves stock objects other mods may look for, against a gap nobody sees on a stock install: see [Should you turn it on?](docs/limits-and-solutions/stock/the-scatter-fix/should-you-turn-it-on.md) |
+| `fixScatter` | `false` (default) leaves the terrain scatter where stock draws it; `true` draws it from the terrain quads it was built on. Off by default because it moves stock objects other mods may look for, against a gap nobody sees on a stock install: see [Off by default: should you turn it on?](docs/the-fix-scatter.md#off-by-default-should-you-turn-it-on) |
 | `patchKopernicus` | `true` (default) patches Kopernicus, when installed, to cope with the statics fix. With `false` and the statics fix on, Kopernicus' flag fix throws when a facility is upgraded in flight near the KSC, which only a Making History mission does: an error in the log whose stack trace names Kopernicus, and nothing else, since the statics fix keeps the flags steady there. Meant only to see what the patch is for |
 | `patchKerbalKonstructs` | `true` (default) patches Kerbal Konstructs, when installed, to cope with the statics fix. With `false` and the statics fix on, moving a group with its group editor in flight sends it elsewhere on its body, and saves it there: meant only to see what the patch is for |
 | `logLevel` | what goes to `KSP.log`, below |
