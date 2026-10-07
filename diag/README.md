@@ -192,7 +192,8 @@ Integrator and KSPTextureLoader as for Real Solar System, and the Community Terr
 KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1,
 [KSP Diag - Colliders](https://github.com/lhervier/KSP-Diag-Colliders), this mod at `logLevel = Debug`,
 and KSP-MCPServer, which plays the test through [`automation/run-scene-changes.py`](automation/run-scene-changes.py):
-a new career, `Diag3-Rocket.craft` on the launchpad, eleven arrivals in flight through every way of leaving
+a new career at the Custom difficulty (on Kerbin, the same as [`career-with-the-parts.sfs`](career-with-the-parts.sfs)),
+`Diag3-Rocket.craft` on the launchpad, eleven arrivals in flight through every way of leaving
 it, and `Diag3-Rover.craft` launched from the SPH onto the runway; one script per way in
 [`automation/scene-changes/`](automation/scene-changes/). On Earth, Real Solar System 20.1.3.0 and what it
 requires (Kopernicus 248, Modular Flight Integrator,
@@ -207,6 +208,9 @@ KSPTextureLoader, the RSS textures). Each one played again without this mod. Rea
   the colliders under the craft at each arrival in
   [`runs/scene-changes-kerbin-fix-readings.json`](runs/scene-changes-kerbin-fix-readings.json) and
   [`runs/scene-changes-kerbin-without-this-mod-readings.json`](runs/scene-changes-kerbin-without-this-mod-readings.json).
+- [`runs/scene-changes-kerbin-without-this-mod-earlier.log`](runs/scene-changes-kerbin-without-this-mod-earlier.log)
+  — an earlier session on Kerbin without this mod, the same protocol at the Normal difficulty, kept for the
+  error of the space centre camera it shows.
 - [`runs/scene-changes-earth-rss-fix.log`](runs/scene-changes-earth-rss-fix.log) and
   [`runs/scene-changes-earth-rss-without-this-mod.log`](runs/scene-changes-earth-rss-without-this-mod.log)
   — on Earth; the same in
