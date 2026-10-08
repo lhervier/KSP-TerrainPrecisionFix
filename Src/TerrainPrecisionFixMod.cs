@@ -87,16 +87,34 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
                 }
             }
 
-            if (!Settings.FixGroundAnchor)
+            if (!Settings.FixGroundAnchorModel)
             {
-                Log.Info("Ground anchor fix turned off in the settings");
+                Log.Info("Ground anchor model fix turned off in the settings");
             }
             else
             {
-                // The parts are not loaded yet: the anchor is fixed once they are, and again if the part
-                // database is ever reloaded.
+                // The parts are not loaded yet: the anchor's collider is fixed once they are, and again if the
+                // part database is ever reloaded.
                 GameEvents.OnPartLoaderLoaded.Add(OnPartLoaderLoaded);
-                Log.Info("Ground anchor fix installed");
+                Log.Info("Ground anchor model fix installed");
+            }
+
+            if (!Settings.FixGroundAnchorLoad)
+            {
+                Log.Info("Ground anchor load fix turned off in the settings");
+            }
+            else
+            {
+                try
+                {
+                    GroundAnchorFix.Install(harmony);
+                    Log.Info("Ground anchor load fix installed");
+                }
+                catch (Exception e)
+                {
+                    // The patch is not in place: anchored vessels are loaded as stock loads them.
+                    Log.Error($"Could not install the ground anchor load fix, anchored vessels are loaded as stock loads them: {e}");
+                }
             }
 
             GameEvents.onGameSceneLoadRequested.Add(OnGameSceneLoadRequested);
@@ -135,7 +153,7 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
             catch (Exception e)
             {
                 // The collider is only replaced once the new one is complete: the anchor is exactly stock.
-                Log.Error($"Could not fix the ground anchor, it is left as stock: {e}");
+                Log.Error($"Could not fix the ground anchor's model, it is left as stock: {e}");
             }
         }
     }

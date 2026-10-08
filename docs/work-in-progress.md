@@ -18,13 +18,6 @@ repeatable.
 
 **→ Full chapter: [Sloped ground](work-in-progress/stock/sloped-ground.md)**
 
-### Ground anchors
-
-**Planned.** The ground anchor starts its physics on the very first frame and is frozen after one, at
-whatever height the ground is then. A stable ground should make its behaviour repeatable, not fix it.
-
-**→ Full chapter: [Ground anchors](work-in-progress/stock/ground-anchors.md)**
-
 ### Asteroids held by a claw
 
 **Planned.** At the first load with this mod, the ground under an asteroid resting on it moves once, with

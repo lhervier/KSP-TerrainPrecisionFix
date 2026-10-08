@@ -114,6 +114,12 @@ same way. Stock scatter has no collider, so this is visual — unless a mod give
 
 **→ Full chapter: [The culprit: the scatter](docs/the-culprit-scatter.md)**
 
+**The ground anchor.** Two stock behaviours raise an anchored vessel when it is loaded, and the anchor,
+riveted to the ground, keeps it there: the anchor's collider stops 2 cm above its bottom, and KSP raises a
+landed vessel to the height it computes for the terrain, above the ground it actually rests on.
+
+**→ Full chapter: [The culprit: the ground anchor](docs/the-culprit-ground-anchor.md)**
+
 ## What moves the frame
 
 The rounding is drawn anew because the frame the ground is built in — how the body is turned in
@@ -151,6 +157,12 @@ a gap nobody sees on a stock install. With a mod that gives the scatter collider
 and turning it on is yours to weigh.
 
 **→ Full chapter: [The fix: the scatter](docs/the-fix-scatter.md)**
+
+**The ground anchor.** The anchor's collider is brought down to the bottom of the anchor, and a vessel
+holding an anchor is loaded where it was saved instead of being raised: each by its own setting, both on
+by default, for the stock anchor only.
+
+**→ Full chapter: [The fix: the ground anchor](docs/the-fix-ground-anchor.md)**
 
 **The patches to other mods.** Two mods look for a static where the statics fix no longer leaves it in
 flight. Each patch, on by default, stands for a small change these mods could make themselves, given as a
@@ -213,6 +225,12 @@ up to 26.5 mm off its quads without the scatter fix, and exactly on them with it
 
 **→ Full chapter: [Checking the culprit: in flight](docs/checking-the-culprit-flight.md)**
 
+**Anchoring a base**, an anchor placed on Kerbin, alone then with a battery on it, saved and loaded twice:
+on stock, the anchor comes back 4.1 cm higher than placed, and the base 26.3 cm above the ground at its
+second load; with this mod, both within 0.08 mm.
+
+**→ Full chapter: [Checking the culprit: anchoring a base](docs/checking-the-culprit-anchoring.md)**
+
 ## Non-regression tests
 
 Checking the culprit shows what this mod fixes. These tests check the other side, one mod at a time:
@@ -256,7 +274,7 @@ measured yet.
 ## Limits and solutions
 
 What this mod makes worse, or would break without a patch of its own, with the solution to each. **The
-statics fix is the riskier of the two fixes on by default**: it takes a static out of the place where stock, and any
+statics fix is the riskiest of the fixes on by default**: it takes a static out of the place where stock, and any
 mod, expects to find it.
 
 **Stock.** This mod widens two visual gaps stock already has: the rocks, grass and trees against the
@@ -284,11 +302,13 @@ Requires KSP 1.12 and [HarmonyKSP](https://github.com/KSPModdingLibs/HarmonyKSP)
 `GameData/000_Harmony`, also installed by KSP Community Fixes).
 
 Copy `GameData/TerrainPrecisionFixMod` into the `GameData` of KSP. Nothing is written to your saves:
-removing the folder gives you the stock terrain, statics and scatter back.
+removing the folder gives you the stock terrain, statics, scatter and ground anchors back. An anchored
+base is then raised again at its next load, as stock raises it:
+[Removing this mod](docs/the-fix-ground-anchor.md#removing-this-mod).
 
 ## Settings
 
-`GameData/TerrainPrecisionFixMod/PluginData/settings.cfg` holds six values, read when KSP starts. To
+`GameData/TerrainPrecisionFixMod/PluginData/settings.cfg` holds eight values, read when KSP starts. To
 change one: quit KSP, edit the file, start KSP again.
 
 | setting | what it does |
@@ -296,6 +316,8 @@ change one: quit KSP, edit the file, start KSP again.
 | `fixTerrain` | `true` (default) places the terrain in double precision; `false` leaves it as stock builds it |
 | `fixStatics` | `true` (default) places the statics in double precision; `false` leaves them where stock places them |
 | `fixScatter` | `false` (default) leaves the terrain scatter where stock draws it; `true` draws it from the terrain quads it was built on. Off by default because it moves stock objects other mods may look for, against a gap nobody sees on a stock install: see [Off by default: should you turn it on?](docs/the-fix-scatter.md#off-by-default-should-you-turn-it-on) |
+| `fixGroundAnchorModel` | `true` (default) brings the collider of the stock ground anchor down to the bottom of the anchor, so that a load puts it back where it was placed; `false` leaves the stock collider, which stops 2 cm above it |
+| `fixGroundAnchorLoad` | `true` (default) loads a vessel holding a stock ground anchor where it was saved; `false` lets stock raise it to the height it computes for the terrain, where the anchor then holds it |
 | `patchKopernicus` | `true` (default) patches Kopernicus, when installed, to cope with the statics fix. With `false` and the statics fix on, Kopernicus' flag fix throws when a facility is upgraded in flight near the KSC, which only a Making History mission does: an error in the log whose stack trace names Kopernicus, and nothing else, since the statics fix keeps the flags steady there. Meant only to see what the patch is for |
 | `patchKerbalKonstructs` | `true` (default) patches Kerbal Konstructs, when installed, to cope with the statics fix. With `false` and the statics fix on, moving a group with its group editor in flight sends it elsewhere on its body, and saves it there: meant only to see what the patch is for |
 | `logLevel` | what goes to `KSP.log`, below |
@@ -303,7 +325,7 @@ change one: quit KSP, edit the file, start KSP again.
 | `logLevel` | what goes to `KSP.log` |
 |---|---|
 | `Info` (default) | a few lines at startup, then one line per body the first time its terrain, then its statics, then its scatter, are corrected |
-| `Debug` | adds one line per quad placed, with how far it was moved, one line per static taken out of its sphere or put back under it, and one line per scatter holder hung from its quad |
+| `Debug` | adds one line per quad placed, with how far it was moved, one line per static taken out of its sphere or put back under it, one line per scatter holder hung from its quad, and one line per vessel holding a ground anchor loaded, with how far stock would have raised it |
 | `Trace` | adds, per quad, how far its vertices were moved within it, and one line per scatter holder handed back to its pool — slower, meant for measuring |
 
 `Error` and `Warning` are accepted too.

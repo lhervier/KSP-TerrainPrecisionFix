@@ -8,6 +8,7 @@ installed. What their readings say is in
 [Driving on while the world moves](../docs/checking-the-culprit-driving.md),
 [Launching from a launch pad of Making History](../docs/checking-the-culprit-launch-pad.md),
 [In flight](../docs/checking-the-culprit-flight.md),
+[Anchoring a base](../docs/checking-the-culprit-anchoring.md),
 the pages of [Non-regression tests](../docs/non-regression.md) and of
 [Limits and solutions](../docs/limits-and-solutions.md).
 
@@ -15,7 +16,9 @@ The saves of the protocols are not here: each protocol belongs to an instrument,
 the `diag` folder of [KSP Diag - Landed Vessel](https://github.com/lhervier/KSP-Diag-LandedVessel/tree/main/diag)
 and of [KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainHeight/tree/main/diag),
 along with the logs of the same sessions without this mod. Only the sessions taken with this mod alone
-and no instrument have their saves here: the loads on Venus, Mars and Mercury, described in
+and no instrument have their saves here, with the anchor of
+[Checking the culprit: anchoring a base](../docs/checking-the-culprit-anchoring.md), a protocol of no
+instrument, `ground-anchor-kerbin.sfs` and its rover, `craft/Diag3-Rover.craft`; the loads on Venus, Mars and Mercury, described in
 [Real Solar System: this mod's safeguard](../docs/non-regression/real-solar-system/this-mods-safeguard.md#the-saves),
 the launch from Cape Canaveral, the capsule on a launch pad of Kerbal Konstructs on the Mun,
 `warp-static-mun-kk.sfs`, and the launch pad in `warp-static-mun-kk/`, of
@@ -158,6 +161,24 @@ KSP Diag - Terrain Quads, KSP Diag - Floating Origin and KSP-MCPServer: on each 
   and [`runs/flight-earth-rss-fix-quads.zip`](runs/flight-earth-rss-fix-quads.zip) (zipped: 41 MB once
   unzipped), and what `analyse-flight.py` printed in
   [`runs/flight-earth-rss-fix-analysis.txt`](runs/flight-earth-rss-fix-analysis.txt).
+
+## The ground anchor protocol
+
+KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1,
+[KSP Diag - Landed Vessel](https://github.com/lhervier/KSP-Diag-LandedVessel),
+[KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainHeight), and this mod at
+`logLevel = Debug`, or not: [`ground-anchor-kerbin.sfs`](ground-anchor-kerbin.sfs), Bill Kerman places a
+ground anchor on the desert of Kerbin beside the rover of [`craft/Diag3-Rover.craft`](craft/Diag3-Rover.craft),
+alone, then with one of the rover's batteries attached on top of it; quicksave and quickload twice,
+played by hand. Three sessions: without this mod, with this mod and `fixGroundAnchorLoad = false`, and with
+this mod as installed. Read in
+[Checking the culprit: anchoring a base](../docs/checking-the-culprit-anchoring.md).
+
+- [`runs/ground-anchor-kerbin-without-this-mod.log`](runs/ground-anchor-kerbin-without-this-mod.log), which
+  holds a first placement, given up, before the two measured;
+- [`runs/ground-anchor-kerbin-model-fix.log`](runs/ground-anchor-kerbin-model-fix.log), which holds a first
+  series of both cases before the measured one, the anchor with a battery read without it set as target;
+- [`runs/ground-anchor-kerbin-fix.log`](runs/ground-anchor-kerbin-fix.log).
 
 ## The seam between subdivision levels
 

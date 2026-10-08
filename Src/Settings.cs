@@ -21,9 +21,16 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
         public static bool FixScatter { get; private set; } = false;
 
         /// <summary>
-        /// Whether the stock ground anchor is kept at the height it was placed at, load after load.
+        /// Whether the collider of the stock ground anchor reaches down to the bottom of the anchor, so that a
+        /// load puts it back at the height it was placed at.
         /// </summary>
-        public static bool FixGroundAnchor { get; private set; } = true;
+        public static bool FixGroundAnchorModel { get; private set; } = true;
+
+        /// <summary>
+        /// Whether a vessel holding a stock ground anchor is loaded where it was saved, instead of being raised
+        /// to the height the terrain is computed at.
+        /// </summary>
+        public static bool FixGroundAnchorLoad { get; private set; } = true;
 
         /// <summary>
         /// Whether Kopernicus, when installed, is patched to cope with statics out of their sphere. Only
@@ -72,7 +79,8 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
             FixTerrain = ReadSwitch(node, "fixTerrain", FixTerrain, path);
             FixStatics = ReadSwitch(node, "fixStatics", FixStatics, path);
             FixScatter = ReadSwitch(node, "fixScatter", FixScatter, path);
-            FixGroundAnchor = ReadSwitch(node, "fixGroundAnchor", FixGroundAnchor, path);
+            FixGroundAnchorModel = ReadSwitch(node, "fixGroundAnchorModel", FixGroundAnchorModel, path);
+            FixGroundAnchorLoad = ReadSwitch(node, "fixGroundAnchorLoad", FixGroundAnchorLoad, path);
             PatchKopernicus = ReadSwitch(node, "patchKopernicus", PatchKopernicus, path);
             PatchKerbalKonstructs = ReadSwitch(node, "patchKerbalKonstructs", PatchKerbalKonstructs, path);
         }

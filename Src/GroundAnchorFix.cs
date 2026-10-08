@@ -1,3 +1,4 @@
+using HarmonyLib;
 using UnityEngine;
 
 namespace com.github.lhervier.ksp.terrainprecisionfix
@@ -5,13 +6,22 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
     /// <summary>
     /// Keeps the stock ground anchor at the height it was placed at, load after load.
     ///
-    /// At each load of a landed vessel whose root carries a ModuleGroundPart, stock KSP puts the vessel back
-    /// on the ground (Vessel.CheckGroundCollision): its origin ends at the height of its lowest collider
-    /// point above that origin, taken as an absolute value. The ground anchor's collider stops 20.8 mm above
-    /// the bottom of the anchor, its origin: once placed, the anchor rests with its origin 20.8 mm below the
-    /// ground, and the first load puts it 20.8 mm above, 4.2 cm higher. Here the collider of the part's
-    /// prefab reaches down to the origin, as those of the stock ground lights do: placed or loaded, the
-    /// anchor then rests with its origin on the ground.
+    /// Two stock behaviours move an anchored vessel at load, and an anchor riveted to the ground then holds it
+    /// where they left it.
+    ///
+    /// The first one puts a landed vessel back on the ground (Vessel.CheckGroundCollision), at each load of a
+    /// vessel made of a single part, and at the first load of any other: its origin ends at the height of its
+    /// lowest collider point above that origin, taken as an absolute value. The ground anchor's collider
+    /// stops 20.8 mm above the bottom of the anchor, its origin: once placed, the anchor rests with its origin
+    /// 20.8 mm below the ground, and the first load puts it 20.8 mm above, 4.2 cm higher. Here the collider of
+    /// the part's prefab reaches down to the origin, as those of the stock ground lights do.
+    ///
+    /// The second one, at every load, raises a landed vessel whose root is below the height the terrain is
+    /// computed at (Vessel.getCorrectedLandedAltitude). The ground a vessel rests on is the terrain's collider,
+    /// made of flat triangles between points at that height, and it can be centimetres below it: tens of
+    /// centimetres at places on Kerbin. A vessel with wheels or legs has its root well above the ground and is
+    /// never raised; an anchor has its origin on the ground and is raised by the whole gap, then riveted in the
+    /// air. Here a vessel holding a stock ground anchor is not raised: it is loaded where it was saved.
     /// </summary>
     internal static class GroundAnchorFix
     {
@@ -21,6 +31,59 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
         // Below this, in metres, a collider already reaches the part's origin; and the vertices within this of
         // the lowest one make the bottom face that is lowered.
         private const float Tolerance = 0.001f;
+
+        /// <summary>
+        /// Applies the patch that keeps a vessel holding a stock ground anchor where it was saved, at load.
+        /// Throws when the patch cannot be applied: vessels are then raised as stock raises them.
+        /// </summary>
+        public static void Install(Harmony harmony)
+        {
+            harmony.CreateClassProcessor(typeof(CorrectedLandedAltitudePatch)).Patch();
+        }
+
+        /// <summary>Whether the vessel holds a stock ground anchor.</summary>
+        private static bool HoldsAnchor(Vessel vessel)
+        {
+            if (vessel == null || vessel.parts == null)
+            {
+                return false;
+            }
+            for (int i = 0; i < vessel.parts.Count; i++)
+            {
+                Part part = vessel.parts[i];
+                if (part != null && part.partInfo != null && part.partInfo.name == PartName)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // Vessel.Load calls this once, for a landed vessel whose parts are loaded, and moves the vessel to the
+        // altitude it returns.
+        [HarmonyPatch(typeof(Vessel), "getCorrectedLandedAltitude")]
+        private static class CorrectedLandedAltitudePatch
+        {
+            private static bool Prefix(Vessel __instance, double lat, double lon, double alt, CelestialBody body,
+                ref double __result)
+            {
+                if (!HoldsAnchor(__instance))
+                {
+                    return true;
+                }
+                if (Log.IsDebugEnabled && body != null && body.pqsController != null)
+                {
+                    // What stock would have done, for the record: the height the skipped method compares with,
+                    // through the public overload (the one it calls is internal).
+                    double terrain = body.pqsController.GetSurfaceHeight(body.GetRelSurfaceNVector(lat, lon))
+                        - body.Radius;
+                    Log.Debug($"Ground anchor load fix: '{__instance.GetDisplayName()}' loaded at its saved altitude"
+                        + $" {alt:F4} m, which stock would have raised by {System.Math.Max(0.0, terrain - alt) * 1000.0:F1} mm");
+                }
+                __result = alt;
+                return false;
+            }
+        }
 
         /// <summary>
         /// Lowers the collider of the stock ground anchor's prefab to the part's origin, so that every anchor
@@ -33,7 +96,7 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
             AvailablePart info = PartLoader.getPartInfoByName(PartName);
             if (info == null || info.partPrefab == null)
             {
-                Log.Info("Ground anchor fix: no stock ground anchor in this game, nothing to fix");
+                Log.Info("Ground anchor model fix: no stock ground anchor in this game, nothing to fix");
                 return;
             }
             Part prefab = info.partPrefab;
@@ -50,7 +113,7 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
                 MeshCollider mesh = candidate as MeshCollider;
                 if (mesh == null || mesh.sharedMesh == null || collider != null)
                 {
-                    Log.Warning("Ground anchor fix: the ground anchor's colliders are not those of the stock part,"
+                    Log.Warning("Ground anchor model fix: the ground anchor's colliders are not those of the stock part,"
                         + " it is left as is");
                     return;
                 }
@@ -58,7 +121,7 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
             }
             if (collider == null)
             {
-                Log.Warning("Ground anchor fix: the ground anchor has no collider, it is left as is");
+                Log.Warning("Ground anchor model fix: the ground anchor has no collider, it is left as is");
                 return;
             }
 
@@ -72,7 +135,7 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
             }
             if (lowest <= Tolerance)
             {
-                Log.Info($"Ground anchor fix: the anchor's collider already reaches its origin ({lowest * 1000f:F1} mm),"
+                Log.Info($"Ground anchor model fix: the anchor's collider already reaches its origin ({lowest * 1000f:F1} mm),"
                     + " it is left as is");
                 return;
             }
@@ -99,8 +162,8 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
             copy.RecalculateBounds();
             collider.sharedMesh = copy;
 
-            Log.Info($"Ground anchor fix: the anchor's collider lowered by {lowest * 1000f:F1} mm to its origin");
-            Log.Debug($"Ground anchor fix: {lowered} of the {vertices.Length} vertices of '{collider.name}' lowered");
+            Log.Info($"Ground anchor model fix: the anchor's collider lowered by {lowest * 1000f:F1} mm to its origin");
+            Log.Debug($"Ground anchor model fix: {lowered} of the {vertices.Length} vertices of '{collider.name}' lowered");
         }
     }
 }
