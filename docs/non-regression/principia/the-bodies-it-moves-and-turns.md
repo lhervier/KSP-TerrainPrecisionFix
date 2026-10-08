@@ -79,10 +79,4 @@ this mod ([Checking the culprit: in flight](../../checking-the-culprit-flight.md
 mod, the same median and 90th percentile, and 0.15 mm more at the very largest. Under
 100 m/s, nothing moved either way. The log shows no warning and no error from this mod.
 
-Both logs of the flights also hold a `NullReferenceException` from
-`SpaceCenterBuildingCollider.OnMouseOver` at every frame of the first seconds, while the rocket stands on
-the launchpad: 507 without this mod, 500 with it. Stock throws it in flight when the mouse cursor is over
-a building of the KSC: the collider calls `building.ColliderHover` on a building that is not there. No
-mod is in its stack.
-
 The logs and the readings are in [`diag/runs/`](../../../diag/README.md#with-principia).
