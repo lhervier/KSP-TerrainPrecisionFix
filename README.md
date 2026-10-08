@@ -320,6 +320,9 @@ runway, have nothing left to correct with this mod, and its CommNet ground stati
 **Deferred.** It draws the ground wherever this mod places it, and the craft and the ground come back as
 they do without it.
 
+**Principia.** It turns and moves the bodies itself, and the craft and the ground come back as they do
+without it, after a load and in flight.
+
 **→ Full chapter: [Non-regression tests](docs/non-regression.md)**
 
 ## Limits and solutions
@@ -337,7 +340,7 @@ with [the statics](#the-statics).
 
 What is still to check, one mod at a time, with what is already known and the test planned for it. In
 progress: the last tests on Real Solar System. Planned: the rest of stock, from asteroids to the other stock statics,
-Kerbal Konstructs, a body from a planet pack, Principia, Parallax, Tilt'Em, KAS, and other mods that
+Kerbal Konstructs, a body from a planet pack, Parallax, Tilt'Em, KAS, and other mods that
 look for a static under its sphere.
 
 **→ Full chapter: [Work in progress](docs/work-in-progress.md)**

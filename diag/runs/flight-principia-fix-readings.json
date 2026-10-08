@@ -1,0 +1,749 @@
+[
+ {
+  "log": 1,
+  "quads": 156,
+  "originShifts": 1,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 80.54721872729715,
+  "surfaceSpeed": 0.032670508543756645
+ },
+ {
+  "log": 2,
+  "quads": 156,
+  "originShifts": 0,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 80.47444060014095,
+  "surfaceSpeed": 11.539452925183971
+ },
+ {
+  "log": 3,
+  "quads": 156,
+  "originShifts": 0,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 80.48098880203906,
+  "surfaceSpeed": 22.327835262989705
+ },
+ {
+  "log": 4,
+  "quads": 156,
+  "originShifts": 0,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 81.0780248407973,
+  "surfaceSpeed": 32.62373816132746
+ },
+ {
+  "log": 5,
+  "quads": 156,
+  "originShifts": 0,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 83.07322094100527,
+  "surfaceSpeed": 42.40772267922323
+ },
+ {
+  "log": 6,
+  "quads": 156,
+  "originShifts": 0,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 87.5028200163506,
+  "surfaceSpeed": 51.70219871782701
+ },
+ {
+  "log": 7,
+  "quads": 156,
+  "originShifts": 0,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 95.40061291586608,
+  "surfaceSpeed": 60.692926181520775
+ },
+ {
+  "log": 8,
+  "quads": 156,
+  "originShifts": 0,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 107.08142857940402,
+  "surfaceSpeed": 69.43599796148283
+ },
+ {
+  "log": 9,
+  "quads": 156,
+  "originShifts": 0,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 122.98255342827179,
+  "surfaceSpeed": 79.33074354654848
+ },
+ {
+  "log": 10,
+  "quads": 161,
+  "originShifts": 0,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 141.21226401499007,
+  "surfaceSpeed": 89.41461753085566
+ },
+ {
+  "log": 11,
+  "quads": 161,
+  "originShifts": 0,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 161.56515300669707,
+  "surfaceSpeed": 99.12347835047817
+ },
+ {
+  "log": 12,
+  "quads": 161,
+  "originShifts": 0,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 185.15527616033796,
+  "surfaceSpeed": 109.47023813583274
+ },
+ {
+  "log": 13,
+  "quads": 166,
+  "originShifts": 0,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 210.25185604044236,
+  "surfaceSpeed": 119.6134833404622
+ },
+ {
+  "log": 14,
+  "quads": 166,
+  "originShifts": 0,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 236.5122327011777,
+  "surfaceSpeed": 129.73474717174548
+ },
+ {
+  "log": 15,
+  "quads": 166,
+  "originShifts": 0,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 264.5032130543841,
+  "surfaceSpeed": 140.14142270082903
+ },
+ {
+  "log": 16,
+  "quads": 166,
+  "originShifts": 0,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 294.0985646166373,
+  "surfaceSpeed": 150.84230848266503
+ },
+ {
+  "log": 17,
+  "quads": 170,
+  "originShifts": 0,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 323.7871316121891,
+  "surfaceSpeed": 161.38942114667236
+ },
+ {
+  "log": 18,
+  "quads": 170,
+  "originShifts": 0,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 353.9631462409161,
+  "surfaceSpeed": 171.97640795150517
+ },
+ {
+  "log": 19,
+  "quads": 170,
+  "originShifts": 0,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 384.39311985543463,
+  "surfaceSpeed": 182.55882315478354
+ },
+ {
+  "log": 20,
+  "quads": 178,
+  "originShifts": 0,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 414.92813224031124,
+  "surfaceSpeed": 193.11374464346736
+ },
+ {
+  "log": 21,
+  "quads": 178,
+  "originShifts": 0,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 444.80568272969685,
+  "surfaceSpeed": 203.38378393990536
+ },
+ {
+  "log": 22,
+  "quads": 178,
+  "originShifts": 0,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 475.1358044343069,
+  "surfaceSpeed": 213.77993239112755
+ },
+ {
+  "log": 23,
+  "quads": 178,
+  "originShifts": 0,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 505.22568922513165,
+  "surfaceSpeed": 224.06285987863453
+ },
+ {
+  "log": 24,
+  "quads": 178,
+  "originShifts": 39,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 535.0153909698129,
+  "surfaceSpeed": 234.21785513649107
+ },
+ {
+  "log": 25,
+  "quads": 178,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 564.4821277887095,
+  "surfaceSpeed": 244.22659912376352
+ },
+ {
+  "log": 26,
+  "quads": 178,
+  "originShifts": 51,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 593.6223291696515,
+  "surfaceSpeed": 254.0703279976188
+ },
+ {
+  "log": 27,
+  "quads": 178,
+  "originShifts": 48,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 621.8869604627835,
+  "surfaceSpeed": 263.5454156307289
+ },
+ {
+  "log": 28,
+  "quads": 178,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 650.4738195397658,
+  "surfaceSpeed": 273.0243392618234
+ },
+ {
+  "log": 29,
+  "quads": 183,
+  "originShifts": 49,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 678.2976487395354,
+  "surfaceSpeed": 282.1197671368348
+ },
+ {
+  "log": 30,
+  "quads": 188,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 706.544084294117,
+  "surfaceSpeed": 291.200861070835
+ },
+ {
+  "log": 31,
+  "quads": 192,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 734.5868375856662,
+  "surfaceSpeed": 300.093943969479
+ },
+ {
+  "log": 32,
+  "quads": 200,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 761.7830112944357,
+  "surfaceSpeed": 308.6116450649031
+ },
+ {
+  "log": 33,
+  "quads": 200,
+  "originShifts": 49,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 789.1305368040921,
+  "surfaceSpeed": 317.0324998016631
+ },
+ {
+  "log": 34,
+  "quads": 200,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 815.9362683761865,
+  "surfaceSpeed": 325.1173003221304
+ },
+ {
+  "log": 35,
+  "quads": 200,
+  "originShifts": 29,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 831.1816604373744,
+  "surfaceSpeed": 329.6575541994228
+ },
+ {
+  "log": 36,
+  "quads": 200,
+  "originShifts": 49,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 856.358532291837,
+  "surfaceSpeed": 337.13799872748575
+ },
+ {
+  "log": 37,
+  "quads": 196,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 881.2147868459579,
+  "surfaceSpeed": 344.6276778182835
+ },
+ {
+  "log": 38,
+  "quads": 201,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 905.1635721358471,
+  "surfaceSpeed": 352.1033322203251
+ },
+ {
+  "log": 39,
+  "quads": 210,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 928.164682061295,
+  "surfaceSpeed": 359.6761815598502
+ },
+ {
+  "log": 40,
+  "quads": 218,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 950.2087091953726,
+  "surfaceSpeed": 367.39999708055865
+ },
+ {
+  "log": 41,
+  "quads": 209,
+  "originShifts": 49,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 970.8854443600867,
+  "surfaceSpeed": 375.1284888082245
+ },
+ {
+  "log": 42,
+  "quads": 201,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 991.0267959997291,
+  "surfaceSpeed": 383.1231640449494
+ },
+ {
+  "log": 43,
+  "quads": 192,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 1010.1425678664818,
+  "surfaceSpeed": 391.11286913446946
+ },
+ {
+  "log": 44,
+  "quads": 192,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 1028.1257746205665,
+  "surfaceSpeed": 399.05755449241013
+ },
+ {
+  "log": 45,
+  "quads": 206,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 1044.8709217632422,
+  "surfaceSpeed": 406.9830932050729
+ },
+ {
+  "log": 46,
+  "quads": 206,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 1060.2812449763296,
+  "surfaceSpeed": 414.9143195318071
+ },
+ {
+  "log": 47,
+  "quads": 206,
+  "originShifts": 48,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 1073.736728097545,
+  "surfaceSpeed": 422.5547830220601
+ },
+ {
+  "log": 48,
+  "quads": 194,
+  "originShifts": 49,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 1086.0429186457768,
+  "surfaceSpeed": 430.3993856306258
+ },
+ {
+  "log": 49,
+  "quads": 184,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 1097.0353962905938,
+  "surfaceSpeed": 438.4665918817523
+ },
+ {
+  "log": 50,
+  "quads": 198,
+  "originShifts": 51,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 1106.3728442525025,
+  "surfaceSpeed": 446.6095015581433
+ },
+ {
+  "log": 51,
+  "quads": 198,
+  "originShifts": 49,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 1113.982836102834,
+  "surfaceSpeed": 454.8365089256652
+ },
+ {
+  "log": 52,
+  "quads": 190,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 1119.7943680953467,
+  "surfaceSpeed": 463.1509809158923
+ },
+ {
+  "log": 53,
+  "quads": 176,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 1123.7369375653798,
+  "surfaceSpeed": 471.55036930390224
+ },
+ {
+  "log": 54,
+  "quads": 176,
+  "originShifts": 49,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 1125.7191726288293,
+  "surfaceSpeed": 479.8551844071105
+ },
+ {
+  "log": 55,
+  "quads": 190,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 1125.7514524173457,
+  "surfaceSpeed": 488.38759443174763
+ },
+ {
+  "log": 56,
+  "quads": 188,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 1123.7006010649493,
+  "surfaceSpeed": 496.95642312431636
+ },
+ {
+  "log": 57,
+  "quads": 176,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 1119.386459762347,
+  "surfaceSpeed": 505.7274704480371
+ },
+ {
+  "log": 58,
+  "quads": 176,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 1113.0571672935039,
+  "surfaceSpeed": 514.1856817177752
+ },
+ {
+  "log": 59,
+  "quads": 190,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 1104.3228783159284,
+  "surfaceSpeed": 522.8495122161405
+ },
+ {
+  "log": 60,
+  "quads": 188,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 1093.2221035578987,
+  "surfaceSpeed": 531.5478005756606
+ },
+ {
+  "log": 61,
+  "quads": 180,
+  "originShifts": 49,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 1079.9833500160603,
+  "surfaceSpeed": 540.1061638826404
+ },
+ {
+  "log": 62,
+  "quads": 176,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 1063.6569575838512,
+  "surfaceSpeed": 549.0496020507547
+ },
+ {
+  "log": 63,
+  "quads": 190,
+  "originShifts": 51,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 1044.6660640741466,
+  "surfaceSpeed": 558.02883215522
+ },
+ {
+  "log": 64,
+  "quads": 188,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 1023.8491427780828,
+  "surfaceSpeed": 566.6882719831062
+ },
+ {
+  "log": 65,
+  "quads": 180,
+  "originShifts": 49,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 1000.455351616838,
+  "surfaceSpeed": 575.3781092417311
+ },
+ {
+  "log": 66,
+  "quads": 176,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 973.8703979514539,
+  "surfaceSpeed": 584.274826742602
+ },
+ {
+  "log": 67,
+  "quads": 198,
+  "originShifts": 49,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 944.4873277904699,
+  "surfaceSpeed": 593.1986764046197
+ },
+ {
+  "log": 68,
+  "quads": 188,
+  "originShifts": 52,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 911.5760490617249,
+  "surfaceSpeed": 602.3250018684087
+ },
+ {
+  "log": 69,
+  "quads": 176,
+  "originShifts": 48,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 877.8366657120641,
+  "surfaceSpeed": 610.9319580809608
+ },
+ {
+  "log": 70,
+  "quads": 190,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 839.7899635307258,
+  "surfaceSpeed": 619.9096607787899
+ },
+ {
+  "log": 71,
+  "quads": 198,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 798.7320965536637,
+  "surfaceSpeed": 628.892502749416
+ },
+ {
+  "log": 72,
+  "quads": 188,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 754.6136960793519,
+  "surfaceSpeed": 637.8717432247865
+ },
+ {
+  "log": 73,
+  "quads": 190,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 707.3872694791062,
+  "surfaceSpeed": 646.837406007529
+ },
+ {
+  "log": 74,
+  "quads": 198,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 657.0073542579776,
+  "surfaceSpeed": 655.7779622603581
+ },
+ {
+  "log": 75,
+  "quads": 188,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 603.4306710145902,
+  "surfaceSpeed": 664.6805236481741
+ },
+ {
+  "log": 76,
+  "quads": 190,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 547.7845602574525,
+  "surfaceSpeed": 673.354369550709
+ },
+ {
+  "log": 77,
+  "quads": 198,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 487.75999855448026,
+  "surfaceSpeed": 682.1379896014816
+ },
+ {
+  "log": 78,
+  "quads": 198,
+  "originShifts": 49,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 424.4244617356453,
+  "surfaceSpeed": 690.8366997382715
+ },
+ {
+  "log": 79,
+  "quads": 202,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 357.74525661370717,
+  "surfaceSpeed": 699.4322354063445
+ },
+ {
+  "log": 80,
+  "quads": 198,
+  "originShifts": 49,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 289.1271489068167,
+  "surfaceSpeed": 707.737071553137
+ },
+ {
+  "log": 81,
+  "quads": 203,
+  "originShifts": 50,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 215.74360097420868,
+  "surfaceSpeed": 716.0728516773735
+ },
+ {
+  "log": 82,
+  "quads": 206,
+  "originShifts": 42,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 142.07595218007918,
+  "surfaceSpeed": 723.9361132552597
+ },
+ {
+  "log": 83,
+  "quads": 198,
+  "originShifts": 1,
+  "logsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\logs-20261008-174824.csv",
+  "quadsFile": "D:\\ksp-dev\\GameData\\KSPDiagTerrainQuads\\PluginData\\quads-20261008-174824.csv",
+  "altitude": 61.96465428778902,
+  "surfaceSpeed": 731.9766685081181
+ }
+]

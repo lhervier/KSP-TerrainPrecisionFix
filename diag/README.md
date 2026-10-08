@@ -354,6 +354,29 @@ protocols through the scripts of [`automation/`](automation). Read in
   `approach-kerbin.sfs`, in a single flight; the lines read are in
   [`runs/approach-deferred-fix-lines.json`](runs/approach-deferred-fix-lines.json).
 
+## With Principia
+
+KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1,
+[Principia](https://github.com/mockingbirdnest/Principia) Lévy on the stock system, the instruments of each
+protocol, and [KSP-MCPServer](https://github.com/lhervier/KSP-MCPServer), which plays the protocols; this
+mod at `logLevel = Debug`, or not: each session is here twice, `-without-this-mod` and `-fix`. Read in
+[Principia: the bodies it moves and turns](../docs/non-regression/principia/the-bodies-it-moves-and-turns.md).
+
+- [`runs/loading-principia-without-this-mod.log`](runs/loading-principia-without-this-mod.log) and
+  [`runs/loading-principia-fix.log`](runs/loading-principia-fix.log) — the four saves of
+  [the loading protocol](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-loading.md),
+  each loaded six times by `run-loading.py`, both instruments at once; what the script printed in
+  `runs/loading-principia-<…>-script.txt`, every line it recorded, with the save it was recorded on, in
+  [`runs/loading-principia-without-this-mod-lines.json`](runs/loading-principia-without-this-mod-lines.json)
+  and [`runs/loading-principia-fix-lines.json`](runs/loading-principia-fix-lines.json).
+- [`runs/flight-principia-without-this-mod.log`](runs/flight-principia-without-this-mod.log) and
+  [`runs/flight-principia-fix.log`](runs/flight-principia-fix.log) — one flight each of
+  [the protocol of the quads of the highest level, in flight](https://github.com/lhervier/KSP-Diag-TerrainQuads/blob/main/docs/the-protocol-flight.md),
+  from the launchpad of the Space Center, KSP Diag - Terrain Quads and KSP Diag - Floating Origin; for each,
+  as for the flights of [In flight](#the-protocol-of-the-quads-of-the-highest-level-in-flight),
+  `-script.txt`, `-readings.json`, `-logs.csv`, `-quads.zip` (49 MB once unzipped) and `-analysis.txt`,
+  for instance [`runs/flight-principia-fix-analysis.txt`](runs/flight-principia-fix-analysis.txt).
+
 ## With Kerbal Konstructs
 
 KSP 1.12.5 with the Making History expansion, Harmony, ModuleManager, KSP Community Fixes 1.41.1,

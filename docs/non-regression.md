@@ -212,3 +212,16 @@ patches. With it installed, the craft and the ground come back as they do withou
 after a trip out of range.
 
 **→ Full chapter: [Deferred: drawing the ground](non-regression/deferred/drawing-the-ground.md)**
+
+## Principia
+
+[Principia](https://github.com/mockingbirdnest/Principia) replaces KSP's orbital mechanics, and takes
+over the rotation and the position of every body: the two values this mod places the terrain from.
+
+### The bodies it moves and turns
+
+**Checked, no problem.** Principia turns the bodies, and moves them while a craft flies, the way stock
+does. With it installed, a landed craft comes back from a load, and the ground is built under a rocket
+in flight, as without it.
+
+**→ Full chapter: [Principia: the bodies it moves and turns](non-regression/principia/the-bodies-it-moves-and-turns.md)**

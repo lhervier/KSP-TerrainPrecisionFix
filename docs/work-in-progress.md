@@ -149,16 +149,6 @@ which edit the height before this fix places it, so the flattening should be kep
 
 **→ Full chapter: [Kerbal Konstructs: the ground it flattens](work-in-progress/kerbal-konstructs/the-ground-it-flattens.md)**
 
-## Principia
-
-### The bodies it moves and turns
-
-**Planned — read in the source, not measured.** Principia writes the rotation and position of every
-body, the two values this fix places the terrain from, the way stock does. Open: whether the quads follow
-a rotation Principia computes.
-
-**→ Full chapter: [Principia: the bodies it moves and turns](work-in-progress/principia/the-bodies-it-moves-and-turns.md)**
-
 ## Parallax
 
 ### Its terrain and its scatter
