@@ -34,8 +34,8 @@ The same method keeps the target of the sphere on the active craft, map or not
 (`sphere.SetTarget(FlightGlobals.fetch.activeVessel.transform)`). So an active sphere goes on
 subdividing around the craft, as it does in flight: the map builds and drops no quad that flight would
 not, and the quads of the highest subdivision level, those this mod corrects, are the ones around the
-craft, as in flight. What this mod does there is what [Checking the culprit](../../../README.md#checking-the-culprit)
-measures.
+craft, as in flight. What this mod does there is what the checks of [the ground](../../../README.md#the-ground)
+measure.
 
 ## The launch sites on the map
 

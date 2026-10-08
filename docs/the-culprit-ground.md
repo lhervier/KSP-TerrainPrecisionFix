@@ -4,7 +4,7 @@ Part of [Terrain Precision Fix](../README.md): the stock code that places the gr
 
 Here it is straight away.
 
-This is how every terrain vertex is placed, in `PQS.BuildVertexSurfaceRelative`, decompiled from
+This is how every terrain vertex is placed, in `PQS.BuildVertexSurfaceRelative`, in
 KSP 1.12.5 (`vertRel` and `planetRel` are `Vector3d` fields):
 
 ```csharp

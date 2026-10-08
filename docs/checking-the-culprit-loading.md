@@ -118,6 +118,8 @@ With this mod, no load of the Moon or Earth series has a `Moving Vessel` line.
 The spots of the saves on the Moon and Earth, and what this mod corrected there, are in
 [Non-regression tests: Real Solar System](non-regression.md#real-solar-system).
 
+### The craft on a runway
+
 **On a runway, and on the ground beside it, on stock**
 ([the readings](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-measurements-runway.md)).
 *On rails* reads the same height on all six loadings, under every craft, within two thousandths of a
@@ -213,6 +215,8 @@ Read off those screenshots:
 | Gilly | +6.919 to +9.236 mm | +7.177 to +7.182 mm | 2.3 mm | 0.005 mm |
 | the Moon | −96.777 to −48.070 mm | −114.043 to −113.968 mm | 48.7 mm | 0.074 mm |
 | Earth | −43.698 to +248.589 mm | +121.669 to +121.952 mm | 292.3 mm | 0.283 mm |
+
+### The deck of a runway
 
 **On a runway, and on the ground beside it, on stock**
 ([the readings](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/main/docs/the-measurements-runway.md)).

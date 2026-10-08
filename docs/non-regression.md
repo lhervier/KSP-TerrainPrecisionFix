@@ -2,7 +2,7 @@
 
 Part of [Terrain Precision Fix](../README.md): what works without this mod still works with it.
 
-[Checking the culprit](../README.md#checking-the-culprit) shows what this mod fixes. These tests check
+[The checks of each fix](../README.md#the-culprit-a-float-at-planet-scale-in-a-frame-that-moves) show what this mod fixes. These tests check
 the other side, one mod at a time, stock first: what this mod could break, played in game with it, and
 compared with the game without it where the two have to be told apart. Only what has been checked is
 here; what is still to check is in [Work in progress](work-in-progress.md), and what this mod does make

@@ -76,7 +76,9 @@ centimetres, on each line taken just after a shift, and none on each line taken 
 The third shift is read at a spot about a kilometre and a half south of the runway that reads far below
 the computed height, with this mod as on stock; see [What the measurements say](#what-the-measurements-say).
 
-**By the runway of the KSC.** Across each move, in millimetres:
+### By the runway of the KSC
+
+Across each move, in millimetres:
 
 | | move | the grass, G | the deck, P | the step, P − G | spread at a spot, at most |
 |---|---|---|---|---|---|
@@ -152,7 +154,9 @@ None of the three shifts counts: each changes *Difference* about as much as the 
 no shift, or less. On that slope, the height KSP computes changes between the lines of a shift by up to
 90 mm, with this mod as on stock.
 
-**By the runway of the KSC at Cape Canaveral.** Across each move, in millimetres:
+### By the runway of the KSC at Cape Canaveral
+
+Across each move, in millimetres:
 
 | | move | the grass, G | the deck, P | the step, P − G | spread at a spot, at most |
 |---|---|---|---|---|---|
