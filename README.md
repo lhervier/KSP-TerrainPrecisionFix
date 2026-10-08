@@ -336,7 +336,7 @@ with [the statics](#the-statics).
 ## Work in progress
 
 What is still to check, one mod at a time, with what is already known and the test planned for it. In
-progress: the last tests on Real Solar System. Planned: the rest of stock, from slopes to the other stock statics,
+progress: the last tests on Real Solar System. Planned: the rest of stock, from asteroids to the other stock statics,
 Kerbal Konstructs, a body from a planet pack, Principia, Parallax, Tilt'Em, KAS, and other mods that
 look for a static under its sphere.
 

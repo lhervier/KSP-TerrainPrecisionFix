@@ -10,14 +10,6 @@ to [Non-regression tests](non-regression.md) if nothing is worse, or to
 
 ## Stock
 
-### Sloped ground
-
-**Planned.** Every campaign so far is on flat ground. On a slope, a separate stock bug, read in the code,
-moves a single-part craft into the ground at every load; this mod should leave it as it is, and make it
-repeatable.
-
-**→ Full chapter: [Sloped ground](work-in-progress/stock/sloped-ground.md)**
-
 ### Asteroids held by a claw
 
 **Planned.** At the first load with this mod, the ground under an asteroid resting on it moves once, with
