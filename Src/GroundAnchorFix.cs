@@ -22,6 +22,12 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
     /// centimetres at places on Kerbin. A vessel with wheels or legs has its root well above the ground and is
     /// never raised; an anchor has its origin on the ground and is raised by the whole gap, then riveted in the
     /// air. Here a vessel holding a stock ground anchor is not raised: it is loaded where it was saved.
+    ///
+    /// A third one is much smaller. At load, an anchor already riveted is riveted again one rendered frame
+    /// after its vessel is unpacked (ModuleGroundPart.MakePartKinematic); when that frame lasts longer than a
+    /// physics step, as it does below 50 frames per second, the anchor meanwhile moves freely for a step or
+    /// two, by up to a millimetre or so, and is riveted there. Here such an anchor is frozen from the moment
+    /// it is unpacked.
     /// </summary>
     internal static class GroundAnchorFix
     {
@@ -39,6 +45,16 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
         public static void Install(Harmony harmony)
         {
             harmony.CreateClassProcessor(typeof(CorrectedLandedAltitudePatch)).Patch();
+        }
+
+        /// <summary>
+        /// Applies the patch that keeps a stock ground anchor, riveted when its vessel was saved, frozen from
+        /// the moment it is unpacked until KSP rivets it again. Throws when the patch cannot be applied: the
+        /// anchor is then riveted as stock rivets it.
+        /// </summary>
+        public static void InstallRivet(Harmony harmony)
+        {
+            harmony.CreateClassProcessor(typeof(UnpackRivetPatch)).Patch();
         }
 
         /// <summary>Whether the vessel holds a stock ground anchor.</summary>
@@ -82,6 +98,47 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
                 }
                 __result = alt;
                 return false;
+            }
+        }
+
+        // Unpacking a ground part that was riveted when saved starts the coroutine that rivets it again
+        // (MakePartKinematic). With a kinematic delay under a second, the stock anchor's 0, that coroutine
+        // neither waits for the part to settle nor checks that it touches the ground: it rivets it at the
+        // next rendered frame, wherever the physics steps in between have taken it.
+        [HarmonyPatch(typeof(ModuleGroundPart), nameof(ModuleGroundPart.OnPartUnpack))]
+        private static class UnpackRivetPatch
+        {
+            private static readonly AccessTools.FieldRef<ModuleGroundPart, bool> DeployedOnGround =
+                AccessTools.FieldRefAccess<ModuleGroundPart, bool>("deployedOnGround");
+
+            private static readonly AccessTools.FieldRef<ModuleCargoPart, bool> BeingAttached =
+                AccessTools.FieldRefAccess<ModuleCargoPart, bool>("beingAttached");
+
+            // Whether the part is being attached in EVA construction, which stock unpacks without riveting.
+            private static void Prefix(ModuleGroundPart __instance, out bool __state)
+            {
+                __state = BeingAttached(__instance);
+            }
+
+            private static void Postfix(ModuleGroundPart __instance, bool __state)
+            {
+                Part part = __instance.part;
+                if (__state || !DeployedOnGround(__instance) || __instance.kinematicDelay >= 1f
+                    || part == null || part.partInfo == null || part.partInfo.name != PartName)
+                {
+                    return;
+                }
+                Rigidbody rb = part.Rigidbody;
+                if (rb == null)
+                {
+                    return;
+                }
+                // The constraints the rivet sets, set one frame early; the rivet sets them again.
+                rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+                rb.constraints = RigidbodyConstraints.FreezeAll;
+                Log.Debug($"Ground anchor rivet fix: '{__instance.vessel?.GetDisplayName()}' frozen as it is unpacked,"
+                    + " until it is riveted again");
             }
         }
 

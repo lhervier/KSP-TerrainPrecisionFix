@@ -65,6 +65,14 @@ and stays within 0.25 mm through its arrivals, against up to 145 mm without it.
 
 **→ Full chapter: [Facility levels](non-regression/stock/facility-levels.md)**
 
+### An anchor on a static
+
+**Checked on Kerbin, on a runway of each kind of static.** An anchor stays put only if what it stands on
+comes back too. On the runways of the KSC and the Desert Airfield, an anchor and an anchored base stay
+within 0.15 mm of the runway, once 1.6 mm; without this mod, up to 116 mm away.
+
+**→ Full chapter: [An anchor on a static](non-regression/stock/an-anchor-on-a-static.md)**
+
 ### Time warp
 
 **Checked on Kerbin and on the Mun.** A craft on the runway through three days at 100 000×: the runway

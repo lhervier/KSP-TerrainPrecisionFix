@@ -1,6 +1,6 @@
 # The culprit: the ground anchor
 
-Part of [Terrain Precision Fix](../README.md): the two stock behaviours that raise a vessel held by a ground anchor when it is loaded, and why the anchor then keeps it in the air.
+Part of [Terrain Precision Fix](../README.md): the two stock behaviours that raise a vessel held by a ground anchor when it is loaded, and why the anchor then keeps it in the air; and a third, much smaller, that moves it by under a millimetre.
 
 Here they are straight away. Neither has to do with the precision of the ground: both are there on any
 ground, moving or not.
@@ -86,6 +86,46 @@ It looks very much like the issue, only higher.
 On stock, KSP 1.12.5 with KSP Community Fixes. The protocol and the readings are in
 [Checking the culprit: anchoring a base](checking-the-culprit-anchoring.md).
 
+## The rivet, one frame late
+
+A third stock behaviour moves an anchored vessel at load, by far less: under a millimetre, and only when
+the game runs slowly.
+
+An anchor riveted when it was saved is riveted again when its vessel goes off rails:
+`ModuleGroundPart.OnPartUnpack` starts the coroutine `MakePartKinematic`, which first waits in
+`ModuleCargoPart.MakePartSettle` for the part to settle, then freezes it. The stock anchor gives that wait
+no time at all, in `groundAnchor.cfg`:
+
+```
+kinematicDelay = 0.0
+```
+
+and the wait for the part to stop moving lasts ten times that, KSP 1.12.5:
+
+```csharp
+float settleDelay = kinematicDelay * 10f;
+```
+
+So the anchor is riveted wherever it is, without waiting. But not at once: `MakePartKinematic` waits on
+`MakePartSettle` as on another coroutine, and resumes at the next rendered frame. In between, the physics
+of the game may step, every 0.02 s. When the frame after the anchor goes off rails is short, no step
+falls in it: the anchor is riveted where the load put it. When it lasts longer than what is left of the
+step, one step or two run with the anchor free: the physics engine settles it against the ground, by a
+fraction of a millimetre, and the rivet freezes it there. Below 50 frames per second, a frame lasts more
+than a step, and this happens at every load; above, only when a frame drags, as the first one after the
+main menu does.
+
+`ModuleCargoPart` logs the speed over the ground of the anchor when it rivets it. It reads less than
+10⁻¹² m/s when no step ran, and millimetres per second when one did:
+
+```
+[ModuleCargoPart]: Part Point d'ancrage Coll-O-Tron velocity 0.0151515944844853 riveting to the ground.
+```
+
+Nothing a player sees at one load: on the ground, the anchor moves by under a millimetre, up or down,
+differently each time. A base held in the air, as stock leaves one, only goes down: at 30 frames per
+second, it sank 7.1 mm over eleven loads ([Checking the culprit: anchoring a base](checking-the-culprit-anchoring.md#below-50-frames-per-second)).
+
 ## With the terrain fix
 
 The terrain fix changes neither: the ground no longer moves, and the anchor and the base are raised all
@@ -94,4 +134,5 @@ the same. Without it, the ground itself comes back higher or lower at each load
 time, and the gap between the collider and the computed height changes with it.
 
 Each behaviour has its own fix in this mod, in [The fix: the ground anchor](the-fix-ground-anchor.md).
-Both are checked in [Checking the culprit: anchoring a base](checking-the-culprit-anchoring.md).
+All three are checked in
+[Checking the culprit: anchoring a base](checking-the-culprit-anchoring.md).

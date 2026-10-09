@@ -117,6 +117,24 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
                 }
             }
 
+            if (!Settings.FixGroundAnchorRivet)
+            {
+                Log.Info("Ground anchor rivet fix turned off in the settings");
+            }
+            else
+            {
+                try
+                {
+                    GroundAnchorFix.InstallRivet(harmony);
+                    Log.Info("Ground anchor rivet fix installed");
+                }
+                catch (Exception e)
+                {
+                    // The patch is not in place: anchors are riveted again as stock rivets them.
+                    Log.Error($"Could not install the ground anchor rivet fix, anchors are riveted as stock rivets them: {e}");
+                }
+            }
+
             GameEvents.onGameSceneLoadRequested.Add(OnGameSceneLoadRequested);
             GameEvents.onFlightReady.Add(OnFlightReady);
         }

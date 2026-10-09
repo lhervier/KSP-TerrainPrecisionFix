@@ -18,7 +18,9 @@ and of [KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainH
 along with the logs of the same sessions without this mod. Only the sessions taken with this mod alone
 and no instrument have their saves here, with the anchor of
 [Checking the culprit: anchoring a base](../docs/checking-the-culprit-anchoring.md), a protocol of no
-instrument, `ground-anchor-kerbin.sfs` and its rover, `craft/Diag3-Rover.craft`; the loads on Venus, Mars and Mercury, described in
+instrument, `ground-anchor-kerbin.sfs` and its rover, `craft/Diag3-Rover.craft`, and the base below 50 frames per
+second, `anchor-base-desert-airfield.sfs`; the rover with two anchors of
+[An anchor on a static](../docs/non-regression/stock/an-anchor-on-a-static.md), `craft/Diag3-Rover-Two-Anchors.craft`; the loads on Venus, Mars and Mercury, described in
 [Real Solar System: this mod's safeguard](../docs/non-regression/real-solar-system/this-mods-safeguard.md#the-saves),
 the launch from Cape Canaveral, the capsule on a launch pad of Kerbal Konstructs on the Mun,
 `warp-static-mun-kk.sfs`, and the launch pad in `warp-static-mun-kk/`, of
@@ -180,6 +182,17 @@ this mod as installed. Read in
   series of both cases before the measured one, the anchor with a battery read without it set as target;
 - [`runs/ground-anchor-kerbin-fix.log`](runs/ground-anchor-kerbin-fix.log).
 
+Below 50 frames per second: the same install, *Frame Limit* at 30 and KSP-MCPServer, the base of
+[`anchor-base-desert-airfield.sfs`](anchor-base-desert-airfield.sfs) loaded, then ten quicksaves and quickloads
+played by [`automation/run-anchor-on-a-static.py`](automation/run-anchor-on-a-static.py) with `--from-save`
+and `--only base`. Three sessions: without this mod, with this mod and `fixGroundAnchorRivet = false`, and
+with this mod as installed. Read in
+[Checking the culprit: anchoring a base, below 50 frames per second](../docs/checking-the-culprit-anchoring.md#below-50-frames-per-second).
+
+- `runs/anchor-rivet-30fps-<without-this-mod|rivet-fix-off|rivet-fix-on>.log`, with what the script printed
+  (`-script.txt`) and the readings of KSP Diag - Landed Vessel (`-readings.json`), as in
+  [`runs/anchor-rivet-30fps-rivet-fix-on.log`](runs/anchor-rivet-30fps-rivet-fix-on.log).
+
 ## The seam between subdivision levels
 
 [KSP Diag - Terrain Quads](https://github.com/lhervier/KSP-Diag-TerrainQuads) and KSP-MCPServer added to
@@ -324,6 +337,25 @@ warp at 10×. Played again without this mod. Read in
   the colliders under the capsule at each reading in
   [`runs/time-warp-flyover-mun-kk-fix-readings.json`](runs/time-warp-flyover-mun-kk-fix-readings.json) and
   [`runs/time-warp-flyover-mun-kk-without-this-mod-readings.json`](runs/time-warp-flyover-mun-kk-without-this-mod-readings.json).
+
+## The anchor on a static protocol
+
+KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, both instruments, this mod at
+`logLevel = Debug`, and KSP-MCPServer: in a new sandbox game, [`craft/Diag3-Rover-Two-Anchors.craft`](craft/Diag3-Rover-Two-Anchors.craft)
+launched from the SPH onto the runway of the KSC, then in another game onto the runway of the Desert
+Airfield, Bill Kerman aboard with his inventory emptied; Bill places an anchor alone and an anchor with a
+battery on it, by hand; then [`automation/run-anchor-on-a-static.py`](automation/run-anchor-on-a-static.py)
+reads both anchors as placed, and after each of five quicksaves and quickloads. Played again without this
+mod. Read in [An anchor on a static](../docs/non-regression/stock/an-anchor-on-a-static.md).
+
+- [`runs/anchor-on-a-static-with-this-mod.log`](runs/anchor-on-a-static-with-this-mod.log), one session for
+  both runways, the Desert Airfield first, followed by three more quicksaves and quickloads there that are
+  not part of the test; [`runs/anchor-on-a-static-runway-without-this-mod.log`](runs/anchor-on-a-static-runway-without-this-mod.log)
+  and [`runs/anchor-on-a-static-desert-airfield-without-this-mod.log`](runs/anchor-on-a-static-desert-airfield-without-this-mod.log);
+- what the script printed, and the readings of both instruments, for each runway with and without this mod:
+  `runs/anchor-on-a-static-<runway>-<with-this-mod|without-this-mod>-script.txt` and `-readings.json`, with
+  `runway` or `desert-airfield`, as in
+  [`runs/anchor-on-a-static-runway-with-this-mod-readings.json`](runs/anchor-on-a-static-runway-with-this-mod-readings.json).
 
 ## On the stock system
 

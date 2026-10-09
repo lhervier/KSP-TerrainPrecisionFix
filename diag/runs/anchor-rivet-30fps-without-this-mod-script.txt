@@ -1,0 +1,12 @@
+12:09:18   loaded   base   On rails    600821034.579 mm  Settled    600821033.605 mm  Moved           -0.974 mm  Ground under craft       820911.255 mm
+12:09:33   load1    base   On rails    600821033.605 mm  Settled    600821032.632 mm  Moved           -0.973 mm  Ground under craft       821012.081 mm
+12:09:48   load2    base   On rails    600821032.632 mm  Settled    600821031.659 mm  Moved           -0.973 mm  Ground under craft       820988.097 mm
+12:10:03   load3    base   On rails    600821031.659 mm  Settled    600821031.415 mm  Moved           -0.243 mm  Ground under craft       820972.193 mm
+12:10:18   load4    base   On rails    600821031.415 mm  Settled    600821031.172 mm  Moved           -0.243 mm  Ground under craft       820871.261 mm
+12:10:33   load5    base   On rails    600821031.172 mm  Settled    600821030.198 mm  Moved           -0.974 mm  Ground under craft       820974.478 mm
+12:10:48   load6    base   On rails    600821030.198 mm  Settled    600821029.955 mm  Moved           -0.244 mm  Ground under craft       820875.433 mm
+12:11:03   load7    base   On rails    600821029.955 mm  Settled    600821028.981 mm  Moved           -0.973 mm  Ground under craft       821044.338 mm
+12:11:18   load8    base   On rails    600821028.981 mm  Settled    600821028.738 mm  Moved           -0.244 mm  Ground under craft       820894.764 mm
+12:11:33   load9    base   On rails    600821028.738 mm  Settled    600821028.494 mm  Moved           -0.243 mm  Ground under craft       821007.064 mm
+12:11:47   load10   base   On rails    600821028.494 mm  Settled    600821027.521 mm  Moved           -0.974 mm  Ground under craft       820925.568 mm
+12:11:47 done

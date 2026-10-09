@@ -33,6 +33,12 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
         public static bool FixGroundAnchorLoad { get; private set; } = true;
 
         /// <summary>
+        /// Whether a stock ground anchor riveted when saved stays frozen from the moment it is unpacked until
+        /// it is riveted again, so that a vessel holding it stays where it was loaded at any frame rate.
+        /// </summary>
+        public static bool FixGroundAnchorRivet { get; private set; } = true;
+
+        /// <summary>
         /// Whether Kopernicus, when installed, is patched to cope with statics out of their sphere. Only
         /// meaningful with the statics fix on, which then breaks Kopernicus' flag fix when this is off.
         /// </summary>
@@ -81,6 +87,7 @@ namespace com.github.lhervier.ksp.terrainprecisionfix
             FixScatter = ReadSwitch(node, "fixScatter", FixScatter, path);
             FixGroundAnchorModel = ReadSwitch(node, "fixGroundAnchorModel", FixGroundAnchorModel, path);
             FixGroundAnchorLoad = ReadSwitch(node, "fixGroundAnchorLoad", FixGroundAnchorLoad, path);
+            FixGroundAnchorRivet = ReadSwitch(node, "fixGroundAnchorRivet", FixGroundAnchorRivet, path);
             PatchKopernicus = ReadSwitch(node, "patchKopernicus", PatchKopernicus, path);
             PatchKerbalKonstructs = ReadSwitch(node, "patchKerbalKonstructs", PatchKerbalKonstructs, path);
         }

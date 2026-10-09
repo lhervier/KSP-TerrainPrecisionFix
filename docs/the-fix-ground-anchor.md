@@ -3,9 +3,10 @@
 Part of [Terrain Precision Fix](../README.md): what this mod does to the ground anchor and to the loading of an anchored vessel, what it leaves alone, and what removing it does.
 
 Two stock behaviours raise an anchored vessel when it is loaded, and the anchor holds it where they left
-it ([The culprit: the ground anchor](the-culprit-ground-anchor.md)). This mod fixes each one on its own,
-with its own setting, both on by default: `fixGroundAnchorModel` and `fixGroundAnchorLoad`. Both are in
-[`Src/GroundAnchorFix.cs`](../Src/GroundAnchorFix.cs), and both touch the stock ground anchor only.
+it; a third moves it by under a millimetre ([The culprit: the ground anchor](the-culprit-ground-anchor.md)).
+This mod fixes each one on its own, with its own setting, all three on by default: `fixGroundAnchorModel`,
+`fixGroundAnchorLoad` and `fixGroundAnchorRivet`. All three are in
+[`Src/GroundAnchorFix.cs`](../Src/GroundAnchorFix.cs), and all three touch the stock ground anchor only.
 
 ## The anchor's model
 
@@ -45,6 +46,33 @@ At `logLevel = Debug`, the log says it for each anchored vessel loaded, with wha
 KSP also loads the part an engineer places as a new vessel, so the line shows up at placement too. The
 anchor then drops onto the ground as it does on stock.
 
+## The rivet
+
+A Harmony postfix on `ModuleGroundPart.OnPartUnpack`: when the part going off rails is a stock ground
+anchor riveted when it was saved, not one being attached in EVA construction, and its kinematic delay is
+under a second, the stock anchor's 0, the case where KSP rivets it at the next frame without waiting, its
+rigidbody is frozen at once, with no speed: the constraints the rivet sets a frame later. No physics step
+can move it in between, at any frame rate. KSP's coroutine then rivets it as on stock.
+
+At `logLevel = Debug`, the log says it for each anchor:
+
+```
+[TerrainPrecisionFix] [DEBUG] Ground anchor rivet fix: 'Point d'ancrage Coll-O-Tron' frozen as it is unpacked, until it is riveted again
+```
+
+What it saves is small, under a millimetre per load, and only on a game running below 50 frames per
+second, or at a frame that drags. It is on by default all the same, because without it an anchored base
+moves at load depending on the frame rate: not at all on a fast computer, at every load on a slow one,
+the same save. A base held in the air, as stock leaves one, only sinks, by that much at every load
+([Checking the culprit: anchoring a base](checking-the-culprit-anchoring.md#below-50-frames-per-second)):
+if parts of it rest on legs or wheels, the anchor riveted a little lower each time presses the base onto
+them. With it, the base stays where it was loaded, at any frame rate. It touches nothing else: an anchor
+that KSP has to let settle before riveting it, one just placed, is left alone.
+
+How many physics steps a slow frame lets through is capped by KSP's own setting, *Max Physics Delta-Time
+per Frame* (`PHYSICS_FRAME_DT_LIMIT` in KSP's `settings.cfg`): at its default, 0.04 s, two steps of 0.02 s
+at most, whatever the frame rate; raised, more.
+
 ## Only for anchored vessels
 
 Raising a vessel to the height KSP computes is wrong for any vessel whose origin rests on a collider
@@ -58,7 +86,8 @@ rest of the fleet is raised as stock raises it. Where the collider is above the 
 
 A base that stock raised into the air and that was saved there stays there. Its saved altitude is in the
 air, this mod loads it there, and, being made of several parts, it no longer goes through the pass of
-`CheckGroundCollision` that would set it down. This mod does not bring it back down.
+`CheckGroundCollision` that would set it down. This mod does not bring it back down, at any frame rate:
+without [the rivet](#the-rivet), a slow game would let it sink a little at every load.
 
 ## Removing this mod
 
@@ -71,8 +100,9 @@ shows: the base 27.4 cm above the ground, `fixGroundAnchorLoad` being the settin
 
 ## Safeguards
 
-- each setting turns its part of the fix off on its own;
+- each setting turns its part of the fix off, or on, on its own;
 - if the patch cannot be installed, vessels are loaded as stock loads them, and the log says so;
 - the collider is replaced only once the new one is complete, and only on an anchor shaped like the
   stock one;
-- the patch acts only on a vessel holding a stock ground anchor.
+- the patch of the load acts only on a vessel holding a stock ground anchor, the patch of the rivet only on
+  a stock ground anchor that KSP is about to rivet again without waiting.

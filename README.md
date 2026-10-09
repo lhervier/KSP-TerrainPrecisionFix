@@ -274,6 +274,10 @@ a rounding.
 anchor is loaded where it was saved instead of being raised: each by its own setting, both on by default,
 for the stock anchor only.
 
+**And a third.** KSP rivets an anchor again one frame after it is loaded, and below 50 frames per second
+the physics moves it in between, by under a millimetre at each load. A third setting freezes it from the
+moment it is loaded, so that a base behaves the same at any frame rate.
+
 **→ Full chapter: [The fix: the ground anchor](docs/the-fix-ground-anchor.md)**
 
 **Checked** by anchoring a base, an anchor placed on Kerbin, alone then with a battery on it, saved and
@@ -281,6 +285,12 @@ loaded twice: on stock, the anchor comes back 4.1 cm higher than placed, and the
 ground at its second load; with this mod, both within 0.08 mm.
 
 **→ Full chapter: [Checking the culprit: anchoring a base](docs/checking-the-culprit-anchoring.md)**
+
+**Checked below 50 frames per second**, at 30: a base held in the air sinks at every load, 7.1 mm over
+eleven loads on stock and 8.5 mm with this mod and its third setting off; with this mod as installed, not
+at all.
+
+**→ Full chapter: [Checking the culprit: anchoring a base, below 50 frames per second](docs/checking-the-culprit-anchoring.md#below-50-frames-per-second)**
 
 ## Performance
 
@@ -305,6 +315,7 @@ game with this mod, and compared with the game without it where the two have to 
 orbit and a return to the space centre, the KSC keeps every building registered, and a craft launched
 from the VAB or the SPH stands on the launchpad or the runway. Through every scene change, the KSC comes
 back to the same place, and through days of time warp it stays put, its lights following day and night.
+An anchored base stays where it was placed on a runway, of the KSC or of a launch site of Making History.
 With the scatter fix on, every scatter holder goes back to its pool.
 
 **KSP Community Fixes.** None of its patches places the terrain, and every measurement on these pages
@@ -357,7 +368,7 @@ base is then raised again at its next load, as stock raises it:
 
 ## Settings
 
-`GameData/TerrainPrecisionFixMod/PluginData/settings.cfg` holds eight values, read when KSP starts. To
+`GameData/TerrainPrecisionFixMod/PluginData/settings.cfg` holds nine values, read when KSP starts. To
 change one: quit KSP, edit the file, start KSP again.
 
 | setting | what it does |
@@ -367,6 +378,7 @@ change one: quit KSP, edit the file, start KSP again.
 | `fixScatter` | `false` (default) leaves the terrain scatter where stock draws it; `true` draws it from the terrain quads it was built on. Off by default because it moves stock objects other mods may look for, against a gap nobody sees on a stock install: see [Off by default: should you turn it on?](docs/the-fix-scatter.md#off-by-default-should-you-turn-it-on) |
 | `fixGroundAnchorModel` | `true` (default) brings the collider of the stock ground anchor down to the bottom of the anchor, so that a load puts it back where it was placed; `false` leaves the stock collider, which stops 2 cm above it |
 | `fixGroundAnchorLoad` | `true` (default) loads a vessel holding a stock ground anchor where it was saved; `false` lets stock raise it to the height it computes for the terrain, where the anchor then holds it |
+| `fixGroundAnchorRivet` | `true` (default) freezes a loaded anchor from the moment it is loaded, until stock rivets it again; `false` lets stock rivet it one frame late, which below 50 frames per second lets it move by under a millimetre first, a base in the air sinking a little at every load |
 | `patchKopernicus` | `true` (default) patches Kopernicus, when installed, to cope with the statics fix. With `false` and the statics fix on, Kopernicus' flag fix throws when a facility is upgraded in flight near the KSC, which only a Making History mission does: an error in the log whose stack trace names Kopernicus, and nothing else, since the statics fix keeps the flags steady there. Meant only to see what the patch is for |
 | `patchKerbalKonstructs` | `true` (default) patches Kerbal Konstructs, when installed, to cope with the statics fix. With `false` and the statics fix on, moving a group with its group editor in flight sends it elsewhere on its body, and saves it there: meant only to see what the patch is for |
 | `logLevel` | what goes to `KSP.log`, below |
@@ -374,7 +386,7 @@ change one: quit KSP, edit the file, start KSP again.
 | `logLevel` | what goes to `KSP.log` |
 |---|---|
 | `Info` (default) | a few lines at startup, then one line per body the first time its terrain, then its statics, then its scatter, are corrected |
-| `Debug` | adds one line per quad placed, with how far it was moved, one line per static taken out of its sphere or put back under it, one line per scatter holder hung from its quad, and one line per vessel holding a ground anchor loaded, with how far stock would have raised it |
+| `Debug` | adds one line per quad placed, with how far it was moved, one line per static taken out of its sphere or put back under it, one line per scatter holder hung from its quad, one line per vessel holding a ground anchor loaded, with how far stock would have raised it, and one line per anchor frozen as it is loaded |
 | `Trace` | adds, per quad, how far its vertices were moved within it, and one line per scatter holder handed back to its pool — slower, meant for measuring |
 
 `Error` and `Warning` are accepted too.

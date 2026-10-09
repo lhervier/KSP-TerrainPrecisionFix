@@ -1,6 +1,6 @@
 # Checking the culprit: anchoring a base
 
-Part of [Terrain Precision Fix](../README.md): the measurements that check [the ground anchor](the-culprit-ground-anchor.md), an anchor placed alone and an anchor with a battery on it, on stock, with the model fix of this mod alone, and with this mod.
+Part of [Terrain Precision Fix](../README.md): the measurements that check [the ground anchor](the-culprit-ground-anchor.md), an anchor placed alone and an anchor with a battery on it, on stock, with the model fix of this mod alone, and with this mod; and, below 50 frames per second, the rivet.
 
 Two instruments take the readings, and both read the target when one is set, here the anchor.
 [KSP Diag - Landed Vessel](https://github.com/lhervier/KSP-Diag-LandedVessel) reads the vessel:
@@ -105,6 +105,52 @@ and is absent at the second, and the line of this mod is there at both, with 273
 | **model fix alone** | ![Model fix alone, the anchor and its battery placed](../imgs/anchor/model-fix/125-set-as-target.png) | ![Model fix alone, at the first load](../imgs/anchor/model-fix/130-record-quicksave-and-reload.png) | ![Model fix alone, at the second load](../imgs/anchor/model-fix/140-quicksave-and-reload-again.png) |
 | **with this mod** | ![With this mod, the anchor and its battery placed](../imgs/anchor/full-fix/130-set-as-target.png) | ![With this mod, at the first load](../imgs/anchor/full-fix/140-quicksave-and-reload.png) | ![With this mod, at the second load](../imgs/anchor/full-fix/150-quicksave-and-reload-again.png) |
 
+## Below 50 frames per second
+
+A third stock behaviour moves an anchor at load, by far less than the two above: KSP rivets it again one
+frame after it goes off rails, and when that frame is longer than a physics step, the anchor is free for a
+step or two ([the rivet, one frame late](the-culprit-ground-anchor.md#the-rivet-one-frame-late)). Below 50
+frames per second, that is every load. This mod fixes it with a setting of its own, `fixGroundAnchorRivet`
+([The fix: the ground anchor](the-fix-ground-anchor.md#the-rivet)).
+
+The protocol: in KSP's settings, *Graphics*, *Frame Limit* at 30. Copy
+[`anchor-base-desert-airfield.sfs`](../diag/anchor-base-desert-airfield.sfs) into the folder of a sandbox
+game and load it: on the runway of the Desert Airfield, an anchor with one of the rover's batteries on it,
+placed on stock and saved after a few loads, where stock left it, about 11 cm above the runway. Set the anchor
+as target and *Record* in KSP Diag - Landed Vessel; then, ten times, quicksave, quickload, *Record*. Three
+sessions, from the same save: on stock; with this mod and `fixGroundAnchorRivet = false`; and with this
+mod as installed, the setting on. [`diag/automation/run-anchor-on-a-static.py`](../diag/automation/run-anchor-on-a-static.py)
+plays it through [KSP-MCPServer](https://github.com/lhervier/KSP-MCPServer), with `--from-save` and
+`--only base`. The sessions are logged in
+[`diag/runs/anchor-rivet-30fps-without-this-mod.log`](../diag/runs/anchor-rivet-30fps-without-this-mod.log),
+[`anchor-rivet-30fps-rivet-fix-off.log`](../diag/runs/anchor-rivet-30fps-rivet-fix-off.log) and
+[`anchor-rivet-30fps-rivet-fix-on.log`](../diag/runs/anchor-rivet-30fps-rivet-fix-on.log).
+
+Heights in mm; *Settled* less the radius of Kerbin. *Moved* is how far the anchor went once physics ran,
+from where the load put it: it does not depend on the ground.
+
+| | **on stock**: *Moved* | *Settled* | **setting off**: *Moved* | *Settled* | **setting on**: *Moved* | *Settled* |
+|---|---|---|---|---|---|---|
+| loaded | −0.974 | 821,033.605 | −0.973 | 821,033.606 | 0.000 | 821,034.579 |
+| 1st load | −0.973 | 821,032.632 | −0.243 | 821,033.362 | 0.000 | 821,034.579 |
+| 2nd load | −0.973 | 821,031.659 | −0.243 | 821,033.119 | 0.000 | 821,034.579 |
+| 3rd load | −0.243 | 821,031.415 | −0.973 | 821,032.146 | 0.000 | 821,034.579 |
+| 4th load | −0.243 | 821,031.172 | −0.243 | 821,031.902 | 0.000 | 821,034.579 |
+| 5th load | −0.974 | 821,030.198 | −0.974 | 821,030.929 | 0.000 | 821,034.579 |
+| 6th load | −0.244 | 821,029.955 | −0.973 | 821,029.955 | 0.000 | 821,034.579 |
+| 7th load | −0.973 | 821,028.981 | −0.973 | 821,028.982 | 0.000 | 821,034.579 |
+| 8th load | −0.244 | 821,028.738 | −0.974 | 821,028.008 | 0.000 | 821,034.579 |
+| 9th load | −0.243 | 821,028.494 | −0.973 | 821,027.035 | 0.000 | 821,034.579 |
+| 10th load | −0.974 | 821,027.521 | −0.973 | 821,026.062 | 0.000 | 821,034.579 |
+
+On stock and with the setting off, `ModuleCargoPart` logs the anchor riveted at 0.0008 to 0.036 m/s at every
+load; with the setting on, at less than 10⁻¹² m/s, next to the line of this mod:
+`Ground anchor rivet fix: 'Point d'ancrage Coll-O-Tron' frozen as it is unpacked, until it is riveted again`.
+
+| on stock | setting off | setting on |
+|---|---|---|
+| ![On stock, at 30 frames per second](../imgs/anchor/rivet/without-this-mod-landed-vessel.png) | ![With this mod, the setting off, at 30 frames per second](../imgs/anchor/rivet/rivet-fix-off-landed-vessel.png) | ![With this mod, the setting on, at 30 frames per second](../imgs/anchor/rivet/rivet-fix-on-landed-vessel.png) |
+
 ## What the measurements say
 
 **On stock, a load puts the anchor 4.1 cm higher than it was placed.** Placed, it rests on its collider,
@@ -129,3 +175,12 @@ whole gap between the collider and the computed height here.
 **With this mod, the anchor and the base stay where they were placed.** *On rails* is the altitude saved,
 not the computed height, and every reading is within 0.08 mm of the ground, alone or with the battery, at
 both loads. The ground under the anchor comes back within 0.02 mm, the terrain fix of this mod.
+
+
+**Below 50 frames per second, a base held in the air sinks a little at every load.** Free for one physics
+step, the anchor falls 0.243 mm; for two, 0.973 mm; never up, the base touching nothing. Over eleven loads,
+the base sank 7.1 mm on stock and 8.5 mm with the setting off, and nothing says it stops. With this mod
+as installed, *Moved* is 0.000 at every load, and *Settled* never changes. On a base resting on the ground
+instead, the step settles it against the ground, by under a millimetre, up or down. Either way it is
+small, but it depends on the frame rate: the same base, from the same save, stays put on a fast computer
+and moves on a slow one.
