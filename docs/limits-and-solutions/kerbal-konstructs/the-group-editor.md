@@ -58,15 +58,15 @@ With that change in Kerbal Konstructs, this mod's patch has nothing left to do.
 ## Checked
 
 With Kerbal Konstructs 1.12.3 and CustomPreLaunchChecks 1.8.1, which it requires, and this mod at
-`logLevel = Debug`. The save, [`diag/non-reg-runway-mune-kk.sfs`](../../../diag/non-reg-runway-mune-kk.sfs),
+`logLevel = Debug`. The save, [`non-reg-runway-mune-kk.sfs`](../../../diag/limits-and-solutions/kerbal-konstructs/the-group-editor/non-reg-runway-mune-kk.sfs),
 is a pod landed on the Mun beside a runway of Kerbal Konstructs, whose two files go in
-`GameData/KerbalKonstructs/NewInstances` ([`diag/non-reg-runway-mune-kk/GameData`](../../../diag/non-reg-runway-mune-kk/GameData)).
+`GameData/KerbalKonstructs/NewInstances` ([`diag/limits-and-solutions/kerbal-konstructs/the-group-editor/non-reg-runway-mune-kk/GameData`](../../../diag/limits-and-solutions/kerbal-konstructs/the-group-editor/non-reg-runway-mune-kk/GameData)).
 In flight, `Ctrl+K` → *Edit Groups* → `MuneBase` opens the group editor, in *Group* mode. Dragging the
 arrows of its gizmo moves the runway, *Save&Close* saves it, then the save is loaded again. The runway
 follows the gizmo and stays where it is let go, the latitude and longitude the editor shows change by
 no more than the distance dragged, and once the save is loaded again the runway is where it was left.
 The log says the patch is applied, and the group stays out of its sphere throughout, put back under it
 only while Kerbal Konstructs places it anew after each drag:
-[`diag/runs/kk-group-editor-fix.log`](../../../diag/runs/kk-group-editor-fix.log). Only the gizmo goes
+[`kk-group-editor-fix.log`](../../../diag/limits-and-solutions/kerbal-konstructs/the-group-editor/kk-group-editor-fix.log). Only the gizmo goes
 through the read this mod patches: the keys and the arrows of the editor's window move a group by
 latitude and longitude, which mean the same thing wherever it hangs.

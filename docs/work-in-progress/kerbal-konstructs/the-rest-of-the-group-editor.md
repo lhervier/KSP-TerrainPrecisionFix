@@ -8,7 +8,7 @@ The rest of the editor, read in the source, goes through latitudes, longitudes a
 to the group's own `PQSCity`, which mean the same thing wherever the group hangs; it has not been played.
 
 *To test:* in flight, near a craft, on the save of the group editor
-([`diag/non-reg-runway-mune-kk.sfs`](../../../diag/non-reg-runway-mune-kk.sfs)): turning a group,
+([`non-reg-runway-mune-kk.sfs`](../../../diag/limits-and-solutions/kerbal-konstructs/the-group-editor/non-reg-runway-mune-kk.sfs)): turning a group,
 creating one, copying one and deleting one, each saved, then the save loaded again. If this mod broke
 something there, a group would turn or appear somewhere else than the editor shows, or come back
 elsewhere once the save is loaded again.

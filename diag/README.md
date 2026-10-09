@@ -12,26 +12,18 @@ installed. What their readings say is in
 the pages of [Non-regression tests](../docs/non-regression.md) and of
 [Limits and solutions](../docs/limits-and-solutions.md).
 
-The saves of the protocols are not here: each protocol belongs to an instrument, and its saves are in
-the `diag` folder of [KSP Diag - Landed Vessel](https://github.com/lhervier/KSP-Diag-LandedVessel/tree/main/diag)
+Each page has its folder here, at the same path as the page under `docs`: the logs, saves and crafts
+of [An anchor on a static](../docs/non-regression/stock/an-anchor-on-a-static.md) are in
+[`non-regression/stock/an-anchor-on-a-static/`](non-regression/stock/an-anchor-on-a-static), and its
+screenshots in [`imgs/non-regression/stock/an-anchor-on-a-static/`](../imgs/non-regression/stock/an-anchor-on-a-static).
+A file that several pages use is in the folder of the page that measures with it. The scripts that play
+the protocols are in [`automation/`](automation).
+
+The saves of the protocols that belong to an instrument are not here: they are in the `diag` folder of
+[KSP Diag - Landed Vessel](https://github.com/lhervier/KSP-Diag-LandedVessel/tree/main/diag)
 and of [KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainHeight/tree/main/diag),
-along with the logs of the same sessions without this mod. Only the sessions taken with this mod alone
-and no instrument have their saves here, with the anchor of
-[Checking the culprit: anchoring a base](../docs/checking-the-culprit-anchoring.md), a protocol of no
-instrument, `ground-anchor-kerbin.sfs` and its rover, `craft/Diag3-Rover.craft`, and the base below 50 frames per
-second, `anchor-base-desert-airfield.sfs`; the rover with two anchors of
-[An anchor on a static](../docs/non-regression/stock/an-anchor-on-a-static.md), `craft/Diag3-Rover-Two-Anchors.craft`; the loads on Venus, Mars and Mercury, described in
-[Real Solar System: this mod's safeguard](../docs/non-regression/real-solar-system/this-mods-safeguard.md#the-saves),
-the launch from Cape Canaveral, the capsule on a launch pad of Kerbal Konstructs on the Mun,
-`warp-static-mun-kk.sfs`, and the launch pad in `warp-static-mun-kk/`, of
-[Time warp](../docs/non-regression/stock/time-warp.md#in-flight-low-over-a-static), and the rover of
-[Real Solar System: a CommNet ground station](../docs/non-regression/real-solar-system/a-commnet-ground-station.md);
-the pod beside a runway of Kerbal Konstructs, `non-reg-runway-mune-kk.sfs`, and the runway in
-`non-reg-runway-mune-kk/`, of [Kerbal Konstructs: the group editor](../docs/limits-and-solutions/kerbal-konstructs/the-group-editor.md);
-in `kopernicus-flag-fix/`, the mission and the change that turns off the flag fix of Kopernicus, of
-[Kopernicus: the flag fix](../docs/limits-and-solutions/kopernicus/the-flag-fix.md); and, in
-`rss-runway-fix/`, the change to Real Solar System of
-[Real Solar System: the runway fix](../docs/non-regression/real-solar-system/the-runway-fix.md).
+along with the logs of the same sessions without this mod. Only the saves of the tests that belong to no
+instrument are here, in the folder of their page.
 
 ## The loading protocol
 
@@ -43,15 +35,25 @@ and what it requires (Kopernicus 248, Modular Flight Integrator, KSPTextureLoade
 `reload-moon-rss-resave.sfs` and `reload-earth-rss-resave.sfs`. Read in
 [Checking the culprit: loading the same save](../docs/checking-the-culprit-loading.md).
 
-- [`runs/loading-fix.log`](runs/loading-fix.log) — the `KSP.log` of the session the four saves were
+- [`loading-fix.log`](checking-the-culprit-loading/loading-fix.log) — the `KSP.log` of the session the four saves were
   played in, one after the other, together with a lone capsule on the same spots, a series no longer
   published.
-- [`runs/loading-rss-fix.log`](runs/loading-rss-fix.log) — the same on Real Solar System, the Moon then
+- [`loading-rss-fix.log`](checking-the-culprit-loading/loading-rss-fix.log) — the same on Real Solar System, the Moon then
   Earth.
-- `runs/reload-<save>-fix-script.txt` — what the script printed for each save, and
-  `runs/reload-<save>-fix-lines.json`, every line it recorded, in both instruments: for instance
-  [`runs/reload-kerbin-2parts-fix-lines.json`](runs/reload-kerbin-2parts-fix-lines.json) or
-  [`runs/reload-earth-rss-resave-fix-lines.json`](runs/reload-earth-rss-resave-fix-lines.json).
+- for each save, what the script printed (`-script.txt`), and every line it recorded, in both
+  instruments (`-lines.json`):
+  - `kerbin-2parts`: [`reload-kerbin-2parts-fix-script.txt`](checking-the-culprit-loading/reload-kerbin-2parts-fix-script.txt) and
+    [`reload-kerbin-2parts-fix-lines.json`](checking-the-culprit-loading/reload-kerbin-2parts-fix-lines.json);
+  - `mune-2parts`: [`reload-mune-2parts-fix-script.txt`](checking-the-culprit-loading/reload-mune-2parts-fix-script.txt) and
+    [`reload-mune-2parts-fix-lines.json`](checking-the-culprit-loading/reload-mune-2parts-fix-lines.json);
+  - `minmus-2parts`: [`reload-minmus-2parts-fix-script.txt`](checking-the-culprit-loading/reload-minmus-2parts-fix-script.txt) and
+    [`reload-minmus-2parts-fix-lines.json`](checking-the-culprit-loading/reload-minmus-2parts-fix-lines.json);
+  - `gilly-2parts`: [`reload-gilly-2parts-fix-script.txt`](checking-the-culprit-loading/reload-gilly-2parts-fix-script.txt) and
+    [`reload-gilly-2parts-fix-lines.json`](checking-the-culprit-loading/reload-gilly-2parts-fix-lines.json);
+  - `moon-rss-resave`: [`reload-moon-rss-resave-fix-script.txt`](checking-the-culprit-loading/reload-moon-rss-resave-fix-script.txt) and
+    [`reload-moon-rss-resave-fix-lines.json`](checking-the-culprit-loading/reload-moon-rss-resave-fix-lines.json);
+  - `earth-rss-resave`: [`reload-earth-rss-resave-fix-script.txt`](checking-the-culprit-loading/reload-earth-rss-resave-fix-script.txt) and
+    [`reload-earth-rss-resave-fix-lines.json`](checking-the-culprit-loading/reload-earth-rss-resave-fix-lines.json).
 
 ## The switching protocol
 
@@ -60,9 +62,9 @@ The install of [The loading protocol](#the-loading-protocol), on Kerbin: the six
 played by its script, `run-switching.py`, on `switch-kerbin.sfs`. Read in
 [Switching to a craft far away](../docs/checking-the-culprit-switching.md).
 
-- [`runs/switching-fix.log`](runs/switching-fix.log) — the `KSP.log` of the session; what the script
-  printed in [`runs/switching-fix-script.txt`](runs/switching-fix-script.txt), and every line it
-  recorded, in both instruments, in [`runs/switching-fix-lines.json`](runs/switching-fix-lines.json).
+- [`switching-fix.log`](checking-the-culprit-switching/switching-fix.log) — the `KSP.log` of the session; what the script
+  printed in [`switching-fix-script.txt`](checking-the-culprit-switching/switching-fix-script.txt), and every line it
+  recorded, in both instruments, in [`switching-fix-lines.json`](checking-the-culprit-switching/switching-fix-lines.json).
 
 ## The approach protocol
 
@@ -71,9 +73,9 @@ The install of [The loading protocol](#the-loading-protocol), on Kerbin: the six
 in a single flight, played by its script, `run-approach.py`, on `approach-kerbin.sfs`. Read in
 [Coming back to a craft left parked](../docs/checking-the-culprit-approach.md).
 
-- [`runs/approach-fix.log`](runs/approach-fix.log) — the `KSP.log` of the session; what the script
-  printed in [`runs/approach-fix-script.txt`](runs/approach-fix-script.txt), and every line it
-  recorded, in both instruments, in [`runs/approach-fix-lines.json`](runs/approach-fix-lines.json).
+- [`approach-fix.log`](checking-the-culprit-approach/approach-fix.log) — the `KSP.log` of the session; what the script
+  printed in [`approach-fix-script.txt`](checking-the-culprit-approach/approach-fix-script.txt), and every line it
+  recorded, in both instruments, in [`approach-fix-lines.json`](checking-the-culprit-approach/approach-fix-lines.json).
 
 ## The runway protocol
 
@@ -82,13 +84,13 @@ The install of [The loading protocol](#the-loading-protocol): the six loadings o
 played by its script, `run-runway.py`. Read in
 [Checking the culprit: loading the same save](../docs/checking-the-culprit-loading.md).
 
-- [`runs/runway-fix.log`](runs/runway-fix.log) — on Kerbin, `runway-kerbin.sfs`; what the script
-  printed in [`runs/runway-fix-script.txt`](runs/runway-fix-script.txt), and every line it recorded, in
-  both instruments, in [`runs/runway-fix-lines.json`](runs/runway-fix-lines.json).
-- [`runs/runway-mun-kk-fix.log`](runs/runway-mun-kk-fix.log) — on the Mun, `runway-mun-kk.sfs`, beside a
+- [`runway-fix.log`](checking-the-culprit-loading/runway-fix.log) — on Kerbin, `runway-kerbin.sfs`; what the script
+  printed in [`runway-fix-script.txt`](checking-the-culprit-loading/runway-fix-script.txt), and every line it recorded, in
+  both instruments, in [`runway-fix-lines.json`](checking-the-culprit-loading/runway-fix-lines.json).
+- [`runway-mun-kk-fix.log`](checking-the-culprit-loading/runway-mun-kk-fix.log) — on the Mun, `runway-mun-kk.sfs`, beside a
   runway placed by Kerbal Konstructs 1.12.3, added to the install with CustomPreLaunchChecks 1.8.1; what
-  the script printed in [`runs/runway-mun-kk-fix-script.txt`](runs/runway-mun-kk-fix-script.txt), and
-  every line it recorded in [`runs/runway-mun-kk-fix-lines.json`](runs/runway-mun-kk-fix-lines.json).
+  the script printed in [`runway-mun-kk-fix-script.txt`](checking-the-culprit-loading/runway-mun-kk-fix-script.txt), and
+  every line it recorded in [`runway-mun-kk-fix-lines.json`](checking-the-culprit-loading/runway-mun-kk-fix-lines.json).
 
 ## The driving protocol
 
@@ -99,13 +101,13 @@ played by its script, `run-driving.py`; on Earth, Real Solar System 20.1.3.0 and
 well. Each log holds one line per quad this mod placed, with how far it was moved. Read in
 [Driving on while the world moves](../docs/checking-the-culprit-driving.md).
 
-- [`runs/driving-diag2-fix.log`](runs/driving-diag2-fix.log) — on Kerbin, `driving-kerbin.sfs`; what the
-  script printed in [`runs/driving-diag2-fix-script.txt`](runs/driving-diag2-fix-script.txt), and every
-  line it recorded in [`runs/driving-diag2-fix-lines.json`](runs/driving-diag2-fix-lines.json).
-- [`runs/driving-earth-rss-diag2-fix.log`](runs/driving-earth-rss-diag2-fix.log) — on Earth,
+- [`driving-diag2-fix.log`](checking-the-culprit-driving/driving-diag2-fix.log) — on Kerbin, `driving-kerbin.sfs`; what the
+  script printed in [`driving-diag2-fix-script.txt`](checking-the-culprit-driving/driving-diag2-fix-script.txt), and every
+  line it recorded in [`driving-diag2-fix-lines.json`](checking-the-culprit-driving/driving-diag2-fix-lines.json).
+- [`driving-earth-rss-diag2-fix.log`](checking-the-culprit-driving/driving-earth-rss-diag2-fix.log) — on Earth,
   `driving-earth-rss.sfs`; what the script printed in
-  [`runs/driving-earth-rss-diag2-fix-script.txt`](runs/driving-earth-rss-diag2-fix-script.txt), and
-  every line it recorded in [`runs/driving-earth-rss-diag2-fix-lines.json`](runs/driving-earth-rss-diag2-fix-lines.json).
+  [`driving-earth-rss-diag2-fix-script.txt`](checking-the-culprit-driving/driving-earth-rss-diag2-fix-script.txt), and
+  every line it recorded in [`driving-earth-rss-diag2-fix-lines.json`](checking-the-culprit-driving/driving-earth-rss-diag2-fix-lines.json).
 
 ## The protocol of the runway and the grass while the world moves
 
@@ -115,16 +117,16 @@ played by its script, `run-driving-runway.py`, from `driving-runway-kerbin.sfs`.
 [Driving on while the world moves](../docs/checking-the-culprit-driving.md#on-kerbin). Earth is under
 [On Real Solar System](#on-real-solar-system).
 
-- [`runs/driving-runway-diag2-fix.log`](runs/driving-runway-diag2-fix.log) — this mod as it is
+- [`driving-runway-diag2-fix.log`](checking-the-culprit-driving/driving-runway-diag2-fix.log) — this mod as it is
   installed; what the script printed in
-  [`runs/driving-runway-diag2-fix-script.txt`](runs/driving-runway-diag2-fix-script.txt), and every
-  line it recorded in [`runs/driving-runway-diag2-fix-lines.json`](runs/driving-runway-diag2-fix-lines.json).
-- [`runs/driving-runway-diag2-fix-terrain-only.log`](runs/driving-runway-diag2-fix-terrain-only.log) —
+  [`driving-runway-diag2-fix-script.txt`](checking-the-culprit-driving/driving-runway-diag2-fix-script.txt), and every
+  line it recorded in [`driving-runway-diag2-fix-lines.json`](checking-the-culprit-driving/driving-runway-diag2-fix-lines.json).
+- [`driving-runway-diag2-fix-terrain-only.log`](checking-the-culprit-driving/driving-runway-diag2-fix-terrain-only.log) —
   an earlier run, with an earlier version of the script, this mod with `fixStatics = false`; what the
   script printed in
-  [`runs/driving-runway-diag2-fix-terrain-only-script.txt`](runs/driving-runway-diag2-fix-terrain-only-script.txt),
+  [`driving-runway-diag2-fix-terrain-only-script.txt`](checking-the-culprit-driving/driving-runway-diag2-fix-terrain-only-script.txt),
   and every line it recorded in
-  [`runs/driving-runway-diag2-fix-terrain-only-lines.json`](runs/driving-runway-diag2-fix-terrain-only-lines.json).
+  [`driving-runway-diag2-fix-terrain-only-lines.json`](checking-the-culprit-driving/driving-runway-diag2-fix-terrain-only-lines.json).
 
 ## The launch pad protocol
 
@@ -135,10 +137,10 @@ of [the launch pad protocol](https://github.com/lhervier/KSP-Diag-TerrainHeight/
 `run-launch-pad.py`. Read in
 [Launching from a launch pad of Making History](../docs/checking-the-culprit-launch-pad.md).
 
-- [`runs/launch-pad-fix-1.log`](runs/launch-pad-fix-1.log) to
-  [`runs/launch-pad-fix-6.log`](runs/launch-pad-fix-6.log) — the `KSP.log` of each session; what the
-  script printed in [`runs/launch-pad-fix-script.txt`](runs/launch-pad-fix-script.txt), and every line
-  it recorded in [`runs/launch-pad-fix-lines.json`](runs/launch-pad-fix-lines.json).
+- [`launch-pad-fix-1.log`](checking-the-culprit-launch-pad/launch-pad-fix-1.log), [`launch-pad-fix-2.log`](checking-the-culprit-launch-pad/launch-pad-fix-2.log), [`launch-pad-fix-3.log`](checking-the-culprit-launch-pad/launch-pad-fix-3.log), [`launch-pad-fix-4.log`](checking-the-culprit-launch-pad/launch-pad-fix-4.log), [`launch-pad-fix-5.log`](checking-the-culprit-launch-pad/launch-pad-fix-5.log) and [`launch-pad-fix-6.log`](checking-the-culprit-launch-pad/launch-pad-fix-6.log) — the `KSP.log`
+  of each session; what the
+  script printed in [`launch-pad-fix-script.txt`](checking-the-culprit-launch-pad/launch-pad-fix-script.txt), and every line
+  it recorded in [`launch-pad-fix-lines.json`](checking-the-culprit-launch-pad/launch-pad-fix-lines.json).
 
 ## The protocol of the quads of the highest level, in flight
 
@@ -148,50 +150,56 @@ KSP Diag - Terrain Quads, KSP Diag - Floating Origin and KSP-MCPServer: on each 
 `Quad-Rocket` launched from the launchpad, played by its script, `run-flight.py`, and read by its
 `analyse-flight.py`. Read in [In flight](../docs/checking-the-culprit-flight.md).
 
-- [`runs/flight-kerbin-fix.log`](runs/flight-kerbin-fix.log) — on Kerbin, from the launchpad of the
-  Space Center, 73 *Logs*; what the script printed in [`runs/flight-kerbin-fix-script.txt`](runs/flight-kerbin-fix-script.txt), what each *Log*
-  answered in [`runs/flight-kerbin-fix-readings.json`](runs/flight-kerbin-fix-readings.json), the two
-  files of the *Logs* in [`runs/flight-kerbin-fix-logs.csv`](runs/flight-kerbin-fix-logs.csv) and
-  [`runs/flight-kerbin-fix-quads.zip`](runs/flight-kerbin-fix-quads.zip) (zipped: 43 MB once unzipped),
+- [`flight-kerbin-fix.log`](checking-the-culprit-flight/flight-kerbin-fix.log) — on Kerbin, from the launchpad of the
+  Space Center, 73 *Logs*; what the script printed in [`flight-kerbin-fix-script.txt`](checking-the-culprit-flight/flight-kerbin-fix-script.txt), what each *Log*
+  answered in [`flight-kerbin-fix-readings.json`](checking-the-culprit-flight/flight-kerbin-fix-readings.json), the two
+  files of the *Logs* in [`flight-kerbin-fix-logs.csv`](checking-the-culprit-flight/flight-kerbin-fix-logs.csv) and
+  [`flight-kerbin-fix-quads.zip`](checking-the-culprit-flight/flight-kerbin-fix-quads.zip) (zipped: 43 MB once unzipped),
   and what `analyse-flight.py` printed in
-  [`runs/flight-kerbin-fix-analysis.txt`](runs/flight-kerbin-fix-analysis.txt).
-- [`runs/flight-earth-rss-fix.log`](runs/flight-earth-rss-fix.log) — on Earth, Real Solar System
+  [`flight-kerbin-fix-analysis.txt`](checking-the-culprit-flight/flight-kerbin-fix-analysis.txt).
+- [`flight-earth-rss-fix.log`](checking-the-culprit-flight/flight-earth-rss-fix.log) — on Earth, Real Solar System
   20.1.3.0 as released and what it requires added, from the launchpad of Cape Canaveral, 56 *Logs*; what
-  the script printed in [`runs/flight-earth-rss-fix-script.txt`](runs/flight-earth-rss-fix-script.txt),
-  what each *Log* answered in [`runs/flight-earth-rss-fix-readings.json`](runs/flight-earth-rss-fix-readings.json),
-  the two files of the *Logs* in [`runs/flight-earth-rss-fix-logs.csv`](runs/flight-earth-rss-fix-logs.csv)
-  and [`runs/flight-earth-rss-fix-quads.zip`](runs/flight-earth-rss-fix-quads.zip) (zipped: 41 MB once
+  the script printed in [`flight-earth-rss-fix-script.txt`](checking-the-culprit-flight/flight-earth-rss-fix-script.txt),
+  what each *Log* answered in [`flight-earth-rss-fix-readings.json`](checking-the-culprit-flight/flight-earth-rss-fix-readings.json),
+  the two files of the *Logs* in [`flight-earth-rss-fix-logs.csv`](checking-the-culprit-flight/flight-earth-rss-fix-logs.csv)
+  and [`flight-earth-rss-fix-quads.zip`](checking-the-culprit-flight/flight-earth-rss-fix-quads.zip) (zipped: 41 MB once
   unzipped), and what `analyse-flight.py` printed in
-  [`runs/flight-earth-rss-fix-analysis.txt`](runs/flight-earth-rss-fix-analysis.txt).
+  [`flight-earth-rss-fix-analysis.txt`](checking-the-culprit-flight/flight-earth-rss-fix-analysis.txt).
 
 ## The ground anchor protocol
 
 KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1,
 [KSP Diag - Landed Vessel](https://github.com/lhervier/KSP-Diag-LandedVessel),
 [KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainHeight), and this mod at
-`logLevel = Debug`, or not: [`ground-anchor-kerbin.sfs`](ground-anchor-kerbin.sfs), Bill Kerman places a
-ground anchor on the desert of Kerbin beside the rover of [`craft/Diag3-Rover.craft`](craft/Diag3-Rover.craft),
+`logLevel = Debug`, or not: [`ground-anchor-kerbin.sfs`](checking-the-culprit-anchoring/ground-anchor-kerbin.sfs), Bill Kerman places a
+ground anchor on the desert of Kerbin beside the rover of [`Diag3-Rover.craft`](checking-the-culprit-anchoring/Diag3-Rover.craft),
 alone, then with one of the rover's batteries attached on top of it; quicksave and quickload twice,
 played by hand. Three sessions: without this mod, with this mod and `fixGroundAnchorLoad = false`, and with
 this mod as installed. Read in
 [Checking the culprit: anchoring a base](../docs/checking-the-culprit-anchoring.md).
 
-- [`runs/ground-anchor-kerbin-without-this-mod.log`](runs/ground-anchor-kerbin-without-this-mod.log), which
+- [`ground-anchor-kerbin-without-this-mod.log`](checking-the-culprit-anchoring/ground-anchor-kerbin-without-this-mod.log), which
   holds a first placement, given up, before the two measured;
-- [`runs/ground-anchor-kerbin-model-fix.log`](runs/ground-anchor-kerbin-model-fix.log), which holds a first
+- [`ground-anchor-kerbin-model-fix.log`](checking-the-culprit-anchoring/ground-anchor-kerbin-model-fix.log), which holds a first
   series of both cases before the measured one, the anchor with a battery read without it set as target;
-- [`runs/ground-anchor-kerbin-fix.log`](runs/ground-anchor-kerbin-fix.log).
+- [`ground-anchor-kerbin-fix.log`](checking-the-culprit-anchoring/ground-anchor-kerbin-fix.log).
 
 Below 50 frames per second: the same install, *Frame Limit* at 30 and KSP-MCPServer, the base of
-[`anchor-base-desert-airfield.sfs`](anchor-base-desert-airfield.sfs) loaded, then ten quicksaves and quickloads
+[`anchor-base-desert-airfield.sfs`](checking-the-culprit-anchoring/anchor-base-desert-airfield.sfs) loaded, then ten quicksaves and quickloads
 played by [`automation/run-anchor-on-a-static.py`](automation/run-anchor-on-a-static.py) with `--from-save`
 and `--only base`. Three sessions: without this mod, with this mod and `fixGroundAnchorRivet = false`, and
 with this mod as installed. Read in
 [Checking the culprit: anchoring a base, below 50 frames per second](../docs/checking-the-culprit-anchoring.md#below-50-frames-per-second).
 
-- `runs/anchor-rivet-30fps-<without-this-mod|rivet-fix-off|rivet-fix-on>.log`, with what the script printed
-  (`-script.txt`) and the readings of KSP Diag - Landed Vessel (`-readings.json`), as in
-  [`runs/anchor-rivet-30fps-rivet-fix-on.log`](runs/anchor-rivet-30fps-rivet-fix-on.log).
+- without this mod: [`anchor-rivet-30fps-without-this-mod.log`](checking-the-culprit-anchoring/anchor-rivet-30fps-without-this-mod.log), with what the script
+  printed in [`anchor-rivet-30fps-without-this-mod-script.txt`](checking-the-culprit-anchoring/anchor-rivet-30fps-without-this-mod-script.txt) and the readings
+  of KSP Diag - Landed Vessel in [`anchor-rivet-30fps-without-this-mod-readings.json`](checking-the-culprit-anchoring/anchor-rivet-30fps-without-this-mod-readings.json);
+- with `fixGroundAnchorRivet = false`: [`anchor-rivet-30fps-rivet-fix-off.log`](checking-the-culprit-anchoring/anchor-rivet-30fps-rivet-fix-off.log), with what the script
+  printed in [`anchor-rivet-30fps-rivet-fix-off-script.txt`](checking-the-culprit-anchoring/anchor-rivet-30fps-rivet-fix-off-script.txt) and the readings
+  of KSP Diag - Landed Vessel in [`anchor-rivet-30fps-rivet-fix-off-readings.json`](checking-the-culprit-anchoring/anchor-rivet-30fps-rivet-fix-off-readings.json);
+- with this mod as installed: [`anchor-rivet-30fps-rivet-fix-on.log`](checking-the-culprit-anchoring/anchor-rivet-30fps-rivet-fix-on.log), with what the script
+  printed in [`anchor-rivet-30fps-rivet-fix-on-script.txt`](checking-the-culprit-anchoring/anchor-rivet-30fps-rivet-fix-on-script.txt) and the readings
+  of KSP Diag - Landed Vessel in [`anchor-rivet-30fps-rivet-fix-on-readings.json`](checking-the-culprit-anchoring/anchor-rivet-30fps-rivet-fix-on-readings.json).
 
 ## The seam between subdivision levels
 
@@ -200,14 +208,14 @@ this mod at `logLevel = Debug`, the craft `Diag3-Rocket` on the launchpad revert
 script of its protocol, `run-revert.py`, until the finer quad is above at the largest gap, on land.
 Read in [The seam with this mod](../docs/limits-and-solutions/stock/the-seam-between-subdivision-levels.md#the-seam-with-this-mod).
 
-- [`runs/revert-earth-rss-fix-diag4.log`](runs/revert-earth-rss-fix-diag4.log) — on Earth, Real Solar
+- [`revert-earth-rss-fix-diag4.log`](limits-and-solutions/stock/the-seam-between-subdivision-levels/revert-earth-rss-fix-diag4.log) — on Earth, Real Solar
   System 20.1.3.0 as released and what it requires added, at Cape Canaveral, nine loads; what the
-  script printed in [`runs/revert-earth-rss-fix-diag4-script.txt`](runs/revert-earth-rss-fix-diag4-script.txt),
-  and every reading in [`runs/revert-earth-rss-fix-diag4-readings.json`](runs/revert-earth-rss-fix-diag4-readings.json).
-- [`runs/revert-kerbin-fix-diag4.log`](runs/revert-kerbin-fix-diag4.log) — on Kerbin, at the Space
+  script printed in [`revert-earth-rss-fix-diag4-script.txt`](limits-and-solutions/stock/the-seam-between-subdivision-levels/revert-earth-rss-fix-diag4-script.txt),
+  and every reading in [`revert-earth-rss-fix-diag4-readings.json`](limits-and-solutions/stock/the-seam-between-subdivision-levels/revert-earth-rss-fix-diag4-readings.json).
+- [`revert-kerbin-fix-diag4.log`](limits-and-solutions/stock/the-seam-between-subdivision-levels/revert-kerbin-fix-diag4.log) — on Kerbin, at the Space
   Center, ten loads; what the script printed in
-  [`runs/revert-kerbin-fix-diag4-script.txt`](runs/revert-kerbin-fix-diag4-script.txt), and every
-  reading in [`runs/revert-kerbin-fix-diag4-readings.json`](runs/revert-kerbin-fix-diag4-readings.json).
+  [`revert-kerbin-fix-diag4-script.txt`](limits-and-solutions/stock/the-seam-between-subdivision-levels/revert-kerbin-fix-diag4-script.txt), and every
+  reading in [`revert-kerbin-fix-diag4-readings.json`](limits-and-solutions/stock/the-seam-between-subdivision-levels/revert-kerbin-fix-diag4-readings.json).
 
 ## The altitude where KSP turns the body
 
@@ -217,7 +225,7 @@ Without this mod: KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.
 System 20.1.3.0 and what it requires, then with Outer Planets Mod 2.2.12, Kopernicus 248, Modular Flight
 Integrator and KSPTextureLoader as for Real Solar System, and the Community Terrain Texture Pack 1.0.5.
 
-- [`runs/rotation-thresholds.txt`](runs/rotation-thresholds.txt) — what
+- [`rotation-thresholds.txt`](non-regression/stock/a-static-turning-with-its-body/rotation-thresholds.txt) — what
   [`automation/run-rotation-threshold.py`](automation/run-rotation-threshold.py) printed, body by body:
   a craft moved from orbit to orbit, the altitude above which KSP turns the body rather than the world.
   No log kept: the readings are the script's. Read in
@@ -228,7 +236,7 @@ Integrator and KSPTextureLoader as for Real Solar System, and the Community Terr
 KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1,
 [KSP Diag - Colliders](https://github.com/lhervier/KSP-Diag-Colliders), this mod at `logLevel = Debug`,
 and KSP-MCPServer, which plays the test through [`automation/run-scene-changes.py`](automation/run-scene-changes.py):
-a new career at the Custom difficulty (on Kerbin, the same as [`career-with-the-parts.sfs`](career-with-the-parts.sfs)),
+a new career at the Custom difficulty (on Kerbin, the same as [`career-with-the-parts.sfs`](non-regression/stock/destroyed-buildings/career-with-the-parts.sfs)),
 `Diag3-Rocket.craft` on the launchpad, eleven arrivals in flight through every way of leaving
 it, and `Diag3-Rover.craft` launched from the SPH onto the runway; one script per way in
 [`automation/scene-changes/`](automation/scene-changes/). On Earth, Real Solar System 20.1.3.0 and what it
@@ -236,22 +244,22 @@ requires (Kopernicus 248, Modular Flight Integrator,
 KSPTextureLoader, the RSS textures). Each one played again without this mod. Read in
 [Scene changes](../docs/non-regression/stock/scene-changes.md).
 
-- [`runs/scene-changes-kerbin-fix.log`](runs/scene-changes-kerbin-fix.log) and
-  [`runs/scene-changes-kerbin-without-this-mod.log`](runs/scene-changes-kerbin-without-this-mod.log) — on
+- [`scene-changes-kerbin-fix.log`](non-regression/stock/scene-changes/scene-changes-kerbin-fix.log) and
+  [`scene-changes-kerbin-without-this-mod.log`](non-regression/stock/scene-changes/scene-changes-kerbin-without-this-mod.log) — on
   Kerbin; what the script printed in
-  [`runs/scene-changes-kerbin-fix-script.txt`](runs/scene-changes-kerbin-fix-script.txt) and
-  [`runs/scene-changes-kerbin-without-this-mod-script.txt`](runs/scene-changes-kerbin-without-this-mod-script.txt),
+  [`scene-changes-kerbin-fix-script.txt`](non-regression/stock/scene-changes/scene-changes-kerbin-fix-script.txt) and
+  [`scene-changes-kerbin-without-this-mod-script.txt`](non-regression/stock/scene-changes/scene-changes-kerbin-without-this-mod-script.txt),
   the colliders under the craft at each arrival in
-  [`runs/scene-changes-kerbin-fix-readings.json`](runs/scene-changes-kerbin-fix-readings.json) and
-  [`runs/scene-changes-kerbin-without-this-mod-readings.json`](runs/scene-changes-kerbin-without-this-mod-readings.json).
-- [`runs/scene-changes-earth-rss-fix.log`](runs/scene-changes-earth-rss-fix.log) and
-  [`runs/scene-changes-earth-rss-without-this-mod.log`](runs/scene-changes-earth-rss-without-this-mod.log)
+  [`scene-changes-kerbin-fix-readings.json`](non-regression/stock/scene-changes/scene-changes-kerbin-fix-readings.json) and
+  [`scene-changes-kerbin-without-this-mod-readings.json`](non-regression/stock/scene-changes/scene-changes-kerbin-without-this-mod-readings.json).
+- [`scene-changes-earth-rss-fix.log`](non-regression/stock/scene-changes/scene-changes-earth-rss-fix.log) and
+  [`scene-changes-earth-rss-without-this-mod.log`](non-regression/stock/scene-changes/scene-changes-earth-rss-without-this-mod.log)
   — on Earth; the same in
-  [`runs/scene-changes-earth-rss-fix-script.txt`](runs/scene-changes-earth-rss-fix-script.txt),
-  [`runs/scene-changes-earth-rss-without-this-mod-script.txt`](runs/scene-changes-earth-rss-without-this-mod-script.txt),
-  [`runs/scene-changes-earth-rss-fix-readings.json`](runs/scene-changes-earth-rss-fix-readings.json) and
-  [`runs/scene-changes-earth-rss-without-this-mod-readings.json`](runs/scene-changes-earth-rss-without-this-mod-readings.json).
-- [`runs/scene-changes-earth-rss-without-this-mod-earlier.log`](runs/scene-changes-earth-rss-without-this-mod-earlier.log)
+  [`scene-changes-earth-rss-fix-script.txt`](non-regression/stock/scene-changes/scene-changes-earth-rss-fix-script.txt),
+  [`scene-changes-earth-rss-without-this-mod-script.txt`](non-regression/stock/scene-changes/scene-changes-earth-rss-without-this-mod-script.txt),
+  [`scene-changes-earth-rss-fix-readings.json`](non-regression/stock/scene-changes/scene-changes-earth-rss-fix-readings.json) and
+  [`scene-changes-earth-rss-without-this-mod-readings.json`](non-regression/stock/scene-changes/scene-changes-earth-rss-without-this-mod-readings.json).
+- [`scene-changes-earth-rss-without-this-mod-earlier.log`](non-regression/stock/scene-changes/scene-changes-earth-rss-without-this-mod-earlier.log)
   — an earlier session on Earth without this mod, kept for the error of the Knowledge Base it shows.
 
 ## The destroyed buildings protocol
@@ -260,21 +268,21 @@ KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1,
 [KSP Diag - Colliders](https://github.com/lhervier/KSP-Diag-Colliders), this mod at `logLevel = Debug`,
 and KSP-MCPServer, which plays the test through
 [`automation/run-destroyed-buildings.py`](automation/run-destroyed-buildings.py): a new career at the Custom
-difficulty (the same as [`career-with-the-parts.sfs`](career-with-the-parts.sfs), which a player can start
-from), [`craft/VAB-Dropper.craft`](craft/VAB-Dropper.craft) dropped twice onto the VAB from the
+difficulty (the same as [`career-with-the-parts.sfs`](non-regression/stock/destroyed-buildings/career-with-the-parts.sfs), which a player can start
+from), [`VAB-Dropper.craft`](non-regression/stock/destroyed-buildings/VAB-Dropper.craft) dropped twice onto the VAB from the
 launchpad, `Diag3-Rover.craft` launched from the SPH onto the runway around the VAB in ruins, the VAB
 repaired, and `Diag3-Rocket.craft` launched from it; three arrivals on the launchpad, two on the runway.
 Played again without this mod. Read in
 [Destroyed buildings](../docs/non-regression/stock/destroyed-buildings.md).
 
-- [`runs/destroyed-buildings-kerbin-fix.log`](runs/destroyed-buildings-kerbin-fix.log) and
-  [`runs/destroyed-buildings-kerbin-without-this-mod.log`](runs/destroyed-buildings-kerbin-without-this-mod.log);
+- [`destroyed-buildings-kerbin-fix.log`](non-regression/stock/destroyed-buildings/destroyed-buildings-kerbin-fix.log) and
+  [`destroyed-buildings-kerbin-without-this-mod.log`](non-regression/stock/destroyed-buildings/destroyed-buildings-kerbin-without-this-mod.log);
   what the script printed in
-  [`runs/destroyed-buildings-kerbin-fix-script.txt`](runs/destroyed-buildings-kerbin-fix-script.txt) and
-  [`runs/destroyed-buildings-kerbin-without-this-mod-script.txt`](runs/destroyed-buildings-kerbin-without-this-mod-script.txt),
+  [`destroyed-buildings-kerbin-fix-script.txt`](non-regression/stock/destroyed-buildings/destroyed-buildings-kerbin-fix-script.txt) and
+  [`destroyed-buildings-kerbin-without-this-mod-script.txt`](non-regression/stock/destroyed-buildings/destroyed-buildings-kerbin-without-this-mod-script.txt),
   the colliders under the craft at each arrival in
-  [`runs/destroyed-buildings-kerbin-fix-readings.json`](runs/destroyed-buildings-kerbin-fix-readings.json) and
-  [`runs/destroyed-buildings-kerbin-without-this-mod-readings.json`](runs/destroyed-buildings-kerbin-without-this-mod-readings.json).
+  [`destroyed-buildings-kerbin-fix-readings.json`](non-regression/stock/destroyed-buildings/destroyed-buildings-kerbin-fix-readings.json) and
+  [`destroyed-buildings-kerbin-without-this-mod-readings.json`](non-regression/stock/destroyed-buildings/destroyed-buildings-kerbin-without-this-mod-readings.json).
 
 ## The facility levels protocol
 
@@ -282,18 +290,18 @@ KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1,
 [KSP Diag - Colliders](https://github.com/lhervier/KSP-Diag-Colliders), this mod at `logLevel = Debug`,
 and KSP-MCPServer, which plays the test through
 [`automation/run-facility-levels.py`](automation/run-facility-levels.py): a new career at the Custom
-difficulty (the same as [`career-with-the-parts.sfs`](career-with-the-parts.sfs)), `Diag3-Rocket.craft` launched onto the launchpad and `Diag3-Rover.craft` onto the runway, four
+difficulty (the same as [`career-with-the-parts.sfs`](non-regression/stock/destroyed-buildings/career-with-the-parts.sfs)), `Diag3-Rocket.craft` launched onto the launchpad and `Diag3-Rover.craft` onto the runway, four
 arrivals on each at each of their three levels. Played again without this mod. Read in
 [Facility levels](../docs/non-regression/stock/facility-levels.md).
 
-- [`runs/facility-levels-kerbin-fix.log`](runs/facility-levels-kerbin-fix.log) and
-  [`runs/facility-levels-kerbin-without-this-mod.log`](runs/facility-levels-kerbin-without-this-mod.log);
+- [`facility-levels-kerbin-fix.log`](non-regression/stock/facility-levels/facility-levels-kerbin-fix.log) and
+  [`facility-levels-kerbin-without-this-mod.log`](non-regression/stock/facility-levels/facility-levels-kerbin-without-this-mod.log);
   what the script printed in
-  [`runs/facility-levels-kerbin-fix-script.txt`](runs/facility-levels-kerbin-fix-script.txt) and
-  [`runs/facility-levels-kerbin-without-this-mod-script.txt`](runs/facility-levels-kerbin-without-this-mod-script.txt),
+  [`facility-levels-kerbin-fix-script.txt`](non-regression/stock/facility-levels/facility-levels-kerbin-fix-script.txt) and
+  [`facility-levels-kerbin-without-this-mod-script.txt`](non-regression/stock/facility-levels/facility-levels-kerbin-without-this-mod-script.txt),
   the colliders under the craft at each arrival in
-  [`runs/facility-levels-kerbin-fix-readings.json`](runs/facility-levels-kerbin-fix-readings.json) and
-  [`runs/facility-levels-kerbin-without-this-mod-readings.json`](runs/facility-levels-kerbin-without-this-mod-readings.json).
+  [`facility-levels-kerbin-fix-readings.json`](non-regression/stock/facility-levels/facility-levels-kerbin-fix-readings.json) and
+  [`facility-levels-kerbin-without-this-mod-readings.json`](non-regression/stock/facility-levels/facility-levels-kerbin-without-this-mod-readings.json).
 
 ## The time warp protocol
 
@@ -306,65 +314,70 @@ the next noon at the KSC; four readings, a screenshot at each. Played again with
 [Time warp](../docs/non-regression/stock/time-warp.md) and
 [The lights of the KSC](../docs/non-regression/stock/the-lights-of-the-ksc.md).
 
-- [`runs/time-warp-kerbin-fix.log`](runs/time-warp-kerbin-fix.log) and
-  [`runs/time-warp-kerbin-without-this-mod.log`](runs/time-warp-kerbin-without-this-mod.log);
+- [`time-warp-kerbin-fix.log`](non-regression/stock/time-warp/time-warp-kerbin-fix.log) and
+  [`time-warp-kerbin-without-this-mod.log`](non-regression/stock/time-warp/time-warp-kerbin-without-this-mod.log);
   what the script printed in
-  [`runs/time-warp-kerbin-fix-script.txt`](runs/time-warp-kerbin-fix-script.txt) and
-  [`runs/time-warp-kerbin-without-this-mod-script.txt`](runs/time-warp-kerbin-without-this-mod-script.txt),
+  [`time-warp-kerbin-fix-script.txt`](non-regression/stock/time-warp/time-warp-kerbin-fix-script.txt) and
+  [`time-warp-kerbin-without-this-mod-script.txt`](non-regression/stock/time-warp/time-warp-kerbin-without-this-mod-script.txt),
   the colliders under the craft at each reading in
-  [`runs/time-warp-kerbin-fix-readings.json`](runs/time-warp-kerbin-fix-readings.json) and
-  [`runs/time-warp-kerbin-without-this-mod-readings.json`](runs/time-warp-kerbin-without-this-mod-readings.json).
+  [`time-warp-kerbin-fix-readings.json`](non-regression/stock/time-warp/time-warp-kerbin-fix-readings.json) and
+  [`time-warp-kerbin-without-this-mod-readings.json`](non-regression/stock/time-warp/time-warp-kerbin-without-this-mod-readings.json).
 
 ## The time warp flyover protocol
 
 KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, Kerbal Konstructs 1.12.3 with the launch
-pad of [`warp-static-mun-kk/`](warp-static-mun-kk/) and its CustomPreLaunchChecks,
+pad of [`non-regression/stock/time-warp/warp-static-mun-kk/`](non-regression/stock/time-warp/warp-static-mun-kk/) and its CustomPreLaunchChecks,
 [KSP Diag - Colliders](https://github.com/lhervier/KSP-Diag-Colliders), this mod at `logLevel = Debug`,
 and KSP-MCPServer, which plays the test through
 [`automation/run-time-warp-flyover.py`](automation/run-time-warp-flyover.py): the capsule of
-[`warp-static-mun-kk.sfs`](warp-static-mun-kk.sfs) on that launch pad, near the highest point of the Mun's
+[`warp-static-mun-kk.sfs`](non-regression/stock/time-warp/warp-static-mun-kk.sfs) on that launch pad, near the highest point of the Mun's
 equator, read before and after `Diag3-Rover.craft`, put on a low orbit of the Mun, passes over it in time
 warp at 10×. Played again without this mod. Read in
 [Time warp](../docs/non-regression/stock/time-warp.md#in-flight-low-over-a-static).
 
-- [`runs/time-warp-flyover-mun-kk-fix.log`](runs/time-warp-flyover-mun-kk-fix.log) and
-  [`runs/time-warp-flyover-mun-kk-without-this-mod.log`](runs/time-warp-flyover-mun-kk-without-this-mod.log);
+- [`time-warp-flyover-mun-kk-fix.log`](non-regression/stock/time-warp/time-warp-flyover-mun-kk-fix.log) and
+  [`time-warp-flyover-mun-kk-without-this-mod.log`](non-regression/stock/time-warp/time-warp-flyover-mun-kk-without-this-mod.log);
   the session without this mod is also the one the launch pad was placed in, with Kerbal Konstructs' editor,
   and holds a first try of the script that launched from the launchpad, where KSP recovered the capsule;
   what the script printed in
-  [`runs/time-warp-flyover-mun-kk-fix-script.txt`](runs/time-warp-flyover-mun-kk-fix-script.txt) and
-  [`runs/time-warp-flyover-mun-kk-without-this-mod-script.txt`](runs/time-warp-flyover-mun-kk-without-this-mod-script.txt),
+  [`time-warp-flyover-mun-kk-fix-script.txt`](non-regression/stock/time-warp/time-warp-flyover-mun-kk-fix-script.txt) and
+  [`time-warp-flyover-mun-kk-without-this-mod-script.txt`](non-regression/stock/time-warp/time-warp-flyover-mun-kk-without-this-mod-script.txt),
   the colliders under the capsule at each reading in
-  [`runs/time-warp-flyover-mun-kk-fix-readings.json`](runs/time-warp-flyover-mun-kk-fix-readings.json) and
-  [`runs/time-warp-flyover-mun-kk-without-this-mod-readings.json`](runs/time-warp-flyover-mun-kk-without-this-mod-readings.json).
+  [`time-warp-flyover-mun-kk-fix-readings.json`](non-regression/stock/time-warp/time-warp-flyover-mun-kk-fix-readings.json) and
+  [`time-warp-flyover-mun-kk-without-this-mod-readings.json`](non-regression/stock/time-warp/time-warp-flyover-mun-kk-without-this-mod-readings.json).
 
 ## The anchor on a static protocol
 
 KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, both instruments, this mod at
-`logLevel = Debug`, and KSP-MCPServer: in a new sandbox game, [`craft/Diag3-Rover-Two-Anchors.craft`](craft/Diag3-Rover-Two-Anchors.craft)
+`logLevel = Debug`, and KSP-MCPServer: in a new sandbox game, [`Diag3-Rover-Two-Anchors.craft`](non-regression/stock/an-anchor-on-a-static/Diag3-Rover-Two-Anchors.craft)
 launched from the SPH onto the runway of the KSC, then in another game onto the runway of the Desert
 Airfield, Bill Kerman aboard with his inventory emptied; Bill places an anchor alone and an anchor with a
 battery on it, by hand; then [`automation/run-anchor-on-a-static.py`](automation/run-anchor-on-a-static.py)
 reads both anchors as placed, and after each of five quicksaves and quickloads. Played again without this
 mod. Read in [An anchor on a static](../docs/non-regression/stock/an-anchor-on-a-static.md).
 
-- [`runs/anchor-on-a-static-with-this-mod.log`](runs/anchor-on-a-static-with-this-mod.log), one session for
+- [`anchor-on-a-static-with-this-mod.log`](non-regression/stock/an-anchor-on-a-static/anchor-on-a-static-with-this-mod.log), one session for
   both runways, the Desert Airfield first, followed by three more quicksaves and quickloads there that are
-  not part of the test; [`runs/anchor-on-a-static-runway-without-this-mod.log`](runs/anchor-on-a-static-runway-without-this-mod.log)
-  and [`runs/anchor-on-a-static-desert-airfield-without-this-mod.log`](runs/anchor-on-a-static-desert-airfield-without-this-mod.log);
+  not part of the test; [`anchor-on-a-static-runway-without-this-mod.log`](non-regression/stock/an-anchor-on-a-static/anchor-on-a-static-runway-without-this-mod.log)
+  and [`anchor-on-a-static-desert-airfield-without-this-mod.log`](non-regression/stock/an-anchor-on-a-static/anchor-on-a-static-desert-airfield-without-this-mod.log);
 - what the script printed, and the readings of both instruments, for each runway with and without this mod:
-  `runs/anchor-on-a-static-<runway>-<with-this-mod|without-this-mod>-script.txt` and `-readings.json`, with
-  `runway` or `desert-airfield`, as in
-  [`runs/anchor-on-a-static-runway-with-this-mod-readings.json`](runs/anchor-on-a-static-runway-with-this-mod-readings.json).
+  - the runway of the KSC, with this mod: [`anchor-on-a-static-runway-with-this-mod-script.txt`](non-regression/stock/an-anchor-on-a-static/anchor-on-a-static-runway-with-this-mod-script.txt) and
+    [`anchor-on-a-static-runway-with-this-mod-readings.json`](non-regression/stock/an-anchor-on-a-static/anchor-on-a-static-runway-with-this-mod-readings.json);
+  - the runway of the KSC, without it: [`anchor-on-a-static-runway-without-this-mod-script.txt`](non-regression/stock/an-anchor-on-a-static/anchor-on-a-static-runway-without-this-mod-script.txt) and
+    [`anchor-on-a-static-runway-without-this-mod-readings.json`](non-regression/stock/an-anchor-on-a-static/anchor-on-a-static-runway-without-this-mod-readings.json);
+  - the Desert Airfield, with this mod: [`anchor-on-a-static-desert-airfield-with-this-mod-script.txt`](non-regression/stock/an-anchor-on-a-static/anchor-on-a-static-desert-airfield-with-this-mod-script.txt) and
+    [`anchor-on-a-static-desert-airfield-with-this-mod-readings.json`](non-regression/stock/an-anchor-on-a-static/anchor-on-a-static-desert-airfield-with-this-mod-readings.json);
+  - the Desert Airfield, without it: [`anchor-on-a-static-desert-airfield-without-this-mod-script.txt`](non-regression/stock/an-anchor-on-a-static/anchor-on-a-static-desert-airfield-without-this-mod-script.txt) and
+    [`anchor-on-a-static-desert-airfield-without-this-mod-readings.json`](non-regression/stock/an-anchor-on-a-static/anchor-on-a-static-desert-airfield-without-this-mod-readings.json).
 
 ## On the stock system
 
 KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, this mod and one instrument.
 
-- [`runs/runway-mun-kk-colliders-fix.log`](runs/runway-mun-kk-colliders-fix.log) — four loadings of
+- [`runway-mun-kk-colliders-fix.log`](checking-the-culprit-loading/runway-mun-kk-colliders-fix.log) — four loadings of
   `runway-mun-kk.sfs`, every collider under each craft listed at each loading, with its height above the terrain
   KSP computes there.
-- [`runs/flight-basics-fix.log`](runs/flight-basics-fix.log) — no instrument, this mod at
+- [`flight-basics-fix.log`](non-regression/kerbal-konstructs/a-ground-station-opened-in-flight/flight-basics-fix.log) — no instrument, this mod at
   `logLevel = Debug`: KSP started, then *Training → Flight Basics* from the main menu, straight into
   flight on the launchpad, and back to the main menu. Read in
   [Kerbal Konstructs: a ground station opened in flight](../docs/non-regression/kerbal-konstructs/a-ground-station-opened-in-flight.md#why).
@@ -381,14 +394,14 @@ protocols through the scripts of [`automation/`](automation). Read in
   [the runway protocol](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-runway.md).
 - [`automation/run-approach.py`](automation/run-approach.py) — plays
   [the approach protocol](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-approach.md).
-- [`runs/runway-deferred-fix.log`](runs/runway-deferred-fix.log) — the six loadings of `runway-kerbin.sfs`;
-  the lines read are in [`runs/runway-deferred-fix-lines.json`](runs/runway-deferred-fix-lines.json).
-- [`runs/runway-without-deferred-fix.log`](runs/runway-without-deferred-fix.log) — the same script on the
+- [`runway-deferred-fix.log`](non-regression/deferred/drawing-the-ground/runway-deferred-fix.log) — the six loadings of `runway-kerbin.sfs`;
+  the lines read are in [`runway-deferred-fix-lines.json`](non-regression/deferred/drawing-the-ground/runway-deferred-fix-lines.json).
+- [`runway-without-deferred-fix.log`](non-regression/deferred/drawing-the-ground/runway-without-deferred-fix.log) — the same script on the
   same install, Deferred and Shabby taken out; the lines read are in
-  [`runs/runway-without-deferred-fix-lines.json`](runs/runway-without-deferred-fix-lines.json).
-- [`runs/approach-deferred-fix.log`](runs/approach-deferred-fix.log) — the six round trips of
+  [`runway-without-deferred-fix-lines.json`](non-regression/deferred/drawing-the-ground/runway-without-deferred-fix-lines.json).
+- [`approach-deferred-fix.log`](non-regression/deferred/drawing-the-ground/approach-deferred-fix.log) — the six round trips of
   `approach-kerbin.sfs`, in a single flight; the lines read are in
-  [`runs/approach-deferred-fix-lines.json`](runs/approach-deferred-fix-lines.json).
+  [`approach-deferred-fix-lines.json`](non-regression/deferred/drawing-the-ground/approach-deferred-fix-lines.json).
 
 ## With Principia
 
@@ -398,20 +411,23 @@ protocol, and [KSP-MCPServer](https://github.com/lhervier/KSP-MCPServer), which 
 mod at `logLevel = Debug`, or not: each session is here twice, `-without-this-mod` and `-fix`. Read in
 [Principia: the bodies it moves and turns](../docs/non-regression/principia/the-bodies-it-moves-and-turns.md).
 
-- [`runs/loading-principia-without-this-mod.log`](runs/loading-principia-without-this-mod.log) and
-  [`runs/loading-principia-fix.log`](runs/loading-principia-fix.log) — the four saves of
+- [`loading-principia-without-this-mod.log`](non-regression/principia/the-bodies-it-moves-and-turns/loading-principia-without-this-mod.log) and
+  [`loading-principia-fix.log`](non-regression/principia/the-bodies-it-moves-and-turns/loading-principia-fix.log) — the four saves of
   [the loading protocol](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-loading.md),
   each loaded six times by `run-loading.py`, both instruments at once; what the script printed in
-  `runs/loading-principia-<…>-script.txt`, every line it recorded, with the save it was recorded on, in
-  [`runs/loading-principia-without-this-mod-lines.json`](runs/loading-principia-without-this-mod-lines.json)
-  and [`runs/loading-principia-fix-lines.json`](runs/loading-principia-fix-lines.json).
-- [`runs/flight-principia-without-this-mod.log`](runs/flight-principia-without-this-mod.log) and
-  [`runs/flight-principia-fix.log`](runs/flight-principia-fix.log) — one flight each of
+  [`loading-principia-without-this-mod-script.txt`](non-regression/principia/the-bodies-it-moves-and-turns/loading-principia-without-this-mod-script.txt)
+  and [`loading-principia-fix-script.txt`](non-regression/principia/the-bodies-it-moves-and-turns/loading-principia-fix-script.txt), every line it recorded,
+  with the save it was recorded on, in
+  [`loading-principia-without-this-mod-lines.json`](non-regression/principia/the-bodies-it-moves-and-turns/loading-principia-without-this-mod-lines.json)
+  and [`loading-principia-fix-lines.json`](non-regression/principia/the-bodies-it-moves-and-turns/loading-principia-fix-lines.json).
+- [`flight-principia-without-this-mod.log`](non-regression/principia/the-bodies-it-moves-and-turns/flight-principia-without-this-mod.log) and
+  [`flight-principia-fix.log`](non-regression/principia/the-bodies-it-moves-and-turns/flight-principia-fix.log) — one flight each of
   [the protocol of the quads of the highest level, in flight](https://github.com/lhervier/KSP-Diag-TerrainQuads/blob/main/docs/the-protocol-flight.md),
   from the launchpad of the Space Center, KSP Diag - Terrain Quads and KSP Diag - Floating Origin; for each,
-  as for the flights of [In flight](#the-protocol-of-the-quads-of-the-highest-level-in-flight),
-  `-script.txt`, `-readings.json`, `-logs.csv`, `-quads.zip` (49 MB once unzipped) and `-analysis.txt`,
-  for instance [`runs/flight-principia-fix-analysis.txt`](runs/flight-principia-fix-analysis.txt).
+  as for the flights of [In flight](#the-protocol-of-the-quads-of-the-highest-level-in-flight), what the
+  script printed, the readings, the logs, the quads (49 MB once unzipped) and the analysis:
+  - without this mod: [`flight-principia-without-this-mod-script.txt`](non-regression/principia/the-bodies-it-moves-and-turns/flight-principia-without-this-mod-script.txt), [`flight-principia-without-this-mod-readings.json`](non-regression/principia/the-bodies-it-moves-and-turns/flight-principia-without-this-mod-readings.json), [`flight-principia-without-this-mod-logs.csv`](non-regression/principia/the-bodies-it-moves-and-turns/flight-principia-without-this-mod-logs.csv), [`flight-principia-without-this-mod-quads.zip`](non-regression/principia/the-bodies-it-moves-and-turns/flight-principia-without-this-mod-quads.zip) and [`flight-principia-without-this-mod-analysis.txt`](non-regression/principia/the-bodies-it-moves-and-turns/flight-principia-without-this-mod-analysis.txt);
+  - with this mod: [`flight-principia-fix-script.txt`](non-regression/principia/the-bodies-it-moves-and-turns/flight-principia-fix-script.txt), [`flight-principia-fix-readings.json`](non-regression/principia/the-bodies-it-moves-and-turns/flight-principia-fix-readings.json), [`flight-principia-fix-logs.csv`](non-regression/principia/the-bodies-it-moves-and-turns/flight-principia-fix-logs.csv), [`flight-principia-fix-quads.zip`](non-regression/principia/the-bodies-it-moves-and-turns/flight-principia-fix-quads.zip) and [`flight-principia-fix-analysis.txt`](non-regression/principia/the-bodies-it-moves-and-turns/flight-principia-fix-analysis.txt).
 
 ## With Kerbal Konstructs
 
@@ -419,12 +435,12 @@ KSP 1.12.5 with the Making History expansion, Harmony, ModuleManager, KSP Commun
 [Kerbal Konstructs](https://github.com/KSP-RO/Kerbal-Konstructs) 1.12.3 and CustomPreLaunchChecks 1.8.1,
 which it requires, no instrument, this mod at `logLevel = Debug`.
 
-- [`runs/kk-group-editor-fix.log`](runs/kk-group-editor-fix.log) — `non-reg-runway-mune-kk.sfs`, its
+- [`kk-group-editor-fix.log`](limits-and-solutions/kerbal-konstructs/the-group-editor/kk-group-editor-fix.log) — `non-reg-runway-mune-kk.sfs`, its
   runway in `GameData/KerbalKonstructs/NewInstances`: the group moved with the gizmo of the group editor,
   saved with *Save&Close*, then the save loaded again. Read in
   [Kerbal Konstructs: the group editor](../docs/limits-and-solutions/kerbal-konstructs/the-group-editor.md).
-- [`runs/kk-ground-station-fix.log`](runs/kk-ground-station-fix.log) —
-  [`kk-ground-station.sfs`](kk-ground-station.sfs), a career game, a pod on the launchpad: a water tower
+- [`kk-ground-station-fix.log`](non-regression/kerbal-konstructs/a-ground-station-opened-in-flight/kk-ground-station-fix.log) —
+  [`kk-ground-station.sfs`](non-regression/kerbal-konstructs/a-ground-station-opened-in-flight/kk-ground-station.sfs), a career game, a pod on the launchpad: a water tower
   of Kerbal Konstructs set up beside it, in flight, as a closed CommNet ground station, then opened from
   the facility manager of Kerbal Konstructs. Read in
   [Kerbal Konstructs: a ground station opened in flight](../docs/non-regression/kerbal-konstructs/a-ground-station-opened-in-flight.md).
@@ -434,14 +450,14 @@ which it requires, no instrument, this mod at `logLevel = Debug`.
 KSP 1.12.5 with the Making History expansion, Harmony, ModuleManager, KSP Community Fixes 1.41.1 and
 [Real Solar System](https://github.com/KSP-RO/RealSolarSystem) 20.1.3.0 with what it requires (Kopernicus
 248, Modular Flight Integrator, KSPTextureLoader, the RSS textures), no instrument. Each
-session plays the mission [`kopernicus-flag-fix/Missions/KSC flag fix`](kopernicus-flag-fix/Missions)
+session plays the mission [`kopernicus-flag-fix/Missions/KSC flag fix`](limits-and-solutions/kopernicus/the-flag-fix/Missions)
 once, as described in [Seeing the patch](../docs/limits-and-solutions/kopernicus/the-flag-fix.md#seeing-the-patch).
 
-- [`runs/kopernicus-flag-fix-without-this-mod.log`](runs/kopernicus-flag-fix-without-this-mod.log) —
+- [`kopernicus-flag-fix-without-this-mod.log`](limits-and-solutions/kopernicus/the-flag-fix/kopernicus-flag-fix-without-this-mod.log) —
   without this mod.
-- [`runs/kopernicus-flag-fix-patch-off.log`](runs/kopernicus-flag-fix-patch-off.log) — this mod at
+- [`kopernicus-flag-fix-patch-off.log`](limits-and-solutions/kopernicus/the-flag-fix/kopernicus-flag-fix-patch-off.log) — this mod at
   `logLevel = Debug`, with `patchKopernicus = false`.
-- [`runs/kopernicus-flag-fix-patch-on.log`](runs/kopernicus-flag-fix-patch-on.log) — this mod at
+- [`kopernicus-flag-fix-patch-on.log`](limits-and-solutions/kopernicus/the-flag-fix/kopernicus-flag-fix-patch-on.log) — this mod at
   `logLevel = Debug`, with its defaults.
 
 ## On Real Solar System
@@ -452,70 +468,70 @@ unless said otherwise. This mod ran at `logLevel = Debug`, so each log also hold
 placed, with how far it was moved. The sessions marked *first safeguard* ran with its first version,
 a fixed metre, and hold the line where it refused part of Earth's terrain.
 
-- [`runs/reload-moon-rss-fix.log`](runs/reload-moon-rss-fix.log) — Diag LandedVessel, Real Solar System's
+- [`reload-moon-rss-fix.log`](non-regression/real-solar-system/the-ground-workaround/reload-moon-rss-fix.log) — Diag LandedVessel, Real Solar System's
   component turned off by an empty assembly named `WorldStabilizer`: one load of
   `reload-moon-rss.sfs`, the save made without this mod, then that save taken again as
   `reload-moon-rss-resave.sfs` and loaded six times. *First safeguard.*
-- [`runs/reload-moon-rss-fix-vgpe-on.log`](runs/reload-moon-rss-fix-vgpe-on.log) — Diag LandedVessel, Real Solar
+- [`reload-moon-rss-fix-vgpe-on.log`](non-regression/real-solar-system/the-ground-workaround/reload-moon-rss-fix-vgpe-on.log) — Diag LandedVessel, Real Solar
   System as released: the loads of `reload-moon-rss-resave.sfs`, six of them recorded. *First
   safeguard.*
-- [`runs/reload-moon-rss-fix-diag2.log`](runs/reload-moon-rss-fix-diag2.log) — Diag TerrainHeight: six loads of
+- [`reload-moon-rss-fix-diag2.log`](checking-the-culprit-loading/reload-moon-rss-fix-diag2.log) — Diag TerrainHeight: six loads of
   `reload-moon-rss-resave.sfs`.
-- [`runs/reload-moon-rss-fix-24loads.log`](runs/reload-moon-rss-fix-24loads.log) — no instrument:
+- [`reload-moon-rss-fix-24loads.log`](non-regression/real-solar-system/the-ground-workaround/reload-moon-rss-fix-24loads.log) — no instrument:
   24 loads of `reload-moon-rss-resave.sfs` in a row. *First safeguard.*
-- [`runs/reload-earth-rss-fix.log`](runs/reload-earth-rss-fix.log) — Diag LandedVessel: six loads of
+- [`reload-earth-rss-fix.log`](checking-the-culprit-loading/reload-earth-rss-fix.log) — Diag LandedVessel: six loads of
   `reload-earth-rss-resave.sfs`, the craft in *prelaunch*.
-- [`runs/reload-earth-rss-fix-diag2.log`](runs/reload-earth-rss-fix-diag2.log) — Diag TerrainHeight: the same six
+- [`reload-earth-rss-fix-diag2.log`](checking-the-culprit-loading/reload-earth-rss-fix-diag2.log) — Diag TerrainHeight: the same six
   loads.
-- [`runs/reload-earth-rss-fix-chain.log`](runs/reload-earth-rss-fix-chain.log) — no instrument, one
+- [`reload-earth-rss-fix-chain.log`](non-regression/real-solar-system/the-ground-workaround/reload-earth-rss-fix-chain.log) — no instrument, one
   session: 27 loads of `reload-earth-rss-landed.sfs`, the craft *landed*, then, after going back to the
   space centre, 24 of `reload-earth-rss-resave.sfs`, the craft in *prelaunch*.
-- [`runs/kopernicus-flag-glitch-without-this-mod.log`](runs/kopernicus-flag-glitch-without-this-mod.log),
-  [`runs/kopernicus-flag-glitch-statics-fix.log`](runs/kopernicus-flag-glitch-statics-fix.log) and
-  [`runs/kopernicus-flag-glitch-statics-fix-off.log`](runs/kopernicus-flag-glitch-statics-fix-off.log) —
+- [`kopernicus-flag-glitch-without-this-mod.log`](limits-and-solutions/kopernicus/the-flag-fix/kopernicus-flag-glitch-without-this-mod.log),
+  [`kopernicus-flag-glitch-statics-fix.log`](limits-and-solutions/kopernicus/the-flag-fix/kopernicus-flag-glitch-statics-fix.log) and
+  [`kopernicus-flag-glitch-statics-fix-off.log`](limits-and-solutions/kopernicus/the-flag-fix/kopernicus-flag-glitch-statics-fix-off.log) —
   MechJeb2 2.15.3 added to the first and the third, and Kopernicus built from the sources of its release
   248 with the change
-  [`kopernicus-flag-fix/kopernicus-248-without-its-flag-fix.diff`](kopernicus-flag-fix/kopernicus-248-without-its-flag-fix.diff),
+  [`kopernicus-248-without-its-flag-fix.diff`](limits-and-solutions/kopernicus/the-flag-fix/kopernicus-248-without-its-flag-fix.diff),
   which turns its flag fix off: a craft on the launchpad at Cape Canaveral, without this mod, then with
   it, then with its statics fix turned off. Read in
   [The flag glitch](../docs/limits-and-solutions/kopernicus/the-flag-fix.md#the-flag-glitch).
-- [`runs/reload-venus-mars-rss-fix.log`](runs/reload-venus-mars-rss-fix.log) — no instrument, one
-  session: six loads of [`reload-venus-rss.sfs`](reload-venus-rss.sfs), then six of
-  [`reload-mars-rss.sfs`](reload-mars-rss.sfs). The six loads after them, on a second site of Mars,
+- [`reload-venus-mars-rss-fix.log`](non-regression/real-solar-system/this-mods-safeguard/reload-venus-mars-rss-fix.log) — no instrument, one
+  session: six loads of [`reload-venus-rss.sfs`](non-regression/real-solar-system/this-mods-safeguard/reload-venus-rss.sfs), then six of
+  [`reload-mars-rss.sfs`](non-regression/real-solar-system/this-mods-safeguard/reload-mars-rss.sfs). The six loads after them, on a second site of Mars,
   are not used.
-- [`runs/reload-mercury-rss-fix.log`](runs/reload-mercury-rss-fix.log) — no instrument: six loads of
-  [`reload-mercury-rss.sfs`](reload-mercury-rss.sfs). Each one logs KSP moving the craft down 22.4 m,
+- [`reload-mercury-rss-fix.log`](non-regression/real-solar-system/this-mods-safeguard/reload-mercury-rss-fix.log) — no instrument: six loads of
+  [`reload-mercury-rss.sfs`](non-regression/real-solar-system/this-mods-safeguard/reload-mercury-rss.sfs). Each one logs KSP moving the craft down 22.4 m,
   the terrain detail its save describes.
-- [`runs/launch-earth-rss-fix.log`](runs/launch-earth-rss-fix.log) — no instrument, MechJeb2 2.15.0.0
+- [`launch-earth-rss-fix.log`](limits-and-solutions/stock/the-seam-between-subdivision-levels/launch-earth-rss-fix.log) — no instrument, MechJeb2 2.15.0.0
   added to the install: one session, a small rocket launched from the VAB onto the launchpad at Cape
   Canaveral, then flown towards orbit, the flight started over three times. The launch was saved
-  afterwards as [`rss-launch-to-earth-orbit.sfs`](rss-launch-to-earth-orbit.sfs), which needs MechJeb2
+  afterwards as [`rss-launch-to-earth-orbit.sfs`](limits-and-solutions/stock/the-seam-between-subdivision-levels/rss-launch-to-earth-orbit.sfs), which needs MechJeb2
   to load. Used in [The seam between subdivision levels](../docs/limits-and-solutions/stock/the-seam-between-subdivision-levels.md).
-- [`runs/runway-earth-rss-without-runway-fix.log`](runs/runway-earth-rss-without-runway-fix.log) —
+- [`runway-earth-rss-without-runway-fix.log`](non-regression/real-solar-system/the-runway-fix/runway-earth-rss-without-runway-fix.log) —
   without this mod,
   [KSP Diag - Colliders](https://github.com/lhervier/KSP-Diag-Colliders) added, and
   Real Solar System built from the sources of its release 20.1.3.0 with the change
-  [`rss-runway-fix/rss-20.1.3-without-its-runway-fix.diff`](rss-runway-fix/rss-20.1.3-without-its-runway-fix.diff),
+  [`rss-20.1.3-without-its-runway-fix.diff`](non-regression/real-solar-system/the-runway-fix/rss-20.1.3-without-its-runway-fix.diff),
   which keeps its runway fix from doing anything: one session, the rover of KSP Diag - Terrain Height
   launched from the SPH onto the runway at Cape Canaveral several times, and reloaded many times
   between, 23 entries in flight. Read in
   [Seeing it](../docs/non-regression/real-solar-system/the-runway-fix.md#seeing-it).
-- [`runs/runway-earth-rss-without-runway-fix-fix.log`](runs/runway-earth-rss-without-runway-fix-fix.log) —
+- [`runway-earth-rss-without-runway-fix-fix.log`](non-regression/real-solar-system/the-runway-fix/runway-earth-rss-without-runway-fix-fix.log) —
   the same install, with this mod: one session, the protocol of
   [Seeing it](../docs/non-regression/real-solar-system/the-runway-fix.md#seeing-it), 37 entries in flight.
-- [`runs/driving-runway-earth-rss-diag2-fix.log`](runs/driving-runway-earth-rss-diag2-fix.log) —
+- [`driving-runway-earth-rss-diag2-fix.log`](checking-the-culprit-driving/driving-runway-earth-rss-diag2-fix.log) —
   [KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainHeight), Diag FloatingOrigin and
   [KSP-MCPServer](https://github.com/lhervier/KSP-MCPServer) added, Real Solar System built without its
   runway fix as above: the protocol of the runway and the grass while the world moves, played by its
   script from `driving-runway-earth-rss.sfs`, two moves of the origin; what the script printed in
-  [`runs/driving-runway-earth-rss-diag2-fix-script.txt`](runs/driving-runway-earth-rss-diag2-fix-script.txt),
+  [`driving-runway-earth-rss-diag2-fix-script.txt`](checking-the-culprit-driving/driving-runway-earth-rss-diag2-fix-script.txt),
   and every line it recorded in
-  [`runs/driving-runway-earth-rss-diag2-fix-lines.json`](runs/driving-runway-earth-rss-diag2-fix-lines.json).
+  [`driving-runway-earth-rss-diag2-fix-lines.json`](checking-the-culprit-driving/driving-runway-earth-rss-diag2-fix-lines.json).
   Read in [Driving on while the world moves](../docs/checking-the-culprit-driving.md#on-earth).
-- [`runs/station-kourou-rss-fix.log`](runs/station-kourou-rss-fix.log) —
+- [`station-kourou-rss-fix.log`](non-regression/real-solar-system/a-commnet-ground-station/station-kourou-rss-fix.log) —
   [KSP-MCPServer](https://github.com/lhervier/KSP-MCPServer) added: one session, a rover driven by its `drive_to` tool
   in 500 m legs toward the CommNet ground station of Kourou, from 28.86 km to 27.30 km, then
-  [`station-kourou-rss.sfs`](station-kourou-rss.sfs) loaded and driven from 27.83 km to 27.30 km by
+  [`station-kourou-rss.sfs`](non-regression/real-solar-system/a-commnet-ground-station/station-kourou-rss.sfs) loaded and driven from 27.83 km to 27.30 km by
   [`automation/run-station-approach.py`](automation/run-station-approach.py). Read in
   [A CommNet ground station from a planet pack](../docs/non-regression/real-solar-system/a-commnet-ground-station.md).
 
@@ -527,7 +543,7 @@ on, read in [Checking the culprit: loading the same save](../docs/checking-the-c
 [Checking the culprit: in flight](../docs/checking-the-culprit-flight.md#the-rocks-along-a-flight),
 [The scatter holders](../docs/non-regression/stock/the-scatter-holders.md) and
 [Kopernicus: scatter with colliders](../docs/non-regression/kopernicus/scatter-with-colliders.md),
-kept as they were logged, copied out of `KSP.log`, in [`runs/scatter-fix/`](runs/scatter-fix): for the
+kept as they were logged, copied out of `KSP.log`, in the folder of the page that reads them: for the
 rocks after a load, one file per load, each holding the last record taken after that load; for the rocks
 over a flight and for the holder pools, one file per flight or session, holding every record taken
 during it. The scatter fix was then a mod of its own, Rock Precision Fix 0.1.0, installed next to this
@@ -559,8 +575,8 @@ first record:
 
 | load | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Kerbin | [`1`](runs/scatter-fix/kerbin-both-load1.log) | [`2`](runs/scatter-fix/kerbin-both-load2.log) | [`3`](runs/scatter-fix/kerbin-both-load3.log) | [`4`](runs/scatter-fix/kerbin-both-load4.log) | [`5`](runs/scatter-fix/kerbin-both-load5.log) | [`6`](runs/scatter-fix/kerbin-both-load6.log) | [`7`](runs/scatter-fix/kerbin-both-load7.log) | [`8`](runs/scatter-fix/kerbin-both-load8.log) | [`9`](runs/scatter-fix/kerbin-both-load9.log) | [`10`](runs/scatter-fix/kerbin-both-load10.log) | [`11`](runs/scatter-fix/kerbin-both-load11.log) | [`12`](runs/scatter-fix/kerbin-both-load12.log) |
-| the Mun | [`1`](runs/scatter-fix/mun-both-load1.log) | [`2`](runs/scatter-fix/mun-both-load2.log) | [`3`](runs/scatter-fix/mun-both-load3.log) | [`4`](runs/scatter-fix/mun-both-load4.log) | [`5`](runs/scatter-fix/mun-both-load5.log) | [`6`](runs/scatter-fix/mun-both-load6.log) | [`7`](runs/scatter-fix/mun-both-load7.log) | [`8`](runs/scatter-fix/mun-both-load8.log) | [`9`](runs/scatter-fix/mun-both-load9.log) | [`10`](runs/scatter-fix/mun-both-load10.log) | [`11`](runs/scatter-fix/mun-both-load11.log) | [`12`](runs/scatter-fix/mun-both-load12.log) |
+| Kerbin | [`1`](checking-the-culprit-loading/scatter/kerbin-both-load1.log) | [`2`](checking-the-culprit-loading/scatter/kerbin-both-load2.log) | [`3`](checking-the-culprit-loading/scatter/kerbin-both-load3.log) | [`4`](checking-the-culprit-loading/scatter/kerbin-both-load4.log) | [`5`](checking-the-culprit-loading/scatter/kerbin-both-load5.log) | [`6`](checking-the-culprit-loading/scatter/kerbin-both-load6.log) | [`7`](checking-the-culprit-loading/scatter/kerbin-both-load7.log) | [`8`](checking-the-culprit-loading/scatter/kerbin-both-load8.log) | [`9`](checking-the-culprit-loading/scatter/kerbin-both-load9.log) | [`10`](checking-the-culprit-loading/scatter/kerbin-both-load10.log) | [`11`](checking-the-culprit-loading/scatter/kerbin-both-load11.log) | [`12`](checking-the-culprit-loading/scatter/kerbin-both-load12.log) |
+| the Mun | [`1`](checking-the-culprit-loading/scatter/mun-both-load1.log) | [`2`](checking-the-culprit-loading/scatter/mun-both-load2.log) | [`3`](checking-the-culprit-loading/scatter/mun-both-load3.log) | [`4`](checking-the-culprit-loading/scatter/mun-both-load4.log) | [`5`](checking-the-culprit-loading/scatter/mun-both-load5.log) | [`6`](checking-the-culprit-loading/scatter/mun-both-load6.log) | [`7`](checking-the-culprit-loading/scatter/mun-both-load7.log) | [`8`](checking-the-culprit-loading/scatter/mun-both-load8.log) | [`9`](checking-the-culprit-loading/scatter/mun-both-load9.log) | [`10`](checking-the-culprit-loading/scatter/mun-both-load10.log) | [`11`](checking-the-culprit-loading/scatter/mun-both-load11.log) | [`12`](checking-the-culprit-loading/scatter/mun-both-load12.log) |
 
 Every record of Kerbin ends on the same line, but for its number:
 
@@ -596,7 +612,7 @@ Both fixes wrote to `KSP.log` that they had acted on the Mun before the first re
 
 | flight | records |
 |---|---|
-| with both fixes | [`mun-5km-both-rocks.log`](runs/scatter-fix/mun-5km-both-rocks.log) |
+| with both fixes | [`mun-5km-both-rocks.log`](checking-the-culprit-flight/scatter/mun-5km-both-rocks.log) |
 
 The file holds the six records and the line of `KSP.log` reporting the crash, between the fifth and the
 sixth. Every record has all its holders built, and 200 vertices measured on its nearest quad, all of them
@@ -634,7 +650,7 @@ Both fixes wrote to `KSP.log` that they had acted on the Mun before the first re
 
 | flight | records |
 |---|---|
-| with both fixes | [`mun-5km-both-holders.log`](runs/scatter-fix/mun-5km-both-holders.log) |
+| with both fixes | [`mun-5km-both-holders.log`](non-regression/stock/the-scatter-holders/mun-5km-both-holders.log) |
 
 The file holds the six records and the line of `KSP.log` reporting the crash, between the fifth and the
 sixth. Every record ends on `0 broken rules`:
@@ -673,7 +689,7 @@ Both fixes wrote to `KSP.log` that they had acted on each body before its first 
 
 | session | records |
 |---|---|
-| with both fixes | [`scenes-both-holders.log`](runs/scatter-fix/scenes-both-holders.log) |
+| with both fixes | [`scenes-both-holders.log`](non-regression/stock/the-scatter-holders/scenes-both-holders.log) |
 
 The file holds the three records, the line of `KSP.log` marking the arrival in each scene, and those of
 both fixes. Every record ends on `0 in no pool` and `0 broken rules`:
@@ -701,8 +717,8 @@ times in one session, each load with a record and a picture of the kerbal's feet
 
 | load | 1 | 2 | 3 | 4 | 5 | 6 |
 |---|---|---|---|---|---|---|
-| with both fixes | [`1`](runs/scatter-fix/collider-both-load1.log) | [`2`](runs/scatter-fix/collider-both-load2.log) | [`3`](runs/scatter-fix/collider-both-load3.log) | [`4`](runs/scatter-fix/collider-both-load4.log) | [`5`](runs/scatter-fix/collider-both-load5.log) | [`6`](runs/scatter-fix/collider-both-load6.log) |
-| its pictures | [`1`](../imgs/scatter-fix/collider-both-load1.png) | [`2`](../imgs/scatter-fix/collider-both-load2.png) | [`3`](../imgs/scatter-fix/collider-both-load3.png) | [`4`](../imgs/scatter-fix/collider-both-load4.png) | [`5`](../imgs/scatter-fix/collider-both-load5.png) | [`6`](../imgs/scatter-fix/collider-both-load6.png) |
+| with both fixes | [`1`](non-regression/kopernicus/scatter-with-colliders/collider-both-load1.log) | [`2`](non-regression/kopernicus/scatter-with-colliders/collider-both-load2.log) | [`3`](non-regression/kopernicus/scatter-with-colliders/collider-both-load3.log) | [`4`](non-regression/kopernicus/scatter-with-colliders/collider-both-load4.log) | [`5`](non-regression/kopernicus/scatter-with-colliders/collider-both-load5.log) | [`6`](non-regression/kopernicus/scatter-with-colliders/collider-both-load6.log) |
+| its pictures | [`1`](../imgs/non-regression/kopernicus/scatter-with-colliders/collider-both-load1.png) | [`2`](../imgs/non-regression/kopernicus/scatter-with-colliders/collider-both-load2.png) | [`3`](../imgs/non-regression/kopernicus/scatter-with-colliders/collider-both-load3.png) | [`4`](../imgs/non-regression/kopernicus/scatter-with-colliders/collider-both-load4.png) | [`5`](../imgs/non-regression/kopernicus/scatter-with-colliders/collider-both-load5.png) | [`6`](../imgs/non-regression/kopernicus/scatter-with-colliders/collider-both-load6.png) |
 
 Every record ends on the same line, but for its number:
 

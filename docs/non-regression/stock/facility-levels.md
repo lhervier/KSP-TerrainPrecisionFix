@@ -17,7 +17,7 @@ the craft arrives on it where it did, level by level.
 A new career at the Custom difficulty: the largest starting funds and science (500 000 and 5 000), funds
 penalties at 10 %, for the upgrades below, and *Bypass Entry Purchase After Research* on. The Research and
 Development upgraded twice, to its last level, and the nodes the craft below need researched. That career is
-[`diag/career-with-the-parts.sfs`](../../../diag/career-with-the-parts.sfs): copied as `persistent.sfs` into
+[`career-with-the-parts.sfs`](../../../diag/non-regression/stock/destroyed-buildings/career-with-the-parts.sfs): copied as `persistent.sfs` into
 a new folder of `saves`, it opens at the space centre. Its building impact damage multiplier is at 1, the
 largest, for [Destroyed buildings](destroyed-buildings.md); it changes nothing here. Then, at each level of
 the launchpad and the runway, starting from the first, the one a new career starts with:
@@ -52,7 +52,7 @@ player can take: the test plays just as well by hand.
 The menus show each facility at each level, with this mod as without it (launchpad on the left, runway on
 the right):
 
-![The menus of the launchpad and the runway, at each level](../../../imgs/non-regression/facility-levels-menus.png)
+![The menus of the launchpad and the runway, at each level](../../../imgs/non-regression/stock/facility-levels/facility-levels-menus.png)
 
 At each level, the collider under the craft is the one of the model of that level, the same with this mod
 and without it: `LP_lev2/collider`, `LP_lev3 1/LP_barsAlpha` and `launchpad/Launch Pad` for the launchpad,
@@ -75,4 +75,4 @@ after every arrival, taken out again: 24 times each. The logs with this mod show
 without it do not show.
 
 The logs, what the script printed and every reading of KSP Diag - Colliders, for both sessions, are in
-[`diag/runs/`](../../../diag/README.md#the-facility-levels-protocol).
+[`diag/non-regression/stock/facility-levels/`](../../../diag/README.md#the-facility-levels-protocol).

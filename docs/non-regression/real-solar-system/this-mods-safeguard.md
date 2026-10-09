@@ -17,8 +17,8 @@ Real Solar System are where a limit set too low would show.
 ## The margin
 
 The sessions with this mod ran at `logLevel = Debug`, which logs how far each quad and each static was
-moved. The quads placed and the largest correction on each body, over every log of
-[`diag/runs`](../../../diag/README.md) taken with this mod in Real Solar System:
+moved. The quads placed and the largest correction on each body, over every log of the
+[runs](../../../diag/README.md) taken with this mod in Real Solar System:
 
 | body | float step | limit | quads placed | largest correction |
 |---|---|---|---|---|
@@ -35,7 +35,7 @@ The statics of Earth stay further from it: the KSC was corrected by 1 541 mm at 
 
 The first version of the safeguard was a fixed metre, set against roundings of a few centimetres on
 Kerbin. On Earth, a correction of two float steps already exceeds it. In the sessions marked *first
-safeguard* in [`diag/runs`](../../../diag/README.md#on-real-solar-system), played on the Moon, Earth's
+safeguard* in [the runs](../../../diag/README.md#on-real-solar-system), played on the Moon, Earth's
 terrain was built too, and that version refused corrections of 1.094 m and 1.318 m:
 
 ```
@@ -55,14 +55,14 @@ For a static, the line ends with *the statics concerned are left where stock pla
 ## The saves
 
 The loads on Venus, Mars and Mercury, taken with this mod alone, have their saves in this repository's
-[`diag`](../../../diag) folder: the same pod on its tank, placed with *Set Position* in the debug menu
+[`diag/non-regression/real-solar-system/this-mods-safeguard`](../../../diag/non-regression/real-solar-system/this-mods-safeguard) folder: the same pod on its tank, placed with *Set Position* in the debug menu
 (Alt+F12, *Cheats*).
 
-- [`reload-venus-rss.sfs`](../../../diag/reload-venus-rss.sfs) — Venus (latitude −13.05°, longitude
+- [`reload-venus-rss.sfs`](../../../diag/non-regression/real-solar-system/this-mods-safeguard/reload-venus-rss.sfs) — Venus (latitude −13.05°, longitude
   −49.81°, the plain where Venera 14 landed), the craft *landed*;
-- [`reload-mars-rss.sfs`](../../../diag/reload-mars-rss.sfs) — Mars (latitude 47.64°, longitude 134.29°,
+- [`reload-mars-rss.sfs`](../../../diag/non-regression/real-solar-system/this-mods-safeguard/reload-mars-rss.sfs) — Mars (latitude 47.64°, longitude 134.29°,
   Utopia Planitia, where Viking 2 landed), the craft in *prelaunch*;
-- [`reload-mercury-rss.sfs`](../../../diag/reload-mercury-rss.sfs) — Mercury (latitude 73.40°, longitude
+- [`reload-mercury-rss.sfs`](../../../diag/non-regression/real-solar-system/this-mods-safeguard/reload-mercury-rss.sfs) — Mercury (latitude 73.40°, longitude
   −79.50°, Borealis Planitia), the craft *landed*. Real Solar System roughens Mercury's terrain
   everywhere with two layers of noise, finer than the collision mesh can follow: at each load, KSP
   first lifts the craft to the height it computes for that spot, 22.4 m above the mesh, then its

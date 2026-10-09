@@ -39,7 +39,7 @@ KSP Community Fixes. To
 reproduce the first: in the Mission Builder, link a *Create Launch Site* node to the start node, open the
 VAB in the settings of the mission, then play it and open the launch site selector of the VAB. We see
 no other way to put a craft on that pad. If you find one, an issue or a pull request is welcome;
-[the mission we used](../../../diag/mission-launch-pad/Missions) places the pad on Kerbin, at latitude
+[the mission we used](../../../diag/non-regression/stock/a-launch-pad-placed-by-a-mission/Missions) places the pad on Kerbin, at latitude
 3.1597°, longitude −141.1279°, and opens the VAB.
 
 *What we did see.* With this mod and a craft brought next to the pad in flight, `KSP.log` shows the pad

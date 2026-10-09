@@ -41,12 +41,12 @@ From the launchpad of the Space Center; the highest subdivision level of Kerbin 
 ([the readings](https://github.com/lhervier/KSP-Diag-TerrainQuads/blob/main/docs/the-measurements-flight.md#on-kerbin)).
 
 **With this mod**, in that same install, with this mod as the only difference, at `logLevel = Debug`.
-The session is logged in [`diag/runs/flight-kerbin-fix.log`](../diag/runs/flight-kerbin-fix.log); what
-the script printed is in [`flight-kerbin-fix-script.txt`](../diag/runs/flight-kerbin-fix-script.txt), what
-each *Log* answered in [`flight-kerbin-fix-readings.json`](../diag/runs/flight-kerbin-fix-readings.json),
-the two files of the *Logs* in [`flight-kerbin-fix-logs.csv`](../diag/runs/flight-kerbin-fix-logs.csv) and
-[`flight-kerbin-fix-quads.zip`](../diag/runs/flight-kerbin-fix-quads.zip), and what `analyse-flight.py`
-printed in [`flight-kerbin-fix-analysis.txt`](../diag/runs/flight-kerbin-fix-analysis.txt). 73 *Logs*:
+The session is logged in [`flight-kerbin-fix.log`](../diag/checking-the-culprit-flight/flight-kerbin-fix.log); what
+the script printed is in [`flight-kerbin-fix-script.txt`](../diag/checking-the-culprit-flight/flight-kerbin-fix-script.txt), what
+each *Log* answered in [`flight-kerbin-fix-readings.json`](../diag/checking-the-culprit-flight/flight-kerbin-fix-readings.json),
+the two files of the *Logs* in [`flight-kerbin-fix-logs.csv`](../diag/checking-the-culprit-flight/flight-kerbin-fix-logs.csv) and
+[`flight-kerbin-fix-quads.zip`](../diag/checking-the-culprit-flight/flight-kerbin-fix-quads.zip), and what `analyse-flight.py`
+printed in [`flight-kerbin-fix-analysis.txt`](../diag/checking-the-culprit-flight/flight-kerbin-fix-analysis.txt). 73 *Logs*:
 the same flight to within a few metres, up to 954 m and 654 m/s, the floating origin moved 2,361 times,
 every frame from about 236 m/s on.
 
@@ -77,12 +77,12 @@ a lower and shorter curve there than on Kerbin.
 ([the readings](https://github.com/lhervier/KSP-Diag-TerrainQuads/blob/main/docs/the-measurements-flight.md#on-earth-in-real-solar-system)).
 
 **With this mod**, in that same install, with this mod as the only difference, at `logLevel = Debug`.
-The session is logged in [`diag/runs/flight-earth-rss-fix.log`](../diag/runs/flight-earth-rss-fix.log);
-what the script printed is in [`flight-earth-rss-fix-script.txt`](../diag/runs/flight-earth-rss-fix-script.txt),
-what each *Log* answered in [`flight-earth-rss-fix-readings.json`](../diag/runs/flight-earth-rss-fix-readings.json),
-the two files of the *Logs* in [`flight-earth-rss-fix-logs.csv`](../diag/runs/flight-earth-rss-fix-logs.csv)
-and [`flight-earth-rss-fix-quads.zip`](../diag/runs/flight-earth-rss-fix-quads.zip), and what
-`analyse-flight.py` printed in [`flight-earth-rss-fix-analysis.txt`](../diag/runs/flight-earth-rss-fix-analysis.txt).
+The session is logged in [`flight-earth-rss-fix.log`](../diag/checking-the-culprit-flight/flight-earth-rss-fix.log);
+what the script printed is in [`flight-earth-rss-fix-script.txt`](../diag/checking-the-culprit-flight/flight-earth-rss-fix-script.txt),
+what each *Log* answered in [`flight-earth-rss-fix-readings.json`](../diag/checking-the-culprit-flight/flight-earth-rss-fix-readings.json),
+the two files of the *Logs* in [`flight-earth-rss-fix-logs.csv`](../diag/checking-the-culprit-flight/flight-earth-rss-fix-logs.csv)
+and [`flight-earth-rss-fix-quads.zip`](../diag/checking-the-culprit-flight/flight-earth-rss-fix-quads.zip), and what
+`analyse-flight.py` printed in [`flight-earth-rss-fix-analysis.txt`](../diag/checking-the-culprit-flight/flight-earth-rss-fix-analysis.txt).
 56 *Logs*, up to 613 m and 503 m/s, the floating origin moved 1,492 times, every frame from about
 236 m/s on: on Earth, the two flights differ by some fifty metres at the top of their curve.
 

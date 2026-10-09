@@ -22,7 +22,7 @@ A new career at the Custom difficulty, set up for the two craft below to be buil
 funds and science (500 000 and 5 000), funds penalties at 10 %, *Bypass Entry Purchase After Research* on;
 the Research and Development upgraded twice, to its last level, and the nodes the craft need researched;
 every other facility at its first level. On Kerbin, that career is
-[`diag/career-with-the-parts.sfs`](../../../diag/career-with-the-parts.sfs): copied as `persistent.sfs` into
+[`career-with-the-parts.sfs`](../../../diag/non-regression/stock/destroyed-buildings/career-with-the-parts.sfs): copied as `persistent.sfs` into
 a new folder of `saves`, it opens at the space centre. A craft on the launchpad, then, in turn, leaving the
 flight and coming back to the craft each time:
 
@@ -115,11 +115,11 @@ interface of the game, and neither of them about the statics:
   which the logs on Earth show with this mod and without it;
 - on Earth, a `NullReferenceException` of the Knowledge Base when the map view changes its focus
   (`KnowledgeBase.OnMapFocusChange`), which an earlier session on Earth without this mod shows too
-  ([`diag/runs/scene-changes-earth-rss-without-this-mod-earlier.log`](../../../diag/runs/scene-changes-earth-rss-without-this-mod-earlier.log)).
+  ([`scene-changes-earth-rss-without-this-mod-earlier.log`](../../../diag/non-regression/stock/scene-changes/scene-changes-earth-rss-without-this-mod-earlier.log)).
 
 The script stays a few seconds at the space centre at every arrival there, as a player looking at it
 would: leaving it within its first frames loses the anchor of its camera for the rest of the session, a
 bug of the game without this mod, which a script going straight on would trigger.
 
 The logs, what the script printed and every reading of KSP Diag - Colliders are in
-[`diag/runs/`](../../../diag/README.md#the-scene-changes-protocol).
+[`diag/non-regression/stock/scene-changes/`](../../../diag/README.md#the-scene-changes-protocol).

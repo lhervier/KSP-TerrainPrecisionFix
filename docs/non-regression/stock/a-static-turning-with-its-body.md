@@ -24,7 +24,7 @@ atmosphere, then twice as high until the frame is inertial, never past the body'
 then halving the interval down to 500 m. The script
 [`run-rotation-threshold.py`](../../../diag/automation/run-rotation-threshold.py) plays these steps through
 [KSP-MCPServer](https://github.com/lhervier/KSP-MCPServer); what it printed is in
-[`rotation-thresholds.txt`](../../../diag/runs/rotation-thresholds.txt). Stock, then Real Solar System
+[`rotation-thresholds.txt`](../../../diag/non-regression/stock/a-static-turning-with-its-body/rotation-thresholds.txt). Stock, then Real Solar System
 20.1.3.0, then Outer Planets Mod 2.2.12:
 
 - **no body turns lower than 100 km.** Every solid body without an atmosphere that was read turns from
@@ -91,7 +91,7 @@ the Mun from 5 km up:
 }
 ```
 
-![The ground of the Mun torn apart between two quads](../../../imgs/non-regression/the-mun-turning-from-5-km.png)
+![The ground of the Mun torn apart between two quads](../../../imgs/non-regression/stock/a-static-turning-with-its-body/the-mun-turning-from-5-km.png)
 
 *KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, Kopernicus 248 and the patch above,
 KSP Diag - Floating Origin at the top, without this mod: a craft moved from orbit to orbit of the Mun

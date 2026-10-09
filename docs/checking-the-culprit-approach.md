@@ -20,9 +20,9 @@ scene is never changed: one single flight, six round trips in a row, on Kerbin. 
 of both instruments, on the save they publish, `approach-kerbin.sfs`, played by its script,
 [`run-approach.py`](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-approach.md#played-by-a-script),
 once without this mod and once with it, both instruments recording at the same moments. The session
-with this mod is logged in [`diag/runs/approach-fix.log`](../diag/runs/approach-fix.log); what the
-script printed is in [`approach-fix-script.txt`](../diag/runs/approach-fix-script.txt), and every line
-it recorded in [`approach-fix-lines.json`](../diag/runs/approach-fix-lines.json).
+with this mod is logged in [`approach-fix.log`](../diag/checking-the-culprit-approach/approach-fix.log); what the
+script printed is in [`approach-fix-script.txt`](../diag/checking-the-culprit-approach/approach-fix-script.txt), and every line
+it recorded in [`approach-fix-lines.json`](../diag/checking-the-culprit-approach/approach-fix-lines.json).
 
 ## The craft, over six round trips
 
@@ -41,9 +41,9 @@ and after it, never moves by more than a thousandth of a millimetre.
 **With this mod**, in that same install, on that same save, with this mod as the only difference. One
 screenshot per round trip, the table cleared between them:
 
-![With this mod, the first round trip, read by Diag LandedVessel](../imgs/Diag1/on-approach/1.png)
+![With this mod, the first round trip, read by Diag LandedVessel](../imgs/checking-the-culprit-approach/landed-vessel/1.png)
 
-The five others are in [`imgs/Diag1/on-approach`](../imgs/Diag1/on-approach).
+The five others are in [`imgs/checking-the-culprit-approach/landed-vessel`](../imgs/checking-the-culprit-approach/landed-vessel).
 
 | round trip | 1 | 2 | 3 | 4 | 5 | 6 |
 |---|---|---|---|---|---|---|
@@ -69,9 +69,9 @@ still packed, to the moment physics takes it over, it moves by 0.023 mm at most.
 
 **With this mod**, in that same install, the same session:
 
-![With this mod, the first round trip, read by Diag TerrainHeight](../imgs/Diag2/on-approach/1.png)
+![With this mod, the first round trip, read by Diag TerrainHeight](../imgs/checking-the-culprit-approach/terrain-height/1.png)
 
-The five others are in [`imgs/Diag2/on-approach`](../imgs/Diag2/on-approach).
+The five others are in [`imgs/checking-the-culprit-approach/terrain-height`](../imgs/checking-the-culprit-approach/terrain-height).
 
 | round trip | 1 | 2 | 3 | 4 | 5 | 6 |
 |---|---|---|---|---|---|---|

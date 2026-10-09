@@ -13,7 +13,7 @@ through the KSC's own `PQSCity`, before any flight, and this mod places a static
 With Kopernicus 248, in the Earth session of [Scene changes](../stock/scene-changes.md): a craft on the
 launchpad at Cape Canaveral, through every way of leaving the flight and coming back, a trip to the Moon
 included, logged in
-[`diag/runs/scene-changes-earth-rss-fix.log`](../../../diag/runs/scene-changes-earth-rss-fix.log).
+[`scene-changes-earth-rss-fix.log`](../../../diag/non-regression/stock/scene-changes/scene-changes-earth-rss-fix.log).
 
 The KSC is taken out of its sphere at Cape Canaveral at each of the twelve arrivals of a craft in flight
 near it, corrected each time by a different amount, from 147 to 1 086 mm, and put back under it before

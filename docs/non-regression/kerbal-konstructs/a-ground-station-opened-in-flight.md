@@ -18,7 +18,7 @@ before this mod takes the KSC out, even in a game that goes from the main menu s
 With this mod at `logLevel = Debug`, KSP started, then *Training → Flight Basics* from the main menu:
 `KSP.log` shows the KSC taken out of its sphere once, with no `back under its sphere` before the scene
 is left, so nothing was lent back
-([`diag/runs/flight-basics-fix.log`](../../../diag/runs/flight-basics-fix.log)).
+([`flight-basics-fix.log`](../../../diag/non-regression/kerbal-konstructs/a-ground-station-opened-in-flight/flight-basics-fix.log)).
 
 [Kerbal Konstructs](https://github.com/KSP-RO/Kerbal-Konstructs) adds ground stations of its own, later.
 Each group of its statics hangs from a stock `PQSCity` of its own, which this mod takes out of its sphere
@@ -38,13 +38,13 @@ station of Kerbal Konstructs is open a few tens of metres away, it goes to that 
 
 ## The save
 
-[`diag/kk-ground-station.sfs`](../../../diag/kk-ground-station.sfs): a career game, a Mk1 pod on the
+[`kk-ground-station.sfs`](../../../diag/non-regression/kerbal-konstructs/a-ground-station-opened-in-flight/kk-ground-station.sfs): a career game, a Mk1 pod on the
 launchpad of the KSC. CommNet is on, and so is *Enable CommNet GroundStations*, in the difficulty options
 of Kerbal Konstructs, off by default: without it, Kerbal Konstructs adds no ground station. In the same
 options, *Open everything* is off: it would open every station at once. The other options are left as
 they come.
 
-![The difficulty options of Kerbal Konstructs, opened in flight from the published save](../../../imgs/non-regression/kerbal-konstructs/open-facility/000-kk-settings.png)
+![The difficulty options of Kerbal Konstructs, opened in flight from the published save](../../../imgs/non-regression/kerbal-konstructs/a-ground-station-opened-in-flight/000-kk-settings.png)
 
 ## The protocol
 
@@ -91,23 +91,23 @@ static it takes out of its sphere and puts back.
 
 | Step 3: a new group at the pod | Step 3: the group made active |
 |---|---|
-| ![The statics editor, Edit Groups, Spawn new Group, and the group editor of NewGroup](../../../imgs/non-regression/kerbal-konstructs/open-facility/010-create-group.png) | ![Set Active Group, Kerbin:NewGroup chosen](../../../imgs/non-regression/kerbal-konstructs/open-facility/020-set-active-group.png) |
+| ![The statics editor, Edit Groups, Spawn new Group, and the group editor of NewGroup](../../../imgs/non-regression/kerbal-konstructs/a-ground-station-opened-in-flight/010-create-group.png) | ![Set Active Group, Kerbin:NewGroup chosen](../../../imgs/non-regression/kerbal-konstructs/a-ground-station-opened-in-flight/020-set-active-group.png) |
 
 | Step 4: the water tower spawned | Step 5: the type of facility |
 |---|---|
-| ![Spawn New, KSC_WaterTower in the Tanks category, and its instance editor](../../../imgs/non-regression/kerbal-konstructs/open-facility/030-spawn-water-tower.png) | ![The facility editor, GroundStation chosen](../../../imgs/non-regression/kerbal-konstructs/open-facility/040-ground-station.png) |
+| ![Spawn New, KSC_WaterTower in the Tanks category, and its instance editor](../../../imgs/non-regression/kerbal-konstructs/a-ground-station-opened-in-flight/030-spawn-water-tower.png) | ![The facility editor, GroundStation chosen](../../../imgs/non-regression/kerbal-konstructs/a-ground-station-opened-in-flight/040-ground-station.png) |
 
 | Step 5: the ground station set up | Step 6: moved aside |
 |---|---|
-| ![Open Cost 1000, Default State Closed, Antenna Range 1, Save Facility](../../../imgs/non-regression/kerbal-konstructs/open-facility/050-save-facility.png) | ![The water tower moved with Left / Right](../../../imgs/non-regression/kerbal-konstructs/open-facility/060-move-away-from-vessel.png) |
+| ![Open Cost 1000, Default State Closed, Antenna Range 1, Save Facility](../../../imgs/non-regression/kerbal-konstructs/a-ground-station-opened-in-flight/050-save-facility.png) | ![The water tower moved with Left / Right](../../../imgs/non-regression/kerbal-konstructs/a-ground-station-opened-in-flight/060-move-away-from-vessel.png) |
 
 | Step 6: 31 m aside, saved | Step 6: the statics editor saved and closed |
 |---|---|
-| ![Left / Right at 31, Save&Close](../../../imgs/non-regression/kerbal-konstructs/open-facility/070-save-and-close-facility.png) | ![The statics editor, Save](../../../imgs/non-regression/kerbal-konstructs/open-facility/080-save-and-close.png) |
+| ![Left / Right at 31, Save&Close](../../../imgs/non-regression/kerbal-konstructs/a-ground-station-opened-in-flight/070-save-and-close-facility.png) | ![The statics editor, Save](../../../imgs/non-regression/kerbal-konstructs/a-ground-station-opened-in-flight/080-save-and-close.png) |
 
 | Step 7: the facility manager | Step 7: the station open |
 |---|---|
-| ![A click on the water tower, the facility manager, Open for 1000 funds](../../../imgs/non-regression/kerbal-konstructs/open-facility/090-facility-manager.png) | ![The facility manager once the station is open](../../../imgs/non-regression/kerbal-konstructs/open-facility/100-facility-opened.png) |
+| ![A click on the water tower, the facility manager, Open for 1000 funds](../../../imgs/non-regression/kerbal-konstructs/a-ground-station-opened-in-flight/090-facility-manager.png) | ![The facility manager once the station is open](../../../imgs/non-regression/kerbal-konstructs/a-ground-station-opened-in-flight/100-facility-opened.png) |
 
 </details>
 
@@ -115,7 +115,7 @@ static it takes out of its sphere and puts back.
 
 Played as above from the published save, with this mod. The distance is the one the part action window
 of the pod shows for the first hop. Log:
-[`diag/runs/kk-ground-station-fix.log`](../../../diag/runs/kk-ground-station-fix.log); earlier in the
+[`kk-ground-station-fix.log`](../../../diag/non-regression/kerbal-konstructs/a-ground-station-opened-in-flight/kk-ground-station-fix.log); earlier in the
 same session, it also holds a first run of the same steps, whose lines are the same.
 
 | Step | First hop |
@@ -125,7 +125,7 @@ same session, it also holds a first run of the same steps, whose lines are the s
 
 | Before, step 2 | After, step 8 |
 |---|---|
-| ![The pod on the launchpad, its part action window open, before the station is opened](../../../imgs/non-regression/kerbal-konstructs/open-facility/005-check-commnet.png) | ![The pod on the launchpad, its part action window open again, once the station is open](../../../imgs/non-regression/kerbal-konstructs/open-facility/110-ground-station-active.png) |
+| ![The pod on the launchpad, its part action window open, before the station is opened](../../../imgs/non-regression/kerbal-konstructs/a-ground-station-opened-in-flight/005-check-commnet.png) | ![The pod on the launchpad, its part action window open again, once the station is open](../../../imgs/non-regression/kerbal-konstructs/a-ground-station-opened-in-flight/110-ground-station-active.png) |
 
 At the click on *Open*, the log shows the three lines above, within the same millisecond, and no
 exception after them.

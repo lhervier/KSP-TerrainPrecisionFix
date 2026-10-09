@@ -87,7 +87,7 @@ row, 24 on the Moon and 51 on Earth, the craft never moved, and the pass, which 
 load, found nothing to correct, without getting in the way. With the workaround off, this mod keeps
 the craft in place on its own, over six loads read by Diag LandedVessel:
 
-![Six loads on the Moon, with this mod and without Real Solar System's workaround](../../../imgs/Diag1/on-load/2parts/rss/30-moon-fix.png)
+![Six loads on the Moon, with this mod and without Real Solar System's workaround](../../../imgs/non-regression/real-solar-system/the-ground-workaround/30-moon-fix.png)
 
 *With this mod, Real Solar System's workaround off, Diag LandedVessel: six loads of `reload-moon-rss-resave.sfs`,
 a spread of 0.364 mm, against 0.395 mm with it on.*

@@ -21,10 +21,10 @@ time. It is [the launch pad protocol](https://github.com/lhervier/KSP-Diag-Terra
 of the instrument, played by its script,
 [`run-launch-pad.py`](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/main/docs/the-protocol-launch-pad.md#played-by-a-script),
 once without this mod and once with it. The sessions with this mod are logged in
-[`diag/runs/launch-pad-fix-1.log`](../diag/runs/launch-pad-fix-1.log) to
-[`launch-pad-fix-6.log`](../diag/runs/launch-pad-fix-6.log); what the script printed is in
-[`launch-pad-fix-script.txt`](../diag/runs/launch-pad-fix-script.txt), and every line it recorded in
-[`launch-pad-fix-lines.json`](../diag/runs/launch-pad-fix-lines.json).
+[`launch-pad-fix-1.log`](../diag/checking-the-culprit-launch-pad/launch-pad-fix-1.log) to
+[`launch-pad-fix-6.log`](../diag/checking-the-culprit-launch-pad/launch-pad-fix-6.log); what the script printed is in
+[`launch-pad-fix-script.txt`](../diag/checking-the-culprit-launch-pad/launch-pad-fix-script.txt), and every line it recorded in
+[`launch-pad-fix-lines.json`](../diag/checking-the-culprit-launch-pad/launch-pad-fix-lines.json).
 
 ## The deck, over six launches
 
@@ -44,7 +44,7 @@ one line of this mod in each: the launch pad taken out of its terrain sphere whi
 
 **With this mod**, in that same install, with this mod as the only difference, the first launch:
 
-![With this mod, the capsule on the deck of the Desert Launch Site, read by Diag TerrainHeight](../imgs/Diag2/launch-pad/table-1.png)
+![With this mod, the capsule on the deck of the Desert Launch Site, read by Diag TerrainHeight](../imgs/checking-the-culprit-launch-pad/table-1.png)
 
 The deck spreads over 592.8 mm without this mod, and 0.001 mm with it.
 
@@ -56,11 +56,11 @@ each launch; the same view without this mod is in
 
 | | |
 |---|---|
-| ![Launch 1](../imgs/Diag2/launch-pad/foot-1.png) | ![Launch 2](../imgs/Diag2/launch-pad/foot-2.png) |
+| ![Launch 1](../imgs/checking-the-culprit-launch-pad/foot-1.png) | ![Launch 2](../imgs/checking-the-culprit-launch-pad/foot-2.png) |
 | launch 1 | launch 2 |
-| ![Launch 3](../imgs/Diag2/launch-pad/foot-3.png) | ![Launch 4](../imgs/Diag2/launch-pad/foot-4.png) |
+| ![Launch 3](../imgs/checking-the-culprit-launch-pad/foot-3.png) | ![Launch 4](../imgs/checking-the-culprit-launch-pad/foot-4.png) |
 | launch 3 | launch 4 |
-| ![Launch 5](../imgs/Diag2/launch-pad/foot-5.png) | ![Launch 6](../imgs/Diag2/launch-pad/foot-6.png) |
+| ![Launch 5](../imgs/checking-the-culprit-launch-pad/foot-5.png) | ![Launch 6](../imgs/checking-the-culprit-launch-pad/foot-6.png) |
 | launch 5 | launch 6 |
 
 ## What the measurements say

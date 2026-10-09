@@ -77,7 +77,7 @@ The height of the runway under the rover, lowest and highest over its four readi
 The logs with this mod and without it show no error.
 
 The logs, what the script printed and every reading of KSP Diag - Colliders, for both sessions, are in
-[`diag/runs/`](../../../diag/README.md#the-time-warp-protocol).
+[`diag/non-regression/stock/time-warp/`](../../../diag/README.md#the-time-warp-protocol).
 
 ## In flight, low over a static
 
@@ -86,8 +86,8 @@ The logs, what the script printed and every reading of KSP Diag - Colliders, for
 The static is a launch pad placed with [Kerbal Konstructs](https://github.com/KSP-RO/Kerbal-Konstructs)
 1.12.3 (*KSC LaunchPad lv 1*, of its *Squad KSC* statics): stock has no static on the Mun a craft can stand
 on. It stands near the highest point of the Mun's equator, at latitude −0.2773°, longitude −132.9521°, with a
-capsule landed on it. The save is [`diag/warp-static-mun-kk.sfs`](../../../diag/warp-static-mun-kk.sfs), and
-the launch pad is in [`diag/warp-static-mun-kk/`](../../../diag/warp-static-mun-kk/), to copy into the
+capsule landed on it. The save is [`warp-static-mun-kk.sfs`](../../../diag/non-regression/stock/time-warp/warp-static-mun-kk.sfs), and
+the launch pad is in [`diag/non-regression/stock/time-warp/warp-static-mun-kk/`](../../../diag/non-regression/stock/time-warp/warp-static-mun-kk/), to copy into the
 `GameData` of KSP with Kerbal Konstructs installed. Then:
 
 1. the save loaded;
@@ -143,4 +143,4 @@ shows the launch pad in the session: without this mod, as it was placed, in the 
 save is first loaded, before this mod takes anything out of its sphere.
 
 The logs, what the script printed and every reading of KSP Diag - Colliders, for both sessions, are in
-[`diag/runs/`](../../../diag/README.md#the-time-warp-flyover-protocol).
+[`diag/non-regression/stock/time-warp/`](../../../diag/README.md#the-time-warp-flyover-protocol).

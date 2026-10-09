@@ -79,4 +79,4 @@ this mod ([Checking the culprit: in flight](../../checking-the-culprit-flight.md
 mod, the same median and 90th percentile, and 0.15 mm more at the very largest. Under
 100 m/s, nothing moved either way. The log shows no warning and no error from this mod.
 
-The logs and the readings are in [`diag/runs/`](../../../diag/README.md#with-principia).
+The logs and the readings are in [`diag/non-regression/principia/the-bodies-it-moves-and-turns/`](../../../diag/README.md#with-principia).

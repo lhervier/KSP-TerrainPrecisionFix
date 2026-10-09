@@ -80,7 +80,7 @@ It looks very much like the issue, only higher.
 
 | | |
 |---|---|
-| ![On stock, an anchor alone at its second load](../imgs/anchor/no-fix/050-quicksave-and-reload-again.png) | ![On stock, an anchor with a battery at its second load](../imgs/anchor/no-fix/150-quicksave-and-reload-again.png) |
+| ![On stock, an anchor alone at its second load](../imgs/checking-the-culprit-anchoring/no-fix/050-quicksave-and-reload-again.png) | ![On stock, an anchor with a battery at its second load](../imgs/checking-the-culprit-anchoring/no-fix/150-quicksave-and-reload-again.png) |
 | an anchor alone, placed by Bill Kerman on the desert of Kerbin, then saved and loaded twice | an anchor with one of the rover's batteries on top, placed and loaded the same way |
 
 On stock, KSP 1.12.5 with KSP Community Fixes. The protocol and the readings are in

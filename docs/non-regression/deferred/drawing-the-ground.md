@@ -83,4 +83,4 @@ Over the six, the craft comes to rest across a spread of 0.039 mm, and the groun
 0.011 mm, against 0.094 mm and 0.011 mm with this mod and no Deferred, and 21.8 mm for both in stock
 ([Checking the culprit: coming back to a craft left parked](../../checking-the-culprit-approach.md)).
 
-The logs and the lines read are in [`diag/runs/`](../../../diag/README.md#with-deferred).
+The logs and the lines read are in [`diag/non-regression/deferred/drawing-the-ground/`](../../../diag/README.md#with-deferred).

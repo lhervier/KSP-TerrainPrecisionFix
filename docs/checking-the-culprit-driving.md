@@ -34,7 +34,7 @@ centimetre. It is the
 of KSP Diag - Terrain Height, on the saves it publishes, in the install above with KSP-MCPServer
 added; on Earth, Real Solar System is built without its runway fix, which keeps the floating origin from
 moving at 500 m once a craft has rolled onto the deck
-([`rss-20.1.3-without-its-runway-fix.diff`](../diag/rss-runway-fix/rss-20.1.3-without-its-runway-fix.diff);
+([`rss-20.1.3-without-its-runway-fix.diff`](../diag/non-regression/real-solar-system/the-runway-fix/rss-20.1.3-without-its-runway-fix.diff);
 see [Real Solar System: the runway fix](non-regression/real-solar-system/the-runway-fix.md)). This mod corrects
 the terrain and the statics separately, each with its own setting (`fixTerrain`, `fixStatics`), so on
 Kerbin the runway is read three ways: on stock, with the terrain fix alone, and with both. On Earth, on
@@ -55,9 +55,9 @@ millimetres:
 | 3 | **−24.665** | +5.656 | yes |
 
 **With this mod**, in that same install, on that same save, with this mod as the only difference. The
-session is logged in [`diag/runs/driving-diag2-fix.log`](../diag/runs/driving-diag2-fix.log); what the
-script printed is in [`driving-diag2-fix-script.txt`](../diag/runs/driving-diag2-fix-script.txt), and
-every line it recorded in [`driving-diag2-fix-lines.json`](../diag/runs/driving-diag2-fix-lines.json).
+session is logged in [`driving-diag2-fix.log`](../diag/checking-the-culprit-driving/driving-diag2-fix.log); what the
+script printed is in [`driving-diag2-fix-script.txt`](../diag/checking-the-culprit-driving/driving-diag2-fix-script.txt), and
+every line it recorded in [`driving-diag2-fix-lines.json`](../diag/checking-the-culprit-driving/driving-diag2-fix-lines.json).
 On the three lines of each shift, **Ground KSP computes** reads the same digits to within six
 thousandths of a millimetre, and Diag FloatingOrigin reads one shift of 500.0 m, to within two
 centimetres, on each line taken just after a shift, and none on each line taken with no shift. In
@@ -69,9 +69,9 @@ centimetres, on each line taken just after a shift, and none on each line taken 
 | 2 | −2.100 | −1.606 | −1.536 | +0.493 | +0.070 |
 | 3 | −517.280 | −514.190 | −511.705 | +3.089 | +2.485 |
 
-![One run on Kerbin with this mod, read by Diag FloatingOrigin: nine lines, three shifts](../imgs/Diag2/on-driving/diag3.png)
+![One run on Kerbin with this mod, read by Diag FloatingOrigin: nine lines, three shifts](../imgs/checking-the-culprit-driving/diag3.png)
 
-![One run on Kerbin with this mod, read by Diag TerrainHeight: nine lines, three shifts](../imgs/Diag2/on-driving/diag2.png)
+![One run on Kerbin with this mod, read by Diag TerrainHeight: nine lines, three shifts](../imgs/checking-the-culprit-driving/diag2.png)
 
 The third shift is read at a spot about a kilometre and a half south of the runway that reads far below
 the computed height, with this mod as on stock; see [What the measurements say](#what-the-measurements-say).
@@ -95,26 +95,26 @@ one run, a third move left out where the grass is no longer flat.
 
 **With the terrain fix alone**, an earlier run, played with an earlier version of the script, `fixStatics = false` in this mod's settings, the only line changed. The
 session is logged in
-[`diag/runs/driving-runway-diag2-fix-terrain-only.log`](../diag/runs/driving-runway-diag2-fix-terrain-only.log),
+[`driving-runway-diag2-fix-terrain-only.log`](../diag/checking-the-culprit-driving/driving-runway-diag2-fix-terrain-only.log),
 what the script printed in
-[`driving-runway-diag2-fix-terrain-only-script.txt`](../diag/runs/driving-runway-diag2-fix-terrain-only-script.txt)
+[`driving-runway-diag2-fix-terrain-only-script.txt`](../diag/checking-the-culprit-driving/driving-runway-diag2-fix-terrain-only-script.txt)
 and every line it recorded in
-[`driving-runway-diag2-fix-terrain-only-lines.json`](../diag/runs/driving-runway-diag2-fix-terrain-only-lines.json).
+[`driving-runway-diag2-fix-terrain-only-lines.json`](../diag/checking-the-culprit-driving/driving-runway-diag2-fix-terrain-only-lines.json).
 At the second move, the rover stalled against the lip of the deck on its way to P and stopped 0.79 m
 from the spot, at the same place each time: its readings there agree to 0.017 mm. On the last visit to
 P, after the move, it stopped 9.7 m away, and that line is left out: P has one line after that move.
 
-![With the terrain fix alone, the first move, read by Diag TerrainHeight](../imgs/Diag2/on-driving-runway/terrain-only-move1-diag2.png)
+![With the terrain fix alone, the first move, read by Diag TerrainHeight](../imgs/checking-the-culprit-driving/runway/terrain-only-move1-diag2.png)
 
 **With both fixes**, this mod as it is installed, the same script as on stock. The session is logged in
-[`diag/runs/driving-runway-diag2-fix.log`](../diag/runs/driving-runway-diag2-fix.log), what the script
-printed in [`driving-runway-diag2-fix-script.txt`](../diag/runs/driving-runway-diag2-fix-script.txt) and
+[`driving-runway-diag2-fix.log`](../diag/checking-the-culprit-driving/driving-runway-diag2-fix.log), what the script
+printed in [`driving-runway-diag2-fix-script.txt`](../diag/checking-the-culprit-driving/driving-runway-diag2-fix-script.txt) and
 every line it recorded in
-[`driving-runway-diag2-fix-lines.json`](../diag/runs/driving-runway-diag2-fix-lines.json). G stood 476 to
+[`driving-runway-diag2-fix-lines.json`](../diag/checking-the-culprit-driving/driving-runway-diag2-fix-lines.json). G stood 476 to
 482 m from the origin before each move, and the rover stopped 12 to 17 cm from each spot. The third
 move is left out, as on stock: the lines taken at a spot there spread over up to 26.7 mm.
 
-![With both fixes, the first move, read by Diag TerrainHeight](../imgs/Diag2/on-driving-runway/fix-move1-diag2.png)
+![With both fixes, the first move, read by Diag TerrainHeight](../imgs/checking-the-culprit-driving/runway/fix-move1-diag2.png)
 
 ## On Earth
 
@@ -133,9 +133,9 @@ In millimetres:
 | 3 | +231.530 | +82.033 | no, 2.8 times |
 
 **With this mod**, in that same install, on that same save. The session is logged in
-[`diag/runs/driving-earth-rss-diag2-fix.log`](../diag/runs/driving-earth-rss-diag2-fix.log); what the
-script printed is in [`driving-earth-rss-diag2-fix-script.txt`](../diag/runs/driving-earth-rss-diag2-fix-script.txt),
-and every line it recorded in [`driving-earth-rss-diag2-fix-lines.json`](../diag/runs/driving-earth-rss-diag2-fix-lines.json).
+[`driving-earth-rss-diag2-fix.log`](../diag/checking-the-culprit-driving/driving-earth-rss-diag2-fix.log); what the
+script printed is in [`driving-earth-rss-diag2-fix-script.txt`](../diag/checking-the-culprit-driving/driving-earth-rss-diag2-fix-script.txt),
+and every line it recorded in [`driving-earth-rss-diag2-fix-lines.json`](../diag/checking-the-culprit-driving/driving-earth-rss-diag2-fix-lines.json).
 Diag FloatingOrigin reads one shift of 500.0 m, to within two centimetres, on each line taken just
 after a shift, and none on each line taken with no shift; its first line reads two, the moves the game
 makes as the scene opens on Earth. In *Difference*, in millimetres:
@@ -146,9 +146,9 @@ makes as the scene opens on Earth. In *Difference*, in millimetres:
 | 2 | +128.235 | +180.144 | +126.215 | +51.910 | −53.929 |
 | 3 | −18.674 | +28.258 | +64.241 | +46.933 | +35.983 |
 
-![One run on Earth with this mod, read by Diag FloatingOrigin: nine lines, three shifts](../imgs/Diag2/on-driving/earth-diag3.png)
+![One run on Earth with this mod, read by Diag FloatingOrigin: nine lines, three shifts](../imgs/checking-the-culprit-driving/earth-diag3.png)
 
-![One run on Earth with this mod, read by Diag TerrainHeight: nine lines, three shifts](../imgs/Diag2/on-driving/earth-diag2.png)
+![One run on Earth with this mod, read by Diag TerrainHeight: nine lines, three shifts](../imgs/checking-the-culprit-driving/earth-diag2.png)
 
 None of the three shifts counts: each changes *Difference* about as much as the same few metres do with
 no shift, or less. On that slope, the height KSP computes changes between the lines of a shift by up to
@@ -170,20 +170,20 @@ Across each move, in millimetres:
 one run, two moves.
 
 **With this mod**, on the same save. The session is logged in
-[`diag/runs/driving-runway-earth-rss-diag2-fix.log`](../diag/runs/driving-runway-earth-rss-diag2-fix.log),
+[`driving-runway-earth-rss-diag2-fix.log`](../diag/checking-the-culprit-driving/driving-runway-earth-rss-diag2-fix.log),
 what the script printed in
-[`driving-runway-earth-rss-diag2-fix-script.txt`](../diag/runs/driving-runway-earth-rss-diag2-fix-script.txt)
+[`driving-runway-earth-rss-diag2-fix-script.txt`](../diag/checking-the-culprit-driving/driving-runway-earth-rss-diag2-fix-script.txt)
 and every line it recorded in
-[`driving-runway-earth-rss-diag2-fix-lines.json`](../diag/runs/driving-runway-earth-rss-diag2-fix-lines.json).
+[`driving-runway-earth-rss-diag2-fix-lines.json`](../diag/checking-the-culprit-driving/driving-runway-earth-rss-diag2-fix-lines.json).
 The rover stopped 13 to 16 cm from each spot, and G stood 475 to 477 m from the origin before each move;
 Diag FloatingOrigin reads a move of 500.0 m, to within three centimetres, on the first line after each. The log shows
 this mod taking the KSC out of its sphere once, as the save loads, and holding it there through both
 moves.
 
-![On Earth, with this mod, the first move, read by Diag TerrainHeight](../imgs/Diag2/on-driving-runway/earth-fix-move1-diag2.png)
+![On Earth, with this mod, the first move, read by Diag TerrainHeight](../imgs/checking-the-culprit-driving/runway/earth-fix-move1-diag2.png)
 
 The screenshots of every move by the runway, on Kerbin and on Earth, read by both instruments, are in
-[`imgs/Diag2/on-driving-runway/`](../imgs/Diag2/on-driving-runway).
+[`imgs/checking-the-culprit-driving/runway/`](../imgs/checking-the-culprit-driving/runway).
 
 ## What the measurements say
 

@@ -21,9 +21,9 @@ and [KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainHeig
 with a save made without this mod, played by its script,
 [`run-switching.py`](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-switching.md#played-by-a-script),
 once without this mod and once with it, both instruments recording at the same moments. The session
-with this mod is logged in [`diag/runs/switching-fix.log`](../diag/runs/switching-fix.log); what the
-script printed is in [`switching-fix-script.txt`](../diag/runs/switching-fix-script.txt), and every
-line it recorded in [`switching-fix-lines.json`](../diag/runs/switching-fix-lines.json).
+with this mod is logged in [`switching-fix.log`](../diag/checking-the-culprit-switching/switching-fix.log); what the
+script printed is in [`switching-fix-script.txt`](../diag/checking-the-culprit-switching/switching-fix-script.txt), and every
+line it recorded in [`switching-fix-lines.json`](../diag/checking-the-culprit-switching/switching-fix-lines.json).
 
 ## The craft, over six rounds
 
@@ -41,7 +41,7 @@ millimetre. *Moved*, once the switch has handed the capsule to physics:
 rails* still reads the same height, within a thousandth of a millimetre. The first line of each round
 is taken as the save opens, the second after the switch:
 
-![With this mod, six rounds of loading the save and switching to the capsule, read by Diag LandedVessel](../imgs/Diag1/on-switch/six-rounds.png)
+![With this mod, six rounds of loading the save and switching to the capsule, read by Diag LandedVessel](../imgs/checking-the-culprit-switching/landed-vessel/six-rounds.png)
 
 The capsule comes to rest across a spread of 112.0 mm without this mod, and 0.028 mm with it.
 
@@ -61,7 +61,7 @@ thousandths of a millimetre.
 
 **With this mod**, in that same install, the same session:
 
-![With this mod, six rounds of loading the save and switching to the capsule, read by Diag TerrainHeight](../imgs/Diag2/on-switch/six-rounds.png)
+![With this mod, six rounds of loading the save and switching to the capsule, read by Diag TerrainHeight](../imgs/checking-the-culprit-switching/terrain-height/six-rounds.png)
 
 All twelve lines, before and after the switch, read between −1.694 and −1.696 mm.
 

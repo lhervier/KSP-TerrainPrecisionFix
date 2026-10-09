@@ -56,82 +56,82 @@ To see the runway without the runway fix, Real Solar System is built from the so
 20.1.3.0 with `RSSRunwayFix` kept from doing anything: it returns at the top of its `Start`, so it
 leaves the sections as stock does, never touches the floating origin, and never holds it. The version
 of the assembly is set to that of the release
-([`rss-20.1.3-without-its-runway-fix.diff`](../../../diag/rss-runway-fix/rss-20.1.3-without-its-runway-fix.diff)).
+([`rss-20.1.3-without-its-runway-fix.diff`](../../../diag/non-regression/real-solar-system/the-runway-fix/rss-20.1.3-without-its-runway-fix.diff)).
 In every session below, the colliders of the sections were on at every load.
 
 **Real Solar System as released, without this mod.** The rover, launched from the SPH, rests in the air
 above the deck, `runway_collider` being the only collider left under it.
 
-![Real Solar System as released, without this mod: the rover launched from the SPH](../../../imgs/rss-runway-fix/10-as-released-rover-above-the-deck.png)
+![Real Solar System as released, without this mod: the rover launched from the SPH](../../../imgs/non-regression/real-solar-system/the-runway-fix/10-as-released-rover-above-the-deck.png)
 
 *Real Solar System as released, without this mod: the rover 46 seconds after its launch from the SPH.*
 
 **Without the runway fix, without this mod.** One session, the rover launched from the SPH several
 times, and reloaded many times between, until each case showed; 23 entries in flight, logged in
-[`diag/runs/runway-earth-rss-without-runway-fix.log`](../../../diag/runs/runway-earth-rss-without-runway-fix.log).
+[`runway-earth-rss-without-runway-fix.log`](../../../diag/non-regression/real-solar-system/the-runway-fix/runway-earth-rss-without-runway-fix.log).
 The views from below the deck were taken with the flight camera moved under it.
 
 *Sunk into the deck.* One load, the rover just launched:
 
-![The rover sunk into the deck, runway_collider drawn](../../../imgs/rss-runway-fix/20-without-runway-fix-sunk.png)
+![The rover sunk into the deck, runway_collider drawn](../../../imgs/non-regression/real-solar-system/the-runway-fix/20-without-runway-fix-sunk.png)
 
 *Without the runway fix, without this mod, Diag Colliders: the rover just launched, seen from beside it with
 the camera below the deck, `runway_collider` (yellow) alone drawn.*
 
-![The same, from three quarters](../../../imgs/rss-runway-fix/20b-without-runway-fix-sunk-three-quarters.png)
+![The same, from three quarters](../../../imgs/non-regression/real-solar-system/the-runway-fix/20b-without-runway-fix-sunk-three-quarters.png)
 
 *The same, seen from three quarters behind.*
 
-![The same, End09_Mesh drawn](../../../imgs/rss-runway-fix/20c-without-runway-fix-sunk-end09.png)
+![The same, End09_Mesh drawn](../../../imgs/non-regression/real-solar-system/the-runway-fix/20c-without-runway-fix-sunk-end09.png)
 
 *The same, `End09_Mesh` (magenta), the end of the runway, alone drawn.*
 
 *A step a wheel climbs.* The same load, the rover driven from the end of the runway onto its fourth
 section:
 
-![The edge of the fourth section ahead of the rover](../../../imgs/rss-runway-fix/22a-without-runway-fix-step-from-above.png)
+![The edge of the fourth section ahead of the rover](../../../imgs/non-regression/real-solar-system/the-runway-fix/22a-without-runway-fix-step-from-above.png)
 
 *The same load, the rover at the edge of the fourth section, `End09_Mesh` (magenta) and
 `Section4_Mesh` (cyan) drawn.*
 
-![The fourth section and runway_collider from below the deck](../../../imgs/rss-runway-fix/22b-without-runway-fix-step-from-below.png)
+![The fourth section and runway_collider from below the deck](../../../imgs/non-regression/real-solar-system/the-runway-fix/22b-without-runway-fix-step-from-below.png)
 
 *The same, from below the deck, `runway_collider` (yellow) and `Section4_Mesh` (cyan) drawn.*
 
-![The rover climbing onto the fourth section](../../../imgs/rss-runway-fix/22-without-runway-fix-step-climbed.png)
+![The rover climbing onto the fourth section](../../../imgs/non-regression/real-solar-system/the-runway-fix/22-without-runway-fix-step-climbed.png)
 
 *The same, the rover driven onto the fourth section, `End09_Mesh` (magenta) and `Section4_Mesh` (cyan)
 drawn.*
 
 *In the air above the deck.* Another load, the rover just launched:
 
-![The rover in the air, every collider drawn](../../../imgs/rss-runway-fix/21-without-runway-fix-in-the-air.png)
+![The rover in the air, every collider drawn](../../../imgs/non-regression/real-solar-system/the-runway-fix/21-without-runway-fix-in-the-air.png)
 
 *Without the runway fix, without this mod, Diag Colliders: the rover just launched, seen from beside it, every
 collider drawn.*
 
-![The same, from the front](../../../imgs/rss-runway-fix/21b-without-runway-fix-in-the-air-front.png)
+![The same, from the front](../../../imgs/non-regression/real-solar-system/the-runway-fix/21b-without-runway-fix-in-the-air-front.png)
 
 *The same, from the front.*
 
-![The same, runway_collider drawn](../../../imgs/rss-runway-fix/21c-without-runway-fix-in-the-air-runway-collider.png)
+![The same, runway_collider drawn](../../../imgs/non-regression/real-solar-system/the-runway-fix/21c-without-runway-fix-in-the-air-runway-collider.png)
 
 *The same, from beside it, `runway_collider` (yellow) alone drawn.*
 
-![The same, runway_collider drawn, from the front](../../../imgs/rss-runway-fix/21d-without-runway-fix-in-the-air-runway-collider-front.png)
+![The same, runway_collider drawn, from the front](../../../imgs/non-regression/real-solar-system/the-runway-fix/21d-without-runway-fix-in-the-air-runway-collider-front.png)
 
 *The same, from the front.*
 
 *A step only seen.* The same load, the rover driven to the fourth section:
 
-![A step between two decks, with their colliders lined up](../../../imgs/rss-runway-fix/23-without-runway-fix-step-only-seen.png)
+![A step between two decks, with their colliders lined up](../../../imgs/non-regression/real-solar-system/the-runway-fix/23-without-runway-fix-step-only-seen.png)
 
 *The same load, the rover at the edge of the fourth section, `End09_Mesh` (magenta), `runway_collider`
 (yellow) and `Section4_Mesh` (cyan) drawn.*
 
 **Without the runway fix, with this mod**, at its defaults with `logLevel = Debug`. One session, logged
 in
-[`diag/runs/runway-earth-rss-without-runway-fix-fix.log`](../../../diag/runs/runway-earth-rss-without-runway-fix-fix.log):
+[`runway-earth-rss-without-runway-fix-fix.log`](../../../diag/non-regression/real-solar-system/the-runway-fix/runway-earth-rss-without-runway-fix-fix.log):
 
 1. Launch the rover from the SPH, and save (F5); load that save five times (F9).
 2. Drive the rover to just before the fourth section, drawn in cyan by Diag Colliders; stop, and save.
@@ -139,19 +139,19 @@ in
    the fourth section, watching the navball for a jolt.
 4. Recover the rover, launch it again from the SPH, and do 2 and 3 again; then a third time.
 
-![The rover just launched, every collider drawn](../../../imgs/rss-runway-fix/29-with-this-mod-launched.png)
+![The rover just launched, every collider drawn](../../../imgs/non-regression/real-solar-system/the-runway-fix/29-with-this-mod-launched.png)
 
 *Without the runway fix, with this mod, Diag Colliders: step 1, the rover just launched, every collider drawn.*
 
-![The rover stopped just before the fourth section](../../../imgs/rss-runway-fix/30-with-this-mod-stopped-before-section4.png)
+![The rover stopped just before the fourth section](../../../imgs/non-regression/real-solar-system/the-runway-fix/30-with-this-mod-stopped-before-section4.png)
 
 *The same: step 2, the rover stopped just before the fourth section.*
 
-![The wheels on the deck](../../../imgs/rss-runway-fix/31-with-this-mod-wheels-on-the-deck.png)
+![The wheels on the deck](../../../imgs/non-regression/real-solar-system/the-runway-fix/31-with-this-mod-wheels-on-the-deck.png)
 
 *The same: step 3, the wheels seen from beside the rover.*
 
-![The rover on the fourth section](../../../imgs/rss-runway-fix/32-with-this-mod-onto-section4.png)
+![The rover on the fourth section](../../../imgs/non-regression/real-solar-system/the-runway-fix/32-with-this-mod-onto-section4.png)
 
 *The same: step 3, the rover driven onto the fourth section; the navball shows no jolt.*
 

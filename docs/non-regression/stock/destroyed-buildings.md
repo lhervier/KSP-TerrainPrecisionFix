@@ -21,11 +21,11 @@ penalties at 10 %, for the upgrades below; *Bypass Entry Purchase After Research
 building impact damage multiplier, 1: at the Normal difficulty, the drop below does not bring the VAB down.
 The Research and Development upgraded twice, to its last level, and the nodes the craft below need
 researched; the launchpad upgraded once, to its second level, the first that takes 54 t. That career, before
-the upgrade of the launchpad, is [`diag/career-with-the-parts.sfs`](../../../diag/career-with-the-parts.sfs):
+the upgrade of the launchpad, is [`career-with-the-parts.sfs`](../../../diag/non-regression/stock/destroyed-buildings/career-with-the-parts.sfs):
 copied as `persistent.sfs` into a new folder of `saves`, it opens at the space centre. Then:
 
 1. the menu of the VAB, at the space centre: no repairs needed;
-2. [`VAB-Dropper.craft`](../../../diag/craft/VAB-Dropper.craft), a probe on three full Rockomax X200-32
+2. [`VAB-Dropper.craft`](../../../diag/non-regression/stock/destroyed-buildings/VAB-Dropper.craft), a probe on three full Rockomax X200-32
    tanks, launched from the VAB onto the launchpad, then moved 350 m above the terrain over the middle of
    the roof of the VAB (`Alt+F12 → Cheats → Set Position`, latitude −0.0964, longitude −74.6237): it falls
    onto the roof. A second after the impact, the VAB collapsing, *Revert to Launch*;
@@ -69,18 +69,18 @@ Rockomax32.BW Exploded!! - blast awesomeness: 0.5
 Back on the launchpad, the VAB stands again, both ways: a *Revert to Launch* made while it collapses puts
 it back. The second drop brings it down for good, the KSC out of its sphere again:
 
-![The VAB collapsed](../../../imgs/non-regression/destroyed-buildings-collapsed.png)
+![The VAB collapsed](../../../imgs/non-regression/stock/destroyed-buildings/destroyed-buildings-collapsed.png)
 
 At the space centre, its menu asks for its repairs, 2 396 funds at these funds penalties, both ways:
 
-![The menu of the VAB, at the space centre](../../../imgs/non-regression/destroyed-buildings-menu.png)
+![The menu of the VAB, at the space centre](../../../imgs/non-regression/stock/destroyed-buildings/destroyed-buildings-menu.png)
 
 From the runway, the next flight shows the VAB in ruins, and so does the quickload; once repaired, it
 stands again, both ways:
 
-![The ruins of the VAB, from the runway](../../../imgs/non-regression/destroyed-buildings-ruins.png)
+![The ruins of the VAB, from the runway](../../../imgs/non-regression/stock/destroyed-buildings/destroyed-buildings-ruins.png)
 
-![The VAB repaired, from the launchpad](../../../imgs/non-regression/destroyed-buildings-repaired.png)
+![The VAB repaired, from the launchpad](../../../imgs/non-regression/stock/destroyed-buildings/destroyed-buildings-repaired.png)
 
 The height of the facility under the craft, lowest and highest over its arrivals: three on the launchpad
 (the dropper at its launch and after the revert, the rocket from the repaired VAB), two on the runway (the rover, then its quickload):
@@ -93,4 +93,4 @@ The height of the facility under the craft, lowest and highest over its arrivals
 The logs with this mod show no error that the logs without it do not show.
 
 The logs, what the script printed and every reading of KSP Diag - Colliders, for both sessions, are in
-[`diag/runs/`](../../../diag/README.md#the-destroyed-buildings-protocol).
+[`diag/non-regression/stock/destroyed-buildings/`](../../../diag/README.md#the-destroyed-buildings-protocol).

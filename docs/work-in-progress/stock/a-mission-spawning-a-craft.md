@@ -7,7 +7,7 @@ Part of [Terrain Precision Fix](../../../README.md), one point of [Work in progr
 *Why.* A mission spawns a craft on a spawn point of the KSC, as a launch does.
 
 *The test.* With the Making History expansion and no other mod, play the mission
-[`KSC flag fix`](../../../diag/kopernicus-flag-fix/Missions): 30 seconds in, it spawns a pod on the launchpad.
+[`KSC flag fix`](../../../diag/limits-and-solutions/kopernicus/the-flag-fix/Missions): 30 seconds in, it spawns a pod on the launchpad.
 
 *What should happen.* The pod should stand on its spawn point, the launchpad at its level. Seen once,
 with Kopernicus and Real Solar System, in

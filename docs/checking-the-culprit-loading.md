@@ -86,19 +86,19 @@ the same saves, loaded six times per series. In each screenshot, the bottom line
 progress, still live, and is not counted. The sessions, what the script printed and every line it
 recorded are in [`diag/runs`](../diag/README.md#the-loading-protocol).
 
-![With this mod, the capsule on its tank, six loads of the same save, on Kerbin](../imgs/Diag1/on-load/2parts/00-kerbin.png)
+![With this mod, the capsule on its tank, six loads of the same save, on Kerbin](../imgs/checking-the-culprit-loading/landed-vessel/00-kerbin.png)
 
-![With this mod, the capsule on its tank, six loads of the same save, on the Mun](../imgs/Diag1/on-load/2parts/10-mune.png)
+![With this mod, the capsule on its tank, six loads of the same save, on the Mun](../imgs/checking-the-culprit-loading/landed-vessel/10-mune.png)
 
-![With this mod, the capsule on its tank, six loads of the same save, on Minmus](../imgs/Diag1/on-load/2parts/20-minmus.png)
+![With this mod, the capsule on its tank, six loads of the same save, on Minmus](../imgs/checking-the-culprit-loading/landed-vessel/20-minmus.png)
 
-![With this mod, the capsule on its tank, six loads of the same save, on Gilly](../imgs/Diag1/on-load/2parts/30-gilly.png)
+![With this mod, the capsule on its tank, six loads of the same save, on Gilly](../imgs/checking-the-culprit-loading/landed-vessel/30-gilly.png)
 
-![With this mod, the capsule on its tank, six loads of the same save, on the Moon](../imgs/Diag1/on-load/2parts/40-moon.png)
+![With this mod, the capsule on its tank, six loads of the same save, on the Moon](../imgs/checking-the-culprit-loading/landed-vessel/40-moon.png)
 
 *Real Solar System's own workaround ran at every load and never had to move the craft: no `Moving Vessel` line — see [Real Solar System's own workaround](non-regression/real-solar-system/the-ground-workaround.md).*
 
-![With this mod, the capsule on its tank, six loads of the same save, on Earth](../imgs/Diag1/on-load/2parts/50-earth.png)
+![With this mod, the capsule on its tank, six loads of the same save, on Earth](../imgs/checking-the-culprit-loading/landed-vessel/50-earth.png)
 
 *The craft is in prelaunch, where stock runs the same pass at every load, and it never had to move the craft: no `Moving Vessel` line — see [Real Solar System's own workaround](non-regression/real-solar-system/the-ground-workaround.md).*
 
@@ -137,19 +137,19 @@ millimetre. *Moved*, once physics has the craft:
 | Mun, on the Kerbal Konstructs runway, with this mod | **−3.709 mm** | −25.041 mm | −25.029 mm | −25.030 mm | −25.024 mm | −25.029 mm |
 
 **On a runway, with this mod**, in that same install, on those same saves, with this mod as the only
-difference. The sessions are logged in [`diag/runs/runway-fix.log`](../diag/runs/runway-fix.log) and
-[`runway-mun-kk-fix.log`](../diag/runs/runway-mun-kk-fix.log), with what the script printed and every
+difference. The sessions are logged in [`runway-fix.log`](../diag/checking-the-culprit-loading/runway-fix.log) and
+[`runway-mun-kk-fix.log`](../diag/checking-the-culprit-loading/runway-mun-kk-fix.log), with what the script printed and every
 line it recorded beside them. *On rails* still reads the same height, within three thousandths of a
 millimetre. The odd lines are on the ground, the even lines on the runway, after switching to it; the
 bottom line is the reading in progress, not a record.
 
 On Kerbin, on the runway of the KSC:
 
-![Six loadings on Kerbin with this mod, read by Diag LandedVessel: the craft on the grass, then the craft on the runway](../imgs/Diag1/on-runway/six-loads.png)
+![Six loadings on Kerbin with this mod, read by Diag LandedVessel: the craft on the grass, then the craft on the runway](../imgs/checking-the-culprit-loading/landed-vessel/six-loads.png)
 
 On the Mun, on a runway placed by Kerbal Konstructs:
 
-![Six loadings on the Mun with this mod, read by Diag LandedVessel: the craft on the ground, then the craft on the runway placed by Kerbal Konstructs](../imgs/Diag1/on-runway/six-loads-mun-kk.png)
+![Six loadings on the Mun with this mod, read by Diag LandedVessel: the craft on the ground, then the craft on the runway placed by Kerbal Konstructs](../imgs/checking-the-culprit-loading/landed-vessel/six-loads-mun-kk.png)
 
 On Kerbin, the craft on the grass comes to rest across a spread of 89.5 mm without this mod, and
 0.076 mm with it; the craft on the runway, 116.8 mm without it, and 0.208 mm with it; the step between
@@ -189,19 +189,19 @@ is the only difference.
 
 As before, the bottom line of each screenshot is the loading in progress, and is not counted.
 
-![With this mod, the capsule on its tank, six loads of the same save, on Kerbin](../imgs/Diag2/on-load/2parts/00-kerbin.png)
+![With this mod, the capsule on its tank, six loads of the same save, on Kerbin](../imgs/checking-the-culprit-loading/terrain-height/00-kerbin.png)
 
-![With this mod, the capsule on its tank, six loads of the same save, on the Mun](../imgs/Diag2/on-load/2parts/10-mune.png)
+![With this mod, the capsule on its tank, six loads of the same save, on the Mun](../imgs/checking-the-culprit-loading/terrain-height/10-mune.png)
 
-![With this mod, the capsule on its tank, six loads of the same save, on Minmus](../imgs/Diag2/on-load/2parts/20-minmus.png)
+![With this mod, the capsule on its tank, six loads of the same save, on Minmus](../imgs/checking-the-culprit-loading/terrain-height/20-minmus.png)
 
-![With this mod, the capsule on its tank, six loads of the same save, on Gilly](../imgs/Diag2/on-load/2parts/30-gilly.png)
+![With this mod, the capsule on its tank, six loads of the same save, on Gilly](../imgs/checking-the-culprit-loading/terrain-height/30-gilly.png)
 
-![With this mod, the capsule on its tank, six loads of the same save, on the Moon](../imgs/Diag2/on-load/2parts/40-moon.png)
+![With this mod, the capsule on its tank, six loads of the same save, on the Moon](../imgs/checking-the-culprit-loading/terrain-height/40-moon.png)
 
 *Real Solar System's own workaround ran at every load and never had to move the craft: no `Moving Vessel` line — see [Real Solar System's own workaround](non-regression/real-solar-system/the-ground-workaround.md).*
 
-![With this mod, the capsule on its tank, six loads of the same save, on Earth](../imgs/Diag2/on-load/2parts/50-earth.png)
+![With this mod, the capsule on its tank, six loads of the same save, on Earth](../imgs/checking-the-culprit-loading/terrain-height/50-earth.png)
 
 *The craft is in prelaunch, where stock runs the same pass at every load, and it never had to move the craft: no `Moving Vessel` line — see [Real Solar System's own workaround](non-regression/real-solar-system/the-ground-workaround.md).*
 
@@ -240,11 +240,11 @@ the same digits as on stock.
 
 On Kerbin, on the runway of the KSC:
 
-![Six loadings on Kerbin with this mod, read by Diag TerrainHeight: the ground under the craft on the grass, then under the craft on the runway](../imgs/Diag2/on-runway/six-loads.png)
+![Six loadings on Kerbin with this mod, read by Diag TerrainHeight: the ground under the craft on the grass, then under the craft on the runway](../imgs/checking-the-culprit-loading/terrain-height/six-loads.png)
 
 On the Mun, on a runway placed by Kerbal Konstructs:
 
-![Six loadings on the Mun with this mod, read by Diag TerrainHeight: the ground under the craft on the ground, then under the craft on the runway placed by Kerbal Konstructs](../imgs/Diag2/on-runway/six-loads-mun-kk.png)
+![Six loadings on the Mun with this mod, read by Diag TerrainHeight: the ground under the craft on the ground, then under the craft on the runway placed by Kerbal Konstructs](../imgs/checking-the-culprit-loading/terrain-height/six-loads-mun-kk.png)
 
 On Kerbin, the grass spreads over 89.5 mm without this mod, and 0.013 mm with it; the deck of the runway,
 over 116.5 mm without it, and 0.177 mm with it; the step between the two, over 38.3 mm without it, and
@@ -421,7 +421,7 @@ hundredths for the craft. Where the remainder of the runway comes from is not es
 hundred times smaller than what stock does.
 
 **On the Mun, the first loading reads another surface.** Listing every collider under each craft at each
-loading ([`diag/runs/runway-mun-kk-colliders-fix.log`](../diag/runs/runway-mun-kk-colliders-fix.log),
+loading ([`runway-mun-kk-colliders-fix.log`](../diag/checking-the-culprit-loading/runway-mun-kk-colliders-fix.log),
 four loadings with this mod): at the first loading of the session, one more collider of the runway is
 active under the craft, a section of the deck, `Section3_Mesh`, 21.3 mm above the deck's own
 `runway_collider`; from the second loading on, it is gone, and the craft rests on `runway_collider`,

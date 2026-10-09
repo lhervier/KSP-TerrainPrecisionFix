@@ -19,7 +19,7 @@ are `PQSCity2`. The test checks one runway of each.
 ## The test
 
 A new sandbox game, with
-[`diag/craft/Diag3-Rover-Two-Anchors.craft`](../../../diag/craft/Diag3-Rover-Two-Anchors.craft) in its
+[`Diag3-Rover-Two-Anchors.craft`](../../../diag/non-regression/stock/an-anchor-on-a-static/Diag3-Rover-Two-Anchors.craft) in its
 `Ships/SPH` folder: the rover of [anchoring a base](../../checking-the-culprit-anchoring.md), with two ground
 anchors in the inventory of its cabin. It is launched from the Space Plane Hangar onto the runway of the
 KSC, Bill Kerman alone aboard, his inventory emptied in the crew panel of the editor: with his parachute and
@@ -77,8 +77,8 @@ the battery, as placed, then at each load.
 
 | | KSP Diag - Landed Vessel | KSP Diag - Terrain Height |
 |---|---|---|
-| **without this mod** | ![Without this mod, on the runway of the KSC: the table of KSP Diag - Landed Vessel](../../../imgs/non-regression/anchor-on-a-static/runway-without-this-mod-landed-vessel.png) | ![Without this mod, on the runway of the KSC: the table of KSP Diag - Terrain Height](../../../imgs/non-regression/anchor-on-a-static/runway-without-this-mod-terrain-height.png) |
-| **with this mod** | ![With this mod, on the runway of the KSC: the table of KSP Diag - Landed Vessel](../../../imgs/non-regression/anchor-on-a-static/runway-with-this-mod-landed-vessel.png) | ![With this mod, on the runway of the KSC: the table of KSP Diag - Terrain Height](../../../imgs/non-regression/anchor-on-a-static/runway-with-this-mod-terrain-height.png) |
+| **without this mod** | ![Without this mod, on the runway of the KSC: the table of KSP Diag - Landed Vessel](../../../imgs/non-regression/stock/an-anchor-on-a-static/runway-without-this-mod-landed-vessel.png) | ![Without this mod, on the runway of the KSC: the table of KSP Diag - Terrain Height](../../../imgs/non-regression/stock/an-anchor-on-a-static/runway-without-this-mod-terrain-height.png) |
+| **with this mod** | ![With this mod, on the runway of the KSC: the table of KSP Diag - Landed Vessel](../../../imgs/non-regression/stock/an-anchor-on-a-static/runway-with-this-mod-landed-vessel.png) | ![With this mod, on the runway of the KSC: the table of KSP Diag - Terrain Height](../../../imgs/non-regression/stock/an-anchor-on-a-static/runway-with-this-mod-terrain-height.png) |
 
 ### The runway of the Desert Airfield
 
@@ -101,8 +101,8 @@ the battery, as placed, then at each load.
 
 | | KSP Diag - Landed Vessel | KSP Diag - Terrain Height |
 |---|---|---|
-| **without this mod** | ![Without this mod, on the runway of the Desert Airfield: the table of KSP Diag - Landed Vessel](../../../imgs/non-regression/anchor-on-a-static/desert-airfield-without-this-mod-landed-vessel.png) | ![Without this mod, on the runway of the Desert Airfield: the table of KSP Diag - Terrain Height](../../../imgs/non-regression/anchor-on-a-static/desert-airfield-without-this-mod-terrain-height.png) |
-| **with this mod** | ![With this mod, on the runway of the Desert Airfield: the table of KSP Diag - Landed Vessel](../../../imgs/non-regression/anchor-on-a-static/desert-airfield-with-this-mod-landed-vessel.png) | ![With this mod, on the runway of the Desert Airfield: the table of KSP Diag - Terrain Height](../../../imgs/non-regression/anchor-on-a-static/desert-airfield-with-this-mod-terrain-height.png) |
+| **without this mod** | ![Without this mod, on the runway of the Desert Airfield: the table of KSP Diag - Landed Vessel](../../../imgs/non-regression/stock/an-anchor-on-a-static/desert-airfield-without-this-mod-landed-vessel.png) | ![Without this mod, on the runway of the Desert Airfield: the table of KSP Diag - Terrain Height](../../../imgs/non-regression/stock/an-anchor-on-a-static/desert-airfield-without-this-mod-terrain-height.png) |
+| **with this mod** | ![With this mod, on the runway of the Desert Airfield: the table of KSP Diag - Landed Vessel](../../../imgs/non-regression/stock/an-anchor-on-a-static/desert-airfield-with-this-mod-landed-vessel.png) | ![With this mod, on the runway of the Desert Airfield: the table of KSP Diag - Terrain Height](../../../imgs/non-regression/stock/an-anchor-on-a-static/desert-airfield-with-this-mod-terrain-height.png) |
 
 ### The log
 
@@ -118,7 +118,7 @@ At each load, `ModuleCargoPart` logs each anchor riveting to the ground, with it
 0.002 and 0.004 m/s, the load at which the anchor with the battery came back 1.5 mm higher.
 
 The logs, what the script printed and every reading of the instruments are in
-[`diag/runs/`](../../../diag/README.md#the-anchor-on-a-static-protocol).
+[`diag/non-regression/stock/an-anchor-on-a-static/`](../../../diag/README.md#the-anchor-on-a-static-protocol).
 
 ## What the results say
 
