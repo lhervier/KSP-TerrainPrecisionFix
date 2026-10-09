@@ -511,7 +511,7 @@ a fixed metre, and hold the line where it refused part of Earth's terrain.
   without this mod,
   [KSP Diag - Colliders](https://github.com/lhervier/KSP-Diag-Colliders) added, and
   Real Solar System built from the sources of its release 20.1.3.0 with the change
-  [`rss-20.1.3-without-its-runway-fix.diff`](non-regression/real-solar-system/the-runway-fix/rss-20.1.3-without-its-runway-fix.diff),
+  [`rss-20.1.3-without-its-runway-fix.diff`](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/main/diag/rss-20.1.3-without-its-runway-fix.diff),
   which keeps its runway fix from doing anything: one session, the rover of KSP Diag - Terrain Height
   launched from the SPH onto the runway at Cape Canaveral several times, and reloaded many times
   between, 23 entries in flight. Read in

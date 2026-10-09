@@ -56,7 +56,7 @@ To see the runway without the runway fix, Real Solar System is built from the so
 20.1.3.0 with `RSSRunwayFix` kept from doing anything: it returns at the top of its `Start`, so it
 leaves the sections as stock does, never touches the floating origin, and never holds it. The version
 of the assembly is set to that of the release
-([`rss-20.1.3-without-its-runway-fix.diff`](../../../diag/non-regression/real-solar-system/the-runway-fix/rss-20.1.3-without-its-runway-fix.diff)).
+([`rss-20.1.3-without-its-runway-fix.diff`](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/main/diag/rss-20.1.3-without-its-runway-fix.diff)).
 In every session below, the colliders of the sections were on at every load.
 
 **Real Solar System as released, without this mod.** The rover, launched from the SPH, rests in the air

@@ -34,7 +34,7 @@ centimetre. It is the
 of KSP Diag - Terrain Height, on the saves it publishes, in the install above with KSP-MCPServer
 added; on Earth, Real Solar System is built without its runway fix, which keeps the floating origin from
 moving at 500 m once a craft has rolled onto the deck
-([`rss-20.1.3-without-its-runway-fix.diff`](../diag/non-regression/real-solar-system/the-runway-fix/rss-20.1.3-without-its-runway-fix.diff);
+([`rss-20.1.3-without-its-runway-fix.diff`](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/main/diag/rss-20.1.3-without-its-runway-fix.diff);
 see [Real Solar System: the runway fix](non-regression/real-solar-system/the-runway-fix.md)). This mod corrects
 the terrain and the statics separately, each with its own setting (`fixTerrain`, `fixStatics`), so on
 Kerbin the runway is read three ways: on stock, with the terrain fix alone, and with both. On Earth, on

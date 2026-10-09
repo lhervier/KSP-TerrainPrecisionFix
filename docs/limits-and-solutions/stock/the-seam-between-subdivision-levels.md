@@ -17,7 +17,7 @@ The quads of the highest subdivision level cover the ground around the craft, an
 ones this fix corrects (see [Only where a craft can stand](../../the-fix-ground.md#only-where-a-craft-can-stand)).
 Further away, the terrain is made of coarser quads, which stock builds and places as it always has.
 Where the two meet, the edge of the finer quad is meant to run along the edge of the coarser one (see
-[How stock joins two levels](#how-stock-joins-two-levels)).
+[The seam in stock](#the-seam-in-stock)).
 
 It does not quite: the vertices the two quads share are not at the same place, in stock already, and
 the terrain has a crack along the seam. This fix places the finer side where the ground is and leaves
@@ -28,55 +28,13 @@ It stays visual: the quads below the highest level have no collider (see
 a craft never stands on that edge. It is seen from the craft, some distance away, never under it (see
 [What a player sees, on Earth](#what-a-player-sees-on-earth)).
 
-## How stock joins two levels
+## The seam in stock
 
-A quad one level coarser covers twice the width, so along the edge two quads share, the finer one has
-twice as many vertices. Stock does not move the extra ones: it changes the triangles of the finer quad
-along that side (`PQ.GetEdgeState`, `PQS.cacheIndices`), so that its edge runs on every other vertex,
-along the same segments as the coarser edge — provided the vertices both quads share land on the same
-point. [What it shows](https://github.com/lhervier/KSP-Diag-TerrainQuads/blob/main/docs/what-it-shows.md#the-seam),
-in KSP Diag - Terrain Quads, shows how, with a figure.
-
-## The shared vertices do not meet, even in stock
-
-Stock places every terrain vertex in two steps, in `PQS.BuildVertexSurfaceRelative` (the whole method,
-and why it rounds, is in [The culprit: the ground](../../the-culprit-ground.md)):
-
-```csharp
-planetRel = base.transform.TransformPoint(vertRel);
-buildQuad.verts[vertexIndex] = buildQuad.transform.InverseTransformPoint(planetRel);
-```
-
-The first line takes the vertex from the centre of the body to the world, through the matrix of the
-terrain sphere: its result depends on `vertRel` and on that matrix, not on the quad's `Transform`. The second line
-expresses that world position relative to the quad's own `Transform`, as rounded. Read alone, this
-says that two quads built in the same frame of the sphere put a vertex they share on the same point.
-
-Measured, they do not. [KSP Diag - Terrain Quads](https://github.com/lhervier/KSP-Diag-TerrainQuads)
-finds every seam around the craft and measures, in double precision, the distance between the places
-where the two quads draw each vertex they share. On Earth under Real Solar System, **without this
-mod**, over 79 loads of a craft on the launchpad at Cape Canaveral, the largest gap of a load went
-from 0.76 m to 2.82 m, and the mean over all shared vertices from 0.28 m to 2.08 m
-([the measurements](https://github.com/lhervier/KSP-Diag-TerrainQuads/blob/main/docs/the-measurements-seam.md#case-1-real-solar-system)); on Kerbin, over seven loads at the Space
-Center, from 118 mm to 312 mm, and the mean from 46 mm to 225 mm
-([the measurements](https://github.com/lhervier/KSP-Diag-TerrainQuads/blob/main/docs/the-measurements-seam.md#case-2-stock-ksp)).
-The gap changes from one load to the next, and so does its direction: the finer quad above the coarser
-one, or below.
-
-Part of the gap comes before those two lines, from `vertRel` itself. Its direction from the centre of
-the body is computed in `PQS.BuildQuad`, in float, through the matrix of the quad being built:
-
-```csharp
-vbData.globalV = buildQuad.quadMatrix.MultiplyPoint3x4(cacheVerts[vertexIndex]);
-vbData.directionFromCenter = vbData.globalV.normalized;
-```
-
-The two quads of a seam reach a vertex they share through two different matrices, and the two
-directions can differ by the precision of a float, about 6 × 10⁻⁸: some 0.4 m along the ground at the
-radius of Earth, some 40 mm at the radius of Kerbin. That is the order of what the measurements give
-beside the coarser vertex. Most of the gap is vertical, though, the finer quad above or below the
-coarser one: about twice what it is beside on Earth, and several times more on Kerbin. Where that part
-comes from has not been traced.
+How stock joins a quad of the highest level to a coarser one, why the vertices the two share do not
+land on the same point even in stock, and how far apart they are, load after load, belong to
+[KSP Diag - Terrain Quads](https://github.com/lhervier/KSP-Diag-TerrainQuads), which draws the seam and
+measures it: [What it shows](https://github.com/lhervier/KSP-Diag-TerrainQuads/blob/main/docs/what-it-shows.md#the-seam)
+and [What the measurements show](https://github.com/lhervier/KSP-Diag-TerrainQuads/blob/main/docs/what-the-measurements-show-seam.md).
 
 ## What this fix changes
 
