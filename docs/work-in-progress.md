@@ -38,13 +38,6 @@ sphere is flagged has not been read, and a craft floating near a coast has not b
 
 **→ Full chapter: [The ocean](work-in-progress/stock/the-ocean.md)**
 
-### The ground station
-
-**Planned.** The ground station of the KSC finds its body by looking up from where it hangs, and a game
-that starts in flight starts it while the KSC may be out of its sphere.
-
-**→ Full chapter: [The ground station](work-in-progress/stock/the-ground-station.md)**
-
 ### A mission spawning a craft
 
 **Planned.** A mission of Making History spawns a craft on a spawn point of the KSC, as a launch does.

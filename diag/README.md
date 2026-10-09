@@ -364,6 +364,10 @@ KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, this mod and
 - [`runs/runway-mun-kk-colliders-fix.log`](runs/runway-mun-kk-colliders-fix.log) — four loadings of
   `runway-mun-kk.sfs`, every collider under each craft listed at each loading, with its height above the terrain
   KSP computes there.
+- [`runs/flight-basics-fix.log`](runs/flight-basics-fix.log) — no instrument, this mod at
+  `logLevel = Debug`: KSP started, then *Training → Flight Basics* from the main menu, straight into
+  flight on the launchpad, and back to the main menu. Read in
+  [Kerbal Konstructs: a ground station opened in flight](../docs/non-regression/kerbal-konstructs/a-ground-station-opened-in-flight.md#why).
 
 ## With Deferred
 
@@ -413,12 +417,17 @@ mod at `logLevel = Debug`, or not: each session is here twice, `-without-this-mo
 
 KSP 1.12.5 with the Making History expansion, Harmony, ModuleManager, KSP Community Fixes 1.41.1,
 [Kerbal Konstructs](https://github.com/KSP-RO/Kerbal-Konstructs) 1.12.3 and CustomPreLaunchChecks 1.8.1,
-which it requires, no instrument, this mod at `logLevel = Debug`. Read in
-[Kerbal Konstructs: the group editor](../docs/limits-and-solutions/kerbal-konstructs/the-group-editor.md).
+which it requires, no instrument, this mod at `logLevel = Debug`.
 
 - [`runs/kk-group-editor-fix.log`](runs/kk-group-editor-fix.log) — `non-reg-runway-mune-kk.sfs`, its
   runway in `GameData/KerbalKonstructs/NewInstances`: the group moved with the gizmo of the group editor,
-  saved with *Save&Close*, then the save loaded again.
+  saved with *Save&Close*, then the save loaded again. Read in
+  [Kerbal Konstructs: the group editor](../docs/limits-and-solutions/kerbal-konstructs/the-group-editor.md).
+- [`runs/kk-ground-station-fix.log`](runs/kk-ground-station-fix.log) —
+  [`kk-ground-station.sfs`](kk-ground-station.sfs), a career game, a pod on the launchpad: a water tower
+  of Kerbal Konstructs set up beside it, in flight, as a closed CommNet ground station, then opened from
+  the facility manager of Kerbal Konstructs. Read in
+  [Kerbal Konstructs: a ground station opened in flight](../docs/non-regression/kerbal-konstructs/a-ground-station-opened-in-flight.md).
 
 ## With Kopernicus
 

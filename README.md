@@ -328,6 +328,9 @@ where they are drawn with the scatter fix on.
 **Real Solar System.** Its two workarounds for this defect, one for a landed craft and one for the
 runway, have nothing left to correct with this mod, and its CommNet ground stations keep relaying.
 
+**Kerbal Konstructs.** A CommNet ground station it opens in flight, beside a craft, finds its body while
+its static is out of its sphere, and relays.
+
 **Deferred.** It draws the ground wherever this mod places it, and the craft and the ground come back as
 they do without it.
 

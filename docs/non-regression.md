@@ -207,6 +207,21 @@ CommNet keeps linking the rover to it.
 
 **→ Full chapter: [Real Solar System: a CommNet ground station](non-regression/real-solar-system/a-commnet-ground-station.md)**
 
+## Kerbal Konstructs
+
+[Kerbal Konstructs](https://github.com/KSP-RO/Kerbal-Konstructs) plants statics of its own, which this
+mod takes out of their sphere in flight like the KSC, and can turn one into a CommNet ground station while
+the player is flying beside it. Its group editor needs a patch of this mod:
+[Limits and solutions](limits-and-solutions.md#kerbal-konstructs).
+
+### A ground station opened in flight
+
+**Checked on Kerbin, no problem.** A ground station finds its body among the parents of its static, which
+this mod lends back to it. Opened in flight beside a craft, while its static is out of its sphere, a
+ground station of Kerbal Konstructs becomes the craft's first CommNet hop.
+
+**→ Full chapter: [Kerbal Konstructs: a ground station opened in flight](non-regression/kerbal-konstructs/a-ground-station-opened-in-flight.md)**
+
 ## Deferred
 
 [Deferred](https://github.com/LGhassen/Deferred) replaces the way KSP draws everything, the terrain
