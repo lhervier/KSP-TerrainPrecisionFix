@@ -121,8 +121,8 @@ when it is loaded, and neither is a rounding. It comes last.
 **How each fix is checked.** Each situation where a craft meets the ground is measured twice, without this
 mod and with it: one instrument reads the landed craft, another the ground itself, and in flight a third
 reads the quads the ground is made of; a fourth reads the scatter. In each summary below, the first figure
-is without this mod, the second with it. The pages of measurements are arranged by situation, as those of
-the instruments are, and each summary links to the part that concerns it.
+is without this mod, the second with it. The pages of measurements are arranged by situation, each with
+its protocol, its saves and the readings both ways, and each summary links to the part that concerns it.
 
 ## The ground
 

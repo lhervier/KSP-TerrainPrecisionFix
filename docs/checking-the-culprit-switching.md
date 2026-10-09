@@ -5,7 +5,7 @@ Part of [Terrain Precision Fix](../README.md): the measurements that check [the 
 Two instruments take the readings:
 [KSP Diag - Landed Vessel](https://github.com/lhervier/KSP-Diag-LandedVessel) measures the craft, and
 [KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainHeight) measures the ground. Each has its own page, with
-its method and its protocol.
+its method.
 
 This fix is built on top of [KSP Community Fixes](https://github.com/KSPModdingLibs/KSPCommunityFixes),
 the base most players run, so every campaign on this page is run in an install that has it: KSP 1.12.5 with Harmony, ModuleManager,
@@ -14,23 +14,24 @@ which plays the protocol — and this mod, or not. *On stock*, below, means that
 
 Two craft landed 1.97 km apart on Kerbin. The save is loaded while flying the rover: the capsule is
 loaded too, but packed, held where the save put it. Then the game's *switch vessel* key flies the
-capsule, and physics takes it over. Six rounds, each starting by loading the same save. It is the
-switching protocol of both instruments —
-[KSP Diag - Landed Vessel](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-switching.md)
-and [KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/main/docs/the-protocol-switching.md) —
-with a save made without this mod, played by its script,
-[`run-switching.py`](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-switching.md#played-by-a-script),
-once without this mod and once with it, both instruments recording at the same moments. The session
-with this mod is logged in [`switching-fix.log`](../diag/checking-the-culprit-switching/switching-fix.log); what the
-script printed is in [`switching-fix-script.txt`](../diag/checking-the-culprit-switching/switching-fix-script.txt), and every
-line it recorded in [`switching-fix-lines.json`](../diag/checking-the-culprit-switching/switching-fix-lines.json).
+capsule, and physics takes it over. Six rounds, each starting by loading the same save. It is
+[the switching protocol](checking-the-culprit-switching/the-protocol.md), with a save made without this
+mod, played by its script, [`run-switching.py`](../diag/automation/run-switching.py), once without this
+mod and once with it, both instruments recording at the same moments. The sessions are logged in
+[`switching-stock.log`](../diag/checking-the-culprit-switching/switching-stock.log) and
+[`switching-fix.log`](../diag/checking-the-culprit-switching/switching-fix.log), with what the script
+printed and every line it recorded beside them ([`diag`](../diag/README.md#the-switching-protocol)).
 
 ## The craft, over six rounds
 
-**On stock**
-([the readings](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-measurements-switching.md)).
-As the save opens, *On rails* reads the same height on all six rounds, within a thousandth of a
-millimetre. *Moved*, once the switch has handed the capsule to physics:
+**On stock.** The first line of each round is taken as the save opens, flying the rover, the second a
+few seconds after switching to the capsule; the bottom line is the reading in progress, not a record:
+
+![Without this mod, six rounds of loading the save and switching to the capsule, read by Diag LandedVessel](../imgs/checking-the-culprit-switching/landed-vessel/six-rounds-stock.png)
+
+As the save opens, *On rails* reads the same height on all six rounds, 600,065,127.486 mm, and *Moved*
+reads `0.000`: the capsule is still held where the save put it, with nothing to move it yet. *Moved*,
+once the switch has handed the capsule to physics:
 
 | round | 1 | 2 | 3 | 4 | 5 | 6 |
 |---|---|---|---|---|---|---|
@@ -41,7 +42,7 @@ millimetre. *Moved*, once the switch has handed the capsule to physics:
 rails* still reads the same height, within a thousandth of a millimetre. The first line of each round
 is taken as the save opens, the second after the switch:
 
-![With this mod, six rounds of loading the save and switching to the capsule, read by Diag LandedVessel](../imgs/checking-the-culprit-switching/landed-vessel/six-rounds.png)
+![With this mod, six rounds of loading the save and switching to the capsule, read by Diag LandedVessel](../imgs/checking-the-culprit-switching/landed-vessel/six-rounds-fix.png)
 
 The capsule comes to rest across a spread of 112.0 mm without this mod, and 0.028 mm with it.
 

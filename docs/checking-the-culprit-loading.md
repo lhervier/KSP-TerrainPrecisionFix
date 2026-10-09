@@ -5,15 +5,16 @@ Part of [Terrain Precision Fix](../README.md): the measurements that check the t
 Two instruments take the readings:
 [KSP Diag - Landed Vessel](https://github.com/lhervier/KSP-Diag-LandedVessel) measures the craft, and
 [KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainHeight) measures the ground. Each has its own page, with
-its method and its protocol. The scatter has an instrument of its own, described in
+its method. The scatter has an instrument of its own, described in
 [The scatter, over twelve loads](#the-scatter-over-twelve-loads).
 
 This fix is built on top of [KSP Community Fixes](https://github.com/KSPModdingLibs/KSPCommunityFixes),
 the base most players run, so every campaign on this page is run in an install that has it: KSP 1.12.5 with Harmony, ModuleManager,
 KSP Community Fixes 1.41.1, both instruments, and [KSP-MCPServer](https://github.com/lhervier/KSP-MCPServer),
 which plays the protocols — and this mod, or not. *On stock*, below, means that install without this mod.
-Every series is played by the script of its protocol, published with the protocol by the instruments,
-once without this mod and once with it, both instruments recording at the same moments.
+Every series is played by the script of its protocol, once without this mod and once with it, both
+instruments recording at the same moments. The saves, the scripts, and the sessions both ways are in
+[`diag`](../diag/README.md#the-loading-protocol).
 
 The culprit predicts a spread of up to one or two float steps, and a float's step doubles each time the
 distance to the centre of the body crosses a power of two. So besides the four stock worlds, the same
@@ -23,18 +24,15 @@ its release 20.1.3.0, and what it requires (Kopernicus 248, Modular Flight Integ
 KSPTextureLoader, the RSS textures).
 
 A craft is set down on bare ground, saved once, and that same save is loaded six times over. The
-craft never changes, the spot never changes, and nothing is touched between two loads. It is the
-loading protocol of both instruments, played by its script,
-[`run-loading.py`](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-loading.md#played-by-a-script), on the saves they publish.
+craft never changes, the spot never changes, and nothing is touched between two loads. It is
+[the loading protocol](checking-the-culprit-loading/the-protocol.md), played by its script,
+[`run-loading.py`](../diag/automation/run-loading.py).
 
 The statics are checked on a runway. Two identical craft, one on a runway and one on the ground beside
 it. The save is loaded, a line is recorded on the craft on the ground, then the game's *switch vessel*
 key flies the craft on the runway and a second line is recorded there. Six loadings of the same save,
-two lines each. It is the runway protocol of both instruments —
-[KSP Diag - Landed Vessel](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-runway.md)
-and [KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainHeight/blob/main/docs/the-protocol-runway.md)
-— on the two saves they publish, played by its script,
-[`run-runway.py`](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-runway.md#played-by-a-script):
+two lines each. It is [the runway protocol](checking-the-culprit-loading/the-runway-protocol.md), on
+its two saves, played by its script, [`run-runway.py`](../diag/automation/run-runway.py):
 
 - **on Kerbin**, the runway of the KSC and the grass beside it, 152 m apart;
 - **on the Mun**, a runway placed by [Kerbal Konstructs](https://github.com/KSP-RO/Kerbal-Konstructs) —
@@ -51,13 +49,40 @@ twice per load: as the save hands the capsule back (*On rails*), and once it has
 (*Settled*). How, and why those two readings, is in
 [This mod's demonstration](https://github.com/lhervier/KSP-Diag-LandedVessel#this-mods-demonstration).
 
-**On stock.** Its campaigns, detailed in
-[The measurements: loading the same save](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-measurements-loading.md).
-On each of the four stock worlds and on the Moon and Earth, a capsule sitting on a small flat fuel
-tank: two parts, because KSP sets a craft of a single part back onto the ground itself at every load.
-Each series is saved once and loaded six times, and uses its own spot, chosen by the rules of
-[its protocol](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-loading.md):
-no `Moving Vessel` line in `KSP.log`, and a craft that does not slide.
+**On stock.** On each of the four stock worlds and on the Moon and Earth, a capsule sitting on a small
+flat fuel tank: two parts, because KSP sets a craft of a single part back onto the ground itself at
+every load. Each series is saved once and loaded six times, and uses its own spot, chosen by the rules
+of [Making the save](checking-the-culprit-loading/making-the-save.md): no `Moving Vessel` line in
+`KSP.log`, and a craft that does not slide. In each screenshot, the bottom line is the loading in
+progress, still live, and is not counted: after the sixth *Record*, it keeps showing that same sixth
+loading.
+
+![Without this mod, the capsule on its tank, six loads of the same save, on Kerbin](../imgs/checking-the-culprit-loading/landed-vessel/00-kerbin-stock.png)
+
+![Without this mod, the capsule on its tank, six loads of the same save, on the Mun](../imgs/checking-the-culprit-loading/landed-vessel/10-mune-stock.png)
+
+![Without this mod, the capsule on its tank, six loads of the same save, on Minmus](../imgs/checking-the-culprit-loading/landed-vessel/20-minmus-stock.png)
+
+![Without this mod, the capsule on its tank, six loads of the same save, on Gilly](../imgs/checking-the-culprit-loading/landed-vessel/30-gilly-stock.png)
+
+![Without this mod, the capsule on its tank, six loads of the same save, on the Moon](../imgs/checking-the-culprit-loading/landed-vessel/40-moon-stock.png)
+
+![Without this mod, the capsule on its tank, six loads of the same save, on Earth](../imgs/checking-the-culprit-loading/landed-vessel/50-earth-stock.png)
+
+*Moved*, read off those screenshots:
+
+| load | Kerbin | Mun | Minmus | Gilly | the Moon | Earth |
+|---|---|---|---|---|---|---|
+| 1 | +30.145 mm | +3.527 mm | +4.994 mm | +0.014 mm | +66.826 mm | +70.856 mm |
+| 2 | +60.502 mm | +6.961 mm | +4.428 mm | −0.306 mm | +57.434 mm | −165.652 mm *(moved down)* |
+| 3 | +16.839 mm | −2.894 mm | +0.939 mm | +0.014 mm | +17.631 mm | −54.965 mm |
+| 4 | +53.031 mm | +15.315 mm | −0.570 mm | +0.458 mm | +35.675 mm | −123.276 mm *(moved down)* |
+| 5 | +32.949 mm | +11.571 mm | −1.751 mm | +2.010 mm | +22.327 mm | −80.310 mm |
+| 6 | +27.332 mm | −1.118 mm | −2.330 mm | +0.037 mm | +60.189 mm | +126.724 mm *(moved up)* |
+
+*(moved up)*, *(moved down)*: the craft came back more than 10 cm inside the ground, or more than 10 cm
+above it, and was moved onto it before its physics started, with a `Moving Vessel up` or
+`Moving Vessel down` line in `KSP.log` giving about the same distance.
 
 *On rails* reads the same digits on every load: KSP puts the craft back at the same place. *Settled* is not. Here is its spread, set against the step of a float at that distance from the
 centre of the body:
@@ -79,26 +104,25 @@ Real Solar System's workaround ran at every load and never had to move the craft
 the ground by 18 to 67 mm each time, under the 10 cm the workaround acts on, and was pushed out by the
 physics engine. *Settled* is read all the same, as a player gets it. The Moon series loads
 `reload-moon-rss-resave.sfs`, the Earth series `reload-earth-rss-resave.sfs`, both in
-[Diag LandedVessel's `diag` folder](https://github.com/lhervier/KSP-Diag-LandedVessel/tree/main/diag).
+[`diag`](../diag/README.md#the-loading-protocol).
 
 **With this mod.** The same test, in the same installs, on the same six worlds, with the same craft and
-the same saves, loaded six times per series. In each screenshot, the bottom line is the loading in
-progress, still live, and is not counted. The sessions, what the script printed and every line it
-recorded are in [`diag/runs`](../diag/README.md#the-loading-protocol).
+the same saves, loaded six times per series. As before, the bottom line of each screenshot is the
+loading in progress, and is not counted.
 
-![With this mod, the capsule on its tank, six loads of the same save, on Kerbin](../imgs/checking-the-culprit-loading/landed-vessel/00-kerbin.png)
+![With this mod, the capsule on its tank, six loads of the same save, on Kerbin](../imgs/checking-the-culprit-loading/landed-vessel/00-kerbin-fix.png)
 
-![With this mod, the capsule on its tank, six loads of the same save, on the Mun](../imgs/checking-the-culprit-loading/landed-vessel/10-mune.png)
+![With this mod, the capsule on its tank, six loads of the same save, on the Mun](../imgs/checking-the-culprit-loading/landed-vessel/10-mune-fix.png)
 
-![With this mod, the capsule on its tank, six loads of the same save, on Minmus](../imgs/checking-the-culprit-loading/landed-vessel/20-minmus.png)
+![With this mod, the capsule on its tank, six loads of the same save, on Minmus](../imgs/checking-the-culprit-loading/landed-vessel/20-minmus-fix.png)
 
-![With this mod, the capsule on its tank, six loads of the same save, on Gilly](../imgs/checking-the-culprit-loading/landed-vessel/30-gilly.png)
+![With this mod, the capsule on its tank, six loads of the same save, on Gilly](../imgs/checking-the-culprit-loading/landed-vessel/30-gilly-fix.png)
 
-![With this mod, the capsule on its tank, six loads of the same save, on the Moon](../imgs/checking-the-culprit-loading/landed-vessel/40-moon.png)
+![With this mod, the capsule on its tank, six loads of the same save, on the Moon](../imgs/checking-the-culprit-loading/landed-vessel/40-moon-fix.png)
 
 *Real Solar System's own workaround ran at every load and never had to move the craft: no `Moving Vessel` line — see [Real Solar System's own workaround](non-regression/real-solar-system/the-ground-workaround.md).*
 
-![With this mod, the capsule on its tank, six loads of the same save, on Earth](../imgs/checking-the-culprit-loading/landed-vessel/50-earth.png)
+![With this mod, the capsule on its tank, six loads of the same save, on Earth](../imgs/checking-the-culprit-loading/landed-vessel/50-earth-fix.png)
 
 *The craft is in prelaunch, where stock runs the same pass at every load, and it never had to move the craft: no `Moving Vessel` line — see [Real Solar System's own workaround](non-regression/real-solar-system/the-ground-workaround.md).*
 
@@ -120,10 +144,38 @@ The spots of the saves on the Moon and Earth, and what this mod corrected there,
 
 ### The craft on a runway
 
-**On a runway, and on the ground beside it, on stock**
-([the readings](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-measurements-runway.md)).
+**On a runway, and on the ground beside it, on stock.** The sessions are logged in
+[`runway-stock.log`](../diag/checking-the-culprit-loading/runway-stock.log) and
+[`runway-mun-kk-stock.log`](../diag/checking-the-culprit-loading/runway-mun-kk-stock.log), with what the
+script printed and every line it recorded beside them. The odd lines are on the ground, the even lines
+on the runway, after switching to it; the bottom line is the reading in progress, not a record.
+
+On Kerbin, on the runway of the KSC:
+
+![Six loadings on Kerbin without this mod, read by Diag LandedVessel: the craft on the grass, then the craft on the runway](../imgs/checking-the-culprit-loading/landed-vessel/six-loads-stock.png)
+
+On the Mun, on a runway placed by Kerbal Konstructs:
+
+![Six loadings on the Mun without this mod, read by Diag LandedVessel: the craft on the ground, then the craft on the runway placed by Kerbal Konstructs](../imgs/checking-the-culprit-loading/landed-vessel/six-loads-mun-kk-stock.png)
+
 *On rails* reads the same height on all six loadings, under every craft, within two thousandths of a
-millimetre. *Moved*, once physics has the craft:
+millimetre: 600,065,066.673 mm on the grass of Kerbin and 600,069,387.065 or .066 mm on its runway;
+204,123,943.054 mm on the ground of the Mun and 204,123,079.402 to .404 mm on its runway. *Settled*, and
+the step between the two craft:
+
+| loading | Kerbin, on the grass | Kerbin, on the runway | **step** | Mun, on the ground | Mun, on the runway | **step** |
+|---|---|---|---|---|---|---|
+| 1 | 600,065,104.439 mm | 600,069,385.929 mm | 4,281.491 mm | 204,123,862.511 mm | 204,123,068.484 mm | −794.028 mm |
+| 2 | 600,065,078.291 mm | 600,069,373.988 mm | 4,295.697 mm | 204,123,880.811 mm | 204,123,050.799 mm | −830.012 mm |
+| 3 | 600,065,139.839 mm | 600,069,439.174 mm | 4,299.336 mm | 204,123,885.042 mm | 204,123,067.278 mm | −817.765 mm |
+| 4 | 600,065,109.983 mm | 600,069,398.772 mm | 4,288.789 mm | 204,123,871.786 mm | 204,123,058.734 mm | −813.052 mm |
+| 5 | 600,065,050.310 mm | 600,069,322.370 mm | 4,272.059 mm | 204,123,888.413 mm | 204,123,068.358 mm | −820.055 mm |
+| 6 | 600,065,083.583 mm | 600,069,394.167 mm | 4,310.584 mm | 204,123,883.721 mm | 204,123,061.701 mm | −822.020 mm |
+| **lowest to highest** | **89.5 mm** | **116.8 mm** | **38.5 mm** | **25.9 mm** | **17.7 mm** | **36.0 mm** |
+
+The step is the runway minus the ground: on Kerbin, 4.3 m, the height of the deck above the grass.
+
+*Moved*, once physics has the craft:
 
 | loading | 1 | 2 | 3 | 4 | 5 | 6 |
 |---|---|---|---|---|---|---|
@@ -140,16 +192,15 @@ millimetre. *Moved*, once physics has the craft:
 difference. The sessions are logged in [`runway-fix.log`](../diag/checking-the-culprit-loading/runway-fix.log) and
 [`runway-mun-kk-fix.log`](../diag/checking-the-culprit-loading/runway-mun-kk-fix.log), with what the script printed and every
 line it recorded beside them. *On rails* still reads the same height, within three thousandths of a
-millimetre. The odd lines are on the ground, the even lines on the runway, after switching to it; the
-bottom line is the reading in progress, not a record.
+millimetre.
 
 On Kerbin, on the runway of the KSC:
 
-![Six loadings on Kerbin with this mod, read by Diag LandedVessel: the craft on the grass, then the craft on the runway](../imgs/checking-the-culprit-loading/landed-vessel/six-loads.png)
+![Six loadings on Kerbin with this mod, read by Diag LandedVessel: the craft on the grass, then the craft on the runway](../imgs/checking-the-culprit-loading/landed-vessel/six-loads-fix.png)
 
 On the Mun, on a runway placed by Kerbal Konstructs:
 
-![Six loadings on the Mun with this mod, read by Diag LandedVessel: the craft on the ground, then the craft on the runway placed by Kerbal Konstructs](../imgs/checking-the-culprit-loading/landed-vessel/six-loads-mun-kk.png)
+![Six loadings on the Mun with this mod, read by Diag LandedVessel: the craft on the ground, then the craft on the runway placed by Kerbal Konstructs](../imgs/checking-the-culprit-loading/landed-vessel/six-loads-mun-kk-fix.png)
 
 On Kerbin, the craft on the grass comes to rest across a spread of 89.5 mm without this mod, and
 0.076 mm with it; the craft on the runway, 116.8 mm without it, and 0.208 mm with it; the step between

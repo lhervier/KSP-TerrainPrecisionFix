@@ -50,7 +50,7 @@ below is a script of [`diag/automation/`](../../../diag/automation) that does, i
 protocol asks a player to do, and records in both instruments at every stop. The terrain is drawn as
 usual, on the screenshots taken along the way.
 
-**Loading the same save.** [The runway protocol](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-runway.md),
+**Loading the same save.** [The runway protocol](../../checking-the-culprit-loading/the-runway-protocol.md),
 played by [`run-runway.py`](../../../diag/automation/run-runway.py): `runway-kerbin.sfs` loaded six times,
 the craft on the grass read first, then the one on the runway, switched to as the `[` key does. The same
 script was played once more on the same install with Deferred and Shabby taken out. Spread over the six
@@ -68,7 +68,7 @@ Hundredths to tenths of a millimetre either way, where stock spreads the same re
 load out of six sets the craft on the grass down 0.23 mm higher than the five others, while the ground
 under it does not move: the craft's own settling, with or without Deferred.
 
-**Coming back to a craft left parked.** [The approach protocol](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-approach.md),
+**Coming back to a craft left parked.** [The approach protocol](../../checking-the-culprit-approach/the-protocol.md),
 played by [`run-approach.py`](../../../diag/automation/run-approach.py): `approach-kerbin.sfs`, six round
 trips of the rover to 3.1 km south of the parked craft and back, in a single flight. The rover drives with
 the cheat *Infinite Electricity* on, so that close to forty kilometres of driving do not depend on its

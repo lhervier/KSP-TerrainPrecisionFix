@@ -1,0 +1,13 @@
+20:59:41   load 1, grass  Settled    204123862.511 mm  Moved  -80.543 mm  Ground under craft  4123549.481 mm
+20:59:48   load 1, runway Settled    204123068.484 mm  Moved  -10.921 mm  Ground under craft  4122756.005 mm
+21:00:24   load 2, grass  Settled    204123880.811 mm  Moved  -62.243 mm  Ground under craft  4123567.818 mm
+21:00:31   load 2, runway Settled    204123050.799 mm  Moved  -28.604 mm  Ground under craft  4122738.290 mm
+21:01:07   load 3, grass  Settled    204123885.042 mm  Moved  -58.011 mm  Ground under craft  4123572.074 mm
+21:01:14   load 3, runway Settled    204123067.278 mm  Moved  -12.124 mm  Ground under craft  4122754.787 mm
+21:01:50   load 4, grass  Settled    204123871.786 mm  Moved  -71.268 mm  Ground under craft  4123558.788 mm
+21:01:57   load 4, runway Settled    204123058.734 mm  Moved  -20.670 mm  Ground under craft  4122746.229 mm
+21:02:06   load 5, grass  Settled    204123888.413 mm  Moved  -54.641 mm  Ground under craft  4123575.467 mm
+21:02:12   load 5, runway Settled    204123068.358 mm  Moved  -11.045 mm  Ground under craft  4122755.879 mm
+21:02:49   load 6, grass  Settled    204123883.721 mm  Moved  -59.333 mm  Ground under craft  4123570.767 mm
+21:02:55   load 6, runway Settled    204123061.701 mm  Moved  -17.701 mm  Ground under craft  4122749.210 mm
+21:02:58 done

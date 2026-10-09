@@ -1,7 +1,7 @@
 # The runs
 
-Part of [Terrain Precision Fix](../README.md): the `KSP.log` of every session taken with this mod
-installed. What their readings say is in
+Part of [Terrain Precision Fix](../README.md): the saves, the scripts and the `KSP.log` of every
+session, without this mod and with it. What their readings say is in
 [Checking the culprit: loading the same save](../docs/checking-the-culprit-loading.md),
 [Coming back to a craft left parked](../docs/checking-the-culprit-approach.md),
 [Switching to a craft far away](../docs/checking-the-culprit-switching.md),
@@ -19,78 +19,143 @@ screenshots in [`imgs/non-regression/stock/an-anchor-on-a-static/`](../imgs/non-
 A file that several pages use is in the folder of the page that measures with it. The scripts that play
 the protocols are in [`automation/`](automation).
 
-The saves of the protocols that belong to an instrument are not here: they are in the `diag` folder of
-[KSP Diag - Landed Vessel](https://github.com/lhervier/KSP-Diag-LandedVessel/tree/main/diag)
-and of [KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainHeight/tree/main/diag),
-along with the logs of the same sessions without this mod. Only the saves of the tests that belong to no
-instrument are here, in the folder of their page.
+The logs of the sessions without this mod read by
+[KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainHeight) alone, and the saves of
+the protocols only it plays, are in [its own `diag` folder](https://github.com/lhervier/KSP-Diag-TerrainHeight/tree/main/diag).
 
 ## The loading protocol
 
-KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, this mod, both instruments and
-[KSP-MCPServer](https://github.com/lhervier/KSP-MCPServer): the four saves of
-[the loading protocol](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-loading.md),
-a capsule on a small tank on Kerbin, the Mun, Minmus and Gilly, each loaded six times by its script, `run-loading.py`. On Real Solar System, the same, plus Real Solar System 20.1.3.0
-and what it requires (Kopernicus 248, Modular Flight Integrator, KSPTextureLoader, the RSS textures):
-`reload-moon-rss-resave.sfs` and `reload-earth-rss-resave.sfs`. Read in
+KSP 1.12.5 with Harmony, ModuleManager, KSP Community Fixes 1.41.1, both instruments and
+[KSP-MCPServer](https://github.com/lhervier/KSP-MCPServer), without this mod and with it:
+[the loading protocol](../docs/checking-the-culprit-loading/the-protocol.md), each save loaded six
+times by its script, [`run-loading.py`](automation/run-loading.py). On Real Solar System, the same,
+plus Real Solar System 20.1.3.0 and what it requires (Kopernicus 248, Modular Flight Integrator,
+KSPTextureLoader, the RSS textures). Read in
 [Checking the culprit: loading the same save](../docs/checking-the-culprit-loading.md).
 
-- [`loading-fix.log`](checking-the-culprit-loading/loading-fix.log) — the `KSP.log` of the session the four saves were
-  played in, one after the other, together with a lone capsule on the same spots, a series no longer
-  published.
-- [`loading-rss-fix.log`](checking-the-culprit-loading/loading-rss-fix.log) — the same on Real Solar System, the Moon then
-  Earth.
-- for each save, what the script printed (`-script.txt`), and every line it recorded, in both
-  instruments (`-lines.json`):
-  - `kerbin-2parts`: [`reload-kerbin-2parts-fix-script.txt`](checking-the-culprit-loading/reload-kerbin-2parts-fix-script.txt) and
+The saves, a capsule on a small flat fuel tank, made by
+[Making the save](../docs/checking-the-culprit-loading/making-the-save.md):
+
+- [`reload-kerbin-2parts.sfs`](checking-the-culprit-loading/reload-kerbin-2parts.sfs) — on the
+  levelled grass of the KSC, just south-west of the west end of the runway;
+- [`reload-mune-2parts.sfs`](checking-the-culprit-loading/reload-mune-2parts.sfs) — on flat ground on
+  the Mun;
+- [`reload-minmus-2parts.sfs`](checking-the-culprit-loading/reload-minmus-2parts.sfs) — on the frozen
+  flats of Minmus;
+- [`reload-gilly-2parts.sfs`](checking-the-culprit-loading/reload-gilly-2parts.sfs) — on Gilly;
+- [`reload-moon-rss-resave.sfs`](checking-the-culprit-loading/reload-moon-rss-resave.sfs) — on flat
+  ground on the Moon, made with this mod; it loads only on Real Solar System;
+- [`reload-earth-rss-resave.sfs`](checking-the-culprit-loading/reload-earth-rss-resave.sfs) — on the
+  grass about 1.4 km west of the KSC on Earth, made with this mod; it loads only on Real Solar System.
+
+Copy a save into the folder of a sandbox game and load it from that game.
+
+- [`loading-stock.log`](checking-the-culprit-loading/loading-stock.log) and
+  [`loading-fix.log`](checking-the-culprit-loading/loading-fix.log) — the `KSP.log` of the session the
+  four saves of the stock worlds were played in, one after the other, together with a lone capsule on
+  the same spots, a series no longer published; without this mod, then with it.
+- [`loading-rss-stock.log`](checking-the-culprit-loading/loading-rss-stock.log) and
+  [`loading-rss-fix.log`](checking-the-culprit-loading/loading-rss-fix.log) — the same on Real Solar
+  System, the Moon then Earth.
+- for each save, without this mod (`-stock`) and with it (`-fix`), what the script printed
+  (`-script.txt`), and every line it recorded, in both instruments (`-lines.json`):
+  - `kerbin-2parts`: [`reload-kerbin-2parts-stock-script.txt`](checking-the-culprit-loading/reload-kerbin-2parts-stock-script.txt),
+    [`reload-kerbin-2parts-stock-lines.json`](checking-the-culprit-loading/reload-kerbin-2parts-stock-lines.json),
+    [`reload-kerbin-2parts-fix-script.txt`](checking-the-culprit-loading/reload-kerbin-2parts-fix-script.txt) and
     [`reload-kerbin-2parts-fix-lines.json`](checking-the-culprit-loading/reload-kerbin-2parts-fix-lines.json);
-  - `mune-2parts`: [`reload-mune-2parts-fix-script.txt`](checking-the-culprit-loading/reload-mune-2parts-fix-script.txt) and
+  - `mune-2parts`: [`reload-mune-2parts-stock-script.txt`](checking-the-culprit-loading/reload-mune-2parts-stock-script.txt),
+    [`reload-mune-2parts-stock-lines.json`](checking-the-culprit-loading/reload-mune-2parts-stock-lines.json),
+    [`reload-mune-2parts-fix-script.txt`](checking-the-culprit-loading/reload-mune-2parts-fix-script.txt) and
     [`reload-mune-2parts-fix-lines.json`](checking-the-culprit-loading/reload-mune-2parts-fix-lines.json);
-  - `minmus-2parts`: [`reload-minmus-2parts-fix-script.txt`](checking-the-culprit-loading/reload-minmus-2parts-fix-script.txt) and
+  - `minmus-2parts`: [`reload-minmus-2parts-stock-script.txt`](checking-the-culprit-loading/reload-minmus-2parts-stock-script.txt),
+    [`reload-minmus-2parts-stock-lines.json`](checking-the-culprit-loading/reload-minmus-2parts-stock-lines.json),
+    [`reload-minmus-2parts-fix-script.txt`](checking-the-culprit-loading/reload-minmus-2parts-fix-script.txt) and
     [`reload-minmus-2parts-fix-lines.json`](checking-the-culprit-loading/reload-minmus-2parts-fix-lines.json);
-  - `gilly-2parts`: [`reload-gilly-2parts-fix-script.txt`](checking-the-culprit-loading/reload-gilly-2parts-fix-script.txt) and
+  - `gilly-2parts`: [`reload-gilly-2parts-stock-script.txt`](checking-the-culprit-loading/reload-gilly-2parts-stock-script.txt),
+    [`reload-gilly-2parts-stock-lines.json`](checking-the-culprit-loading/reload-gilly-2parts-stock-lines.json),
+    [`reload-gilly-2parts-fix-script.txt`](checking-the-culprit-loading/reload-gilly-2parts-fix-script.txt) and
     [`reload-gilly-2parts-fix-lines.json`](checking-the-culprit-loading/reload-gilly-2parts-fix-lines.json);
-  - `moon-rss-resave`: [`reload-moon-rss-resave-fix-script.txt`](checking-the-culprit-loading/reload-moon-rss-resave-fix-script.txt) and
+  - `moon-rss-resave`: [`reload-moon-rss-resave-stock-script.txt`](checking-the-culprit-loading/reload-moon-rss-resave-stock-script.txt),
+    [`reload-moon-rss-resave-stock-lines.json`](checking-the-culprit-loading/reload-moon-rss-resave-stock-lines.json),
+    [`reload-moon-rss-resave-fix-script.txt`](checking-the-culprit-loading/reload-moon-rss-resave-fix-script.txt) and
     [`reload-moon-rss-resave-fix-lines.json`](checking-the-culprit-loading/reload-moon-rss-resave-fix-lines.json);
-  - `earth-rss-resave`: [`reload-earth-rss-resave-fix-script.txt`](checking-the-culprit-loading/reload-earth-rss-resave-fix-script.txt) and
+  - `earth-rss-resave`: [`reload-earth-rss-resave-stock-script.txt`](checking-the-culprit-loading/reload-earth-rss-resave-stock-script.txt),
+    [`reload-earth-rss-resave-stock-lines.json`](checking-the-culprit-loading/reload-earth-rss-resave-stock-lines.json),
+    [`reload-earth-rss-resave-fix-script.txt`](checking-the-culprit-loading/reload-earth-rss-resave-fix-script.txt) and
     [`reload-earth-rss-resave-fix-lines.json`](checking-the-culprit-loading/reload-earth-rss-resave-fix-lines.json).
 
 ## The switching protocol
 
 The install of [The loading protocol](#the-loading-protocol), on Kerbin: the six rounds of
-[the switching protocol](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-switching.md),
-played by its script, `run-switching.py`, on `switch-kerbin.sfs`. Read in
+[the switching protocol](../docs/checking-the-culprit-switching/the-protocol.md), played by its script,
+[`run-switching.py`](automation/run-switching.py), on
+[`switch-kerbin.sfs`](checking-the-culprit-switching/switch-kerbin.sfs), a capsule landed on the grass
+west of the KSC and a rover 1.97 km to the south of it. Read in
 [Switching to a craft far away](../docs/checking-the-culprit-switching.md).
 
-- [`switching-fix.log`](checking-the-culprit-switching/switching-fix.log) — the `KSP.log` of the session; what the script
-  printed in [`switching-fix-script.txt`](checking-the-culprit-switching/switching-fix-script.txt), and every line it
-  recorded, in both instruments, in [`switching-fix-lines.json`](checking-the-culprit-switching/switching-fix-lines.json).
+- [`switching-stock.log`](checking-the-culprit-switching/switching-stock.log) — the `KSP.log` of the
+  session without this mod; what the script printed in
+  [`switching-stock-script.txt`](checking-the-culprit-switching/switching-stock-script.txt), and every
+  line it recorded, in both instruments, in
+  [`switching-stock-lines.json`](checking-the-culprit-switching/switching-stock-lines.json).
+- [`switching-fix.log`](checking-the-culprit-switching/switching-fix.log) — the same with this mod; what
+  the script printed in [`switching-fix-script.txt`](checking-the-culprit-switching/switching-fix-script.txt),
+  and every line it recorded in [`switching-fix-lines.json`](checking-the-culprit-switching/switching-fix-lines.json).
 
 ## The approach protocol
 
 The install of [The loading protocol](#the-loading-protocol), on Kerbin: the six round trips of
-[the approach protocol](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-approach.md),
-in a single flight, played by its script, `run-approach.py`, on `approach-kerbin.sfs`. Read in
+[the approach protocol](../docs/checking-the-culprit-approach/the-protocol.md), in a single flight,
+played by its script, [`run-approach.py`](automation/run-approach.py), on
+[`approach-kerbin.sfs`](checking-the-culprit-approach/approach-kerbin.sfs), a capsule landed on the
+flat grass west of the KSC and a rover 26 m from it. Read in
 [Coming back to a craft left parked](../docs/checking-the-culprit-approach.md).
 
-- [`approach-fix.log`](checking-the-culprit-approach/approach-fix.log) — the `KSP.log` of the session; what the script
-  printed in [`approach-fix-script.txt`](checking-the-culprit-approach/approach-fix-script.txt), and every line it
-  recorded, in both instruments, in [`approach-fix-lines.json`](checking-the-culprit-approach/approach-fix-lines.json).
+- [`approach-stock.log`](checking-the-culprit-approach/approach-stock.log) — the `KSP.log` of the
+  session without this mod; what the script printed in
+  [`approach-stock-script.txt`](checking-the-culprit-approach/approach-stock-script.txt), and every line
+  it recorded, in both instruments, in
+  [`approach-stock-lines.json`](checking-the-culprit-approach/approach-stock-lines.json).
+- [`approach-fix.log`](checking-the-culprit-approach/approach-fix.log) — the same with this mod; what
+  the script printed in [`approach-fix-script.txt`](checking-the-culprit-approach/approach-fix-script.txt),
+  and every line it recorded in [`approach-fix-lines.json`](checking-the-culprit-approach/approach-fix-lines.json).
+- [`approach-diag1-stock.log`](checking-the-culprit-approach/approach-diag1-stock.log) — the `KSP.log`
+  of an earlier session without this mod, kept for the record: its round trips stayed within range of
+  the parked craft, so the game never unloaded it and there was nothing to read.
 
 ## The runway protocol
 
 The install of [The loading protocol](#the-loading-protocol): the six loadings of
-[the runway protocol](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-runway.md),
-played by its script, `run-runway.py`. Read in
+[the runway protocol](../docs/checking-the-culprit-loading/the-runway-protocol.md), played by its script,
+[`run-runway.py`](automation/run-runway.py). Read in
 [Checking the culprit: loading the same save](../docs/checking-the-culprit-loading.md).
 
-- [`runway-fix.log`](checking-the-culprit-loading/runway-fix.log) — on Kerbin, `runway-kerbin.sfs`; what the script
-  printed in [`runway-fix-script.txt`](checking-the-culprit-loading/runway-fix-script.txt), and every line it recorded, in
-  both instruments, in [`runway-fix-lines.json`](checking-the-culprit-loading/runway-fix-lines.json).
-- [`runway-mun-kk-fix.log`](checking-the-culprit-loading/runway-mun-kk-fix.log) — on the Mun, `runway-mun-kk.sfs`, beside a
-  runway placed by Kerbal Konstructs 1.12.3, added to the install with CustomPreLaunchChecks 1.8.1; what
-  the script printed in [`runway-mun-kk-fix-script.txt`](checking-the-culprit-loading/runway-mun-kk-fix-script.txt), and
-  every line it recorded in [`runway-mun-kk-fix-lines.json`](checking-the-culprit-loading/runway-mun-kk-fix-lines.json).
+The saves:
+
+- [`runway-kerbin.sfs`](checking-the-culprit-loading/runway-kerbin.sfs) — two identical craft, one on
+  the grass beside the runway of the KSC and one on the runway, 152 m apart;
+- [`runway-mun-kk.sfs`](checking-the-culprit-loading/runway-mun-kk.sfs) — the same on the Mun: one craft
+  on a runway placed by [Kerbal Konstructs](https://github.com/KSP-RO/Kerbal-Konstructs) 1.12.3 and one
+  on the ground 42 m away. The runway itself is in the two files of
+  [`runway-mun-kk/GameData/KerbalKonstructs/NewInstances/`](checking-the-culprit-loading/runway-mun-kk/GameData/KerbalKonstructs/NewInstances/):
+  copy that `GameData` into the folder of KSP, over its own, before loading the save. Made by
+  [Making the save on the Mun](../docs/checking-the-culprit-loading/making-the-mun-save.md).
+
+The logs, without this mod (`-stock`) and with it (`-fix`):
+
+- [`runway-stock.log`](checking-the-culprit-loading/runway-stock.log) and
+  [`runway-fix.log`](checking-the-culprit-loading/runway-fix.log) — on Kerbin, `runway-kerbin.sfs`; what
+  the script printed in [`runway-stock-script.txt`](checking-the-culprit-loading/runway-stock-script.txt)
+  and [`runway-fix-script.txt`](checking-the-culprit-loading/runway-fix-script.txt), and every line it
+  recorded, in both instruments, in [`runway-stock-lines.json`](checking-the-culprit-loading/runway-stock-lines.json)
+  and [`runway-fix-lines.json`](checking-the-culprit-loading/runway-fix-lines.json).
+- [`runway-mun-kk-stock.log`](checking-the-culprit-loading/runway-mun-kk-stock.log) and
+  [`runway-mun-kk-fix.log`](checking-the-culprit-loading/runway-mun-kk-fix.log) — on the Mun,
+  `runway-mun-kk.sfs`, Kerbal Konstructs 1.12.3 added to the install with CustomPreLaunchChecks 1.8.1;
+  what the script printed in [`runway-mun-kk-stock-script.txt`](checking-the-culprit-loading/runway-mun-kk-stock-script.txt)
+  and [`runway-mun-kk-fix-script.txt`](checking-the-culprit-loading/runway-mun-kk-fix-script.txt), and
+  every line it recorded in [`runway-mun-kk-stock-lines.json`](checking-the-culprit-loading/runway-mun-kk-stock-lines.json)
+  and [`runway-mun-kk-fix-lines.json`](checking-the-culprit-loading/runway-mun-kk-fix-lines.json).
 
 ## The driving protocol
 
@@ -391,9 +456,9 @@ protocols through the scripts of [`automation/`](automation). Read in
 [Deferred](../docs/non-regression/deferred/drawing-the-ground.md).
 
 - [`automation/run-runway.py`](automation/run-runway.py) — plays
-  [the runway protocol](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-runway.md).
+  [the runway protocol](../docs/checking-the-culprit-loading/the-runway-protocol.md).
 - [`automation/run-approach.py`](automation/run-approach.py) — plays
-  [the approach protocol](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-approach.md).
+  [the approach protocol](../docs/checking-the-culprit-approach/the-protocol.md).
 - [`runway-deferred-fix.log`](non-regression/deferred/drawing-the-ground/runway-deferred-fix.log) — the six loadings of `runway-kerbin.sfs`;
   the lines read are in [`runway-deferred-fix-lines.json`](non-regression/deferred/drawing-the-ground/runway-deferred-fix-lines.json).
 - [`runway-without-deferred-fix.log`](non-regression/deferred/drawing-the-ground/runway-without-deferred-fix.log) — the same script on the
@@ -413,7 +478,7 @@ mod at `logLevel = Debug`, or not: each session is here twice, `-without-this-mo
 
 - [`loading-principia-without-this-mod.log`](non-regression/principia/the-bodies-it-moves-and-turns/loading-principia-without-this-mod.log) and
   [`loading-principia-fix.log`](non-regression/principia/the-bodies-it-moves-and-turns/loading-principia-fix.log) — the four saves of
-  [the loading protocol](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-loading.md),
+  [the loading protocol](../docs/checking-the-culprit-loading/the-protocol.md),
   each loaded six times by `run-loading.py`, both instruments at once; what the script printed in
   [`loading-principia-without-this-mod-script.txt`](non-regression/principia/the-bodies-it-moves-and-turns/loading-principia-without-this-mod-script.txt)
   and [`loading-principia-fix-script.txt`](non-regression/principia/the-bodies-it-moves-and-turns/loading-principia-fix-script.txt), every line it recorded,
@@ -467,6 +532,33 @@ it requires (Kopernicus, Modular Flight Integrator, KSPTextureLoader, the RSS te
 unless said otherwise. This mod ran at `logLevel = Debug`, so each log also holds one line per quad
 placed, with how far it was moved. The sessions marked *first safeguard* ran with its first version,
 a fixed metre, and hold the line where it refused part of Earth's terrain.
+
+Two saves are only used by [The ground workaround](../docs/non-regression/real-solar-system/the-ground-workaround.md),
+next to the two of [The loading protocol](#the-loading-protocol):
+
+- [`reload-moon-rss.sfs`](non-regression/real-solar-system/the-ground-workaround/reload-moon-rss.sfs) —
+  a capsule on an empty FL-T100, landed on flat ground on the Moon, made without this mod;
+  `reload-moon-rss-resave.sfs` is the same craft, saved again at a later load;
+- [`reload-earth-rss-landed.sfs`](non-regression/real-solar-system/the-ground-workaround/reload-earth-rss-landed.sfs) —
+  `reload-earth-rss-resave.sfs` with one line changed in the file: the situation of the craft, from
+  `PRELAUNCH` to `LANDED`.
+
+Without this mod, played by hand, watching the craft, Real Solar System as released unless said
+otherwise:
+
+- [`reload-moon-rss-stock.log`](non-regression/real-solar-system/the-ground-workaround/reload-moon-rss-stock.log) —
+  Diag LandedVessel: six loads of `reload-moon-rss.sfs`, then one of a save taken after the sixth.
+- [`reload-moon-rss-vgpeoff-stock.log`](non-regression/real-solar-system/the-ground-workaround/reload-moon-rss-vgpeoff-stock.log) —
+  Diag LandedVessel: the first load of `reload-moon-rss.sfs` with Real Solar System's
+  `VesselGroundPositionEnhancer` turned off, by an empty assembly named `WorldStabilizer` in `GameData`.
+- [`reload-moon-rss-stock-14loads.log`](non-regression/real-solar-system/the-ground-workaround/reload-moon-rss-stock-14loads.log) —
+  Diag LandedVessel: fourteen loads of `reload-moon-rss.sfs`.
+- [`reload-moon-rss-stock-tipped.log`](non-regression/real-solar-system/the-ground-workaround/reload-moon-rss-stock-tipped.log) —
+  Diag TerrainHeight: the first load of `reload-moon-rss-resave.sfs`, where the craft tipped over.
+- [`reload-earth-rss-stock.log`](non-regression/real-solar-system/the-ground-workaround/reload-earth-rss-stock.log) —
+  Diag LandedVessel alone: six loads of `reload-earth-rss-resave.sfs`.
+
+With this mod:
 
 - [`reload-moon-rss-fix.log`](non-regression/real-solar-system/the-ground-workaround/reload-moon-rss-fix.log) — Diag LandedVessel, Real Solar System's
   component turned off by an empty assembly named `WorldStabilizer`: one load of

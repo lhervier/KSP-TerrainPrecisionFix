@@ -10,8 +10,11 @@ The save opens on the rover, 26 m south of the parked craft, which is already it
 trip it does what the protocol asks a player to do, in the same order, and records in both instruments at
 every stop: beside the craft; about 700 m away; 2600 m away, out of range; then, on the way back, 2000 m
 away, back in range; and back on the rover's starting spot, a few seconds after the craft is handed to
-physics. It turns on the cheat Infinite Electricity first, for the rover. It prints what it read, writes it
-to lines.json, and quits KSP (unless --keep-running is given).
+physics. It turns on the cheat Infinite Electricity first, for the rover. After each round trip it takes one
+screenshot of each table, that window alone in the middle of the screen, and empties both tables: thirty lines
+do not fit in a window. It prints what it read, writes it to lines.json after every round trip, and quits KSP
+(unless --keep-running is given). The windows of the instruments are hidden once the flight opens, so that
+the scene shows, and each is shown only for its screenshot.
 """
 import argparse
 import json
@@ -78,6 +81,23 @@ def record(trip, line, rows):
             % (trip, line, distance, landed["SettledMm"], landed["MovedMm"], terrain["CollisionSurfaceMm"]))
 
 
+def screenshots(directory, trip, width):
+    """One screenshot per table, each window alone in the middle of the screen, then both tables emptied: the
+    windows stay hidden but for their own screenshot."""
+    for shown in ("landedvessel", "terrainheight"):
+        call(shown + "_show_window", visible=True)
+        size = call(shown + "_move_window", x=0, y=60)
+        call(shown + "_move_window", x=(width - size["width"]) / 2, y=60)
+        call("wait", seconds=1)
+        call("screenshot", path=os.path.join(os.path.abspath(directory), "trip%d-%s.png" % (trip, shown)),
+             return_image=False)
+        call(shown + "_show_window", visible=False)
+    call("landedvessel_move_window", x=0, y=40)
+    call("terrainheight_move_window", x=640, y=40)
+    call("landedvessel_clear")
+    call("terrainheight_clear")
+
+
 def main():
     global URL
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
@@ -86,7 +106,8 @@ def main():
     parser.add_argument("--trips", type=int, default=6, help="how many round trips")
     parser.add_argument("--heading", type=float, default=180.0,
                         help="where the rover drives off to, in degrees from north (default south)")
-    parser.add_argument("--out", default="out", help="where lines.json goes")
+    parser.add_argument("--out", default="out", help="where lines.json and the screenshots go")
+    parser.add_argument("--screen-width", type=float, default=1280, help="the width of KSP's window, in pixels")
     parser.add_argument("--port", type=int, default=8770, help="the port of KSP-MCPServer")
     parser.add_argument("--keep-running", action="store_true", help="leave KSP running at the end")
     options = parser.parse_args()
@@ -103,6 +124,8 @@ def main():
     call("terrainheight_clear")
     call("landedvessel_move_window", x=0, y=40)
     call("terrainheight_move_window", x=640, y=40)
+    call("landedvessel_show_window", visible=False)
+    call("terrainheight_show_window", visible=False)
     rover = call("get_state")["vessel"]
     home = (rover["latitude"], rover["longitude"])
     call("wait", seconds=5)
@@ -133,8 +156,9 @@ def main():
         wait_for_digits_to_settle()
         record(trip, 5, rows)
 
-    with open(os.path.join(options.out, "lines.json"), "w", newline="") as f:
-        json.dump(rows, f, indent=1)
+        screenshots(options.out, trip, options.screen_width)
+        with open(os.path.join(options.out, "lines.json"), "w", newline="") as f:
+            json.dump(rows, f, indent=1)
     log("done")
     if not options.keep_running:
         call("quit_game")

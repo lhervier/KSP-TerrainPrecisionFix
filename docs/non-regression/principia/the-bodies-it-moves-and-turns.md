@@ -38,10 +38,10 @@ On a save made without it, Principia starts from a state of its own: it writes
 and the game saved afterwards holds a `SCENARIO` named `PrincipiaPluginAdapter`. That line is in its log
 for every session below; `KSP.log` alone does not show that Principia runs.
 
-**Loading the same save.** [The loading protocol](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-loading.md)
-of both instruments, played by its script,
-[`run-loading.py`](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-loading.md#played-by-a-script),
-on the four saves they publish: a capsule on a small tank, on flat ground on Kerbin, the Mun, Minmus and
+**Loading the same save.** [The loading protocol](../../checking-the-culprit-loading/the-protocol.md),
+played by its script,
+[`run-loading.py`](../../../diag/automation/run-loading.py),
+on its four saves: a capsule on a small tank, on flat ground on Kerbin, the Mun, Minmus and
 Gilly, each loaded six times. Spread over the six loads:
 
 | series | *Settled*, without this mod | *Settled*, with this mod | the ground under the craft, without this mod | the ground under the craft, with this mod |

@@ -5,7 +5,7 @@ Part of [Terrain Precision Fix](../README.md): the measurements that check [the 
 Two instruments take the readings:
 [KSP Diag - Landed Vessel](https://github.com/lhervier/KSP-Diag-LandedVessel) measures the craft, and
 [KSP Diag - Terrain Height](https://github.com/lhervier/KSP-Diag-TerrainHeight) measures the ground. Each has its own page, with
-its method and its protocol.
+its method.
 
 This fix is built on top of [KSP Community Fixes](https://github.com/KSPModdingLibs/KSPCommunityFixes),
 the base most players run, so every campaign on this page is run in an install that has it: KSP 1.12.5 with Harmony, ModuleManager,
@@ -16,19 +16,27 @@ The way a craft meets the ground that you cannot avoid by never quitting: a craf
 parked while a rover drives away from it, past 2500 m, where the game unloads it — then comes back
 within 200 m, where physics takes the parked craft over again. No save is loaded at any point and the
 scene is never changed: one single flight, six round trips in a row, on Kerbin. It is
-[the approach protocol](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-approach.md)
-of both instruments, on the save they publish, `approach-kerbin.sfs`, played by its script,
-[`run-approach.py`](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-protocol-approach.md#played-by-a-script),
-once without this mod and once with it, both instruments recording at the same moments. The session
-with this mod is logged in [`approach-fix.log`](../diag/checking-the-culprit-approach/approach-fix.log); what the
-script printed is in [`approach-fix-script.txt`](../diag/checking-the-culprit-approach/approach-fix-script.txt), and every line
-it recorded in [`approach-fix-lines.json`](../diag/checking-the-culprit-approach/approach-fix-lines.json).
+[the approach protocol](checking-the-culprit-approach/the-protocol.md), on its save,
+`approach-kerbin.sfs`, played by its script, [`run-approach.py`](../diag/automation/run-approach.py),
+once without this mod and once with it, both instruments recording at the same moments. The sessions
+are logged in [`approach-stock.log`](../diag/checking-the-culprit-approach/approach-stock.log) and
+[`approach-fix.log`](../diag/checking-the-culprit-approach/approach-fix.log), with what the script
+printed and every line it recorded beside them ([`diag`](../diag/README.md#the-approach-protocol)).
 
 ## The craft, over six round trips
 
-**On stock**
-([the readings](https://github.com/lhervier/KSP-Diag-LandedVessel/blob/main/docs/the-measurements-approach.md)).
-*Moved* — how far the craft ends up from the height it was handed back at — reads:
+**On stock.** One screenshot per round trip, the table cleared between them, so that its first line is
+the last line of the one before; the bottom line of each is the reading in progress, not a record:
+
+![Without this mod, the first round trip, read by Diag LandedVessel](../imgs/checking-the-culprit-approach/landed-vessel/1-stock.png)
+
+The first line of this first screenshot is not a round trip: it is the scene opening, the craft handed
+back by the save and coming to rest 513.774 mm higher than the save held it. That is what
+[Checking the culprit: loading the same save](checking-the-culprit-loading.md) is about, and it is left
+aside here. The five other screenshots are in
+[`imgs/checking-the-culprit-approach/landed-vessel`](../imgs/checking-the-culprit-approach/landed-vessel),
+`2-stock.png` to `6-stock.png`. *Moved* — how far the craft ends up from the height it was handed back
+at — reads:
 
 | round trip | 1 | 2 | 3 | 4 | 5 | 6 |
 |---|---|---|---|---|---|---|
@@ -36,14 +44,17 @@ it recorded in [`approach-fix-lines.json`](../diag/checking-the-culprit-approach
 
 Over the whole series — where the craft started, and where each of the six round trips left it — it
 comes to rest across a spread of 46.8 mm. The height it is handed back at, read before each round trip
-and after it, never moves by more than a thousandth of a millimetre.
+and after it, never moves by more than a thousandth of a millimetre. The round trip pictured under
+[the protocol](checking-the-culprit-approach/the-protocol.md), taken by hand in another flight of the
+same save, read −17.572 mm.
 
 **With this mod**, in that same install, on that same save, with this mod as the only difference. One
-screenshot per round trip, the table cleared between them:
+screenshot per round trip again:
 
-![With this mod, the first round trip, read by Diag LandedVessel](../imgs/checking-the-culprit-approach/landed-vessel/1.png)
+![With this mod, the first round trip, read by Diag LandedVessel](../imgs/checking-the-culprit-approach/landed-vessel/1-fix.png)
 
-The five others are in [`imgs/checking-the-culprit-approach/landed-vessel`](../imgs/checking-the-culprit-approach/landed-vessel).
+The five others are in [`imgs/checking-the-culprit-approach/landed-vessel`](../imgs/checking-the-culprit-approach/landed-vessel),
+`2-fix.png` to `6-fix.png`.
 
 | round trip | 1 | 2 | 3 | 4 | 5 | 6 |
 |---|---|---|---|---|---|---|
